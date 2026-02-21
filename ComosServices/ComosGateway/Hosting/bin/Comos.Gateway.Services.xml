@@ -1,0 +1,2489 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>Comos.Gateway.Services</name>
+    </assembly>
+    <members>
+        <member name="T:Comos.Gateway.Services.Contracts.TeamcenterExportResult">
+            <summary>
+            Team center export result
+            </summary>
+        </member>
+        <member name="T:Comos.Gateway.Services.Contracts.ExportInformation">
+            <summary>
+            Export Information Class
+            </summary>
+        </member>
+        <member name="T:Comos.Gateway.Services.Contracts.PBSData">
+            <summary>
+            PBS Data
+            </summary>
+        </member>
+        <member name="P:Comos.Gateway.Services.Contracts.ImportLongRunningTaskInfo.OrganizationId">
+            <summary>
+            orgnization id is used for multienant-support in PlantSight - it is treated as optional
+            </summary>
+        </member>
+        <member name="P:Comos.Gateway.Services.Contracts.ImportLongRunningTaskInfo.SubjectId">
+            <summary>
+            subject id is used for client-credential calls - it is treated as optional
+            </summary>
+        </member>
+        <member name="T:Comos.Gateway.Services.Controllers.ComosFavoritesController">
+            <summary>
+            Comos Favorite load, save and delete operations
+            </summary> 
+        </member>
+        <member name="M:Comos.Gateway.Services.Controllers.ComosFavoritesController.#ctor(Comos.Gateway.Contracts.IWorkerRequestManager,Microsoft.Extensions.Logging.ILogger{Comos.Gateway.Services.Controllers.ComosFavoritesController},Comos.Gateway.Services.Utilities.PoolManagerStaticInitializer,Comos.Web.Common.AsyncUtility)">
+            <summary>
+            Constructor
+            </summary>
+            <param name="workerManager"></param>
+            <param name="logger"></param>
+            <param name="poolManagerStaticInitializer"></param>
+            <param name="asyncUtility"></param>
+        </member>
+        <member name="M:Comos.Gateway.Services.Controllers.ComosFavoritesController.GetFavorites(System.String,System.String,System.String)">
+            <summary>
+            Get comos favorites for the authenticated current user.
+            Favorites can be filtered by query parameter filter.
+            </summary>
+            <param name="dbid"></param>
+            <param name="lcid"></param>
+            <param name="filter"></param>
+            <returns>COMOS favorites list</returns>
+            <remarks>Compatibility with MS 2.0: filter=query -> insertion of target object has to be moved to WebView Service</remarks>
+        </member>
+        <member name="M:Comos.Gateway.Services.Controllers.ComosFavoritesController.PostFavorite(System.String,Comos.Gateway.Contracts.FavoriteItem,System.String)">
+            <summary>
+            Add a favorite
+            </summary>
+            <param name="dbid">database id</param>
+            <param name="favorite">Favorite item</param>
+            <param name="lcid">language id</param>
+            <returns>state 0:success, 1:favorite already stored</returns>
+        </member>
+        <member name="M:Comos.Gateway.Services.Controllers.ComosFavoritesController.DeleteFavorite(System.String,System.String,System.String,System.String,System.String)">
+            <summary>
+            Delete a favorite
+            </summary>
+            <param name="dbid">database id</param>
+            <param name="projid">project id</param>
+            <param name="objid">Object id</param>
+            <param name="overlayid">optional overlay id</param>
+            <param name="lcid">language id</param>
+            <returns></returns>
+        </member>
+        <member name="T:Comos.Gateway.Services.Controllers.ComosObjectController">
+            <summary>
+            Comos object controller
+            </summary>
+        </member>
+        <member name="M:Comos.Gateway.Services.Controllers.ComosObjectController.#ctor(Comos.Gateway.Contracts.IWorkerRequestManager,Microsoft.Extensions.Logging.ILogger{Comos.Gateway.Services.Controllers.ComosObjectController},Comos.Gateway.Services.Utilities.PoolManagerStaticInitializer,Comos.Web.Common.AsyncUtility)">
+            <summary>
+            Constructor
+            </summary>
+            <param name="workerManager"></param>
+            <param name="logger"></param>
+            <param name="poolManagerStaticInitializer"></param>
+            <param name="asyncUtility"></param>
+        </member>
+        <member name="M:Comos.Gateway.Services.Controllers.ComosObjectController.FullTextSearch(System.String,System.String,System.String,System.String,System.String,System.String,System.Int32,System.Int32,System.Int32)">
+            <summary>
+            Fulltext search with specified pattern
+            </summary>
+            <param name="dbid">database id</param>
+            <param name="projid">project id</param>
+            <param name="overlayid">workingoverlay id</param>
+            <param name="pattern">search pattern</param>
+            <param name="lcid">locale id</param>
+            <param name="startnodeid">start node id</param>
+            <param name="type">system type</param>
+            <param name="sub_set_index"></param>
+            <param name="page_items_count"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Comos.Gateway.Services.Controllers.ComosObjectController.GetObjectMetadataSearchResult(System.String,System.String,Comos.Gateway.Contracts.SearchManagerFilter,System.String,System.String,System.Boolean)">
+            <summary>
+            Gets the comos objects, with given search criteria
+            </summary>
+            <param name="dbid">database id</param>
+            <param name="projid">project id</param>
+            <param name="overlayid">workingoverlay id</param>
+            <param name="lcid">locale id</param>
+            <param name="searchFilter">Search Filter</param>
+            <returns></returns>
+        </member>
+        <member name="M:Comos.Gateway.Services.Controllers.ComosObjectController.GetPlantObjects(System.String,System.String,System.String,System.String,System.String,System.String,System.String,System.String,System.String,System.String)">
+            <summary>
+            Fulltext search with specified pattern
+            </summary>
+            <param name="dbid">database id</param>
+            <param name="projid">project id</param>
+            <param name="overlayid">workingoverlay id</param>
+            <param name="timestamp">Last change date for objects to return. Older objects are not contained.</param>
+            <param name="fields">fileds to reduce the retrieved properties to</param>
+            <param name="pattern">search pattern</param>
+            <param name="hclass"></param>
+            <param name="fclass"></param>
+            <param name="lcid">locale id</param>
+            <param name="rootids">root object id</param>
+            <returns></returns>
+        </member>
+        <member name="M:Comos.Gateway.Services.Controllers.ComosObjectController.GetComosObjectProperties(System.String,System.String,System.String,System.String,System.String,System.String)">
+            <summary>
+            Get complete object properties of passed comos object <paramref name="objid"/>.
+            </summary>
+            <param name="dbid">database id</param>
+            <param name="projid">project id</param>
+            <param name="objid">comos object id</param>
+            <param name="fields">fileds to reduce the retrieved properties to</param>
+            <param name="overlayid">overlay id</param>
+            <param name="lcid">language id</param>
+            <returns>object properties</returns>
+            GET  /api/comos_gateway/v1/dbs/{dbid}/projects/{projid}/objects/{objid}
+        </member>
+        <member name="M:Comos.Gateway.Services.Controllers.ComosObjectController.GetComosObjectPropertiesByPathFullName(System.String,System.String,System.String,System.String,System.String,System.String)">
+            <summary>
+            Get complete object properties of passed comos object <paramref name="pathfullname"/>.
+            </summary>
+            <param name="dbid">database id</param>
+            <param name="projid">project id</param>
+            <param name="pathfullname">comos object path full name</param>
+            <param name="fields">fileds to reduce the retrieved properties to</param>
+            <param name="overlayid">overlay id</param>
+            <param name="lcid">language id</param>
+            <returns>object properties</returns>
+            GET  /api/comos_gateway/v1/dbs/{dbid}/projects/{projid}/object
+        </member>
+        <member name="M:Comos.Gateway.Services.Controllers.ComosObjectController.GetComosObjects(System.String,System.String,System.String,System.String,System.String,System.Int32,System.String,System.String)">
+            <summary>
+            Get complete object properties and specifications of passed comos objects.
+            </summary>
+            <param name="dbid">database id</param>
+            <param name="projid">project id</param>
+            <param name="filter">comos objects uids as a filter</param>
+            <param name="fields">fileds to reduce the retrieved properties to</param>
+            <param name="nested_names"></param>
+            <param name="recursion_depth"></param>
+            <param name="overlayid">overlay id</param>
+            <param name="lcid">language id</param>
+            <returns>object properties</returns>
+        </member>
+        <member name="M:Comos.Gateway.Services.Controllers.ComosObjectController.GetComosObjectPropertiesBatch(System.String,Comos.Gateway.Contracts.SyncMappingItem[],System.String,System.String,System.String)">
+            <summary>
+            Get specific object properties by list of syncmappingitems
+            </summary>
+            <param name="dbid">database id</param>
+            <param name="objects">contains a list of syncmappingitems</param>
+            <param name="projid">project id</param>
+            <param name="overlayid">overlay id</param>
+            <param name="lcid">language id</param>
+            <returns>list of syncmappingitems</returns>
+            GET  /api/webview/v1/dbs/{dbid}/objects
+        </member>
+        <member name="M:Comos.Gateway.Services.Controllers.ComosObjectController.GetNewDevicesBatch(System.String,System.String,Comos.Gateway.Contracts.SyncMappingItem[],System.String)">
+            <summary>
+            Search new devices by specified functional classification and a list of syncmappingitems
+            which contains the last synchronized object in each db / project
+            </summary>
+            <param name="dbid">database id</param>
+            <param name="fclass">function classification</param>
+            <param name="objects">contains a list of syncmappingitems</param>
+            <param name="lcid">language id</param>
+            <returns>list of comosdeviceItem</returns>
+        </member>
+        <member name="M:Comos.Gateway.Services.Controllers.ComosObjectController.SetComosObjectPropertiesBatch(System.String,Comos.Gateway.Contracts.SyncMappingItem[],System.String,System.String,System.String)">
+            <summary>
+            Get specific object properties by list of syncmappingitems
+            </summary>
+            <param name="dbid">database id</param>
+            <param name="objects">contains a list of syncmappingitems</param>
+            <param name="projid">project id</param>
+            <param name="overlayid">overlay id</param>
+            <param name="lcid">language id</param>
+            <returns>list of syncmappingitems</returns>
+            GET  /api/webview/v1/dbs/{dbid}/projects/objects
+        </member>
+        <member name="M:Comos.Gateway.Services.Controllers.ComosObjectController.GetAttributeValue(System.String,System.String,System.String,System.String,System.String)">
+            <summary>
+            Get comos attribute value.
+            </summary>
+            <param name="dbid">database id</param>
+            <param name="projid">project id</param>
+            <param name="objid">comos specifaction object id</param>
+            <param name="overlayid">overlay id</param>
+            <param name="lcid">language id</param>
+            <returns>attribute value</returns>
+        </member>
+        <member name="M:Comos.Gateway.Services.Controllers.ComosObjectController.GetNumericAttributeValue(System.String,System.String,System.String,System.String,System.String)">
+            <summary>
+            Get comos attribute numeric value
+            </summary>
+            <param name="dbid">database id</param>
+            <param name="projid">project id</param>
+            <param name="objid">comos specifaction object id</param>
+            <param name="overlayid">overlay id</param>
+            <param name="lcid">language id</param>
+            <returns>attribute value</returns>
+        </member>
+        <member name="M:Comos.Gateway.Services.Controllers.ComosObjectController.GetSpecifications(System.String,System.String,System.String,System.String,System.String)">
+            <summary>
+            Get specification chapter cards.
+            </summary>
+            <param name="dbid">database id</param>
+            <param name="projid">project id</param>
+            <param name="objid">comos specifaction object id</param>
+            <param name="overlayid">overlay id</param>
+            <param name="lcid">language id</param>
+            <returns>list of chapter cards</returns>
+        </member>
+        <member name="M:Comos.Gateway.Services.Controllers.ComosObjectController.GetSpecifications(System.String,System.String,System.String,System.String,System.String,System.Int32,System.String,System.String)">
+            <summary>
+            Get the specifications for an object.
+            </summary>
+            <param name="dbid">database id</param>
+            <param name="projid">project id</param>
+            <param name="objid">comos specifaction object id</param>
+            <param name="fields">fields to be displayed for specifications</param>
+            <param name="nested_names">nested names of specifications to be included in response</param>
+            <param name="recursion_depth">Specifications children to be fetched until what depth.(-1: entire depth, 0: top level specs, 1: next level specs, and so on)</param>
+            <param name="overlayid">overlay id</param>
+            <param name="lcid">language id</param>
+            <returns>list of specifications</returns>
+        </member>
+        <member name="M:Comos.Gateway.Services.Controllers.ComosObjectController.SetSpecifications(System.String,System.String,System.String,System.Collections.Generic.IEnumerable{System.Object},System.String,System.String,System.String)">
+            <summary>
+            Updates the specifications for an object.
+            </summary>
+            <param name="dbid">database id</param>
+            <param name="projid">project id</param>
+            <param name="objid">comos specifaction object id</param>
+            <param name="values">collection of specifications to be updated.</param>
+            <param name="fields">fields to be displayed for specifications</param>
+            <param name="overlayid">overlay id</param>
+            <param name="lcid">language id</param>
+            <returns>Collection of specifications</returns>
+        </member>
+        <member name="M:Comos.Gateway.Services.Controllers.ComosObjectController.ValidateSpecifications(System.String,System.String,System.String,System.Collections.Generic.IEnumerable{System.Object},System.String,System.String,System.String,System.Boolean)">
+            <summary>
+            Validate spec 
+            </summary>
+            <param name="dbid">database id</param>
+            <param name="projid">project id</param>
+            <param name="objid">comos specifaction object id</param>
+            <param name="values">collection of specifications to be updated.</param>
+            <param name="fields">fields to be displayed for specifications</param>
+            <param name="overlayid">overlay id</param>
+            <param name="lcid">language id</param>
+            <param name="check_mandatory">checks if the mandatory specifications are provided</param>
+            <returns>displayvalue</returns>
+        </member>
+        <member name="M:Comos.Gateway.Services.Controllers.ComosObjectController.GetOwnSpecifications(System.String,System.String,System.String,System.String,System.String)">
+            <summary>
+            Get object's own specifications.
+            </summary>
+            <param name="dbid">database id</param>
+            <param name="projid">project id</param>
+            <param name="objid">comos specifaction object id</param>
+            <param name="overlayid">overlay id</param>
+            <param name="lcid">language id</param>
+            <returns>list of chapter cards</returns>
+        </member>
+        <member name="M:Comos.Gateway.Services.Controllers.ComosObjectController.GetOwnSpecificationsExtended(System.String,System.String,System.String,System.String,System.String,System.Int32,System.String,System.String)">
+            <summary>
+            Get the own specifications for an object.
+            </summary>
+            <param name="dbid">database id</param>
+            <param name="projid">project id</param>
+            <param name="objid">comos specifaction object id</param>
+            <param name="fields">fields to be displayed for specifications</param>
+            <param name="nested_names">nested names of specifications to be included in response</param>
+            <param name="recursion_depth">Specifications children to be fetched until what depth.(-1: entire depth, 0: top level specs, 1: next level specs, and so on)</param>
+            <param name="overlayid">overlay id</param>
+            <param name="lcid">language id</param>
+            <returns>list of specifications</returns>
+        </member>
+        <member name="M:Comos.Gateway.Services.Controllers.ComosObjectController.GetOwnSpecificationsBulk(System.String,System.String,System.String[],System.String,System.String,System.Int32,System.String,System.String)">
+            <summary>
+            Get object's own specifications in bulk.
+            </summary>
+            <param name="dbid">database id</param>
+            <param name="projid">project id</param>
+            <param name="objects">comos specifaction objects</param>
+            <param name="fields">fields</param>
+            <param name="nested_names">nested names</param>
+            <param name="recursion_depth">recursion depth</param>
+            <param name="overlayid">overlay id</param>
+            <param name="lcid">language id</param>
+            <returns>list of chapter cards</returns>
+        </member>
+        <member name="M:Comos.Gateway.Services.Controllers.ComosObjectController.GetOwnerProperties(System.String,System.String,System.String,System.String,System.String)">
+            <summary>
+            Get properties of owner object.
+            </summary>
+            <param name="dbid">database id</param>
+            <param name="projid">project id</param>
+            <param name="objid">comos specifaction object id</param>
+            <param name="overlayid">overlay id</param>
+            <param name="lcid">language id</param>
+            <returns>properties of owner object</returns>
+        </member>
+        <member name="M:Comos.Gateway.Services.Controllers.ComosObjectController.SetSpecifications(System.String,System.String,System.String,Comos.Gateway.Contracts.SpecificationValueWrite[],System.String,System.String)">
+             <summary>
+            Set the specification values
+             </summary>
+             <param name="dbid">Database Id</param>
+             <param name="projid">Project Id</param>
+             <param name="objid">Object Id/Object Id</param>
+             <param name="values">Specification values</param>
+             <param name="overlayid">Overlay Id</param>
+             <param name="lcid">Project language</param>
+             <returns></returns>
+        </member>
+        <member name="M:Comos.Gateway.Services.Controllers.ComosObjectController.GetCDevices(System.String,System.String,System.String,System.String,System.String)">
+            <summary>
+            Get array of cdevices
+            </summary>
+            <param name="dbid">database id</param>
+            <param name="projid">project id</param>
+            <param name="name">Object Name/Object Id</param>
+            <param name="overlayid">overlay id</param>
+            <param name="lcid">language id</param>
+            <returns>array of ComosCDevice</returns>
+        </member>
+        <member name="M:Comos.Gateway.Services.Controllers.ComosObjectController.GetSpecification(System.String,System.String,System.String,System.String,System.String,System.String)">
+            <summary>
+            Get a specification by nested name
+            </summary>
+            <param name="dbid">database id</param>
+            <param name="projid">project id</param>
+            <param name="objid">object id</param>
+            <param name="nested_name">nested name</param>
+            <param name="overlayid">overlay id</param>
+            <param name="lcid"></param>
+            <returns>json</returns>
+        </member>
+        <member name="M:Comos.Gateway.Services.Controllers.ComosObjectController.GetControlSpecifications(System.String,System.String,System.String,System.String,System.String,System.String)">
+            <summary>
+            Read control specifications from all comos chaptercard objects.
+            </summary>
+            <param name="dbid">database id</param>
+            <param name="projid">project id</param>
+            <param name="objid">Object id</param>
+            <param name="nested_name">nested name</param>
+            <param name="overlayid">optional overlay id</param>
+            <param name="lcid">language id</param>
+            <returns>returns control specifications for attributes in chaptercard</returns>
+        </member>
+        <member name="M:Comos.Gateway.Services.Controllers.ComosObjectController.SetLinkToSpecification(System.String,System.String,System.String,Comos.Gateway.Contracts.SpecificationValueWrite,System.String,System.String)">
+            <summary>
+            Validate spec 
+            </summary>
+            <param name="dbid">database id</param>
+            <param name="projid">project id</param>
+            <param name="objid">Object id</param>
+            <param name="value">Specification Value</param>
+            <param name="overlayid">optional overlay id</param>
+            <param name="lcid">language id</param>
+            <returns>displayvalue</returns>
+        </member>
+        <member name="M:Comos.Gateway.Services.Controllers.ComosObjectController.GetStandardTableValues(System.String,System.String,System.String,System.String,System.String)">
+            <summary>
+            
+            </summary>
+            <param name="dbid"></param>
+            <param name="projid"></param>
+            <param name="path"></param>
+            <param name="overlayid"></param>
+            <param name="lcid"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Comos.Gateway.Services.Controllers.ComosObjectController.CreateComosObject(System.String,System.String,System.Object,System.String,System.String,System.String)">
+            <summary>
+            Creates Comos Object
+            </summary>
+            <param name="dbid">DB id of Comos DB</param>
+            <param name="projid">Project Id</param>
+            <param name="values">Required input parameters defined in object of type ComosObjectProperties</param>
+            <param name="overlayid">Overlay Id if required</param>
+            <param name="lcid">Language Id</param>
+            <param name="fields">can be * or blank or any attribute name of comos Object. if it is * then return all object properties. if blank then only return baseobject properties else return specific property.</param>
+            <returns></returns>
+        </member>
+        <member name="M:Comos.Gateway.Services.Controllers.ComosObjectController.UpdateObjectProperties(System.String,System.String,System.String,System.Object,System.String,System.String,System.String)">
+            <summary>
+            Update Comos Object
+            </summary>
+            <param name="dbid">Database Id</param>
+            <param name="projid">Project Id</param>
+            <param name="objid">objid</param>
+            <param name="value">values</param>
+            <param name="fields">fileds to reduce the retrieved properties to</param>
+            <param name="overlayid">overlay id</param>
+            <param name="lcid">language id</param>
+            <returns>True/False</returns>
+        </member>
+        <member name="M:Comos.Gateway.Services.Controllers.ComosObjectController.SetXmlState(System.String,System.String,System.String,System.String,System.String,System.String,System.String)">
+            <summary>
+            Set aggregation state of the object with the specified id
+            </summary>
+            <param name="dbid">Database Id</param>
+            <param name="projid">Project Id</param>
+            <param name="objid">Object Id</param>
+            <param name="path">XPath</param>
+            <param name="state">State</param>
+            <param name="overlayid">Overly Id</param>
+            <param name="lcid">lcid</param>
+            <returns>List of changed objects</returns>
+        </member>
+        <member name="M:Comos.Gateway.Services.Controllers.ComosObjectController.SetXmlStateBulk(System.String,System.String,Comos.Gateway.Contracts.AggregatedState[],System.String,System.String)">
+            <summary>
+            Set aggregation state of the object with the specified id
+            </summary>
+            <param name="dbid">Database Id</param>
+            <param name="projid">Project Id</param>
+            <param name="states">States</param>
+            <param name="overlayid">Overly Id</param>
+            <param name="lcid">lcid</param>
+            <returns>List of changed objects</returns>
+        </member>
+        <member name="M:Comos.Gateway.Services.Controllers.ComosObjectController.GetXmlState(System.String,System.String,System.String,System.String,System.String,System.String)">
+            <summary>
+            Gets aggregation state of the object with the specified id
+            </summary>
+            <param name="dbid">Database Id</param>
+            <param name="projid">Project Id</param>
+            <param name="objid">Object Id</param>
+            <param name="path">XPath</param>
+            <param name="overlayid">Overly Id</param>
+            <param name="lcid">lcid</param>
+            <returns>List of changed objects</returns>
+        </member>
+        <member name="M:Comos.Gateway.Services.Controllers.ComosObjectController.DeleteObject(System.String,System.String,System.String,System.String,System.String,System.String)">
+            <summary>
+            Deletes The Object
+            </summary>
+            <param name="dbid">Database Id</param>
+            <param name="projid">Project Id</param>
+            <param name="objid">comos object Id</param>
+            <param name="refobjectId">Reference object id, can be used to replace the references (e.g. DocObj) </param>
+            <param name="overlayid">Overly Id</param>
+            <param name="lcid">lcid</param>
+            <returns>status</returns>
+        </member>
+        <member name="M:Comos.Gateway.Services.Controllers.ComosObjectController.BulkUpdate(System.String,System.String,System.Object,System.String,System.String)">
+            <summary>
+            Update object properties in hierarchy
+            </summary>
+            <param name="dbid">Database ID</param>
+            <param name="projid">Project ID</param>
+            <param name="value">Input parameters for updating Comos objects.</param>
+            <param name="overlayid">Overlay ID</param>
+            <param name="lcid">Project Language</param>
+            <returns></returns>
+        </member>
+        <member name="M:Comos.Gateway.Services.Controllers.ComosObjectController.BulkUpdateObjects(System.String,System.String,System.Object,System.String,System.String,System.Int32,System.String,System.String)">
+            <summary>
+            Update Comos Object
+            </summary>
+            <param name="dbid">Database Id</param>
+            <param name="projid">Project Id</param>
+            <param name="value">values</param>
+            <param name="fields"></param>
+            <param name="recursion_depth"></param>
+            <param name="overlayid">overlay id</param>
+            <param name="lcid">language id</param>
+            <param name="nested_names"></param>
+            <returns>True/False</returns>
+        </member>
+        <member name="M:Comos.Gateway.Services.Controllers.ComosObjectController.GetStandardTableValuesForAPI(System.String,System.String,System.String,System.String,System.String)">
+            <summary>
+            
+            </summary>
+            <param name="dbid">Database Id</param>
+            <param name="projid">Project Id</param>
+            <param name="objid">Object Id of standard table</param>
+            <param name="overlayid">Overlay Id</param>
+            <param name="lcid">Language Id</param>
+            <returns></returns>
+        </member>
+        <member name="M:Comos.Gateway.Services.Controllers.ComosObjectController.ExecuteScript(System.String,System.String,Comos.Gateway.Contracts.ScriptInfo,System.String,System.String)">
+            <summary>
+            Executes a Comos script
+            </summary>
+            <param name="dbid">Database Id</param>
+            <param name="projid">Project Id</param>
+            <param name="scriptInfo">An instance of <see cref="T:Comos.Gateway.Contracts.ScriptInfo"/> containing location and parameters</param>
+            <param name="overlayid">Overlay Id</param>
+            <param name="lcid">Language Id</param>
+            <returns>The return value of the script</returns>
+        </member>
+        <member name="M:Comos.Gateway.Services.Controllers.ComosObjectController.ScriptExecution(System.String,System.String,Comos.Gateway.Contracts.ScriptExecutionInfo,System.String,System.String)">
+            <summary>
+            Executes a Comos script for public api
+            </summary>
+            <param name="dbid">Database Id</param>
+            <param name="projid">Project Id</param>
+            <param name="scriptInfo">An instance of <see cref="T:Comos.Gateway.Contracts.ScriptInfo"/> containing location and parameters</param>
+            <param name="overlayid">Overlay Id</param>
+            <param name="lcid">Language Id</param>
+            <returns>The return value of the script</returns>
+        </member>
+        <member name="M:Comos.Gateway.Services.Controllers.ComosObjectController.ExecuteButtonClickScript(System.String,System.String,System.String,System.String,System.String)">
+            <summary>
+            Executes a button click comos script
+            </summary>
+            <param name="dbid">Database Id</param>
+            <param name="projid">Project Id</param>
+            <param name="objid">object id</param>
+            <param name="nested_name">nested name</param>
+            <param name="overlayid">overlay id</param>
+            <returns>bool</returns>
+        </member>
+        <member name="T:Comos.Gateway.Services.Controllers.ComosTasksController">
+            <summary>
+            Comos Task web api Controller
+            </summary>
+        </member>
+        <member name="M:Comos.Gateway.Services.Controllers.ComosTasksController.#ctor(Comos.Gateway.Contracts.IWorkerRequestManager,Microsoft.Extensions.Logging.ILogger{Comos.Gateway.Services.Controllers.ComosTasksController},Comos.Gateway.Services.Utilities.PoolManagerStaticInitializer,Comos.Web.Common.AsyncUtility)">
+            <summary>
+            Constructor
+            </summary>
+            <param name="workerManager"></param>
+            <param name="logger"></param>
+            <param name="poolManagerStaticInitializer"></param>
+            <param name="asyncUtility"></param>
+        </member>
+        <member name="M:Comos.Gateway.Services.Controllers.ComosTasksController.GetTasks(System.String,System.Boolean,System.Int32,System.Int32,System.Int32,System.String)">
+            <summary>
+            Get my comos tasks with the following default PersonRole = Proxy | Responsible | User
+            </summary>
+            <param name="dbid">Database key</param>
+            <param name="mytask">get my task</param>
+            <param name="task_type">Types:  All = 0, BasisTask = 1, WorkflowTask = 2</param>  
+            <param name="task_state">Sate: All = 0, Open = 1, Closed = 20:</param>     
+            <param name="person_role">Roles: User = 1, Responsible = 2, Creator = 4, Proxy = 8</param>        
+            <param name="lcid">Database language default 1033</param>            
+            <returns>WebTaskResult</returns>
+        </member>
+        <member name="M:Comos.Gateway.Services.Controllers.ComosTasksController.CreateTask(System.String,Comos.Gateway.Contracts.KeyValue[],System.String)">
+            <summary>
+            Creat a Task
+            </summary>
+            <param name="dbid"></param>              
+            <param name="task_attributes"></param>
+            <param name="lcid"></param>
+        </member>
+        <member name="M:Comos.Gateway.Services.Controllers.ComosTasksController.GetObjectsToSync(System.String,System.String)">
+            <summary>
+            Get a list of objects from comos database that have unsync status
+            </summary>
+            <param name="dbid"></param>
+            <param name="lcid"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Comos.Gateway.Services.Controllers.ComosTasksController.ResetObjectsToSync(System.String,Comos.Gateway.Contracts.ComosGatewayRefObject[],System.String)">
+            <summary>
+            Reset the unsync status for the list of comos objects
+            </summary>
+            <param name="dbid"></param>
+            <param name="objects"></param>
+            <param name="lcid"></param>
+            <returns></returns>
+        </member>
+        <member name="T:Comos.Gateway.Services.Controllers.ControllerUtilities">
+            <summary>
+            Controller utilities
+            </summary>
+        </member>
+        <member name="M:Comos.Gateway.Services.Controllers.ControllerUtilities.#ctor(Comos.Web.Common.AsyncUtility)">
+            <summary>
+            Constructor
+            </summary>
+            <param name="asyncUtility"></param>
+        </member>
+        <member name="T:Comos.Gateway.Services.Controllers.DashboardsController">
+            <summary>
+            Dashboard web api Controller
+            </summary>
+        </member>
+        <member name="M:Comos.Gateway.Services.Controllers.DashboardsController.#ctor(Comos.Gateway.Contracts.IWorkerRequestManager,Microsoft.Extensions.Logging.ILogger{Comos.Gateway.Services.Controllers.DashboardsController},Comos.Gateway.Services.Utilities.PoolManagerStaticInitializer,Comos.Web.Common.AsyncUtility,Comos.Gateway.Services.Helper.ProjectUtility)">
+            <summary>
+            Constructor
+            </summary>
+            <param name="workerManager"></param>
+            <param name="logger"></param>
+            <param name="poolManagerStaticInitializer"></param>
+            <param name="asyncUtility"></param>
+            <param name="projectUtility"></param>
+        </member>
+        <member name="M:Comos.Gateway.Services.Controllers.DashboardsController.GetDashboard(System.String,System.String,System.String)">
+            <summary>
+            Get a Dashboard
+            </summary>
+            <param name="dbid"></param>
+            <param name="id">dashboard id</param>       
+            <param name="lcid"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Comos.Gateway.Services.Controllers.DashboardsController.GetDefaultDashboard(System.String,System.String)">
+            <summary>
+            Get default Dashboard
+            </summary>
+            <param name="dbid"></param>        
+            <param name="lcid"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Comos.Gateway.Services.Controllers.DashboardsController.GetDashboards(System.String,System.String,System.String)">
+            <summary>
+            Get Dashboards Infos
+            </summary>
+            <param name="dbid"></param>      
+            <param name="lcid"></param>
+            <param name="group"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Comos.Gateway.Services.Controllers.DashboardsController.UpdateCurrentDashboardId(System.String,System.String,System.String)">
+            <summary>
+            set the dashborard as User current dashboard
+            </summary>
+            <param name="dbid"></param>       
+            <param name="id">dashboard id</param>
+            <param name="lcid"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Comos.Gateway.Services.Controllers.DashboardsController.UpdateDashboard(System.String,Comos.Gateway.Contracts.Dashboard,System.String)">
+            <summary>
+            Save a Dashborard
+            </summary>
+            <param name="dbid"></param>
+            <param name="dashboard">Dashboard Object</param>           
+            <param name="lcid"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Comos.Gateway.Services.Controllers.DashboardsController.DeleteDashboard(System.String,System.String,System.String)">
+            <summary>
+            delete a Dashborard
+            </summary>
+            <param name="dbid"></param>
+            <param name="id">dashboard id</param>            
+            <param name="lcid">Project Language id</param>
+            <returns></returns>
+        </member>
+        <member name="M:Comos.Gateway.Services.Controllers.DashboardsController.ManageMultipleDashboards(System.String,Comos.Gateway.Contracts.Dashboard[],System.String,System.String)">
+            <summary>
+            
+            </summary>
+            <param name="dbid"></param>
+            <param name="dashboards"></param>
+            <param name="lcid"></param>
+            <param name="group"></param>
+            <returns></returns>
+        </member>
+        <member name="T:Comos.Gateway.Services.Controllers.DatabasesController">
+            <summary>
+            Databases
+            </summary>   
+        </member>
+        <member name="M:Comos.Gateway.Services.Controllers.DatabasesController.#ctor(Comos.Gateway.Contracts.IWorkerRequestManager,Microsoft.Extensions.Logging.ILogger{Comos.Gateway.Services.Controllers.DatabasesController},Comos.Gateway.Services.Utilities.PoolManagerStaticInitializer,Comos.Web.Common.AsyncUtility)">
+            <summary>
+            Constructor
+            </summary>
+            <param name="workerManager"></param>
+            <param name="logger"></param>
+            <param name="poolManagerStaticInitializer"></param>
+            <param name="asyncUtility"></param>
+        </member>
+        <member name="M:Comos.Gateway.Services.Controllers.DatabasesController.GetDatabases">
+            <summary>
+            Get list of available databases
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:Comos.Gateway.Services.Controllers.DatabasesController.GetDBString(System.String,System.Int32)">
+            <summary>
+            Get a database string by csenum
+            </summary>
+            <param name="dbid">database id</param>
+            <param name="csenum">integer value</param>
+            <returns>string</returns>
+        </member>
+        <member name="M:Comos.Gateway.Services.Controllers.DatabasesController.GetSequenceId(System.String)">
+            <summary>
+            Get a database sequenceid for comos sync event
+            </summary>
+            <param name="dbid">database id</param>
+            <returns>long</returns>
+        </member>
+        <member name="M:Comos.Gateway.Services.Controllers.DatabasesController.GetNavigatorType">
+            <summary>
+            Get the NavigatorType value that is defined in the comos web configuration file
+            </summary>
+            <returns>string</returns>
+        </member>
+        <member name="M:Comos.Gateway.Services.Controllers.DatabasesController.GetTaskmanagementType">
+            <summary>
+            Get the NavigatorType value that is defined in the comos web configuration file
+            </summary>
+            <returns>string</returns>
+        </member>
+        <member name="M:Comos.Gateway.Services.Controllers.DatabasesController.GetXhqSettings">
+            <summary>
+            This will return the Xhq Settings configured in comos web configuration file
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:Comos.Gateway.Services.Controllers.DatabasesController.DisplayRightContextPanelOnMobileDevice">
+            <summary>
+            This will read Webview Configuration file for DisplayRightContextPanelOnMobileDevice
+            </summary>
+            <returns>Value of DisplayRightContextPanelOnMobileDevice Node</returns>
+        </member>
+        <member name="T:Comos.Gateway.Services.Controllers.DocumentsController">
+            <summary>
+            Documents controller
+            </summary>
+        </member>
+        <member name="M:Comos.Gateway.Services.Controllers.DocumentsController.#ctor(Comos.ESign.Contracts.IESignPluginContainer,Comos.Gateway.Contracts.IWorkerRequestManager,Comos.Services.Common.Contracts.IConnectionConfiguration,Comos.Gateway.Services.Utilities.DocumentUtility,Comos.Gateway.Services.Utilities.PoolManagerStaticInitializer,Microsoft.Extensions.Logging.ILogger{Comos.Gateway.Services.Controllers.DocumentsController},Comos.Web.Common.AsyncUtility)">
+            <summary>
+            Ctor
+            </summary>
+            <param name="esignPluginContainer"></param>
+            <param name="workerManager"></param>
+            <param name="connectionConfiguration"></param>
+            <param name="documentUtility"></param>
+            <param name="poolManagerStaticInitializer"></param>
+            <param name="logger"></param>
+            <param name="asyncUtility"></param>
+        </member>
+        <member name="M:Comos.Gateway.Services.Controllers.DocumentsController.GetDocument(System.String,System.String,System.String,System.String,System.String,System.String,System.String,System.String)">
+            <summary>
+            Gets a document by downloading it. 
+            The supplied document ID can refer to documents of various types:
+            <ul>
+                <li>a plain COMOS document (including reports)</li> 
+                <li>a DDM (= versioned) document (in this case the latest version will be retrieved)</li> 
+                <li>a particular version of a DDM (= versioned) document</li> 
+                <li>a revision (in this case the parameter "docid" technically refers to COMOS device)</li>
+                <li>a redlining document of a revision</li>
+                <li>an additional document of a revision</li>
+            </ul>
+            In addition, the user can specify an export type for reports (see the paramter description below).
+            
+            Concerning the download of redlinings up to version COMOS 10.1 the document ID must be refer to a revision and additionally the
+            parameter user_id must be provided. From COMOS version 10.2 upwards the document ID can directly refer to the redlining document.
+            </summary>
+            <param name="dbid">Database Id</param>
+            <param name="projid">Project Id</param>
+            <param name="docid">Document Id</param>
+            <param name="overlayid">Overlay Id</param>
+            <param name="lcid">Project language</param>
+            <param name="export_type">Export type. At the moment the types 'report2pdf' and 'report2excel' are supported. Note that docid must refer to a report in this case.</param>
+            <param name="user_id">The User ID</param>
+            <param name="start_objid">optional start object for the query</param>
+            <returns>The document contents as a download. </returns>
+        </member>
+        <member name="M:Comos.Gateway.Services.Controllers.DocumentsController.GetDocumentVersion(System.String,System.String,System.String,System.String,System.String,System.String,System.String)">
+            <param name="dbid">Database Id</param>
+            <param name="projid">Project Id</param>
+            <param name="docid">Document Id</param>
+            <param name="overlayid">Overlay Id</param>
+            <param name="lcid">Project language</param>        
+            <param name="version_index">dvm document version index</param>
+            <param name="package_index">dbm packages document index</param>
+            <returns>The document contents as a download. </returns>
+        </member>
+        <member name="M:Comos.Gateway.Services.Controllers.DocumentsController.GetDocumentsInObject(System.String,System.String,System.String,System.String,System.String)">
+            <summary>
+            Get all documents below an object
+            </summary>
+            <param name="dbid">database id</param>
+            <param name="projid">project id</param>
+            <param name="objid">object id</param>
+            <param name="overlayid">overlay id</param>
+            <param name="lcid"></param>
+            <returns>DocumentInfo</returns>
+        </member>
+        <member name="M:Comos.Gateway.Services.Controllers.DocumentsController.AddDocumentToObject(System.String,System.String,System.String,System.String,System.String,System.Boolean,System.String)">
+            <summary>
+            This method posts/stores a new attachment of a task.
+            From the body part of the POST message the name and content of the file
+            are retrieved. The size of the file is fetched from a header. 
+            </summary>
+            <param name="dbid"></param>
+            <param name="projid"></param>
+            <param name="objid"></param>
+            <param name="overlayid"></param>
+            <param name="lcid"></param>
+            <param name="usefileextension"></param>
+            <param name="cObjectUid"></param>
+            <returns>A new attachment ID</returns>
+        </member>
+        <member name="M:Comos.Gateway.Services.Controllers.DocumentsController.DeleteDocumentFromObject(System.String,System.String,System.String,System.Object,System.String,System.String)">
+            <summary>
+            This method posts/stores a new attachment of a task.
+            From the body part of the POST message the name and content of the file
+            are retrieved. The size of the file is fetched from a header. 
+            </summary>
+            <param name="dbid"></param>
+            <param name="projid"></param>
+            <param name="objid"></param>
+            <param name="docname"></param>
+            <param name="overlayid"></param>
+            <param name="lcid"></param>
+            <returns>A new attachment ID</returns>
+        </member>
+        <member name="M:Comos.Gateway.Services.Controllers.DocumentsController.EStampDocument(System.String)">
+            <summary>
+            EStamps the given document
+            </summary>
+            <param name="dbid"></param>
+            <returns>DocumentInfo</returns>
+        </member>
+        <member name="M:Comos.Gateway.Services.Controllers.DocumentsController.GetDocumentHistory(System.String,System.String,System.String,System.String,System.String,System.String)">
+            <summary>
+            Gets the version history of a document. 
+            </summary>
+            <param name="dbid">Database Id</param>
+            <param name="projid">Project Id</param>
+            <param name="objid">Object Id</param>
+            <param name="overlayid">Overlay Id</param>
+            <param name="lcid">Project language</param>
+            <param name="versionsmode">Project language</param>
+            <returns>The document version history. </returns>
+        </member>
+        <member name="M:Comos.Gateway.Services.Controllers.DocumentsController.GetDocumentRevisions(System.String,System.String,System.String,System.String,System.String,System.String)">
+            <summary>
+            Gets the revisons of a document. 
+            </summary>
+            <param name="dbid">Database Id</param>
+            <param name="projid">Project Id</param>
+            <param name="objid">Object Id</param>
+            <param name="overlayid">Overlay Id</param>
+            <param name="revisiontypename">Project language</param>
+            <param name="lcid">Project language</param>
+            <returns>The revisions of a document. </returns>
+        </member>
+        <member name="M:Comos.Gateway.Services.Controllers.DocumentsController.GetRevisionInfo(System.String,System.String,System.String,System.String,System.String)">
+            <summary>
+            Gets the revisons of a document. 
+            </summary>
+            <param name="dbid">Database Id</param>
+            <param name="projid">Project Id</param>
+            <param name="objid">Object Id</param>
+            <param name="overlayid">Overlay Id</param>
+            <param name="lcid">Project language</param>
+            <returns>The revisions of a document. </returns>
+        </member>
+        <member name="M:Comos.Gateway.Services.Controllers.DocumentsController.GetRedliningInfo(System.String,System.String,System.String,System.String,System.String,System.String)">
+            <summary>
+            Gets the redlining of a revision. 
+            </summary>
+            <param name="dbid">Database Id</param>
+            <param name="projid">Project Id</param>
+            <param name="objid">Object Id</param>
+            <param name="redliningid">Redlining Id</param>
+            <param name="overlayid">Overlay Id</param>
+            <param name="lcid">Project language</param>
+            <returns>The redlining of a revision. </returns>
+        </member>
+        <member name="M:Comos.Gateway.Services.Controllers.DocumentsController.PostCreateDocumentStarRevision(System.String,System.String,System.String,System.String,System.String)">
+            <summary>
+            Create * Revision for document.
+            </summary>
+            <param name="dbid">Database Id</param>
+            <param name="projid">Project Id</param>
+            <param name="docid">Object  Id</param>        
+            <param name="overlayid">Overlay Id</param>
+            <param name="lcid">Project language</param>
+            <returns>Status </returns>
+        </member>
+        <member name="M:Comos.Gateway.Services.Controllers.DocumentsController.PostCreateDocumentRevision(System.String,System.String,System.String,System.String,System.String)">
+            <summary>
+            Create revision for the new *-Revision.
+            </summary>
+            <param name="dbid">Database Id</param>
+            <param name="projid">Project Id</param>
+            <param name="docid">Object  Id</param>
+            <param name="overlayid">Overlay Id</param>
+            <param name="lcid">Project language</param>
+            <returns>Status </returns>
+        </member>
+        <member name="M:Comos.Gateway.Services.Controllers.DocumentsController.PostAcceptDocumentRevisionStep(System.String,System.String,System.String,Comos.Gateway.Contracts.RevisionStep,System.String,System.String)">
+            <summary>
+            Posts a specific revision. 
+            </summary>
+            <param name="dbid">Database Id</param>
+            <param name="projid">Project Id</param>
+            <param name="objid">Object  Id</param>
+            <param name="step">Revision Step</param>
+            <param name="overlayid">Overlay Id</param>
+            <param name="lcid">Project language</param>
+            <returns>Status </returns>
+        </member>
+        <member name="M:Comos.Gateway.Services.Controllers.DocumentsController.PostDocumentRevisionRedlining(System.String,System.String,System.String,System.String,System.String)">
+            <summary>
+            Posts a new redlining document for a specific revision. 
+            </summary>
+            <param name="dbid">Database Id</param>
+            <param name="projid">Project Id</param>
+            <param name="docid">revision Id</param>
+            <param name="overlayid">Overlay Id</param>
+            <param name="lcid">Project language</param>
+            <returns>Status </returns>
+        </member>
+        <member name="M:Comos.Gateway.Services.Controllers.DocumentsController.GetRevisionRedlinings(System.String,System.String,System.String,System.String,System.String)">
+            <summary>
+            Gets the redlining documents of a revision. 
+            </summary>
+            <param name="dbid">Database Id</param>
+            <param name="projid">Project Id</param>
+            <param name="objid">Revision Id</param>
+            <param name="overlayid">Overlay Id</param>
+            <param name="lcid">Project language</param>
+            <returns>An overview of the redlining documents. </returns>
+        </member>
+        <member name="M:Comos.Gateway.Services.Controllers.DocumentsController.GetRevisionAdditionalDocuments(System.String,System.String,System.String,System.String,System.String)">
+            <summary>
+            Gets the additional documents of a revision. 
+            </summary>
+            <param name="dbid">Database Id</param>
+            <param name="projid">Project Id</param>
+            <param name="objid">Revision Id</param>
+            <param name="overlayid">Overlay Id</param>
+            <param name="lcid">Project language</param>
+            <returns>An overview of the additional documents. </returns>
+        </member>
+        <member name="M:Comos.Gateway.Services.Controllers.DocumentsController.PostDocumentRevisionAdditionalDocument(System.String,System.String,System.String,System.String,System.String)">
+            <summary>
+            Posts a new addtional document for a specific revision. 
+            </summary>
+            <param name="dbid">Database Id</param>
+            <param name="projid">Project Id</param>
+            <param name="docid">Revision Id</param>
+            <param name="overlayid">Overlay Id</param>
+            <param name="lcid">Project language</param>
+            <returns>Status </returns>
+        </member>
+        <member name="M:Comos.Gateway.Services.Controllers.DocumentsController.GetDocumentMandatoryChapters(System.String,System.String,System.String,System.String,System.String)">
+            <summary>
+            Gets information about the mandatory chapters of a DDM (versioned) document. 
+            </summary>
+            <param name="dbid">Database Id</param>
+            <param name="projid">Project Id</param>
+            <param name="docid">Document Id</param>
+            <param name="overlayid">Overlay Id</param>
+            <param name="lcid">Project language</param>
+            <returns>Information about the mandatory chapters of the specified document.  </returns>
+        </member>
+        <member name="M:Comos.Gateway.Services.Controllers.DocumentsController.GetDocumentMandatoryChapter(System.String,System.String,System.String,System.String,System.String,System.String)">
+            <summary>
+            Gets information about a mandatory chapter.
+            Its specifications are listed. 
+            </summary>
+            <param name="dbid">Database Id</param>
+            <param name="projid">Project Id</param>
+            <param name="docid">Document Id</param>
+            <param name="nested_name">Chapter Id</param>
+            <param name="overlayid">Overlay Id</param>
+            <param name="lcid">Project language</param>
+            <returns>A list of specifications.  </returns>
+        </member>
+        <member name="M:Comos.Gateway.Services.Controllers.DocumentsController.PostValidateBeforeCheckin(System.String,System.String,System.String,Comos.Gateway.Contracts.SpecificationValueWrite[],System.String,System.String)">
+            <summary>
+            Checks whether the mandytory specifications that are passed in the body can be set at the DDM (versioned) document.
+            </summary>
+            <param name="dbid">Database Id</param>
+            <param name="projid">Project Id</param>
+            <param name="docid">Document Id</param>
+            <param name="mandatorySpecs">From Body: SpecificationValueWrite[] mandatorySpecs</param>
+            <param name="overlayid">Overlay Id</param>
+            <param name="lcid">Project language</param>
+            <returns>Status (Success/Failure) </returns>
+        </member>
+        <member name="M:Comos.Gateway.Services.Controllers.DocumentsController.CheckOriginalFileExists(System.String,System.String,System.String,System.String,System.String)">
+            <summary>
+            This is to check whether Original File Exists at Physical Location before Checkout
+            </summary>
+            <param name="dbid"></param>
+            <param name="projid"></param>
+            <param name="docid"></param>
+            <param name="overlayid"></param>
+            <param name="lcid"></param>
+            <returns>True if Original File Exists at Physical Location else False</returns>
+        </member>
+        <member name="M:Comos.Gateway.Services.Controllers.DocumentsController.DocumentCloudProperties(System.String,System.String,System.String,System.String,System.String)">
+            <summary>
+            This is to read the documents cloud properties
+            </summary>
+            <param name="dbid"></param>
+            <param name="projid"></param>
+            <param name="docid"></param>
+            <param name="overlayid"></param>
+            <param name="lcid"></param>
+            <returns>Document properties required to access from cloud</returns>
+        </member>
+        <member name="M:Comos.Gateway.Services.Controllers.DocumentsController.PostDocumentCheckout(System.String,System.String,System.String,Comos.Gateway.Contracts.KeyValue,System.String,System.String)">
+            <summary>
+            Checks out a document. 
+            
+            Note that this operation does not do a download -
+            it must be done by calling the route "... {projid}/documents/{docid}".
+            </summary>
+            <param name="dbid">Database Id</param>
+            <param name="projid">Project Id</param>
+            <param name="docid">Document Id</param>
+            <param name="overlayid">Overlay Id</param>
+            <param name="lcid">Project language</param>
+            <param name="comment">Checkout comment</param>
+            <returns>Status (Success/Failure) </returns>
+        </member>
+        <member name="M:Comos.Gateway.Services.Controllers.DocumentsController.UpdateRevisionProperties(System.String,System.String,System.String,Comos.Gateway.Contracts.RevisionProperties,System.String,System.String)">
+            <summary>
+            Update revision properties
+            </summary>
+            <param name="dbid">Database Id</param>
+            <param name="projid">Project Id</param>
+            <param name="objid">Object  Id</param>
+            <param name="properties"></param>        
+            <param name="overlayid">Overlay Id</param>
+            <param name="lcid">Project language</param>
+            <returns>Status </returns>
+        </member>
+        <member name="M:Comos.Gateway.Services.Controllers.DocumentsController.PostDocumentEsign(System.String,System.String,System.String,Comos.Gateway.Contracts.KeyValue[],System.String,System.String)">
+            <summary>
+            Posts a new redlining document for a specific revision. 
+            </summary>
+            <param name="dbid">Database Id</param>
+            <param name="projid">Project Id</param>
+            <param name="docid">revision Id</param>
+            <param name="settings">ESign settings as key/value pairs</param>
+            <param name="overlayid">Overlay Id</param>
+            <param name="lcid">Project language</param>
+            <returns>Status </returns>
+        </member>
+        <member name="M:Comos.Gateway.Services.Controllers.DocumentsController.ReplaceSignedDocumentInDB(System.String,System.String,System.String,System.String,System.String)">
+            <summary>
+            Replaces signed revision from temp location to database location
+            </summary>
+            <param name="dbid"></param>
+            <param name="projid"></param>
+            <param name="overlayid"></param>
+            <param name="revisionid"></param>
+            <param name="outputFileName"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Comos.Gateway.Services.Controllers.DocumentsController.SignDocument(System.String,System.String,System.String,System.String,Comos.ESign.Contracts.IESignPlugin,Comos.ESign.Contracts.IESignConfiguration,Comos.ESign.Contracts.IESignCertificateConfiguration,Comos.Gateway.Contracts.DocumentInfo)">
+            <summary>
+            Esign the revision document
+            </summary>
+            <param name="dbid"></param>
+            <param name="projid"></param>
+            <param name="docid"></param>
+            <param name="overlayid"></param>
+            <param name="esignPlugin"></param>
+            <param name="esignSettings"></param>
+            <param name="certificateConfig"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Comos.Gateway.Services.Controllers.DocumentsController.CreatePlaceHolderUnderParent(System.String,System.String,System.String,System.String,System.String,System.String)">
+            <summary>
+            Creates placeholder under given object
+            </summary>
+            <param name="dbid">Database Id</param>
+            <param name="projid">Project Id</param>
+            <param name="objid">comos object Id</param>
+            <param name="objname">Placeholder name</param>
+            <param name="overlayid">Overly Id</param>
+            <param name="lcid">lcid</param>
+            <returns>GridItem</returns>
+        </member>
+        <member name="M:Comos.Gateway.Services.Controllers.DocumentsController.GetPlantRevisionIdForEsign(System.String,System.String,System.String,System.String,System.String)">
+            <summary>
+            to get plant revision id for project revision
+            </summary>
+            <param name="dbid"></param>
+            <param name="projId"></param>
+            <param name="docid"></param>
+            <param name="overlayid"></param>
+            <param name="lcid"></param>
+            <returns>plant revision id</returns>
+        </member>
+        <member name="M:Comos.Gateway.Services.Controllers.DocumentsController.PostDocumentUndoCheckout(System.String,System.String,System.String,System.String,System.String,System.String)">
+            <summary>
+            Undoes a document checkout. 
+            </summary>
+            <param name="dbid">Database Id</param>
+            <param name="projid">Project Id</param>
+            <param name="docid">Document Id</param>
+            <param name="overlayid">Overlay Id</param>
+            <param name="lcid">Project language</param>
+            <param name="comment">Checkout comment</param>
+            <returns>Status (Success/Failure) </returns>
+        </member>
+        <member name="M:Comos.Gateway.Services.Controllers.DocumentsController.PostDocumentCheckin(System.String,System.String,System.String,System.String,System.String,System.Boolean)">
+            <summary>
+            Checks in a document through an upload. 
+            
+            A message body with the content type "multipart/form-data" is expected.
+            A name/value pair with the key "comment" must be provided as well as 
+            a name/value pair with the key "values" containing the a list of specification items (technically of type SpecificationValue).
+            The message body must also contain a file e.g. in the following format:
+            '
+            ...
+            Content-Disposition: form-data; name="file"; filename="Test.txt" Content-Type: text/plain"
+            
+            This is the contents of the file !
+            '.
+            
+            </summary>
+            <param name="dbid">Database Id</param>
+            <param name="projid">Project Id</param>
+            <param name="docid">Document Id</param>
+            <param name="use_specification_patch">Document Id</param>
+            <param name="overlayid">Overlay Id</param>
+            <param name="lcid">Project language</param>        
+            <returns>Status (Success/Failure) </returns>
+        </member>
+        <member name="M:Comos.Gateway.Services.Controllers.DocumentsController.PostTransmittals(System.String,System.String,System.String,System.String,System.Boolean)">
+            <summary>
+            Upload the documents in Bulk using zip file
+            </summary>
+            <param name="dbid">Database Id</param>
+            <param name="projid">Project Id</param>
+            <param name="overlayid">Overlay Id</param>
+            <param name="lcid">Project language</param>
+            <param name="onlyChangedDocuments">Upload only changed documents</param>
+            <returns>Status (Success/Failure) </returns>
+        </member>
+        <member name="M:Comos.Gateway.Services.Controllers.DocumentsController.GetDocumentMetadataSearchSettings(System.String,System.String,System.String,System.String)">
+            <summary>
+            Gets the free properties configured for document metadata search, under project settings.
+            </summary>
+            <param name="dbid">database id</param>
+            <param name="projid">project id</param>
+            <param name="overlayid">workingoverlay id</param>
+            <param name="lcid">locale id</param>
+            <returns></returns>
+        </member>
+        <member name="M:Comos.Gateway.Services.Controllers.DocumentsController.GetDocumentMetadataSearchResult(System.String,System.String,Comos.Gateway.Contracts.SearchManagerFilter,System.String,System.String,System.Boolean)">
+            <summary>
+            Gets the documents, with given search criteria
+            </summary>
+            <param name="dbid">database id</param>
+            <param name="projid">project id</param>
+            <param name="overlayid">workingoverlay id</param>
+            <param name="lcid">locale id</param>
+            <param name="searchFilter">Search Filter</param>
+            <param name="includeDDMVersions">Include DDM Version</param>
+            <returns></returns>
+        </member>
+        <member name="M:Comos.Gateway.Services.Controllers.DocumentsController.ReplaceDocument(System.String,System.String,System.String,System.String,System.String)">
+            <summary>
+            Replaces the document of a given object while keeping the UID
+            </summary>
+            <param name="dbid"></param>
+            <param name="projid"></param>
+            <param name="docid"></param>
+            <param name="overlayid"></param>
+            <param name="lcid"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Comos.Gateway.Services.Controllers.DocumentsController.FilterPDFAndFDFBlobs(System.Net.Http.MultipartFormDataStreamProvider,System.Collections.Generic.List{System.Net.Http.MultipartFileData}@)">
+            <summary>
+            Extracts additional files (PDF or FDF blobs) from the provided MultipartFormDataStreamProvider
+            and updates the fileData list with the remaining files.
+            </summary>
+            <param name="provider">The MultipartFormDataStreamProvider containing the uploaded files.</param>
+            <param name="fileData">A reference to the list of MultipartFileData to be updated with non-PDF/FDF files.</param>
+            <returns>An array of FileMetaData objects representing the additional files (PDF or FDF blobs).</returns>
+        </member>
+        <member name="T:Comos.Gateway.Services.Controllers.GroupsController">
+            <summary>
+            Controller for managing COMOS UserGroups from the web
+            </summary>
+        </member>
+        <member name="M:Comos.Gateway.Services.Controllers.GroupsController.#ctor(Comos.Gateway.Contracts.IWorkerRequestManager,Microsoft.Extensions.Logging.ILogger{Comos.Gateway.Services.Controllers.UsersController},Comos.Gateway.Services.Utilities.PoolManagerStaticInitializer,Comos.Web.Common.AsyncUtility)">
+            <summary>
+            
+            </summary>
+            <param name="workerManager"></param>
+            <param name="logger"></param>
+            <param name="poolManagerStaticInitializer"></param>
+            <param name="asyncUtility"></param>
+        </member>
+        <member name="M:Comos.Gateway.Services.Controllers.GroupsController.GetGroup(System.String,System.String,System.Boolean,System.String,System.String)">
+            <summary>
+            Get information about a group including its members
+            </summary>
+            <param name="dbid">The ID of the database</param>
+            <param name="groupName">The name of the group</param>
+            <param name="activeOnly">True if only active users should be retrieved</param>
+            <param name="firstName">Nested name of first name attribute</param>
+            <param name="lastName">Nested name of last name attribute</param>
+            <returns>A <see cref="T:Comos.Services.Common.HttpActionResult"/> containing a <see cref="T:Comos.Gateway.Contracts.UserGroup"/> </returns>
+        </member>
+        <member name="M:Comos.Gateway.Services.Controllers.GroupsController.ChangeGroup(System.String,System.String,Comos.Gateway.Contracts.GroupUpdate,System.Boolean,System.String,System.String)">
+            <summary>
+            Change the properties of a group
+            </summary>
+            <param name="dbid">The ID of the database</param>
+            <param name="groupName">The name of the group the users should be added to</param>
+            <param name="groupUpdate">The updated group data</param>
+            <param name="activeOnly">True if only active users should be retrieved</param>
+            <param name="firstName">Nested name of first name attribute</param>
+            <param name="lastName">Nested name of last name attribute</param>
+            <returns>A <see cref="T:Comos.Services.Common.HttpActionResult"/> containing an instance of <see cref="T:Comos.Gateway.Contracts.UserGroup"/> with the updated information</returns>
+        </member>
+        <member name="M:Comos.Gateway.Services.Controllers.GroupsController.AddUserToGroup(System.String,System.String,Comos.Gateway.Contracts.UserIdentifier,System.String,System.String)">
+            <summary>
+            Add a user to a group 
+            </summary>
+            <param name="dbid"></param>
+            <param name="group_name"></param>
+            <param name="userIdentifier"></param>
+            <param name="projid"></param>
+            <param name="overlayid"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Comos.Gateway.Services.Controllers.GroupsController.RemoveUserFromGroup(System.String,System.String,System.String,System.String,System.String)">
+            <summary>
+            Remove a user from a group
+            </summary>
+            <param name="dbid"></param>
+            <param name="group_name"></param>
+            <param name="user_name"></param>
+            <param name="projid"></param>
+            <param name="overlayid"></param>
+            <returns></returns>
+        </member>
+        <member name="T:Comos.Gateway.Services.Controllers.HealthCheckController">
+            <summary>
+            Metrics interface for worker metrics collector.
+            Access is anonymous but it should be secured by IP-Security feature of IIS to allow only local access.
+            </summary>
+        </member>
+        <member name="M:Comos.Gateway.Services.Controllers.HealthCheckController.#ctor(Comos.Gateway.Contracts.Analysis.IWorkerMetricCollector)">
+            <summary>
+            Create controller.
+            </summary>
+            <param name="collector"></param>
+        </member>
+        <member name="M:Comos.Gateway.Services.Controllers.HealthCheckController.CheckHealth">
+            <summary>
+            Get current health status
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="T:Comos.Gateway.Services.Controllers.OcrImageProcessingController">
+            <summary>
+            Provides Comos Ocr web api services
+            </summary>
+        </member>
+        <member name="M:Comos.Gateway.Services.Controllers.OcrImageProcessingController.#ctor(Comos.Gateway.Contracts.IWorkerRequestManager,Microsoft.Extensions.Logging.ILogger{Comos.Gateway.Services.Controllers.OcrImageProcessingController},Comos.Gateway.Services.Utilities.PoolManagerStaticInitializer,Comos.Web.Common.AsyncUtility)">
+            <summary>
+            Ctor
+            </summary>
+            <param name="workerManager"></param>
+             <param name="logger"></param>
+            <param name="poolManagerStaticInitializer"></param>
+            <param name="asyncUtility"></param>
+        </member>
+        <member name="M:Comos.Gateway.Services.Controllers.OcrImageProcessingController.GetOcrResultsForImageInTempLocationAsync(System.String,System.String,System.String,System.String,System.String)">
+            <summary>
+            Get Ocr Results for Image in temp folder
+            </summary>
+            <param name="dbid"></param>
+            <param name="projid"></param>
+            <param name="objid"></param>
+            <param name="overlayid"></param>
+            <param name="lcid"></param>
+            <returns></returns>
+        </member>
+        <member name="T:Comos.Gateway.Services.Controllers.EventsController">
+            <summary>
+            Handles messages from Eventservice
+            </summary>
+        </member>
+        <member name="M:Comos.Gateway.Services.Controllers.EventsController.#ctor(Comos.Gateway.Contracts.IWorkerRequestManager,Microsoft.Extensions.Logging.ILogger{Comos.Gateway.Services.Controllers.EventsController},Comos.Gateway.Services.Utilities.PoolManagerStaticInitializer,Comos.Web.Common.AsyncUtility)">
+            <summary>
+            
+            </summary>
+            <param name="workerManager"></param>
+            <param name="logger"></param>
+            <param name="poolManagerStaticInitializer"></param>
+            <param name="asyncUtility"></param>
+        </member>
+        <member name="M:Comos.Gateway.Services.Controllers.EventsController.PostHandleEvent(Comos.Services.Common.Event)">
+            <summary>
+            Handles a message from event service
+            </summary>
+            <param name="eventObj"></param>
+            <returns></returns>
+        </member>
+        <member name="T:Comos.Gateway.Services.Controllers.PicturesController">
+            <summary>
+            Pictures controller
+            </summary>    
+        </member>
+        <member name="M:Comos.Gateway.Services.Controllers.PicturesController.#ctor(Comos.Gateway.Contracts.IWorkerRequestManager,Microsoft.Extensions.Logging.ILogger{Comos.Gateway.Services.Controllers.PicturesController},Comos.Gateway.Services.Utilities.PoolManagerStaticInitializer,Comos.Web.Common.AsyncUtility)">
+            <summary>
+            Constructor
+            </summary>
+            <param name="workerManager"></param>
+            <param name="logger"></param>
+            <param name="poolManagerStaticInitializer"></param>
+            <param name="asyncUtility"></param>
+        </member>
+        <member name="M:Comos.Gateway.Services.Controllers.PicturesController.GetPicture(System.String,System.String,System.String)">
+            <summary>
+            Get the picture with the specified key
+            </summary>
+            <param name="dbid">Database Id</param>
+            <param name="keyid">Picture key</param>
+            <param name="lcid">Project language</param>
+            <returns>GridItem[]</returns>
+        </member>
+        <member name="M:Comos.Gateway.Services.Controllers.PicturesController.GetPictures(System.String,System.String[],System.String)">
+            <summary>
+            Get multiple pictures at a time
+            </summary>
+            <param name="dbid">The db.</param>
+            <param name="pictureIds">The pictureIds.</param>
+            <param name="lcid">The lcid.</param>
+            <returns>A json object containing a dictionary of the pictures and an error dictionary of pictures that could not be retrieved</returns>
+        </member>
+        <member name="T:Comos.Gateway.Services.Controllers.ImportController">
+            <summary>
+            Databases
+            </summary>
+        </member>
+        <member name="P:Comos.Gateway.Services.Controllers.ImportController.Discovery">
+            <summary>
+            Gets the discovery
+            </summary>
+        </member>
+        <member name="M:Comos.Gateway.Services.Controllers.ImportController.#ctor(Comos.Services.Common.Contracts.IApiServiceDiscovery,Comos.Gateway.Contracts.IWorkerRequestManager,Comos.Gateway.Services.Utilities.DocumentUtility,Comos.Gateway.Services.Utilities.PoolManagerStaticInitializer,Microsoft.Extensions.Logging.ILogger{Comos.Gateway.Services.Controllers.ImportController},Comos.Web.Common.AsyncUtility)">
+            <summary>
+            Constructor
+            </summary>
+            <param name="discovery"></param>
+            <param name="workerManager"></param>
+            <param name="documentUtility"></param>
+            <param name="poolManagerStaticInitializer"></param>
+            <param name="logger"></param>
+            <param name="asyncUtility"></param>
+        </member>
+        <member name="M:Comos.Gateway.Services.Controllers.ImportController.ImportExcel">
+            <summary>
+            This method starts an import by the EXCEL Importer.
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:Comos.Gateway.Services.Controllers.ImportController.GetImportConfigs(System.String,System.String,System.String,System.String,System.Boolean)">
+            <summary>
+            This method fetches all EXCEL configs from the well-known location 'G001|Y00R00072|A10' 
+            in the 'Documents' section of a project in COMOS.
+            </summary>
+            <param name="dbid">Database Id</param>
+            <param name="projid">Project Id</param>
+            <param name="overlayid">Overlay Id</param>
+            <param name="importType">the import type Excel or Autocad</param>
+            <param name="isTreeView">If required view is Tree View.</param>
+            <returns>Excel configs with the attributes 'Name', 'Description', and 'UID'.</returns>
+        </member>
+        <member name="T:Comos.Gateway.Services.Controllers.ProjectsController">
+            <summary>
+            Databases
+            </summary>
+        </member>
+        <member name="M:Comos.Gateway.Services.Controllers.ProjectsController.#ctor(Comos.Gateway.Contracts.IWorkerRequestManager,Microsoft.Extensions.Logging.ILogger{Comos.Gateway.Services.Controllers.ProjectsController},Comos.Gateway.Services.Utilities.PoolManagerStaticInitializer,Comos.Web.Common.AsyncUtility)">
+            <summary>
+            Constructor
+            </summary>
+            <param name="workerManager"></param>
+            <param name="logger"></param>
+            <param name="poolManagerStaticInitializer"></param>
+            <param name="asyncUtility"></param>
+        </member>
+        <member name="M:Comos.Gateway.Services.Controllers.ProjectsController.GetProjects(System.String,System.Boolean,System.String)">
+            <summary>
+            Get list of projects in the specified database
+            </summary>
+            <param name="dbid">Database Id</param>
+            <param name="lcid">Project language</param>
+            <param name="storage">get storage project</param>
+            <returns>GridItem[]</returns>
+        </member>
+        <member name="M:Comos.Gateway.Services.Controllers.ProjectsController.ExportManager(System.String,System.String,System.String,System.String,Comos.Gateway.Contracts.SearchManagerFilter,System.String)">
+            <summary>
+            Scan Manager long running background task
+            </summary>
+            <param name="dbid"></param>
+            <param name="projid"></param>
+            <param name="rootid"></param>       
+            <param name="view"></param>
+            <param name="searchFilter"></param>
+            <param name="overlayid"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Comos.Gateway.Services.Controllers.ProjectsController.ComosObjectsExport(Comos.Gateway.Contracts.ComosObjectsExportRequest)">
+            <summary>
+            Exports Comos objects using search manager.
+            </summary>
+            <param name="request"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Comos.Gateway.Services.Controllers.ProjectsController.ExportProject(System.String,System.String,System.String,System.Nullable{System.DateTime},System.String)">
+            <summary>
+            Scan Manager long running background task
+            </summary>
+            <param name="dbid"></param>
+            <param name="projid"></param>
+            <param name="rootid"></param>       
+            <param name="view"></param>
+            <param name="searchFilter"></param>
+            <param name="timestamp"></param>
+            <param name="overlayid"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Comos.Gateway.Services.Controllers.ProjectsController.CreateProject(System.String,System.String,System.String)">
+            <summary>
+            Create project in the specified database
+            </summary>
+            <param name="dbid">Database Id.</param>        
+            <param name="projectname">Project Name.</param>
+            <param name="templateName">Template Name.</param>
+            <returns>List of objects</returns>
+        </member>
+        <member name="M:Comos.Gateway.Services.Controllers.ProjectsController.DeleteProject(System.String,System.String)">
+            <summary>
+            Delete a project from the repository.
+            </summary>
+            <param name="dbid"> To be deleted project</param>
+            <param name="projid"> To be deleted project</param>
+            <returns></returns>
+        </member>
+        <member name="M:Comos.Gateway.Services.Controllers.ProjectsController.GetWorkingOverlays(System.String,System.String,System.String,System.String,System.Boolean)">
+            <summary>
+            Get list of working overlays of the specified project
+            </summary>
+            <param name="dbid">Database Id</param>
+            <param name="projid">Project Id</param>
+            <param name="overlayid">Start overlay id from where the search should begin, can be empty</param>
+            <param name="lcid">Project language</param>
+            <param name="check_rights_recursively">Check rights for child overlays, recursively</param>
+            <returns>WorkingOverlays</returns>
+        </member>
+        <member name="M:Comos.Gateway.Services.Controllers.ProjectsController.CreateWorkingOverlay(System.String,System.String,Comos.Gateway.Contracts.WorkingOverlayCreate)">
+            <summary>
+            Create a working layer with the name layername and description descriptionText for the project projid in the specified database
+            </summary>
+            <param name="dbid">Database Id</param>        
+            <param name="projid">Project name</param>
+            <param name="workingOverlay">New Working Overlay</param>
+            <returns> ServiceResult of WorkingOverlayCreate : info about the created working overlay</returns>
+        </member>
+        <member name="M:Comos.Gateway.Services.Controllers.ProjectsController.GetProjectLanguages(System.String,System.String,System.String,System.String)">
+            <summary>
+            Get languages of project
+            </summary>
+            <param name="dbid">Database Id</param>
+            <param name="projid">Project Id</param>
+            <param name="overlayid">Overly Id</param>
+            <param name="lcid">project language</param>
+            <returns>GridItem[]</returns>
+        </member>
+        <member name="M:Comos.Gateway.Services.Controllers.ProjectsController.GetAllProjectsCommonLanguages(System.String,System.String)">
+            <summary>
+            Get languages of all projects
+            </summary>
+            <param name="dbid">Database Id</param>
+            <param name="lcid">project language</param>
+            <returns>GridItem[]</returns>
+        </member>
+        <member name="M:Comos.Gateway.Services.Controllers.ProjectsController.GetProjectDefaultLanguage(System.String,System.String,System.String)">
+            <summary>
+            Get languages of project
+            </summary>
+            <param name="dbid">Database Id</param>
+            <param name="projid">Project Id</param>        
+            <param name="overlayid">Overly Id</param>
+            <returns>GridItem[]</returns>
+        </member>
+        <member name="M:Comos.Gateway.Services.Controllers.ProjectsController.GetProjectViews(System.String,System.String,System.String,System.String)">
+            <summary>
+            Get views of the navigator
+            </summary>
+            <param name="dbid">Database Id</param>
+            <param name="projid">Project Id</param>
+            <param name="overlayid">Project Id</param>
+            <param name="lcid">Project language</param>
+            <returns>GridItem[]</returns>
+            <exception cref="T:System.Web.Http.HttpResponseException"></exception>
+        </member>
+        <member name="M:Comos.Gateway.Services.Controllers.ProjectsController.GetObjectView(System.String,System.String,System.String,System.String,System.String)">
+            <summary>
+            Get views of the navigator
+            </summary>
+            <param name="dbid">Database Id</param>
+            <param name="projid">Project Id</param>
+            <param name="objid">comos object Id</param>
+            <param name="overlayid">overlay Id</param>
+            <param name="lcid">Project language</param>    
+            <returns>string</returns>   
+            <exception cref="T:System.Web.Http.HttpResponseException"></exception>
+        </member>
+        <member name="M:Comos.Gateway.Services.Controllers.ProjectsController.GetNavigatorNodes(System.String,System.String,System.String,System.String,System.String,System.String,System.String,System.String,System.Boolean,System.Boolean,System.Boolean)">
+            <summary>
+            Get navigator nodes Todo: Implement modes
+            </summary>
+            <param name="dbid">Database Id</param>
+            <param name="projid">Project Id</param>
+            <param name="overlayid">Overlay Id</param>
+            <param name="nodeid">Target Id</param>
+            <param name="parent">Parent Id</param>
+            <param name="view">View</param>
+            <param name="mode">Mode</param>
+            <param name="lcid">Project language</param>
+            <param name="is_overlay_view">si overlay view activ</param>
+            <param name="hideMappingTables">Hide Mapping Tables for PlantSight</param>
+            <param name="changed_objects_only">Only changed objects or ancestors of changed objects are returned</param>
+            <returns>GridItem[]</returns>
+        </member>
+        <member name="M:Comos.Gateway.Services.Controllers.ProjectsController.GetChangesForNavigatorNode(System.String,System.String,System.String,System.String,System.String,System.String,System.String,System.String)">
+            <summary>
+            This method fetches for a given node object in the navigator all COMOS objects
+            that have changes according to the working layer view in COMOS.
+            Technically speaking, all devices that satisfy the condition 
+            "device.GetSystemStatus(Plt.ComosSystemConstants.System_Status_Overlay) > 0" are recursively collected.
+            
+            </summary>
+            <param name="dbid">Database Id</param>
+            <param name="projid">Project Id</param>
+            <param name="overlayid">Overlay Id</param>
+            <param name="nodeid">Target Id</param>
+            <param name="parent">Parent Id</param>
+            <param name="view">View</param>
+            <param name="mode">Mode</param>
+            <param name="lcid">Project language</param>
+            <returns>GridItem[]</returns>
+        </member>
+        <member name="M:Comos.Gateway.Services.Controllers.ProjectsController.GetNavigatorNavigation(System.String,System.String,System.String,System.String,System.String)">
+            <summary>
+            Get navigator parents of the nodeid
+            </summary>
+            <param name="dbid">Database Id</param>
+            <param name="projid">Project Id</param>
+            <param name="overlayid">Overlay Id</param>
+            <param name="nodeid">Target Id</param>                
+            <param name="lcid">Project language</param>
+            <returns>GridItem[]</returns>
+        </member>
+        <member name="M:Comos.Gateway.Services.Controllers.ProjectsController.GetNavigatorType(System.String,System.String,System.String,System.String)">
+            <summary>
+            Get Navigator Type
+            </summary>
+            <param name="dbid">Database Id</param>
+            <param name="projid">Project Id</param>
+            <param name="overlayid">Overly Id</param>
+            <param name="lcid">lcid</param>
+            <returns>GridItem</returns>
+        </member>
+        <member name="M:Comos.Gateway.Services.Controllers.ProjectsController.UpdateNavigatorType(System.String,System.String,Comos.Gateway.Contracts.NavigatorType,System.String)">
+            <summary>
+            Update Navigator Type
+            </summary>
+            <param name="dbid">Database Id</param>
+            <param name="projid">Project Id</param>
+            <param name="navigatortype">Project Id</param>
+            <param name="lcid">lcid</param>
+            <returns>True/False</returns>
+        </member>
+        <member name="M:Comos.Gateway.Services.Controllers.ProjectsController.GetTreeNodes(System.String,System.String,System.String,System.String,System.String,System.String,System.Boolean)">
+            <summary>
+            Get navigator nodes of the nodeid when user uses Tree toogle
+            </summary>
+            <param name="dbid">Database Id</param>
+            <param name="projid">Project Id</param>
+            <param name="overlayid">Overlay Id</param>
+            <param name="nodeid">Target Id</param>        
+            <param name="view">view</param>     
+            <param name="lcid">Project language</param>
+            <param name="is_overlay_view"></param>
+            <returns>GridItem[]</returns>
+        </member>
+        <member name="M:Comos.Gateway.Services.Controllers.ProjectsController.NavigatorSearch(System.String,System.String,System.String,System.String,System.String,System.String,System.String,System.Boolean,System.Boolean)">
+            <summary>
+            Get elements based on navigator search
+            </summary>
+            <param name="projid">Project Id</param>
+            <param name="nodeid">Target Id</param>
+            <param name="searchitem">searchitem</param>
+            <param name="overlayid">Overlay Id</param>
+            <param name="lcid">Project language</param>
+            <param name="dbid">Database Id</param>
+            <param name="view">view</param>
+            <param name="case_sensitive">Case Sensitive</param>
+            <param name="wildcards">Wildcards</param>
+            <returns>GridItem[]</returns>
+        </member>
+        <member name="M:Comos.Gateway.Services.Controllers.ProjectsController.GetDashboardQueries(System.String,System.String,System.String,System.String)">
+            <summary>
+            Get all queries in a project.
+            </summary>
+            <param name="dbid">Database Id</param>
+            <param name="projid">Project Id</param>
+            <param name="overlayid">Overlay Id</param>
+            <param name="lcid">Project language</param>
+            <returns>all queries</returns>
+        </member>
+        <member name="M:Comos.Gateway.Services.Controllers.ProjectsController.GetQueryData(System.String,System.String,System.String,System.String,System.String,System.String,System.Int32,System.Int32,System.String,System.String,System.Threading.CancellationToken)">
+            <summary>
+            Get query data.
+            </summary>
+            <param name="dbid">Database Id</param>
+            <param name="projid">Project Id</param>
+            <param name="qid">query object</param>
+            <param name="start_objid">optional start object for the query</param>
+            <param name="overlayid">Overlay Id</param>
+            <param name="lcid">Project language</param>
+            <param name="limit"></param>
+            <param name="cursor"></param>
+            <param name="filter">If set, query returns only rows that contains the text (case-insensitive)</param>
+            <param name="query_settings">The query settings as JSON string</param>
+            <param name="cancellationToken">The CancellationToken for aborting the query-execution from the client.</param>
+            <returns>query data</returns>
+        </member>
+        <member name="M:Comos.Gateway.Services.Controllers.ProjectsController.UpdateQueryObjectDetails(System.String,System.String,System.String,Comos.Gateway.Contracts.ComosQueryCell[],System.String,System.String)">
+            <summary>
+            
+            </summary>
+            <param name="dbid"></param>
+            <param name="projid"></param>
+            <param name="qid"></param>
+            <param name="values"></param>
+            <param name="overlayid"></param>
+            <param name="lcid"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Comos.Gateway.Services.Controllers.ProjectsController.GetEsignClientSettings(System.String,System.String,System.String,System.String)">
+            <summary>
+            Get Navigator Type
+            </summary>
+            <param name="dbid">Database Id</param>
+            <param name="projid">Project Id</param>
+            <param name="overlayid">Overly Id</param>
+            <param name="lcid">lcid</param>
+            <returns>GridItem</returns>
+        </member>
+        <member name="M:Comos.Gateway.Services.Controllers.ProjectsController.GetProjectSettings(System.String,System.String,System.String,System.String)">
+            <summary>
+            Get 3D Viewer Project Id
+            </summary>
+            <param name="dbid">Database Id</param>
+            <param name="projid">Project Id</param>
+            <param name="overlayid">Overly Id</param>
+            <param name="lcid">lcid</param>
+            <returns>string</returns>
+        </member>
+        <member name="M:Comos.Gateway.Services.Controllers.ProjectsController.GetReportJson(System.String,System.String,System.String,System.String,System.String,Comos.Gateway.Contracts.Contracts.ReportToJsonOperationType)">
+            <summary>
+            Get report JSON, for given report id
+            </summary>
+            <param name="dbid">Database Id</param>
+            <param name="projid">Project Id</param>
+            <param name="reportid"></param>
+            <param name="overlayid">Overlay Id</param>
+            <param name="lcid">Project language</param>
+            <param name="operation">Specifies the operation type for generating the report, such as cached, forced, etc.</param>
+            <returns></returns>
+        </member>
+        <member name="M:Comos.Gateway.Services.Controllers.ProjectsController.GetSymbolLibrary(System.String,System.String,System.String,System.String,System.String)">
+            <summary>
+            Get report symbol library JSON, for given report or report template id
+            </summary>
+            <param name="dbid">Database Id</param>
+            <param name="projid">Project Id</param>
+            <param name="reportid"></param>
+            <param name="overlayid">Overlay Id</param>
+            <param name="lcid">Project language</param>
+            <returns></returns>
+        </member>
+        <member name="M:Comos.Gateway.Services.Controllers.ProjectsController.GetChangedObjectsInWorkingOverlay(System.String,System.String,System.String,System.String,System.Boolean)">
+            <summary>
+            Get all changed objects in working overlay
+            </summary>
+            <param name="dbid">Database Id</param>
+            <param name="projid">Project Id</param>
+            <param name="overlayid">Overly Id</param>
+            <param name="lcid">lcid</param>
+            <param name="filteraggregateditems">filteraggregateditems: default = true</param>
+            <returns>List of changed objects</returns>
+        </member>
+        <member name="M:Comos.Gateway.Services.Controllers.ProjectsController.GetChangedReportsInWorkingOverlay(System.String,System.String,System.String,System.String)">
+            <summary>
+            Get all reports in working overlay
+            </summary>
+            <param name="dbid">Database Id</param>
+            <param name="projid">Project Id</param>
+            <param name="overlayid">Overly Id</param>
+            <param name="lcid">lcid</param>
+            <returns>Array of report as json objects</returns>
+        </member>
+        <member name="M:Comos.Gateway.Services.Controllers.ProjectsController.CreateTwinObjectsAsync(System.String,System.String,Comos.Gateway.Contracts.ExtendedComosBaseObject[],System.String,System.String)">
+            <summary>
+            Create object in twin working overlay
+            </summary>
+            <param name="dbid">Database Id</param>
+            <param name="projid">Project Id</param>
+            <param name="comosBaseObjects">Objects to create</param>
+            <param name="overlayid">Overly Id</param>
+            <param name="lcid">lcid</param>
+            <returns>List of objects</returns>
+        </member>
+        <member name="M:Comos.Gateway.Services.Controllers.ProjectsController.PutTwinObjectsAsync(System.String,System.String,Comos.Gateway.Contracts.ExtendedComosBaseObject[],System.String,System.String)">
+            <summary>
+            Put objects in twin working overlay
+            </summary>
+            <param name="dbid">Database Id</param>
+            <param name="projid">Project Id</param>
+            <param name="comosBaseObjects">Objects to put</param>
+            <param name="overlayid">Overly Id</param>
+            <param name="lcid">lcid</param>
+            <returns>List of objects</returns>
+        </member>
+        <member name="M:Comos.Gateway.Services.Controllers.ProjectsController.GetCDevices(System.String,System.String,System.String,System.String,System.String)">
+            <summary>
+            Gets cdevices by owner system full name.
+            </summary>
+            <param name="dbid">The db id.</param>
+            <param name="projid">The project xid.</param>
+            <param name="ownersystemfullname">The owner system full name.</param>
+            <param name="overlayid">The overlay xid.</param>
+            <param name="lcid">The lcid.</param>
+            <returns>An array of GridItem containing the cdevices.</returns>
+        </member>
+        <member name="M:Comos.Gateway.Services.Controllers.ProjectsController.AssignPrimitives(System.String,System.String,System.String,Comos.Gateway.Contracts.Contracts.LinkDevicesToCDevice[],System.String)">
+            <summary>
+            
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:Comos.Gateway.Services.Controllers.ProjectsController.IsSharepointEnabled(System.String,System.String,System.String,System.String)">
+            <summary>
+            Gets if SharePoint Checkout is enabled for the given user
+            </summary>
+            <param name="dbid">Database Id</param>
+            <param name="projid">Project Id</param>
+            <param name="overlayid">Overly Id</param>
+            <param name="lcid">lcid</param>
+            <returns>GridItem</returns>
+        </member>
+        <member name="T:Comos.Gateway.Services.Controllers.RolesController">
+            <summary>
+            Users 
+            </summary>
+        </member>
+        <member name="M:Comos.Gateway.Services.Controllers.RolesController.#ctor(Comos.Gateway.Contracts.IWorkerRequestManager,Microsoft.Extensions.Logging.ILogger{Comos.Gateway.Services.Controllers.UsersController},Comos.Gateway.Services.Utilities.PoolManagerStaticInitializer,Comos.Gateway.Services.Utilities.DocumentUtility,Comos.Web.Common.AsyncUtility)">
+            <summary>
+            
+            </summary>
+            <param name="workerManager"></param>
+            <param name="logger"></param>
+            <param name="poolManagerStaticInitializer"></param>
+            <param name="documentUtility"></param>
+            <param name="asyncUtility"></param>
+        </member>
+        <member name="M:Comos.Gateway.Services.Controllers.RolesController.GetUsersByRole(System.String,System.String,System.String,System.String,System.String)">
+            <summary>
+            
+            </summary>
+            <param name="dbid"></param>
+            <param name="rolename"></param>
+            <param name="projid"></param>
+            <param name="overlayid"></param>
+            <param name="lcid"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Comos.Gateway.Services.Controllers.RolesController.AddUserToRole(System.String,System.String,System.String,System.String,System.String,System.String)">
+            <summary>
+            
+            </summary>
+            <param name="dbid"></param>
+            <param name="rolename"></param>
+            <param name="username"></param>
+            <param name="projid"></param>
+            <param name="overlayid"></param>
+            <param name="lcid"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Comos.Gateway.Services.Controllers.RolesController.RemoveUserFromRole(System.String,System.String,System.String,System.String,System.String,System.String)">
+            <summary>
+            
+            </summary>
+            <param name="dbid"></param>
+            <param name="rolename"></param>
+            <param name="username"></param>
+            <param name="projid"></param>
+            <param name="overlayid"></param>
+            <param name="lcid"></param>
+            <returns></returns>
+        </member>
+        <member name="T:Comos.Gateway.Services.Controllers.SnapshotsController">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="M:Comos.Gateway.Services.Controllers.SnapshotsController.#ctor(Comos.Gateway.Services.Providers.ISnapshotsProvider,Comos.Gateway.Contracts.IWorkerRequestManager,Microsoft.Extensions.Logging.ILogger{Comos.Gateway.Services.Controllers.SnapshotsController},Comos.Gateway.Services.Utilities.PoolManagerStaticInitializer,Comos.Web.Common.AsyncUtility)">
+            <summary>
+            
+            </summary>
+            <param name="snapshotsProvider"></param>
+            <param name="workerManager"></param>
+            <param name="logger"></param>
+            <param name="poolManagerStaticInitializer"></param>
+            <param name="asyncUtility"></param>
+            <exception cref="T:System.ArgumentNullException"></exception>
+        </member>
+        <member name="M:Comos.Gateway.Services.Controllers.SnapshotsController.GetSnapShotByQueryId(System.String,System.String,System.String,System.String,System.String,System.Threading.CancellationToken)">
+            <summary>
+            
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:Comos.Gateway.Services.Controllers.SnapshotsController.QueryHasSnapshots(System.String,System.String,System.String,System.String)">
+            <summary>
+            
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="T:Comos.Gateway.Services.Controllers.TeamcenterController">
+            <summary>
+            Teamcenter
+            </summary>   
+        </member>
+        <member name="M:Comos.Gateway.Services.Controllers.TeamcenterController.#ctor(Comos.Gateway.Contracts.IWorkerRequestManager,Microsoft.Extensions.Logging.ILogger{Comos.Gateway.Services.Controllers.TeamcenterController},Comos.Gateway.Services.Utilities.PoolManagerStaticInitializer,Comos.Web.Common.AsyncUtility)">
+            <summary>
+            Constructor
+            </summary>
+            <param name="workerManager"></param>
+            <param name="logger"></param>
+            <param name="poolManagerStaticInitializer"></param>
+            <param name="asyncUtility"></param>
+        </member>
+        <member name="M:Comos.Gateway.Services.Controllers.TeamcenterController.GetTeamcenterConfiguration">
+            <summary>
+            Gets the COMOS configuration for Teamcenter
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:Comos.Gateway.Services.Controllers.TeamcenterController.Export(System.String)">
+            <summary>
+            
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="T:Comos.Gateway.Services.Controllers.UsersController">
+            <summary>
+            Users 
+            </summary>
+        </member>
+        <member name="M:Comos.Gateway.Services.Controllers.UsersController.#ctor(Comos.Gateway.Contracts.IWorkerRequestManager,Microsoft.Extensions.Logging.ILogger{Comos.Gateway.Services.Controllers.UsersController},Comos.Gateway.Services.Utilities.PoolManagerStaticInitializer,Comos.Gateway.Services.Utilities.DocumentUtility,Comos.Web.Common.AsyncUtility)">
+            <summary>
+            Constructor
+            </summary>
+            <param name="workerManager"></param>
+            <param name="logger"></param>
+            <param name="poolManagerStaticInitializer"></param>
+            <param name="documentUtility"></param>
+            <param name="asyncUtility"></param>
+        </member>
+        <member name="M:Comos.Gateway.Services.Controllers.UsersController.GetUsers(System.String,System.Boolean,System.String,System.String,System.String)">
+            <summary>
+            
+            </summary>
+            <param name="dbid"></param>
+            <param name="active_only">True if only active user should be retrieved</param>
+            <param name="lcid"></param>
+            <param name="first_name">Nested name of first name attribute</param>
+            <param name="last_name">Nested name of last name attribute</param>
+            <returns></returns>
+        </member>
+        <member name="M:Comos.Gateway.Services.Controllers.UsersController.GetUsersWithSearchText(System.String,System.String,System.String,System.String,System.String)">
+            <summary>
+            
+            </summary>
+            <param name="dbid"></param>
+            <param name="searchtext"></param>
+            <param name="first_name">Nested name of first name attribute</param>
+            <param name="last_name">Nested name of last name attribute</param>
+            <param name="lcid"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Comos.Gateway.Services.Controllers.UsersController.GetCurrentUser(System.String,System.String,System.String,System.String)">
+            <summary>
+            Get infos from the current comos user
+            </summary>
+            <param name="dbid">db key</param>
+            <param name="lcid">project language</param>
+            <param name="first_name">>Nested name of first name attribute</param>
+            <param name="last_name">Nested name of last name attribute</param>
+            <returns></returns>
+        </member>
+        <member name="M:Comos.Gateway.Services.Controllers.UsersController.GetUserGroups(System.String,System.String,System.String)">
+            <summary>
+            Get groups from comos user
+            </summary>
+            <param name="dbid">db key</param>
+            <param name="username">user name</param>
+            <param name="lcid">project language</param>
+            <returns></returns>
+        </member>
+        <member name="M:Comos.Gateway.Services.Controllers.UsersController.EditGroupMemberships(System.String,System.String,Comos.Gateway.Contracts.UserUpdate)">
+            <summary>
+            Change the group memberships
+            </summary>
+            <param name="dbid">db key</param>
+            <param name="username">user name</param>
+            <param name="groupData"></param>
+            <returns>A collection of <see cref="T:Comos.Gateway.Contracts.UserGroup"/> the user is now part of.</returns>
+        </member>
+        <member name="M:Comos.Gateway.Services.Controllers.UsersController.GetUserProfilePicture(System.String,System.String)">
+            <summary>
+            This method fetches Profile picture of user.
+            </summary>
+        </member>
+        <member name="M:Comos.Gateway.Services.Controllers.UsersController.DeleteUserProfilePicture(System.String,System.String)">
+            <summary>
+            This method delete Profile picture of user.
+            </summary>
+        </member>
+        <member name="M:Comos.Gateway.Services.Controllers.UsersController.UpdateUserProfilePicture(System.String)">
+            <summary>
+            This method posts/stores Profile picture of user.
+            From the body part of the POST message the name and content of the file
+            are retrieved. The size of the file is fetched from a header. 
+            </summary>
+            <param name="dbid"></param>
+            <returns>A new attachment ID</returns>
+        </member>
+        <member name="M:Comos.Gateway.Services.Controllers.UsersController.CreateUserSyncWithBentely(System.String,Comos.Gateway.Contracts.UserCreate,System.String)">
+            <summary>
+            Create User to Sync with Bentely IMS
+            </summary>        
+            <param name="user">User Object</param>
+            <param name="dbid">dbid Object</param>
+            <param name="lcid">lcid Object</param>
+            <returns></returns>
+        </member>
+        <member name="M:Comos.Gateway.Services.Controllers.UsersController.GetAllUserGroups(System.String,System.String)">
+            <summary>
+            To get all user groups
+            </summary>
+            <param name="dbid"></param>
+            <param name="lcid"></param>
+            <returns>User Groups</returns>
+        </member>
+        <member name="M:Comos.Gateway.Services.Controllers.UsersController.GetAllUserDepartments(System.String,System.String)">
+            <summary>
+            
+            </summary>
+            <param name="dbid"></param>
+            <param name="lcid"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Comos.Gateway.Services.Controllers.UsersController.GetRolesByUser(System.String,System.String,System.String,System.String,System.String)">
+            <summary>
+            
+            </summary>
+            <param name="dbid"></param>
+            <param name="username"></param>
+            <param name="projid"></param>
+            <param name="overlayid"></param>
+            <param name="lcid"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Comos.Gateway.Services.Controllers.UsersController.UpdateUser(System.String,System.String,Comos.Gateway.Contracts.UserUpdate,System.String,System.String,System.String)">
+            <summary>
+            
+            </summary>
+            <param name="dbid"></param>
+            <param name="username"></param>
+            <param name="userdata"></param>
+            <param name="projid"></param>
+            <param name="overlayid"></param>
+            <param name="lcid"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Comos.Gateway.Services.Controllers.UsersController.CreateNewUserInUserManagement(System.String,Comos.Gateway.Contracts.UserCreate[],System.String,System.String)">
+            <summary>
+            
+            </summary>
+            <param name="dbid"></param>
+            <param name="users"></param>
+            <param name="departmentUID"></param>
+            <param name="lcid"></param>
+            <returns></returns>
+        </member>
+        <member name="T:Comos.Gateway.Services.Controllers.VersionInfoController">
+            <summary>
+            Version
+            </summary>   
+        </member>
+        <member name="M:Comos.Gateway.Services.Controllers.VersionInfoController.#ctor(Comos.Gateway.Contracts.IWorkerRequestManager,Microsoft.Extensions.Logging.ILogger{Comos.Gateway.Services.Controllers.VersionInfoController},Comos.Gateway.Services.Utilities.PoolManagerStaticInitializer,Comos.Web.Common.AsyncUtility)">
+            <summary>
+            Constructor
+            </summary>
+            <param name="workerManager"></param>
+            <param name="logger"></param>
+            <param name="poolManagerStaticInitializer"></param>
+            <param name="asyncUtility"></param>
+        </member>
+        <member name="M:Comos.Gateway.Services.Controllers.VersionInfoController.Get">
+            <summary>
+            Get service pack information
+            </summary>
+            <returns>Dictionary</returns>
+        </member>
+        <member name="M:Comos.Gateway.Services.Controllers.VersionInfoController.ReadVersionInfo">
+            <summary>
+            reads service pack xml and returns XML key values
+            </summary>
+            <returns>Dictionary </returns>
+        </member>
+        <member name="T:Comos.Gateway.Services.Core.ComosGatewayControllerBase">
+            <summary>
+            Base class of all Comos.Gateway.Services controller
+            </summary>
+        </member>
+        <member name="F:Comos.Gateway.Services.Core.ComosGatewayControllerBase.requestMngr">
+            <summary>
+            injected request manager which handles serialization of worker requests and responses (long running imports)
+            </summary>
+        </member>
+        <member name="P:Comos.Gateway.Services.Core.ComosGatewayControllerBase.AsyncUtility">
+            <summary>
+            Gets the AsyncUtility
+            </summary>
+        </member>
+        <member name="M:Comos.Gateway.Services.Core.ComosGatewayControllerBase.#ctor(Comos.Gateway.Contracts.IWorkerRequestManager,Comos.Gateway.Services.Utilities.PoolManagerStaticInitializer,Comos.Web.Common.AsyncUtility,Microsoft.Extensions.Logging.ILogger{Comos.Gateway.Services.Core.ComosGatewayControllerBase})">
+            <summary>
+            Default constructor.
+            </summary>
+            <param name="workerManager"></param>
+            <param name="poolManagerStaticInitializer"></param>
+            <param name="asyncUtility"></param>
+            <param name="logger"></param>
+        </member>
+        <member name="T:Comos.Gateway.Services.Core.ComosGatewayServer">
+            <summary>
+            Server for Comos Gateway
+            </summary>
+        </member>
+        <member name="M:Comos.Gateway.Services.Core.ComosGatewayServer.Requester.CheckSessionData(Comos.Gateway.Contracts.PoolRequest,System.String,System.Object,Comos.Services.Sessions.WebLicense)">
+            <summary>
+            Check the Licenses for the Services
+            </summary>
+            <param name="request"></param>
+            <param name="sessionDataAsString">Product String</param>
+            <param name="sessionData">not in use. (only by documentView)</param>
+            <param name="licenseData">checkouted licenses in CLS</param>
+            <returns></returns>
+        </member>
+        <member name="M:Comos.Gateway.Services.Core.ComosGatewayServer.CreateRequest(System.String,System.String,System.String,System.String,System.String,System.String,System.String,System.Threading.CancellationToken)">
+            <summary>
+            Create worker Request
+            </summary>
+            <param name="user"></param>
+            <param name="session"></param>
+            <param name="database"></param>
+            <param name="project"></param>
+            <param name="overlay"></param>
+            <param name="projectLanguage"></param>
+            <param name="projectName">Only "USERS" project as name is allowed</param>
+            <param name="cancellationToken">The CancellationToken for aborting the query-execution from the client.</param>
+            <returns></returns>
+        </member>
+        <member name="M:Comos.Gateway.Services.Core.ComosGatewayServer.#ctor(Microsoft.Extensions.Logging.ILogger{Comos.Gateway.Services.Core.ComosGatewayServer})">
+            <summary>
+            Constructor
+            </summary>
+            <param name="logger"></param>
+        </member>
+        <member name="T:Comos.Gateway.Services.Helper.AsyncHelper">
+            <summary>
+            Simple helper to call async functions synchronously.
+            </summary>
+        </member>
+        <member name="F:Comos.Gateway.Services.Helper.AsyncHelper._taskFactory">
+            <summary>
+            Factory to be used to call async methods.
+            </summary>
+        </member>
+        <member name="M:Comos.Gateway.Services.Helper.AsyncHelper.RunSync``1(System.Func{System.Threading.Tasks.Task{``0}})">
+            <summary>
+            Call func with TaskFactory and wait for result.
+            </summary>
+            <typeparam name="TResult"></typeparam>
+            <param name="func"></param>
+            <returns></returns>
+        </member>
+        <member name="T:Comos.Gateway.Services.Helper.DynamicObjectHelper">
+            <summary>
+            This is a helper class to avoid checking of dynamic object types
+            (typically JObject or ExpandoObject)    
+            </summary>
+        </member>
+        <member name="M:Comos.Gateway.Services.Helper.DynamicObjectHelper.GetDictionary(System.Object)">
+            <summary>
+            Convert dynamic object (JObject or ExpandoObject) to a Dictionary.        
+            </summary>
+            <param name="obj">Dynamic object to be converted</param>
+            <returns></returns>
+        </member>
+        <member name="M:Comos.Gateway.Services.Helper.DynamicObjectHelper.GetEnumerable``1(System.Object)">
+            <summary>
+            Convert dynamic object (JObject or ExpandoObject) to an Enumerable of specified type.   
+            </summary>
+            <typeparam name="T">Type of the enumerable element</typeparam>
+            <param name="obj">Dynamic object to be converted</param>
+            <returns></returns>
+        </member>
+        <member name="T:Comos.Gateway.Services.Helper.ProjectUtility">
+            <summary>
+            Project Utility
+            </summary>
+        </member>
+        <member name="M:Comos.Gateway.Services.Helper.ProjectUtility.#ctor(Comos.Web.Common.AsyncUtility)">
+            <summary>
+            Constructor
+            </summary>
+            <param name="asyncUtility"></param>
+        </member>
+        <member name="M:Comos.Gateway.Services.Helper.ProjectUtility.SetStorageProject(System.String,System.String)">
+            <summary>
+            Sets stoage project
+            </summary>
+            <param name="dbid"></param>
+            <param name="prjid"></param>
+        </member>
+        <member name="T:Comos.Gateway.Services.Providers.ISnapshotLib">
+            <summary>
+            Interface for accessing Snapshot functionality
+            necessary for enabling unit tests
+            add more methods if needed
+            </summary>
+        </member>
+        <member name="M:Comos.Gateway.Services.Providers.ISnapshotLib.SnapshotInfoAsync(System.String,System.String,System.String,System.Int32)">
+            <summary>
+            Gets meta data about a query's snapshot
+            </summary>
+            <param name="projectId"></param>
+            <param name="queryId"></param>
+            <param name="overlayId"></param>
+            <param name="lcid"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Comos.Gateway.Services.Providers.ISnapshotLib.SnapshotDataAsync(System.Int32,System.Int32,System.Int32)">
+            <summary>
+            Gets the Data for a snapshot
+            </summary>
+            <param name="snapshotId"></param>
+            <param name="minId"></param>
+            <param name="maxId"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Comos.Gateway.Services.Providers.ISnapshotLib.SnapshotId(System.String,System.String,System.String)">
+            <summary>
+            Searches the database for snapshots associated with a query
+            and returns the snapshot id if a snapshot exists
+            </summary>
+            <param name="projectId"></param>
+            <param name="queryId"></param>
+            <param name="overlayId"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Comos.Gateway.Services.Providers.ISnapshotLib.ColumnInfosAsync(System.Int32)">
+            <summary>
+            Gets the column headers of a snapshot
+            </summary>
+            <param name="snapshotId"></param>
+            <returns></returns>
+        </member>
+        <member name="T:Comos.Gateway.Services.Providers.ISnapshotsProvider">
+            <summary>
+            Provider for snapshot data
+            </summary>
+        </member>
+        <member name="M:Comos.Gateway.Services.Providers.ISnapshotsProvider.GetSnapShotByQueryId(System.String,System.String,System.String,System.String,System.Int32)">
+            <summary>
+            gets the snapshot to a given query id
+            </summary>
+            <param name="dbid"></param>
+            <param name="projid"></param>
+            <param name="queryid"></param>
+            <param name="overlayid"></param>
+            <param name="lcid"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Comos.Gateway.Services.Providers.ISnapshotsProvider.QueryHasSnapshots(System.String,System.String,System.String,System.String)">
+            <summary>
+            Returns if the query has a snapshot
+            </summary>
+            <param name="dbid"></param>
+            <param name="projid"></param>
+            <param name="queryid"></param>
+            <param name="overlayid"></param>
+            <returns></returns>
+        </member>
+        <member name="T:Comos.Gateway.Services.Providers.SnapshotLib">
+            <summary>
+            Implementation of the <see cref="T:Comos.Gateway.Services.Providers.ISnapshotLib"/>
+            </summary>
+        </member>
+        <member name="M:Comos.Gateway.Services.Providers.SnapshotLib.SnapshotInfoAsync(System.String,System.String,System.String,System.Int32)">
+            <inheritdoc />
+        </member>
+        <member name="M:Comos.Gateway.Services.Providers.SnapshotLib.SnapshotDataAsync(System.Int32,System.Int32,System.Int32)">
+            <inheritdoc />
+        </member>
+        <member name="M:Comos.Gateway.Services.Providers.SnapshotLib.SnapshotId(System.String,System.String,System.String)">
+            <inheritdoc />
+        </member>
+        <member name="M:Comos.Gateway.Services.Providers.SnapshotLib.ColumnInfosAsync(System.Int32)">
+            <inheritdoc />
+        </member>
+        <member name="T:Comos.Gateway.Services.Providers.SnapshotsProvider">
+            <summary>
+            implements <see cref="T:Comos.Gateway.Services.Providers.ISnapshotsProvider"/>
+            </summary>
+        </member>
+        <member name="M:Comos.Gateway.Services.Providers.SnapshotsProvider.#ctor(Comos.Gateway.Services.Providers.ISnapshotLib)">
+            <summary>
+            The constructor
+            </summary>
+            <param name="snapshotLib">An implementation of <see cref="T:Comos.Gateway.Services.Providers.ISnapshotLib"/> for accessing snapshot data</param>
+        </member>
+        <member name="M:Comos.Gateway.Services.Providers.SnapshotsProvider.GetSnapShotByQueryId(System.String,System.String,System.String,System.String,System.Int32)">
+            <summary>
+            gets the snapshot to a given query id
+            </summary>
+            <param name="dbid"></param>
+            <param name="projid"></param>
+            <param name="queryid"></param>
+            <param name="overlayid"></param>
+            <param name="lcid"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Comos.Gateway.Services.Providers.SnapshotsProvider.QueryHasSnapshots(System.String,System.String,System.String,System.String)">
+            <summary>
+            
+            </summary>
+            <param name="dbid"></param>
+            <param name="projid"></param>
+            <param name="queryid"></param>
+            <param name="overlayid"></param>
+            <returns></returns>
+        </member>
+        <member name="T:Comos.Gateway.Services.Utilities.DocumentUtility">
+            <summary>
+            Document Utility
+            </summary>
+        </member>
+        <member name="M:Comos.Gateway.Services.Utilities.DocumentUtility.#ctor(Microsoft.Extensions.Logging.ILogger{Comos.Gateway.Services.Utilities.DocumentUtility})">
+            <summary>
+            Constructor
+            </summary>
+            <param name="logger"></param>
+        </member>
+        <member name="M:Comos.Gateway.Services.Utilities.DocumentUtility.ExtractArrayOfNameValuesFromJSONString(System.String,System.String)">
+            <summary>
+            This method extracts from a JSON string an array of name/value pairs. 
+            The name of the array must be specified as a parameter. 
+            E.g.:
+                { "Configurations": [{ "DbKey": "db1", "ProjectUid": "U:2:A3BQHFA8AR:", WorkingOverlayID:"Test-Arbeitsschicht", SystemUid:"U:8:A3X0C5WU0D:J5"},
+                                     { "DbKey": "db6", "ProjectUid": "U:2:A3BQHFA8AR:", WorkingOverlayID:"Test-Arbeitsschicht", SystemUid:"U:8:A3X0C5WU0D:J5"}
+                                    ],
+                  "References":     [{ "DbKey": "db1", "ProjectUid": "U:2:A3BQHFA8AR:", WorkingOverlayID:"Test-Arbeitsschicht", SystemUid:"U:8:A3X0C5WU0D:J5"},
+                                     { "DbKey": "db6", "ProjectUid": "U:2:A3BQHFA8AR:", WorkingOverlayID:"Test-Arbeitsschicht", SystemUid:"U:8:A3X0C5WU0D:J5"}
+                                    ]                         
+                }
+            
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="T:Comos.Gateway.Services.Utilities.InnerServiceRequestContext">
+            <summary>
+            Request context implementation which can be used for inner-service WebApi calls
+            </summary>
+        </member>
+        <member name="P:Comos.Gateway.Services.Utilities.InnerServiceRequestContext.AdditionalHeader">
+            <summary>
+            may contain additional headers for inner service calls
+            </summary>
+        </member>
+        <member name="M:Comos.Gateway.Services.Utilities.InnerServiceRequestContext.CreateRequestTokenHeader(System.Object)">
+            <summary>
+            Encodes the HTTP Header token.
+            </summary>
+            <param name="requestToken"></param>
+            <returns></returns>
+        </member>
+        <member name="T:Comos.Gateway.Services.Utilities.PoolManagerStaticInitializer">
+            <summary>
+            Static accessor and initialization class for the IWorkerRequestManager and the PoolManager instance.
+            </summary>
+        </member>
+        <member name="M:Comos.Gateway.Services.Utilities.PoolManagerStaticInitializer.#ctor(Microsoft.Extensions.Logging.ILogger{Comos.Gateway.Services.Utilities.PoolManagerStaticInitializer})">
+            <summary>
+            Constructor
+            </summary>
+            <param name="logger"></param>
+        </member>
+        <member name="M:Comos.Gateway.Services.Utilities.PoolManagerStaticInitializer.Init(Comos.Gateway.Contracts.IWorkerRequestManager)">
+            <summary>
+            initialise PoolManager to static instance
+            </summary>
+            <param name="workerRequestMngr"></param>
+        </member>
+        <member name="T:Comos.Gateway.Services.Utilities.ProcessObjectsExportResult">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="M:Comos.Gateway.Services.Utilities.ProcessObjectsExportResult.ProcessResult(Comos.Gateway.Contracts.ComosObjectsExportResult,System.Exception)">
+            <summary>
+            ProcessResult
+            </summary>
+            <param name="resultData"></param>
+            <param name="error"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Comos.Gateway.Services.Utilities.ProcessObjectsExportResult.ProcessResult(System.Object,System.Exception)">
+            <summary>
+            ProcessResult
+            </summary>
+            <param name="resultData"></param>
+            <param name="error"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Comos.Gateway.Services.Utilities.ProcessObjectsExportResult.PutArgs(System.Object[],System.String[])">
+            <summary>
+            PutArgs
+            </summary>
+            <param name="processingArgs"></param>
+            <param name="temporaryFiles"></param>
+        </member>
+        <member name="T:Comos.Gateway.Services.Utilities.ProcessImportLogFileResult">
+            <summary>
+            Processing implementation of logger results which come from long running worker data import calls
+            </summary>
+        </member>
+        <member name="M:Comos.Gateway.Services.Utilities.ProcessImportLogFileResult.#ctor(Microsoft.Extensions.Logging.ILogger{Comos.Gateway.Services.Utilities.ProcessImportLogFileResult},Comos.Services.Common.Contracts.IServiceProxyProvider)">
+            <summary>
+            Constructor
+            </summary>
+            <param name="logger"></param>
+            <param name="serviceProxyProvider"></param>
+            <param name="delegationClient"></param>
+        </member>
+        <member name="M:Comos.Gateway.Services.Utilities.ProcessImportLogFileResult.ProcessResult(Comos.Gateway.Contracts.ImportLoggerContent[],System.Exception)">
+            <summary>
+            Store logger result to SchedulerService.
+            </summary>
+            <param name="resultData"></param>
+            <param name="error"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Comos.Gateway.Services.Utilities.ProcessImportLogFileResult.ProcessResult(System.Object,System.Exception)">
+            <summary>
+            Forward processing to typesafe version of this method.
+            </summary>
+            <param name="resultData"></param>
+            <param name="error"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Comos.Gateway.Services.Utilities.ProcessImportLogFileResult.PutArgs(System.Object[],System.String[])">
+            <summary>
+            Prepares instance to process logging result data.
+            </summary>
+            <param name="processingArgs"></param>
+            <param name="temporaryFiles"></param>
+        </member>
+        <member name="T:Comos.Gateway.Services.Utilities.ProcessScanManagerResult">
+            <summary>
+            ProcessScanManagerResult
+            </summary>
+        </member>
+        <member name="M:Comos.Gateway.Services.Utilities.ProcessScanManagerResult.#ctor">
+            <summary>
+            Process ScanManager Result
+            </summary>
+        </member>
+        <member name="M:Comos.Gateway.Services.Utilities.ProcessScanManagerResult.ProcessResult(Comos.Gateway.Contracts.ExportResultItem[],System.Exception)">
+            <summary>
+            ProcessResult
+            </summary>
+            <param name="resultData"></param>
+            <param name="error"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Comos.Gateway.Services.Utilities.ProcessScanManagerResult.PutArgs(System.Object[],System.String[])">
+            <summary>
+            Arguments passed to the processor
+            </summary>
+            <param name="processingArgs"></param>
+            <param name="temporaryFiles"></param>
+        </member>
+        <member name="M:Comos.Gateway.Services.Utilities.ProcessScanManagerResult.ProcessResult(System.Object,System.Exception)">
+            <summary>
+            ProcessResult
+            </summary>
+            <param name="resultData"></param>
+            <param name="error"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Comos.Gateway.Services.Utilities.ProcessScanManagerResult.DeleteFilesAsync(System.Int32)">
+            <summary>
+            Delete older export post a duration mentioned in the config
+            </summary>
+            <param name="duration"></param>
+        </member>
+        <member name="M:Comos.Gateway.Services.Utilities.ProcessScanManagerResult.ConvertScanManagerResToTC(Comos.Gateway.Contracts.ExportResultItem[],System.String,Comos.Services.Common.Serialization.ServiceApiJsonHelper)">
+            <summary>
+            Converts Scan Manager output to teamcenter export result
+            </summary>
+            <param name="items"></param>
+            <param name="view"></param>
+            <param name="jsonSerializer"></param>
+            <returns></returns>
+        </member>
+        <member name="T:Comos.Gateway.Services.WebApiHelpers.ApiControllerExtensions">
+            <summary>
+            ApiController extensions
+            </summary>
+        </member>
+        <member name="P:Comos.Gateway.Services.WebApiHelpers.ApiControllerExtensions.ApiRequestContext.AdditionalHeader">
+            <summary>
+            may contain additional headers for inner service calls
+            </summary>
+        </member>
+        <member name="M:Comos.Gateway.Services.WebApiHelpers.ApiControllerExtensions.GetApiRequestContext(System.Web.Http.ApiController)">
+            <summary>
+            Gets the api request context
+            </summary>
+            <param name="controller"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Comos.Gateway.Services.WebApiHelpers.ApiControllerExtensions.GetUserName(System.Web.Http.ApiController)">
+            <summary>
+            Gets the user name without domain from the ComosRequestContext
+            TODO: Add to Service.Common for reusing?
+            </summary>
+            <param name="controller"></param>
+            <returns></returns>
+        </member>
+    </members>
+</doc>

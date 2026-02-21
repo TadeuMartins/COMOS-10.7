@@ -1,0 +1,170 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<!--
+@<DEL>@ TEXT ENCLOSED within delete markers will be REMOVED
+   Date      Name                    Description of Change
+12-Feb-2013  Ravi Inti               Initial
+11-Mar-2013  Ravi Inti               Changes uid to piduid for piperun and branch
+$HISTORY$
+  TEXT ENCLOSED within delete markers will be REMOVED @<DEL>@
+Description:
+   This file is the XML schema against which the 2D Schematic\logical Pipe Run XML files imported into 
+   NX Routing Mechanical application are validated.
+-->
+<xs:schema attributeFormDefault="unqualified" elementFormDefault="qualified" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+    <xs:annotation>
+        <xs:documentation>
+            The URL for this schema location is "TBD". This file is available with NX OOTB kits folder UGII_ROUTING_APP_VIEW_DIR
+            Users of this schema can copy this to a location where their run xml files can access it locally when running
+            NX Routing Mechanical application to import the run xml (The sample Run XML is also available with NX OOTB kits folder UGII_ROUTING_APP_VIEW_DIR.
+
+            Site containing a lot of XML related information:
+            http://www.xml.org/
+
+            Introduction to XML Schema creation:
+            http://www.w3.org/TR/xmlschema-0/
+
+            Reference for XML Schema structures and datatypes:
+            http://www.w3.org/TR/xmlschema-1/
+            http://www.w3.org/TR/xmlschema-2/
+
+            Tutorial for Schema creation:
+            http://www.zvon.org/xxl/XMLSchemaTutorial/Output/index.html
+
+            Reference for the XPath language:
+            http://www.w3.org/TR/xpath
+
+            Quick reference for XML Schema elements:
+            http://doc.ddart.net/xmlsdk/htm/xsd_ref_1yer.htm
+
+            Validation of XML schema and instance [use Xerces-J2 validation]:
+            http://www.corefiling.com/opensource/schemaValidate.html
+        </xs:documentation>
+  </xs:annotation>
+  <xs:element name="Schematics3D">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element name="StartingRouting">
+          <xs:complexType>
+            <xs:sequence>
+              <xs:annotation>
+                    <xs:documentation>
+                        Piperuns defined here will be mapped to the NX Routing objects. These objects can be visualized in
+                        Routing Mechanical Run Navigator.
+                    </xs:documentation>
+              </xs:annotation>
+              <xs:element name="Piperuns">
+                <xs:complexType>
+                  <xs:sequence>
+                    <xs:element minOccurs="1" maxOccurs="unbounded" name="Piperun">
+                      <xs:complexType>
+                        <xs:sequence>
+                          <xs:annotation>
+                                <xs:documentation>
+                                    Branches defined here will be mapped to the NX Run objects. These objects can be visualized in
+                                    Routing Mechanical Run Navigator. All the Branches defined under a piperun will be created as children of the
+                                    Routing to which Piperun is mapped.
+                                </xs:documentation>
+                          </xs:annotation>
+                          <xs:element name="Branches">
+                            <xs:complexType>
+                              <xs:sequence>
+                                <xs:element minOccurs="1" maxOccurs="unbounded" name="Branch">
+                                  <xs:complexType>
+                                    <xs:sequence>
+                                      <xs:annotation>
+                                            <xs:documentation>
+                                                FromPart will be mapped to the From Item in the NX Run definition
+                                                the piduid attribute will be mapped to the REFERENCE_ID
+                                            </xs:documentation>
+                                      </xs:annotation>
+                                      <xs:element minOccurs="0" maxOccurs="1" name="FromPart">
+                                        <xs:complexType>
+                                          <xs:attribute name="deviceuid" type="xs:string" use="required" />
+                                          <xs:attribute name="identifier" type="xs:string" use="required" />
+                                          <xs:attribute name="piduid" type="xs:string" use="required" />
+                                          <xs:attribute name="pidname" type="xs:string" use="required" />
+                                          <xs:attribute name="description" type="xs:string" use="required" />
+                                          <xs:attribute name="path" type="xs:string" use="required" />
+                                          <xs:attribute name="connector" type="xs:string" use="required" />
+                                          <xs:attribute name="DBPartNo" type="xs:string" use="required" />
+                                          <xs:attribute name="TAG_ID" type="xs:string" use="required" />
+                                        </xs:complexType>
+                                      </xs:element>
+                                      <xs:element minOccurs="0" maxOccurs="1" name="ToPart">
+                                        <xs:annotation>
+                                              <xs:documentation>
+                                                  ToPart will be mapped to the To Item in the NX Run definition
+                                                  the piduid attribute will be mapped to the REFERENCE_ID
+                                              </xs:documentation>
+                                        </xs:annotation>
+                                        <xs:complexType>
+                                          <xs:attribute name="deviceuid" type="xs:string" use="required" />
+                                          <xs:attribute name="identifier" type="xs:string" use="required" />
+                                          <xs:attribute name="piduid" type="xs:string" use="required" />
+                                          <xs:attribute name="pidname" type="xs:string" use="required" />
+                                          <xs:attribute name="description" type="xs:string" use="required" />
+                                          <xs:attribute name="path" type="xs:string" use="required" />
+                                          <xs:attribute name="connector" type="xs:string" use="required" />
+                                          <xs:attribute name="DBPartNo" type="xs:string" use="required" />
+                                          <xs:attribute name="TAG_ID" type="xs:string" use="required" />
+                                        </xs:complexType>
+                                      </xs:element>
+                                      <xs:element name="PartsToPlace">
+                                        <xs:annotation>
+                                              <xs:documentation>
+                                                  PartsToPlace will be mapped to the Member Items in the NX Run definition
+                                                  the piduid attribute will be mapped to the REFERENCE_ID
+                                              </xs:documentation>
+                                        </xs:annotation>
+                                        <xs:complexType>
+                                          <xs:sequence minOccurs="0">
+                                            <xs:element maxOccurs="unbounded" name="Part">
+                                              <xs:complexType>
+                                                <xs:attribute name="deviceuid" type="xs:string" use="required" />
+                                                <xs:attribute name="identifier" type="xs:string" use="required" />
+                                                <xs:attribute name="piduid" type="xs:string" use="required" />
+                                                <xs:attribute name="pidname" type="xs:string" use="required" />
+                                                <xs:attribute name="description" type="xs:string" use="required" />
+                                                <xs:attribute name="path" type="xs:string" use="required" />
+                                                <xs:attribute name="connector" type="xs:string" use="required" />
+                                                <xs:attribute name="DBPartNo" type="xs:string" use="required" />
+                                                <xs:attribute name="TAG_ID" type="xs:string" use="required" />
+                                                <xs:attribute name="ACTUATOR_TYPE" type="xs:string" use="optional" />
+                                              </xs:complexType>
+                                            </xs:element>
+                                          </xs:sequence>
+                                          <xs:attribute name="count" type="xs:unsignedByte" use="required" />
+                                        </xs:complexType>
+                                      </xs:element>
+                                    </xs:sequence>
+                                    <xs:attribute name="TAG_ID" type="xs:string" use="required" />
+                                    <xs:attribute name="piduid" type="xs:string" use="required" />
+                                    <xs:attribute name="name" type="xs:string" use="required" />
+                                    <xs:attribute name="path" type="xs:string" use="required" />
+                                    <xs:attribute name="PipeClass" type="xs:string" use="required" />
+                                    <xs:attribute name="NPS" type="xs:string" use="required" />
+                                  </xs:complexType>
+                                </xs:element>
+                              </xs:sequence>
+                              <xs:attribute name="count" type="xs:unsignedByte" use="required" />
+                            </xs:complexType>
+                          </xs:element>
+                        </xs:sequence>
+                        <xs:attribute name="TAG_ID" type="xs:string" use="required" />
+                        <xs:attribute name="piduid" type="xs:string" use="required" />
+                        <xs:attribute name="name" type="xs:string" use="required" />
+                        <xs:attribute name="path" type="xs:string" use="required" />
+                      </xs:complexType>
+                    </xs:element>
+                  </xs:sequence>
+                  <xs:attribute name="count" type="xs:unsignedByte" use="required" />
+                </xs:complexType>
+              </xs:element>
+            </xs:sequence>
+          </xs:complexType>
+        </xs:element>
+      </xs:sequence>
+      <xs:attribute name="version" type="xs:string" use="required" />
+    </xs:complexType>
+  </xs:element>
+</xs:schema>

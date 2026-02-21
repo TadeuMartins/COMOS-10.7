@@ -1,0 +1,19 @@
+=== STOP NODE SHIM ===
+STOPPED_NODE	72420
+=== RETRY COPY LOOP ===
+RETRY	20	The process cannot access the file 'C:\Program Files (x86)\COMOS\Team_AI\Bin\SDK\AI\844cdd2b-94d8-413e-908d-349596c6c3c1_Comos.ServiceiPID.Agent.dll' because it is being used by another process.
+RETRY	40	The process cannot access the file 'C:\Program Files (x86)\COMOS\Team_AI\Bin\SDK\AI\844cdd2b-94d8-413e-908d-349596c6c3c1_Comos.ServiceiPID.Agent.dll' because it is being used by another process.
+RETRY	60	The process cannot access the file 'C:\Program Files (x86)\COMOS\Team_AI\Bin\SDK\AI\844cdd2b-94d8-413e-908d-349596c6c3c1_Comos.ServiceiPID.Agent.dll' because it is being used by another process.
+RETRY	80	The process cannot access the file 'C:\Program Files (x86)\COMOS\Team_AI\Bin\SDK\AI\844cdd2b-94d8-413e-908d-349596c6c3c1_Comos.ServiceiPID.Agent.dll' because it is being used by another process.
+RETRY	100	The process cannot access the file 'C:\Program Files (x86)\COMOS\Team_AI\Bin\SDK\AI\844cdd2b-94d8-413e-908d-349596c6c3c1_Comos.ServiceiPID.Agent.dll' because it is being used by another process.
+RETRY	120	The process cannot access the file 'C:\Program Files (x86)\COMOS\Team_AI\Bin\SDK\AI\844cdd2b-94d8-413e-908d-349596c6c3c1_Comos.ServiceiPID.Agent.dll' because it is being used by another process.
+RETRY	140	The process cannot access the file 'C:\Program Files (x86)\COMOS\Team_AI\Bin\SDK\AI\844cdd2b-94d8-413e-908d-349596c6c3c1_Comos.ServiceiPID.Agent.dll' because it is being used by another process.
+RETRY	160	The process cannot access the file 'C:\Program Files (x86)\COMOS\Team_AI\Bin\SDK\AI\844cdd2b-94d8-413e-908d-349596c6c3c1_Comos.ServiceiPID.Agent.dll' because it is being used by another process.
+RETRY	180	The process cannot access the file 'C:\Program Files (x86)\COMOS\Team_AI\Bin\SDK\AI\844cdd2b-94d8-413e-908d-349596c6c3c1_Comos.ServiceiPID.Agent.dll' because it is being used by another process.
+RETRY	200	The process cannot access the file 'C:\Program Files (x86)\COMOS\Team_AI\Bin\SDK\AI\844cdd2b-94d8-413e-908d-349596c6c3c1_Comos.ServiceiPID.Agent.dll' because it is being used by another process.
+RETRY	220	The process cannot access the file 'C:\Program Files (x86)\COMOS\Team_AI\Bin\SDK\AI\844cdd2b-94d8-413e-908d-349596c6c3c1_Comos.ServiceiPID.Agent.dll' because it is being used by another process.
+RETRY	240	The process cannot access the file 'C:\Program Files (x86)\COMOS\Team_AI\Bin\SDK\AI\844cdd2b-94d8-413e-908d-349596c6c3c1_Comos.ServiceiPID.Agent.dll' because it is being used by another process.
+COPY_NEVER_SUCCEEDED
+=== HASHES ===
+3418D3D63BF427FD1D70B760EED2454F223762C255AC474306F9CFA3262A722A	C:\Program Files (x86)\COMOS\Team_AI\Bin\SDK\AI\Comos.ServiceiPID.Agent.dll
+39AABE158E54074E564B52C5C4BD018AC2F04B560D0237EC80F458EC6BBDE16E	C:\Program Files (x86)\COMOS\Team_AI\Bin\SDK\AI\844cdd2b-94d8-413e-908d-349596c6c3c1_Comos.ServiceiPID.Agent.dll

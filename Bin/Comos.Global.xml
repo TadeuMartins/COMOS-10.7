@@ -1,0 +1,2451 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>Comos.Global</name>
+    </assembly>
+    <members>
+        <member name="T:Comos.Global.AppControls.AppearanceType">
+            <summary>
+            Specifies the appearance type of an IAppControl.
+            </summary>
+        </member>
+        <member name="F:Comos.Global.AppControls.AppearanceType.Undefined">
+            <summary>
+            The appearance type is not defined.
+            </summary>
+        </member>
+        <member name="F:Comos.Global.AppControls.AppearanceType.Tab">
+            <summary>
+            The IAppControl appears as a tab.
+            </summary>
+        </member>
+        <member name="F:Comos.Global.AppControls.AppearanceType.Floating">
+            <summary>
+            The IAppControl appears as a non-modal window.
+            </summary>
+        </member>
+        <member name="F:Comos.Global.AppControls.AppearanceType.Modal">
+            <summary>
+            The IAppControl appears as a modal window.
+            </summary>
+        </member>
+        <member name="T:Comos.Global.AppControls.Area">
+            <summary>
+            Specifies in which area of the user interface an IAppControl is placed.
+            </summary>
+        </member>
+        <member name="F:Comos.Global.AppControls.Area.Undefined">
+            <summary>
+            The area is not defined.
+            </summary>
+        </member>
+        <member name="F:Comos.Global.AppControls.Area.Document">
+            <summary>
+            The IAppControl is placed in the main document area.
+            </summary>
+        </member>
+        <member name="F:Comos.Global.AppControls.Area.Document2">
+            <summary>
+            The IAppControl is placed in the document area of the second screen.
+            If the second screen is not enabled, the IAppControl is placed in the main document area.
+            </summary>
+        </member>
+        <member name="F:Comos.Global.AppControls.Area.Navigator">
+            <summary>
+            The IAppControl is placed in the navigator area.
+            </summary>
+        </member>
+        <member name="F:Comos.Global.AppControls.Area.SidePanel">
+            <summary>
+            Specifies that the element is positioned in the side panel area of the user interface.
+            </summary>
+        </member>
+        <member name="T:Comos.Global.AppControls.SubArea">
+            <summary>
+            Specifies in which subarea of the user interface an IAppControl is placed.
+            This option is only applied if the IAppControl represents a tab in the navigator area.
+            </summary>
+        </member>
+        <member name="F:Comos.Global.AppControls.SubArea.Undefined">
+            <summary>
+            The subarea is not defined.
+            </summary>
+        </member>
+        <member name="F:Comos.Global.AppControls.SubArea.Default">
+            <summary>
+            The IAppControl is placed in the main area of the navigator.
+            </summary>
+        </member>
+        <member name="F:Comos.Global.AppControls.SubArea.Detail">
+            <summary>
+            The IAppControl is placed in the detail area of the navigator.
+            </summary>
+        </member>
+        <member name="T:Comos.Global.AppControls.ScaleMode">
+            <summary>
+            Specifies the scale mode of an IAppControl.
+            </summary>
+        </member>
+        <member name="F:Comos.Global.AppControls.ScaleMode.Undefined">
+            <summary>
+            The scale mode is not defined.
+            </summary>
+        </member>
+        <member name="F:Comos.Global.AppControls.ScaleMode.Pixel">
+            <summary>
+            The width and the height of an IAppControl are set in pixels.
+            </summary>
+        </member>
+        <member name="F:Comos.Global.AppControls.ScaleMode.Twip">
+            <summary>
+            The width and the height of an IAppControl are set in twips.
+            </summary>
+        </member>
+        <member name="T:Comos.Global.AppControls.ResizeMode">
+            <summary>
+            Specifies whether an IAppControl can resize.
+            This option is only applied if the IAppControl represents a window.
+            </summary>
+        </member>
+        <member name="F:Comos.Global.AppControls.ResizeMode.Undefined">
+            <summary>
+            The resize mode is not defined.
+            </summary>
+        </member>
+        <member name="F:Comos.Global.AppControls.ResizeMode.Resize">
+            <summary>
+            The IAppControl can resize.
+            </summary>
+        </member>
+        <member name="F:Comos.Global.AppControls.ResizeMode.NoResize">
+            <summary>
+            The IAppControl cannot resize.
+            </summary>
+        </member>
+        <member name="T:Comos.Global.AppControls.AutoClose">
+            <summary>
+            Specifies whether an IAppControl is automatically closed if a project or working overlay change occurs.
+            </summary>
+        </member>
+        <member name="F:Comos.Global.AppControls.AutoClose.Undefined">
+            <summary>
+            The auto close behaviour is not defined.
+            </summary>
+        </member>
+        <member name="F:Comos.Global.AppControls.AutoClose.AutoClose">
+            <summary>
+            The IAppControl is automatically closed if a project or working overlay change occurs.
+            </summary>
+        </member>
+        <member name="F:Comos.Global.AppControls.AutoClose.NoAutoClose">
+            <summary>
+            The IAppControl is not automatically closed if a project or working overlay change occurs.
+            </summary>
+        </member>
+        <member name="T:Comos.Global.AppControls.AppControlState">
+            <summary>
+            Specifies the state of an IAppControl.
+            </summary>
+        </member>
+        <member name="F:Comos.Global.AppControls.AppControlState.Undefined">
+            <summary>
+            The state is not defined.
+            </summary>
+        </member>
+        <member name="F:Comos.Global.AppControls.AppControlState.ReuseOnly">
+            <summary>
+            The IAppControl is reused if the same kind of IAppControl is opened again.
+            The user cannot change this state.
+            </summary>
+        </member>
+        <member name="F:Comos.Global.AppControls.AppControlState.Reuse">
+            <summary>
+            The IAppControl is reused if the same kind of IAppControl is opened again.
+            The user can change this state.
+            </summary>
+        </member>
+        <member name="F:Comos.Global.AppControls.AppControlState.UniqueOnly">
+            <summary>
+            The IAppControl is not reused if the same kind of IAppControl is opened again.
+            The user cannot change this state.
+            </summary>
+        </member>
+        <member name="F:Comos.Global.AppControls.AppControlState.Unique">
+            <summary>
+            The IAppControl is not reused if the same kind of IAppControl is opened again.
+            The user can change this state.
+            </summary>
+        </member>
+        <member name="F:Comos.Global.AppControls.AppControlState.NoState">
+            <summary>
+            In this case no state will be visible. WindowMenuExtension(green round button) will be collapsed.
+            </summary>
+        </member>
+        <member name="T:Comos.Global.AppControls.IAppControls">
+             <summary>
+             Defines members for managing controls of the Comos application.
+             </summary>
+             <example><code>
+             IAppControls appControls = Comos.Global.AppGlobal.AppControls;
+             IAppControlOptions options = appControls.CreateOptions();
+            
+             options.Assembly = "CommonComosTests";
+             options.Class = "CommonComosTests.MyUserControl";
+             // or:
+             // options.ToolId = "MyToolId";
+            
+             IAppControlAppearance appearance = options.Appearance;
+            
+             appearance.Area = Area.Navigator;
+             appearance.SubArea = SubArea.Detail;
+            
+             IAppControl appControl = appControls.Create(options);
+            
+             if (appControl != null)
+             {
+                 IAppControlHeader header = appControl.Header;
+            
+                 header.Title = "MyTitle";
+                 header.Image = Comos.PicturesLibrary.Pictures.Instance.PictureByKey("std_actionWarning");
+             
+                 appControl.Show();
+             }
+             </code></example>
+             <example><code>
+             IAppControls appControls = Comos.Global.AppGlobal.AppControls;
+             IAppControl appControl = null;
+            
+             for (int i = 0; i &lt; appControls.Count; i++)
+             {
+                 if (appControls[i].Control is MyUserControl)
+                 {
+                     appControl = appControls[i];
+                     break;
+                 }
+             }
+            
+             if (appControl != null)
+                 appControls.TryClose(appControl);
+             </code></example>
+        </member>
+        <member name="P:Comos.Global.AppControls.IAppControls.Count">
+            <summary>
+            Gets the number of IAppControl instances contained by this instance.
+            </summary>
+        </member>
+        <member name="P:Comos.Global.AppControls.IAppControls.Item(System.Object)">
+            <summary>
+            Gets the IAppControl for the specified identifier.
+            </summary>
+            <param name="ident">The index or the underlying control of the IAppControl.</param>
+            <returns>The IAppControl if successful. Otherwise, null.</returns>
+        </member>
+        <member name="M:Comos.Global.AppControls.IAppControls.Create(Comos.Global.AppControls.IAppControlOptions)">
+            <summary>
+            Creates a new IAppControl with the specified IAppControlOptions.
+            </summary>
+            <param name="options">
+            An IAppControlOptions instance which specifies the options for the new IAppControl.
+            This IAppControlOptions instance must have been created with the CreateOptions method and
+            must not be reused for creating further IAppControl instances.
+            </param>
+            <returns>
+            A new IAppControl if successful. Null if an existing IAppControl is reused or creating a new
+            IAppControl with the specified options is not possible.
+            </returns>
+        </member>
+        <member name="M:Comos.Global.AppControls.IAppControls.CreateOptions">
+            <summary>
+            Creates a new IAppControlOptions instance which can be used as a parameter for the Create method.
+            </summary>
+            <returns>A new IAppControlOptions instance.</returns>
+        </member>
+        <member name="M:Comos.Global.AppControls.IAppControls.TryClose(System.Object)">
+            <summary>
+            Tries to close the IAppControl for the specified identifier.
+            </summary>
+            <param name="ident">
+            The index of the IAppControl, the underlying control of the IAppControl or the IAppControl itself.
+            </param>
+            <returns>True if the IAppControl was closed. Otherwise, false.</returns>
+        </member>
+        <member name="T:Comos.Global.AppControls.IAppControl">
+            <summary>
+            Represents a control of the Comos application and offers members for managing this control.
+            </summary>
+            <example>
+            See Comos.Global.AppControls.IAppControl.
+            </example>
+        </member>
+        <member name="P:Comos.Global.AppControls.IAppControl.Options">
+            <summary>
+            Gets the IAppControlOptions.
+            </summary>
+        </member>
+        <member name="P:Comos.Global.AppControls.IAppControl.Header">
+            <summary>
+            Gets the IAppControlHeader.
+            </summary>
+        </member>
+        <member name="P:Comos.Global.AppControls.IAppControl.Control">
+            <summary>
+            Gets the underlying control.
+            </summary>
+        </member>
+        <member name="P:Comos.Global.AppControls.IAppControl.IsActive">
+            <summary>
+            Gets or sets a Boolean value that indicates whether the IAppControl is currently active.
+            </summary>
+        </member>
+        <member name="M:Comos.Global.AppControls.IAppControl.Show">
+            <summary>
+            Shows the IAppControl.
+            </summary>
+            <remarks>
+            This method must not be called more than once.
+            </remarks>
+        </member>
+        <member name="T:Comos.Global.AppControls.IAppControlHeader">
+            <summary>
+            Defines members for managing the header information of a control of the Comos application.
+            </summary>
+        </member>
+        <member name="P:Comos.Global.AppControls.IAppControlHeader.OwnerIdent">
+            <summary>
+            Gets or sets a string that represents information about the owner object.
+            </summary>
+        </member>
+        <member name="P:Comos.Global.AppControls.IAppControlHeader.Title">
+            <summary>
+            Gets or sets a string that represents the control's main title.
+            </summary>
+        </member>
+        <member name="P:Comos.Global.AppControls.IAppControlHeader.Description">
+            <summary>
+            Gets or sets a string that represents a description.
+            </summary>
+        </member>
+        <member name="P:Comos.Global.AppControls.IAppControlHeader.Image">
+            <summary>
+            Gets or sets a System.Windows.Media.Imaging.BitmapImage as an icon of the control.
+            </summary>
+        </member>
+        <member name="T:Comos.Global.AppControls.IAppControlOptions">
+            <summary>
+            Defines members for managing the options of a control of the Comos application.
+            </summary>
+        </member>
+        <member name="P:Comos.Global.AppControls.IAppControlOptions.Appearance">
+            <summary>
+            Gets the IAppControlAppearance.
+            </summary>
+        </member>
+        <member name="P:Comos.Global.AppControls.IAppControlOptions.ToolId">
+            <summary>
+            Gets or sets the tool id of the IAppControl.
+            </summary>
+            <remarks>
+            Changes of this property are only applied before creating the IAppControl.
+            </remarks>
+        </member>
+        <member name="P:Comos.Global.AppControls.IAppControlOptions.Assembly">
+            <summary>
+            Gets or sets the name of the assembly of the IAppControl's underlying control.
+            </summary>
+            <remarks>
+            Changes of this property are only applied before creating the IAppControl.
+            </remarks>
+        </member>
+        <member name="P:Comos.Global.AppControls.IAppControlOptions.Class">
+            <summary>
+            Gets or sets the fully qualified name of the class of the IAppControl's underlying control.
+            </summary>
+            <remarks>
+            Changes of this property are only applied before creating the IAppControl.
+            </remarks>
+        </member>
+        <member name="P:Comos.Global.AppControls.IAppControlOptions.OriginalXml">
+            <summary>
+            Gets the original XML node of the Main.xml file according to the ToolId property.
+            Gets String.Empty, if the IAppControl is not created yet or the ToolId has not been set.
+            </summary>
+        </member>
+        <member name="T:Comos.Global.AppControls.IAppControlAppearance">
+            <summary>
+            Defines members for managing the appearance of a control of the Comos application.
+            Changes of properties are only applied before creating the IAppControl.
+            </summary>
+        </member>
+        <member name="P:Comos.Global.AppControls.IAppControlAppearance.AppearanceType">
+            <summary>
+            Gets or sets the AppearanceType of the IAppControl.
+            </summary>
+            <remarks>
+            Changes of this property are only applied before creating the IAppControl.
+            </remarks>
+        </member>
+        <member name="P:Comos.Global.AppControls.IAppControlAppearance.Area">
+            <summary>
+            Gets or sets the Area of the IAppControl.
+            </summary>
+            <remarks>
+            Changes of this property are only applied before creating the IAppControl.
+            </remarks>
+        </member>
+        <member name="P:Comos.Global.AppControls.IAppControlAppearance.SubArea">
+            <summary>
+            Gets or sets the SubArea of the IAppControl.
+            </summary>
+            <remarks>
+            Changes of this property are only applied before creating the IAppControl.
+            </remarks>
+        </member>
+        <member name="P:Comos.Global.AppControls.IAppControlAppearance.ScaleMode">
+            <summary>
+            Gets or sets the ScaleMode of the IAppControl.
+            </summary>
+            <remarks>
+            Changes of this property are only applied before creating the IAppControl.
+            </remarks>
+        </member>
+        <member name="P:Comos.Global.AppControls.IAppControlAppearance.ResizeMode">
+            <summary>
+            Gets or sets the ResizeMode of the IAppControl.
+            </summary>
+            <remarks>
+            Changes of this property are only applied before creating the IAppControl.
+            </remarks>
+        </member>
+        <member name="P:Comos.Global.AppControls.IAppControlAppearance.AutoClose">
+            <summary>
+            Gets or sets the AutoClose behaviour of the IAppControl.
+            </summary>
+            <remarks>
+            Changes of this property are only applied before creating the IAppControl.
+            </remarks>
+        </member>
+        <member name="P:Comos.Global.AppControls.IAppControlAppearance.State">
+            <summary>
+            Gets or sets the AppControlState of the IAppControl.
+            </summary>
+            <remarks>
+            Changes of this property are only applied before creating the IAppControl.
+            </remarks>
+        </member>
+        <member name="P:Comos.Global.AppControls.IAppControlAppearance.Width">
+            <summary>
+            Gets or sets the width of the IAppControl.
+            </summary>
+            <remarks>
+            Changes of this property are only applied before creating the IAppControl and if the IAppControl
+            represents a window.
+            </remarks>
+        </member>
+        <member name="P:Comos.Global.AppControls.IAppControlAppearance.Height">
+            <summary>
+            Gets or sets the height of the IAppControl.
+            </summary>
+            <remarks>
+            Changes of this property are only applied before creating the IAppControl and if the IAppControl
+            represents a window.
+            </remarks>
+        </member>
+        <member name="P:Comos.Global.AppControls.IAppControlAppearance.MinHeight">
+            <summary>
+            Get or sets the minimum height of the window. 
+            </summary>
+            <remarks>
+            Changes of this property are only applied before creating the IAppControl and if the IAppControl
+            represents a window.
+            </remarks>
+        </member>
+        <member name="P:Comos.Global.AppControls.IAppControlAppearance.MinWidth">
+            <summary>
+            Get or sets the minimum width of the window. 
+            </summary>
+            <remarks>
+            Changes of this property are only applied before creating the IAppControl and if the IAppControl
+            represents a window.
+            </remarks>
+        </member>
+        <member name="T:Comos.Global.AppGlobal">
+            <summary>
+            Provides global members for the application.
+            </summary>
+        </member>
+        <member name="P:Comos.Global.AppGlobal.AppControls">
+            <summary>
+            Gets a collection of IAppControl instances. This collection can be used to manage controls
+            of the Comos application.
+            </summary>
+        </member>
+        <member name="P:Comos.Global.AppGlobal.CurrentMessagePack">
+            <summary>
+            Gets the current message pack.
+            </summary>
+        </member>
+        <member name="P:Comos.Global.AppGlobal.CTraceSources">
+            <summary>
+            Gets a collection of CTraceSource instances. This collection can be used to request trace sources
+            that were defined in the application's .config file.
+            </summary>
+        </member>
+        <member name="P:Comos.Global.AppGlobal.Workset">
+            <summary>
+            Gets or sets the current Plt.IComosDWorkset.
+            </summary>
+        </member>
+        <member name="P:Comos.Global.AppGlobal.ComosApplication">
+            <summary>
+            Gets the current application object as ComosVBInterface.IApplication.
+            (This is not a WPF or WinForms application.)
+            </summary>
+        </member>
+        <member name="P:Comos.Global.AppGlobal.TestService">
+            <summary>
+            Gets a singleton of the TestService class.
+            </summary>
+        </member>
+        <member name="M:Comos.Global.AppGlobal.GetDBStr(Comos.CSMEnum.DBKey)">
+            <summary>
+            Gets the DB STR.
+            </summary>
+            <param name="KeyConst">The key const.</param>
+            <returns></returns>
+        </member>
+        <member name="M:Comos.Global.AppGlobal.ITX(System.String)">
+            <summary>
+            Translates the specified string.
+            </summary>
+            <param name="curtext">The string to be translated.</param>
+            <returns>The translated string.</returns>
+        </member>
+        <member name="M:Comos.Global.AppGlobal.GetMethodNameString(System.Reflection.MethodBase)">
+            <summary>
+            Gets a textual description of the specified method.
+            </summary>
+            <param name="calledMethod">The method to get a textual description for.</param>
+            <returns>A textual description of the method.</returns>
+        </member>
+        <member name="M:Comos.Global.AppGlobal.GetCommandLineArgument(System.String)">
+            <summary>Gets the specified command line argument.</summary>
+            <param name="key">The key of the command line argument.</param>
+            <returns>The value of the command line argument.</returns>
+            <history>adtaka5  15.11.2017  2585853  Copied code to <seealso cref="M:Comos.Global.AppGlobal.ExtractCommandLineValue(System.String,System.String)"/> to write Unit tests</history>
+        </member>
+        <member name="M:Comos.Global.AppGlobal.ChangeProject(Plt.IComosDProject)">
+            <summary>
+            Changes the project.
+            </summary>
+            <param name="newProject">The new project.</param>
+        </member>
+        <member name="M:Comos.Global.AppGlobal.CreateObject``1(System.String,System.String)">
+            <summary>Loads an assembly and creates and object of the passed class name</summary>
+             <remarks>The Code was copied from <see cref="M:Comos.Global.AppGlobal.GetComosVersion"/> and changed to use a generic type.</remarks>
+             <param name="assemblyName">Name of the assembly to be loaded</param>
+             <param name="className">Name of the class to create an object</param>
+             <returns>
+             null, if the assembly could not be loaded
+             null, if the class name could not be found
+             null, if the created object could not be returned as OBJECT_TYPE
+             An object of type OBJECT_TYPE otherwise
+             </returns>
+             <history>adtaka5  06.12.2017  2585853  Created</history>
+        </member>
+        <member name="M:Comos.Global.AppGlobal.GetComosVersion">
+            <history>adtaka5  29.03.2017  1641103  Use the new getter which is equivalent to the function GetVersion() of the old VB PTTitle.dll</history>
+            <history>adtaka5  06.12.2017  2585853  Calls <see cref="M:Comos.Global.AppGlobal.CreateObject``1(System.String,System.String)"/> to get an object implementing interface <see cref="T:Comos.Global.Interfaces.IVersionProvider"/></history>
+        </member>
+        <member name="M:Comos.Global.AppGlobal.ExtractCommandLineValue(System.String,System.String)">
+            <summary>Extracts the value for the passed key out of the passed commandline.</summary>
+            <remarks>The code was copied from <seealso cref="M:Comos.Global.AppGlobal.GetCommandLineArgument(System.String)"/></remarks>
+            <param name="key">The key of the command line argument</param>
+            <param name="fullCommandLine">The command line</param>
+            <returns>
+            The value of the command line argument if the key exists with a value
+            An empty string otherwise
+            </returns>
+            <history>adtaka5  15.11.2017  2585853  Copied code to <seealso cref="M:Comos.Global.AppGlobal.ExtractCommandLineValue(System.String,System.String)"/> to write Unit tests</history>
+        </member>
+        <member name="M:Comos.Global.AppGlobal.StdErrorHandler(System.Object)">
+            <summary>
+            Executes the standard error handling.
+            </summary>
+            <param name="o">Any object that describes an error. Should be a string or an exception.</param>
+        </member>
+        <member name="M:Comos.Global.AppGlobal.StdErrorHandler(System.Exception)">
+            <summary>
+            Executes the standard error handling.
+            </summary>
+            <param name="ex">The exception to handle.</param>
+        </member>
+        <member name="M:Comos.Global.AppGlobal.IsFileAllowedForExecution(System.String,System.Boolean)">
+            <summary>
+            Checks that the input file name is black listed or not.
+            </summary>
+            <param name="fileName">(string) File name to check</param>
+            <param name="showErrorMessage">(Boolean) Want to show error message or not</param>
+            <returns>Is input file allowed to open/execute or not.</returns>
+        </member>
+        <member name="T:Comos.Global.CExtensions.ExtensionMethods">
+            <summary>
+            Provides extension methods for the Comos environment.
+            </summary>
+        </member>
+        <member name="M:Comos.Global.CExtensions.ExtensionMethods.AsEnumerable(Plt.IComosDCollection)">
+            <summary>
+            Returns an IEnumerable&lt;IComosBaseObject&gt; for the collection.
+            </summary>
+            <param name="coll">The collection to get an IEnumerable&lt;IComosBaseObject&gt; for.</param>
+            <returns>An IEnumerable&lt;IComosBaseObject&gt; for the collection.</returns>
+            <remarks>
+            This method is implemented by using deferred execution. The immediate return value is an object
+            that stores all the information that is required to perform the action.
+            The query represented by this method is not executed until the object is enumerated either
+            by calling its GetEnumerator method directly or by using foreach.
+            </remarks>
+            <exception cref="T:System.ArgumentNullException">Thrown if coll is null.</exception>
+            <example><code>
+            IComosDCollection coll1 = null;
+            // coll1 = ...
+            foreach (IComosBaseObject comosObj in coll1.AsEnumerable())
+            {
+              // ...
+            }
+            </code></example>
+            <example><code>
+            IComosDCollection coll2 = null;
+            // coll2 = ...
+            IEnumerable&lt;IComosBaseObject&gt; orderedColl = coll2.AsEnumerable().OrderBy(obj => obj.Description);
+            </code></example>
+            <example><code>
+            IComosDCollection coll3 = null;
+            // coll3 = ...
+            Dictionary&lt;string, IComosBaseObject&gt; dict = coll3.AsEnumerable().ToDictionary(obj => obj.SystemUID());
+            </code></example>
+        </member>
+        <member name="M:Comos.Global.CExtensions.ExtensionMethods.AsEnumerable``1(Plt.IComosDCollection)">
+            <summary>
+            Returns an IEnumerable&lt;T&gt; of the specified type T for the collection. 
+            he specified type must derive from IComosBaseObject.
+            </summary>
+            <typeparam name="T">
+            The type T of the returned IEnumerable&lt;T&gt;. The type must derive from IComosBaseObject.
+            </typeparam>
+            <param name="coll">The collection to get an IEnumerable&lt;T&gt; of the specified type T for.</param>
+            <returns>An IEnumerable&lt;T&gt; of the specified type T for the collection.</returns>
+            <remarks>
+            This method is implemented by using deferred execution. The immediate return value is an object
+            that stores all the information that is required to perform the action.
+            The query represented by this method is not executed until the object is enumerated either
+            by calling its GetEnumerator method directly or by using foreach.
+            </remarks>
+            <exception cref="T:System.ArgumentNullException">Thrown if coll is null.</exception>
+            <example><code>
+            IComosDSpecification tab = null;
+            // tab = ...
+            var edits = from spec in tab.OwnSpecifications().AsEnumerable&lt;IComosDSpecification&gt;()
+                        where spec.ControlType == "ComosSUIEdit.SUIEdit"
+                        select spec;
+            </code></example>
+        </member>
+        <member name="M:Comos.Global.CExtensions.ExtensionMethods.AsEnumerable(Plt.IComosDGeneralCollection)">
+            <summary>
+            Returns an IEnumerable&lt;object&gt; for the collection.
+            </summary>
+            <param name="coll">The collection to get an IEnumerable&lt;object&gt; for.</param>
+            <returns>An IEnumerable&lt;object&gt; for the collection.</returns>
+            <remarks>
+            This method is implemented by using deferred execution. The immediate return value is an object
+            that stores all the information that is required to perform the action.
+            The query represented by this method is not executed until the object is enumerated either
+            by calling its GetEnumerator method directly or by using foreach.
+            </remarks>
+            <exception cref="T:System.ArgumentNullException">Thrown if coll is null.</exception>
+        </member>
+        <member name="M:Comos.Global.CExtensions.ExtensionMethods.AsEnumerable``1(Plt.IComosDGeneralCollection)">
+            <summary>
+            Returns an IEnumerable&lt;T&gt; of the specified type T for the collection.
+            </summary>
+            <typeparam name="T">The type T of the returned IEnumerable&lt;T&gt;.</typeparam>
+            <param name="coll">The collection to get an IEnumerable&lt;T&gt; of the specified type T for.</param>
+            <returns>An IEnumerable&lt;T&gt; of the specified type T for the collection.</returns>
+            <remarks>
+            This method is implemented by using deferred execution. The immediate return value is an object
+            that stores all the information that is required to perform the action.
+            The query represented by this method is not executed until the object is enumerated either
+            by calling its GetEnumerator method directly or by using foreach.
+            </remarks>
+            <exception cref="T:System.ArgumentNullException">Thrown if coll is null.</exception>
+        </member>
+        <member name="M:Comos.Global.CExtensions.ExtensionMethods.GetVarStorageObject(Plt.IComosDWorkset,System.String)">
+            <summary>
+            Gets the var storage object.
+            </summary>
+            <param name="workset">The workset.</param>
+            <param name="itemKey">The item key.</param>
+            <returns></returns>
+        </member>
+        <member name="M:Comos.Global.CExtensions.ExtensionMethods.GetVarStorageObject``1(Plt.IComosDWorkset,System.String)">
+            <summary>
+            Gets the var storage object.
+            </summary>
+            <typeparam name="T"></typeparam>
+            <param name="workset">The workset.</param>
+            <param name="itemKey">The item key.</param>
+            <returns></returns>
+        </member>
+        <member name="M:Comos.Global.CExtensions.ExtensionMethods.GetStandardTable(Plt.IComosDProject,System.String,System.Int32)">
+            <summary>
+            Gets the standard table with the stated name.
+            </summary>
+            <param name="project">The project</param>
+            <param name="nestedName">The nested name of the standard table</param>
+            <param name="mode">0:own project;  1:try own project first, then CDevice;  2:try CDeviceSystem first, then own project;  4:use only CDeviceSystem </param>
+            <returns></returns>
+        </member>
+        <member name="M:Comos.Global.CExtensions.ExtensionMethods.IsObjectEqual(Plt.IComosBaseObject,Plt.IComosBaseObject)">
+            <summary>
+            Determines whether the specified comos base objects are equal.
+            </summary>
+            <param name="comosBaseObject1">A comos base object.</param>
+            <param name="comosBaseObject2">A comos base object.</param>
+            <returns>
+              <c>true</c> if the specified comos base objects are equal; otherwise, <c>false</c>.
+            </returns>
+        </member>
+        <member name="M:Comos.Global.CExtensions.ExtensionMethods.ThrowInvalidOperationException">
+            <summary>
+            Throws a new InvalidOperationException expressing that a collection has been modified
+            while enumerating on it.
+            </summary>
+        </member>
+        <member name="T:Comos.Global.CExtensions.ExtensionMethods.ComosCollectionEnumerable`1">
+            <summary>
+            Provides an implementation of the IEnumerable&lt;T&gt; interface for the IComosDCollection type.
+            </summary>
+            <typeparam name="T">The type of the enumerated collection items.</typeparam>
+        </member>
+        <member name="M:Comos.Global.CExtensions.ExtensionMethods.ComosCollectionEnumerable`1.#ctor(Plt.IComosDCollection)">
+            <summary>
+            Creates a new instance of the ComosCollectionEnumerable&lt;T&gt; class.
+            </summary>
+            <param name="coll">The collection to create a ComosCollectionEnumerable&lt;T&gt; for.</param>
+        </member>
+        <member name="M:Comos.Global.CExtensions.ExtensionMethods.ComosCollectionEnumerable`1.System#Collections#Generic#IEnumerable{T}#GetEnumerator">
+            <summary>
+            Returns an enumerator that iterates through the collection.
+            </summary>
+            <returns>An enumerator that iterates through the collection.</returns>
+        </member>
+        <member name="M:Comos.Global.CExtensions.ExtensionMethods.ComosCollectionEnumerable`1.System#Collections#IEnumerable#GetEnumerator">
+            <summary>
+            Returns an enumerator that iterates through the collection.
+            </summary>
+            <returns>An enumerator that iterates through the collection.</returns>
+        </member>
+        <member name="T:Comos.Global.CExtensions.ExtensionMethods.ComosCollectionEnumerable`1.ComosCollectionEnumerator">
+            <summary>
+            Provides an implementation of the IEnumerator&lt;T&gt; interface for the IComosDCollection type.
+            </summary>
+        </member>
+        <member name="M:Comos.Global.CExtensions.ExtensionMethods.ComosCollectionEnumerable`1.ComosCollectionEnumerator.#ctor(Plt.IComosDCollection)">
+            <summary>
+            Creates a new instance of the ComosCollectionEnumerator class.
+            </summary>
+            <param name="coll">The collection to create a ComosCollectionEnumerator for.</param>
+        </member>
+        <member name="P:Comos.Global.CExtensions.ExtensionMethods.ComosCollectionEnumerable`1.ComosCollectionEnumerator.System#Collections#Generic#IEnumerator{T}#Current">
+            <summary>
+            Gets the element in the collection at the current position of the enumerator.
+            </summary>
+        </member>
+        <member name="M:Comos.Global.CExtensions.ExtensionMethods.ComosCollectionEnumerable`1.ComosCollectionEnumerator.System#IDisposable#Dispose">
+            <summary>
+            Frees all resources of the enumerator.
+            </summary>
+        </member>
+        <member name="P:Comos.Global.CExtensions.ExtensionMethods.ComosCollectionEnumerable`1.ComosCollectionEnumerator.System#Collections#IEnumerator#Current">
+            <summary>
+            Gets the element in the collection at the current position of the enumerator.
+            </summary>
+        </member>
+        <member name="M:Comos.Global.CExtensions.ExtensionMethods.ComosCollectionEnumerable`1.ComosCollectionEnumerator.System#Collections#IEnumerator#MoveNext">
+            <summary>
+            Advances the enumerator to the next element of the collection.
+            </summary>
+            <returns>
+            True if the enumerator was successfully advanced to the next element.
+            False if the enumerator has passed the end of the collection.
+            </returns>
+        </member>
+        <member name="M:Comos.Global.CExtensions.ExtensionMethods.ComosCollectionEnumerable`1.ComosCollectionEnumerator.System#Collections#IEnumerator#Reset">
+            <summary>
+            Sets the enumerator to its initial position, which is before the first element in the collection.
+            </summary>
+        </member>
+        <member name="T:Comos.Global.CExtensions.ExtensionMethods.GeneralCollectionEnumerable`1">
+            <summary>
+            Provides an implementation of the IEnumerable&lt;T&gt; interface for the IComosDGeneralCollection type.
+            </summary>
+            <typeparam name="T">The type of the enumerated collection items.</typeparam>
+        </member>
+        <member name="M:Comos.Global.CExtensions.ExtensionMethods.GeneralCollectionEnumerable`1.#ctor(Plt.IComosDGeneralCollection)">
+            <summary>
+            Creates a new instance of the GeneralCollectionEnumerable&lt;T&gt; class.
+            </summary>
+            <param name="coll">The collection to create a GeneralCollectionEnumerable&lt;T&gt; for.</param>
+        </member>
+        <member name="M:Comos.Global.CExtensions.ExtensionMethods.GeneralCollectionEnumerable`1.System#Collections#Generic#IEnumerable{T}#GetEnumerator">
+            <summary>
+            Returns an enumerator that iterates through the collection.
+            </summary>
+            <returns>An enumerator that iterates through the collection.</returns>
+        </member>
+        <member name="M:Comos.Global.CExtensions.ExtensionMethods.GeneralCollectionEnumerable`1.System#Collections#IEnumerable#GetEnumerator">
+            <summary>
+            Returns an enumerator that iterates through the collection.
+            </summary>
+            <returns>An enumerator that iterates through the collection.</returns>
+        </member>
+        <member name="T:Comos.Global.CExtensions.ExtensionMethods.GeneralCollectionEnumerable`1.GeneralCollectionEnumerator">
+            <summary>
+            Provides an implementation of the IEnumerator&lt;T&gt; interface for the IComosDGeneralCollection type.
+            </summary>
+        </member>
+        <member name="M:Comos.Global.CExtensions.ExtensionMethods.GeneralCollectionEnumerable`1.GeneralCollectionEnumerator.#ctor(Plt.IComosDGeneralCollection)">
+            <summary>
+            Creates a new instance of the GeneralCollectionEnumerator class.
+            </summary>
+            <param name="coll">The collection to create a GeneralCollectionEnumerator for.</param>
+        </member>
+        <member name="P:Comos.Global.CExtensions.ExtensionMethods.GeneralCollectionEnumerable`1.GeneralCollectionEnumerator.System#Collections#Generic#IEnumerator{T}#Current">
+            <summary>
+            Gets the element in the collection at the current position of the enumerator.
+            </summary>
+        </member>
+        <member name="M:Comos.Global.CExtensions.ExtensionMethods.GeneralCollectionEnumerable`1.GeneralCollectionEnumerator.System#IDisposable#Dispose">
+            <summary>
+            Frees all resources of the enumerator.
+            </summary>
+        </member>
+        <member name="P:Comos.Global.CExtensions.ExtensionMethods.GeneralCollectionEnumerable`1.GeneralCollectionEnumerator.System#Collections#IEnumerator#Current">
+            <summary>
+            Gets the element in the collection at the current position of the enumerator.
+            </summary>
+        </member>
+        <member name="M:Comos.Global.CExtensions.ExtensionMethods.GeneralCollectionEnumerable`1.GeneralCollectionEnumerator.System#Collections#IEnumerator#MoveNext">
+            <summary>
+            Advances the enumerator to the next element of the collection.
+            </summary>
+            <returns>
+            True if the enumerator was successfully advanced to the next element.
+            False if the enumerator has passed the end of the collection.
+            </returns>
+        </member>
+        <member name="M:Comos.Global.CExtensions.ExtensionMethods.GeneralCollectionEnumerable`1.GeneralCollectionEnumerator.System#Collections#IEnumerator#Reset">
+            <summary>
+            Sets the enumerator to its initial position, which is before the first element in the collection.
+            </summary>
+        </member>
+        <member name="T:Comos.Global.CMessageBox">
+            <summary>
+            Displays a message box. This class should be used in the Comos environment instead of
+            System.Windows.MessageBox or other message boxes.
+            </summary>
+        </member>
+        <member name="M:Comos.Global.CMessageBox.ShowWithCheckBox(System.String,System.String,System.String)">
+            <summary>
+            Display a message box with checkbox
+            </summary>
+            <param name="messageText"> The display text</param>
+            <param name="checkBoxText">The checkbox text</param>
+            <param name="caption">The caption of the message box</param>
+            <returns></returns>
+        </member>
+        <member name="M:Comos.Global.CMessageBox.Show(System.String)">
+            <summary>
+            Displays a message box.
+            </summary>
+        </member>
+        <member name="M:Comos.Global.CMessageBox.Show(System.String,System.String)">
+            <summary>
+            Displays a message box.
+            </summary>
+        </member>
+        <member name="M:Comos.Global.CMessageBox.Show(System.Windows.Window,System.String)">
+            <summary>
+            Displays a message box.
+            </summary>
+        </member>
+        <member name="M:Comos.Global.CMessageBox.Show(System.String,System.String,System.Windows.MessageBoxButton)">
+            <summary>
+            Displays a message box.
+            </summary>
+        </member>
+        <member name="M:Comos.Global.CMessageBox.Show(System.Windows.Window,System.String,System.String)">
+            <summary>
+            Displays a message box.
+            </summary>
+        </member>
+        <member name="M:Comos.Global.CMessageBox.Show(System.String,System.String,System.Windows.MessageBoxButton,System.Windows.MessageBoxImage)">
+            <summary>
+            Displays a message box.
+            </summary>
+        </member>
+        <member name="M:Comos.Global.CMessageBox.Show(System.Windows.Window,System.String,System.String,System.Windows.MessageBoxButton)">
+            <summary>
+            Displays a message box.
+            </summary>
+        </member>
+        <member name="M:Comos.Global.CMessageBox.Show(System.String,System.String,System.Windows.MessageBoxButton,System.Windows.MessageBoxImage,System.Windows.MessageBoxResult)">
+            <summary>
+            Displays a message box.
+            </summary>
+        </member>
+        <member name="M:Comos.Global.CMessageBox.Show(System.Windows.Window,System.String,System.String,System.Windows.MessageBoxButton,System.Windows.MessageBoxImage)">
+            <summary>
+            Displays a message box.
+            </summary>
+        </member>
+        <member name="M:Comos.Global.CMessageBox.Show(System.String,System.String,System.Windows.MessageBoxButton,System.Windows.MessageBoxImage,System.Windows.MessageBoxResult,System.Windows.MessageBoxOptions)">
+            <summary>
+            Displays a message box.
+            </summary>
+        </member>
+        <member name="M:Comos.Global.CMessageBox.Show(System.Windows.Window,System.String,System.String,System.Windows.MessageBoxButton,System.Windows.MessageBoxImage,System.Windows.MessageBoxResult)">
+            <summary>
+            Displays a message box.
+            </summary>
+        </member>
+        <member name="M:Comos.Global.CMessageBox.Show(System.Windows.Window,System.String,System.String,System.Windows.MessageBoxButton,System.Windows.MessageBoxImage,System.Windows.MessageBoxResult,System.Windows.MessageBoxOptions)">
+            <summary>
+            Displays a message box.
+            </summary>
+        </member>
+        <member name="P:Comos.Global.IMessageItem.Version">
+            <summary>
+            Gets the interface version.
+            </summary>
+        </member>
+        <member name="P:Comos.Global.IMessagePack.Version">
+            <summary>
+            Gets the interface version.
+            </summary>
+        </member>
+        <member name="T:Comos.Global.IComAppGlobal">
+            <summary>
+            The default interface for the ComAppGlobal class.
+            </summary>
+        </member>
+        <member name="P:Comos.Global.IComAppGlobal.Version">
+            <summary>
+            Gets the interface version.
+            </summary>
+        </member>
+        <member name="P:Comos.Global.IComAppGlobal.TraceSources">
+            <summary>
+            Gets a collection of ComCTraceSource instances. This collection can be used to request trace sources
+            that were defined in the application's .config file.
+            </summary>
+        </member>
+        <member name="M:Comos.Global.IComAppGlobal.StdErrorHandler(System.String)">
+            <summary>
+            Executes the standard error handling.
+            </summary>
+            <param name="error">The error to handle.</param>
+        </member>
+        <member name="P:Comos.Global.IComAppGlobal.Workset">
+            <summary>
+            Sets the workset from the COM point of view (Appdomain:DefaultDomain).
+            </summary>
+            <value>
+            The workset.
+            </value>
+            <history>[ADZISE2 20.12.12] F34120 set the workset to ComAppGlobal for the case that comos is startet
+            in a special way (such as Comos.Web.Worker) to ensure that Workset is available in
+            Comos.Global.AppGlobal (which runs in two .Net Application Domains) depending on the original callee
+            </history>
+        </member>
+        <member name="M:Comos.Global.IComAppGlobal.GetWorkset">
+            <summary>
+            Provides access for COM to the Workset which is set at AppGlobal.Workset
+            </summary>
+            <returns>
+            AppGlobal.Workset
+            </returns>
+        </member>
+        <member name="T:Comos.Global.ComAppGlobal">
+            <summary>
+            Offers the functionality of the AppGlobal class to COM. Should only be used from COM context.
+            </summary>
+        </member>
+        <member name="P:Comos.Global.ComAppGlobal.Version">
+            <summary>
+            Gets the interface version.
+            </summary>
+        </member>
+        <member name="P:Comos.Global.ComAppGlobal.TraceSources">
+            <summary>
+            Gets a collection of ComCTraceSource instances. This collection can be used to request trace sources
+            that were defined in the application's .config file.
+            </summary>
+        </member>
+        <member name="M:Comos.Global.ComAppGlobal.StdErrorHandler(System.String)">
+            <summary>
+            Executes the standard error handling.
+            </summary>
+            <param name="error">The error to handle.</param>
+        </member>
+        <member name="P:Comos.Global.ComAppGlobal.Workset">
+            <summary>
+            Sets the workset from the COM point of view (Appdomain:DefaultDomain).
+            </summary>
+            <value>
+            The workset.
+            </value>
+            <history>[ADZISE2 20.12.12] F34120 set the workset to ComAppGlobal for the case that comos is startet
+            in a special way (such as Comos.Web.Worker) to ensure that Workset is available in
+            Comos.Global.AppGlobal (which runs in two .Net Application Domains) depending on the original callee
+            </history>
+        </member>
+        <member name="M:Comos.Global.ComAppGlobal.GetWorkset">
+            <summary>
+            Provides access for COM to the Workset which is set at AppGlobal.Workset
+            </summary>
+            <returns>
+            AppGlobal.Workset
+            </returns>
+        </member>
+        <member name="M:Comos.Global.ComAppGlobal.IsFileAllowedForExecution(System.String,System.Boolean)">
+            <summary>
+            Checks that the input file name is black listed or not.
+            </summary>
+            <param name="fileName">(string) File name to check</param>
+            <param name="showErrorMessage">(Boolean) Want to show error message or not</param>
+            <returns>Is input file allowed to open/execute or not.</returns>
+        </member>
+        <member name="T:Comos.Global.InterfaceVersion">
+            <summary>
+            Provides the current version numbers of the COM-visible interfaces.
+            </summary>
+        </member>
+        <member name="F:Comos.Global.InterfaceVersion.IComAppGlobal">
+            <summary>The current version of the IComAppGlobal interface.</summary>
+        </member>
+        <member name="F:Comos.Global.InterfaceVersion.IComCTraceSource">
+            <summary>The current version of the IComCTraceSource interface.</summary>
+        </member>
+        <member name="F:Comos.Global.InterfaceVersion.IComCTraceSources">
+            <summary>The current version of the IComCTraceSources interface.</summary>
+        </member>
+        <member name="F:Comos.Global.InterfaceVersion.ICMessageItem">
+            <summary>The current version of the ICMessageItem interface.</summary>
+        </member>
+        <member name="F:Comos.Global.InterfaceVersion.ICMessagePack">
+            <summary>The current version of the ICMessagePack interface.</summary>
+        </member>
+        <member name="T:Comos.Global.IComCTraceSource">
+            <summary>
+            The default interface for the ComCTraceSource class.
+            </summary>
+        </member>
+        <member name="P:Comos.Global.IComCTraceSource.Version">
+            <summary>
+            Gets the interface version.
+            </summary>
+        </member>
+        <member name="M:Comos.Global.IComCTraceSource.Write(Comos.Global.ComTraceEventLevel,System.Int32,System.String)">
+            <summary>
+            Writes a message to all listeners of this trace source if the trace level of the
+            source switch is set high enough.
+            </summary>
+            <param name="traceEventLevel">
+            One of the ComTraceEventLevel values that specifies the event level of the trace data.
+            </param>
+            <param name="id">A numeric identifier for the event.</param>
+            <param name="message">A message to trace.</param>
+        </member>
+        <member name="P:Comos.Global.IComCTraceSource.TraceLevel">
+            <summary>
+            Gets the level of the trace source's source switch.
+            </summary>
+        </member>
+        <member name="T:Comos.Global.ComCTraceSource">
+            <summary>
+            A COM visible wrapper for the CTraceSource class. Should only be used from COM context.
+            </summary>
+        </member>
+        <member name="M:Comos.Global.ComCTraceSource.#ctor">
+            <summary>
+            Creates a new instance of the ComCTraceSource class.
+            </summary>
+        </member>
+        <member name="M:Comos.Global.ComCTraceSource.#ctor(Comos.Global.CTraceSource)">
+            <summary>
+            Creates a new instance of the ComCTraceSource class.
+            </summary>
+            <param name="traceSource">The trace source to wrap.</param>
+        </member>
+        <member name="M:Comos.Global.ComCTraceSource.ComTraceEventLevelToTraceEventType(Comos.Global.ComTraceEventLevel)">
+            <summary>
+            Converts a ComTraceEventLevel enumeration member to a TraceEventType enumeration member.
+            </summary>
+            <param name="comTraceEventLevel">The ComTraceEventLevel enumeration member to convert.</param>
+            <returns>The resulting TraceEventType enumeration member.</returns>
+        </member>
+        <member name="M:Comos.Global.ComCTraceSource.SourceLevelsToComTraceEventLevel(System.Diagnostics.SourceLevels)">
+            <summary>
+            Converts a SourceLevels enumeration member to a ComTraceEventLevel enumeration member.
+            </summary>
+            <param name="sourceLevels">The SourceLevels enumeration member to convert.</param>
+            <returns>The resulting ComTraceEventLevel enumeration member.</returns>
+        </member>
+        <member name="P:Comos.Global.ComCTraceSource.Version">
+            <summary>
+            Gets the interface version.
+            </summary>
+        </member>
+        <member name="M:Comos.Global.ComCTraceSource.Write(Comos.Global.ComTraceEventLevel,System.Int32,System.String)">
+            <summary>
+            Writes a message to all listeners of this trace source if the trace level of the
+            source switch is set high enough.
+            </summary>
+            <param name="traceEventLevel">
+            One of the ComTraceEventLevel values that specifies the event level of the trace data.
+            </param>
+            <param name="id">A numeric identifier for the event.</param>
+            <param name="message">A message to trace.</param>
+        </member>
+        <member name="P:Comos.Global.ComCTraceSource.TraceLevel">
+            <summary>
+            Gets the level of the trace source's source switch.
+            </summary>
+        </member>
+        <member name="T:Comos.Global.ComTraceEventLevel">
+            <summary>
+            Identifies the trace level.
+            This enum should only be used from COM.
+            </summary>
+        </member>
+        <member name="F:Comos.Global.ComTraceEventLevel.Off">
+            <summary>
+            Tracing off.
+            </summary>
+        </member>
+        <member name="F:Comos.Global.ComTraceEventLevel.Critical">
+            <summary>
+            Fatal error or application crash.  
+            </summary>
+        </member>
+        <member name="F:Comos.Global.ComTraceEventLevel.Error">
+            <summary>
+            Recoverable error.  
+            </summary>
+        </member>
+        <member name="F:Comos.Global.ComTraceEventLevel.Warning">
+            <summary>
+            Noncritical problem.  
+            </summary>
+        </member>
+        <member name="F:Comos.Global.ComTraceEventLevel.Information">
+            <summary>
+            Informational message.
+            </summary>
+        </member>
+        <member name="F:Comos.Global.ComTraceEventLevel.Verbose">
+            <summary>
+            Debugging trace.  
+            </summary>
+        </member>
+        <member name="T:Comos.Global.IComCTraceSources">
+            <summary>
+            The default interface for the ComCTraceSources class.
+            </summary>
+        </member>
+        <member name="P:Comos.Global.IComCTraceSources.Version">
+            <summary>
+            Gets the interface version.
+            </summary>
+        </member>
+        <member name="P:Comos.Global.IComCTraceSources.Count">
+            <summary>
+            Gets the number of ComCTraceSource instances contained by this instance.
+            </summary>
+        </member>
+        <member name="P:Comos.Global.IComCTraceSources.Item(System.Object)">
+            <summary>
+            Gets the ComCTraceSource instance at the specified index or with the specified name.
+            When using the name, the trace source must have been defined with the equal name in
+            the application's .config file.
+            </summary>
+            <param name="keyOrIndex">
+            The zero-based index or the name of the CTraceSource instance to get.
+            </param>
+            <returns>
+            The CTraceSource instance at the specified index or with the specified name if successful.
+            Otherwise, null.
+            </returns>
+        </member>
+        <member name="T:Comos.Global.ComCTraceSources">
+            <summary>
+            A COM visible wrapper for the CTraceSources class. Should only be used from COM context.
+            </summary>
+        </member>
+        <member name="M:Comos.Global.ComCTraceSources.#ctor">
+            <summary>
+            Creates a new instance of the ComCTraceSources class.
+            </summary>
+        </member>
+        <member name="M:Comos.Global.ComCTraceSources.#ctor(Comos.Global.CTraceSources)">
+            <summary>
+            Creates a new instance of the ComCTraceSources class.
+            </summary>
+            <param name="traceSources">The trace sources to wrap.</param>
+        </member>
+        <member name="P:Comos.Global.ComCTraceSources.Version">
+            <summary>
+            Gets the interface version.
+            </summary>
+        </member>
+        <member name="P:Comos.Global.ComCTraceSources.Count">
+            <summary>
+            Gets the number of ComCTraceSource instances contained by this instance.
+            </summary>
+        </member>
+        <member name="P:Comos.Global.ComCTraceSources.Item(System.Object)">
+            <summary>
+            Gets the ComCTraceSource instance at the specified index or with the specified name.
+            When using the name, the trace source must have been defined with the equal name in
+            the application's .config file.
+            </summary>
+            <param name="keyOrIndex">
+            The zero-based index or the name of the CTraceSource instance to get.
+            </param>
+            <returns>
+            The CTraceSource instance at the specified index or with the specified name if successful.
+            Otherwise, null.
+            </returns>
+        </member>
+        <member name="T:Comos.Global.EnLoginMode">
+            <summary>Determines which user credentials are set at the Workset</summary>
+        </member>
+        <member name="F:Comos.Global.EnLoginMode.UserSelection">
+            <summary>Selected user</summary>
+        </member>
+        <member name="F:Comos.Global.EnLoginMode.Password">
+            <summary>Windows user, domain and password</summary>
+        </member>
+        <member name="M:Comos.Global.ILoginFunctionLib.GetDBConnections(Comos.Global.DBConnectionType)">
+            <summary>
+            Get the database connection by database connection type
+            </summary>
+            <param name="Type"> One of the three strings: MicrosoftJet, OracleDB or SQL, for choise the database connection  </param>
+            <returns></returns>
+        </member>
+        <member name="M:Comos.Global.ILoginFunctionLib.GetSystemUser">
+            <summary>
+             get the username of the person, who is currently logged on to the Windows operating system
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:Comos.Global.ILoginFunctionLib.ComosInit(Plt.IComosDWorkset,System.String,System.String,Comos.Global.UpdateDBScheme,System.Boolean,System.Boolean)">
+            <summary>Performs several checks and calls a method at the Workset to initialize the DB connection</summary>
+            <param name="Wkset">Workset</param>
+            <param name="Database">Connection string to a database</param>
+            <param name="UserName">Login of the user</param>
+            <param name="UpdateScheme">Flag to indicate how a required update of the database shall be performed</param>
+            <param name="ShowDBMessage">Flag to indicate if a message concerning the DB version shall be shown or not</param>
+            <param name="ShowDocMessage">Flag to indicate if a message concerning the Document version shall be shown or not</param>
+            <returns></returns>
+        </member>
+        <member name="P:Comos.Global.ILoginFunctionLib.IsDBConncectionCompleted">
+            <summary>Returns if the Workset has connected to a database and performed all required changes</summary>
+            <history>adtaka5 08.01.2016 1505600: created</history>
+            <returns>
+            true, if the Workset is connected to a database and all required changes in the database are completed
+            false, if no connection to a database exists or required changes are in progress
+            </returns>
+        </member>
+        <member name="M:Comos.Global.ILoginFunctionLib.CheckDataSource(System.Boolean,System.String,System.String)">
+            <summary>                
+            This method checks, if the parameter DBBase is valid.
+            </summary>
+            <param name="showErrorMessage">show the messagebox for the wrong commandline. If showErrorMessage = false commandline shouldnt be emtpy</param>
+            <param name="DBBase">database name for example [SQL-Server]pt_sql_server</param>
+            <param name="commandline">the full commandline string with all parameters</param>
+            <returns></returns>
+        </member>
+        <member name="T:Comos.Global.ComLoginFunctionLib">
+            <summary>
+                default interface for comLoginFunctionLib
+            </summary>
+        </member>
+        <member name="T:Comos.Global.ComosNotImplementedException">
+            <summary>
+            Represents a NotImplementedException for Comos.
+            </summary>
+        </member>
+        <member name="M:Comos.Global.ComosNotImplementedException.#ctor(System.Reflection.MethodBase)">
+            <summary>
+            Creates a new instance of the ComosNotImplementedException class.
+            </summary>  
+            <param name="CalledMethod">
+            The method inside which the exception occurred.
+            </param>
+            <example>
+            AppGlobal.StdErrorHandler(new ComosNotImplementedException(System.Reflection.MethodInfo.GetCurrentMethod())); 
+            </example>
+        </member>
+        <member name="M:Comos.Global.ComosNotImplementedException.#ctor(System.Reflection.MethodBase,System.String)">
+            <summary>
+            Creates a new instance of the ComosNotImplementedException class.
+            </summary>  
+            <param name="CalledMethod">
+            The method inside which the exception occurred.
+            </param>
+            <param name="AdditionalInfo">A string containing additional information.</param>
+            <example>
+            AppGlobal.StdErrorHandler(new
+            ComosNotImplementedException(System.Reflection.MethodInfo.GetCurrentMethod(),"[Default=1]")); 
+            </example>      
+        </member>
+        <member name="P:Comos.Global.ComosNotImplementedException.Message">
+            <summary>
+            Gets a message that describes the current exception.
+            </summary>
+        </member>
+        <member name="T:Comos.Global.CompatibleIDispatch">
+            <summary>
+            As IDispatchImplType.CompatibleImpl attribute is deprecated, we introduce an
+            IReflect implementation to be able to call our C# class members late bound,
+            especially from VBScript, where we observed difficulties, e. g. when omitting optional parameters 
+            or dealing with methods which accept strongly typed objects.
+            The interesting part is "InvokeMember". 
+            </summary>
+        </member>
+        <member name="T:Comos.Global.ConnectionInfo">
+            <summary>
+            Database connection info: description, value
+            
+            Two Connections are the same if the Value is the same (not case sensitive)
+            </summary>
+        </member>
+        <member name="T:Comos.Global.CTraceSource">
+            <summary>
+            A Comos trace source derived from System.Diagnostics.TraceSource.
+            </summary>
+        </member>
+        <member name="T:Comos.Global.CTraceSources">
+            <summary>
+            A collection of CTraceSource instances for accessing the trace sources
+            defined in the application's .config file.
+            </summary>
+        </member>
+        <member name="P:Comos.Global.CTraceSources.Count">
+            <summary>
+            Gets the number of CTraceSource instances contained by this instance.
+            </summary>
+        </member>
+        <member name="P:Comos.Global.CTraceSources.Item(System.Int32)">
+            <summary>
+            Gets the CTraceSource instance at the specified index. 
+            </summary>
+            <param name="index">The zero-based index of the CTraceSource instance to get.</param>
+            <returns>The CTraceSource instance at the specified index if successful. Otherwise, null.</returns>
+        </member>
+        <member name="P:Comos.Global.CTraceSources.Item(System.String)">
+            <summary>
+            Gets the CTraceSource instance with the name as the specified key.
+            The trace source must have been defined with the equal name in the application's .config file.
+            </summary>
+            <param name="key">The name of the CTraceSource instance to get.</param>
+            <returns>The CTraceSource instance with the specified name if successful. Otherwise, null.</returns>
+        </member>
+        <member name="M:Comos.Global.CTraceSources.CreateTraceSource(System.String)">
+            <summary>
+            Creates the trace source.
+            </summary>
+            <param name="key">The key.</param>
+            <returns></returns>
+        </member>
+        <member name="M:Comos.Global.CTraceSources.ApplyDefaultListeners(Comos.Global.CTraceSource)">
+            <summary>
+            Applies the default listeners.
+            </summary>
+            <param name="traceSource">The trace source.</param>
+        </member>
+        <member name="P:Comos.Global.CTraceSources.IsDebugMode">
+            <summary>
+            Returns a Boolean value that indicates whether the application runs in debug mode.
+            </summary>
+            <remarks>
+            The debug mode is actived by setting a special command line parameter, i.e.
+            /DG:d or /DG:debug or /DG: "d" ...
+            </remarks>
+        </member>
+        <member name="P:Comos.Global.CTraceSources.ExistsSystemDiagnosticsSection">
+            <summary>
+            Returns a Boolean value that indicates whether an application configuration file with
+            a "system.diagnostics" section exists.
+            </summary>
+        </member>
+        <member name="M:Comos.Global.CTraceSources.Initialize">
+            <summary>
+            Called by the static constructor before the first CTraceSource instance is created.
+            </summary>
+        </member>
+        <member name="M:Comos.Global.CTraceSources.GetEnumerator">
+            <summary>
+            Retrieves an enumerator for the CTraceSource instances in this instance.
+            </summary>
+            <returns>The enumerator.</returns>
+        </member>
+        <member name="T:Comos.Global.Diagnostics.BackupFileStream">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="M:Comos.Global.Diagnostics.BackupFileStream.#ctor(System.String,System.Int64)">
+            <summary>
+            Initializes a new instance of the <see cref="T:Comos.Global.Diagnostics.BackupFileStream"/> class.
+            </summary>
+            <param name="path">The path.</param>
+            <param name="maxFileLength">Length of the max file.</param>
+        </member>
+        <member name="P:Comos.Global.Diagnostics.BackupFileStream.MaxFileLength">
+            <summary>
+            Gets the length of the max file.
+            </summary>
+            <value>
+            The length of the max file.
+            </value>
+        </member>
+        <member name="P:Comos.Global.Diagnostics.BackupFileStream.CanRead">
+            <summary>
+            Gets a value indicating whether the current stream supports reading.
+            </summary>
+            <returns>true if the stream supports reading; false if the stream is closed or was opened with write-only access.
+              </returns>
+        </member>
+        <member name="M:Comos.Global.Diagnostics.BackupFileStream.Write(System.Byte[],System.Int32,System.Int32)">
+            <summary>
+            Writes a block of bytes to this stream using data from a buffer.
+            </summary>
+            <param name="array">The buffer containing data to write to the stream.</param>
+            <param name="offset">The zero-based byte offset in <paramref name="array"/> at which to begin copying bytes to the current stream.</param>
+            <param name="count">The number of bytes to be written to the current stream.</param>
+            <exception cref="T:System.ArgumentNullException">
+              <paramref name="array"/> is null.
+              </exception>
+              
+            <exception cref="T:System.ArgumentException">
+              <paramref name="offset"/> and <paramref name="count"/> describe an invalid range in <paramref name="array"/>.
+              </exception>
+              
+            <exception cref="T:System.ArgumentOutOfRangeException">
+              <paramref name="offset"/> or <paramref name="count"/> is negative.
+              </exception>
+              
+            <exception cref="T:System.IO.IOException">
+            An I/O error occurs.
+            - or -
+            Another thread may have caused an unexpected change in the position of the operating system's file handle.
+              </exception>
+              
+            <exception cref="T:System.ObjectDisposedException">
+            The stream is closed.
+              </exception>
+              
+            <exception cref="T:System.NotSupportedException">
+            The current stream instance does not support writing.
+              </exception>
+        </member>
+        <member name="T:Comos.Global.Diagnostics.BackupFileStreamMode">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:Comos.Global.Diagnostics.BackupFileStreamMode.CutOff">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:Comos.Global.Diagnostics.BackupFileStreamMode.CreateNew">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:Comos.Global.Diagnostics.BackupFileStreamMode.Truncate">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:Comos.Global.Diagnostics.BackupFileStreamMode.WrapAround">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="T:Comos.Global.Diagnostics.CDefaultTraceListener">
+            <summary>
+            Writes trace output to the Win32 OutputDebugString function.
+            </summary>
+        </member>
+        <member name="M:Comos.Global.Diagnostics.CDefaultTraceListener.OutputDebugString(System.String)">
+            <summary>
+            Writes the specified message to the Win32 OutputDebugString function.
+            </summary>
+            <param name="message">The message to write.</param>
+        </member>
+        <member name="M:Comos.Global.Diagnostics.CDefaultTraceListener.Write(System.String)">
+            <summary>
+            Writes the specified message to the OutputDebugString function.
+            </summary>
+            <param name="message">The message to write.</param>
+        </member>
+        <member name="M:Comos.Global.Diagnostics.CDefaultTraceListener.WriteLine(System.String)">
+            <summary>
+            Writes the specified message to the OutputDebugString function,
+            followed by a carriage return and line feed (\r\n).
+            </summary>
+            <param name="message">The message to write.</param>
+        </member>
+        <member name="M:Comos.Global.Diagnostics.CDefaultTraceListener.CoreWrite(System.String)">
+            <summary>
+            Writes the specified message to the Win32 OutputDebugString function.
+            </summary>
+            <param name="message">The message to write.</param>
+        </member>
+        <member name="T:Comos.Global.Diagnostics.ComosTextWriterTraceListener">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="M:Comos.Global.Diagnostics.ComosTextWriterTraceListener.#cctor">
+            <summary>
+            Initializes the <see cref="T:Comos.Global.Diagnostics.ComosTextWriterTraceListener"/> class.
+            </summary>
+        </member>
+        <member name="M:Comos.Global.Diagnostics.ComosTextWriterTraceListener.#ctor">
+            <summary>
+            Initializes a new instance of the <see cref="T:Comos.Global.Diagnostics.ComosTextWriterTraceListener"/> class.
+            </summary>
+        </member>
+        <member name="M:Comos.Global.Diagnostics.ComosTextWriterTraceListener.#ctor(System.String)">
+            <summary>
+            Initializes a new instance of the <see cref="T:Comos.Global.Diagnostics.ComosTextWriterTraceListener"/> class.
+            </summary>
+            <param name="initializeData">The initialize data.</param>
+        </member>
+        <member name="P:Comos.Global.Diagnostics.ComosTextWriterTraceListener.MaxFileLength">
+            <summary>
+            Gets the length of the max file.
+            </summary>
+            <value>
+            The length of the max file.
+            </value>
+        </member>
+        <member name="P:Comos.Global.Diagnostics.ComosTextWriterTraceListener.MaxFileCount">
+            <summary>
+            Gets the max file count.
+            </summary>
+        </member>
+        <member name="P:Comos.Global.Diagnostics.ComosTextWriterTraceListener.FileDirectory">
+            <summary>
+            Gets the name of the file directory.
+            </summary>
+            <value>
+            The name of the file directory.
+            </value>
+        </member>
+        <member name="P:Comos.Global.Diagnostics.ComosTextWriterTraceListener.Mode">
+            <summary>
+            Gets or sets the mode.
+            </summary>
+            <value>
+            The mode.
+            </value>
+        </member>
+        <member name="P:Comos.Global.Diagnostics.ComosTextWriterTraceListener.CurrentFileName">
+            <summary>
+            Gets the current filename.
+            </summary>
+            <value>
+            The name of the current file.
+            </value>
+        </member>
+        <member name="M:Comos.Global.Diagnostics.ComosTextWriterTraceListener.InitializeFromInitializeData(System.String)">
+            <summary>
+            Creates the stream from initialize data.
+            </summary>
+            <param name="initData">The initialize data.</param>
+            <returns></returns>
+        </member>
+        <member name="M:Comos.Global.Diagnostics.ComosTextWriterTraceListener.ParseString(System.String,System.String,System.String)">
+            <summary>
+            Parses the string.
+            </summary>
+            <param name="initializeData">The initialize data.</param>
+            <param name="name">The name.</param>
+            <param name="defaultValue">The default value.</param>
+            <returns></returns>
+        </member>
+        <member name="M:Comos.Global.Diagnostics.ComosTextWriterTraceListener.ParseLong(System.String,System.String,System.Int64)">
+            <summary>
+            Parses the long.
+            </summary>
+            <param name="initializeData">The initialize data.</param>
+            <param name="name">The name.</param>
+            <param name="defaultValue">The default value.</param>
+            <returns></returns>
+        </member>
+        <member name="M:Comos.Global.Diagnostics.ComosTextWriterTraceListener.ParseEnum``1(System.String,System.String,``0)">
+            <summary>
+            Parses the enum.
+            </summary>
+            <typeparam name="T"></typeparam>
+            <param name="initializeData">The initialize data.</param>
+            <param name="name">The name.</param>
+            <param name="defaultValue">The default value.</param>
+            <returns></returns>
+        </member>
+        <member name="M:Comos.Global.Diagnostics.ComosTextWriterTraceListener.EnsureStream">
+            <summary>
+            Ensures the stream.
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:Comos.Global.Diagnostics.ComosTextWriterTraceListener.EnsureFileDirectory">
+            <summary>
+            Ensures the file directory and delete old files.
+            </summary>
+        </member>
+        <member name="M:Comos.Global.Diagnostics.ComosTextWriterTraceListener.GetEncodingWithFallback(System.Text.Encoding)">
+            <summary>
+            Gets the encoding with fallback.
+            </summary>
+            <param name="encoding">The encoding.</param>
+            <returns></returns>
+        </member>
+        <member name="M:Comos.Global.Diagnostics.ComosTextWriterTraceListener.WriteComosVersion">
+            <summary>
+            Writes the comos version.
+            </summary>
+        </member>
+        <member name="M:Comos.Global.Diagnostics.ComosTextWriterTraceListener.GetInitialFileName(System.String,System.Int32,System.Int32)">
+            <summary>
+            Gets the initial name of the file.
+            </summary>
+            <param name="directory">The directory.</param>
+            <param name="decimals">The decimals.</param>
+            <param name="index">The index.</param>
+            <returns></returns>
+        </member>
+        <member name="M:Comos.Global.Diagnostics.ComosTextWriterTraceListener.DeleteFile(System.String)">
+            <summary>
+            Deletes the file.
+            </summary>
+            <param name="path">The path.</param>
+            <returns></returns>
+        </member>
+        <member name="M:Comos.Global.Diagnostics.ComosTextWriterTraceListener.HandleMaxFileLengthReached(Comos.Global.Diagnostics.MaxFileLengthReachedException)">
+            <summary>
+            Handles the max file length reached.
+            </summary>
+            <param name="ex">The ex.</param>
+        </member>
+        <member name="M:Comos.Global.Diagnostics.ComosTextWriterTraceListener.WrapAround(System.Byte[],System.Int32)">
+            <summary>
+            Wraps the around.
+            </summary>
+            <param name="array">The array.</param>
+            <param name="count">The count.</param>
+        </member>
+        <member name="M:Comos.Global.Diagnostics.ComosTextWriterTraceListener.Backup">
+            <summary>
+            Backups this instance.
+            </summary>
+        </member>
+        <member name="M:Comos.Global.Diagnostics.ComosTextWriterTraceListener.RenewStream(System.String)">
+            <summary>
+            Renews the stream.
+            </summary>
+            <param name="nextFileName">Name of the next file.</param>
+        </member>
+        <member name="M:Comos.Global.Diagnostics.ComosTextWriterTraceListener.IncrementNextFileIndex">
+            <summary>
+            Increments the index of the next file.
+            </summary>
+        </member>
+        <member name="M:Comos.Global.Diagnostics.ComosTextWriterTraceListener.GetNextFileName(System.Int32)">
+            <summary>
+            Gets the name of the backup file.
+            </summary>
+            <param name="nextIndex">The index.</param>
+            <returns></returns>
+        </member>
+        <member name="M:Comos.Global.Diagnostics.ComosTextWriterTraceListener.DeleteOldFiles">
+            <summary>
+            Deletes the old files.
+            </summary>
+        </member>
+        <member name="M:Comos.Global.Diagnostics.ComosTextWriterTraceListener.Flush">
+            <summary>
+            When overridden in a derived class, flushes the output buffer.
+            </summary>
+        </member>
+        <member name="M:Comos.Global.Diagnostics.ComosTextWriterTraceListener.Write(System.String)">
+            <summary>
+            When overridden in a derived class, writes the specified message to the listener you create in the derived class.
+            </summary>
+            <param name="message">A message to write.</param>
+        </member>
+        <member name="M:Comos.Global.Diagnostics.ComosTextWriterTraceListener.WriteLine(System.String)">
+            <summary>
+            When overridden in a derived class, writes a message to the listener you create in the derived class, followed by a line terminator.
+            </summary>
+            <param name="message">A message to write.</param>
+        </member>
+        <member name="M:Comos.Global.Diagnostics.ComosTextWriterTraceListener.Dispose(System.Boolean)">
+            <summary>
+            Releases the unmanaged resources used by the <see cref="T:System.Diagnostics.TraceListener"/> and optionally releases the managed resources.
+            </summary>
+            <param name="disposing">true to release both managed and unmanaged resources; false to release only unmanaged resources.</param>
+        </member>
+        <member name="T:Comos.Global.Diagnostics.CTextWriterTraceListener">
+            <summary>
+            Writes trace output to a text file.
+            </summary>
+        </member>
+        <member name="M:Comos.Global.Diagnostics.CTextWriterTraceListener.#ctor(System.String)">
+            <summary>
+            Creates a new instance of the CTextWriterListener class with a file name.
+            </summary>
+            <param name="fileName">The name of the file to write the trace output to.</param>
+        </member>
+        <member name="M:Comos.Global.Diagnostics.CTextWriterTraceListener.Write(System.String)">
+            <summary>
+            Writes the specified message to a text file.
+            </summary>
+            <param name="message">The message to write.</param>
+        </member>
+        <member name="M:Comos.Global.Diagnostics.CTextWriterTraceListener.WriteLine(System.String)">
+            <summary>
+            Writes the specified message to a text file,
+            followed by a carriage return and line feed (\r\n).
+            </summary>
+            <param name="message">The message to write.</param>
+        </member>
+        <member name="M:Comos.Global.Diagnostics.CTextWriterTraceListener.Flush">
+            <summary>
+            Flushes the output buffer of the underlying text writer.
+            </summary>
+        </member>
+        <member name="M:Comos.Global.Diagnostics.CTextWriterTraceListener.EnsureWriter">
+            <summary>
+            Ensures that the underlying text writer is initialized.
+            </summary>
+            <returns>True if the text writer is initialized. Otherwise, false.</returns>
+        </member>
+        <member name="M:Comos.Global.Diagnostics.CTextWriterTraceListener.GetEncodingWithFallback(System.Text.Encoding)">
+            <summary>
+            Gets an encoding with fallback for the specified encoding.
+            </summary>
+            <param name="encoding">The encoding to get an encoding with fall back for.</param>
+            <returns>An encoding with fallback.</returns>
+        </member>
+        <member name="T:Comos.Global.Diagnostics.CTraceListener">
+            <summary>
+            Provides the abstrace base class for Comos trace listeners.
+            </summary>
+        </member>
+        <member name="M:Comos.Global.Diagnostics.CTraceListener.TraceData(System.Diagnostics.TraceEventCache,System.String,System.Diagnostics.TraceEventType,System.Int32,System.Object)">
+            <summary>
+            Writes trace information, a data object and event information to the listener specific output.
+            </summary>
+            <param name="eventCache">
+            A TraceEventCache object that contains the current process ID, thread ID, and stack trace information.
+            </param>
+            <param name="source">
+            A name used to identify the output, typically the name of the application that generated the trace event.
+            </param>
+            <param name="eventType">
+            One of the TraceEventType values specifying the type of event that has caused the trace.
+            </param>
+            <param name="id">A numeric identifier for the event.</param>
+            <param name="data">The trace data to emit.</param>
+        </member>
+        <member name="M:Comos.Global.Diagnostics.CTraceListener.TraceData(System.Diagnostics.TraceEventCache,System.String,System.Diagnostics.TraceEventType,System.Int32,System.Object[])">
+            <summary>
+            Writes trace information, an array of data objects and event information to the listener specific output.
+            </summary>
+            <param name="eventCache">
+            A TraceEventCache object that contains the current process ID, thread ID, and stack trace information.
+            </param>
+            <param name="source">
+            A name used to identify the output, typically the name of the application that generated the trace event.
+            </param>
+            <param name="eventType">
+            One of the TraceEventType values specifying the type of event that has caused the trace.
+            </param>
+            <param name="id">A numeric identifier for the event.</param>
+            <param name="data">An array of objects to emit as data.</param>
+        </member>
+        <member name="M:Comos.Global.Diagnostics.CTraceListener.TraceEvent(System.Diagnostics.TraceEventCache,System.String,System.Diagnostics.TraceEventType,System.Int32,System.String)">
+            <summary>
+            Writes trace information, a message, and event information to the listener specific output.
+            </summary>
+            <param name="eventCache">
+            A TraceEventCache object that contains the current process ID, thread ID, and stack trace information.
+            </param>
+            <param name="source">
+            A name used to identify the output, typically the name of the application that generated the trace event.
+            </param>
+            <param name="eventType">
+            One of the TraceEventType values specifying the type of event that has caused the trace. 
+            </param>
+            <param name="id">A numeric identifier for the event.</param>
+            <param name="message">A message to write.</param>
+        </member>
+        <member name="M:Comos.Global.Diagnostics.CTraceListener.TraceEvent(System.Diagnostics.TraceEventCache,System.String,System.Diagnostics.TraceEventType,System.Int32,System.String,System.Object[])">
+            <summary>
+            Writes trace information, a formatted array of objects and event information to the listener specific output.
+            </summary>
+            <param name="eventCache">
+            A TraceEventCache object that contains the current process ID, thread ID, and stack trace information.
+            </param>
+            <param name="source">
+            A name used to identify the output, typically the name of the application that generated the trace event.
+            </param>
+            <param name="eventType">
+            One of the TraceEventType values specifying the type of event that has caused the trace. 
+            </param>
+            <param name="id">A numeric identifier for the event.</param>
+            <param name="format">
+            A format string that contains zero or more format items, which correspond to objects in the args array.
+            </param>
+            <param name="args">An object array containing zero or more objects to format.</param>
+        </member>
+        <member name="M:Comos.Global.Diagnostics.CTraceListener.Trace(System.Diagnostics.TraceEventCache,System.String,System.Diagnostics.TraceEventType,System.Int32,System.String)">
+            <summary>
+            Writes trace information, a message, and event information to the listener specific output.
+            </summary>
+            <param name="eventCache">
+            A TraceEventCache object that contains the current process ID, thread ID, and stack trace information.
+            </param>
+            <param name="source">
+            A name used to identify the output, typically the name of the application that generated the trace event.
+            </param>
+            <param name="eventType">
+            One of the TraceEventType values specifying the type of event that has caused the trace. 
+            </param>
+            <param name="id">A numeric identifier for the event.</param>
+            <param name="data">A message to write.</param>
+        </member>
+        <member name="M:Comos.Global.Diagnostics.CTraceListener.CreateLine(System.Diagnostics.TraceEventCache,System.String,System.Diagnostics.TraceEventType,System.Int32,System.String,System.Boolean)">
+            <summary>
+            Creates a new line for trace output.
+            </summary>
+            <param name="eventCache">
+            A TraceEventCache object that contains the current process ID, thread ID, and stack trace information.
+            </param>
+            <param name="source">
+            A name used to identify the output, typically the name of the application that generated the trace event.
+            </param>
+            <param name="eventType">
+            One of the TraceEventType values specifying the type of event that has caused the trace. 
+            </param>
+            <param name="id">A numeric identifier for the event.</param>
+            <param name="message">The text message for the line to create.</param>
+            <param name="isFirstLine">
+            True if the line to create is the first line of a set of lines. Otherwise, false.
+            </param>
+            <returns>The created line.</returns>
+        </member>
+        <member name="M:Comos.Global.Diagnostics.CTraceListener.IsTraceOptionEnabled(System.Diagnostics.TraceOptions)">
+            <summary>
+            Gets a Boolean value that indicates whether the specified trace option is enabled.
+            </summary>
+            <param name="option">The trace option to check.</param>
+            <returns>True if the specified trace option is enabled. Otherwise, false.</returns>
+        </member>
+        <member name="T:Comos.Global.Diagnostics.MaxFileLengthReachedException">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="M:Comos.Global.Diagnostics.MaxFileLengthReachedException.#ctor(System.Byte[],System.Int32,System.Int32)">
+            <summary>
+            Initializes a new instance of the <see cref="T:Comos.Global.Diagnostics.MaxFileLengthReachedException"/> class.
+            </summary>
+            <param name="array">The array.</param>
+            <param name="offset">The offset.</param>
+            <param name="count">The count.</param>
+        </member>
+        <member name="M:Comos.Global.Diagnostics.MaxFileLengthReachedException.#ctor(System.Byte[],System.Int32,System.Int32,System.String)">
+            <summary>
+            Initializes a new instance of the <see cref="T:Comos.Global.Diagnostics.MaxFileLengthReachedException"/> class.
+            </summary>
+            <param name="array">The array.</param>
+            <param name="offset">The offset.</param>
+            <param name="count">The count.</param>
+            <param name="message">The message.</param>
+        </member>
+        <member name="M:Comos.Global.Diagnostics.MaxFileLengthReachedException.#ctor(System.Byte[],System.Int32,System.Int32,System.String,System.Exception)">
+            <summary>
+            Initializes a new instance of the <see cref="T:Comos.Global.Diagnostics.MaxFileLengthReachedException"/> class.
+            </summary>
+            <param name="array">The array.</param>
+            <param name="offset">The offset.</param>
+            <param name="count">The count.</param>
+            <param name="message">The message.</param>
+            <param name="innerException">The inner exception.</param>
+        </member>
+        <member name="P:Comos.Global.Diagnostics.MaxFileLengthReachedException.Array">
+            <summary>
+            Gets the array.
+            </summary>
+        </member>
+        <member name="P:Comos.Global.Diagnostics.MaxFileLengthReachedException.Offset">
+            <summary>
+            Gets the offset.
+            </summary>
+        </member>
+        <member name="P:Comos.Global.Diagnostics.MaxFileLengthReachedException.Count">
+            <summary>
+            Gets the count.
+            </summary>
+        </member>
+        <member name="T:Comos.Global.EmptyMessageBoxHandler">
+            <summary>
+            EmptyMessageBoxHandler for deaktivating messageboxes in COMOS
+            
+            set at Workset.MessageBoxHandler to deaktivate messageboxes
+            </summary>
+        </member>
+        <member name="P:Comos.Global.EmptyMessageBoxHandler.DefaultResult">
+            <summary>
+            result for the unshown message boxes
+            </summary>
+        </member>
+        <member name="M:Comos.Global.EmptyMessageBoxHandler.ShowMessageBox(System.String,System.String,System.Int16)">
+            <summary>
+            Implementation of _MessageBoxHandler
+            this implementation is intentionally empty in order to not show any messageboxes
+            </summary>
+            <param name="txt">irrelevant</param>
+            <param name="caption">irrelevant</param>
+            <param name="Mode">irrelevant</param>
+            <returns>Value of DefaultResult property</returns>
+        </member>
+        <member name="T:Comos.Global.EncryptUtility">
+            <summary>
+            Inplements utility function for en/decrypt strings
+            </summary>
+        </member>
+        <member name="M:Comos.Global.EncryptUtility.DPDecode(System.String)">
+            <summary>
+            Decode encrypted string using windows DPAPI
+            </summary>
+            <param name="encodedString"></param>
+            <returns></returns>
+            <exception cref="T:System.ArgumentNullException"></exception>
+        </member>
+        <member name="T:Comos.Global.Interfaces.IVersionProvider">
+            <summary>Interface definition for handling versions</summary>
+            <history>adtaka5  06.12.2017  2585853  Created</history>
+        </member>
+        <member name="P:Comos.Global.Interfaces.IVersionProvider.Version">
+            <summary>Returns the Comos Version</summary>
+        </member>
+        <member name="F:Comos.Global.LoginFunctionLib._domainName">
+            <summary>Domain name to verify the user when set at the Workset</summary>
+        </member>
+        <member name="F:Comos.Global.LoginFunctionLib._password">
+            <summary>Entered password to verify the user when set at the Workset</summary>
+        </member>
+        <member name="P:Comos.Global.LoginFunctionLib.LoginMode">
+            <summary><see cref="P:Comos.Global.LoginFunctionLib.LoginMode"/> to determine which credentials are used to verify the user when set at the Workset</summary>
+            <remarks>The default value is <see cref="F:Comos.Global.EnLoginMode.UserSelection"/></remarks>
+        </member>
+        <member name="M:Comos.Global.LoginFunctionLib.CheckDataSource(System.Boolean,System.String,System.String)">
+            <summary>Verifies the ODBC connection passed to COMOS</summary>
+            <remarks>
+            Calls <see cref="M:Comos.Global.LoginFunctionLib.ExtractDBConnectionType(System.String)"/> and <see cref="M:Comos.Global.LoginFunctionLib.ExtractODBCName(System.String)"/> to get the corresponding values.
+            In case of <see cref="F:Comos.Global.DBConnectionType.MicrosoftJet"/> the existance of the extracted file is checked.
+            In case of the other connection types <see cref="M:Comos.Global.LoginFunctionLib.CheckOdbcDataSource(System.Boolean,Comos.Global.DBConnectionType,System.String,System.String)"/> is called.
+            In case of invalid velues a message box is shown if the parameter showErrorMessage is true.
+            </remarks>
+            <param name="showErrorMessage">Defines if a message box is shown in case of an invalid ODBC connection</param>
+            <param name="commandline">Complete command line passed to COMOS</param>
+            <returns>
+            true if all checks passed
+            false otherwise
+            </returns>
+            <history>adtaka5  09.05.2017  2092620  Changed to use new methods</history>
+        </member>
+        <member name="M:Comos.Global.LoginFunctionLib.CheckOdbcDataSource(System.Boolean,Comos.Global.DBConnectionType,System.String,System.String)">
+            <summary>Verifies the ODBC connection passed to COMOS</summary>
+            <param name="showErrorMessage">Defines if a message box is shown in case of an invalid ODBC connection</param>
+            <param name="dbType">Extracted Database connection type</param>
+            <param name="odbcName">Extracted ODBC name</param>
+            <param name="commandline">Complete command line passed to COMOS</param>
+            <returns>
+            true if the ODBC connection is valid
+            false if the ODBC connection is invalid or the connection tyoe equals <see cref="F:Comos.Global.DBConnectionType.MicrosoftJet"/>
+            </returns>
+            <history>adtaka5  09.05.2017  2092620  Renamed method IsDataSourceOk</history>
+        </member>
+        <member name="M:Comos.Global.LoginFunctionLib.ExtractODBCName(System.String)">
+            <summary>Extracts the ODBC connection name</summary>
+            <param name="cmdlineParam">Part of the command line parameter /DT: passed to COMOS</param>
+            <returns>
+            The text after the closing bracket ] if ] exists
+            An empty string otherwise
+            </returns>
+            <history>adtaka5  09.05.2017  2092620  Created (from further method GetDBBaseWithoutDBMode())</history>
+        </member>
+        <member name="M:Comos.Global.LoginFunctionLib.ExtractDBConnectionType(System.String)">
+            <summary>Extracts the Database connection</summary>
+            <param name="cmdlineParam">Part of the command line parameter /DT: passed to COMOS</param>
+            <returns>
+            <see cref="F:Comos.Global.DBConnectionType.SQL"/> if the parameter starts with [SQL - SERVER]
+            <see cref="F:Comos.Global.DBConnectionType.MicrosoftJet"/> otherwise
+            </returns>
+            <history>adtaka5  09.05.2017  2092620  Created (from further method GetDBBaseWithoutDBMode())</history>
+        </member>
+        <member name="M:Comos.Global.LoginFunctionLib.ComosInit(Plt.IComosDWorkset,System.String,System.String,Comos.Global.UpdateDBScheme,System.Boolean,System.Boolean)">
+             <remarks>
+             CAUTION: Method is used from external clients, do not rename or change access modifiers without clarification!
+             </remarks>
+            
+        </member>
+        <member name="M:Comos.Global.LoginFunctionLib.Initialize(Plt.IComosDWorkset,System.String,System.String,Comos.Global.UpdateDBScheme,System.Boolean,System.Boolean)">
+            <history>adtaka5 08.01.2016 1505600: Uses new flag <seealso cref="P:Comos.Global.LoginFunctionLib.IsDBConncectionCompleted"/> to store if the connection to the database is completed</history>
+            <history>adgech13 16.03.2016 1627575: extracted override and delegate to it using CMessageBox prompt</history>
+        </member>
+        <member name="M:Comos.Global.LoginFunctionLib.Initialize(Plt.IComosDWorkset,System.String,System.String,Comos.Global.UpdateDBScheme,System.Boolean,System.Boolean,Comos.Global.IUserPrompt)">
+            <param name="userPrompt">
+            Implementation to be used to ask for user feedback
+            </param>
+            <history>adgech13 16.03.2016 1627575: extracted from override, introduced dependency on user prompt</history>
+            <history>adgech13 16.03.2016 1627575: deinitialize workset after unsuccessful db update</history>
+            <history>adtaka5  07.12.2016 1836266: Calls <see cref="M:Comos.Global.LoginFunctionLib.SetUserAtWorkset(Plt.IComosDUser)"/> to set the user dependent on the <see cref="P:Comos.Global.LoginFunctionLib.LoginMode"/></history>
+        </member>
+        <member name="M:Comos.Global.LoginFunctionLib.TryToLogon(Plt.IComosDWorkset@,System.Boolean,System.String,Comos.Global.IUserPrompt,System.String,Comos.Global.UpdateDBScheme)">
+            <history>ADGECH13  25.11.2020  5302552  Extracted from <see cref="M:Comos.Global.LoginFunctionLib.Initialize(Plt.IComosDWorkset,System.String,System.String,Comos.Global.UpdateDBScheme,System.Boolean,System.Boolean)"/></history>
+        </member>
+        <member name="M:Comos.Global.LoginFunctionLib.LetUserTryToAdjustDatabaseSchemeAndIndexes(System.String,Comos.Global.UpdateDBScheme,Plt.IComosDUser,Comos.Global.IUserPrompt)">
+            <param name="userPrompt">
+            Implementation to be used to ask for user feedback
+            </param>
+            <history>adgech13 16.03.2016 added dependency on userPrompt</history>
+        </member>
+        <member name="P:Comos.Global.LoginFunctionLib.IsDBConncectionCompleted">
+            <summary>Stores if the connection to the database is completed</summary>
+            <history>adtaka5 08.01.2016 1505600: created</history>
+        </member>
+        <member name="M:Comos.Global.LoginFunctionLib.SetCredentials(System.String,System.Security.SecureString)">
+            <summary>Stores the required credentials <see cref="F:Comos.Global.LoginFunctionLib._domainName"/> and <see cref="F:Comos.Global.LoginFunctionLib._password"/></summary>
+            <param name="domainName">Domain where the user account exists</param>
+            <param name="password">Password for the user account</param>
+        </member>
+        <member name="M:Comos.Global.LoginFunctionLib.SetUserAtWorkset(Plt.IComosDUser)">
+            <summary>Sets the user at the Workset dependent on the <see cref="P:Comos.Global.LoginFunctionLib.LoginMode"/></summary>
+            <param name="user">COMOS user</param>
+        </member>
+        <member name="T:Comos.Global.Markup.BooleanToConverter`1">
+            <summary>
+            
+            </summary>
+            <typeparam name="T"></typeparam>
+        </member>
+        <member name="M:Comos.Global.Markup.BooleanToConverter`1.#ctor">
+            <summary>
+            Initializes a new instance of the <see cref="T:Comos.Global.Markup.BooleanToVisibilityConverter"/> class.
+            </summary>
+        </member>
+        <member name="P:Comos.Global.Markup.BooleanToConverter`1.TrueValue">
+            <summary>
+            Gets or sets the true value.
+            </summary>
+            <value>
+            The true value.
+            </value>
+        </member>
+        <member name="P:Comos.Global.Markup.BooleanToConverter`1.FalseValue">
+            <summary>
+            Gets or sets the false value.
+            </summary>
+            <value>
+            The false value.
+            </value>
+        </member>
+        <member name="M:Comos.Global.Markup.BooleanToConverter`1.Convert(System.Object,System.Type,System.Object,System.Globalization.CultureInfo)">
+            <summary>
+            Converts a value.
+            </summary>
+            <param name="value">The value produced by the binding source.</param>
+            <param name="targetType">The type of the binding target property.</param>
+            <param name="parameter">The converter parameter to use.</param>
+            <param name="culture">The culture to use in the converter.</param>
+            <returns>
+            A converted value. If the method returns null, the valid null value is used.
+            </returns>
+        </member>
+        <member name="M:Comos.Global.Markup.BooleanToConverter`1.ConvertBack(System.Object,System.Type,System.Object,System.Globalization.CultureInfo)">
+            <summary>
+            Converts a value.
+            </summary>
+            <param name="value">The value that is produced by the binding target.</param>
+            <param name="targetType">The type to convert to.</param>
+            <param name="parameter">The converter parameter to use.</param>
+            <param name="culture">The culture to use in the converter.</param>
+            <returns>
+            A converted value. If the method returns null, the valid null value is used.
+            </returns>
+        </member>
+        <member name="T:Comos.Global.Markup.BooleanToFontStyleConverter">
+            <summary>
+            Represents the converter that converts Boolean values to and from <see cref="T:System.Windows.FontStyle"/> enumeration values.
+            If necessary you can change the <see cref="T:System.Windows.FontStyle"/> values for true and/or false.
+            </summary>
+        </member>
+        <member name="M:Comos.Global.Markup.BooleanToFontStyleConverter.#ctor">
+            <summary>
+            Initializes a new instance of the <see cref="T:Comos.Global.Markup.BooleanToFontStyleConverter"/> class.
+            </summary>
+        </member>
+        <member name="T:Comos.Global.Markup.BooleanToFontWeightConverter">
+            <summary>
+            Represents the converter that converts Boolean values to and from <see cref="T:System.Windows.FontWeight"/> enumeration values.
+            If necessary you can change the <see cref="T:System.Windows.FontWeight"/> values for true and/or false.
+            The default values are "True = Bold", "False = Normal".
+            </summary>
+        </member>
+        <member name="M:Comos.Global.Markup.BooleanToFontWeightConverter.#ctor">
+            <summary>
+            Initializes a new instance of the <see cref="T:Comos.Global.Markup.BooleanToFontStyleConverter"/> class.
+            </summary>
+        </member>
+        <member name="T:Comos.Global.Markup.BooleanToNegatedBooleanConverter">
+            <summary>
+            Represents the converter that converts Boolean values to their negated value.
+            </summary>
+        </member>
+        <member name="M:Comos.Global.Markup.BooleanToNegatedBooleanConverter.#ctor">
+            <summary>
+            Initializes a new instance of the <see cref="T:Comos.Global.Markup.BooleanToVisibilityConverter"/> class.
+            </summary>
+        </member>
+        <member name="T:Comos.Global.Markup.BooleanToVisibilityConverter">
+            <summary>
+            Represents the converter that converts Boolean values to and from <see cref="T:System.Windows.Visibility"/> enumeration values.
+            If necessary you can change the <see cref="T:System.Windows.Visibility"/> values for true and/or false.
+            </summary>
+        </member>
+        <member name="M:Comos.Global.Markup.BooleanToVisibilityConverter.#ctor">
+            <summary>
+            Initializes a new instance of the <see cref="T:Comos.Global.Markup.BooleanToVisibilityConverter"/> class.
+            </summary>
+        </member>
+        <member name="T:Comos.Global.Markup.ConverterPipe">
+            <summary>
+            A value converter which contains a list of IValueConverters and invokes their Convert or ConvertBack methods
+            in the order that they exist in the list.  The output of one converter is piped into the next converter
+            allowing for modular value converters to be chained together.  If the ConvertBack method is invoked,
+            the value converters are executed in reverse order (highest to lowest index).  Do not leave an element 
+            in the Converters property collection null, every element must reference a valid IValueConverter instance. 
+            If a value converter's type is not decorated with the ValueConversionAttribute, 
+            an InvalidOperationException will be thrown when the converter is added to the Converters collection.
+            </summary>
+        </member>
+        <member name="P:Comos.Global.Markup.ConverterPipe.Converters">
+            <summary>
+            Returns the list of IValueConverters contained in this converter.
+            </summary>
+        </member>
+        <member name="M:Comos.Global.Markup.ConverterPipe.#ctor">
+            <summary>
+              Create an instance of class <see cref="T:Comos.Global.Markup.ConverterPipe"/> 
+            </summary>
+        </member>
+        <member name="M:Comos.Global.Markup.ConverterPipe.GetTargetType(System.Int32,System.Type,System.Boolean)">
+            <summary>
+            Returns the target type for a conversion operation.
+            </summary>
+            <param name="converterIndex">The index of the current converter about to be executed.</param>
+            <param name="finalTargetType">The 'targetType' argument passed into the conversion method.</param>
+            <param name="convert">Pass true if calling from the Convert method, or false if calling from ConvertBack.</param>
+        </member>
+        <member name="M:Comos.Global.Markup.ConverterPipe.Convert(System.Object,System.Type,System.Object,System.Globalization.CultureInfo)">
+            <summary>
+              Call 'Convert'-method of all converters of the collection in the order they were added.
+              If one converter of the collection returns Binding.DoNothing the convertion is terminated.
+            </summary>
+            <param name="value"></param>
+            <param name="targetType"></param>
+            <param name="parameter"></param>
+            <param name="culture"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Comos.Global.Markup.ConverterPipe.ConvertBack(System.Object,System.Type,System.Object,System.Globalization.CultureInfo)">
+            <summary>
+              Call 'ConvertBack'-method of all converters of the collection in the reverse order they were added.
+              If one converter of the collection returns Binding.DoNothing the convertion is terminated.
+            </summary>
+            <param name="value"></param>
+            <param name="targetType"></param>
+            <param name="parameter"></param>
+            <param name="culture"></param>
+            <returns></returns>
+        </member>
+        <member name="T:Comos.Global.Markup.ItxExtension">
+            <summary>
+            Implements a markup extension that supports ITX translation in XAML.
+            </summary>
+        </member>
+        <member name="M:Comos.Global.Markup.ItxExtension.#ctor">
+            <summary>
+            Creates a new ItxExtension instance.
+            </summary>
+        </member>
+        <member name="M:Comos.Global.Markup.ItxExtension.#ctor(System.String)">
+            <summary>
+            Creates a new ItxExtension instance with an unprocessed ITX text starting with an ITX key.
+            </summary>
+            <param name="text">
+            An unprocessed ITX text starting with an ITX key.
+            </param>
+        </member>
+        <member name="P:Comos.Global.Markup.ItxExtension.Text">
+            <summary>
+            Gets or sets an unprocessed ITX text starting with an ITX key.
+            </summary>
+        </member>
+        <member name="M:Comos.Global.Markup.ItxExtension.ProvideValue(System.IServiceProvider)">
+            <summary>
+            Returns the processed and translated Text property as the value of the target property for
+            this markup extension.
+            </summary>
+            <param name="serviceProvider">An object that can provide services for the markup extension.</param>
+            <returns>
+            The processed and translated Text property as the value of the target property for this markup extension.
+            </returns>
+        </member>
+        <member name="T:Comos.Global.Mvvm.Command">
+            <summary>
+            An implementation of the System.Windows.Input.ICommand interface that hands over calls of the CanExecute
+            and Execute members to specified delegates.
+            </summary>
+        </member>
+        <member name="M:Comos.Global.Mvvm.Command.#ctor(System.Func{System.Object,System.Boolean},System.Action{System.Object})">
+            <summary>
+            Creates a new instance of the Command class.
+            </summary>
+            <param name="canExecute">A delegate which is called when the CanExecute member of the Command is called.</param>
+            <param name="execute">A delegate which is called when the CanExecuteChanged member of the Command is called.</param>
+        </member>
+        <member name="M:Comos.Global.Mvvm.Command.CanExecute(System.Object)">
+            <summary>
+            Determines whether the command can execute in its current state.
+            </summary>
+            <param name="parameter">
+            Data used by the command.
+            If the command does not require data to be passed, this object can be set to null.
+            </param>
+            <returns>True if this command can be executed. Otherwise, false.</returns>
+        </member>
+        <member name="E:Comos.Global.Mvvm.Command.CanExecuteChanged">
+            <summary>
+            Occurs when changes occur that affect whether or not the command should execute.
+            </summary>
+        </member>
+        <member name="M:Comos.Global.Mvvm.Command.Execute(System.Object)">
+            <summary>
+            Executes the command.
+            </summary>
+            <param name="parameter">
+            Data used by the command.
+            If the command does not require data to be passed, this object can be set to null.
+            </param>
+        </member>
+        <member name="T:Comos.Global.Mvvm.Command`1">
+            <summary>
+            An implementation of the System.Windows.Input.ICommand interface that hands over calls of the CanExecute
+            and Execute members to specified delegates.
+            </summary>
+            <typeparam name="T"></typeparam>
+        </member>
+        <member name="M:Comos.Global.Mvvm.Command`1.#ctor(System.Action{`0})">
+            <summary>
+            Creates a new instance of the Command class.
+            It uses default value as true for CanExecute.
+            </summary>
+            <param name="execute">A delegate which is called when the CanExecuteChanged member of the Command is called.</param>
+        </member>
+        <member name="M:Comos.Global.Mvvm.Command`1.#ctor(System.Func{`0,System.Boolean},System.Action{`0})">
+            <summary>
+            Creates a new instance of the Command class.
+            </summary>
+            <param name="canExecute">A delegate which is called when the CanExecute member of the Command is called.</param>
+            <param name="execute">A delegate which is called when the CanExecuteChanged member of the Command is called.</param>        
+        </member>
+        <member name="M:Comos.Global.Mvvm.Command`1.CanExecute(System.Object)">
+            <summary>
+            Determines whether the command can execute in its current state.
+            </summary>
+            <param name="parameter">
+            Data used by the command.
+            Paramter value should always be of Type T, else exception will be thrown if T is a value Type
+            </param>
+            <returns>True if this command can be executed. Otherwise, false.</returns>
+        </member>
+        <member name="E:Comos.Global.Mvvm.Command`1.CanExecuteChanged">
+            <summary>
+            Occurs when changes occur that affect whether or not the command should execute.
+            </summary>
+        </member>
+        <member name="M:Comos.Global.Mvvm.Command`1.Execute(System.Object)">
+            <summary>
+            Executes the command.
+            </summary>
+            <param name="parameter">
+            Data used by the command.
+            Paramter value should always be of Type T, else exception will be thrown if T is a value Type
+            </param>
+        </member>
+        <member name="T:Comos.Global.Mvvm.ViewModelBase">
+            <summary>
+            A base class for view model classes.
+            </summary>
+        </member>
+        <member name="E:Comos.Global.Mvvm.ViewModelBase.PropertyChanged">
+            <summary>
+            Raised when a property value changes.
+            </summary>
+        </member>
+        <member name="M:Comos.Global.Mvvm.ViewModelBase.NotifyPropertyChanged(System.String[])">
+            <summary>
+            Raises the PropertyChanged event for the specified properties.
+            </summary>
+            <param name="propertyNames">
+            The names of the properties for which a PropertyChanged event should be raised.
+            </param>
+        </member>
+        <member name="T:Comos.Global.IVBMessageBox">
+            <summary>
+            The default interface for the VBMessageBox class.
+            </summary>
+        </member>
+        <member name="M:Comos.Global.IVBMessageBox.ShowMessageBox(System.String,System.Object,System.String,System.Object,System.Object)">
+            <summary>
+            Displays a message box.
+            </summary>
+            <param name="prompt">The display text.</param>
+            <param name="vbButtons">A VBA.VbMsgBoxStyle.</param>
+            <param name="title">The title.</param>
+            <param name="helpFile">Currently ignored.</param>
+            <param name="context">Currently ignored.</param>
+            <returns>A VBA.VbMsgBoxResult.</returns>
+        </member>
+        <member name="T:Comos.Global.VBMessageBox">
+            <summary>
+            Offers the functionality of the .NET System.Windows.MessageBox class to COM.
+            Should only be used from COM context.
+            </summary>
+            <history>
+            [CEA: 2009-04-28]
+            The VBMessageBox class now use the WindowsForms MessageBox, because the WPF's MessageBox
+            does not allow Application modal MessageBoxes.
+            </history>
+        </member>
+        <member name="T:Comos.Global.VBMessageBox.WindowWrapper">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="M:Comos.Global.VBMessageBox.WindowWrapper.#ctor(System.Windows.Window)">
+            <summary>
+            Initializes a new instance of the <see cref="T:Comos.Global.VBMessageBox.WindowWrapper"/> class.
+            </summary>
+            <param name="wnd">The WND.</param>
+        </member>
+        <member name="P:Comos.Global.VBMessageBox.WindowWrapper.Handle">
+            <summary>
+            Gets the handle to the window.
+            </summary>
+            <value></value>
+            <returns>
+            A handle to the window.
+            </returns>
+        </member>
+        <member name="M:Comos.Global.VBMessageBox.ShowMessageBox(System.String,System.Object,System.String,System.Object,System.Object)">
+            <summary>
+            Displays a message box.
+            </summary>
+            <param name="prompt">The display text.</param>
+            <param name="vbButtons">A VBA.VbMsgBoxStyle.</param>
+            <param name="title">The title.</param>
+            <param name="helpFile">Currently ignored.</param>
+            <param name="context">Currently ignored.</param>
+            <returns>A VBA.VbMsgBoxResult.</returns>
+        </member>
+        <member name="T:Comos.Global.View.MsgCheckBox">
+            <summary>
+            Interaction logic for MsgCheckBox.xaml
+            </summary>
+            <summary>
+            MsgCheckBox
+            </summary>
+        </member>
+        <member name="P:Comos.Global.View.MsgCheckBox.CustomTitle">
+             <summary>
+            The caption of the messagebox with checkbox
+             </summary>
+        </member>
+        <member name="P:Comos.Global.View.MsgCheckBox.MessageText">
+            <summary>
+            The display text in the messagebox
+            </summary>
+        </member>
+        <member name="P:Comos.Global.View.MsgCheckBox.CheckBoxText">
+            <summary>
+            The text of the checkbox
+            </summary>
+        </member>
+        <member name="P:Comos.Global.View.MsgCheckBox.MsgImage">
+            <summary>
+            The image of the messagebox
+            </summary>
+        </member>
+        <member name="P:Comos.Global.View.MsgCheckBox.AnswerChecked">
+            <summary>
+            the result state of the checkbox
+            </summary>
+        </member>
+        <member name="P:Comos.Global.View.MsgCheckBox.CommandCloseWindow">
+            <summary>
+            window handling
+            </summary>
+        </member>
+        <member name="P:Comos.Global.View.MsgCheckBox.Results">
+            <summary>
+            Results of the messagebox button value ("Yes" or "NO") and checkbox state (true or false)
+            </summary>
+        </member>
+        <member name="M:Comos.Global.View.MsgCheckBox.#ctor(System.String,System.String,System.String)">
+            <summary>
+            /
+            </summary>
+            <param name="messageText"></param>
+            <param name="checkBoxText"></param>
+            <param name="title"></param>
+        </member>
+        <member name="M:Comos.Global.View.MsgCheckBox.InitializeComponent">
+            <summary>
+            InitializeComponent
+            </summary>
+        </member>
+    </members>
+</doc>

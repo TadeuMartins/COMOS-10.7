@@ -1,0 +1,24 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ComosIntegrationTestConfig>
+  <version>Team_AI</version>
+  <DBRoot>
+    <DB>
+      <alias>iDB</alias>
+      <type>sql</type>
+      <path>SERVER=CSSQL2;DATABASE=ComosIntegrationTest_10.4.2_iDB;USER ID=ComosIntegrationDB;PWD=ComosIntegrationDB</path>
+    </DB>
+    <DB>
+      <alias>ComosDB</alias>
+      <type>sql</type>
+      <path>SERVER=CSSQL2;DATABASE=ComosIntegrationTest_10.2_ComosDB;USER ID=ComosIntegrationDB;PWD=ComosIntegrationDB</path>
+    </DB>
+  </DBRoot>
+  <DeployInformation>
+    <ComosSourcePath>\\debonkl0c16\VersionControl\CM\Komponenten\Team_AI</ComosSourcePath>
+    <PathToTestDLLs>\\debonkl0c16\VersionControl\CM\Komponenten\Team_AI\DeployRoot\Testing\Tests</PathToTestDLLs>
+    <TfsRoot>$/CIS/Comos/Team/Team_AI</TfsRoot>
+    <TestResultsPath>O:\Softwaretest\Testautomatisierung\Developertests\Testresults\Team_AI</TestResultsPath>
+    <TargetPath>D:\Comos\Team_AI\</TargetPath>
+    <DeployToolSource>d:\comos\comos.versioncontrol\Configuration\Packages\TestDeployment\</DeployToolSource>
+  </DeployInformation>
+</ComosIntegrationTestConfig>

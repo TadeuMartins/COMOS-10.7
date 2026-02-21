@@ -1,0 +1,33 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<assembly xmlns="urn:schemas-microsoft-com:asm.v1" manifestVersion="1.0">
+  <assemblyIdentity name="ComosCustomize" version="1.0.0.0" type="win32" />
+  <!-- ************************************************************* -->
+  <!-- **              ComosCustomize.manifest                    ** -->
+  <!-- **                                                         ** -->
+  <!-- **   References to additional Assemblies or OCX Coponents  ** -->
+  <!-- **                                                         ** -->
+  <!-- **   please insert here manifest information for own       ** -->
+  <!-- **   components, that exist only at specific customer      ** -->
+  <!-- **   installation                                          ** -->
+  <!-- ************************************************************* -->
+  <file name="WorksetSetterVB.dll">
+    <comClass clsid="{3DE3E594-746A-4D8A-970F-2206ECE08912}" description="WorksetSetterVB.Globals" tlbid="{609DF2F6-06CF-48E5-979D-4022E125DE9A}" progid="WorksetSetterVB.Globals" />
+    <typelib tlbid="{609DF2F6-06CF-48E5-979D-4022E125DE9A}" version="1.1" helpdir="" flags="hasdiskimage" />
+  </file>
+  <comInterfaceExternalProxyStub iid="{3A699586-C899-40D4-9067-C1649238E698}" name="Globals" tlbid="{609DF2F6-06CF-48E5-979D-4022E125DE9A}" proxyStubClsid32="{00020424-0000-0000-C000-000000000046}" />
+  <dependency>
+    <dependentAssembly>
+      <assemblyIdentity type="win32" name="Comos.TA.ComosInterface" version="1.0.7550.27630" />
+    </dependentAssembly>
+  </dependency>
+  <dependency>
+    <dependentAssembly>
+      <assemblyIdentity type="win32" name="Comos.TA.Lib" version="1.0.7550.27625" />
+    </dependentAssembly>
+  </dependency>
+  <dependency>
+    <dependentAssembly>
+      <assemblyIdentity type="win32" name="Comos.TA.ScriptUtilities" version="1.0.0.0" />
+    </dependentAssembly>
+  </dependency>
+</assembly>

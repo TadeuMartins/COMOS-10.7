@@ -1,0 +1,441 @@
+// ─────────────────────────────────────────────────────────────────────────────
+// SpeechRecognition Polyfill for CefSharp / non-Chrome Chromium
+//
+// The Web Speech API (SpeechRecognition) does NOT work in CefSharp because it
+// relies on Google's cloud speech servers, only available in Chrome.
+//
+// This polyfill implements the same SpeechRecognition interface using:
+//   1. navigator.mediaDevices.getUserMedia() — to capture microphone audio
+//   2. MediaRecorder API — to record audio chunks
+//   3. Azure OpenAI Whisper API — via the shim's /api/ai/v1/transcribe endpoint
+//
+// It monkey-patches window.SpeechRecognition and window.webkitSpeechRecognition
+// BEFORE the chat-widget.js loads, so the widget's W2 hook works transparently.
+// ─────────────────────────────────────────────────────────────────────────────
+(function () {
+  "use strict";
+
+  // ── Detect shim base URL ─────────────────────────────────────────────────
+  function detectShimBase() {
+    var links = document.querySelectorAll('a[href*="/comos/download/"]');
+    for (var i = 0; i < links.length; i++) {
+      var m = links[i].href.match(/(https?:\/\/[^/]+)\/comos\/download\//);
+      if (m) return m[1];
+    }
+    return "http://127.0.0.1:56401";
+  }
+
+  // ── Polyfill SpeechRecognition class ─────────────────────────────────────
+  function WhisperSpeechRecognition() {
+    this.continuous = false;
+    this.interimResults = false;
+    this.lang = navigator.language || "en-US";
+    this.maxAlternatives = 1;
+
+    // Event handlers (matching Web Speech API)
+    this.onstart = null;
+    this.onresult = null;
+    this.onerror = null;
+    this.onend = null;
+    this.onspeechstart = null;
+    this.onspeechend = null;
+    this.onaudiostart = null;
+    this.onaudioend = null;
+    this.onsoundstart = null;
+    this.onsoundend = null;
+    this.onnomatch = null;
+
+    // Internal state
+    this._stream = null;
+    this._recorder = null;
+    this._chunks = [];
+    this._active = false;
+    this._stopRequested = false;
+    this._silenceTimer = null;
+    this._analyser = null;
+    this._audioCtx = null;
+    this._silenceStart = null;
+
+    // Configuration
+    this._SILENCE_THRESHOLD = 0.01;   // RMS below this = silence
+    this._SILENCE_DURATION = 2000;    // ms of silence before auto-send
+    this._CHECK_INTERVAL = 150;       // ms between silence checks
+    this._MIN_AUDIO_MS = 500;         // minimum recording length before sending
+    this._recordStart = 0;
+  }
+
+  WhisperSpeechRecognition.prototype.start = function () {
+    var self = this;
+    if (self._active) return;
+
+    console.log("[speech-polyfill] start() called");
+    console.log("[speech-polyfill] navigator.mediaDevices exists:", !!navigator.mediaDevices);
+    console.log("[speech-polyfill] isSecureContext:", window.isSecureContext);
+    console.log("[speech-polyfill] location.protocol:", location.protocol);
+    console.log("[speech-polyfill] location.origin:", location.origin);
+
+    self._active = true;
+    self._stopRequested = false;
+    self._chunks = [];
+    self._silenceStart = null;
+    self._recordStart = Date.now();
+
+    // Request microphone — with fallback for insecure contexts
+    var getUserMediaPromise;
+    if (navigator.mediaDevices && navigator.mediaDevices.getUserMedia) {
+      console.log("[speech-polyfill] Using navigator.mediaDevices.getUserMedia");
+      getUserMediaPromise = navigator.mediaDevices.getUserMedia({ audio: true });
+    } else if (navigator.getUserMedia || navigator.webkitGetUserMedia || navigator.mozGetUserMedia) {
+      console.log("[speech-polyfill] Using legacy navigator.getUserMedia");
+      var legacyGetUserMedia = navigator.getUserMedia || navigator.webkitGetUserMedia || navigator.mozGetUserMedia;
+      getUserMediaPromise = new Promise(function (resolve, reject) {
+        legacyGetUserMedia.call(navigator, { audio: true }, resolve, reject);
+      });
+    } else {
+      console.error("[speech-polyfill] NO getUserMedia API available at all!");
+      self._active = false;
+      if (self.onerror) {
+        self.onerror({
+          error: "not-allowed",
+          message: "Microphone API not available. navigator.mediaDevices is " +
+            typeof navigator.mediaDevices + ", isSecureContext=" + window.isSecureContext +
+            ", protocol=" + location.protocol
+        });
+      }
+      if (self.onend) self.onend(new Event("end"));
+      return;
+    }
+
+    getUserMediaPromise
+      .then(function (stream) {
+        console.log("[speech-polyfill] getUserMedia SUCCESS — got stream with " + stream.getAudioTracks().length + " audio tracks");
+        self._stream = stream;
+
+        // Fire onstart
+        if (self.onstart) {
+          self.onstart(new Event("start"));
+        }
+        if (self.onaudiostart) {
+          self.onaudiostart(new Event("audiostart"));
+        }
+
+        // Set up MediaRecorder
+        var mimeType = "audio/webm;codecs=opus";
+        if (!MediaRecorder.isTypeSupported(mimeType)) {
+          mimeType = "audio/webm";
+        }
+        if (!MediaRecorder.isTypeSupported(mimeType)) {
+          mimeType = ""; // let browser decide
+        }
+
+        var options = mimeType ? { mimeType: mimeType } : {};
+        self._recorder = new MediaRecorder(stream, options);
+
+        self._recorder.ondataavailable = function (e) {
+          if (e.data && e.data.size > 0) {
+            self._chunks.push(e.data);
+          }
+        };
+
+        self._recorder.onstop = function () {
+          self._sendToWhisper();
+        };
+
+        // Start recording with timeslice for continuous data collection
+        self._recorder.start(500);
+
+        // Set up silence detection using Web Audio API
+        self._setupSilenceDetection(stream);
+      })
+      .catch(function (err) {
+        console.error("[speech-polyfill] getUserMedia FAILED:", err.name, err.message, err);
+        self._active = false;
+        if (self.onerror) {
+          var errorEvent = {
+            error: "not-allowed",
+            message: err.message || "Microphone access denied",
+          };
+          if (err.name === "NotFoundError" || err.name === "DevicesNotFoundError") {
+            errorEvent.error = "audio-capture";
+            errorEvent.message = "No microphone found";
+          } else if (err.name === "NotAllowedError" || err.name === "PermissionDeniedError") {
+            errorEvent.error = "not-allowed";
+            errorEvent.message = "Microphone access denied";
+          } else if (err.name === "TypeError") {
+            errorEvent.error = "not-allowed";
+            errorEvent.message = "Microphone API unavailable (not a secure context). Protocol: " + location.protocol;
+          }
+          console.error("[speech-polyfill] Firing onerror:", JSON.stringify(errorEvent));
+          self.onerror(errorEvent);
+        }
+        if (self.onend) {
+          self.onend(new Event("end"));
+        }
+      });
+  };
+
+  WhisperSpeechRecognition.prototype._setupSilenceDetection = function (stream) {
+    var self = this;
+    try {
+      self._audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+      var source = self._audioCtx.createMediaStreamSource(stream);
+      self._analyser = self._audioCtx.createAnalyser();
+      self._analyser.fftSize = 2048;
+      source.connect(self._analyser);
+
+      var dataArray = new Float32Array(self._analyser.fftSize);
+
+      function checkSilence() {
+        if (!self._active || self._stopRequested) return;
+
+        self._analyser.getFloatTimeDomainData(dataArray);
+
+        // Calculate RMS
+        var sum = 0;
+        for (var i = 0; i < dataArray.length; i++) {
+          sum += dataArray[i] * dataArray[i];
+        }
+        var rms = Math.sqrt(sum / dataArray.length);
+
+        var now = Date.now();
+        var elapsed = now - self._recordStart;
+
+        if (rms < self._SILENCE_THRESHOLD) {
+          // Silence detected
+          if (!self._silenceStart) {
+            self._silenceStart = now;
+          } else if (
+            now - self._silenceStart >= self._SILENCE_DURATION &&
+            elapsed >= self._MIN_AUDIO_MS
+          ) {
+            // Enough silence after enough recording — send for transcription
+            self._silenceStart = null;
+            if (self.onspeechend) {
+              self.onspeechend(new Event("speechend"));
+            }
+            self._finishRecording();
+            return;
+          }
+        } else {
+          // Sound detected — reset silence timer
+          self._silenceStart = null;
+          if (self.onspeechstart && !self._speechStarted) {
+            self._speechStarted = true;
+            self.onspeechstart(new Event("speechstart"));
+          }
+        }
+
+        self._silenceTimer = setTimeout(checkSilence, self._CHECK_INTERVAL);
+      }
+
+      self._speechStarted = false;
+      checkSilence();
+    } catch (e) {
+      console.warn("[speech-polyfill] Silence detection unavailable:", e);
+      // Fallback: no silence detection, rely on manual stop()
+    }
+  };
+
+  WhisperSpeechRecognition.prototype._finishRecording = function () {
+    var self = this;
+    if (self._recorder && self._recorder.state !== "inactive") {
+      self._recorder.stop();
+    }
+  };
+
+  WhisperSpeechRecognition.prototype._sendToWhisper = function () {
+    var self = this;
+
+    // Clean up audio resources
+    self._cleanupAudio();
+
+    if (self._chunks.length === 0) {
+      if (self.onerror) {
+        self.onerror({ error: "no-speech", message: "No speech detected" });
+      }
+      self._fireEnd();
+      return;
+    }
+
+    var blob = new Blob(self._chunks, { type: "audio/webm" });
+    self._chunks = [];
+
+    // Convert blob to base64 and send to shim
+    var reader = new FileReader();
+    reader.onloadend = function () {
+      var base64Data = reader.result.split(",")[1]; // strip "data:audio/webm;base64,"
+      var shimBase = detectShimBase();
+      var url = shimBase + "/api/ai/v1/transcribe";
+
+      fetch(url, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          audio: base64Data,
+          filename: "recording.webm",
+          language: self.lang,
+        }),
+      })
+        .then(function (resp) {
+          return resp.json();
+        })
+        .then(function (data) {
+          if (data.error) {
+            if (self.onerror) {
+              self.onerror({ error: "network", message: data.error });
+            }
+            self._fireEnd();
+            return;
+          }
+
+          var transcript = (data.text || "").trim();
+          if (!transcript) {
+            if (self.onerror) {
+              self.onerror({ error: "no-speech", message: "No speech detected" });
+            }
+            self._fireEnd();
+            return;
+          }
+
+          // Fire onresult with SpeechRecognitionEvent-compatible structure
+          if (self.onresult) {
+            var resultEvent = {
+              resultIndex: 0,
+              results: {
+                0: {
+                  0: { transcript: transcript, confidence: 0.95 },
+                  length: 1,
+                  isFinal: true,
+                },
+                length: 1,
+              },
+            };
+            self.onresult(resultEvent);
+          }
+
+          // If continuous mode, restart recording automatically
+          if (self.continuous && !self._stopRequested) {
+            self._chunks = [];
+            self._recordStart = Date.now();
+            self._silenceStart = null;
+            self._speechStarted = false;
+
+            navigator.mediaDevices
+              .getUserMedia({ audio: true })
+              .then(function (stream) {
+                self._stream = stream;
+
+                var mimeType = "audio/webm;codecs=opus";
+                if (!MediaRecorder.isTypeSupported(mimeType)) {
+                  mimeType = "audio/webm";
+                }
+                if (!MediaRecorder.isTypeSupported(mimeType)) {
+                  mimeType = "";
+                }
+
+                var options = mimeType ? { mimeType: mimeType } : {};
+                self._recorder = new MediaRecorder(stream, options);
+                self._recorder.ondataavailable = function (e) {
+                  if (e.data && e.data.size > 0) {
+                    self._chunks.push(e.data);
+                  }
+                };
+                self._recorder.onstop = function () {
+                  self._sendToWhisper();
+                };
+                self._recorder.start(500);
+                self._setupSilenceDetection(stream);
+              })
+              .catch(function () {
+                self._fireEnd();
+              });
+          } else {
+            self._fireEnd();
+          }
+        })
+        .catch(function (err) {
+          console.error("[speech-polyfill] Whisper request failed:", err);
+          if (self.onerror) {
+            self.onerror({
+              error: "network",
+              message: "Network error occurred during speech recognition.",
+            });
+          }
+          self._fireEnd();
+        });
+    };
+
+    reader.readAsDataURL(blob);
+  };
+
+  WhisperSpeechRecognition.prototype._cleanupAudio = function () {
+    if (this._silenceTimer) {
+      clearTimeout(this._silenceTimer);
+      this._silenceTimer = null;
+    }
+    if (this._stream) {
+      this._stream.getTracks().forEach(function (t) { t.stop(); });
+      this._stream = null;
+    }
+    if (this._audioCtx) {
+      try { this._audioCtx.close(); } catch (_) {}
+      this._audioCtx = null;
+    }
+    this._analyser = null;
+  };
+
+  WhisperSpeechRecognition.prototype._fireEnd = function () {
+    this._active = false;
+    if (this.onaudioend) {
+      this.onaudioend(new Event("audioend"));
+    }
+    if (this.onend) {
+      this.onend(new Event("end"));
+    }
+  };
+
+  WhisperSpeechRecognition.prototype.stop = function () {
+    this._stopRequested = true;
+    if (this._recorder && this._recorder.state !== "inactive") {
+      this._recorder.stop(); // triggers onstop → _sendToWhisper
+    } else {
+      this._cleanupAudio();
+      this._fireEnd();
+    }
+  };
+
+  WhisperSpeechRecognition.prototype.abort = function () {
+    this._stopRequested = true;
+    this._chunks = []; // discard audio
+    this._cleanupAudio();
+    if (this._recorder && this._recorder.state !== "inactive") {
+      try { this._recorder.stop(); } catch (_) {}
+    }
+    this._fireEnd();
+  };
+
+  // ── Install the polyfill ─────────────────────────────────────────────────
+  // Only install if native SpeechRecognition is NOT available (i.e., CefSharp)
+  var hasNative =
+    typeof window.SpeechRecognition === "function" ||
+    typeof window.webkitSpeechRecognition === "function";
+
+  console.log("[speech-polyfill] ====== POLYFILL INIT ======");
+  console.log("[speech-polyfill] hasNative SpeechRecognition:", hasNative);
+  console.log("[speech-polyfill] isSecureContext:", window.isSecureContext);
+  console.log("[speech-polyfill] navigator.mediaDevices:", !!navigator.mediaDevices);
+  console.log("[speech-polyfill] location.protocol:", location.protocol);
+  console.log("[speech-polyfill] location.href:", location.href);
+
+  if (!hasNative) {
+    window.SpeechRecognition = WhisperSpeechRecognition;
+    window.webkitSpeechRecognition = WhisperSpeechRecognition;
+    console.log(
+      "[speech-polyfill] ★ Installed Whisper-based SpeechRecognition polyfill ★"
+    );
+  } else {
+    console.log(
+      "[speech-polyfill] Native SpeechRecognition detected, polyfill not needed"
+    );
+  }
+})();

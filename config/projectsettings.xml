@@ -1,0 +1,2060 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ComosProjectSettings>
+  <General version="1.0"/>
+  <!--
+        Includes all single project setting items
+        (Categories, Groups and Settings)
+    -->
+  <SettingSources>
+    <Source assembly="Comos.EngineeringAdapter.Comos.Configuration" class="Comos.EngineeringAdapter.Comos.Configuration.EngineeringAdapterProjectSettingsSource"/>
+    <Source assembly="Comos.Tc.PDI.Global" class="Comos.Tc.PDI.Global.PDIProjectSettingsSource"/>
+    <Source assembly="ExportDGN.UI" class="ExportDGN.UI.DocumentExportDGNProjectSettingsSource"/>
+  </SettingSources>
+  <SettingItems>
+    <!-- Categories -->
+    <Category id="CAT_1_General" caption="~06687 General settings"/>
+    <Category id="CAT_1a_Project" caption="~06af6 Projektdaten"/>
+    <Category id="CAT_1b_Standard" caption="~00a62 Standard"/>
+    <Category id="CAT_1c_Documents" caption="~035e3 Documents"/>
+    <Category id="CAT_1d_Revision" caption="~0265d Revisionsoptionen"/>
+    <Category id="CAT_1e_Languages" caption="~004f1 Sprachen" hasOwnRightsManagement="true"/>
+    <Category id="CAT_1g_Fulltext" caption="~02dce Volltext-Index"/>
+    <Category id="CAT_1h_NumberingRanges" caption="~059fb Numbering ranges"/>
+    <Category id="CAT_1i_Comos" caption="COMOS"/>
+	<Category id="CAT_1j_ModularReport" caption="Modular Report"/>
+    <Category id="CAT_2f6_Cases" caption="~00315 Fahrfälle"/>
+    <Category id="CAT_2b_EIC" caption="~0668a EI&amp;C"/>
+    <Category id="CAT_2b_EIC_Verweise" caption="~0668b EI&amp;C references"/>
+    <Category id="CAT_2d_LayoutConfiguration_Channel" caption="~07d0f Layout Configuration for Channel"/>
+    <Category id="CAT_2f_Process" caption="~01c0d Prozess-Entwicklung"/>
+    <Category id="CAT_2f1_PSD" caption="~0668d Pipe Spec Designer"/>
+    <Category id="CAT_2f2_PSM" caption="~0668e Pipe Spec Manager"/>
+    <Category id="CAT_2f3_EngineeringInterfaces" caption="COMOS Engineering Interfaces"/>
+    <Category id="CAT_2f4_SPID" caption="~08302  General P&amp;ID Exchange"/>
+    <Category id="CAT_2f4_PIDInterface" caption="~08191 PID Interface"/>
+    <Category id="CAT_2f5_XMpLant" caption="~06691 XMpLant"/>
+    <Category id="CAT_2f7_FEED" caption="~06692 Front End Engineering and Design"/>
+    <Category id="CAT_2g_Operations" caption="~06693 Operations"/>
+    <Category id="CAT_2h_PQM" caption="~0865f DDMS"/>
+    <Category id="CAT_2k_Maintenance" caption="~06af1 Instandhaltung"/>
+    <Category id="CAT_2l_Automation" caption="~06694 Automation"/>
+    <Category id="CAT_2e1_eClass" caption="~07411 Produktdaten Mapping"      />
+    <Category id="CAT_CEP_EngineeringPortal" caption="COMOS Engineering Portal" /> <!-- TODO: translate if needed and create ITX key -->
+    <Category id="CAT_ME" caption="~08085 Modular engineering" />
+    <Category id="CAT_2m_Inspection" caption="Inspection"/>
+    <Category id="CAT_2n_ShutDown" caption="~0720a ShutDown"/>
+
+    <!--<Category id="CAT_System" caption="~00283 System" comosInternal="true" />-->
+
+    <!-- Don't change this id, it's used in code... -->
+    <Category id="CAT_CustomerSettings" caption="~06698 Customer settings"/>
+    <!-- Groups -->
+    <Setting id="GRP_1a1_General" type="Group" caption="~000ae Allgemein"/>
+    <Setting id="GRP_1a2_Customer" type="Group" caption="~03ec0 Customer"/>
+    <Setting id="GRP_1a4_Links" type="Group" caption="~00260 Verknüpfungen"/>
+    <Setting id="GRP_1b1_Prefix" type="Group" caption="~009fb Vor- und Trennzeichen"/>
+    <Setting id="GRP_1b2_Attribute" type="Group" caption="~0055f Spezifikationswert"/>
+    <Setting id="GRP_1b3_Static" type="Group" caption="~003c5 Statische Verknüpfung"/>
+    <Setting id="GRP_1b4_Unit" type="Group" caption="~00d7b Unit system"/>
+    <Setting id="GRP_1b5_Datetime" type="Group" />
+    <Setting id="GRP_1b5a_InvariantDateTime" type="Group" caption="~08ba3 Invariant Date/Time Display"/>
+    <Setting id="GRP_1b6_User" type="Group" caption="~0669d User / rights"/>
+    <Setting id="GRP_1b7_Other" type="Group" caption="~0169d Sonstige"/>
+    <Setting id="GRP_1b8_Workflows" type="Group" caption="~0669e Workflows"/>
+    <Setting id="GRP_1b9_Workflows" type="Group" caption="~03adf Workflow Options" indent="1"/>
+    <Setting id="GRP_1c1_General" type="Group" caption="~02ffe General"/>
+    <Setting id="GRP_1c2_ViewStation" type="Group" caption="~03874 View Station: Default Action"/>
+    <Setting id="GRP_1c3_Automatic" type="Group" caption="~00c5c Automatisches Referenzieren der Dokumente"/>
+    <Setting id="GRP_1c4_AutoCADExport" type="Group" caption="~066a1 Auto CAD Export"/>
+    <Setting id="GRP_1c6_Redlining" type="Group" caption="~03007 Redlining"/>
+    <Setting id="GRP_1d1_Server" type="Group" caption="~03d65 Server-side revisions"/>
+    <Setting id="GRP_1d2_Procedure" type="Group" caption="~03001 Procedure"/>
+    <Setting id="GRP_1d4_Monitoring" type="Group"/>
+    <Setting id="GRP_1d5_Settings" type="Group" caption="~03005 Settings"/>
+    <Setting id="GRP_1d6_Report" type="Group" caption="~03003 Report revision comparison method"/>
+    <Setting id="GRP_1d7_Redlining" type="Group"/>
+    <Setting id="GRP_1d8_Other" type="Group" caption="~0169d Sonstige"/>
+    <Setting id="GRP_1f2_Types" type="Group" caption="~066a3 Types of TS number device collections"/>
+    <Setting id="GRP_1f3_Contact" type="Group" caption="~066a4 Contact objects"/>
+    <!--<Setting id="GRP_1i2_Debug" type="Group" caption="~066aa Debug mode"/>-->
+    <Setting id="GRP_1i3_ProjOpt" type="Group" caption="~066ab Extra project options"/>
+    <!--<Setting id="GRP_1i4_Allg" type="Group" caption="~066ac General data"/>-->
+    <Setting id="GRP_1i5_DokOpt" type="Group" caption="~066ad Document options"/>
+    <Setting id="GRP_1i6_QueryOpt" type="Group" caption="~01bdf Query settings"/>
+    <Setting id="GRP_1i7_NavigatorSettings" type="Group" caption="~07af5 Settings for navigator text"/>
+    <Setting id="GRP_1i8_Other" type="Group" caption="~0169d Sonstige"/>
+	<Setting id="GRP_1j1_ModularReport" type="Group" caption="Modular report settings"/>
+    <Setting id="GRP_2b1_General" type="Group" caption="~02ffe General"/>
+    <Setting id="GRP_2b2_Manufacturer" type="Group" caption="~033f2 Manufacturer device selection"/>
+    <Setting id="GRP_2b5_Settings" type="Group" caption="~03005 Settings"/>
+    <Setting id="GRP_2b6_Reference" type="Group" caption="~066af Reference output"/>
+    <Setting id="GRP_2b7_Separator" type="Group" caption="~066b0 Delimiter"/>
+    <Setting id="GRP_2b8_Settings" type="Group" caption="~0169d Sonstige"/>
+    <Setting id="GRP_2b9_Connections" type="Group" caption="~009ce Connections"/>
+    <Setting id="GRP_2d1_EIC_LayoutConfiguration_Channel" type="Group" caption="~07d10 Layout configuration for channel symbol"/>
+    <Setting id="GRP_2e1_Misc" type="Group" caption="~0169d Sonstige"/>
+    <Setting id="GRP_2e2_PipeClassBaseObjects" type="Group" caption="~066b4 Basic objects for pipe specs"/>
+    <Setting id="GRP_2e3_BaseObjects" type="Group" caption="~066b5 Other basic objects"/>
+    <Setting id="GRP_2e4_Roots" type="Group" caption="~066b6 Start node"/>
+    <Setting id="GRP_2e6_3DView" type="Group" caption="~066b8 3D view"/>
+    <Setting id="GRP_2f1_first" type="Group"/>
+    <Setting id="GRP_2f2_Link" type="Group" caption="~066b9 Link P&amp;ID and PPC"/>
+    <Setting id="GRP_2f3_last" type="Group"/>
+    <Setting id="GRP_2f5_PIDXMpLantImportSearchNodes" type="Group" caption="~06abc Search node for base objects with ComponentClass"/>
+    <Setting id="GRP_2f6_FEEDThreshholdsForSimulationImports" type="Group" caption="~0720b Threshold for simulation import of components"/>
+    <Setting id="GRP_2f7_FEEDBaseObjects" type="Group" caption="~06ac7 Links to base objects"/>
+    <Setting id="GRP_2f8_FEEDStreamQueries" type="Group" caption="~06ac8 Links to queries for stream tabs"/>
+    <Setting id="GRP_2f9_FEEDBaseProcess" type="Group" caption="~06ac9 Link to process for FEED structure"/>
+    <Setting id="GRP_2g1_General" type="Group" caption="~02ffe General"/>
+    <Setting id="GRP_2g2_EMail" type="Group" caption="~066bb E-mail options"/>
+    <Setting id="GRP_2g4_Configuration" type="Group" caption="~066bc Configuration file transfer"/>
+    <Setting id="GRP_2g5_Settings" type="Group" caption= "~0548f Transmittal"/>
+    <Setting id="GRP_2h1_Inifile" type="Group" caption="~066bd Project and profile folders"/>
+    <Setting id="GRP_2h2_Interface1" type="Group" caption="~066be Interface directories"/>
+    <Setting id="GRP_2h3_Interface2" type="Group" caption="~066bf Interface object classes"/>
+    <Setting id="GRP_2h4_Status" type="Group" caption="~00345 Status"/>
+    <Setting id="GRP_2h5_PDMSE3DProjectDetails" type="Group" caption="~07d79 PDMS/E3D Project Details"/>
+    <Setting id="GRP_2h6_DefaultConfiguration" type="Group" caption="~0806d Export configuration"/>
+    <Setting id="GRP_2h7_DefaultConfiguration" type="Group" caption="~050f1 Import configuration"/>
+    <Setting id="GRP_2h9_DefaultConfiguration" type="Group" caption="~08489 Symbol Path Configuration"/>
+    <Setting id="GRP_2h8_DefaultConfiguration" type="Group" caption="~0865b Configuration Settings"/>
+    <Setting id="GRP_2i1_Location" type="Group" caption="~066c0 Location for settings"/>
+    <Setting id="GRP_2i2_Object" type="Group" caption="~066c1 Object export settings"/>
+    <Setting id="GRP_2i3_Database" type="Group" caption="~066c2 Database settings"/>
+    <Setting id="GRP_2i4_Document" type="Group" caption="~066c3 Document management settings"/>
+    <Setting id="GRP_2i5_Microstation" type="Group" caption="~066c4 Microstation settings"/>
+    <Setting id="GRP_2i6_Attribute" type="Group" caption="~066c5 Attribute exchange"/>
+    <Setting id="GRP_2i7_button" type="Group"/>
+    <Setting id="GRP_2k1_Options" type="Group" caption="~02da3 Options"/>
+    <Setting id="GRP 2k2_Expansions" type="Group" caption="~066c7 Expansions"/>
+    <!-- ANA, 12.03.2014--> new groups for the new MRO project settings
+    <Setting id="GRP REMA" type="Group" caption="~0390e Resources"/>
+    <Setting id="GRP MntcDemon" type="Group" caption="~03eed Maintenance Demon"/>
+    <Setting id="GRP Storage" type="Group" caption="~06ff3 Storage management base objects"/>
+    <Setting id="GRP MROBaseObjects" type="Group" caption="~06c98 Maintenance base objects"/>
+    <Setting id="GRP_2m1_XMpLantImport" type="Group" caption="~06abc Search node for base objects with ComponentClass"/>
+    <Setting id="GRP_2n1_DataAggr" type="Group" caption="~06fbe Data Aggregation"/>
+    <Setting id="GRP_2o1_Options" type="Group" caption="~02da3 Options"/>
+    <Setting id="GRP_2p1_MROBaseObjects" type="Group" caption="~06c98 Maintenance base objects"/>
+    <Setting id="GRP_2q1_MROBaseObjects" type="Group" caption="~06c98 Maintenance base objects"/>
+    <Setting id="GRP_2r1_QueryObjects" type="Group" caption="~06e34 Abfrage-Objekte"/>
+    <Setting id="GRP_2s1_EclassFiles" type="Group" caption="~075b2 eCl@ss files"/>
+    <Setting id="GRP_SqlFTSearch" type="Group" caption="~07ac4 SQL Full-text search settings"/>
+    <Setting id="GRP_2s2_PIDOPCSettings" type="Group" caption="~08855 Links to P&amp;ID off/on page connectors"/>
+    <Setting id="GRP_2s3_FEEDOPCSettings" type="Group" caption="~08856 Links to FEED off/on page connectors"/>
+
+    <!-- Settings -->
+    <Setting id="SET_General" type="UserControl">
+      <Class assembly="Comos.Platform.ProjectSettings.Extensions" class="Comos.Platform.ProjectSettings.Extensions.AxWrapper.ProSysExtension"/>
+    </Setting>
+    <Setting id="COM01_COM0001" type="TextBox" caption="~066c9 Customer name" attributeName="COM01_COM0001"/>
+    <Setting id="COM01_COM0029" type="TextBox" caption="~066ca Order no." attributeName="COM01_COM0029"/>
+    <Setting id="PO_SqlFullText" type="TextBox" defaultValue="" caption="~07ac5 SQL Full-text search server" attributeName="SqlFullTextSearch" />
+
+    <Setting id="COM01_COM0004" type="FileOpenDialog" caption="~066cf Company logo" attributeName="COM01_COM0004" filter="*.jpg; *.bmp; *.wmf; *.emf; *.gif; *.rle|*.jpg;*.bmp;*.wmf;*.emf;*.gif;*.rle">
+      <ToolTip itx="~066d0 (Select to display in the labeling field (.jpg, .bmp, .wmf, .emf, .gif, .rle)"/>
+      <Class assembly="Comos.Platform.ProjectSettings.Extensions" class="Comos.Platform.ProjectSettings.Extensions.FileOpenDialogExtensionCopyFile" />
+    </Setting>
+    <Setting id="COM01_COM0010" type="FileOpenDialog" caption="~066d1 Customer logo" attributeName="COM01_COM0010" filter="*.jpg; *.bmp; *.wmf; *.emf; *.gif; *.rle|*.jpg;*.bmp;*.wmf;*.emf;*.gif;*.rle">
+      <ToolTip itx="~066d0 (Select to display in the labeling field (.jpg, .bmp, .wmf, .emf, .gif, .rle)"/>
+      <Class assembly="Comos.Platform.ProjectSettings.Extensions" class="Comos.Platform.ProjectSettings.Extensions.FileOpenDialogExtensionCopyFile" />
+    </Setting>
+    <Setting id="SET_Links" type="UserControl">
+      <Class assembly="Comos.Platform.ProjectSettings.Extensions" class="Comos.Platform.ProjectSettings.Extensions.AxWrapper.ProLinkExtension"/>
+    </Setting>
+
+    <!-- Prefix and delimeters -->
+    <Setting id="PO_ToplevelSignsLikeUnitLocation" type="CheckBox" defaultValue="false" caption="~02dd0 Prefix and separators for objects of class 'General' are the same as for unit and location" attributeName="TopLevelSignsLikeUnitLocation"/>
+    <Setting id="SET_cbClasses" type="ComboBox" defaultValue="" caption="~03674 Classes" attributeName="">
+      <Class assembly="Comos.Platform.ProjectSettings.Extensions" class="Comos.Platform.ProjectSettings.Extensions.PrefixAndDelimeterExtension"/>
+    </Setting>
+    <Setting id="SET_cbPrefix" type="ComboBox" defaultValue="" caption="~0072f Vorzeichen" attributeName="" isEditable="true" observedSettings="SET_cbClasses">
+      <Class assembly="Comos.Platform.ProjectSettings.Extensions" class="Comos.Platform.ProjectSettings.Extensions.PrefixAndDelimeterExtension"/>
+      <Items>
+        <Item id="Key_None" value="" caption="" />
+        <Item id="Key_Space" value="( )" caption="~000d3 Leerzeichen" />
+        <Item id="Key_Empty" value="(/)" caption="~014ed Kein" />
+      </Items>
+    </Setting>
+    <Setting id="SET_cbSeperator1" type="ComboBox" defaultValue="" caption="~009fe Trennzeichen (anderer Typ)" attributeName="" isEditable="true" observedSettings="SET_cbClasses">
+      <Class assembly="Comos.Platform.ProjectSettings.Extensions" class="Comos.Platform.ProjectSettings.Extensions.PrefixAndDelimeterExtension"/>
+      <Items>
+        <Item id="Key_None" value="" caption="" />
+        <Item id="Key_Space" value="( )" caption="~000d3 Leerzeichen" />
+        <Item id="Key_Empty" value="(/)" caption="~014ed Kein" />
+      </Items>
+    </Setting>
+    <Setting id="SET_cbSeperator2" type="ComboBox" defaultValue="" caption="~009fd Trennzeichen (gleicher Typ)" attributeName="" isEditable="true" observedSettings="SET_cbClasses">
+      <Class assembly="Comos.Platform.ProjectSettings.Extensions" class="Comos.Platform.ProjectSettings.Extensions.PrefixAndDelimeterExtension"/>
+      <Items>
+        <Item id="Key_None" value="" caption="" />
+        <Item id="Key_Space" value="( )" caption="~000d3 Leerzeichen" />
+        <Item id="Key_Empty" value="(/)" caption="~014ed Kein" />
+      </Items>
+    </Setting>
+    <!-- End Prefix and delimeters -->
+
+    <Setting id="PO_NoExponentialNotation" type="ComboBox" defaultValue="1" caption="~02ff6 Exponential notation" attributeName="NoExponentialNotation">
+      <Items>
+        <Item id="Key0" value="0" caption="~06af5 Immer Exponentialnotation"/>
+        <Item id="Key1" value="1" caption="~06af4 Keine Exponentialnotation"/>
+        <Item id="Key2" value="2" caption="~066d3 Only suspend if value would not be rounded to zero"/>
+      </Items>
+    </Setting>
+    <Setting id="PO_FillDisplayValue" type="CheckBox" defaultValue="0" caption="~022a5 Nachkommastellen mit Nullen auffüllen" attributeName="FillDisplayValue"/>
+    <Setting id="PO_StaticLinkEmptySourceDiff" type="ComboBox" defaultValue="0" caption="~02ff7 Consider empty source values" attributeName="StaticLinkEmptySourceDiff">
+      <Items>
+        <Item id="Key0" value="0" caption="~02ffb Never"/>
+        <Item id="Key1" value="1" caption="~02ffc Always"/>
+        <Item id="Key2" value="2" caption="~02ffd Only, if link source exists"/>
+      </Items>
+    </Setting>
+    <Setting id="PO_SwitchDynamicToStaticLink" type="CheckBox" defaultValue="1" caption="~066d6 Change from dynamic to static on first change" attributeName="SwitchDynamicToStaticLink"/>
+    <Setting id="PO_ShowDynamicLinkItalic" type="CheckBox" defaultValue="-1" caption="~02bf6 Dynamische Verknüpfung kursiv darstellen" attributeName="ShowDynamicLinkItalic"/>
+
+    <!--Unit system stuff ADDRNA0 + ADVOIO0 FTR1400179 14.08.2015-->
+    <Setting id="SET_txtCurrUnitSystem" type="TextBox" caption="~07133 Current unit system" attributeName="" isEditable="false">
+      <Class assembly="Comos.Platform.ProjectSettings.Extensions" class="Comos.Platform.ProjectSettings.Extensions.UnitSystemExtension"/>
+    </Setting>
+    <Setting id="SET_cboNewUnitSystem" type="ComboBox" defaultValue="1" caption="~07132 New unit system" attributeName="">
+      <Items>
+        <Item id="K1" value="1" caption="~01791 Metrisch" />
+        <Item id="K2" value="2" caption="~07418 Imperial" />
+        <Item id="K3" value="3" caption="~0258b Alternativsystem 1" />
+        <Item id="K4" value="4" caption="~0258c Alternativsystem 2" />
+        <Item id="K5" value="5" caption="~0258d Alternativsystem 3" />
+      </Items>
+      <Class assembly="Comos.Platform.ProjectSettings.Extensions" class="Comos.Platform.ProjectSettings.Extensions.UnitSystemExtension"/>
+    </Setting>
+    <Setting id="SET_btnApplyUSChange" type="Button" caption="~07134 Apply unit system change" attributeName="" observedSettings="SET_cboNewUnitSystem;SET_txtCurrUnitSystem">
+      <Class assembly="Comos.Platform.ProjectSettings.Extensions" class="Comos.Platform.ProjectSettings.Extensions.UnitSystemExtension"/>
+    </Setting>
+    <!--End Unit system stuff-->
+
+    <Setting id="PO_DateTimeFormat" type="RadioButtonGroup" defaultValue="0" caption="~0263a Anzeige von Datum/Uhrzeit in" attributeName="DateTimeFormat">
+      <Items>
+        <Item id="Key0" value="0" caption="~0263b Lokalzeit"/>
+        <Item id="Key1" value="1" caption="~0263c UTC (Koordinierte Weltzeit)"/>
+      </Items>
+    </Setting>
+    <Setting id="PO_InvariantDateTime_FormatSpecification" type="TextBox" caption="~08ba4 Format specification" attributeName="InvariantDateTime_FormatSpecification" observedSettings="PO_InvariantDateTime_FormatSpecification" />
+    <Setting id="PO_InvariantDateTime_TimeZoneOffsetInMinutes" type="TextBox" caption="~08ba5 Time zone offset to UTC in minutes" defaultValue="0" attributeName="InvariantDateTime_TimeZoneOffsetInMinutes" observedSettings="PO_InvariantDateTime_TimeZoneOffsetInMinutes" />
+    <Setting id="PO_InvariantDateTime_LocaleName" type="TextBox" caption="~08c43 Locale name" attributeName="InvariantDateTime_LocaleName" observedSettings="PO_InvariantDateTime_LocaleName" />
+    <Setting id="PO_M01_SetUserProjectMode" type="CheckBox" defaultValue="1" caption="~02326 Benutzer-Projekt aktivieren" attributeName="SetUserProjectMode"/>
+    <Setting id="PO_RestrictedScriptAccess" type="CheckBox" defaultValue="0" caption="~066d8 No write permission for 'read-only scripts'" attributeName="RestrictedScriptAccess"/>
+    <Setting id="PO_RightsReadNoInheritMode" type="CheckBox" defaultValue="0" caption="~066d9 Automatic read right 'Only for one object' for all owners" attributeName="RightsReadNoInheritMode"/>
+    <Setting id="PO_UserRoleAssignment" type="ComboBox" defaultValue="0" caption="~040ed Validity of 'user to role assignment'" attributeName="UserRoleAssignment">
+      <Items>
+        <Item id="Key0" value="0" caption="~040ee The whole project"/>
+        <Item id="Key1" value="1" caption="~040ef Per working overlay"/>
+      </Items>
+    </Setting>
+    <Setting id="PO_M01_ObjectRevision" type="CheckBox" defaultValue="0" caption="~02053 Historienverwaltung" attributeName="ObjectRevision"/>
+    <Setting id="PO_M01_HistoryBehaviorForInheritedObjects" type="ComboBox" defaultValue="0" caption="~0021e Mode" attributeName="HistoryBehaviorForInheritedObjects">
+      <Items>
+        <Item id="Key0" value="0" caption="~08265 Compatibility mode for already existing history data"/>
+        <Item id="Key1" value="1" caption="~08266 Standard mode (recommended)"/>
+      </Items>
+    </Setting>
+    <Setting id="PO_LocalInstanceProducing" type="CheckBox" defaultValue="0" caption="~00cf3 Lokale Instanzen" attributeName="LocalInstanceProducing"/>
+    <Setting id="PO_CheckNameWithFolder" type="CheckBox" caption="~01352 Namen ordnerübergreifend eindeutig" attributeName="CheckNameWithFolder"/>
+    <Setting id="SET_CheckNameWithFolder" type="ComboBox" attributeName="CheckNameWithFolder" observedSettings="PO_CheckNameWithFolder">
+      <Items>
+        <Item id="Key1" value="1" caption="~049aa Device and document names"/>
+        <Item id="Key2" value="2" caption="~049ab Only device names"/>
+        <Item id="Key3" value="3" caption="~049ac Only document names"/>
+      </Items>
+      <Class assembly="Comos.Platform.ProjectSettings.Extensions" class="Comos.Platform.ProjectSettings.Extensions.UniqueNameAccrossFoldersExtension"/>
+    </Setting>
+    <Setting id="PO_NormspecificTextMask" type="ComboBox" defaultValue="1" caption="~04c64 Standard-specific text masks" attributeName="NormspecificTextMask">
+      <Class assembly="Comos.Platform.ProjectSettings.Extensions" class="Comos.Platform.ProjectSettings.Extensions.NormspecificTextMasksExtension"/>
+    </Setting>
+
+    <!-- BEGIN Numbering ranges -->
+    <Setting id="PO_M01_UseNumberRanges" type="CheckBox" defaultValue="0" caption="~05f54 Use Numberranges" attributeName="UseNumberRanges"/>
+    <Setting id="SET_NumberingRanges" type="UserControl" observedSettings="PO_M01_UseNumberRanges">
+      <Class assembly="Comos.Platform.ProjectSettings.Extensions" class="Comos.Platform.ProjectSettings.Extensions.NumberingRangesExtension"/>
+    </Setting>
+    <!-- END Numbering ranges -->
+
+    <Setting id="PO_M01_WF_CAW" type="CheckBox" defaultValue="0" caption="~066de Activate workflows" attributeName="WF_CAW"/>
+    <Setting id="PO_M01_WF_CET" type="CheckBox" defaultValue="1" caption="~03ae1 Scan periodically for workflows with expired timers" attributeName="WF_CET" observedSettings="PO_M01_WF_CAW">
+      <Class assembly="Comos.Platform.ProjectSettings.Extensions" class="Comos.Platform.ProjectSettings.Extensions.WorkflowExtension"/>
+    </Setting>
+    <Setting id="PO_M01_WF_SCI" type="TextBox" defaultValue="2" caption="~03ae2 Scan interval" attributeName="WF_SCI" observedSettings="PO_M01_WF_CAW">
+      <Class assembly="Comos.Platform.ProjectSettings.Extensions" class="Comos.Platform.ProjectSettings.Extensions.WorkflowExtension"/>
+    </Setting>
+    <Setting id="PO_CheckoutToEditExternalDocs" type="CheckBox" defaultValue="0" caption="~05a58 Checkout to edit external documents" attributeName="CheckoutToEditExternalDocs" observedSettings="PO_DefWorkFldrForExternalDocs">
+      <Class assembly="Comos.Platform.ProjectSettings.Extensions" class="Comos.Platform.ProjectSettings.Extensions.DocumentSettings"/>
+    </Setting>
+    <Setting id="PO_DefWorkFldrForExternalDocs" type="BrowseFolderDialog" caption="~05a59 Default working folder" attributeName="DefWorkFldrForExternalDocs"/>
+    <Setting id="PO_DeleteRefDocuments" type="CheckBox" defaultValue="-1" caption="~01fe4 Referenzdokumente mitlöschen" attributeName="DELETEREFDOCS"/>
+    <Setting id="PO_M00_EnabelAutoVue" type="CheckBox" defaultValue="false" caption="~02b30 AutoVue - Als Dokumentenansicht verwenden" attributeName="EnabelAutoVue"/>
+    <Setting id="PO_ViewSTDocDefaultAction" type="ComboBox" defaultValue="0" caption="~03876 Default action" attributeName="ViewSTDocDefaultAction">
+      <Items>
+        <Item id="vda0" value="1" caption="~033ef Open document readonly"/>
+        <Item id="vda1" value="0" caption="~033ee Show last revision file"/>
+      </Items>
+    </Setting>
+    <Setting id="PO_ViewSTNoRevisionBehaviour" type="ComboBox" defaultValue="0" caption="~03875 Default action for documents without revisions"
+              attributeName="ViewStNoRevisionBehaviour" observedSettings="PO_ViewSTDocDefaultAction">
+      <Class assembly="Comos.Platform.ProjectSettings.Extensions" class="Comos.Platform.ProjectSettings.Extensions.ViewStationDefaultActionExtension"/>
+      <Items>
+        <Item id="0" value="0" caption="~03877 Show error message"/>
+        <Item id="1" value="1" caption="~033ef Open document readonly"/>
+      </Items>
+    </Setting>
+    <Setting id="PO_AutoDocRefNameSystem" type="ComboBox" defaultValue="FALSE" caption="~021e7 Standard (@NameSystem)" attributeName="AUTOREFERENCEDOCUMENT">
+      <Items>
+        <Item id="Key0" value="FALSE" caption="~01184 Aus"/>
+        <Item id="Key1" value="TRUE" caption="~021e5 Dokumentengruppen-Hierarchie"/>
+        <Item id="Key2" value="2" caption="~021e6 Anlagen/Orts-Hierarchie"/>
+      </Items>
+    </Setting>
+    <Setting id="PO_AutoDocRefProject" type="ComboBox" defaultValue="0" caption="~033ed @Project" attributeName="AUTOREFERENCEDOCUMENTPROJ">
+      <Items>
+        <Item id="Key0" value="0" caption="~01184 Aus"/>
+        <Item id="Key1" value="1" caption="~021e5 Dokumentengruppen-Hierarchie"/>
+        <Item id="Key2" value="2" caption="~021e6 Anlagen/Orts-Hierarchie"/>
+      </Items>
+    </Setting>
+    <Setting id="PO_ESRServerSide" type="CheckBox" defaultValue="0" caption="~03d69 Enable transfer of revision jobs to Comos Enterprise Server" attributeName="ESRServerSide"/>
+    <Setting id="PO_ESRWatchFolder" type="BrowseFolderDialog" caption="~03d66 Shared folder" attributeName="ESRWatchFolder" observedSettings="PO_ESRServerSide"/>
+    <Setting id="PO_OBSERVEDOCUMENTRELEASE" type="RadioButtonGroup" defaultValue="0" caption="~03004 Monitoring" attributeName="OBSERVEDOCUMENTRELEASE" observedSettings="PO_CreatePDFFileInFirstRevisionStep;PO_EnableContentBasedRevisioning">
+      <Class assembly="Comos.Platform.ProjectSettings.Extensions" class="Comos.Platform.ProjectSettings.Extensions.RevisionArchiveExtension"/>
+      <Items>
+        <Item id="optNone" value="0" caption="~06adc (0) Keine Überwachung"/>
+        <Item id="optObserveDoc" value="1" caption="~06add (1) Create revision on change (create * revision)"/>
+        <Item id="optObserveAfter" value="2" caption="~06ade (2.1) As with (1) additional monitoring of releasing the evaluated reports"/>
+        <Item id="optObserveDocA" value="3" caption="~06adf (2.2) As with (1) additional monitoring of releasing all reports"/>
+      </Items>
+    </Setting>
+
+    <!-- Revision Archive -->
+    <Setting id="PO_REVISIONARCHIVE" type="ComboBox" defaultValue="cNoRevision" caption="~00d8d Revisionsarchiv" attributeName="REVISIONARCHIVE">
+      <Class assembly="Comos.Platform.ProjectSettings.Extensions" class="Comos.Platform.ProjectSettings.Extensions.RevisionArchiveExtension"/>
+      <Items>
+        <Item id="KEY_PDFF" value="RevisionArchivePDFFactory" caption="~06165 PDFFactory (ab v. 1.5x)"/>
+        <Item id="KEY_USER" value="RevisionArchiveUser" caption="~00e85 Benutzerdefiniert"/>
+        <Item id="KEY_NONE" value="cNoRevision" caption="~014ed Kein"/>
+        <Item id="KEY_ADOBE" value="RevisionArchiveAdobePDF" caption="~029b7 Adobe PDF (ab v. 6.0)"/>
+        <Item id="KEY_APRYSE_PDF" value="RevisionArchiveAprysePDF" caption="~08b3e COMOS PDF Printer"/>
+        <Item id="KEY_APRYSE_PDF_ARCHIVE" value="RevisionArchiveAprysePDFArchive" caption="~08b40 COMOS PDF/A Printer"/>
+        <Item id="KEY_APRYSE_TIFF" value="RevisionArchiveApryseTIFF" caption="~08b3f COMOS TIFF Printer"/>
+        <!--<Item id="KEY_COMOSPDFEXPORT" value="RevisionArchiveComosPDFExport" caption="~03edb PDF export"/>-->
+      </Items>
+    </Setting>
+    <Setting id="PO_RevisionArchiveComosPDFExportDocTypes" type="UserControl" observedSettings="PO_RevisionArchiveComosPDFExportDocTypes;PO_RevisionArchiveComosPDFExport" attributeName="RevisionArchiveComosPDFExportDocTypes">
+      <Class assembly="Comos.Platform.ProjectSettings.Extensions, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null" class="Comos.Platform.ProjectSettings.Extensions.PDFExportAsRevision"/>
+      <Items>
+        <Item id="CRP#" value="CRP" caption="COMOS"/>
+        <Item id="WORD#" value="Word" caption="Word"/>
+        <Item id="EXCEL#" value="Excel" caption="Excel"/>
+        <Item id="POWERPOINT#" value="PowerPoint" caption="PowerPoint"/>
+        <Item id="PDF#" value="PDF" caption="PDF"/>
+        <Item id="DWG/DXF#" value="AutoCAD" caption="DWG/DXF"/>
+        <Item id="DGN#" value="DGN" caption="DGN"/>
+      </Items>
+    </Setting>
+    <Setting id="PO_RevisionArchiveComosPDFExport" type="UserControl" defaultValue="0" attributeName="RevisionArchiveComosPDFExport" observedSettings="PO_RevisionArchiveComosPDFExport" IsVisible="false"/>
+    <Setting id="SET_cmdSetPDFExportSettings" type="Button" defaultValue="0" caption="~0805a PDF export settings" attributeName="cmdSetPDFExportSettings" observedSettings="PO_RevisionArchiveComosPDFExportDocTypes" IsVisible="false">
+      <Class assembly="Comos.Platform.ProjectSettings.Extensions" class="Comos.Platform.ProjectSettings.Extensions.RevisionArchiveExtension"/>
+    </Setting>
+
+    <Setting id="PO_CreatePDFFileInFirstRevisionStep" type="CheckBox" defaultValue="0" caption="~0258a PDF-Datei beim ersten Schritt erzeugen" attributeName="CreatePDFFileInFirstRevisionStep" observedSettings="PO_REVISIONARCHIVE;SET_txtRevArchive;PO_OBSERVEDOCUMENTRELEASE;PO_RevisionArchiveComosPDFExportDocTypes" IsVisible="false">
+      <Class assembly="Comos.Platform.ProjectSettings.Extensions" class="Comos.Platform.ProjectSettings.Extensions.RevisionArchiveExtension"/>
+    </Setting>
+    <Setting id="PO_RevisionCheckUnsavedObject" type="CheckBox" defaultValue="0" caption="~07d11 Check for unsaved objects" attributeName="RevUnsavedObject" IsVisible="false">
+      <Class assembly="Comos.Platform.ProjectSettings.Extensions" class="Comos.Platform.ProjectSettings.Extensions.RevisionArchiveExtension"/>
+    </Setting>
+    <Setting id="SET_txtRevArchive" type="TextBox" defaultValue="" caption="~06af3 Prog-ID" attributeName="txtRevisionArchive" observedSettings="PO_REVISIONARCHIVE" IsVisible="false">
+      <Class assembly="Comos.Platform.ProjectSettings.Extensions" class="Comos.Platform.ProjectSettings.Extensions.RevisionArchiveExtension"/>
+    </Setting>
+    <!-- End Revision Archive -->
+
+    <Setting id="PO_RevisionLabelEditable" type="CheckBox" defaultValue="0" caption="~01e8a Revisionskennzeichen während des gesamten Revisionsvorgangs editierbar" attributeName="RevisionLabelEditable" observedSettings="PO_CreatePDFFileInFirstRevisionStep">
+      <Class assembly="Comos.Platform.ProjectSettings.Extensions" class="Comos.Platform.ProjectSettings.Extensions.RevisionArchiveExtension"/>
+    </Setting>
+    <Setting id="PO_DQMRevisionAlwaysPossible" type="CheckBox" defaultValue="0" caption="~022a6 Revision im ausgecheckten Zustand möglich" attributeName="DQMRevisionAlwaysPossible"/>
+    <!-- Report revision  comparison method -->
+    <Setting id="PO_EnableContentBasedRevisioning" type="ComboBox" defaultValue="0" caption="~0264d Vergleichsbasis" attributeName="EnableContentBasedRevisioning">
+      <Items>
+        <Item id="Key0" value="0" caption="~00e10 Zeitstempel"/>
+        <Item id="Key1" value="1" caption="~02651 Inhalt (Texte)"/>
+      </Items>
+    </Setting>
+    <Setting id="PO_ShowDeletedTextsInContentBasedRevisioning" type="ComboBox" defaultValue="0" caption="~0264e Entfallene Texte darstellen" attributeName="ShowDeletedTextsInContentBasedRevisioning" observedSettings="PO_EnableContentBasedRevisioning" >
+      <Class assembly="Comos.Platform.ProjectSettings.Extensions" class="Comos.Platform.ProjectSettings.Extensions.RevisionArchiveExtension"/>
+      <Items>
+        <Item id="Key0" value="0" caption="~005b8 Nein"/>
+        <Item id="Key1" value="1" caption="~02652 Seit der letzten Revision"/>
+        <Item id="Key2" value="2" caption="~02653 Seit Beginn der Revisionierung"/>
+      </Items>
+    </Setting>
+    <Setting id="PO_ShowDeletedListRowsInContentBasedRevisioning" type="ComboBox" defaultValue="0" caption="~0264f Entfallene Listenzeilen darstellen" attributeName="ShowDeletedListRowsInContentBasedRevisioning" observedSettings="PO_EnableContentBasedRevisioning">
+      <Class assembly="Comos.Platform.ProjectSettings.Extensions" class="Comos.Platform.ProjectSettings.Extensions.RevisionArchiveExtension"/>
+      <Items>
+        <Item id="Key0" value="0" caption="~005b8 Nein"/>
+        <Item id="Key1" value="1" caption="~02652 Seit der letzten Revision"/>
+        <Item id="Key2" value="2" caption="~02653 Seit Beginn der Revisionierung"/>
+      </Items>
+    </Setting>
+    <Setting id="PO_M00_ReportChangedTextRepresentationOption" type="TextBox" defaultValue="0" caption="Hide Representation of textual changes option" attributeName="M00_ReportChangedTextRepresentationOption" IsVisible="false">
+      <Class assembly="Comos.Platform.ProjectSettings.Extensions" class="Comos.Platform.ProjectSettings.Extensions.RevisionArchiveExtension"/>
+    </Setting>
+    <Setting id="PO_M00_ReportChangedTextRepresentation" type="ComboBox" defaultValue="0" caption="~07111 Representation of textual changes" attributeName="M00_ReportChangedTextRepresentation"  observedSettings="PO_M00_ReportChangedTextRepresentationOption">
+      <Class assembly="Comos.Platform.ProjectSettings.Extensions" class="Comos.Platform.ProjectSettings.Extensions.RevisionArchiveExtension"/>
+      <Items>
+        <Item id="Key0" value="0" caption="~07113 Italicize"/>
+        <Item id="Key1" value="1" caption="~07114 Surround with revision rectangle"/>
+      </Items>
+    </Setting>
+
+    <Setting id="RevisionRectangle_OutlineColor" type="UserControl" caption="~07a81 Revision rectangle color" observedSettings="RevisionRectangle_OutlineColor;RevisionRectangle_OutlineType;RevisionRectangle_OutlineWidth;RevisionRectangle_BackgroundColor;RevisionRectangle_BackgroundTransparency;ReleasedRevisionRectangle_OutlineColor;ReleasedRevisionRectangle_OutlineType;ReleasedRevisionRectangle_OutlineWidth;ReleasedRevisionRectangle_BackgroundColor;ReleasedRevisionRectangle_BackgroundTransparency"
+             attributeName="M00_ReportChangedTextRepresentationColor"
+             defaultValue ="49408">
+      <Class assembly="Comos.Platform.ProjectSettings.Extensions, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null" class="Comos.Platform.ProjectSettings.Extensions.RevisionExtensionColor"/>
+    </Setting>
+    <Setting id="RevisionRectangle_OutlineType" type="UserControl" defaultValue="2" observedSettings="RevisionRectangle_OutlineType" attributeName="M00_RevisionRectangleOutlineType" IsVisible ="false"/>
+    <Setting id="RevisionRectangle_OutlineWidth" type="UserControl" defaultValue="10" observedSettings="RevisionRectangle_OutlineWidth" attributeName="M00_RevisionRectangleOutlineWidth" IsVisible ="false"/>
+    <Setting id="RevisionRectangle_BackgroundColor" type="UserControl" defaultValue="15203321" observedSettings="RevisionRectangle_BackgroundColor" attributeName="M00_RevisionRectangleBackgroundColor" IsVisible ="false"/>
+    <Setting id="RevisionRectangle_BackgroundTransparency" type="UserControl" defaultValue="1" observedSettings="RevisionRectangle_BackgroundTransparency" attributeName="M00_RevisionRectangleTransparency" IsVisible ="false"/>
+    <Setting id="ReleasedRevisionRectangle_OutlineColor" type="UserControl" defaultValue="11974326" observedSettings="ReleasedRevisionRectangle_OutlineColor" attributeName="M00_ReleasedRevisionRectangleOutlineColor" IsVisible ="false"/>
+    <Setting id="ReleasedRevisionRectangle_OutlineType" type="UserControl" defaultValue="2" observedSettings="ReleasedRevisionRectangle_OutlineType" attributeName="M00_ReleasedRevisionRectangleOutlineType" IsVisible ="false"/>
+    <Setting id="ReleasedRevisionRectangle_OutlineWidth" type="UserControl" defaultValue="10" observedSettings="ReleasedRevisionRectangle_OutlineWidth" attributeName="M00_ReleasedRevisionRectangleOutlineWidth" IsVisible ="false"/>
+    <Setting id="ReleasedRevisionRectangle_BackgroundColor" type="UserControl" defaultValue="15203321" observedSettings="ReleasedRevisionRectangle_BackgroundColor" attributeName="M00_ReleasedRevisionRectangleBackgroundColor" IsVisible ="false"/>
+    <Setting id="ReleasedRevisionRectangle_BackgroundTransparency" type="UserControl" defaultValue="1" observedSettings="ReleasedRevisionRectangle_BackgroundTransparency" attributeName="M00_ReleasedRevisionRectangleTransparency" IsVisible ="false"/>
+
+
+    <!-- End Report revision  comparison method -->
+
+    <Setting id="PO_ViewRevisionWithRedlining" type="RadioButtonGroup" defaultValue="1" caption="~03007 Redlining" attributeName="ViewRevisionWithRedlining">
+      <Items>
+        <Item id="optNoRedlining" value="0" caption="~02c1f Redlining aus"/>
+        <Item id="optShowPDFViewer" value="1" caption="~02c20 Revision ohne Redlining anzeigen"/>
+        <Item id="optShowRedlining" value="2" caption="~02c21 Revision mit Redlining anzeigen"/>
+      </Items>
+    </Setting>
+    <Setting id="PO_EnablePDCatTools" type="CheckBox" defaultValue="0" caption="~0295c PDCAT-Komponenten aktivieren" attributeName="EnablePDCatTools">
+      <Class assembly="Comos.Platform.ProjectSettings.Extensions" class="Comos.Platform.ProjectSettings.Extensions.RevisionArchiveExtension"/>
+    </Setting>
+    <Setting id="SET_cmdHelp" type="Button" caption="?" attributeName="cmdHelp">
+      <Class assembly="Comos.Platform.ProjectSettings.Extensions" class="Comos.Platform.ProjectSettings.Extensions.RevisionArchiveExtension"/>
+    </Setting>
+    <Setting id="PO_NoRevisionForInconsistentDocs" type="CheckBox" defaultValue="0" caption="~03006 No revision for inconsistent documents" attributeName="NoRevisionForInconsistentDocs"/>
+    <Setting id="PO_TiffViewerPath" type="TextBox" caption="~03d68 Revision Viewer" attributeName="TiffViewerPath"/>
+    <Setting id="PO_IncrementRevisionIndexOverAllLayersUnique" type="CheckBox" defaultValue="false" caption="~066ed Unique revision index across working layer" attributeName="IncrementRevisionIndexOverAllLayersUnique"/>
+    <Setting id="SET_Languages" type="UserControl">
+      <Class assembly="Comos.Platform.ProjectSettings.Extensions" class="Comos.Platform.ProjectSettings.Extensions.AxWrapper.LanguageListExtension"/>
+    </Setting>
+    <Setting id="SET_Fulltext" type="UserControl">
+      <Class assembly="Comos.Platform.ProjectSettings.Extensions" class="Comos.Platform.ProjectSettings.Extensions.AxWrapper.SeIndexerExtension"/>
+    </Setting>
+
+    <!--<Setting id="COM000_COM1001" type="TextBox" caption="~066ef From COMOS version" attributeName="COM000_COM1001" comosInternal="true" />
+      <Setting id="COM000_COM1002" type="TextBox" caption="~066f1 COMOSDB version" attributeName="COM000_COM1002" comosInternal="true"/>
+      <Setting id="COM000_COM1003" type="TextBox" caption="~03482 Date" attributeName="COM000_COM1003" comosInternal="true"/>
+      <Setting id="COM000_COM1004" type="TextBox" caption="~066f0 From COMOS update" attributeName="COM000_COM1004" comosInternal="true"/>-->
+
+    <!--<Setting id="COM000_PIA0001" type="CheckBox" defaultValue="false" caption="~066f2 Output PIA messages" attributeName="COM000_PIA0001"/>-->
+    <Setting id="PO_DelOwnElmsOnCDevChange" type="ComboBox" defaultValue="1" caption="~066f9 Behavior of elements upon base object switch" attributeName="COM000_COM1010">
+      <Items>
+        <Item id="ELM10" value="0" caption="~066fa Delete elements"/>
+        <Item id="ELM20" value="1" caption="~07e3d Not required elements (for cables only)"/>
+        <Item id="ELM25" value="3" caption="~066fb Not required elements"/>
+        <Item id="ELM30" value="2" caption="~066fc Keep elements"/>
+      </Items>
+    </Setting>
+    <!--<Setting id="COM000_STDMASK" type="ComboBox" defaultValue="0" caption="~066fd Standard masks" attributeName="COM000_STDMASK">
+         <Items>
+            <Item id="00" value="0" caption="~066fe Default value"/>
+            <Item id="01" value="1" caption="~0496a KKS"/>
+         </Items>
+      </Setting>-->
+    <Setting id="COM000_PagingMode" type="ComboBox" defaultValue="0" caption="~066ff Browse" attributeName="VERWEIS_PagingMode">
+      <Items>
+        <Item id="0" value="0" caption="~06700 in Planart, optionsabhängig"/>
+        <Item id="1" value="1" caption="~06701 in Planart, frei"/>
+        <Item id="2" value="2" caption="~06702 across all documents"/>
+      </Items>
+    </Setting>
+    <Setting id="SinglePrintJobs" type="ComboBox" defaultValue="2" caption="~06706 Single print jobs" attributeName="SinglePrintJobs">
+      <Items>
+        <Item id="0" value="0" caption="~08608 Print all documents in a single file"/>
+        <Item id="1" value="1" caption="~08609 Print each document in a separate file"/>
+        <Item id="2" value="2" caption="~0860b Use value from Configuration file"/>
+      </Items>
+    </Setting>
+    <Setting id="PO_DefaultFontName" type="UserControl" caption="~08c65 DefaultFont" observedSettings="PO_DefaultFontName;PO_DefaultFontSize" attributeName="PO_DefaultFontName">
+      <Class assembly="Comos.Platform.ProjectSettings.Extensions, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null" class="Comos.Platform.ProjectSettings.Extensions.DefaultFont"/>     
+    </Setting>
+    <Setting id="PO_DefaultFontSize" type="UserControl" observedSettings="PO_DefaultFontSize" defaultValue="10" attributeName="PO_DefaultFontSize" IsVisible ="false"/>
+    <Setting id="QueryOptions_IgnoreReadRight" type="CheckBox" caption="~06707 No right evaluation for displaying objects" attributeName="QueryOptions_IgnoreReadRight"/>
+    <Setting id="PO_M01_ConvertUnitsInQuery" type="CheckBox" defaultValue="0" caption="~07976 Automatically convert units" attributeName="ConvertUnitsInQuery" />
+    <Setting id="PO_ROLayersRevokeRights" type="TextBox" defaultValue="126" caption="~06709 Currently revoked rights for working areas: read only" attributeName="ROLayersRevokeRights">
+      <ToolTip itx="~06c9b E.g. if you want to revoke the user’s write and delete rights set the value to 6 (RightsWrite + RightsDelete, respectively 2 + 4)."/>
+    </Setting>
+    <Setting id="PO_M01_Navigator_Device_ShowUnitPointer" type="CheckBox" defaultValue="1" caption="~07af6 Systemtype &quot;Device&quot;: show unit" attributeName="NavigatorDeviceShowUnitPointer"/>
+    <Setting id="PO_M01_Navigator_Device_ShowLocationPointer" type="CheckBox" defaultValue="1" caption="~07af7 Systemtype &quot;Device&quot;: show location" attributeName="NavigatorDeviceShowLocationPointer"/>
+    <Setting id="PO_M01_Navigator_Device_ShowImplementationPointer" type="CheckBox" defaultValue="1" caption="~07af8 Systemtype &quot;Device&quot;: show implementation" attributeName="NavigatorDeviceShowImplementationPointer"/>
+    <Setting id="PO_M01_Navigator_Document_ShowUnitPointer" type="CheckBox" defaultValue="1" caption="~07af9 Systemtype &quot;Documents&quot;: show unit" attributeName="NavigatorDocumentShowUnitPointer"/>
+    <Setting id="PO_M01_Navigator_Document_ShowLocationPointer" type="CheckBox" defaultValue="1" caption="~07afa Systemtype &quot;Documents&quot;: show location" attributeName="NavigatorDocumentShowLocationPointer"/>
+    <Setting id="PO_M01_Navigator_Document_ShowReferenceDocPointer" type="CheckBox" defaultValue="1" caption="~07b48 Systemtype &quot;Document&quot;: show reference documents" attributeName="NavigatorDocumentShowReferenceDocPointer"/>
+    <Setting id="PO_M01_Navigator_Document_ShowOrgDocumentPointer" type="CheckBox" defaultValue="1" caption="~07b47 Systemtype &quot;Document&quot;: show original document" attributeName="NavigatorDocumentShowOrgDocumentPointer"/>
+    <Setting id="PO_CheckLabelWithFolder" type="CheckBox" defaultValue="0" caption="~0670a Unique label across folders" attributeName="CheckLabelWithFolder"/>
+    <Setting id="PO_UseCDeviceMasksOnTemplateCopy" type="TextBox" defaultValue="0" caption="~0670c Use name mask of base objects" attributeName="UseCDeviceMasksOnTemplateCopy"/>
+    <Setting id="PO_UseScriptFctDuringCopy" type="CheckBox" defaultValue="1" caption="~0670d Execute scripts during copy process" attributeName="UseScriptFctDuringCopy"/>
+    <Setting id="PO_CopyProjectWithRevisions" type="RadioButtonGroup" defaultValue="0" caption="~0670e Copy Project With Revisions" attributeName="CopyProjectWithRevisions">
+      <Items>
+        <Item id="CopyTrue" value="1" caption="~02f95 Yes"/>
+        <Item id="CopyFalse" value="2" caption="~005b8 Nein"/>
+        <Item id="MsgBox" value="0" caption="~0670f Ask every time"/>
+      </Items>
+    </Setting>
+    <Setting id="PO_CopyWithImplementedObjects" type="CheckBox" defaultValue="0" caption="~06710 Copy with implemented objects" attributeName="CopyWithImplementedObjects"/>
+    <Setting id="PO_EditProjSpecsWithoutFunctionRight" type="CheckBox" defaultValue="0" caption="~06711 Edit project settings without function rights" attributeName="EditProjSpecsWithoutFunctionRight"/>
+    <Setting id="PO_LayersPerObject" type="CheckBox" defaultValue="0" caption="~06713 Activate LayersPerObject" attributeName="LayersPerObject"/>
+
+    <!--
+         This setting (PO_MergeModeChapterMandatory) converts its value;
+         if the CheckBox is checked the value of the attribute is set to false (0) and vise versa.
+         This is why the default value here is 0, this courses the checkbox to be checked by default; therefore the default value in POptions is 1.
+      -->
+    <Setting id="PO_MergeModeChapterMandatory" type="CheckBox" defaultValue="0" caption="~06714 On copy-in, merge assemblies by default" attributeName="MergeModeChapterMandatory">
+      <ToolTip itx="~06b35 Die lokale Einstellung am Stammobjekt überschreibt die Projekteinstellung"/>
+      <Class assembly="Comos.Platform.ProjectSettings.Extensions" class="Comos.Platform.ProjectSettings.Extensions.MergeModeChapterMandatoryExtension"/>
+    </Setting>
+
+    <Setting id="SET_Cases" type="UserControl">
+      <Class assembly="Comos.Platform.ProjectSettings.Extensions" class="Comos.Platform.ProjectSettings.Extensions.AxWrapper.ProCaseExtension"/>
+    </Setting>
+    <Setting id="PO_POTENTIALTRACKING" type="CheckBox" defaultValue="1" caption="~000d6 Potentialverfolgung" attributeName="POTENTIALTRACKING"/>
+    <Setting id="PO_UnderlineForEmptyProdValues" type="CheckBox" defaultValue="false" caption="~06717 Write '_' for blank request values to manufacturer device" attributeName="UnderlineForEmptyProdValues"/>
+    <Setting id="PO_DEVICENAMEMODE" type="ComboBox" defaultValue="Normal" caption="~00afb Kennzeichnung der Betriebsmittel" attributeName="DEVICENAMEMODE">
+      <Items>
+        <Item id="NORMAL" value="Normal" caption="~00162 Normal"/>
+        <Item id="LABELPATH" value="SHT/KAP/PATH" caption="~01c86 Kennbuchstabe / Pfad"/>
+        <Item id="LABELNUMBER" value="SHT/KAP/NUM" caption="~01c87 Kennbuchstabe / Nummer"/>
+      </Items>
+    </Setting>
+    <Setting id="PO_NameModeDocument" type="RadioButtonGroup" defaultValue="0" caption="" attributeName="NameModeDocument">
+      <Items>
+        <Item id="MODEReference" value="0" caption="~0300c Kennzeichen des Referenzdokuments"/>
+        <Item id="MODEOriginal" value="1" caption="~0300b Kennzeichen des Originaldokuments"/>
+      </Items>
+    </Setting>
+    <Setting id="PO_SIGNALTRACKING" type="RadioButtonGroup" defaultValue="2" caption="~000d7 Signalverfolgung" attributeName="SIGNALTRACKING">
+      <Items>
+        <Item id="Complete" value="1" caption="~01177 Vollständig"/>
+        <Item id="WOBridges" value="2" caption="~01175 Brückenverbindungen ignorieren"/>
+        <Item id="None" value="0" caption="~001d7 Kein"/>
+      </Items>
+    </Setting>
+    <Setting id="PO_CheckSignaltracking" type="CheckBox" defaultValue="true" caption="~0680e Signalverfolgung prüfen" attributeName="CHECKSIGNALTRACKING"/>
+    <Setting id="PDSelLocalProductsOnly" type="CheckBox" defaultValue="false" caption="~033f4 List only local manufacturer devices" attributeName="PDSelLocalProductsOnly"/>
+    <Setting id="PO_PDSelLocalProducts" type="ObjectPointer" caption="~033f5 Local manufacturer devices:" attributeName="PDSelLocalAtDevice"/>
+    <Setting id="PO_M01_DETAIL_ImplMgrReplace" type="ComboBox" defaultValue="0" caption="~035e7 Implementation" attributeName="DETAIL_ImplMgrReplace" observedSettings="PO_M40_ConnectionObjectVersion">
+      <Items>
+        <Item id="Object will not be replaced (by pointer)" value="0" caption="~06721 Object will not be replaced (by pointer)"/>
+        <Item id="Object will be replaced (by pointer)" value="1" caption="~06722 Object will be replaced (by pointer)"/>
+        <Item id="Object will not be replaced (by merge)" value="2" caption="~06723 Object will not be replaced (by merge)"/>
+        <Item id="Object will be replaced (by merge)" value="3" caption="~06724 Object will be replaced (by merge)"/>
+      </Items>
+      <Class assembly="Comos.WSP.ProjectSettingsExtensions" class="Comos.WSP.ProjectSettingsExtensions.ImplementationExtension"/>
+    </Setting>
+    <Setting id="PO_WithRelativLabel" type="ComboBox" defaultValue="2" caption="~06725 Display relative label" attributeName="DETAIL_WITHRELATIVLABEL">
+      <Items>
+        <Item id="No" value="0" caption="~005b8 Nein"/>
+        <Item id="Yes1" value="1" caption="~06726 Yes (up to V8.1, remove shared part)"/>
+        <Item id="Yes2" value="2" caption="~06728 Yes (from V8.2, remove hierarchical part)"/>
+        <Item id="Yes3" value="3" caption="~06727 Yes (up to V8.1, with =./+., remove shared part)"/>
+        <Item id="Always" value="4" caption="~02ffc Always"/>
+      </Items>
+    </Setting>
+    <Setting id="PO_WithRelativLabelRef" type="ComboBox" defaultValue="_" caption="~06729 Output relative references" attributeName="DETAIL_WITHRELATIVLABELREF">
+      <Items>
+        <Item id="AnalogRelLabel" value="_" caption="~0672a Analog to relative label"/>
+        <Item id="No" value="0" caption="~005b8 Nein"/>
+        <Item id="Yes" value="2" caption="~02f95 Yes"/>
+        <Item id="withfixed" value="3" caption="~0672b with fixed = &amp; +"/>
+      </Items>
+    </Setting>
+    <Setting id="PO_RotatePlaceholderText" type="CheckBox" defaultValue="false" caption="~0672c Regard rotation of *V*-variables" attributeName="DETAIL_ROTATEPLACEHOLDERTEXT"/>
+    <Setting id="IsProParANS" type="CheckBox" defaultValue="false" caption="~0672d ANSI standards" attributeName="DETAIL_ANSSTANDARDS"/>
+    <Setting id="PrintLanguage1" type="ComboBox" defaultValue="Deutsch" caption="~0672f Print language 1" attributeName="DETAIL_PrintLanguage1">
+      <Items>
+        <Item id="Keine" value="Keine" caption="~001d7 Kein"/>
+        <Item id="Deutsch" value="Deutsch" caption="~06730 German"/>
+        <Item id="Englisch" value="Englisch" caption="~06731 English"/>
+        <Item id="Französisch" value="Französisch" caption="~06732 French"/>
+        <Item id="Chinesisch" value="Chinesisch" caption="~04184 Chinese"/>
+      </Items>
+    </Setting>
+    <Setting id="PrintLanguage2" type="ComboBox" defaultValue="Englisch" caption="~06734 Print language 2" attributeName="DETAIL_PrintLanguage2">
+      <Items>
+        <Item id="Keine" value="Keine" caption="~001d7 Kein"/>
+        <Item id="Deutsch" value="Deutsch" caption="~06730 German"/>
+        <Item id="Englisch" value="Englisch" caption="~06731 English"/>
+        <Item id="Französisch" value="Französisch" caption="~06732 French"/>
+        <Item id="Chinesisch" value="Chinesisch" caption="~04184 Chinese"/>
+      </Items>
+    </Setting>
+    <Setting id="PrintBilingual" type="CheckBox" defaultValue="false" caption="~06735 Activate language output on reports" attributeName="DETAIL_PrintBilingual"/>
+    <Setting id="PO_M41_DETAIL_PotMgrBehavior" type="ComboBox" defaultValue="1" caption="~06af7 Verhalten Potentialmanager" attributeName="DETAIL_PotMgrBehavior">
+      <Items>
+        <Item id="MainTable" value="0" caption="~06736 Selection via main table"/>
+        <Item id="Filter" value="1" caption="~06737 Selection via filter"/>
+      </Items>
+    </Setting>
+    <Setting id="PO_AuxiliaryContactor10DIN" type="CheckBox" defaultValue="false" caption="~06738 Numbering of auxiliary contacts acc.to DIN/IEC" attributeName="DETAIL_DET001"/>
+    <Setting id="PO_PrintDetailPlans" type="CheckBox" defaultValue="false" caption="~06739 Print internal circuits of macro blocks" attributeName="DETAIL_PrintDetailPlans"/>
+    <Setting id="PO_AutoLoopUseSearchManager" type="CheckBox" defaultValue="false" caption="~0673b Use search via classification for loops" attributeName="DETAIL_DET0003"/>
+    <Setting id="PO_M41_DETAIL_ContactMirror" type="ComboBox" defaultValue="0" caption="~0673c Contact mirror" attributeName="DETAIL_ContactMirror">
+      <Items>
+        <Item id="01" value="0" caption="~0673d both directions"/>
+        <Item id="02" value="1" caption="~0673e Vertical"/>
+        <Item id="03" value="2" caption="~0593e Horizontal"/>
+      </Items>
+    </Setting>
+    <Setting id="PO_M40_ConnectionObjectVersion" type="ComboBox" defaultValue="0" caption="~076c3 Connection Mode" attributeName="ConnectionObject_Version">
+      <Items>
+        <Item id="01" value="0" caption="~076c4 No connection object (up to 10.2)"/>
+        <Item id="02" value="1" caption="~076c5 Create connection objects for connector types 'E' and 'I' (from 10.2 SP1)"/>
+      </Items>
+      <Class assembly="Comos.WSP.ProjectSettingsExtensions" class="Comos.WSP.ProjectSettingsExtensions.ConnectionObjectExtension"/>
+
+    </Setting>
+
+    <Setting id="PO_M40_ShowAWGValues" type="CheckBox" defaultValue="false" caption="~08633 Show AWG values" attributeName="ShowAWGValues" observedSettings="PO_M40_ConnectionObjectVersion">
+      <Class assembly="Comos.WSP.ProjectSettingsExtensions" class="Comos.WSP.ProjectSettingsExtensions.ShowAwgValuesExtension"/>
+    </Setting>
+    <Setting id="PO_M40_UseConnectorEndType" type="CheckBox" defaultValue="false" caption="~0874e Use connector endhandling" attributeName="UseConnectorEndhandling" observedSettings="PO_M40_ConnectionObjectVersion">
+      <Class assembly="Comos.WSP.ProjectSettingsExtensions" class="Comos.WSP.ProjectSettingsExtensions.UseConnectorEndTypeExtension"/>
+    </Setting>
+     <Setting id="PO_M40_ShieldBehaviourVersion" type="ComboBox" defaultValue="0" caption="~08c60 Shield behaviour" attributeName="ShieldBehaviourVersion" observedSettings="PO_M40_ConnectionObjectVersion">
+      <Items>
+        <Item id="01" value="0" caption="~08c61 Up to COMOS 10.6"/>
+        <Item id="02" value="1" caption="~08c62 From COMOS 10.7 (Placement information and reference connections enabled)"/>
+      </Items>
+      <Class assembly="Comos.WSP.ProjectSettingsExtensions" class="Comos.WSP.ProjectSettingsExtensions.ShieldBehaviourVersionExtension"/>
+    </Setting>
+
+    <Setting id="M45_PreserveObjectAfterMerge" type="CheckBox" defaultValue="false" caption="~065d0 Preserve object after merge" attributeName="PreserveObjectAfterMerge"/>
+    <Setting id="PO_M40_AddressMnemonic" type="ComboBox" defaultValue="0" caption="~07143 Address mnemonic" attributeName="DETAIL_AddressMnemonic" observedSettings="PO_M40_AddressMnemonic">
+      <Items>
+        <Item id="Key0" value="0" caption="Siemens"/>
+        <Item id="Key1" value="1" caption="IEC 61131"/>
+        <Item id="Key2" value="2" caption="~00e85 Benutzerdefiniert"/>
+      </Items>
+    </Setting>
+    <Setting id="PO_VerweisMitAnlage" type="ComboBox" defaultValue="2" caption="~0673f Unit label" attributeName="VERWEIS_VerweisMitAnlage">
+      <Items>
+        <Item id="ER00" value="0" caption="~06740 Never output"/>
+        <Item id="ER01" value="1" caption="~06741 Always output"/>
+        <Item id="ER02" value="2" caption="~06742 Only output if differing from current object"/>
+      </Items>
+    </Setting>
+    <Setting id="PO_VerweisMitOrt" type="ComboBox" defaultValue="2" caption="~06743 Location label" attributeName="VERWEIS_VerweisMitOrt">
+      <Items>
+        <Item id="ER00" value="0" caption="~06740 Never output"/>
+        <Item id="ER01" value="1" caption="~06741 Always output"/>
+        <Item id="ER02" value="2" caption="~06742 Only output if differing from current object"/>
+      </Items>
+    </Setting>
+    <Setting id="PO_VerweisMitGruppe" type="ComboBox" defaultValue="0" caption="~06744 Document group label" attributeName="VERWEIS_VerweisMitGruppe">
+      <Items>
+        <Item id="ER00" value="0" caption="~06740 Never output"/>
+        <Item id="ER01" value="1" caption="~06741 Always output"/>
+        <Item id="ER02" value="2" caption="~06742 Only output if differing from current object"/>
+      </Items>
+    </Setting>
+    <Setting id="PO_VerweisMitBlatt" type="ComboBox" defaultValue="2" caption="~06745 Sheet label" attributeName="VERWEIS_VerweisMitBlatt">
+      <Items>
+        <Item id="ER00" value="0" caption="~06740 Never output"/>
+        <Item id="ER01" value="1" caption="~06741 Always output"/>
+        <Item id="ER02" value="2" caption="~06742 Only output if differing from current object"/>
+      </Items>
+    </Setting>
+    <Setting id="PO_VerweisMitPfad" type="ComboBox" defaultValue="1" caption="~06746 Path (vertical)" attributeName="VERWEIS_VerweisMitPfad">
+      <Items>
+        <Item id="CALC" value="5" caption="~06747 Calculated"/>
+        <Item id="JA" value="1" caption="~02f95 Yes"/>
+        <Item id="NEIN" value="0" caption="~005b8 Nein"/>
+      </Items>
+    </Setting>
+    <Setting id="PO_VerweisMitZone" type="ComboBox" defaultValue="0" caption="~06748 Zone (horizontal)" attributeName="VERWEIS_VerweisMitZone">
+      <Items>
+        <Item id="CALC" value="5" caption="~06747 Calculated"/>
+        <Item id="JA" value="1" caption="~02f95 Yes"/>
+        <Item id="NEIN" value="0" caption="~005b8 Nein"/>
+      </Items>
+    </Setting>
+    <Setting id="PO_VerweisOhneGruppe" type="CheckBox" defaultValue="1" caption="~0674a Remove document group prefix" attributeName="VERWEIS_VerweisOhneGruppe" observedSettings="PO_VerweisVersion" IsVisible="true">
+      <Class assembly="Comos.WSP.ProjectSettingsExtensions" class="Comos.WSP.ProjectSettingsExtensions.VerweisOhneGruppeExtension"/>
+    </Setting>
+    <Setting id="PO_VerweisLeertext" type="TextBox" defaultValue="VW" caption="~0674b Text for unresolved reference" attributeName="VERWEIS_VerweisLeertext"/>
+    <Setting id="PO_RefBehaviour" type="ComboBox" defaultValue="0" caption="~0674c Reference behavior" attributeName="VERWEIS_RefBehaviour">
+      <Items>
+        <Item id="0" value="0" caption="~0674d Document order, reference to connection end"/>
+        <Item id="1" value="1" caption="~0674e Device order, reference to device"/>
+        <Item id="2" value="2" caption="~0674f Device order, reference to connection end"/>
+      </Items>
+    </Setting>
+    <Setting id="PO_VerweisVersion" type="ComboBox" defaultValue="0" caption="~06e88 Reference version" attributeName="VERWEIS_VerweisVersion">
+      <Items>
+        <Item id="0" value="0" caption="~06e89 reference behaviour until COMOS 10.1 SP2"/>
+        <Item id="1" value="1" caption="~06e8a reference behaviour according to EN61082-1"/>
+        <Item id="2" value="2" caption="~085dc reference behaviour according to EN61082-1 including optional shortened references"/>
+      </Items>
+    </Setting>
+    <Setting id="PO_VerweisBlattPrefix" type="TextBox" defaultValue="/" caption="~06750 Unit/location to sheet" attributeName="VERWEIS_VerweisBlattPrefix"  observedSettings="PO_VerweisVersion" IsVisible="true">
+      <Class assembly="Comos.WSP.ProjectSettingsExtensions" class="Comos.WSP.ProjectSettingsExtensions.VerweisBlattExtension"/>
+    </Setting>
+    <Setting id="PO_VerweisDocumentTypePrefix" type="TextBox" defaultValue="&amp;" caption="~085dd Unit/location to document type" attributeName="VERWEIS_VerweisDocumentTypePrefix" observedSettings="PO_VerweisVersion" IsVisible="false">
+      <Class assembly="Comos.WSP.ProjectSettingsExtensions" class="Comos.WSP.ProjectSettingsExtensions.VerweisDocumentTypePrefixExtension"/>
+    </Setting>
+    <Setting id="PO_VerweisDocumentTypeToSheet" type="TextBox" defaultValue="/" caption="~085de Document type to sheet" attributeName="VERWEIS_VerweisDocumentTypeToSheet" observedSettings="PO_VerweisVersion" IsVisible="false">
+      <Class assembly="Comos.WSP.ProjectSettingsExtensions" class="Comos.WSP.ProjectSettingsExtensions.VerweisDocumentTypeToSheetExtension"/>
+    </Setting>
+    <Setting id="PO_VerweisDelimiter" type="TextBox" defaultValue="." caption="~06751 Sheet to path" attributeName="VERWEIS_VerweisDelimiter"/>
+    <Setting id="PO_VerweisPfadZone" type="TextBox" defaultValue="-" caption="~06752 Path to zone" attributeName="VERWEIS_VerweisPfadZone"/>
+    <Setting id="PO_VerweisPrefix" type="TextBox" defaultValue="(" caption="~00211 Prefix" attributeName="VERWEIS_VerweisPrefix"/>
+    <Setting id="PO_VerweisPostfix" type="TextBox" defaultValue=")" caption="~059f2 Postfix" attributeName="VERWEIS_VerweisPostfix"/>
+    <Setting id="PO_VerweisBlattFolge" type="ComboBox" defaultValue="99" caption="~06753 Document order" attributeName="VERWEIS_VerweisBlattFolge">
+      <Items>
+        <Item id="ES00" value="0" caption="~00a62 Standard"/>
+        <Item id="ES01" value="1" caption="~00077 Name"/>
+        <Item id="ES02" value="2" caption="~06754 Unit / name"/>
+        <Item id="ES03" value="3" caption="~06755 Location / name"/>
+        <Item id="ES04" value="4" caption="~06756 Unit / location / name"/>
+        <Item id="ES05" value="5" caption="~06757 Location / unit / name"/>
+        <Item id="ES11" value="11" caption="~06758 Document group / name"/>
+        <Item id="ES90" value="90" caption="~06759 Page number"/>
+        <Item id="ES99" value="99" caption="~0675a Reference documents"/>
+      </Items>
+    </Setting>
+    <Setting id="PO_RelativLabelForSegments" type="CheckBox" defaultValue="true" caption="~0675b Relative output to segments" attributeName="VERWEIS_RelativLabelForSegments"/>
+    <Setting id="PO_M41_DETAIL_IgnoreLinkedLocationOutput" type="CheckBox" defaultValue="0" caption="~0756f Ignore linked location for output" attributeName="DETAIL_IGNORELINKEDLOCATIONFOROUTPUT"/>
+    <Setting id="PO_M40_LayoutConfiguration_Channel_Line1_Group" type="UserControl" caption="">
+      <Class assembly="Comos.EngineeringAdapter.Comos.Configuration, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null" class="Comos.EngineeringAdapter.Comos.Configuration.SettingExtensions.HorizontalControlStripSettingExtension" />
+    </Setting>
+    <Setting id="PO_M40_LayoutConfiguration_Channel_Line2_Group" type="UserControl" caption="">
+      <Class assembly="Comos.EngineeringAdapter.Comos.Configuration, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null" class="Comos.EngineeringAdapter.Comos.Configuration.SettingExtensions.HorizontalControlStripSettingExtension" />
+    </Setting>
+    <Setting id="PO_M40_LayoutConfiguration_Channel_Line3_Group" type="UserControl" caption="">
+      <Class assembly="Comos.EngineeringAdapter.Comos.Configuration, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null" class="Comos.EngineeringAdapter.Comos.Configuration.SettingExtensions.HorizontalControlStripSettingExtension" />
+    </Setting>
+    <Setting id="PO_M40_LayoutConfiguration_Channel_Line3_5_Group" type="UserControl" caption="">
+      <Class assembly="Comos.EngineeringAdapter.Comos.Configuration, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null" class="Comos.EngineeringAdapter.Comos.Configuration.SettingExtensions.HorizontalControlStripSettingExtension" />
+    </Setting>
+    <Setting id="PO_M40_LayoutConfiguration_Channel_Line4_Group" type="UserControl" caption="">
+      <Class assembly="Comos.EngineeringAdapter.Comos.Configuration, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null" class="Comos.EngineeringAdapter.Comos.Configuration.SettingExtensions.HorizontalControlStripSettingExtension" />
+    </Setting>
+    <Setting id="PO_M40_LayoutConfiguration_Channel_Line5_Group" type="UserControl" caption="">
+      <Class assembly="Comos.EngineeringAdapter.Comos.Configuration, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null" class="Comos.EngineeringAdapter.Comos.Configuration.SettingExtensions.HorizontalControlStripSettingExtension" />
+    </Setting>
+    <Setting id="PO_M40_LayoutConfiguration_Channel_Line6_Group" type="UserControl" caption="">
+      <Class assembly="Comos.EngineeringAdapter.Comos.Configuration, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null" class="Comos.EngineeringAdapter.Comos.Configuration.SettingExtensions.HorizontalControlStripSettingExtension" />
+    </Setting>
+    <Setting id="PO_M40_LayoutConfiguration_Channel_Line7_Group" type="UserControl" caption="">
+      <Class assembly="Comos.EngineeringAdapter.Comos.Configuration, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null" class="Comos.EngineeringAdapter.Comos.Configuration.SettingExtensions.HorizontalControlStripSettingExtension" />
+    </Setting>
+    <Setting id="PO_M40_LayoutConfiguration_Channel_Line8_Group" type="UserControl" caption="">
+      <Class assembly="Comos.EngineeringAdapter.Comos.Configuration, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null" class="Comos.EngineeringAdapter.Comos.Configuration.SettingExtensions.HorizontalControlStripSettingExtension" />
+    </Setting>
+    <Setting id="PO_M40_LayoutConfiguration_Channel_Line9_Group" type="UserControl" caption="">
+      <Class assembly="Comos.EngineeringAdapter.Comos.Configuration, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null" class="Comos.EngineeringAdapter.Comos.Configuration.SettingExtensions.HorizontalControlStripSettingExtension" />
+    </Setting>
+    <Setting id="PO_M40_LayoutConfiguration_Channel_Line10_Group" type="UserControl" caption="">
+      <Class assembly="Comos.EngineeringAdapter.Comos.Configuration, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null" class="Comos.EngineeringAdapter.Comos.Configuration.SettingExtensions.HorizontalControlStripSettingExtension" />
+    </Setting>
+    <Setting id="PO_M40_LayoutConfiguration_Channel_Line1" type="ComboBox" defaultValue="" caption="~07d07 Line 1" iseditable="True" attributeName="LayoutConfiguration_Channel_Line1">
+      <Class assembly="Comos.Platform.ProjectSettings.Extensions" class="Comos.Platform.ProjectSettings.Extensions.LayoutConfigurationforChannelExtension"/>
+    </Setting>
+    <Setting id="PO_M40_LayoutConfiguration_Channel_Line1_1" type="CheckBox" defaultValue="0" caption="~08be6 Adapt text to channel width" attributeName="LayoutConfiguration_Channel_Line1_1"/>
+    
+    <Setting id="PO_M40_LayoutConfiguration_Channel_Line2" type="ComboBox" defaultValue="" caption="~07d08 Line 2" iseditable="True" attributeName="LayoutConfiguration_Channel_Line2">
+      <Class assembly="Comos.Platform.ProjectSettings.Extensions" class="Comos.Platform.ProjectSettings.Extensions.LayoutConfigurationforChannelExtension"/>
+    </Setting>
+    <Setting id="PO_M40_LayoutConfiguration_Channel_Line2_1" type="CheckBox" defaultValue="0" caption="~08be6 Adapt text to channel width" attributeName="LayoutConfiguration_Channel_Line2_1"/>
+    
+    <Setting id="PO_M40_LayoutConfiguration_Channel_Line3" type="ComboBox" defaultValue="" caption="~07d09 Line 3" iseditable="True" attributeName="LayoutConfiguration_Channel_Line3">
+      <Class assembly="Comos.Platform.ProjectSettings.Extensions" class="Comos.Platform.ProjectSettings.Extensions.LayoutConfigurationforChannelExtension"/>
+    </Setting>
+    <Setting id="PO_M40_LayoutConfiguration_Channel_Line3_1" type="CheckBox" defaultValue="0" caption="~08be6 Adapt text to channel width" attributeName="LayoutConfiguration_Channel_Line3_1"/>
+    
+    <Setting id="PO_M40_LayoutConfiguration_Channel_Line3_5" type="ComboBox" defaultValue="Nested Label" caption="~07d0a Line 4" iseditable="True" attributeName="LayoutConfiguration_Channel_Line3_5">
+      <Class assembly="Comos.Platform.ProjectSettings.Extensions" class="Comos.Platform.ProjectSettings.Extensions.LayoutConfigurationforChannelExtension"/>
+    </Setting>
+    <Setting id="PO_M40_LayoutConfiguration_Channel_Line3_5_1" type="CheckBox" defaultValue="0" caption="~08be6 Adapt text to channel width" attributeName="LayoutConfiguration_Channel_Line3_5_1"/>
+    
+    <Setting id="PO_M40_LayoutConfiguration_Channel_Line4" type="ComboBox" defaultValue="" caption="Line 5" iseditable="True" attributeName="LayoutConfiguration_Channel_Line4">
+      <Class assembly="Comos.Platform.ProjectSettings.Extensions" class="Comos.Platform.ProjectSettings.Extensions.LayoutConfigurationforChannelExtension"/>
+    </Setting>
+    <Setting id="PO_M40_LayoutConfiguration_Channel_Line4_1" type="CheckBox" defaultValue="0" caption="~08be6 Adapt text to channel width" attributeName="LayoutConfiguration_Channel_Line4_1"/>>
+    
+    <Setting id="PO_M40_LayoutConfiguration_Channel_Line5" type="ComboBox" defaultValue="" caption="Line 6" iseditable="True" attributeName="LayoutConfiguration_Channel_Line5">
+      <Class assembly="Comos.Platform.ProjectSettings.Extensions" class="Comos.Platform.ProjectSettings.Extensions.LayoutConfigurationforChannelExtension"/>
+    </Setting>
+    <Setting id="PO_M40_LayoutConfiguration_Channel_Line5_1" type="CheckBox" defaultValue="0" caption="~08be6 Adapt text to channel width" attributeName="LayoutConfiguration_Channel_Line5_1"/>
+    
+    <Setting id="PO_M40_LayoutConfiguration_Channel_Line6" type="ComboBox" defaultValue="" caption="Line 7" iseditable="True" attributeName="LayoutConfiguration_Channel_Line6">
+      <Class assembly="Comos.Platform.ProjectSettings.Extensions" class="Comos.Platform.ProjectSettings.Extensions.LayoutConfigurationforChannelExtension"/>
+    </Setting>
+    <Setting id="PO_M40_LayoutConfiguration_Channel_Line6_1" type="CheckBox" defaultValue="0" caption="~08be6 Adapt text to channel width" attributeName="LayoutConfiguration_Channel_Line6_1"/>
+    
+    <Setting id="PO_M40_LayoutConfiguration_Channel_Line7" type="ComboBox" defaultValue="" caption="Line 8" iseditable="True" attributeName="LayoutConfiguration_Channel_Line7">
+      <Class assembly="Comos.Platform.ProjectSettings.Extensions" class="Comos.Platform.ProjectSettings.Extensions.LayoutConfigurationforChannelExtension"/>
+    </Setting>
+    <Setting id="PO_M40_LayoutConfiguration_Channel_Line7_1" type="CheckBox" defaultValue="0" caption="~08be6 Adapt text to channel width" attributeName="LayoutConfiguration_Channel_Line7_1"/>
+    
+    <Setting id="PO_M40_LayoutConfiguration_Channel_Line8" type="ComboBox" defaultValue="" caption="Line 9" iseditable="True" attributeName="LayoutConfiguration_Channel_Line8">
+      <Class assembly="Comos.Platform.ProjectSettings.Extensions" class="Comos.Platform.ProjectSettings.Extensions.LayoutConfigurationforChannelExtension"/>
+    </Setting>
+    <Setting id="PO_M40_LayoutConfiguration_Channel_Line8_1" type="CheckBox" defaultValue="0" caption="~08be6 Adapt text to channel width" attributeName="LayoutConfiguration_Channel_Line8_1"/>
+    
+    <Setting id="PO_M40_LayoutConfiguration_Channel_Line9" type="ComboBox" defaultValue="Manufacturer" caption="Line 10" iseditable="True" attributeName="LayoutConfiguration_Channel_Line9">
+      <Class assembly="Comos.Platform.ProjectSettings.Extensions" class="Comos.Platform.ProjectSettings.Extensions.LayoutConfigurationforChannelExtension"/>
+    </Setting>
+    <Setting id="PO_M40_LayoutConfiguration_Channel_Line9_1" type="CheckBox" defaultValue="0" caption="~08be6 Adapt text to channel width" attributeName="LayoutConfiguration_Channel_Line9_1"/>
+    
+    <Setting id="PO_M40_LayoutConfiguration_Channel_Line10" type="ComboBox" defaultValue="Article Number" caption="Line 11" iseditable="True" attributeName="LayoutConfiguration_Channel_Line10">
+      <Class assembly="Comos.Platform.ProjectSettings.Extensions" class="Comos.Platform.ProjectSettings.Extensions.LayoutConfigurationforChannelExtension"/>
+    </Setting>
+    <Setting id="PO_M40_LayoutConfiguration_Channel_Line10_1" type="CheckBox" defaultValue="0" caption="~08be6 Adapt text to channel width" attributeName="LayoutConfiguration_Channel_Line10_1"/>
+    
+    <Setting id="PCPath" type="ObjectPointer" caption="~06761 Pipe spec definition" attributeName="VIPER_PCPath"/>
+    <Setting id="StdCatPath" type="ObjectPointer" caption="~06762 Basic tables, industrial standards" attributeName="VIPER_StdCatPath"/>
+    <Setting id="VIPER_PipeClassMenuPath" type="ObjectPointer" caption="~06764 Pipe part types" attributeName="VIPER_PipeClassMenuPath"/>
+    <Setting id="PO_M20_VIPER_ENCODING" type="TextBox" defaultValue="ISO-8859-1" caption="~06766 Default encoding for XML import" attributeName="VIPER_ENCODING"/>
+    <Setting id="VIPER_MTOConfig" type="ObjectPointer" caption="~06767 MTO configuration" attributeName="VIPER_MTOConfig"/>
+    <Setting id="PO_M20_VIPER_AutoAssignDBPath" type="TextBox" caption="~06768 Matching database" attributeName="VIPER_AutoAssignDBPath">
+      <Class assembly="Comos.C3DView.ProjectSettings" class="Comos.C3DView.ProjectSettings.AutoAssignExtension"/>
+    </Setting>
+    <Setting id="PFD_CSTREAM" type="ObjectPointer" caption="~0676a Base object for pipe section" attributeName="PFD_CSTREAM">
+      <ToolTip itx="~0676b Specifies the default base object for pipe sections which is used by the 'Connection' tool on P&amp;IDs."/>
+    </Setting>
+    <Setting id="PO_D3ConnectionTypeTable" type="ObjectPointer" caption="~0676c Connection type table" attributeName="VIPER_D3ConnectionTypeTable"/>
+    <Setting id="PO_M20_VIPER_StandardDependingStdTablesRoot" type="ObjectPointer" caption="~0676d System standard depending tables" attributeName="VIPER_StandardDependingStdTablesRoot"/>
+    <Setting id="PO_M20_VIPER_PipeSpecBase" type="ObjectPointer" caption="~0676f COMOS pipe spec" attributeName="VIPER_PipeSpecBase"/>
+    <Setting id="PO_M20_VIPER_FolderBase" type="ObjectPointer" caption="~06770 Pipe spec folder" attributeName="VIPER_FolderBase"/>
+    <Setting id="PO_M20_VIPER_PipeSpecComponentRoot" type="ObjectPointer" caption="~06771 Pipe spec component limits" attributeName="VIPER_PipeSpecComponentRoot" selectToolTip="Object with additional chapters to add to a pipe part from catalogue when it is added to a pipe class."/>
+    <Setting id="PO_M20_VIPER_PPFQueriesRoot" type="ObjectPointer" caption="~06772 Pipe Part Finder queries" attributeName="VIPER_PPFQueriesRoot"/>
+    <Setting id="PO_M20_VIPER_IsolationSpecBase" type="ObjectPointer" caption="~06773 Insulation pipe spec" attributeName="VIPER_IsolationSpecBase"/>
+    <Setting id="PO_M20_VIPER_PDMSPipeSpecBase" type="ObjectPointer" caption="~06af2 PDMS Rohrklasse" attributeName="VIPER_PDMSPipeSpecBase"/>
+    <Setting id="PO_M20_VIPER_TemplatePipeSpecBase" type="ObjectPointer" caption="~06774 Template pipe spec" attributeName="VIPER_TemplatePipeSpecBase"/>
+    <Setting id="PO_M20_VIPER_SelectorTabBase" type="ObjectPointer" caption="~06775 Base object for selector" attributeName="VIPER_SelectorTabBase"/>
+    <Setting id="PO_M22_PFD_DXFINIFILE" type="FileOpenDialog" caption="~06779 DXF Ini file" attributeName="PFD_DXFINIFILE"/>
+    <Setting id="PO_M22_Redlining_Document_Type" type="ComboBox" defaultValue="1" caption="~0876b Redlining on Document" attributeName="Document_RedliningType">
+      <Items>
+        <Item id="RedliningType1" value="1" caption="~00304 Off"/>
+        <Item id="RedliningType2" value="2" caption="~0876a On with Tasks"/>
+      </Items>
+    </Setting>
+    <Setting id="PO_M24_PFD_SPEC_PC" type="TextBox" caption="~05687 Pipe spec" attributeName="PFD_SPEC_PC"/>
+    <Setting id="PO_M24_PFD_SPEC_ND1" type="TextBox" caption="~0677a Nominal diameter for first connector (input)" attributeName="PFD_SPEC_ND1"/>
+    <Setting id="PO_M24_PFD_SPEC_ND2" type="TextBox" caption="~0677b Nominal diameter for other connector (output)" attributeName="PFD_SPEC_ND2"/>
+    <Setting id="PO_M24_PFD_FunctionCodePPC" type="TextBox" defaultValue="GD.VFCD" caption="~0677c Attribute for PPC function code" attributeName="PFD_FunctionCodePPC"/>
+    <Setting id="PO_M22_PFD_FunctionCodePID" type="TextBox" defaultValue="SYS.PIA600" caption="~0677d Attribute for PID function code" attributeName="PFD_FunctionCodePID"/>
+    <Setting id="PFD_ROTATEPLACEHOLDERTEXT" type="CheckBox" defaultValue="true" caption="~0677e Regard rotation of *V:Symbol*-variables" attributeName="PFD_ROTATEPLACEHOLDERTEXT"/>
+    <Setting id="PO_M22_PFD_DEFAULTDWGFILE" type="FileOpenDialog" caption="~0677f PFD_DEFAULTDWGFILE" attributeName="PFD_DEFAULTDWGFILE"/>
+    <Setting id="PO_M65_DDM_CheckInKind" type="ComboBox" defaultValue="1" caption="~06780 Check-in mechanism" attributeName="DDM_CheckInKind">
+      <Items>
+        <Item id="CheckInKind1" value="1" caption="~06781 Only current version"/>
+        <Item id="CheckInKind2" value="2" caption="~06782 All versions"/>
+        <Item id="CheckInKind3" value="4" caption="~06783 Number of versions are project-dependent"/>
+      </Items>
+    </Setting>
+    <Setting id="PO_M65_DDM_MaxVersionCount" type="TextBox" defaultValue="1" caption="~00068 Anzahl" attributeName="DDM_MaxVersionCount"/>
+    <Setting id="PO_M65_DDM_DefaultWorkingFolder" type="BrowseFolderDialog" caption="~06785 Default working directory" observedSettings="PO_M65_DDM_SP_IsSharePointEnable" attributeName="DDM_DefaultWorkingFolder">
+      <Class assembly="Comos.Platform.ProjectSettings.Extensions" class="Comos.Platform.ProjectSettings.Extensions.SharePointDirectoryExtension"/>
+    </Setting>
+    <Setting id="DDM_IsFlocStruct" type="CheckBox" defaultValue="false" caption="~08b1e Enable working directory with FLOC structure" attributeName="DDM_IsFlocStruct"/>
+    <Setting id="PO_M65_DDM_SP_IsSharePointEnable" type="UserControl" caption="" observedSettings="PO_M65_DDM_SP_IsSharePointEnable" attributeName="DDM_SP_IsSharePointEnable">
+      <Class assembly="Comos.Platform.ProjectSettings.Extensions, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null" class="Comos.Platform.ProjectSettings.Extensions.DoubleCheckBox"/>
+    </Setting>
+    <Setting id="PO_M65_DDM_SP_SiteName" type="ComboBox" caption="~08b33 SharePoint site name" observedSettings="PO_M65_DDM_SP_IsSharePointEnable" attributeName="DDM_SP_SiteName">
+      <Class assembly="Comos.Platform.ProjectSettings.Extensions" class="Comos.Platform.ProjectSettings.Extensions.FileTransferExtension"/>
+    </Setting>
+    <Setting id="PO_M65_DDM_SP_HostName" type="TextBox" caption="~08b34 SharePoint host name" observedSettings="PO_M65_DDM_SP_IsSharePointEnable" attributeName="DDM_SP_HostName">
+      <Class assembly="Comos.Platform.ProjectSettings.Extensions" class="Comos.Platform.ProjectSettings.Extensions.SharePointDirectoryExtension"/>
+    </Setting>
+    <Setting id="PO_M65_DDM_SP_DocLibraryName" type="TextBox" observedSettings="PO_M65_DDM_SP_IsSharePointEnable" caption="~08b35 Default document library name" attributeName="DDM_SP_DocLibraryName">
+      <Class assembly="Comos.Platform.ProjectSettings.Extensions" class="Comos.Platform.ProjectSettings.Extensions.SharePointDirectoryExtension"/>
+    </Setting>
+    <Setting id="DDM_Active" type="CheckBox" defaultValue="false" caption="~0866d Drag/drop import for DDMS" attributeName="DDM_Active"/>
+    <Setting id="DDM_PQM001" type="CheckBox" defaultValue="false" caption="~06787 Import DVM documents only" attributeName="DDM_PQM001"/>
+    <Setting id="PO_M65_DDM_PQM002" type="CheckBox" defaultValue="false" caption="~06d63 Dokumente mit fehlenden Referenzen erlauben" attributeName="DDM_PQM002" >
+      <Class assembly="Comos.Platform.ProjectSettings.Extensions" class="Comos.Platform.ProjectSettings.Extensions.PQMExtension"/>
+    </Setting>
+    <Setting id="PO_M65_DocumentRootCatalog" type="ObjectPointer" caption= "~07cf9 Document catalog base object" attributeName="DocumentRootCatalog">
+      <Class assembly="Comos.Platform.ProjectSettings.Extensions" class="Comos.Platform.ProjectSettings.Extensions.ObjectPointerExtensionForBaseObject"/>
+    </Setting>
+    <Setting id="PO_M65_DefaultPreviewMechanism" type="ComboBox" defaultValue="1" caption="~08541 Preview mechanism" attributeName="DefaultPreviewMechanism">
+      <Items>
+        <Item id="PreviewMechanism1" value="1" caption="~0853f Latest version"/>
+        <Item id="PreviewMechanism2" value="2" caption="~08540 Latest revision"/>
+      </Items>
+    </Setting>
+    <Setting id="PO_M65_DDM_CustomisedDDMRoot" type="ObjectPointer" caption= "~08026 Custom base object document"  attributeName="PO_M65_DDM_CustomisedDDMRoot"/>
+    <Setting id="DDM_DDMRoot" type="ObjectPointer" caption="~06788 Base object document" attributeName="DDM_DDMRoot"/>
+    <Setting id="DDM_NodeTempDocs" type="ObjectPointer" caption="~06789 Create temporary documents below" attributeName="DDM_NodeTempDocs"/>
+    <Setting id="PO_M65_DDM_TRM0001" type="ObjectPointer" caption="~0678a Folder base object" attributeName="DDM_TRM0001"/>
+    <Setting id="PO_M65_DDM_TRM0002" type="ObjectPointer" caption="~0678b Container base object" attributeName="DDM_TRM0002"/>
+    <Setting id="PO_M65_DDM_TRM0003" type="ObjectPointer" caption="~0678c Version base object" attributeName="DDM_TRM0003"/>
+    <Setting id="PO_M65_DDM_TRM0004" type="BrowseFolderDialog" caption="~0678d Directory" attributeName="DDM_TRM0004"/>
+    <Setting id="DDM_EmailFrom" type="TextBox" caption="~0678e E-mail sender" attributeName="DDM_EmailFrom"/>
+    <Setting id="DDM_EmailServer" type="TextBox" caption="~0678f E-mail server (SMTP)" attributeName="DDM_EmailServer"/>
+    <Setting id="DDM_SSL_Port" type="TextBox" defaultValue="25" caption="E-mail server port (SMTP)" attributeName="DDM_SSL_Port"/>
+    <Setting id="DDM_IsSMTPAuthenticationEnable" type="CheckBox" defaultValue="false" caption="~08b1d Enable SMTP authentication for SMTP server" attributeName="DDM_IsSMTPAuthenticationEnable"/>
+    <Setting id="PO_M65_DDM_SRCFLDR" type="BrowseFolderDialog" caption="~06791 Source folder with documents" attributeName="DDM_SRCFLDR"/>
+    <Setting id="PO_M65_DDM_LOGFLDR" type="BrowseFolderDialog" caption="~06792 Folder for log file" attributeName="DDM_LOGFLDR"/>
+    <Setting id="PO_M65_DDM_TXTExternalData" type="BrowseFolderDialog" caption="~06793 Folder for MDB" attributeName="DDM_TXTExternalData"/>
+    <Setting id="PO_M65_DDM_CmbStrucSep"  type="ComboBox"  defaultValue="0" caption="~06794 Structure separator" attributeName="DDM_CmbStrucSep">
+      <Class assembly="Comos.Platform.ProjectSettings.Extensions" class="Comos.Platform.ProjectSettings.Extensions.FileTransferExtension"/>
+    </Setting>
+    <Setting id="PO_M65_DDM_Checkout_FileName_Delimiter"  type="ComboBox"  defaultValue="" caption="~087af Delimiter for filename on checkout" attributeName="DDM_Delimiter_FileName">
+      <Class assembly="Comos.Platform.ProjectSettings.Extensions" class="Comos.Platform.ProjectSettings.Extensions.FileTransferExtension"/>
+    </Setting>
+    <Setting id="DDM_LnkUserDefinedScript" type="ObjectPointer" caption="~06795 Script user-defined separator" attributeName="DDM_LnkUserDefinedScript"/>
+    <Setting id="PO_M65_DDM_TBLNODEATT" type="ObjectPointer" caption="~06796 Standard tables for mapping" attributeName="DDM_TBLNODEATT"/>
+    <Setting id="PO_M65_DDM_TBLMAP" type="ComboBox" caption="~06797 Selected table for mapping" defaultValue="0" attributeName="DDM_TBLMAP" observedSettings="PO_M65_DDM_TBLNODEATT">
+      <Class assembly="Comos.Platform.ProjectSettings.Extensions" class="Comos.Platform.ProjectSettings.Extensions.FileTransferExtension"/>
+    </Setting>
+    <Setting id="PO_M65_DDM_TBLNODECOL" type="ObjectPointer" caption="~06798 Standard tables for MDB" attributeName="DDM_TBLNODECOL"/>
+    <Setting id="PO_M65_DDM_TBLCOL" type="ComboBox" caption="~06799 Selected table for MDB" defaultValue="0" attributeName="DDM_TBLCOL" observedSettings="PO_M65_DDM_TBLNODECOL">
+      <Class assembly="Comos.Platform.ProjectSettings.Extensions" class="Comos.Platform.ProjectSettings.Extensions.FileTransferExtension"/>
+    </Setting>
+    <Setting id="IniFile" type="FileOpenDialog" caption="~060c6 Initialization file" attributeName="CA_IniFile"/>
+    <Setting id="DefaultConfig" type="BrowseFolderDialog" caption="~08198 Export directory" attributeName="CA_DefaultConfig"/>
+    <Setting id="DefaultConfigImport" type="BrowseFolderDialog" caption="~08275 Import directory" attributeName="CA_DefaultConfigImport"/>
+    <Setting id="ConfigFileSetting" type="BrowseFolderDialog" caption="~085e5 Configuration directory" attributeName="CA_ConfigSetting"/>
+    <Setting id="DefaultWorksharePath" type="BrowseFolderDialog" caption="~08276 Workshare directory" attributeName="CA_WorksharePath"/>
+    <Setting id="DefaultSymbolPath" type="BrowseFolderDialog" caption="~085e8 Symbol Path Root directory" attributeName="CA_DefaultSymbolSelectorPath"/>
+    <Setting id="CA_PID_Interface_Default_PID_Template" type="ObjectPointer" caption="~08277 Default P&amp;ID template" attributeName ="PID_Interface_Default_PID_Template">
+      <ToolTip itx = "~08278 Select a P&amp;ID template document. This P&amp;ID template will be used to create all-new PIDs during SmartPlant import if PID-template mapping is not available."/>
+    </Setting>
+    <Setting id="CAPDMSE3DProjectCodes" type="TextBox" caption="~07d78 PDMS/E3D Project Codes" attributeName="CA_PDMSE3DProjectCodes" allowTextinput="0"/>
+    <Setting id="CAExchangePath" type="TextBox" caption="~0679a Exchange directory" attributeName="CA_CAExchangePath" allowTextinput="0"/>
+    <Setting id="CAComPath" type="TextBox" caption="~0679b Communication directory" attributeName="CA_CAComPath" allowTextinput="0"/>
+    <Setting id="CADocPath" type="TextBox" caption="~0679c Document path" attributeName="CA_CADocPath" allowTextinput="0"/>
+    <Setting id="CAConfigPath" type="TextBox" caption="~0679d Configuration path" attributeName="CA_CAConfigPath" allowTextinput="0"/>
+    <Setting id="CAInterfaceActive" type="CheckBox" caption="~0679e Interface active" attributeName="CA_InterfaceActive"/>
+    <Setting id="PO_M26_MSI_L0002" type="ObjectPointer" caption="~0679f Default location for pipes" attributeName="MSI_L0002"/>
+    <Setting id="PO_M26_MSI_L0003" type="ObjectPointer" caption="~067a0 Default location for equipment" attributeName="MSI_L0003"/>
+    <Setting id="PO_M26_MSI_CPM0025" type="TextBox" caption="~067a1 Pipe object" attributeName="MSI_CPM0025"/>
+    <Setting id="PO_M26_MSI_CPM0026" type="TextBox" caption="~067a2 Equipment folder" attributeName="MSI_CPM0026"/>
+    <Setting id="PO_M26_MSI_CPM0001" type="TextBox" caption="~067a3 Plant Modeler start node" attributeName="MSI_CPM0001"/>
+    <Setting id="PO_M26_MSI_CPM0002" type="TextBox" caption="~067a4 Pipe spec limit" attributeName="MSI_CPM0002"/>
+    <Setting id="PO_M26_MSI_CPM0003" type="TextBox" caption="~067a5 Structure subunit" attributeName="MSI_CPM0003"/>
+    <Setting id="PO_M26_MSI_CPM0004" type="TextBox" caption="~067a6 KKS system count" attributeName="MSI_CPM0004"/>
+    <Setting id="PO_M26_MSI_CPM0005" type="TextBox" caption="~067a7 PPC start node" attributeName="MSI_CPM0005"/>
+    <Setting id="PO_M26_MSI_CPM0006" type="TextBox" caption="~067b0 Cell library start node" attributeName="MSI_CPM0006"/>
+    <Setting id="PO_M26_MSI_CPM0022" type="TextBox" caption="~05687 Pipe spec" attributeName="MSI_CPM0022"/>
+    <Setting id="PO_M26_MSI_CPM0023" type="TextBox" caption="~067b1 Nominal diameter 1" attributeName="MSI_CPM0023"/>
+    <Setting id="PO_M26_MSI_CPM0024" type="TextBox" caption="~067b2 Nominal diameter 2" attributeName="MSI_CPM0024"/>
+    <Setting id="PO_M26_MSI_CPM0007" type="TextBox" caption="~067b3 Default seed file" attributeName="MSI_CPM0007"/>
+    <Setting id="PO_M26_MSI_CPM0020" type="TextBox" caption="~067b4 Auto backup on exit" attributeName="MSI_CPM0020"/>
+    <Setting id="PO_M26_MSI_CPM0021" type="TextBox" caption="~067b5 Auto check-in of working DGN on exit" attributeName="MSI_CPM0021"/>
+    <Setting id="PO_M26_MSI_CPM0008" type="TextBox" caption="~067b6 Startup file commands" attributeName="MSI_CPM0008"/>
+    <Setting id="PO_M26_MSI_CPM0009" type="TextBox" caption="~067b7 Interface settings" attributeName="MSI_CPM0009"/>
+    <Setting id="PO_M26_MSI_CPM0010" type="TextBox" caption="~067b8 Configuration file (optional)" attributeName="MSI_CPM0010"/>
+    <Setting id="PO_M26_MSI_CPM0030" type="ObjectPointer" caption="~067b9 Template for scheme" attributeName="MSI_CPM0030"/>
+    <Setting id="PO_M26_MSI_CPM0031" type="ObjectPointer" caption="~067ba Library for schemes" attributeName="MSI_CPM0031"/>
+    <Setting id="PO_M26_MSI_CPM0027" type="ObjectPointer" caption="~008f4 Dokumentengruppe" attributeName="MSI_CPM0027"/>
+    <Setting id="PO_M26_MSI_CPM0028" type="ObjectPointer" caption="~0001b Ort" attributeName="MSI_CPM0028"/>
+    <Setting id="PO_M26_MSI_CPM0029" type="TextBox" caption="~020a8 Betreff" attributeName="MSI_CPM0029"/>
+    <Setting id="PO_M61_IAge_MaintenanceProject" type="CheckBox" defaultValue="0" caption="~067bf Is maintenance project" attributeName="IAge_MaintenanceProject"/>
+    <Setting id="PO_M61_IAge_IsSDProject" type="CheckBox" defaultValue="0" caption="~067c0 Is shutdown project" attributeName="IAge_IsSDProject"/>
+    <Setting id="PO_M61_IAge_UseEventManager" type="CheckBox" defaultValue="0" caption="~067c3 Use event manager" attributeName="IAge_UseEventManager"/>
+    <Setting id="PO_M61_IAge_CompProject" type="TextBox" caption="~067c5 Company DB" attributeName="IAge_CompProject"/>
+    <Setting id="PO_M61_IAge_LockWorkPackagesOnStatusChange" type="CheckBox" defaultValue="0" caption="~067c6 Lock maintenance objects" attributeName="IAge_LockWorkPackagesOnStatusChange"/>
+    <Setting id="PO_M61_IAge_ArchiveFinishedWorkPackages" type="CheckBox" defaultValue="0" caption="~067c7 Automatically archive completed workpackages" attributeName="IAge_ArchiveFinishedWorkPackages"/>
+    <Setting id="PO_M61_IAge_DoNotDeletePlannedDate" type="CheckBox" defaultValue="0" caption="~067c8 Do not reset planned date on workpackage" attributeName="IAge_DoNotDeletePlannedDate"/>
+    <Setting id="PO_M61_IAge_MNTCUseNavigatorText" type="CheckBox" defaultValue="0" caption="~067c9 Use maintenance Navigator text" attributeName="IAge_MNTCUseNavigatorText"/>
+    <Setting id="PO_M61_IAge_LCStructure" type="CheckBox" defaultValue="1" caption="~067ca Use lifecycle structure" attributeName="IAge_LCStructure" IsVisible= "false"/>
+    <Setting id="PO_M61_IAge_LCLinkCDevice" type="ObjectPointer" caption="~067cb Lifecycle base object fullname" attributeName="IAge_LCLinkCDevice">
+      <Class assembly="Comos.Platform.ProjectSettings.Extensions" class="Comos.Platform.ProjectSettings.Extensions.MaintenanceDefaultOptionsExtensions"/>
+    </Setting>
+    <Setting id="PO_M61_IAge_ORCompareMode" type="ComboBox" defaultValue="1" caption="~067cc Device comparison mode" attributeName="IAge_ORCompareMode">
+      <Items>
+        <Item id="Classification" value="1" caption="~0328b Klassifizierung"/>
+        <Item id="Baseobject" value="2" caption="~04fa8 Base object"/>
+        <Item id="Displayvalue" value="3" caption="~067ac Display value of attribute"/>
+      </Items>
+    </Setting>
+    <Setting id="PO_M61_IAge_ORCompareSpecName" type="TextBox" caption="~067cd Device comparison attribute" attributeName="IAge_ORCompareSpecName"/>
+    <Setting id="PO_M61_IAge_QualiCompareMode" type="ComboBox" defaultValue="1" caption="~067cf Qualification comparision mode" attributeName="IAge_QualiCompareMode">
+      <Items>
+        <Item id="Classification" value="1" caption="~0328b Klassifizierung"/>
+        <Item id="Baseobject" value="2" caption="~04fa8 Base object"/>
+        <Item id="Displayvalue" value="3" caption="~067ac Display value of attribute"/>
+      </Items>
+    </Setting>
+    <Setting id="PO_M61_IAge_QualiCompareSpecName" type="TextBox" caption="~067d0 Qualification comparision attribute" attributeName="IAge_QualiCompareSpecName"/>
+    <Setting id="PO_M61_IAge_LinkTourProgress" type="CheckBox" defaultValue="0" caption="~067d1 Cache Tour Progress" attributeName="IAge_LinkTourProgress"/>
+    <Setting id="PO_M61_IAge_PreferMntcStatePlanned" type="CheckBox" defaultValue="1" caption="~067d4 Plan work packages per default" attributeName="IAge_PreferMntcStatePlanned"/>
+    <Setting id="PO_M61_IAge_WriteWorkPackageLabel" type="CheckBox" defaultValue="1" caption="~067d5 Set work package Label" attributeName="IAge_WriteWorkPackageLabel"/>
+    <!--adarve3, 13.02.2014, A5528 #7-->
+    <Setting id="PO_M61_IAge_RescheduleUseShiftOptionAsDefault" type="CheckBox" defaultValue="0" caption="~06c83 Reschedule: use shift option as default" attributeName="IAge_RescheduleUseShiftOptionAsDefault"/>
+    <Setting id="PO_M61_IAge_GroupItems" type="CheckBox" defaultValue="1" caption="~06c84 Group items" attributeName="IAge_GroupItems"/>
+    <Setting id="PO_M61_IAge_ScanSize" type="TextBox" defaultValue="250" caption="~06c85 Scan size" attributeName="IAge_ScanSize"/>
+    <Setting id="PO_M61_IAge_CreatePackageInThePast" type="CheckBox" defaultValue="0" caption="~06c86 Create packages in the past" attributeName="IAge_CreatePackageInThePast"/>
+    <!--adarve3, 13.02.2014, A5528 : observed settings, readonly in plan project, #14-->
+    <Setting id="PO_M61_IAge_DefaultSystemUser" type="TextBox" caption="~06c8a Default system user" attributeName="IAge_DefaultSystemUser">
+      <Class assembly="Comos.Platform.ProjectSettings.Extensions" class="Comos.Platform.ProjectSettings.Extensions.MaintenanceDefaultOptionsExtensions"/>
+    </Setting>
+    <Setting id="PO_M61_IAge_MaterialCDevice" type="ObjectPointer" caption="~06c8b Material base object" attributeName="IAge_MaterialCDevice">
+      <Class assembly="Comos.Platform.ProjectSettings.Extensions" class="Comos.Platform.ProjectSettings.Extensions.MaintenanceDefaultOptionsExtensions"/>
+    </Setting>
+    <Setting id="PO_M61_IAge_PersonRefCDevice" type="ObjectPointer" caption="~06c8d Person reference base object" attributeName="IAge_PersonRefCDevice">
+      <Class assembly="Comos.Platform.ProjectSettings.Extensions" class="Comos.Platform.ProjectSettings.Extensions.MaintenanceDefaultOptionsExtensions"/>
+    </Setting>
+    <Setting id="PO_M61_IAge_GenericQualificationCDevice" type="ObjectPointer" caption="~06c90 Qualification base object" attributeName="IAge_GenericQualificationCDevice">
+      <Class assembly="Comos.Platform.ProjectSettings.Extensions" class="Comos.Platform.ProjectSettings.Extensions.MaintenanceDefaultOptionsExtensions"/>
+    </Setting>
+    <Setting id="PO_M61_IAge_GenericQualificationRequirementCDevice" type="ObjectPointer" caption="~06c92 Qualification requirement base object" attributeName="IAge_GenericQualificationRequirementCDevice">
+      <Class assembly="Comos.Platform.ProjectSettings.Extensions" class="Comos.Platform.ProjectSettings.Extensions.MaintenanceDefaultOptionsExtensions"/>
+    </Setting>
+    <Setting id="PO_M61_IAge_DefaultQualificationObject" type="ObjectPointer" caption="~080e3 Default qualification base object" attributeName="PO_M61_IAge_DefaultQualificationObject">
+      <Class assembly="Comos.Platform.ProjectSettings.Extensions" class="Comos.Platform.ProjectSettings.Extensions.MaintenanceDefaultOptionsExtensions"/>
+    </Setting>
+
+    <!--Setting id="PO_M61_IAge_GenericBookingCSpec" type="TextBox" caption="Generic booking base specification" attributeName="IAge_GenericBookingCSpec">
+        <Class assembly="Comos.Platform.ProjectSettings.Extensions" class="Comos.Platform.ProjectSettings.Extensions.MaintenanceDefaultOptionsExtensions"/>
+      </Setting-->
+    <Setting id="PO_M61_IAge_MembershipRootDevice" type="ObjectPointer" caption="~06c93 Membership root object" attributeName="IAge_MembershipRootDevice">
+      <Class assembly="Comos.Platform.ProjectSettings.Extensions" class="Comos.Platform.ProjectSettings.Extensions.MaintenanceDefaultOptionsExtensions"/>
+    </Setting>
+    <Setting id="PO_M61_IAge_ClassifcationRoot" type="ObjectPointer" caption="~06c94 Classification root" attributeName="IAge_ClassifcationRoot">
+      <Class assembly="Comos.Platform.ProjectSettings.Extensions" class="Comos.Platform.ProjectSettings.Extensions.MaintenanceDefaultOptionsExtensions"/>
+    </Setting>
+    <!--adarve3 Ende-->
+    <!--z003a4yb, 02.06.2014-->
+    <Setting id="PO_M01_DWH_CustomFPFolderCDevice" type="ObjectPointer" caption="~06ce8 Custom FP-tables folder" attributeName="DWH_CustomFPFolderCDevice"></Setting>
+    <Setting id="PO_M61_IAge_GoodReceiptRootCDevice" type="ObjectPointer" caption="~06ff1 Goods temporary storage" attributeName="IAge_GoodReceiptRootCDevice"/>
+    <Setting id="PO_M61_IAge_Event" type="ObjectPointer" caption="~06ce9 Event base object" attributeName="IAge_Event">
+      <Class assembly="Comos.Platform.ProjectSettings.Extensions" class="Comos.Platform.ProjectSettings.Extensions.MaintenanceDefaultOptionsExtensions"/>
+    </Setting>
+    <Setting id="PO_M61_IAge_DiagramCDevice" type="ObjectPointer" caption="~06e2e Diagram base object" attributeName="IAge_DiagramCDevice">
+      <Class assembly="Comos.Platform.ProjectSettings.Extensions" class="Comos.Platform.ProjectSettings.Extensions.MaintenanceDefaultOptionsExtensions"/>
+    </Setting>
+    <Setting id="PO_M61_IAge_LogisticsCDevice" type="ObjectPointer" caption="~06e2f Logistics base object" attributeName="IAge_LogisticsCDevice">
+      <Class assembly="Comos.Platform.ProjectSettings.Extensions" class="Comos.Platform.ProjectSettings.Extensions.MaintenanceDefaultOptionsExtensions"/>
+    </Setting>
+    <Setting id="PO_M61_IAge_LogicalSymbolDefinition" type="ObjectPointer" caption="~06e31 LogicalSymbolDefinition base object" attributeName="IAge_LogicalSymbolDefinition">
+      <Class assembly="Comos.Platform.ProjectSettings.Extensions" class="Comos.Platform.ProjectSettings.Extensions.MaintenanceDefaultOptionsExtensions"/>
+    </Setting>
+    <Setting id="PO_M61_IAge_QueryInspectionObjects" type="ObjectPointer" caption="~06e32 QueryInspectionObjects" attributeName="IAge_QueryInspectionObjects">
+      <Class assembly="Comos.Platform.ProjectSettings.Extensions" class="Comos.Platform.ProjectSettings.Extensions.MaintenanceDefaultOptionsExtensions"/>
+    </Setting>
+    <Setting id="PO_M61_IAge_QueryStatus" type="ObjectPointer" caption="~0313a QueryStatus" attributeName="IAge_QueryStatus">
+      <Class assembly="Comos.Platform.ProjectSettings.Extensions" class="Comos.Platform.ProjectSettings.Extensions.MaintenanceDefaultOptionsExtensions"/>
+    </Setting>
+    <Setting id="PO_M61_IAge_QueryOrder" type="ObjectPointer" caption="~06e35 QueryOrder" attributeName="IAge_QueryOrder">
+      <Class assembly="Comos.Platform.ProjectSettings.Extensions" class="Comos.Platform.ProjectSettings.Extensions.MaintenanceDefaultOptionsExtensions"/>
+    </Setting>
+    <Setting id="PO_M61_IAge_QueryImExport" type="ObjectPointer" caption="~06e33 QueryImExport" attributeName="IAge_QueryImExport">
+      <Class assembly="Comos.Platform.ProjectSettings.Extensions" class="Comos.Platform.ProjectSettings.Extensions.MaintenanceDefaultOptionsExtensions"/>
+    </Setting>
+    <!--z003a4yb Ende-->
+
+    <!--z003a4yb, 22.12.2014-->
+    <Setting id="PO_M61_IAge_MaintenancePlanInspection" type="ObjectPointer" caption="~073db Maintenance Plan Inspection" attributeName="IAge_MaintenancePlanInspection">
+      <Class assembly="Comos.Platform.ProjectSettings.Extensions" class="Comos.Platform.ProjectSettings.Extensions.MaintenanceDefaultOptionsExtensions"/>
+    </Setting>
+
+    <Setting id="PO_M22_XMpLant_Import_CDeviceSearchNode" type="ObjectPointer"   caption="~071fd Search node 1" attributeName ="XMpLant_Import_CDeviceSearchNode">
+      <ToolTip itx = "~06abd Specifies the starting node for the XMpLant import to search for base objects by ComponentClass."/>
+    </Setting>
+    <Setting id="PO_M22_XMpLant_Import_CDeviceSearchNode_2" type="ObjectPointer" caption="~071fe Search node 2" attributeName ="XMpLant_Import_CDeviceSearchNode_2">
+      <ToolTip itx = "~06abd Specifies the starting node for the XMpLant import to search for base objects by ComponentClass."/>
+    </Setting>
+    <Setting id="PO_M22_XMpLant_Import_CDeviceSearchNode_3" type="ObjectPointer" caption="~071ff Search node 3" attributeName ="XMpLant_Import_CDeviceSearchNode_3">
+      <ToolTip itx = "~06abd Specifies the starting node for the XMpLant import to search for base objects by ComponentClass."/>
+    </Setting>
+    <Setting id="PO_M22_XMpLant_Import_CDeviceSearchNode_4" type="ObjectPointer" caption="~07200 Search node 4"  attributeName ="XMpLant_Import_CDeviceSearchNode_4">
+      <ToolTip itx = "~06abd Specifies the starting node for the XMpLant import to search for base objects by ComponentClass."/>
+    </Setting>
+    <Setting id="PO_M22_XMpLant_Import_CDeviceSearchNode_5" type="ObjectPointer" caption="~07201 Search node 5"  attributeName ="XMpLant_Import_CDeviceSearchNode_5">
+      <ToolTip itx = "~06abd Specifies the starting node for the XMpLant import to search for base objects by ComponentClass."/>
+    </Setting>
+    <Setting id="PO_M22_XMpLant_Import_CDeviceSearchNode_6" type="ObjectPointer" caption="~07202 Search node 6"  attributeName ="XMpLant_Import_CDeviceSearchNode_6">
+      <ToolTip itx = "~06abd Specifies the starting node for the XMpLant import to search for base objects by ComponentClass."/>
+    </Setting>
+    <Setting id="PO_M22_XMpLant_Import_CDeviceSearchNode_7" type="ObjectPointer" caption="~07203 Search node 7"  attributeName ="XMpLant_Import_CDeviceSearchNode_7">
+      <ToolTip itx = "~06abd Specifies the starting node for the XMpLant import to search for base objects by ComponentClass."/>
+    </Setting>
+    <Setting id="PO_M22_XMpLant_Import_CDeviceSearchNode_8" type="ObjectPointer" caption="~07204 Search node 8"  attributeName ="XMpLant_Import_CDeviceSearchNode_8">
+      <ToolTip itx = "~06abd Specifies the starting node for the XMpLant import to search for base objects by ComponentClass."/>
+    </Setting>
+    <Setting id="PO_M22_XMpLant_Import_CDeviceSearchNode_9" type="ObjectPointer" caption="~07205 Search node 9"  attributeName ="XMpLant_Import_CDeviceSearchNode_9">
+      <ToolTip itx = "~06abd Specifies the starting node for the XMpLant import to search for base objects by ComponentClass."/>
+    </Setting>
+    <Setting id="PO_M22_XMpLant_Import_CDeviceSearchNode_10" type="ObjectPointer" caption="~07206 Search node 10"  attributeName ="XMpLant_Import_CDeviceSearchNode_10">
+      <ToolTip itx = "~06abd Specifies the starting node for the XMpLant import to search for base objects by ComponentClass."/>
+    </Setting>
+    <Setting id="PO_M22_StandardTable_Concrete_Objects" type="ObjectPointer" caption="~07207 Auswahlliste zum Erkennen und Austauschen allgemeiner durch spezifische Elemente" attributeName ="StandardTable_Concrete_Objects">
+      <ToolTip itx = "~07208 Specifies the standardtable for definiton of concrete devices to use, upon actions with general devices."/>
+    </Setting>
+    <Setting id="PO_M22_Data_Connection_Rule" type="ComboBox" defaultValue="0" caption="~079d2 Werkzeug zur Attributsynchronisierung" attributeName="PID_Data_Connection_Rule">
+      <Items>
+        <!-- The values exist in an Enum in POptions (PO_M22_Data_Connection_R) -->
+        <Item id="Key0" value="0" caption="~058f8 Update connected"/>
+        <Item id="Key1" value="1" caption="~079d1 Data flow manager"/>
+      </Items>
+    </Setting>
+    <Setting id="PO_M22_BaseObject_OPC_UniDirectional" type="ObjectPointer" caption="~08ade Base object for unidirectional off page connector" attributeName="PID_BaseObject_OPC_UniDirectional">
+      <ToolTip itx="~08ae0 Off page connector with flow direction" />
+    </Setting>
+    <Setting id="PO_M22_BaseObject_OPC_BiDirectional" type="ObjectPointer" caption="~08adf Base object for bidirectional off page connector" attributeName="PID_BaseObject_OPC_BiDirectional">
+      <ToolTip itx="~08ae1 Off page connector without flow direction" />
+    </Setting>
+    <Setting id="PO_M22_BaseObject_OnPageConnector_UniDirectional" type="ObjectPointer" caption="~08adc Base object for unidirectional on page connector" attributeName="PID_BaseObject_OnPageConnector_UniDirectional">
+      <ToolTip itx="~08ae2 on page connector with flow direction" />
+    </Setting>
+    <Setting id="PO_M22_BaseObject_OnPageConnector_BiDirectional" type="ObjectPointer" caption="~08add Base object for bidirectional on page connector" attributeName="PID_BaseObject_OnPageConnector_BiDirectional">
+      <ToolTip itx="~08ae3 on page connector without flow direction" />
+    </Setting>
+    <Setting id="PO_M20_OPC_Technique" type="ComboBox" defaultValue="0" caption="~0884e Off/on page connector technique" attributeName="Process_OPC_Technique">
+      <Items>
+        <Item id="Key0" value="0" caption="~0884c Graphical element from standard table"/>
+        <Item id="Key1" value="1" caption="~0884d Off/on page connector objects"/>
+      </Items>
+      <Class assembly="Comos.Platform.ProjectSettings.Extensions" class="Comos.Platform.ProjectSettings.Extensions.OffOnPageConnectorTechnique"/>
+      <ToolTip itx ="~08adb You will be able to change only if there is no P&amp;ID exist in current project."/>
+    </Setting>
+
+    <!--FEED Setting items-->
+    <Setting id="PO_M21_PointerToSimObjectsNode" type="ObjectPointer" caption="~067f1 Base object node for simulation objects" attributeName="FEED_PointerToSimObjectsNode">
+      <ToolTip itx="~067ae Specifies the base object node according to current norm below which the simulation objects are held." />
+    </Setting>
+    <Setting id="PO_M21_PointerToStreamObjectsNode" type="ObjectPointer" caption="~06aca Base object node for stream objects" attributeName="FEED_PointerToStreamObjectsNode">
+      <ToolTip itx="~06acb Specifies the base object node according to current norm below which the stream objects are held." />
+    </Setting>
+    <Setting id="PO_M21_PointerToMaterialBaseObject" type="ObjectPointer" caption="~06acc Base object for pure component" attributeName="FEED_PointerToMaterialBaseObject">
+      <ToolTip itx="~06acd Specifies the base object for the empty pure component." />
+    </Setting>
+    <Setting id="PO_M21_PointerToMaterialStreamListQuery" type="ObjectPointer" caption="~06ace Base object for query on material stream list tab" attributeName="FEED_PointerToMaterialStreamListQuery">
+      <ToolTip itx="~06acf Specifies the base object for the query listing the material streams below a process stream." />
+    </Setting>
+    <Setting id="PO_M21_PointerToComponentListQuery" type="ObjectPointer" caption="~06ad0 Base object for query on component list tab" attributeName="FEED_PointerToComponentListQuery">
+      <ToolTip itx="~06ad1 Specifies the base object for the query listing the components below a material stream." />
+    </Setting>
+    <Setting id="PO_M21_PointerToProcessStartingCurrentStructure" type="ObjectPointer" caption="~06ad2 Process base node according to current structure" attributeName="FEED_PointerToProcessStartingCurrentStructure">
+      <ToolTip itx="~06ad3 Specifies the starting node for FEED. To be found in General oder FEED structure project presettings." />
+    </Setting>
+    <Setting id="PO_M21_BaseObject_OPC_UniDirectional" type="ObjectPointer" caption="~08ade Base object for unidirectional off page connector" attributeName="FEED_BaseObject_OPC_UniDirectional">
+      <ToolTip itx="~08ae0 Off page connector with flow direction" />
+    </Setting>
+    <Setting id="PO_M21_BaseObject_OPC_BiDirectional" type="ObjectPointer" caption="~08adf Base object for bidirectional off page connector" attributeName="FEED_BaseObject_OPC_BiDirectional">
+      <ToolTip itx="~08ae1 Off page connector without flow direction" />
+    </Setting>
+    <Setting id="PO_M21_BaseObject_OnPageConnector_UniDirectional" type="ObjectPointer" caption="~08adc Base object for unidirectional on page connector" attributeName="FEED_BaseObject_OnPageConnector_UniDirectional">
+      <ToolTip itx="~08ae2 on page connector with flow direction" />
+    </Setting>
+    <Setting id="PO_M21_BaseObject_OnPageConnector_BiDirectional" type="ObjectPointer" caption="~08add Base object for bidirectional on page connector" attributeName="FEED_BaseObject_OnPageConnector_BiDirectional">
+      <ToolTip itx="~08ae3 on page connector without flow direction" />
+    </Setting>
+
+    <!--End FEED Setting items-->
+
+    <Setting id="PO_M20_EA_OPM_EXPORT_EXPORTMAPPINGDEFINITION_Group" type="UserControl" caption="">
+      <Class assembly="Comos.EngineeringAdapter.Comos.Configuration, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null" class="Comos.EngineeringAdapter.Comos.Configuration.SettingExtensions.HorizontalControlStripSettingExtension" />
+    </Setting>
+
+    <Setting id="PO_M20_EA_OPM_EXPORT_EXPORTMAPPINGDEFINITION_Action_Edit" type="Button" caption="~0047b Edit" observedSettings="PO_M20_EA_OPM_EXPORT_EXPORTMAPPINGDEFINITION" attributeName="eClassMappingDefinition">
+      <Class assembly="Comos.EngineeringAdapter.Comos.Configuration, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null" class="Comos.EngineeringAdapter.Comos.Configuration.SettingExtensions.EditFileSettingExtension" />
+      <ToolTip itx="~06f68 Opens an editor for the mapping file." />
+    </Setting>
+
+    <Setting id="PO_M20_EA_OPM_EXPORT_EXPORTMAPPINGDEFINITION_Action_Import" type="Button" caption="~00476 Import" observedSettings="PO_M20_EA_OPM_EXPORT_EXPORTMAPPINGDEFINITION" attributeName="eClassMappingDefinition">
+      <Class assembly="Comos.EngineeringAdapter.Comos.Configuration, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null" class="Comos.EngineeringAdapter.Comos.Configuration.SettingExtensions.ImportFileSettingExtension">
+        <Parameter name="ImportBaseDirectory" value="eClass\Mappings\Export" />
+      </Class>
+      <ToolTip itx="~06f62 Imports the referenced file to the Comos database." />
+    </Setting>
+
+    <Setting id="PO_M20_EA_OPM_EXPORT_EXPORTMAPPINGDEFINITION_Action_Export" type="Button" caption="~00bb1 Export" observedSettings="PO_M20_EA_OPM_EXPORT_EXPORTMAPPINGDEFINITION" attributeName="eClassMappingDefinition">
+      <Class assembly="Comos.EngineeringAdapter.Comos.Configuration, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null" class="Comos.EngineeringAdapter.Comos.Configuration.SettingExtensions.ExportFileSettingExtension" />
+      <ToolTip itx="~06f61 Exports the referenced file contained in the Comos data base to another location." />
+    </Setting>
+
+    <Setting id="PO_M20_EA_OPM_EXPORT_EXPORTMAPPINGDEFINITION" type="FileOpenDialog" caption="~07126 Mapping definition file path" attributeName="eClassMappingDefinition" filter="Mapping definition files (*.gmad)|*.gmad|All files (*.*)|*.*" filterIndex="0" initialDirectory="">
+      <ToolTip itx="~07125 Mapping definition file to be used for eCl@ss import." />
+    </Setting>
+
+    <!-- eClass OntoML -->
+    <Setting id="PO_M20_EA_OPM_EXPORT_EXPORTONTOML_Group" type="UserControl" caption="">
+      <Class assembly="Comos.EngineeringAdapter.Comos.Configuration, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null" class="Comos.EngineeringAdapter.Comos.Configuration.SettingExtensions.HorizontalControlStripSettingExtension" />
+    </Setting>
+
+    <Setting id="PO_M20_EA_OPM_EXPORT_EXPORTONTOML_Action_Import" type="Button" caption="~00476 Import" observedSettings="PO_M20_EA_OPM_EXPORT_EXPORTONTOML" attributeName="eClassONTOML">
+      <Class assembly="Comos.EngineeringAdapter.Comos.Configuration, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null" class="Comos.EngineeringAdapter.Comos.Configuration.SettingExtensions.ImportFileSettingExtension">
+        <Parameter name="ImportBaseDirectory" value="eClass\Mappings\Export" />
+      </Class>
+      <ToolTip itx="~07127 Imports the referenced file to the Comos database." />
+    </Setting>
+    <Setting id="PO_M20_EA_OPM_EXPORT_EXPORTONTOML" type="FileOpenDialog" caption="~07128 OntoML file path" attributeName="eClassONTOML" filter="eCl@ss OntoML (*.xml)|*.xml|All files (*.*)|*.*" filterIndex="0" initialDirectory="">
+      <ToolTip itx="~07129 OntoML file to be used for eCl@ss import." />
+    </Setting>
+    <!-- eClass OntoML end -->
+    <!-- eClass UnitsML -->
+    <Setting id="PO_M20_EA_OPM_EXPORT_EXPORTUNITSML_Group" type="UserControl" caption="">
+      <Class assembly="Comos.EngineeringAdapter.Comos.Configuration, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null" class="Comos.EngineeringAdapter.Comos.Configuration.SettingExtensions.HorizontalControlStripSettingExtension" />
+    </Setting>
+    <Setting id="PO_M20_EA_OPM_EXPORT_EXPORTUNITSML_Action_Import" type="Button" caption="~00476 Import" observedSettings="PO_M20_EA_OPM_EXPORT_EXPORTUNITSML" attributeName="eClassUnitsML">
+      <Class assembly="Comos.EngineeringAdapter.Comos.Configuration, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null" class="Comos.EngineeringAdapter.Comos.Configuration.SettingExtensions.ImportFileSettingExtension">
+        <Parameter name="ImportBaseDirectory" value="eClass\Mappings\Export" />
+      </Class>
+      <ToolTip itx="~07127 Imports the referenced file to the Comos database." />
+    </Setting>
+    <Setting id="PO_M20_EA_OPM_EXPORT_EXPORTUNITSML" type="FileOpenDialog" caption="~0712a UnitsML file path" attributeName="eClassUnitsML" filter="eCl@ss UnitsML (*.xml)|*.xml|All files (*.*)|*.*" filterIndex="0" initialDirectory="">
+      <ToolTip itx="~0712b Units Definition File corresponding to the OntoML." />
+    </Setting>
+    <!-- eClass UnitsML end -->
+    <Setting id="PO_M20_ECLASS_DOCUMENTFOLDER" type="ObjectPointer" caption="~07587 folder for additional documentation" attributeName="eClassFolderForAdditionalDocumentation" >
+      <ToolTip itx="~075ae defines, where additional documents will be placed during import." />
+    </Setting>
+
+    <!-- ESign -->
+    <Category id="CAT_1d_ESign" caption="eSign"/>
+    <Setting id="GRP_1d1_ESignTypeProps" type="Group" caption="~07951 Signature type"/>
+    <Setting id="PO_ActivateESign" type="CheckBox" defaultValue="0" caption="~07952 activate eSign classic" attributeName="ActivateESign" observedSettings="PO_REVISIONARCHIVE;PO_CreatePDFFileInFirstRevisionStep;PO_M04_ESign_ActivateInPdf">
+      <ToolTip itx="~07954 The options 'Revision archive' and 'Create PDF file at first step' have to be set in the Revision Options"/>
+      <Class assembly="Comos.Platform.ProjectSettings.Extensions" class="Comos.Platform.ProjectSettings.Extensions.RevisionArchiveExtension"/>
+    </Setting>
+
+    <Setting id="PO_M04_ESign_ActivateInPdf" type="CheckBox" defaultValue="0" caption="~07953 activate eSign in PDF" attributeName="ESign_ActivateInPdf" observedSettings="PO_REVISIONARCHIVE;PO_CreatePDFFileInFirstRevisionStep;PO_ActivateESign">
+      <ToolTip itx="~07954 The options 'Revision archive' and 'Create PDF file at first step' have to be set in the Revision Options"/>
+      <Class assembly="Comos.Platform.ProjectSettings.Extensions" class="Comos.Platform.ProjectSettings.Extensions.RevisionArchiveExtension"/>
+    </Setting>
+
+    <Setting id="GRP_1d2_ESignProps" type="Group" caption="~07955 Signature position"/>
+    <Setting id="PO_M04_ESign_Visible" type="CheckBox" defaultValue="0" caption="~07956 Signature visible on PDF" attributeName="ESign_Visible" observedSettings="PO_M04_ESign_ActivateInPdf">
+      <Class assembly="Comos.Platform.ProjectSettings.Extensions" class="Comos.Platform.ProjectSettings.Extensions.ESignExtensions"/>
+    </Setting>
+    <Setting id="PO_M04_ESign_PageNumber" type="TextBox" caption="~06759 Page number" attributeName="ESign_PageNumber" observedSettings="PO_M04_ESign_ActivateInPdf;PO_M04_ESign_Visible" defaultValue="1">
+      <Class assembly="Comos.Platform.ProjectSettings.Extensions" class="Comos.Platform.ProjectSettings.Extensions.ESignExtensions"/>
+    </Setting>
+    <Setting id="PO_M04_ESign_LowerLeftX" type="TextBox" caption="~07957 Left bottom corner X (PDF points)" attributeName="ESign_LowerLeftX" observedSettings="PO_M04_ESign_ActivateInPdf;PO_M04_ESign_Visible" defaultValue="0">
+      <Class assembly="Comos.Platform.ProjectSettings.Extensions" class="Comos.Platform.ProjectSettings.Extensions.ESignExtensions"/>
+    </Setting>
+    <Setting id="PO_M04_ESign_LowerLeftY" type="TextBox" caption="~07958 Left bottom corner Y (PDF points)" attributeName="ESign_LowerLeftY" observedSettings="PO_M04_ESign_ActivateInPdf;PO_M04_ESign_Visible" defaultValue="0">
+      <Class assembly="Comos.Platform.ProjectSettings.Extensions" class="Comos.Platform.ProjectSettings.Extensions.ESignExtensions"/>
+    </Setting>
+    <Setting id="PO_M04_ESign_Width" type="TextBox" caption="~07959 Width (PDF points)" attributeName="ESign_Width" observedSettings="PO_M04_ESign_ActivateInPdf;PO_M04_ESign_Visible;PO_M04_ESign_Direction;PO_M04_ESign_Name_Width;PO_M04_ESign_Location_Width;PO_M04_ESign_Date_Width;PO_M04_ESign_EMail_Width;PO_M04_ESign_Reason_Width" defaultValue="0">
+      <Class assembly="Comos.Platform.ProjectSettings.Extensions" class="Comos.Platform.ProjectSettings.Extensions.ESignExtensions"/>
+    </Setting>
+    <Setting id="PO_M04_ESign_Height" type="TextBox" caption="~0795a Height (PDF points)" attributeName="ESign_Height" observedSettings="PO_M04_ESign_ActivateInPdf;PO_M04_ESign_Visible" defaultValue="0">
+      <Class assembly="Comos.Platform.ProjectSettings.Extensions" class="Comos.Platform.ProjectSettings.Extensions.ESignExtensions"/>
+    </Setting>
+    <Setting id="PO_M04_ESign_Image" type="FileOpenDialog" caption="~00607 Image" attributeName="ESign_Image" defaultValue="">
+      <Class assembly="Comos.Platform.ProjectSettings.Extensions" class="Comos.Platform.ProjectSettings.Extensions.FileOpenDialogExtensionCopyFile" />
+    </Setting>
+    <Setting id="PO_M04_ESign_Direction" type="RadioButtonGroup" defaultValue="0" attributeName="ESign_Direction" observedSettings="PO_M04_ESign_ActivateInPdf;PO_M04_ESign_Visible;PO_M04_ESign_Width;PO_M04_ESign_Height;PO_M04_ESign_Name_Width;PO_M04_ESign_Location_Width;PO_M04_ESign_Date_Width;PO_M04_ESign_EMail_Width;PO_M04_ESign_Reason_Width">
+      <Items>
+        <Item id="Key0" value="0" caption="~0795b Vertical text alignment"/>
+        <Item id="Key1" value="1" caption="~0795c Horizontal text alignment"/>
+      </Items>
+      <Class assembly="Comos.Platform.ProjectSettings.Extensions" class="Comos.Platform.ProjectSettings.Extensions.ESignExtensions"/>
+    </Setting>
+    <!--<Setting id="PO_M04_ESign_FontSize" type="TextBox" caption="Font size" attributeName="ESign_FontSize" observedSettings="PO_M04_ESign_ActivateInPdf" defaultValue="10">
+      <Class assembly="Comos.Platform.ProjectSettings.Extensions" class="Comos.Platform.ProjectSettings.Extensions.ESignExtensions"/>
+    </Setting>
+    <Setting id="PO_M04_ESign_FontName" type="TextBox" caption="Font name" attributeName="ESign_FontName" observedSettings="PO_M04_ESign_ActivateInPdf" defaultValue="Arial">
+      <Class assembly="Comos.Platform.ProjectSettings.Extensions" class="Comos.Platform.ProjectSettings.Extensions.ESignExtensions"/>
+    </Setting>
+    <Setting id="PO_M04_ESign_FillColor" type="TextBox" caption="Fill color" attributeName="ESign_FillColor" observedSettings="PO_M04_ESign_ActivateInPdf" defaultValue="-1">
+      <Class assembly="Comos.Platform.ProjectSettings.Extensions" class="Comos.Platform.ProjectSettings.Extensions.ESignExtensions"/>
+    </Setting>
+    <Setting id="PO_M04_ESign_StrokeColor" type="TextBox" caption="Line color" attributeName="ESign_StrokeColor" observedSettings="PO_M04_ESign_ActivateInPdf" defaultValue="0">
+      <Class assembly="Comos.Platform.ProjectSettings.Extensions" class="Comos.Platform.ProjectSettings.Extensions.ESignExtensions"/>
+    </Setting>!-->
+    <Setting id="GRP_1d3_ESignTextProps" type="Group" caption="~0795d Additional signature information"/>
+    <Setting id="PO_M04_ESign_UseName" type="CheckBox" defaultValue="1" caption="~00077 Name" attributeName="ESign_UseName" observedSettings="PO_M04_ESign_ActivateInPdf">
+      <Class assembly="Comos.Platform.ProjectSettings.Extensions" class="Comos.Platform.ProjectSettings.Extensions.ESignExtensions"/>
+    </Setting>
+    <Setting id="PO_M04_ESign_Name_Width" type="TextBox" caption="~07959 Width (PDF points)" attributeName="ESign_Name_Width"  defaultValue="0" observedSettings="PO_M04_ESign_ActivateInPdf;PO_M04_ESign_Visible;PO_M04_ESign_Direction;PO_M04_ESign_UseName;PO_M04_ESign_Width;PO_M04_ESign_Reason_Width;PO_M04_ESign_Location_Width;PO_M04_ESign_Date_Width;PO_M04_ESign_EMail_Width">
+      <Class assembly="Comos.Platform.ProjectSettings.Extensions" class="Comos.Platform.ProjectSettings.Extensions.ESignExtensions"/>
+    </Setting>
+    <Setting id="PO_M04_ESign_UseReason" type="CheckBox" defaultValue="1" caption="~01b2e Reason" attributeName="ESign_UseReason" observedSettings="PO_M04_ESign_ActivateInPdf">
+      <Class assembly="Comos.Platform.ProjectSettings.Extensions" class="Comos.Platform.ProjectSettings.Extensions.ESignExtensions"/>
+    </Setting>
+    <Setting id="PO_M04_ESign_Reason_Width" type="TextBox" caption="~07959 Width (PDF points)" attributeName="ESign_Reason_Width"   defaultValue="0" observedSettings="PO_M04_ESign_ActivateInPdf;PO_M04_ESign_Visible;PO_M04_ESign_Direction;PO_M04_ESign_UseReason;PO_M04_ESign_Width;PO_M04_ESign_Name_Width;PO_M04_ESign_Location_Width;PO_M04_ESign_Date_Width;PO_M04_ESign_EMail_Width">
+      <Class assembly="Comos.Platform.ProjectSettings.Extensions" class="Comos.Platform.ProjectSettings.Extensions.ESignExtensions"/>
+    </Setting>
+    <Setting id="PO_M04_ESign_UseLocation" type="CheckBox" defaultValue="0" caption="~0001b Location" attributeName="ESign_UseLocation" observedSettings="PO_M04_ESign_ActivateInPdf">
+      <Class assembly="Comos.Platform.ProjectSettings.Extensions" class="Comos.Platform.ProjectSettings.Extensions.ESignExtensions"/>
+    </Setting>
+    <Setting id="PO_M04_ESign_Location_Width" type="TextBox" caption="~07959 Width (PDF points)" attributeName="ESign_Location_Width"   defaultValue="0" observedSettings="PO_M04_ESign_ActivateInPdf;PO_M04_ESign_Visible;PO_M04_ESign_Direction;PO_M04_ESign_Width;PO_M04_ESign_UseLocation;PO_M04_ESign_Name_Width;PO_M04_ESign_Date_Width;PO_M04_ESign_Reason_Width;PO_M04_ESign_EMail_Width">
+      <Class assembly="Comos.Platform.ProjectSettings.Extensions" class="Comos.Platform.ProjectSettings.Extensions.ESignExtensions"/>
+    </Setting>
+
+    <Setting id="PO_M04_ESign_UseDate" type="CheckBox" defaultValue="0" caption="~0034f Date" attributeName="ESign_UseDate" observedSettings="PO_M04_ESign_ActivateInPdf">
+      <Class assembly="Comos.Platform.ProjectSettings.Extensions" class="Comos.Platform.ProjectSettings.Extensions.ESignExtensions"/>
+    </Setting>
+    <Setting id="PO_M04_ESign_Date_Width" type="TextBox" caption="~07959 Width (PDF points)" attributeName="ESign_Date_Width"   defaultValue="0" observedSettings="PO_M04_ESign_ActivateInPdf;PO_M04_ESign_Visible;PO_M04_ESign_Direction;PO_M04_ESign_UseDate;PO_M04_ESign_Width;PO_M04_ESign_Name_Width;PO_M04_ESign_Location_Width;PO_M04_ESign_Reason_Width;PO_M04_ESign_EMail_Width">
+      <Class assembly="Comos.Platform.ProjectSettings.Extensions" class="Comos.Platform.ProjectSettings.Extensions.ESignExtensions"/>
+    </Setting>
+    <Setting id="PO_M04_ESign_UseEMail" type="CheckBox" defaultValue="0" caption="~020fd E-mail" attributeName="ESign_UseEMail" observedSettings="PO_M04_ESign_ActivateInPdf">
+      <Class assembly="Comos.Platform.ProjectSettings.Extensions" class="Comos.Platform.ProjectSettings.Extensions.ESignExtensions"/>
+    </Setting>
+    <Setting id="PO_M04_ESign_EMail_Width" type="TextBox" caption="~07959 Width (PDF points)" attributeName="ESign_EMail_Width"   defaultValue="0" observedSettings="PO_M04_ESign_ActivateInPdf;PO_M04_ESign_Visible;PO_M04_ESign_Direction;PO_M04_ESign_UseEMail;PO_M04_ESign_Width;PO_M04_ESign_Name_Width;PO_M04_ESign_Location_Width;PO_M04_ESign_Reason_Width;PO_M04_ESign_Date_Width">
+      <Class assembly="Comos.Platform.ProjectSettings.Extensions" class="Comos.Platform.ProjectSettings.Extensions.ESignExtensions"/>
+    </Setting>
+
+    <Setting id="GRP_1d7_ESignDateTimeFormat" type="Group" caption="~0870e Date &amp; Time format configuration"/>
+    <Setting id="id_M04_Esign_DateTimeConfigControl" type="UserControl" caption="" observedSettings="id_M04_Esign_DateTimeConfigControl;PO_M04_ESign_DateTimeFormat;PO_M04_ESign_DateTimeRegion;PO_M04_ESign_DateTimeExample;PO_M04_ESign_ActivateInPdf;PO_M04_ESign_UseDate" attributeName="id_M04_Esign_DateTimeConfigControl">
+      <Class assembly="Comos.Platform.ProjectSettings.Extensions, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null" class="Comos.Platform.ProjectSettings.Extensions.EsignDateConfiguration"/>
+      <Items>
+        <Item id="0" value="Default(OS Region Setting)" caption="Default(OS Region Setting)"/>
+        <Item id="1" value="en-US" caption="en-US"/>
+        <Item id="2" value="de-DE" caption="de-DE"/>
+        <Item id="3" value="zh-CN" caption="zh-CN"/>
+      </Items>
+    </Setting>
+    <Setting id="PO_M04_ESign_DateTimeFormat" type="UserControl" defaultValue="yyyy'/'MM'/'dd HH:mm:ss '(UTC'zzz')'" observedSettings="PO_M04_ESign_DateTimeFormat" attributeName="PO_M04_ESign_DateTimeFormat" IsVisible ="false"/>
+    <Setting id="PO_M04_ESign_DateTimeRegion" type="UserControl" defaultValue="en-US" observedSettings="PO_M04_ESign_DateTimeRegion" attributeName="PO_M04_ESign_DateTimeRegion" IsVisible ="false"/>
+    <Setting id="PO_M04_ESign_DateTimeExample" type="UserControl" observedSettings="PO_M04_ESign_DateTimeExample" defaultValue="1970/01/01 00:00:00 (UTC+05:30)" attributeName="PO_M04_ESign_DateTimeExample" IsVisible ="false"/>
+
+    <Setting id="GRP_1d7_ESignUniqueProps" type="Group" caption="~08250 Signature uniqueness criteria"/>
+    <Setting id="PO_M04_ESign_UseUniqueName" type="CheckBox" defaultValue="0" caption="~00077 Name" attributeName="ESign_UseUniqueName" observedSettings="PO_M04_ESign_ActivateInPdf;PO_M04_ESign_UseName">
+      <Class assembly="Comos.Platform.ProjectSettings.Extensions" class="Comos.Platform.ProjectSettings.Extensions.ESignExtensions"/>
+    </Setting>
+    <Setting id="PO_M04_ESign_UseUniqueReason" type="CheckBox" defaultValue="0" caption="~01b2e Reason" attributeName="ESign_UseUniqueReason" observedSettings="PO_M04_ESign_ActivateInPdf;PO_M04_ESign_UseReason">
+      <Class assembly="Comos.Platform.ProjectSettings.Extensions" class="Comos.Platform.ProjectSettings.Extensions.ESignExtensions"/>
+    </Setting>
+    <Setting id="PO_M04_ESign_UseUniqueLocation" type="CheckBox" defaultValue="0" caption="~0001b Location" attributeName="ESign_UseUniqueLocation" observedSettings="PO_M04_ESign_ActivateInPdf;PO_M04_ESign_UseLocation">
+      <Class assembly="Comos.Platform.ProjectSettings.Extensions" class="Comos.Platform.ProjectSettings.Extensions.ESignExtensions"/>
+    </Setting>
+
+    <Setting id="GRP_1d4_ESignReasonProps" type="Group" caption="~0795f Reasons"/>
+    <Setting id="PO_M04_ESign_AllowReasonTextInput" type="CheckBox" defaultValue="0" caption="~0795e Allow text input" attributeName="ESign_AllowReasonTextInput" observedSettings="PO_M04_ESign_ActivateInPdf">
+      <Class assembly="Comos.Platform.ProjectSettings.Extensions" class="Comos.Platform.ProjectSettings.Extensions.ESignExtensions"/>
+    </Setting>
+    <Setting id="PO_M04_ESign_Reasons" type="ObjectPointer" caption="~07960 Standard table for default reasons" attributeName="ESign_Reasons" />
+
+    <Setting id="GRP_1d6_ESignSignatureStyle"  type="Group" caption="~07b93 Signature style"/>
+
+    <Setting id="PO_M04_ESign_StrokeColor" type="UserControl" caption="~07b92 Stroke Color" observedSettings="PO_M04_ESign_ActivateInPdf;PO_M04_ESign_StrokeColor" attributeName="ESign_StrokeColor">
+      <Class assembly="Comos.Platform.ProjectSettings.Extensions, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null" class="Comos.Platform.ProjectSettings.Extensions.EsignColorCtrl"/>
+    </Setting>
+    <Setting id="PO_M04_ESign_FillColor" type="UserControl" caption="~07b90 Fill Color" observedSettings="PO_M04_ESign_ActivateInPdf;PO_M04_ESign_FillColor" attributeName="ESign_FillColor">
+      <Class assembly="Comos.Platform.ProjectSettings.Extensions, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null" class="Comos.Platform.ProjectSettings.Extensions.EsignColorCtrl"/>
+    </Setting>
+    <Setting id="PO_M04_ESign_FontName" type="TextBox" caption="~00d4d Font" attributeName="ESign_FontName" observedSettings="PO_M04_ESign_ActivateInPdf">
+      <Class assembly="Comos.Platform.ProjectSettings.Extensions" class="Comos.Platform.ProjectSettings.Extensions.ESignExtensions"/>
+    </Setting>
+    <Setting id="PO_M04_ESign_FontSize" type="TextBox" caption="~013e4 Font size" attributeName="ESign_FontSize" observedSettings="PO_M04_ESign_ActivateInPdf">
+      <Class assembly="Comos.Platform.ProjectSettings.Extensions" class="Comos.Platform.ProjectSettings.Extensions.ESignExtensions"/>
+    </Setting>
+    <Setting id="PO_M04_ESign_LineWidth" type="TextBox" caption="~013e5 Line width" attributeName="ESign_LineWidth" observedSettings="PO_M04_ESign_ActivateInPdf">
+      <Class assembly="Comos.Platform.ProjectSettings.Extensions" class="Comos.Platform.ProjectSettings.Extensions.ESignExtensions"/>
+    </Setting>
+    <Setting id="GRP_1d5_ESignSecurityProps"  type="Group" caption="~07961 Signature security" observedSettings="PO_M04_ESign_ActivateInPdf">
+      <Class assembly="Comos.Platform.ProjectSettings.Extensions" class="Comos.Platform.ProjectSettings.Extensions.ESignExtensions"/>
+    </Setting>
+    <Setting id="PO_M04_ESign_RequestPassword" type="CheckBox" defaultValue="0" caption="~07962 Use Windows password" attributeName="ESign_RequestPassword" observedSettings="PO_M04_ESign_ActivateInPdf">
+      <Class assembly="Comos.Platform.ProjectSettings.Extensions" class="Comos.Platform.ProjectSettings.Extensions.ESignExtensions"/>
+    </Setting>
+    <Setting id="PO_M04_ESign_TimeStampUrl" type="TextBox" defaultValue="" caption="~07a2c Timestamp server URL" attributeName="ESign_TimeStampUrl" observedSettings="PO_M04_ESign_ActivateInPdf">
+      <Class assembly="Comos.Platform.ProjectSettings.Extensions" class="Comos.Platform.ProjectSettings.Extensions.ESignExtensions"/>
+    </Setting>
+    <Setting id="PO_M04_ESign_TSA_RootCertPath" type="FileOpenDialog" filter="Root Certificate File (*.cer)|*.cer" filterIndex="0" caption="TSA Root Certificate Path" attributeName="ESign_TSA_RootCertPath" >
+      <ToolTip itx = "~08862 Selected Root Certificate will be used as Trusted Root certificate for eSign Embedded Timestamp. Required only for PDFtron provider"/>
+      <Class assembly="Comos.Platform.ProjectSettings.Extensions" class="Comos.Platform.ProjectSettings.Extensions.FileOpenDialogExtensionCopyFile" />
+    </Setting>
+    <!-- ESign end -->
+
+    <!-- WEB M04 -->
+    <Category id="CAT_Web" caption="Mobile Solutions"/>
+    <Setting id="GRP_Comos.Web" type="Group" caption="~06aea Mobile Document Review Einstellungen"/>
+    <Setting id="PO_M04_COM002_COM2001" type="ObjectPointer" caption="~06af0 Stammprojekt für Mobile Document Review" attributeName="COM002_COM2001"/>
+    <Setting id="PO_M04_COM002_COM2002" type="TextBox" caption="~06c5a COMOS WEB Server URL" attributeName="COM002_COM2002"/>
+    <Setting id="PO_M04_COM002_COM2003" type="TextBox" caption="~06c5b COMOS WEB Database Key" attributeName="COM002_COM2003"/>
+    <Setting id="PO_M04_COM002_COM2004" type="TextBox" caption="~07c52 COMOS Walkinside Project ID" attributeName="COM002_COM2004"/>
+    <Setting id="PO_M04_COM002_COM2005" type="ObjectPointer" caption="~085c2 Queries Folder" attributeName="COM002_COM2005"/>
+    <!-- End of Web M04 -->
+
+    <!-- Comos Engineering Portal -->
+    <Setting id="GRP_EngineeringPortal" value="" type="Group" caption="Product Selector"/><!-- TODO: translate if needed and create ITX key -->
+    <Setting id="PO_CEP_TEMPORARY_FOLDER" value="" type="TextBox" caption="~08605 Temporary folder" attributeName="PO_CEP_TEMPORARY_FOLDER"/><!-- TODO: translate if needed and create ITX key -->
+
+    <!--<Setting id="PO_CEP_WEB_SERVER_URL" value="" type="TextBox" caption="~08603 CEP Web Server" attributeName="PO_CEP_WEB_SERVER_URL"/>
+    <Setting id="PO_CEP_USERNAME" value="" type="TextBox" caption="~08601 CEP Username" attributeName="PO_CEP_USERNAME"/>
+    <Setting id="PO_CEP_GTAC_ACCESS_KEY" value="" type="TextBox" caption="~08602 CEP Access key" attributeName="PO_CEP_GTAC_ACCESS_KEY"/>
+    <Setting id="PO_CEP_DOWNLOAD_SERVER_URL" value="" type="TextBox" caption="~08604 CEP Download Server" attributeName="PO_CEP_DOWNLOAD_SERVER_URL"/>-->
+
+    <!--END: Comos Engineering Portal -->
+
+    <!-- Comos Modular Engineering -->
+    <Setting id="GRP_Configurator" value="" type="Group" caption="~083af Configurator"/>
+    <Setting id="PO_ExecutionOnPendingUpdate" defaultValue="1" type="CheckBox" caption="~083b0 Execution on pending update" attributeName="PO_ExecutionOnPendingUpdate"/>
+    <!--END: Comos Modular Engineering -->
+	<!-- COMOS Modular Report -->
+	<Setting id="PO_M00_Modular_Report_Template_Collection" type="ComboBox" defaultValue="1" caption="~08b49 Template collection" iseditable="True" attributeName="Modular_Report_Template_Collection">
+      <Class assembly="Comos.Platform.ProjectSettings.Extensions" class="Comos.Platform.ProjectSettings.Extensions.ModularReportExtension">
+	  <Parameter name="StdTableFullName" value="Y10|M00|A30|Y10M00N00051"/>
+	  </Class>
+    </Setting>
+    <Setting id="PO_M00_Modular_Report_Print_Revision_Rectangles" type="CheckBox" defaultValue="1" caption="~08c21 Print revision rectangles" attributeName="Modular_Report_Print_Revision_Rectangles"/>
+	<Setting id="PO_M00_Modular_Report_Show_Markup" type="ComboBox" defaultValue="2" caption="~08c22 Show markup" iseditable="True" attributeName="Modular_Report_Show_Markup">
+      <Class assembly="Comos.Platform.ProjectSettings.Extensions" class="Comos.Platform.ProjectSettings.Extensions.ModularReportExtension">
+	  <Parameter name="StdTableFullName" value="Y10|M00|A20|Y10M00N00048"/>
+	  </Class>
+    </Setting>
+	<Setting id="PO_M00_Modular_Report_Excel_Export_Settings_List_Only" type="CheckBox" defaultValue="0" caption="~08c23 List only" attributeName="Modular_Report_Excel_Export_Settings_List_Only"/>
+	<!-- END: COMOS Modular Report -->
+  </SettingItems>
+  <!--
+        discribes the hierarchy of the project setting items,
+        referencing the single project setting items from SettingItems range.
+    -->
+  <SettingsHierarchy>
+    <Category idref="CAT_1_General">
+      <Category idref="CAT_1a_Project">
+        <Setting idref="GRP_1a1_General">
+          <Setting idref="SET_General"/>
+          <Setting idref="PO_EditProjSpecsWithoutFunctionRight"/>
+        </Setting>
+        <Setting idref="GRP_1a2_Customer">
+          <Setting idref="COM01_COM0001"/>
+          <Setting idref="COM01_COM0029"/>
+          <Setting idref="COM01_COM0004"/>
+          <Setting idref="COM01_COM0010"/>
+        </Setting>
+        <Setting idref="GRP_1a4_Links">
+          <Setting idref="SET_Links"/>
+        </Setting>
+      </Category>
+      <Category idref="CAT_1b_Standard">
+        <Setting idref="GRP_1b1_Prefix">
+          <Setting idref="SET_cbClasses"/>
+          <Setting idref="SET_cbPrefix"/>
+          <Setting idref="SET_cbSeperator1"/>
+          <Setting idref="SET_cbSeperator2"/>
+          <Setting idref="PO_ToplevelSignsLikeUnitLocation"/>
+        </Setting>
+        <Setting idref="GRP_1b2_Attribute">
+          <Setting idref="PO_NoExponentialNotation"/>
+          <Setting idref="PO_FillDisplayValue"/>
+        </Setting>
+        <Setting idref="GRP_1b3_Static">
+          <Setting idref="PO_StaticLinkEmptySourceDiff"/>
+          <Setting idref="PO_SwitchDynamicToStaticLink"/>
+          <Setting idref="PO_ShowDynamicLinkItalic"/>
+        </Setting>
+        <Setting idref="GRP_1b4_Unit">
+          <Setting idref="SET_txtCurrUnitSystem"/>
+          <Setting idref="SET_cboNewUnitSystem"/>
+          <Setting idref="SET_btnApplyUSChange"/>
+        </Setting>
+        <Setting idref="GRP_1b5_Datetime">
+          <Setting idref="PO_DateTimeFormat"/>
+        </Setting>
+        <Setting idref="GRP_1b5a_InvariantDateTime">
+          <Setting idref="PO_InvariantDateTime_FormatSpecification" />
+          <Setting idref="PO_InvariantDateTime_TimeZoneOffsetInMinutes" />
+          <Setting idref="PO_InvariantDateTime_LocaleName" />
+        </Setting>
+        <Setting idref="GRP_1b6_User">
+          <Setting idref="PO_M01_SetUserProjectMode"/>
+          <Setting idref="PO_RestrictedScriptAccess"/>
+          <Setting idref="PO_RightsReadNoInheritMode"/>
+          <Setting idref="PO_UserRoleAssignment"/>
+          <Setting idref="PO_LayersPerObject"/>
+          <Setting idref="PO_ROLayersRevokeRights"/>
+        </Setting>
+        <Setting idref="GRP_1b7_Other">
+          <Setting idref="PO_M01_ObjectRevision"/>
+          <Setting idref="PO_M01_HistoryBehaviorForInheritedObjects"/>
+          <Setting idref="PO_LocalInstanceProducing"/>
+          <Setting idref="PO_CheckNameWithFolder"/>
+          <Setting idref="SET_CheckNameWithFolder"/>
+          <Setting idref="PO_CheckLabelWithFolder"/>
+          <Setting idref="PO_NormspecificTextMask"/>
+          <!--<Setting idref="PO_M01_UseNumberRanges"/>-->
+          <Setting idref="PO_CopyWithImplementedObjects"/>
+          <Setting idref="PO_UseCDeviceMasksOnTemplateCopy"/>
+          <Setting idref="PO_UseScriptFctDuringCopy"/>
+        </Setting>
+        <Setting idref="GRP_1b8_Workflows">
+          <Setting idref="PO_M01_WF_CAW"/>
+          <Setting idref="GRP_1b9_Workflows">
+            <Setting idref="PO_M01_WF_CRW"/>
+            <Setting idref="PO_M01_WF_CET"/>
+            <Setting idref="PO_M01_WF_SCI"/>
+          </Setting>
+        </Setting>
+        <Setting idref="GRP_2n1_DataAggr">
+          <Setting idref="PO_M01_DWH_CustomFPFolderCDevice"/>
+        </Setting>
+      </Category>
+      <Category idref="CAT_1c_Documents">
+        <Setting idref="GRP_1c1_General">
+          <Setting idref="PO_CheckoutToEditExternalDocs"/>
+          <Setting idref="PO_DefWorkFldrForExternalDocs"/>
+          <Setting idref="PO_DeleteRefDocuments"/>
+          <Setting idref="PO_M00_EnabelAutoVue"/>
+          <Setting idref="SinglePrintJobs"/>
+          <Setting idref="PO_DefaultFontName"/>
+        </Setting>
+        <Setting idref="GRP_1i5_DokOpt">
+          <Setting idref="COM000_PagingMode"/>
+        </Setting>
+        <Setting idref="GRP_1c2_ViewStation">
+          <Setting idref="PO_ViewSTDocDefaultAction"/>
+          <Setting idref="PO_ViewSTNoRevisionBehaviour"/>
+        </Setting>
+        <Setting idref="GRP_1c3_Automatic">
+          <Setting idref="PO_AutoDocRefNameSystem"/>
+          <Setting idref="PO_AutoDocRefProject"/>
+        </Setting>
+        <Setting idref="GRP_1c4_AutoCADExport">
+          <Setting idref="PO_M22_PFD_DXFINIFILE"/>
+          <Setting idref="PO_M22_PFD_DEFAULTDWGFILE"/>
+        </Setting>
+        <Setting idref="GRP_1c6_Redlining">
+          <Setting idref="PO_M22_Redlining_Document_Type"/>
+        </Setting>
+      </Category>
+      <Category idref="CAT_1d_Revision">
+        <Setting idref="GRP_1d1_Server">
+          <Setting idref="PO_ESRServerSide"/>
+          <Setting idref="PO_ESRWatchFolder"/>
+        </Setting>
+        <Setting idref="GRP_1d2_Procedure">
+          <Setting idref="PO_RevisionLabelEditable"/>
+          <Setting idref="PO_DQMRevisionAlwaysPossible"/>
+        </Setting>
+        <Setting idref="GRP_1d4_Monitoring">
+          <Setting idref="PO_OBSERVEDOCUMENTRELEASE"/>
+        </Setting>
+        <Setting idref="GRP_1d5_Settings">
+          <Setting idref="PO_REVISIONARCHIVE"/>
+          <Setting idref="SET_cmdSetTiffSettings"/>
+          <Setting idref ="PO_RevisionArchiveComosPDFExportDocTypes"/>
+          <Setting idref="SET_cmdSetPDFExportSettings"/>
+          <Setting idref="SET_txtRevArchive"/>
+          <Setting idref="PO_CreatePDFFileInFirstRevisionStep"/>
+          <Setting idref="PO_RevisionCheckUnsavedObject"/>
+        </Setting>
+        <Setting idref="GRP_1d6_Report">
+          <Setting idref="PO_EnableContentBasedRevisioning"/>
+          <Setting idref="PO_ShowDeletedTextsInContentBasedRevisioning"/>
+          <Setting idref="PO_ShowDeletedListRowsInContentBasedRevisioning"/>
+          <Setting idref="PO_M00_ReportChangedTextRepresentationOption" />
+          <Setting idref="PO_M00_ReportChangedTextRepresentation" />
+          <Setting idref="RevisionRectangle_OutlineColor"/>
+        </Setting>
+        <Setting idref="GRP_1d7_Redlining">
+          <Setting idref="PO_ViewRevisionWithRedlining"/>
+        </Setting>
+        <Setting idref="GRP_1d8_Other">
+          <Setting idref="PO_EnablePDCatTools"/>
+          <Setting idref="SET_cmdHelp"/>
+          <Setting idref="PO_NoRevisionForInconsistentDocs"/>
+          <Setting idref="PO_TiffViewerPath"/>
+          <Setting idref="PO_IncrementRevisionIndexOverAllLayersUnique"/>
+        </Setting>
+        <Category idref="CAT_1d_ESign">
+          <Setting idref="GRP_1d1_ESignTypeProps">
+            <Setting idref="PO_ActivateESign"/>
+            <Setting idref="PO_M04_ESign_ActivateInPdf"/>
+          </Setting>
+          <Setting idref="GRP_1d2_ESignProps">
+            <Setting idref="PO_M04_ESign_Visible"/>
+            <Setting idref="PO_M04_ESign_PageNumber"/>
+            <Setting idref="PO_M04_ESign_LowerLeftX"/>
+            <Setting idref="PO_M04_ESign_LowerLeftY"/>
+            <Setting idref="PO_M04_ESign_Width"/>
+            <Setting idref="PO_M04_ESign_Height"/>
+            <Setting idref="PO_M04_ESign_Image"/>
+            <Setting idref="PO_M04_ESign_Direction"/>
+            <!--<Setting idref="PO_M04_ESign_FontSize"/>
+            <Setting idref="PO_M04_ESign_FontName"/>
+            <Setting idref="PO_M04_ESign_FillColor"/>
+            <Setting idref="PO_M04_ESign_StrokeColor"/>-->
+          </Setting>
+          <Setting idref="GRP_1d3_ESignTextProps">
+            <Setting idref="PO_M04_ESign_UseName"/>
+            <Setting idref="PO_M04_ESign_Name_Width"/>
+            <Setting idref="PO_M04_ESign_UseReason"/>
+            <Setting idref="PO_M04_ESign_Reason_Width"/>
+            <Setting idref="PO_M04_ESign_UseLocation"/>
+            <Setting idref="PO_M04_ESign_Location_Width"/>
+            <Setting idref="PO_M04_ESign_UseEMail"/>
+            <Setting idref="PO_M04_ESign_EMail_Width"/>
+            <Setting idref="PO_M04_ESign_UseDate"/>
+            <Setting idref="PO_M04_ESign_Date_Width"/>
+          </Setting>
+          <Setting idref="GRP_1d7_ESignDateTimeFormat">
+            <Setting idref="id_M04_Esign_DateTimeConfigControl"/>
+          </Setting>
+          <Setting idref="GRP_1d7_ESignUniqueProps">
+            <Setting idref="PO_M04_ESign_UseUniqueName"/>
+            <Setting idref="PO_M04_ESign_UseUniqueReason"/>
+            <Setting idref="PO_M04_ESign_UseUniqueLocation"/>
+          </Setting>
+          <Setting idref="GRP_1d4_ESignReasonProps">
+            <Setting idref="PO_M04_ESign_AllowReasonTextInput"/>
+            <Setting idref="PO_M04_ESign_Reasons"/>
+          </Setting>
+          <Setting idref="GRP_1d6_ESignSignatureStyle">
+            <Setting idref="PO_M04_ESign_FillColor"/>
+            <Setting idref="PO_M04_ESign_FontName"/>
+            <Setting idref="PO_M04_ESign_FontSize"/>
+            <Setting idref="PO_M04_ESign_LineWidth"/>
+            <Setting idref="PO_M04_ESign_StrokeColor"/>
+          </Setting>
+          <Setting idref="GRP_1d5_ESignSecurityProps">
+            <Setting idref="PO_M04_ESign_RequestPassword"/>
+            <Setting idref="PO_M04_ESign_TimeStampUrl"/>
+            <Setting idref="PO_M04_ESign_TSA_RootCertPath"/>
+          </Setting>
+        </Category>
+      </Category>
+      <Category idref="CAT_1e_Languages">
+        <Setting idref="SET_Languages"/>
+      </Category>
+      <Category idref="CAT_1g_Fulltext">
+        <Setting idref="SET_Fulltext"/>
+        <Setting idref="GRP_SqlFTSearch">
+          <Setting idref="PO_SqlFullText"/>
+        </Setting>
+      </Category>
+      <Category idref="CAT_1h_NumberingRanges">
+        <Setting idref="PO_M01_UseNumberRanges"/>
+        <Setting idref="SET_NumberingRanges"/>
+      </Category>
+      <Category idref="CAT_1i_Comos">
+        <!--<Setting idref="GRP_1i3_ProjOpt">
+          <Setting idref="PO_DelOwnElmsOnCDevChange"/>
+        </Setting-->>
+        <!--<Setting idref="GRP_1i4_Allg">
+               <Setting idref="COM000_STDMASK"/>
+            </Setting>-->
+        <!--<Setting idref="GRP_1i2_Debug">
+          <Setting idref="COM000_PIA0001"/>
+        </Setting>-->
+        <Setting idref="PO_CopyProjectWithRevisions"/>
+        <Setting idref="GRP_1i6_QueryOpt">
+          <Setting idref="QueryOptions_IgnoreReadRight"/>
+          <Setting idref="PO_M01_ConvertUnitsInQuery"/>
+        </Setting>
+        <Setting idref="GRP_1i7_NavigatorSettings">
+          <Setting idref="PO_M01_Navigator_Device_ShowUnitPointer"/>
+          <Setting idref="PO_M01_Navigator_Device_ShowLocationPointer"/>
+          <Setting idref="PO_M01_Navigator_Device_ShowImplementationPointer"/>
+          <Setting idref="PO_M01_Navigator_Document_ShowUnitPointer"/>
+          <Setting idref="PO_M01_Navigator_Document_ShowLocationPointer"/>
+          <Setting idref="PO_M01_Navigator_Document_ShowReferenceDocPointer"/>
+          <Setting idref="PO_M01_Navigator_Document_ShowOrgDocumentPointer"/>
+        </Setting>
+        <Setting idref="GRP_1i8_Other">
+          <Setting idref="PO_MergeModeChapterMandatory"/>
+        </Setting>
+      </Category>
+      <Category idref="CAT_2e1_eClass">
+        <Setting idref="GRP_2s1_EclassFiles">
+          <Setting idref="PO_M20_EA_OPM_EXPORT_EXPORTMAPPINGDEFINITION_Group">
+            <Setting idref="PO_M20_EA_OPM_EXPORT_EXPORTMAPPINGDEFINITION_Action_Export" />
+            <Setting idref="PO_M20_EA_OPM_EXPORT_EXPORTMAPPINGDEFINITION_Action_Import" />
+            <Setting idref="PO_M20_EA_OPM_EXPORT_EXPORTMAPPINGDEFINITION_Action_Edit" />
+            <Setting idref="PO_M20_EA_OPM_EXPORT_EXPORTMAPPINGDEFINITION" />
+          </Setting>
+          <Setting idref="PO_M20_EA_OPM_EXPORT_EXPORTONTOML_Group">
+            <Setting idref="PO_M20_EA_OPM_EXPORT_EXPORTONTOML_Action_Import" />
+            <Setting idref="PO_M20_EA_OPM_EXPORT_EXPORTONTOML" />
+          </Setting>
+          <Setting idref="PO_M20_EA_OPM_EXPORT_EXPORTUNITSML_Group">
+            <Setting idref="PO_M20_EA_OPM_EXPORT_EXPORTUNITSML_Action_Import" />
+            <Setting idref="PO_M20_EA_OPM_EXPORT_EXPORTUNITSML" />
+          </Setting>
+          <Setting idref="PO_M20_ECLASS_DOCUMENTFOLDER" />
+        </Setting>
+        <Setting idref="GRP_EngineeringPortal">
+          <Setting idref="PO_CEP_USERNAME" />
+          <Setting idref="PO_CEP_GTAC_ACCESS_KEY" />
+          <Setting idref="PO_CEP_WEB_SERVER_URL" />
+          <Setting idref="PO_CEP_DOWNLOAD_SERVER_URL" />
+          <Setting idref="PO_CEP_TEMPORARY_FOLDER" />
+        </Setting>
+      </Category>
+      <Category idref="CAT_ME">
+        <Setting idref="GRP_Configurator">
+          <Setting idref="PO_ExecutionOnPendingUpdate" />
+        </Setting>
+      </Category>
+	  <Category idref="CAT_1j_ModularReport">
+		<Setting idref="GRP_1j1_ModularReport">
+			<Setting idref="PO_M00_Modular_Report_Template_Collection"/>
+			<Setting idref="PO_M00_Modular_Report_Print_Revision_Rectangles"/>
+			<Setting idref="PO_M00_Modular_Report_Show_Markup"/>
+			<Setting idref="PO_M00_Modular_Report_Excel_Export_Settings_List_Only"/>
+		</Setting>
+	  </Category>
+    </Category>
+    <Category idref="CAT_2f_Process">
+      <Setting idref="GRP_2f1_first">
+        <Setting idref="PFD_CSTREAM"/>
+        <Setting idref="PO_M22_StandardTable_Concrete_Objects" />
+        <Setting idref="PO_M22_Data_Connection_Rule"/>
+        <Setting idref="PO_M20_OPC_Technique"/>
+        <Setting idref="GRP_2s2_PIDOPCSettings">
+          <Setting idref="PO_M22_BaseObject_OPC_UniDirectional"/>
+          <Setting idref="PO_M22_BaseObject_OPC_BiDirectional"/>
+          <Setting idref="PO_M22_BaseObject_OnPageConnector_UniDirectional"/>
+          <Setting idref="PO_M22_BaseObject_OnPageConnector_BiDirectional"/>
+        </Setting>
+      </Setting>
+      <Category idref="CAT_2f1_PSD">
+        <Setting idref="GRP_2e4_Roots">
+          <Setting idref="StdCatPath"/>
+          <Setting idref="VIPER_PipeClassMenuPath"/>
+          <Setting idref="PCPath"/>
+          <Setting idref="PO_M20_VIPER_StandardDependingStdTablesRoot"/>
+        </Setting>
+        <Setting idref="GRP_2e2_PipeClassBaseObjects">
+          <Setting idref="PO_M20_VIPER_FolderBase"/>
+          <Setting idref="PO_M20_VIPER_PipeSpecBase"/>
+        </Setting>
+        <Setting idref="GRP_2e3_BaseObjects">
+          <Setting idref="PO_M20_VIPER_PipeSpecComponentRoot"/>
+        </Setting>
+        <Setting idref="GRP_2e1_Misc">
+          <Setting idref="PO_M20_VIPER_ENCODING"/>
+          <Setting idref="PO_D3ConnectionTypeTable"/>
+          <Setting idref="VIPER_MTOConfig"/>
+        </Setting>
+        <Setting idref="GRP_2e6_3DView">
+          <Setting idref="PO_M20_VIPER_AutoAssignDBPath"/>
+        </Setting>
+      </Category>
+      <Category idref="CAT_2f2_PSM">
+        <Setting idref="GRP_2f2_Link">
+          <Setting idref="PO_M24_PFD_SPEC_PC"/>
+          <Setting idref="PO_M24_PFD_SPEC_ND1"/>
+          <Setting idref="PO_M24_PFD_SPEC_ND2"/>
+          <Setting idref="PO_M24_PFD_FunctionCodePPC"/>
+          <Setting idref="PO_M22_PFD_FunctionCodePID"/>
+          <Setting idref="PFD_ROTATEPLACEHOLDERTEXT"/>
+        </Setting>
+      </Category>
+      <Category idref="CAT_2f3_EngineeringInterfaces">
+        <Setting idref="GRP_2h1_Inifile">
+          <Setting idref="IniFile"/>
+        </Setting>
+        <!--<Setting idref="GRP_2h2_Interface1">
+          <Setting idref="CAExchangePath"/>
+          <Setting idref="CAComPath"/>
+          <Setting idref="CADocPath"/>
+        </Setting>
+        <Setting idref="GRP_2h3_Interface2">
+          <Setting idref="CAConfigPath"/>
+        </Setting>
+        <Setting idref="GRP_2h4_Status">
+          <Setting idref="CAInterfaceActive"/>
+        </Setting>-->
+        <Setting idref="GRP_2h5_PDMSE3DProjectDetails">
+          <Setting idref="CAPDMSE3DProjectCodes"/>
+        </Setting>
+      </Category>
+
+      <Category idref="CAT_2f4_SPID">
+        <Setting idref="GRP_2h6_DefaultConfiguration">
+          <Setting idref="DefaultConfig"/>
+        </Setting>
+        <Setting idref="GRP_2h7_DefaultConfiguration">
+          <Setting idref="DefaultConfigImport"/>
+          <Setting idref="DefaultWorksharePath"/>
+          <Setting idref="CA_PID_Interface_Default_PID_Template"/>
+        </Setting>
+        <Setting idref="GRP_2h8_DefaultConfiguration">
+          <Setting idref="ConfigFileSetting"/>
+        </Setting>
+        <Setting idref="GRP_2h9_DefaultConfiguration">
+          <Setting idref="DefaultSymbolPath"/>
+        </Setting>
+      </Category>
+
+      <Category idref="CAT_2f5_XMpLant">
+        <Setting idref="GRP_2m1_XMpLantImport">
+          <Setting idref="PO_M22_XMpLant_Import_CDeviceSearchNode"/>
+          <Setting idref="PO_M22_XMpLant_Import_CDeviceSearchNode_2"/>
+          <Setting idref="PO_M22_XMpLant_Import_CDeviceSearchNode_3"/>
+          <Setting idref="PO_M22_XMpLant_Import_CDeviceSearchNode_4"/>
+          <Setting idref="PO_M22_XMpLant_Import_CDeviceSearchNode_5"/>
+          <Setting idref="PO_M22_XMpLant_Import_CDeviceSearchNode_6"/>
+          <Setting idref="PO_M22_XMpLant_Import_CDeviceSearchNode_7"/>
+          <Setting idref="PO_M22_XMpLant_Import_CDeviceSearchNode_8"/>
+          <Setting idref="PO_M22_XMpLant_Import_CDeviceSearchNode_9"/>
+          <Setting idref="PO_M22_XMpLant_Import_CDeviceSearchNode_10"/>
+        </Setting>
+      </Category>
+      <Category idref="CAT_2f6_Cases">
+        <Setting idref="SET_Cases"/>
+      </Category>
+      <Category idref="CAT_2f7_FEED">
+        <Setting idref="GRP_2f7_FEEDBaseObjects">
+          <Setting idref="PO_M21_PointerToSimObjectsNode"/>
+          <Setting idref="PO_M21_PointerToStreamObjectsNode"/>
+          <Setting idref="PO_M21_PointerToMaterialBaseObject"/>
+        </Setting>
+        <Setting idref="GRP_2f8_FEEDStreamQueries">
+          <Setting idref="PO_M21_PointerToMaterialStreamListQuery"/>
+          <Setting idref="PO_M21_PointerToComponentListQuery"/>
+        </Setting>
+        <Setting idref="GRP_2f9_FEEDBaseProcess">
+          <Setting idref="PO_M21_PointerToProcessStartingCurrentStructure"/>
+        </Setting>
+        <Setting idref="GRP_2s3_FEEDOPCSettings">
+          <Setting idref="PO_M21_BaseObject_OPC_UniDirectional"/>
+          <Setting idref="PO_M21_BaseObject_OPC_BiDirectional"/>
+          <Setting idref="PO_M21_BaseObject_OnPageConnector_UniDirectional"/>
+          <Setting idref="PO_M21_BaseObject_OnPageConnector_BiDirectional"/>
+        </Setting>
+      </Category>
+    </Category>
+    <Category idref ="CAT_2l_Automation">
+      <Category idref="CAT_2b_EIC">
+        <Setting idref="GRP_2b1_General">
+          <Setting idref="PO_POTENTIALTRACKING"/>
+          <Setting idref="PO_UnderlineForEmptyProdValues"/>
+          <Setting idref="PO_DEVICENAMEMODE"/>
+          <Setting idref="PO_NameModeDocument"/>
+          <Setting idref="PO_SIGNALTRACKING"/>
+          <Setting idref="PO_CheckSignaltracking"/>
+        </Setting>
+        <Setting idref="GRP_2b2_Manufacturer">
+          <Setting idref="PDSelLocalProductsOnly"/>
+          <Setting idref="PO_PDSelLocalProducts"/>
+        </Setting>
+        <Setting idref="GRP_2b5_Settings">
+          <Setting idref="PO_M01_DETAIL_ImplMgrReplace"/>
+          <Setting idref="PO_WithRelativLabel"/>
+          <Setting idref="PO_WithRelativLabelRef"/>
+          <Setting idref="PO_RotatePlaceholderText"/>
+          <Setting idref="IsProParANS"/>
+          <Setting idref="PrintLanguage1"/>
+          <Setting idref="PrintLanguage2"/>
+          <Setting idref="PrintBilingual"/>
+          <Setting idref="PO_M41_DETAIL_PotMgrBehavior"/>
+          <Setting idref="PO_AuxiliaryContactor10DIN"/>
+          <Setting idref="PO_PrintDetailPlans"/>
+          <!--Setting idref="PO_ConnectionNumbering"/ respectively DETAIL_DET0002, possibly used again in future versions (FLA) -->
+          <Setting idref="PO_AutoLoopUseSearchManager"/>
+          <Setting idref="PO_M41_DETAIL_ContactMirror"/>
+          <Setting idref="M45_PreserveObjectAfterMerge"/>
+          <Setting idref="PO_M40_AddressMnemonic"/>
+        </Setting>
+        <Setting idref="GRP_2b8_Settings">
+          <Setting idref="PO_VerweisBlattFolge"/>
+          <Setting idref="PO_RelativLabelForSegments"/>
+          <Setting idref="PO_M41_DETAIL_IgnoreLinkedLocationOutput"/>
+        </Setting>
+        <Setting idref="GRP_2b9_Connections">
+          <Setting idref="PO_M40_ConnectionObjectVersion"/>
+          <Setting idref="PO_M40_ShowAWGValues"/>
+          <Setting idref="PO_M40_UseConnectorEndType"/>
+		  <Setting idref="PO_M40_ShieldBehaviourVersion"/>
+		</Setting>
+      </Category>
+      <Category idref="CAT_2b_EIC_Verweise">
+        <Setting idref="GRP_2b6_Reference">
+          <Setting idref="PO_VerweisMitAnlage"/>
+          <Setting idref="PO_VerweisMitOrt"/>
+          <Setting idref="PO_VerweisMitGruppe"/>
+          <Setting idref="PO_VerweisMitBlatt"/>
+          <Setting idref="PO_VerweisMitPfad"/>
+          <Setting idref="PO_VerweisMitZone"/>
+          <Setting idref="PO_VerweisOhneGruppe"/>
+          <Setting idref="PO_VerweisLeertext"/>
+          <Setting idref="PO_RefBehaviour"/>
+          <Setting idref="PO_VerweisVersion"/>
+        </Setting>
+        <Setting idref="GRP_2b7_Separator">
+          <Setting idref="PO_VerweisBlattPrefix"/>
+          <Setting idref="PO_VerweisDocumentTypePrefix"/>
+          <Setting idref="PO_VerweisDocumentTypeToSheet"/>
+          <Setting idref="PO_VerweisDelimiter"/>
+          <Setting idref="PO_VerweisPfadZone"/>
+          <Setting idref="PO_VerweisPrefix"/>
+          <Setting idref="PO_VerweisPostfix"/>
+        </Setting>
+      </Category>
+      <Category idref="CAT_2d_LayoutConfiguration_Channel">
+        <Setting idref="GRP_2d1_EIC_LayoutConfiguration_Channel">
+          <Setting idref="PO_M40_LayoutConfiguration_Channel_Line1_Group">
+            <Setting idref="PO_M40_LayoutConfiguration_Channel_Line1_1" />
+            <Setting idref="PO_M40_LayoutConfiguration_Channel_Line1"/>
+          </Setting>
+          <Setting idref="PO_M40_LayoutConfiguration_Channel_Line2_Group">
+            <Setting idref="PO_M40_LayoutConfiguration_Channel_Line2_1" />
+            <Setting idref="PO_M40_LayoutConfiguration_Channel_Line2"/>
+          </Setting>
+          <Setting idref="PO_M40_LayoutConfiguration_Channel_Line3_Group">
+            <Setting idref="PO_M40_LayoutConfiguration_Channel_Line3_1" />
+            <Setting idref="PO_M40_LayoutConfiguration_Channel_Line3"/>
+          </Setting>
+          <Setting idref="PO_M40_LayoutConfiguration_Channel_Line3_5_Group">
+            <Setting idref="PO_M40_LayoutConfiguration_Channel_Line3_5_1" />
+            <Setting idref="PO_M40_LayoutConfiguration_Channel_Line3_5"/>
+          </Setting>
+          <Setting idref="PO_M40_LayoutConfiguration_Channel_Line4_Group">
+            <Setting idref="PO_M40_LayoutConfiguration_Channel_Line4_1" />
+            <Setting idref="PO_M40_LayoutConfiguration_Channel_Line4"/>
+          </Setting>
+          <Setting idref="PO_M40_LayoutConfiguration_Channel_Line5_Group">
+            <Setting idref="PO_M40_LayoutConfiguration_Channel_Line5_1" />
+            <Setting idref="PO_M40_LayoutConfiguration_Channel_Line5"/>
+          </Setting>
+          <Setting idref="PO_M40_LayoutConfiguration_Channel_Line6_Group">
+            <Setting idref="PO_M40_LayoutConfiguration_Channel_Line6_1" />
+            <Setting idref="PO_M40_LayoutConfiguration_Channel_Line6"/>
+          </Setting>
+          <Setting idref="PO_M40_LayoutConfiguration_Channel_Line7_Group">
+            <Setting idref="PO_M40_LayoutConfiguration_Channel_Line7_1" />
+            <Setting idref="PO_M40_LayoutConfiguration_Channel_Line7" />       
+          </Setting>
+          <Setting idref="PO_M40_LayoutConfiguration_Channel_Line8_Group">
+            <Setting idref="PO_M40_LayoutConfiguration_Channel_Line8_1" />
+            <Setting idref="PO_M40_LayoutConfiguration_Channel_Line8"/>
+          </Setting>
+          <Setting idref="PO_M40_LayoutConfiguration_Channel_Line9_Group">
+            <Setting idref="PO_M40_LayoutConfiguration_Channel_Line9_1" />
+            <Setting idref="PO_M40_LayoutConfiguration_Channel_Line9"/>
+          </Setting>
+          <Setting idref="PO_M40_LayoutConfiguration_Channel_Line10_Group">
+            <Setting idref="PO_M40_LayoutConfiguration_Channel_Line10_1" />
+            <Setting idref="PO_M40_LayoutConfiguration_Channel_Line10"/>
+          </Setting>
+        </Setting>
+      </Category>
+    </Category>
+    <Category idref="CAT_2g_Operations">
+      <Category idref="CAT_2h_PQM">
+        <Setting idref="GRP_2g1_General">
+          <Setting idref="PO_M65_DDM_CheckInKind"/>
+          <Setting idref="PO_M65_DDM_MaxVersionCount"/>
+          <Setting idref="DDM_IsFlocStruct"/>
+          <Setting idref="PO_M65_DDM_SP_IsSharePointEnable"/>
+          <Setting idref="PO_M65_DDM_DefaultWorkingFolder"/>
+          <Setting idref="PO_M65_DDM_SP_SiteName"/>
+          <Setting idref="PO_M65_DDM_SP_HostName"/>
+          <Setting idref="PO_M65_DDM_SP_DocLibraryName"/>
+          <Setting idref="DDM_Active"/>
+          <Setting idref="DDM_PQM001"/>
+          <Setting idref="DDM_DDMRoot"/>
+          <Setting idref="PO_M65_DDM_CustomisedDDMRoot"/>
+          <Setting idref="DDM_NodeTempDocs"/>
+          <Setting idref="PO_M65_DDM_PQM002"/>
+          <Setting idref="PO_M65_DocumentRootCatalog"/>
+          <Setting idref="PO_M65_DefaultPreviewMechanism"/>
+          <Setting idref="PO_M65_DDM_Checkout_FileName_Delimiter"/>
+        </Setting>
+        <Setting idref="GRP_2g5_Settings">
+          <Setting idref="PO_M65_DDM_TRM0001"/>
+          <Setting idref="PO_M65_DDM_TRM0002"/>
+          <Setting idref="PO_M65_DDM_TRM0003"/>
+          <Setting idref="PO_M65_DDM_TRM0004"/>
+        </Setting>
+        <Setting idref="GRP_2g2_EMail">
+          <Setting idref="DDM_EmailFrom"/>
+          <Setting idref="DDM_EmailServer"/>
+          <Setting idref="DDM_SSL_Port"/>
+          <Setting idref="DDM_IsSMTPAuthenticationEnable"/>
+        </Setting>
+        <Setting idref="GRP_2g4_Configuration">
+          <Setting idref="PO_M65_DDM_SRCFLDR"/>
+          <Setting idref="PO_M65_DDM_LOGFLDR"/>
+          <Setting idref="PO_M65_DDM_TXTExternalData"/>
+          <Setting idref="PO_M65_DDM_CmbStrucSep"/>
+          <Setting idref="DDM_LnkUserDefinedScript"/>
+          <Setting idref="PO_M65_DDM_TBLNODEATT"/>
+          <Setting idref="PO_M65_DDM_TBLMAP"/>
+          <Setting idref="PO_M65_DDM_TBLNODECOL"/>
+          <Setting idref="PO_M65_DDM_TBLCOL"/>
+        </Setting>
+      </Category>
+      <Category idref="CAT_2k_Maintenance">
+        <Setting idref="GRP_2k1_Options">
+          <Setting idref="PO_M61_IAge_MaintenanceProject"/>
+          <Setting idref="PO_M61_IAge_UseEventManager"/>
+          <Setting idref="PO_M61_IAge_CompProject"/>
+        </Setting>
+        <Setting idref="GRP 2k2_Expansions">
+          <Setting idref="PO_M61_IAge_LockWorkPackagesOnStatusChange"/>
+          <Setting idref="PO_M61_IAge_ArchiveFinishedWorkPackages"/>
+          <Setting idref="PO_M61_IAge_DoNotDeletePlannedDate"/>
+          <Setting idref="PO_M61_IAge_MNTCUseNavigatorText"/>
+          <!-- <Setting idref="PO_M61_IAge_LCStructure"/> -->
+          <Setting idref="PO_M61_IAge_LinkTourProgress"/>
+          <Setting idref="PO_M61_IAge_PreferMntcStatePlanned"/>
+          <Setting idref="PO_M61_IAge_WriteWorkPackageLabel"/>
+          <!--adarve3, 13.02.2014, A5528 , #7-->
+          <Setting idref="PO_M61_IAge_RescheduleUseShiftOptionAsDefault"/>
+          <!--adarve3, 13.02.2014, A5528 : planproject read only, #14-->
+          <Setting idref="PO_M61_IAge_DefaultSystemUser"/>
+        </Setting>
+        <Setting idref="GRP REMA">
+          <Setting idref="PO_M61_IAge_ORCompareMode"/>
+          <Setting idref="PO_M61_IAge_ORCompareSpecName"/>
+          <Setting idref="PO_M61_IAge_QualiCompareMode"/>
+          <Setting idref="PO_M61_IAge_QualiCompareSpecName"/>
+        </Setting>
+        <Setting idref="GRP MntcDemon">
+          <Setting idref="PO_M61_IAge_GroupItems"/>
+          <Setting idref="PO_M61_IAge_ScanSize"/>
+          <Setting idref="PO_M61_IAge_CreatePackageInThePast"/>
+        </Setting>
+        <Setting idref="GRP MROBaseObjects">
+          <Setting idref="PO_M61_IAge_LCLinkCDevice"/>
+          <Setting idref="PO_M61_IAge_GenericQualificationRequirementCDevice"/>
+          <Setting idref="PO_M61_IAge_PersonRefCDevice"/>
+          <Setting idref="PO_M61_IAge_GenericQualificationCDevice"/>
+          <Setting idref="PO_M61_IAge_MembershipRootDevice"/>
+          <Setting idref="PO_M61_IAge_Event"/>
+          <Setting idref="PO_M61_IAge_DefaultQualificationObject"/>
+        </Setting>
+        <Setting idref="GRP Storage">
+          <Setting idref="PO_M61_IAge_GoodReceiptRootCDevice"/>
+          <Setting idref="PO_M61_IAge_MaterialCDevice"/>
+          <Setting idref="PO_M61_IAge_LogisticsCDevice"/>
+        </Setting>
+      </Category>
+      <Category idref="CAT_2m_Inspection">
+        <Setting idref="GRP_2p1_MROBaseObjects">
+          <Setting idref="PO_M61_IAge_LogicalSymbolDefinition"/>
+          <Setting idref="PO_M61_IAge_MaintenancePlanInspection"/>
+        </Setting>
+        <Setting idref="GRP_2r1_QueryObjects">
+          <Setting idref="PO_M61_IAge_DiagramCDevice"/>
+          <Setting idref="PO_M61_IAge_QueryInspectionObjects"/>
+          <Setting idref="PO_M61_IAge_QueryStatus"/>
+          <Setting idref="PO_M61_IAge_QueryOrder"/>
+          <Setting idref="PO_M61_IAge_QueryImExport"/>
+        </Setting>
+      </Category>
+      <Category idref="CAT_2n_ShutDown">
+        <Setting idref="GRP_2o1_Options">
+          <Setting idref="PO_M61_IAge_IsSDProject"/>
+        </Setting>
+        <Setting idref="GRP_2q1_MROBaseObjects">
+          <Setting idref="PO_M61_IAge_ClassifcationRoot"/>
+        </Setting>
+      </Category>
+    </Category>
+    <Category idref="CAT_Web">
+      <Setting idref="GRP_Comos.Web">
+        <Setting idref="PO_M04_COM002_COM2001"/>
+        <Setting idref="PO_M04_COM002_COM2002"/>
+        <Setting idref="PO_M04_COM002_COM2003"/>
+        <Setting idref="PO_M04_COM002_COM2004"/>
+        <Setting idref="PO_M04_COM002_COM2005"/>
+      </Setting>
+    </Category>
+    <Category idref="CAT_CustomerSettings"/>
+  </SettingsHierarchy>
+</ComosProjectSettings>

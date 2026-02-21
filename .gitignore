@@ -1,0 +1,34 @@
+# ═══════════════════════════════════════════════════════════════════
+# COMOS 10.7 Team_AI — Git Ignore
+# Keeps: configs, scripts, SDK/AI source, docs, ThirdParty chat UI
+# Excludes: debug symbols, test runners, oversized binaries (>100MB)
+# ═══════════════════════════════════════════════════════════════════
+
+# ── Debug symbols (2+ GB) ──────────────────────────────────────────
+*.pdb
+
+# ── Test runners ───────────────────────────────────────────────────
+Bin/ComosTestRunner/
+
+# ── Single files exceeding GitHub 100 MB limit ─────────────────────
+Bin/ThirdParty/CefSharp/x86/libcef.dll
+
+# ── Python / Node caches ──────────────────────────────────────────
+__pycache__/
+*.pyc
+node_modules/
+.venv/
+*.pkl
+
+# ── Editor / OS artifacts ─────────────────────────────────────────
+.vscode/settings.json
+.vscode/launch.json
+*.swp
+*.swo
+*~
+Thumbs.db
+.DS_Store
+
+# ── Logs & temp ───────────────────────────────────────────────────
+*.log
+*.tmp

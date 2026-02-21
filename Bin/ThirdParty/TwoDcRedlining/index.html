@@ -1,0 +1,277 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8" />
+	<meta name="viewport"
+		  content="width=device-width, initial-scale=1.0, user-scalable=false" />
+	<meta http-equiv="X-UA-Compatible" content="ie=edge" />
+	<title>TwoDC Redlining</title>
+	<style>
+		* {
+			margin: 0%;
+			padding: 0%;
+		}
+	</style>
+	<link rel="stylesheet" href="./twodcSmartMarkupPlugin.css" />
+</head>
+
+<body>
+	<twodc-ui-frame>
+		<twodc-ui-container>
+			<twodc-ui-panel>
+				<twodc-view>
+					<two-dc-layout id="layoutOne"
+								   source="default"
+								   twodc-zoom-toggle="true"
+								   twodc-mouse-control-toggle="true"
+								   twodc-scene-pannable-toggle="true"
+								   twodc-layout-control-toggle="true"
+								   twodc-birdview-toggle="true"
+								   twodc-birdController-fill-color="blue"
+								   twodc-birdController-fill-opacity="0.2"
+								   twodc-search-on="true"
+								   twodc-reset-on="true"
+								   twodc-print-on="false"
+								   twodc-pan-left-key="37, 65"
+								   twodc-pan-right-key="39, 68"
+								   twodc-pan-up-key="38, 87"
+								   twodc-pan-down-key="40, 83"
+								   twodc-settings-fdf="off">
+					</two-dc-layout>
+					<progress-bar id="progressBar"></progress-bar>
+				</twodc-view>
+			</twodc-ui-panel>
+		</twodc-ui-container>
+	</twodc-ui-frame>
+	<script src="./twodcRedlining.js"></script>
+	<script src="./twodcSmartMarkupPlugin.js"></script>
+	<script src="./tflite_web_api_cc_simd.js"></script>
+	<script>
+		/**
+		 * File System Helper
+		 * Browsers fetch api by default doesnt support file:/// protocol.
+		 * This shim will redirect all the network request from twodc control to XMLHttpRequest for urls starting with file:///
+		 * Other requests will be handled by the browsers default fetch implementation
+		 *
+		 *
+		 * DONOT modify this code unless you are absolutely sure what you are doing
+		 * */
+
+		function fetchPolyfill(url, options) {
+			options = options || {};
+			return new Promise((resolve, reject) => {
+				const request = new XMLHttpRequest();
+				// wasm files and tensorflow tflite models have to be served as binary data from the web server
+				// since here we are fetching these files from the file system we need to overrite the responseType and mime-type of the request
+				if (url.indexOf('.wasm') > -1 || url.indexOf('.tflite') > -1) {
+					request.responseType = "arraybuffer";
+					request.overrideMimeType("application/octet-stream");
+				}
+				const keys = [];
+				const headers = {};
+
+				const response = () => new Response(request.response, {
+					ok: ((request.status / 100) | 0) == 2, // 200-299
+					statusText: request.statusText,
+					status: '200',
+					url: request.responseURL,
+					text: () => Promise.resolve(request.responseText),
+					json: () => Promise.resolve(request.responseText).then(JSON.parse),
+					blob: () => Promise.resolve(new Blob([request.response])),
+					arrayBuffer: () => request.response,
+					clone: response,
+					headers: {
+						keys: () => keys,
+						entries: () => keys.map((n) => [n, request.getResponseHeader(n)]),
+						get: (n) => request.getResponseHeader(n),
+						has: (n) => request.getResponseHeader(n) != null,
+					}
+				});
+
+				request.open(options.method || "get", url, true);
+
+				request.onload = () => {
+					request
+						.getAllResponseHeaders()
+						.toLowerCase()
+						.replace(/^(.+?):/gm, (m, key) => {
+							headers[key] || keys.push((headers[key] = key));
+						});
+
+					resolve(response());
+				};
+
+				request.onerror = reject;
+
+				request.withCredentials = options.credentials == "include";
+
+				for (const i in options.headers) {
+					request.setRequestHeader(i, options.headers[i]);
+				}
+
+				request.send(options.body || null);
+			});
+		}
+
+		let originalImplementation = fetch;
+		window.fetch = (resource, options) => {
+			// if resource url doesnt starts with file:/// redirect to original fetch implementation
+			if (/^file:\/\/\//.test(resource) === false) {
+				return originalImplementation(resource);
+			}
+			// else redirect to polyfill
+			return fetchPolyfill(resource, options);
+		};
+
+	</script>
+	<script type="text/javascript">
+		var layoutOneName = 'layoutOne';
+		var fileSource;
+		var fileDirectory;
+		var fileName;
+
+		// Save markup through dot net object
+		function saveMarkup() {
+			twodcRedlining.saveMarkups(layoutOneName);
+			const markUps = twodcRedlining.getAllMarkups(layoutOneName);
+			markupBoundObject.saveRevisionFileAsJson(JSON.stringify(markUps));
+			isDirty = false;
+			markupBoundObject.updatePendingChangeState(isDirty);
+		};
+
+		// bind markup call
+		function bindSaveMarkupCall() {
+			markupBoundObject.injectSaveAndExportMarkup(saveMarkup);
+		};
+
+		async function exportMarkupsAsPDF(backgroundColor, fileName) {
+			const blob = await twodcRedlining.exportMarkupsAsPDF(layoutOneName, { backgroundColor: backgroundColor });
+			return downloadFile(blob, fileName);
+		};
+
+		async function exportMarkupsAsFDF(fileName) {
+			const blob = await twodcRedlining.exportMarkupsAsFDF(layoutOneName);
+			return downloadFile(blob, fileName);
+		};
+
+		const downloadFile = (blob, fileName) => {
+			try {
+				const link = document.createElement('a');
+				link.href = URL.createObjectURL(blob);
+				link.download = fileName;
+				link.style.display = 'none';
+				link.target = '_blank';
+				document.body.append(link);
+				link.click();
+				link.remove();
+				setTimeout(() => URL.revokeObjectURL(link.href), 7000);
+				return fileName;
+			}
+			catch (err) {
+				console.error(err);
+				return null;
+			}
+		};
+
+		async function importFDFAsMarkups(filePath) {
+			var response = await fetch(filePath);
+			var fdfBlob = await response.blob();
+			var file = new File([fdfBlob], "fdf");
+			await twodcRedlining.importFDFAsMarkups(layoutOneName, file);
+			return true;
+		}
+
+	</script>
+
+	<script>
+		var userName;
+		var extension = 'pdf';
+		var isDirty = false;
+		var revisionfile;
+		var jsonRevisionFile;
+		var isDataLoaded = false;
+
+		const urlParams = new URLSearchParams(window.location.search);
+
+		// following mapping is between Comos.WPF.ExtendedControls.TwoDcViewModel.TwoDcUiElementVisibility and 2DC attributes
+		const twoDcMappings = {
+			BirdView: "twodc-birdview-toggle",
+			Ruler: "twodc-settings-ruler",
+			Zoom: "twodc-settings-zoom",
+			Quadrant: "twodc-settings-quadrant",
+			Grid: "twodc-settings-grid",
+			Print: "twodc-settings-print",
+			Language: "twodc-settings-language",
+			Settings: "twodc-settings"
+		};
+
+		const layout = document.getElementById(layoutOneName);
+
+		urlParams.forEach(function (value, key) {
+			if (key == 'source') {
+				fileSource = value;
+				console.log(fileSource);
+				fileDirectory = fileSource.substring(0, fileSource.lastIndexOf('\\'));
+				console.log(fileDirectory);
+				fileName = value.substr(fileSource.lastIndexOf('\\') + 1, value.length - 1).trim();
+				console.log(fileName);
+			}
+			else if (key == 'UserName') {
+				userName = value;
+			}
+			else if (key == 'RevisionFile') {
+				revisionfile = value;
+			}
+			else if (twoDcMappings[key] != undefined || twoDcMappings[key] != null) {
+				layout.setAttribute(twoDcMappings[key], value);
+			}
+		});
+
+		twodcRedlining.init();
+		twodcRedlining.load();
+		const SmartMarkup = twodcSmartMarkupPlugin.default;
+		const smartmarkupPlugin = new SmartMarkup({
+			tfPath: './'
+		});
+		twodcRedlining.registerPlugin(smartmarkupPlugin);
+
+		if (layout != undefined || layout != null) {
+
+			layout.layout2DC.DocumentId = fileName;
+			twodcRedlining.setUserName(layoutOneName, userName);
+
+			if (revisionfile === null) {
+				// Load pdf file
+				twodcRedlining.setDataURL(layoutOneName, fileSource, extension);
+			}
+			else {
+				// load pdf file and then mark up file
+				twodcRedlining.setDataURL(layoutOneName, fileSource, extension).then((args) => {
+					var jsonData = markupBoundObject.loadJsonFile();
+					if (jsonData !== null) {
+						var jsonRevisionFileDetails = JSON.parse(jsonData);
+						twodcRedlining.addMarkups(layoutOneName, jsonRevisionFileDetails);
+					}
+					isDataLoaded = true;
+				});
+			}
+
+            var symbolLibrary = markupBoundObject.loadSymbolLibrary();
+            if (symbolLibrary !== null) {
+                twodcRedlining.setSymbols('layoutOne', { type: 'STRING', data: symbolLibrary });
+			}
+
+			// Bind javascript call with POCO object
+			bindSaveMarkupCall();
+
+			// IsDirty flag
+			twodcRedlining.onMarkupUpdate(layoutOneName, (args) => {
+				if (!isDataLoaded)
+					return;
+				isDirty = true;
+				markupBoundObject.updatePendingChangeState(isDirty);
+			});
+		}
+	</script>
+</body>
+</html>

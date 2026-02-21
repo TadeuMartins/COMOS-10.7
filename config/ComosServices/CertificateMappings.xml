@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<Configuration>
+  <!-- ESign Certificate Mappings -->
+  <!-- Name: Login user name
+       CommonName: Common Name (CN) of the certificate's subject
+       Issuer: Common Name (CN) of the certificate's Issuer
+       SerialNumber: Hex string of the certificate's serial number
+       ThumbPrint: Hex string of the certificate's thumbprint
+       Store: Certificate Store from where the certificate should be taken (MY/CA/ROOT)
+       StoreLocation: Location of the certificate, 0 (LocalMachine), 1 Current User
+  -->
+  <!--
+  <Mappings>
+    <DefaultMapping>
+      <Issuer>Issuer 1</Issuer>
+      <Store>MY</Store> 
+      <StoreLocation>0</StoreLocation> 
+    </DefaultMapping>
+    <Mapping>
+      <Name>UserName1</Name>
+      <CommonName>Common Name 1</CommonName>
+      <Issuer>Issuer 2</Issuer>
+      <Store>MY</Store>
+      <StoreLocation>0</StoreLocation>
+    </Mapping>
+    <Mapping>
+      <Name>Username2</Name>
+      <CommonName>Common Name 2</CommonName>
+      <SerialNumber>4a 69 d7 c3 59 af 89 a4 48 2f 03 fa 0e fd 90 b6</SerialNumber>
+      <Issuer>Issuer 3</Issuer>
+      <Store>MY</Store>
+      <StoreLocation>0</StoreLocation>
+    </Mapping>
+    <Mapping>
+      <Name>UserName3</Name>
+      <CommonName>Common Name 3</CommonName>
+      <ThumbPrint>b9 24 38 c5 7a 4d d5 81 9f 42 93 78 d0 c8 5a fd 04 ce df 20</ThumbPrint>
+      <Store>MY</Store>
+      <StoreLocation>0</StoreLocation>
+    </Mapping>
+  </Mappings>
+  -->
+</Configuration>

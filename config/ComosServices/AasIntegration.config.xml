@@ -1,0 +1,23 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<Configuration>
+  <DxcService>
+    <BaseUrl></BaseUrl>
+    <OAuthSettings>
+      <OAuthConnection Id="DataExchangeOAuthService">
+        <ServiceUrl></ServiceUrl>
+        <ClientId></ClientId>
+        <ClientSecret></ClientSecret>
+      </OAuthConnection>
+    </OAuthSettings>
+  </DxcService>
+  <AasServers>
+    <AasServer>
+      <BaseUrl></BaseUrl>
+      <ApiKey></ApiKey>
+    </AasServer>
+    <AasServer>
+      <BaseUrl></BaseUrl>
+      <ApiKey></ApiKey>
+    </AasServer>
+  </AasServers>
+</Configuration>

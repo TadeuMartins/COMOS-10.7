@@ -1,0 +1,147 @@
+<?xml version="1.0" encoding="utf-8"?>
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema">
+	<!-- Attributes -->
+	<xs:attributeGroup name="rootAttributes">
+		<xs:attribute name="Version" use="required">
+			<xs:simpleType>
+				<xs:restriction base="xs:decimal">
+					<xs:minInclusive value="1"/>
+					<xs:maxInclusive value="3"/>
+				</xs:restriction>
+			</xs:simpleType>
+		</xs:attribute>
+		<xs:attribute name="CommandID" type="xs:string" use="required"/>
+		<xs:attribute name="Description" type="xs:string"/>
+		<xs:attribute name="MaxRuntime" type="xs:decimal"/>
+	</xs:attributeGroup>
+	<xs:attributeGroup name="actionAttributes">
+		<xs:attribute name="ActionID" type="xs:string" use="required"/>
+		<xs:attribute name="Description" type="xs:string"/>
+	</xs:attributeGroup>
+	<xs:attributeGroup name="connectionAttributes">
+		<xs:attribute name="ConnectionString" type="xs:string" use="required"/>
+		<xs:attribute name="Project" type="xs:string" use="required"/>
+		<xs:attribute name="WorkingOverlay" type="xs:string"/>
+	</xs:attributeGroup>
+	<xs:attributeGroup name="functionAttributes">
+		<xs:attribute name="Class" use="required">
+			<xs:simpleType>
+				<xs:restriction base="xs:string">
+					<xs:pattern value="Comos.XMLAdapter.Adapter|ComosXMLInterface.XMLInterface"/>
+				</xs:restriction>
+			</xs:simpleType>
+		</xs:attribute>
+		<xs:attribute name="Name" use="required">
+			<xs:simpleType>
+				<xs:restriction base="xs:string">
+					<xs:pattern value="Import|Export"/>
+				</xs:restriction>
+			</xs:simpleType>
+		</xs:attribute>
+	</xs:attributeGroup> 
+	<xs:attributeGroup name="assemblyAttributes">
+		<xs:attribute name="Location" type="xs:string" use="required"/>
+		<xs:attribute name="AssemblyName" type="xs:string" use="required"/>
+		<xs:attribute name="ClassName" type="xs:string" use="required"/>
+	</xs:attributeGroup>
+	<xs:attributeGroup name="parameterAttributes">
+		<xs:attribute name="Name" use="required">
+			<xs:simpleType>
+				<xs:restriction base="xs:string">
+					<xs:enumeration value="XMLFile"/>
+					<xs:enumeration value="XMLConnector"/>
+					<xs:enumeration value="RootNode"/>
+					<xs:enumeration value="DeleteObjects"/>
+					<xs:enumeration value="CreateWorkingOverlay"/>
+					<xs:enumeration value="VersionsAdministration"/>
+					<xs:enumeration value="DifferenceOnly"/>
+					<xs:enumeration value="SaveMode"/>
+					<xs:enumeration value="Filter"/>
+					<xs:enumeration value="ShowFile"/>
+					<xs:enumeration value="XMLFileMoveTo"/>
+				</xs:restriction>
+			</xs:simpleType>
+		</xs:attribute>
+		<xs:attribute name="Value"/>
+		<xs:attribute name="ParamType">
+			<xs:simpleType>
+ 			 <xs:restriction base="xs:string">
+					<xs:enumeration value="PathFullName"/>
+					<xs:enumeration value="SystemFullName"/>
+					<xs:enumeration value="SystemUID"/>
+				</xs:restriction>
+			</xs:simpleType>
+		</xs:attribute>
+		<xs:attribute name="ObjectSystemType"/>
+	</xs:attributeGroup>
+	<xs:attributeGroup name="filterItemAttributes">
+		<xs:attribute name="QueryName" use="required"/>
+		<xs:attribute name="ColumnName" use="required"/>
+		<xs:attribute name="Value" use="required"/>
+	</xs:attributeGroup>
+	<!-- Elements / Types -->
+	<xs:complexType name="parametersType">
+		<xs:sequence>
+			<xs:element name="Parameter" minOccurs="5" maxOccurs="11">
+			<xs:complexType>
+				<xs:sequence minOccurs="0">						
+				<xs:element name="Item" maxOccurs="unbounded">
+					<xs:complexType>
+						<xs:attributeGroup ref="filterItemAttributes"/>
+					</xs:complexType>
+				</xs:element>						
+				</xs:sequence>
+				<xs:attributeGroup ref="parameterAttributes"/>
+			</xs:complexType>
+			</xs:element>				
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="functionAssemblyBase">
+		<xs:sequence>
+			<xs:element name="Parameters" type="parametersType"/> 
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="functionType">
+		<xs:complexContent>
+			<xs:extension base="functionAssemblyBase">
+				<xs:attributeGroup ref="functionAttributes"/>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	<xs:complexType name="assemblyType">
+		<xs:complexContent>
+			<xs:extension base="functionAssemblyBase">
+				<xs:attributeGroup ref="assemblyAttributes"/>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	<xs:complexType name="settingsType">
+		<xs:all>
+			<xs:element name="UniqueCommandID" type="xs:boolean" minOccurs="0"/>
+		</xs:all>
+	</xs:complexType>
+	<xs:complexType name="connectionType">
+		<xs:attributeGroup ref="connectionAttributes"/>
+	</xs:complexType>
+	<!-- Schema -->
+	<xs:element name="MXExec">
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element name="Settings" type="settingsType" minOccurs="0"/>
+				<xs:element name="Action" maxOccurs="unbounded">
+					<xs:complexType>
+						<xs:sequence>
+							<xs:element name="Connection" type="connectionType"/>
+							<xs:choice>
+								<xs:element name="Assembly" type="assemblyType"/>
+								<xs:element name="Function" type="functionType"/>
+							</xs:choice>
+						</xs:sequence>
+						<xs:attributeGroup ref="actionAttributes"/>
+					</xs:complexType>
+				</xs:element>
+			</xs:sequence>
+			<xs:attributeGroup ref="rootAttributes"/>
+		</xs:complexType>
+	</xs:element>
+</xs:schema>

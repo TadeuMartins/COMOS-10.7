@@ -1,0 +1,1362 @@
+{
+  "$id": "1",
+  "definitionId": "2d6b209d929d47449f92eff4fe88d45b",
+  "versionId": "893563d3a9ef4a11881f527c559aadf7",
+  "name": "DocumentRevisionWorkflow",
+  "displayName": "Document Revision Workflow",
+  "version": 1,
+  "variables": {
+    "$id": "2",
+    "data": {}
+  },
+  "customAttributes": {
+    "$id": "3",
+    "data": {}
+  },
+  "isSingleton": false,
+  "persistenceBehavior": "WorkflowBurst",
+  "deleteCompletedInstances": false,
+  "isPublished": true,
+  "isLatest": true,
+  "createdAt": "2022-09-23T15:06:40.6133715Z",
+  "activities": [
+    {
+      "$id": "4",
+      "activityId": "6238e59b-a61f-4c00-8804-a4e4a19192ca",
+      "type": "InitializeVariablesActivity",
+      "name": "InitializeVariables",
+      "displayName": "Initialize variables",
+      "persistWorkflow": false,
+      "loadWorkflowContext": false,
+      "saveWorkflowContext": false,
+      "properties": [
+        {
+          "$id": "5",
+          "name": "Variables",
+          "expressions": {
+            "$id": "6",
+            "Json": "[\"ReviewUsers\",\"ReviewApprovers\",\"ConsolidateUser\",\"Document\",\"Token\",\"DueDate\",\"DueDateForApproval\",\"BaseAdress\"]"
+          }
+        }
+      ],
+      "propertyStorageProviders": {}
+    },
+    {
+      "$id": "7",
+      "activityId": "10a8f91f-f33e-4413-b31d-0ea4e1ba05db",
+      "type": "CreateRevisionActivity",
+      "name": "CreateRevision",
+      "displayName": "Create Revision",
+      "persistWorkflow": false,
+      "loadWorkflowContext": false,
+      "saveWorkflowContext": false,
+      "properties": [
+        {
+          "$id": "8",
+          "name": "Document",
+          "syntax": "JavaScript",
+          "expressions": {
+            "$id": "9",
+            "JavaScript": "Document"
+          }
+        }
+      ],
+      "propertyStorageProviders": {}
+    },
+    {
+      "$id": "10",
+      "activityId": "0e84da0b-632a-4e01-80f3-a4a952db5b77",
+      "type": "WriteLine",
+      "name": "StartWorkflow",
+      "displayName": "Start Workflow",
+      "persistWorkflow": false,
+      "loadWorkflowContext": false,
+      "saveWorkflowContext": false,
+      "properties": [
+        {
+          "$id": "11",
+          "name": "Text",
+          "expressions": {
+            "$id": "12",
+            "Literal": "Workflow started"
+          }
+        }
+      ],
+      "propertyStorageProviders": {}
+    },
+    {
+      "$id": "13",
+      "activityId": "469d06b3-34ed-4d79-a9b5-3e268f5e0fe3",
+      "type": "ParallelForEach",
+      "name": "ParalellForEach",
+      "displayName": "For Each Review User",
+      "persistWorkflow": false,
+      "loadWorkflowContext": false,
+      "saveWorkflowContext": false,
+      "properties": [
+        {
+          "$id": "14",
+          "name": "Items",
+          "syntax": "JavaScript",
+          "expressions": {
+            "$id": "15",
+            "JavaScript": "getVariable('ReviewUsers')"
+          }
+        }
+      ],
+      "propertyStorageProviders": {}
+    },
+    {
+      "$id": "16",
+      "activityId": "88408055-669c-4a4d-8eef-ebf2454b3fbd",
+      "type": "SetTransientVariable",
+      "name": "SetUser",
+      "displayName": "Set Review User",
+      "persistWorkflow": false,
+      "loadWorkflowContext": false,
+      "saveWorkflowContext": false,
+      "properties": [
+        {
+          "$id": "17",
+          "name": "VariableName",
+          "expressions": {
+            "$id": "18",
+            "Literal": "User"
+          }
+        },
+        {
+          "$id": "19",
+          "name": "Value",
+          "syntax": "JavaScript",
+          "expressions": {
+            "$id": "20",
+            "JavaScript": "input"
+          }
+        }
+      ],
+      "propertyStorageProviders": {}
+    },
+    {
+      "$id": "21",
+      "activityId": "57892446-5c82-46ee-a5fd-a55a75977aab",
+      "type": "SendEmail",
+      "displayName": "Send Email",
+      "persistWorkflow": false,
+      "loadWorkflowContext": false,
+      "saveWorkflowContext": false,
+      "properties": [
+        {
+          "$id": "22",
+          "name": "From",
+          "expressions": {
+            "$id": "23"
+          }
+        },
+        {
+          "$id": "24",
+          "name": "To",
+          "syntax": "JavaScript",
+          "expressions": {
+            "$id": "25",
+            "JavaScript": "[getTransientVariable('User').EMail]"
+          }
+        },
+        {
+          "$id": "26",
+          "name": "Subject",
+          "syntax": "Liquid",
+          "expressions": {
+            "$id": "27",
+            "Liquid": "COMOS: Document-Nr.{{Variables.Document.Label}} Review document"
+          }
+        },
+        {
+          "$id": "28",
+          "name": "Attachments",
+          "expressions": {
+            "$id": "29"
+          }
+        },
+        {
+          "$id": "30",
+          "name": "Body",
+          "syntax": "Liquid",
+          "expressions": {
+            "$id": "31",
+            "Liquid": "Check document until {{ Variables.DueDate }}. Document: <a href=\"{{ Variables.BaseAdress }}/WebView/index.html#/taskmanagement/task/{{ Activities.CreateTaskReview.TaskId }}\">Link</a>"
+          }
+        },
+        {
+          "$id": "32",
+          "name": "Cc",
+          "expressions": {
+            "$id": "33"
+          }
+        },
+        {
+          "$id": "34",
+          "name": "Bcc",
+          "expressions": {
+            "$id": "35"
+          }
+        }
+      ],
+      "propertyStorageProviders": {}
+    },
+    {
+      "$id": "36",
+      "activityId": "7d2ff5f6-5304-4192-b072-5691160ee320",
+      "type": "While",
+      "name": "While",
+      "displayName": "Wait for all review responses",
+      "persistWorkflow": false,
+      "loadWorkflowContext": false,
+      "saveWorkflowContext": false,
+      "properties": [
+        {
+          "$id": "37",
+          "name": "Condition",
+          "syntax": "JavaScript",
+          "expressions": {
+            "$id": "38",
+            "JavaScript": "getVariable('ResponseCounter') < getVariable('ReviewUsers').Count"
+          }
+        }
+      ],
+      "propertyStorageProviders": {}
+    },
+    {
+      "$id": "39",
+      "activityId": "2c81a2bf-de45-46e3-b7ed-ae63ed67f6ca",
+      "type": "SignalReceived",
+      "name": "SignalReceived",
+      "displayName": "Review Received",
+      "persistWorkflow": false,
+      "loadWorkflowContext": false,
+      "saveWorkflowContext": false,
+      "properties": [
+        {
+          "$id": "40",
+          "name": "Signal",
+          "expressions": {
+            "$id": "41",
+            "Literal": "ResponseReceived"
+          }
+        }
+      ],
+      "propertyStorageProviders": {}
+    },
+    {
+      "$id": "42",
+      "activityId": "2b0e2a46-5320-4ea2-889d-347be7281d43",
+      "type": "SetVariable",
+      "displayName": "Set Review Responses",
+      "persistWorkflow": false,
+      "loadWorkflowContext": false,
+      "saveWorkflowContext": false,
+      "properties": [
+        {
+          "$id": "43",
+          "name": "VariableName",
+          "expressions": {
+            "$id": "44",
+            "Literal": "ReviewResponses"
+          }
+        },
+        {
+          "$id": "45",
+          "name": "Value",
+          "syntax": "JavaScript",
+          "expressions": {
+            "$id": "46",
+            "JavaScript": "`${getVariable('ReviewResponses') ? getVariable('ReviewResponses') : \"\"}Accepted: ${input.Accepted} User: ${input.User} Comment: ${input.Comment}\\n`"
+          }
+        }
+      ],
+      "propertyStorageProviders": {}
+    },
+    {
+      "$id": "47",
+      "activityId": "5a0a45d0-df05-45d6-afac-eb9b717d9049",
+      "type": "SetVariable",
+      "name": "ResponseCounter",
+      "displayName": "Increment Response Counter",
+      "persistWorkflow": false,
+      "loadWorkflowContext": false,
+      "saveWorkflowContext": false,
+      "properties": [
+        {
+          "$id": "48",
+          "name": "VariableName",
+          "expressions": {
+            "$id": "49",
+            "Literal": "ResponseCounter"
+          }
+        },
+        {
+          "$id": "50",
+          "name": "Value",
+          "syntax": "JavaScript",
+          "expressions": {
+            "$id": "51",
+            "JavaScript": "getVariable('ResponseCounter') + 1"
+          }
+        }
+      ],
+      "propertyStorageProviders": {}
+    },
+    {
+      "$id": "52",
+      "activityId": "81ca0f87-c1ea-4c58-91ce-6680f41135d6",
+      "type": "Fork",
+      "name": "Fork",
+      "displayName": "Accept or reject consolidation",
+      "persistWorkflow": false,
+      "loadWorkflowContext": false,
+      "saveWorkflowContext": false,
+      "properties": [
+        {
+          "$id": "53",
+          "name": "Branches",
+          "expressions": {
+            "$id": "54",
+            "Json": "[\"Approve\",\"Reject\"]"
+          }
+        }
+      ],
+      "propertyStorageProviders": {}
+    },
+    {
+      "$id": "55",
+      "activityId": "8b1e5841-5c43-4a88-a4b1-28741235e7a0",
+      "type": "SignalReceived",
+      "displayName": "Consolidate Approved",
+      "persistWorkflow": false,
+      "loadWorkflowContext": false,
+      "saveWorkflowContext": false,
+      "properties": [
+        {
+          "$id": "56",
+          "name": "Signal",
+          "expressions": {
+            "$id": "57",
+            "Literal": "ConsolidateApproved"
+          }
+        }
+      ],
+      "propertyStorageProviders": {}
+    },
+    {
+      "$id": "58",
+      "activityId": "6623dec4-5c2e-4499-bafe-671e2b252ae2",
+      "type": "ReleaseRevisionActivity",
+      "displayName": "Release Revision",
+      "persistWorkflow": false,
+      "loadWorkflowContext": false,
+      "saveWorkflowContext": false,
+      "properties": [
+        {
+          "$id": "59",
+          "name": "Revision",
+          "syntax": "JavaScript",
+          "expressions": {
+            "$id": "60",
+            "JavaScript": "Revision"
+          }
+        },
+        {
+          "$id": "61",
+          "name": "RevisionStep",
+          "expressions": {
+            "$id": "62",
+            "Literal": "2"
+          }
+        }
+      ],
+      "propertyStorageProviders": {}
+    },
+    {
+      "$id": "63",
+      "activityId": "fc405328-0539-4639-97b9-9067d0c120e2",
+      "type": "Join",
+      "displayName": "Join Review Consolidated",
+      "persistWorkflow": false,
+      "loadWorkflowContext": false,
+      "saveWorkflowContext": false,
+      "properties": [
+        {
+          "$id": "64",
+          "name": "Mode",
+          "expressions": {
+            "$id": "65",
+            "Literal": "WaitAny"
+          }
+        }
+      ],
+      "propertyStorageProviders": {}
+    },
+    {
+      "$id": "66",
+      "activityId": "02b24d96-4a8b-4f03-a76e-dd3775abc40b",
+      "type": "SetVariable",
+      "displayName": "Reset Responses",
+      "persistWorkflow": false,
+      "loadWorkflowContext": false,
+      "saveWorkflowContext": false,
+      "properties": [
+        {
+          "$id": "67",
+          "name": "VariableName",
+          "expressions": {
+            "$id": "68",
+            "Literal": "ReviewResponses"
+          }
+        },
+        {
+          "$id": "69",
+          "name": "Value",
+          "expressions": {
+            "$id": "70",
+            "Literal": ""
+          }
+        }
+      ],
+      "propertyStorageProviders": {}
+    },
+    {
+      "$id": "71",
+      "activityId": "b3b07a01-5914-45d4-a26c-0a42b209f272",
+      "type": "SetVariable",
+      "displayName": "Reset Response Counter",
+      "persistWorkflow": false,
+      "loadWorkflowContext": false,
+      "saveWorkflowContext": false,
+      "properties": [
+        {
+          "$id": "72",
+          "name": "VariableName",
+          "expressions": {
+            "$id": "73",
+            "Literal": "ResponseCounter"
+          }
+        },
+        {
+          "$id": "74",
+          "name": "Value",
+          "expressions": {
+            "$id": "75",
+            "Literal": "0"
+          }
+        }
+      ],
+      "propertyStorageProviders": {}
+    },
+    {
+      "$id": "76",
+      "activityId": "96df9f79-7da3-49cc-b38e-1aa10d36457b",
+      "type": "ParallelForEach",
+      "displayName": "For Each Review Approver",
+      "persistWorkflow": false,
+      "loadWorkflowContext": false,
+      "saveWorkflowContext": false,
+      "properties": [
+        {
+          "$id": "77",
+          "name": "Items",
+          "syntax": "JavaScript",
+          "expressions": {
+            "$id": "78",
+            "JavaScript": "getVariable('ReviewApprovers')"
+          }
+        }
+      ],
+      "propertyStorageProviders": {}
+    },
+    {
+      "$id": "79",
+      "activityId": "5dd2d41a-40da-47d3-9125-1d640080366d",
+      "type": "SetTransientVariable",
+      "displayName": "Set Review Approver User",
+      "persistWorkflow": false,
+      "loadWorkflowContext": false,
+      "saveWorkflowContext": false,
+      "properties": [
+        {
+          "$id": "80",
+          "name": "VariableName",
+          "expressions": {
+            "$id": "81",
+            "Literal": "User"
+          }
+        },
+        {
+          "$id": "82",
+          "name": "Value",
+          "syntax": "JavaScript",
+          "expressions": {
+            "$id": "83",
+            "JavaScript": "input"
+          }
+        }
+      ],
+      "propertyStorageProviders": {}
+    },
+    {
+      "$id": "84",
+      "activityId": "6939dcad-3bec-423e-8fec-addbd47928a6",
+      "type": "SendEmail",
+      "displayName": "Send Email",
+      "persistWorkflow": false,
+      "loadWorkflowContext": false,
+      "saveWorkflowContext": false,
+      "properties": [
+        {
+          "$id": "85",
+          "name": "From",
+          "expressions": {
+            "$id": "86"
+          }
+        },
+        {
+          "$id": "87",
+          "name": "To",
+          "syntax": "JavaScript",
+          "expressions": {
+            "$id": "88",
+            "JavaScript": "[getTransientVariable('User').EMail]"
+          }
+        },
+        {
+          "$id": "89",
+          "name": "Subject",
+          "syntax": "Liquid",
+          "expressions": {
+            "$id": "90",
+            "Liquid": "COMOS: Document-Nr.{{Variables.Document.Label}} Approve document"
+          }
+        },
+        {
+          "$id": "91",
+          "name": "Attachments",
+          "expressions": {
+            "$id": "92"
+          }
+        },
+        {
+          "$id": "93",
+          "name": "Body",
+          "syntax": "Liquid",
+          "expressions": {
+            "$id": "94",
+            "Liquid": "Check document until {{ Variables.DueDate }}. Document:  <a href=\"{{ Variables.BaseAdress }}/WebView/index.html#/taskmanagement/task/{{ Activities.CreateTaskApprove.TaskId }}\">Link</a>"
+          }
+        },
+        {
+          "$id": "95",
+          "name": "Cc",
+          "expressions": {
+            "$id": "96"
+          }
+        },
+        {
+          "$id": "97",
+          "name": "Bcc",
+          "expressions": {
+            "$id": "98"
+          }
+        }
+      ],
+      "propertyStorageProviders": {}
+    },
+    {
+      "$id": "99",
+      "activityId": "e90094b3-9739-4ad9-8777-b54fce941e45",
+      "type": "While",
+      "displayName": "Wait for all approver responses",
+      "persistWorkflow": false,
+      "loadWorkflowContext": false,
+      "saveWorkflowContext": false,
+      "properties": [
+        {
+          "$id": "100",
+          "name": "Condition",
+          "syntax": "JavaScript",
+          "expressions": {
+            "$id": "101",
+            "JavaScript": "getVariable('ResponseCounter') < getVariable('ReviewApprovers').Count"
+          }
+        }
+      ],
+      "propertyStorageProviders": {}
+    },
+    {
+      "$id": "102",
+      "activityId": "effec5ce-ea45-4b01-a13d-eec4a4ef60f1",
+      "type": "SignalReceived",
+      "displayName": "Approve Received",
+      "persistWorkflow": false,
+      "loadWorkflowContext": false,
+      "saveWorkflowContext": false,
+      "properties": [
+        {
+          "$id": "103",
+          "name": "Signal",
+          "expressions": {
+            "$id": "104",
+            "Literal": "ResponseReceived"
+          }
+        }
+      ],
+      "propertyStorageProviders": {}
+    },
+    {
+      "$id": "105",
+      "activityId": "c3e7fd16-cadc-4b69-91da-bc5c3ff5d02b",
+      "type": "SetVariable",
+      "displayName": "Set Approver Responses",
+      "persistWorkflow": false,
+      "loadWorkflowContext": false,
+      "saveWorkflowContext": false,
+      "properties": [
+        {
+          "$id": "106",
+          "name": "VariableName",
+          "expressions": {
+            "$id": "107",
+            "Literal": "ReviewResponses"
+          }
+        },
+        {
+          "$id": "108",
+          "name": "Value",
+          "syntax": "JavaScript",
+          "expressions": {
+            "$id": "109",
+            "JavaScript": "`${getVariable('ReviewResponses') ? getVariable('ReviewResponses') : \"\"}Accepted: ${input.Accepted} User: ${input.User} Comment: ${input.Comment}\\n`"
+          }
+        }
+      ],
+      "propertyStorageProviders": {}
+    },
+    {
+      "$id": "110",
+      "activityId": "3ef0fbe9-eef0-4dfb-a882-d0741b787f27",
+      "type": "SetVariable",
+      "displayName": "Increment Response Counter",
+      "persistWorkflow": false,
+      "loadWorkflowContext": false,
+      "saveWorkflowContext": false,
+      "properties": [
+        {
+          "$id": "111",
+          "name": "VariableName",
+          "expressions": {
+            "$id": "112",
+            "Literal": "ResponseCounter"
+          }
+        },
+        {
+          "$id": "113",
+          "name": "Value",
+          "syntax": "JavaScript",
+          "expressions": {
+            "$id": "114",
+            "JavaScript": "getVariable('ResponseCounter') + 1"
+          }
+        }
+      ],
+      "propertyStorageProviders": {}
+    },
+    {
+      "$id": "115",
+      "activityId": "2080fbff-7ead-461b-afdc-001395c9f0cb",
+      "type": "Fork",
+      "displayName": "Accept or reject consolidation",
+      "persistWorkflow": false,
+      "loadWorkflowContext": false,
+      "saveWorkflowContext": false,
+      "properties": [
+        {
+          "$id": "116",
+          "name": "Branches",
+          "expressions": {
+            "$id": "117",
+            "Json": "[\"Approve\",\"Reject\"]"
+          }
+        }
+      ],
+      "propertyStorageProviders": {}
+    },
+    {
+      "$id": "118",
+      "activityId": "aa205bae-28a8-432b-a5d4-906bd1443b91",
+      "type": "SignalReceived",
+      "displayName": "Consolidate Approved Received",
+      "persistWorkflow": false,
+      "loadWorkflowContext": false,
+      "saveWorkflowContext": false,
+      "properties": [
+        {
+          "$id": "119",
+          "name": "Signal",
+          "expressions": {
+            "$id": "120",
+            "Literal": "ConsolidateApproved"
+          }
+        }
+      ],
+      "propertyStorageProviders": {}
+    },
+    {
+      "$id": "121",
+      "activityId": "484884a1-ae19-4926-9dfa-4b89048ed021",
+      "type": "SignalReceived",
+      "displayName": "Consolidate Rejected Received",
+      "persistWorkflow": false,
+      "loadWorkflowContext": false,
+      "saveWorkflowContext": false,
+      "properties": [
+        {
+          "$id": "122",
+          "name": "Signal",
+          "expressions": {
+            "$id": "123",
+            "Literal": "ConsolidateRejected"
+          }
+        }
+      ],
+      "propertyStorageProviders": {}
+    },
+    {
+      "$id": "124",
+      "activityId": "add8b1f2-df0e-4c48-949b-b8ceed016b6a",
+      "type": "ReleaseRevisionActivity",
+      "displayName": "Release Revision",
+      "persistWorkflow": false,
+      "loadWorkflowContext": false,
+      "saveWorkflowContext": false,
+      "properties": [
+        {
+          "$id": "125",
+          "name": "Revision",
+          "syntax": "JavaScript",
+          "expressions": {
+            "$id": "126",
+            "JavaScript": "Revision"
+          }
+        },
+        {
+          "$id": "127",
+          "name": "RevisionStep",
+          "expressions": {
+            "$id": "128",
+            "Literal": "3"
+          }
+        }
+      ],
+      "propertyStorageProviders": {}
+    },
+    {
+      "$id": "129",
+      "activityId": "04af286f-03b2-4c47-951d-d0f25ecb578d",
+      "type": "Join",
+      "displayName": "Join Approve Consolidated",
+      "persistWorkflow": false,
+      "loadWorkflowContext": false,
+      "saveWorkflowContext": false,
+      "properties": [
+        {
+          "$id": "130",
+          "name": "Mode",
+          "expressions": {
+            "$id": "131",
+            "Literal": "WaitAny"
+          }
+        }
+      ],
+      "propertyStorageProviders": {}
+    },
+    {
+      "$id": "132",
+      "activityId": "55c24af5-7f3c-43fe-8930-14f043614c9f",
+      "type": "SetVariable",
+      "displayName": "Reset Responses",
+      "persistWorkflow": false,
+      "loadWorkflowContext": false,
+      "saveWorkflowContext": false,
+      "properties": [
+        {
+          "$id": "133",
+          "name": "VariableName",
+          "expressions": {
+            "$id": "134",
+            "Literal": "ReviewResponses"
+          }
+        },
+        {
+          "$id": "135",
+          "name": "Value",
+          "expressions": {
+            "$id": "136"
+          }
+        }
+      ],
+      "propertyStorageProviders": {}
+    },
+    {
+      "$id": "137",
+      "activityId": "cc0d4d98-29db-424d-971f-6a50377244d4",
+      "type": "SetVariable",
+      "displayName": "Reset Response Counter",
+      "persistWorkflow": false,
+      "loadWorkflowContext": false,
+      "saveWorkflowContext": false,
+      "properties": [
+        {
+          "$id": "138",
+          "name": "VariableName",
+          "expressions": {
+            "$id": "139",
+            "Literal": "ResponseCounter"
+          }
+        },
+        {
+          "$id": "140",
+          "name": "Value",
+          "expressions": {
+            "$id": "141",
+            "Literal": "0"
+          }
+        }
+      ],
+      "propertyStorageProviders": {}
+    },
+    {
+      "$id": "142",
+      "activityId": "ab117030-5d2a-447e-a81d-a0465315237b",
+      "type": "SignalReceived",
+      "displayName": "Consolidate Rejected",
+      "persistWorkflow": false,
+      "loadWorkflowContext": false,
+      "saveWorkflowContext": false,
+      "properties": [
+        {
+          "$id": "143",
+          "name": "Signal",
+          "expressions": {
+            "$id": "144",
+            "Literal": "ConsolidateRejected"
+          }
+        }
+      ],
+      "propertyStorageProviders": {}
+    },
+    {
+      "$id": "145",
+      "activityId": "75d41b8c-196a-4a3a-b00d-7bc20273dc2f",
+      "type": "SetVariable",
+      "displayName": "Set response counter",
+      "persistWorkflow": false,
+      "loadWorkflowContext": false,
+      "saveWorkflowContext": false,
+      "properties": [
+        {
+          "$id": "146",
+          "name": "VariableName",
+          "expressions": {
+            "$id": "147",
+            "Literal": "ResponseCounter"
+          }
+        },
+        {
+          "$id": "148",
+          "name": "Value",
+          "expressions": {
+            "$id": "149",
+            "Literal": "0"
+          }
+        }
+      ],
+      "propertyStorageProviders": {}
+    },
+    {
+      "$id": "150",
+      "activityId": "5cd9d82d-33da-45b7-b9e1-1d6b46e43267",
+      "type": "SetVariable",
+      "displayName": "Set response counter",
+      "persistWorkflow": false,
+      "loadWorkflowContext": false,
+      "saveWorkflowContext": false,
+      "properties": [
+        {
+          "$id": "151",
+          "name": "VariableName",
+          "expressions": {
+            "$id": "152",
+            "Literal": "ResponseCounter"
+          }
+        },
+        {
+          "$id": "153",
+          "name": "Value",
+          "expressions": {
+            "$id": "154",
+            "Literal": "0"
+          }
+        }
+      ],
+      "propertyStorageProviders": {}
+    },
+    {
+      "$id": "155",
+      "activityId": "ad9bf384-d335-40f5-a78c-dc9a46f7d5ca",
+      "type": "SetVariable",
+      "displayName": "Set review response",
+      "persistWorkflow": false,
+      "loadWorkflowContext": false,
+      "saveWorkflowContext": false,
+      "properties": [
+        {
+          "$id": "156",
+          "name": "VariableName",
+          "expressions": {
+            "$id": "157",
+            "Literal": "ReviewResponses"
+          }
+        },
+        {
+          "$id": "158",
+          "name": "Value",
+          "expressions": {
+            "$id": "159"
+          }
+        }
+      ],
+      "propertyStorageProviders": {}
+    },
+    {
+      "$id": "160",
+      "activityId": "94c6d91e-a8d2-4820-897f-d95123a3ff3d",
+      "type": "SetVariable",
+      "displayName": "Set approval response",
+      "persistWorkflow": false,
+      "loadWorkflowContext": false,
+      "saveWorkflowContext": false,
+      "properties": [
+        {
+          "$id": "161",
+          "name": "VariableName",
+          "expressions": {
+            "$id": "162",
+            "Literal": "ReviewResponses"
+          }
+        },
+        {
+          "$id": "163",
+          "name": "Value",
+          "expressions": {
+            "$id": "164"
+          }
+        }
+      ],
+      "propertyStorageProviders": {}
+    },
+    {
+      "$id": "165",
+      "activityId": "9c2ee740-8994-4d17-acc6-152a18ffbdb2",
+      "type": "CreateTaskActivity",
+      "name": "CreateTaskReview",
+      "displayName": "Create Task",
+      "persistWorkflow": false,
+      "loadWorkflowContext": false,
+      "saveWorkflowContext": false,
+      "properties": [
+        {
+          "$id": "166",
+          "name": "TaskName",
+          "syntax": "Liquid",
+          "expressions": {
+            "$id": "167",
+            "Liquid": "Review Document: {{Variables.Document.Label}}"
+          }
+        },
+        {
+          "$id": "168",
+          "name": "TaskType",
+          "expressions": {
+            "$id": "169",
+            "Literal": "DDMS Workflow Task"
+          }
+        },
+        {
+          "$id": "170",
+          "name": "Fields",
+          "syntax": "JavaScript",
+          "expressions": {
+            "$id": "171",
+            "JavaScript": "return {\r\n    \"Responsible\": getTransientVariable(\"User\"),\r\n    \"State\": \"Created\",\r\n    \"Description\": Document.Description,\r\n    \"DueDate\": DueDate,\r\n    \"DocumentNo\": Document.Label,\r\n    \"DocumentRevision\": Revision,\r\n    \"Reason\": \"Review\",\r\n    \"ReviewComments\": \"Reviewed\"\r\n}"
+          }
+        }
+      ],
+      "propertyStorageProviders": {}
+    },
+    {
+      "$id": "172",
+      "activityId": "63de3b33-8455-448c-b9c3-f45e168086d2",
+      "type": "CreateTaskActivity",
+      "displayName": "Create Task",
+      "persistWorkflow": false,
+      "loadWorkflowContext": false,
+      "saveWorkflowContext": false,
+      "properties": [
+        {
+          "$id": "173",
+          "name": "TaskName",
+          "syntax": "Liquid",
+          "expressions": {
+            "$id": "174",
+            "Liquid": "Consolidate review Document: {{Variables.Document.Label}}"
+          }
+        },
+        {
+          "$id": "175",
+          "name": "TaskType",
+          "expressions": {
+            "$id": "176",
+            "Literal": "DDMS Consolidate Workflow Task"
+          }
+        },
+        {
+          "$id": "177",
+          "name": "Fields",
+          "syntax": "JavaScript",
+          "expressions": {
+            "$id": "178",
+            "JavaScript": "return {\r\n    \"Responsible\": ConsolidateUser,\r\n    \"State\": \"Created\",\r\n    \"Description\": Document.Description,\r\n    \"DueDate\": DueDate,\r\n    \"DocumentNo\": Document.Label,\r\n    \"DocumentRevision\": Revision,\r\n    \"Reason\": \"Consolidate\",\r\n    \"ReviewComments\": ReviewResponses\r\n}"
+          }
+        }
+      ],
+      "propertyStorageProviders": {}
+    },
+    {
+      "$id": "179",
+      "activityId": "6eaaf06c-b379-44f3-9fc1-32d8ebdfa37d",
+      "type": "CreateTaskActivity",
+      "name": "CreateTaskApprove",
+      "displayName": "Create Task",
+      "persistWorkflow": false,
+      "loadWorkflowContext": false,
+      "saveWorkflowContext": false,
+      "properties": [
+        {
+          "$id": "180",
+          "name": "TaskName",
+          "syntax": "Liquid",
+          "expressions": {
+            "$id": "181",
+            "Liquid": "Approve Document: {{Variables.Document.Label}}"
+          }
+        },
+        {
+          "$id": "182",
+          "name": "TaskType",
+          "expressions": {
+            "$id": "183",
+            "Literal": "DDMS Workflow Task"
+          }
+        },
+        {
+          "$id": "184",
+          "name": "Fields",
+          "syntax": "JavaScript",
+          "expressions": {
+            "$id": "185",
+            "JavaScript": "return {\r\n    \"Responsible\": getTransientVariable(\"User\"),\r\n    \"State\": \"Created\",\r\n    \"Description\": Document.Description,\r\n    \"DueDate\": DueDate,\r\n    \"DocumentNo\": Document.Label,\r\n    \"DocumentRevision\": Revision,\r\n    \"Reason\": \"Approve\"\r\n}"
+          }
+        }
+      ],
+      "propertyStorageProviders": {}
+    },
+    {
+      "$id": "186",
+      "activityId": "841a3488-3488-4308-8015-0891891cfda9",
+      "type": "CreateTaskActivity",
+      "displayName": "Create Task",
+      "persistWorkflow": false,
+      "loadWorkflowContext": false,
+      "saveWorkflowContext": false,
+      "properties": [
+        {
+          "$id": "187",
+          "name": "TaskName",
+          "syntax": "Liquid",
+          "expressions": {
+            "$id": "188",
+            "Liquid": "Consolidate approve Document: {{ Variables.Document.Label }}"
+          }
+        },
+        {
+          "$id": "189",
+          "name": "TaskType",
+          "expressions": {
+            "$id": "190",
+            "Literal": "DDMS Consolidate Workflow Task"
+          }
+        },
+        {
+          "$id": "191",
+          "name": "Fields",
+          "syntax": "JavaScript",
+          "expressions": {
+            "$id": "192",
+            "JavaScript": "return {\r\n    \"Responsible\": ConsolidateUser,\r\n    \"State\": \"Created\",\r\n    \"Description\": Document.Description,\r\n    \"DueDate\": DueDate,\r\n    \"DocumentNo\": Document.Label,\r\n    \"DocumentRevision\": Revision,\r\n    \"Reason\": \"Consolidate approve\",\r\n    \"ReviewComments\": ReviewResponses\r\n}"
+          }
+        }
+      ],
+      "propertyStorageProviders": {}
+    }
+  ],
+  "connections": [
+    {
+      "$id": "193",
+      "sourceActivityId": "10a8f91f-f33e-4413-b31d-0ea4e1ba05db",
+      "targetActivityId": "0e84da0b-632a-4e01-80f3-a4a952db5b77",
+      "outcome": "Done"
+    },
+    {
+      "$id": "194",
+      "sourceActivityId": "0e84da0b-632a-4e01-80f3-a4a952db5b77",
+      "targetActivityId": "469d06b3-34ed-4d79-a9b5-3e268f5e0fe3",
+      "outcome": "Done"
+    },
+    {
+      "$id": "195",
+      "sourceActivityId": "2b0e2a46-5320-4ea2-889d-347be7281d43",
+      "targetActivityId": "5a0a45d0-df05-45d6-afac-eb9b717d9049",
+      "outcome": "Done"
+    },
+    {
+      "$id": "196",
+      "sourceActivityId": "81ca0f87-c1ea-4c58-91ce-6680f41135d6",
+      "targetActivityId": "8b1e5841-5c43-4a88-a4b1-28741235e7a0",
+      "outcome": "Approve"
+    },
+    {
+      "$id": "197",
+      "sourceActivityId": "8b1e5841-5c43-4a88-a4b1-28741235e7a0",
+      "targetActivityId": "6623dec4-5c2e-4499-bafe-671e2b252ae2",
+      "outcome": "Done"
+    },
+    {
+      "$id": "198",
+      "sourceActivityId": "6623dec4-5c2e-4499-bafe-671e2b252ae2",
+      "targetActivityId": "fc405328-0539-4639-97b9-9067d0c120e2",
+      "outcome": "Done"
+    },
+    {
+      "$id": "199",
+      "sourceActivityId": "fc405328-0539-4639-97b9-9067d0c120e2",
+      "targetActivityId": "02b24d96-4a8b-4f03-a76e-dd3775abc40b",
+      "outcome": "Done"
+    },
+    {
+      "$id": "200",
+      "sourceActivityId": "02b24d96-4a8b-4f03-a76e-dd3775abc40b",
+      "targetActivityId": "b3b07a01-5914-45d4-a26c-0a42b209f272",
+      "outcome": "Done"
+    },
+    {
+      "$id": "201",
+      "sourceActivityId": "b3b07a01-5914-45d4-a26c-0a42b209f272",
+      "targetActivityId": "96df9f79-7da3-49cc-b38e-1aa10d36457b",
+      "outcome": "Done"
+    },
+    {
+      "$id": "202",
+      "sourceActivityId": "96df9f79-7da3-49cc-b38e-1aa10d36457b",
+      "targetActivityId": "5dd2d41a-40da-47d3-9125-1d640080366d",
+      "outcome": "Iterate"
+    },
+    {
+      "$id": "203",
+      "sourceActivityId": "469d06b3-34ed-4d79-a9b5-3e268f5e0fe3",
+      "targetActivityId": "88408055-669c-4a4d-8eef-ebf2454b3fbd",
+      "outcome": "Iterate"
+    },
+    {
+      "$id": "204",
+      "sourceActivityId": "e90094b3-9739-4ad9-8777-b54fce941e45",
+      "targetActivityId": "effec5ce-ea45-4b01-a13d-eec4a4ef60f1",
+      "outcome": "Iterate"
+    },
+    {
+      "$id": "205",
+      "sourceActivityId": "7d2ff5f6-5304-4192-b072-5691160ee320",
+      "targetActivityId": "2c81a2bf-de45-46e3-b7ed-ae63ed67f6ca",
+      "outcome": "Iterate"
+    },
+    {
+      "$id": "206",
+      "sourceActivityId": "effec5ce-ea45-4b01-a13d-eec4a4ef60f1",
+      "targetActivityId": "c3e7fd16-cadc-4b69-91da-bc5c3ff5d02b",
+      "outcome": "Done"
+    },
+    {
+      "$id": "207",
+      "sourceActivityId": "c3e7fd16-cadc-4b69-91da-bc5c3ff5d02b",
+      "targetActivityId": "3ef0fbe9-eef0-4dfb-a882-d0741b787f27",
+      "outcome": "Done"
+    },
+    {
+      "$id": "208",
+      "sourceActivityId": "2080fbff-7ead-461b-afdc-001395c9f0cb",
+      "targetActivityId": "aa205bae-28a8-432b-a5d4-906bd1443b91",
+      "outcome": "Approve"
+    },
+    {
+      "$id": "209",
+      "sourceActivityId": "2080fbff-7ead-461b-afdc-001395c9f0cb",
+      "targetActivityId": "484884a1-ae19-4926-9dfa-4b89048ed021",
+      "outcome": "Reject"
+    },
+    {
+      "$id": "210",
+      "sourceActivityId": "484884a1-ae19-4926-9dfa-4b89048ed021",
+      "targetActivityId": "0e84da0b-632a-4e01-80f3-a4a952db5b77",
+      "outcome": "Done"
+    },
+    {
+      "$id": "211",
+      "sourceActivityId": "aa205bae-28a8-432b-a5d4-906bd1443b91",
+      "targetActivityId": "add8b1f2-df0e-4c48-949b-b8ceed016b6a",
+      "outcome": "Done"
+    },
+    {
+      "$id": "212",
+      "sourceActivityId": "add8b1f2-df0e-4c48-949b-b8ceed016b6a",
+      "targetActivityId": "04af286f-03b2-4c47-951d-d0f25ecb578d",
+      "outcome": "Done"
+    },
+    {
+      "$id": "213",
+      "sourceActivityId": "04af286f-03b2-4c47-951d-d0f25ecb578d",
+      "targetActivityId": "55c24af5-7f3c-43fe-8930-14f043614c9f",
+      "outcome": "Done"
+    },
+    {
+      "$id": "214",
+      "sourceActivityId": "55c24af5-7f3c-43fe-8930-14f043614c9f",
+      "targetActivityId": "cc0d4d98-29db-424d-971f-6a50377244d4",
+      "outcome": "Done"
+    },
+    {
+      "$id": "215",
+      "sourceActivityId": "81ca0f87-c1ea-4c58-91ce-6680f41135d6",
+      "targetActivityId": "ab117030-5d2a-447e-a81d-a0465315237b",
+      "outcome": "Reject"
+    },
+    {
+      "$id": "216",
+      "sourceActivityId": "ab117030-5d2a-447e-a81d-a0465315237b",
+      "targetActivityId": "0e84da0b-632a-4e01-80f3-a4a952db5b77",
+      "outcome": "Done"
+    },
+    {
+      "$id": "217",
+      "sourceActivityId": "2c81a2bf-de45-46e3-b7ed-ae63ed67f6ca",
+      "targetActivityId": "2b0e2a46-5320-4ea2-889d-347be7281d43",
+      "outcome": "Done"
+    },
+    {
+      "$id": "218",
+      "sourceActivityId": "96df9f79-7da3-49cc-b38e-1aa10d36457b",
+      "targetActivityId": "75d41b8c-196a-4a3a-b00d-7bc20273dc2f",
+      "outcome": "Done"
+    },
+    {
+      "$id": "219",
+      "sourceActivityId": "469d06b3-34ed-4d79-a9b5-3e268f5e0fe3",
+      "targetActivityId": "5cd9d82d-33da-45b7-b9e1-1d6b46e43267",
+      "outcome": "Done"
+    },
+    {
+      "$id": "220",
+      "sourceActivityId": "5cd9d82d-33da-45b7-b9e1-1d6b46e43267",
+      "targetActivityId": "ad9bf384-d335-40f5-a78c-dc9a46f7d5ca",
+      "outcome": "Done"
+    },
+    {
+      "$id": "221",
+      "sourceActivityId": "ad9bf384-d335-40f5-a78c-dc9a46f7d5ca",
+      "targetActivityId": "7d2ff5f6-5304-4192-b072-5691160ee320",
+      "outcome": "Done"
+    },
+    {
+      "$id": "222",
+      "sourceActivityId": "6238e59b-a61f-4c00-8804-a4e4a19192ca",
+      "targetActivityId": "10a8f91f-f33e-4413-b31d-0ea4e1ba05db",
+      "outcome": "Done"
+    },
+    {
+      "$id": "223",
+      "sourceActivityId": "75d41b8c-196a-4a3a-b00d-7bc20273dc2f",
+      "targetActivityId": "94c6d91e-a8d2-4820-897f-d95123a3ff3d",
+      "outcome": "Done"
+    },
+    {
+      "$id": "224",
+      "sourceActivityId": "94c6d91e-a8d2-4820-897f-d95123a3ff3d",
+      "targetActivityId": "e90094b3-9739-4ad9-8777-b54fce941e45",
+      "outcome": "Done"
+    },
+    {
+      "$id": "225",
+      "sourceActivityId": "88408055-669c-4a4d-8eef-ebf2454b3fbd",
+      "targetActivityId": "9c2ee740-8994-4d17-acc6-152a18ffbdb2",
+      "outcome": "Done"
+    },
+    {
+      "$id": "226",
+      "sourceActivityId": "9c2ee740-8994-4d17-acc6-152a18ffbdb2",
+      "targetActivityId": "57892446-5c82-46ee-a5fd-a55a75977aab",
+      "outcome": "Done"
+    },
+    {
+      "$id": "227",
+      "sourceActivityId": "7d2ff5f6-5304-4192-b072-5691160ee320",
+      "targetActivityId": "63de3b33-8455-448c-b9c3-f45e168086d2",
+      "outcome": "Done"
+    },
+    {
+      "$id": "228",
+      "sourceActivityId": "63de3b33-8455-448c-b9c3-f45e168086d2",
+      "targetActivityId": "81ca0f87-c1ea-4c58-91ce-6680f41135d6",
+      "outcome": "Done"
+    },
+    {
+      "$id": "229",
+      "sourceActivityId": "5dd2d41a-40da-47d3-9125-1d640080366d",
+      "targetActivityId": "6eaaf06c-b379-44f3-9fc1-32d8ebdfa37d",
+      "outcome": "Done"
+    },
+    {
+      "$id": "230",
+      "sourceActivityId": "6eaaf06c-b379-44f3-9fc1-32d8ebdfa37d",
+      "targetActivityId": "6939dcad-3bec-423e-8fec-addbd47928a6",
+      "outcome": "Done"
+    },
+    {
+      "$id": "231",
+      "sourceActivityId": "e90094b3-9739-4ad9-8777-b54fce941e45",
+      "targetActivityId": "841a3488-3488-4308-8015-0891891cfda9",
+      "outcome": "Done"
+    },
+    {
+      "$id": "232",
+      "sourceActivityId": "841a3488-3488-4308-8015-0891891cfda9",
+      "targetActivityId": "2080fbff-7ead-461b-afdc-001395c9f0cb",
+      "outcome": "Done"
+    }
+  ],
+  "id": "893563d3a9ef4a11881f527c559aadf7"
+}

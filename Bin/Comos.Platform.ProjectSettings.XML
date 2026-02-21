@@ -1,0 +1,3238 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>Comos.Platform.ProjectSettings</name>
+    </assembly>
+    <members>
+        <member name="T:Comos.Platform.ProjectSettings.CoreExtensions.AxWrapperExtension">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="M:Comos.Platform.ProjectSettings.CoreExtensions.AxWrapperExtension.#ctor(System.String)">
+            <summary>
+            Initializes a new instance of the <see cref="T:Comos.Platform.ProjectSettings.CoreExtensions.AxWrapperExtension"/> class.
+            </summary>
+        </member>
+        <member name="M:Comos.Platform.ProjectSettings.CoreExtensions.AxWrapperExtension.CanExecuteAction(Comos.Platform.ProjectSettings.Interface.SettingExtensionArgument)">
+            <summary>
+            Determines whether this instance can execute the action with the specified <see cref="T:Comos.Platform.ProjectSettings.Interface.SettingExtensionArgument"/>.
+            </summary>
+            <param name="settingArg">The setting arguments.</param>
+            <returns>
+              <c>true</c> if this instance can execute the action with the specified <see cref="T:Comos.Platform.ProjectSettings.Interface.SettingExtensionArgument"/>; otherwise, <c>false</c>.
+            </returns>
+        </member>
+        <member name="M:Comos.Platform.ProjectSettings.CoreExtensions.AxWrapperExtension.ExecuteAction(Comos.Platform.ProjectSettings.Interface.SettingExtensionArgument)">
+            <summary>
+            Executes the action.
+            </summary>
+            <param name="settingArg">The setting arguments.</param>
+        </member>
+        <member name="M:Comos.Platform.ProjectSettings.CoreExtensions.AxWrapperExtension.DependentSettingChanged(Comos.Platform.ProjectSettings.Interface.SettingExtensionArgument,Comos.Platform.ProjectSettings.Interface.ISetting)">
+            <summary>
+            Notifies that a dependent setting has changed.
+            </summary>
+            <param name="settingArg">The setting arguments.</param>
+            <param name="dependentsetting">The dependentsetting.</param>
+        </member>
+        <member name="M:Comos.Platform.ProjectSettings.CoreExtensions.AxWrapperExtension.Initialized(Comos.Platform.ProjectSettings.Interface.SettingExtensionArgument)">
+            <summary>
+            Called when this <see cref="T:Comos.Platform.ProjectSettings.Interface.ISettingExtension"/> has been initialized.
+            </summary>
+            <param name="settingArg">The setting arguments.</param>
+        </member>
+        <member name="T:Comos.Platform.ProjectSettings.CoreExtensions.SpecChapterExtension">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="M:Comos.Platform.ProjectSettings.CoreExtensions.SpecChapterExtension.#ctor">
+            <summary>
+            Initializes a new instance of the <see cref="T:Comos.Platform.ProjectSettings.CoreExtensions.SpecChapterExtension"/> class.
+            </summary>
+        </member>
+        <member name="M:Comos.Platform.ProjectSettings.CoreExtensions.SpecChapterExtension.Initialized(Comos.Platform.ProjectSettings.Interface.SettingExtensionArgument)">
+            <summary>
+            Called when this <see cref="T:Comos.Platform.ProjectSettings.Interface.ISettingExtension"/> has been initialized.
+            </summary>
+            <param name="settingArg">The setting arguments.</param>
+        </member>
+        <member name="M:Comos.Platform.ProjectSettings.CoreExtensions.SpecChapterExtension.OnChildInitialized">
+            <summary>
+            Called when the wrapped child has been initialized.
+            When overwritten in a drived class, can be used to implement custom initilization logic. 
+            By default this implementation sets the workset and the Objects (ItemObjects) Collection.
+            </summary>
+        </member>
+        <member name="T:Comos.Platform.ProjectSettings.Core.ComosUtilities">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Comos.Platform.ProjectSettings.Core.ComosUtilities.IsComosDomain">
+            <summary>
+            Gets a value indicating whether this instance is comos internal.
+            </summary>
+            <value>
+            	<c>true</c> if this instance is comos internal; otherwise, <c>false</c>.
+            </value>
+        </member>
+        <member name="M:Comos.Platform.ProjectSettings.Core.ComosUtilities.CheckObjectRights(System.Int32,Plt.IComosBaseObject)">
+            <summary>
+            Checks the object rights.
+            </summary>
+            <param name="rights">The rights.</param>
+            <param name="comosObject">The comos object.</param>
+            <returns></returns>
+        </member>
+        <member name="M:Comos.Platform.ProjectSettings.Core.ComosUtilities.HasSystemLicense">
+            <summary>
+            Determines whether [has system license].
+            </summary>
+            <returns>
+              <c>true</c> if [has system license]; otherwise, <c>false</c>.
+            </returns>
+        </member>
+        <member name="M:Comos.Platform.ProjectSettings.Core.ComosUtilities.CheckComosInternal(System.String,System.String,System.Boolean)">
+            <summary>
+            Checks the comos internal.
+            </summary>
+            <param name="id">The id.</param>
+            <param name="idref">The idref.</param>
+            <param name="comosInternal">if set to <c>true</c> [comos internal].</param>
+            <returns></returns>
+        </member>
+        <member name="T:Comos.Platform.ProjectSettings.Core.CustomerCategory">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="M:Comos.Platform.ProjectSettings.Core.CustomerCategory.#ctor(Plt.IComosDSpecification,Comos.Platform.ProjectSettings.Core.CustomerSettingsController)">
+            <summary>
+            Initializes a new instance of the <see cref="T:Comos.Platform.ProjectSettings.Core.CustomerCategory"/> class.
+            </summary>
+        </member>
+        <member name="M:Comos.Platform.ProjectSettings.Core.CustomerCategory.CreateSettings">
+            <summary>
+            Creates the settings.
+            </summary>
+        </member>
+        <member name="P:Comos.Platform.ProjectSettings.Core.CustomerCategory.ID">
+            <summary>
+            Gets the ID.
+            </summary>
+        </member>
+        <member name="P:Comos.Platform.ProjectSettings.Core.CustomerCategory.Caption">
+            <summary>
+            Gets the caption.
+            </summary>
+        </member>
+        <member name="P:Comos.Platform.ProjectSettings.Core.CustomerCategory.IsVisible">
+            <summary>
+            Gets or sets a value indicating whether this instance is visible.
+            </summary>
+            <value>
+            	<c>true</c> if this instance is visible; otherwise, <c>false</c>.
+            </value>
+        </member>
+        <member name="P:Comos.Platform.ProjectSettings.Core.CustomerCategory.IsEnabled">
+            <history>adtaka5  20.06.2017  2318533: Added setter</history> 
+        </member>
+        <member name="P:Comos.Platform.ProjectSettings.Core.CustomerCategory.HasOwnRightsManagement">
+            <history>adtaka5  20.06.2017  2318533: Added setter</history> 
+        </member>
+        <member name="P:Comos.Platform.ProjectSettings.Core.CustomerCategory.Settings">
+            <summary>
+            Gets the settings.
+            </summary>
+        </member>
+        <member name="P:Comos.Platform.ProjectSettings.Core.CustomerCategory.Categories">
+            <summary>
+            Gets the categories.
+            </summary>
+        </member>
+        <member name="T:Comos.Platform.ProjectSettings.Core.CustomerSetting">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="M:Comos.Platform.ProjectSettings.Core.CustomerSetting.#ctor(Plt.IComosDSpecification,Comos.Platform.ProjectSettings.Core.CustomerSettingsController,Comos.Platform.ProjectSettings.Interface.ICategory)">
+            <summary>
+            Initializes a new instance of the <see cref="T:Comos.Platform.ProjectSettings.Core.CustomerSetting"/> class.
+            </summary>
+        </member>
+        <member name="P:Comos.Platform.ProjectSettings.Core.CustomerSetting.Specification">
+            <summary>
+            Gets the specification.
+            </summary>
+        </member>
+        <member name="P:Comos.Platform.ProjectSettings.Core.CustomerSetting.Id">
+            <summary>
+            Gets the ID.
+            </summary>
+        </member>
+        <member name="P:Comos.Platform.ProjectSettings.Core.CustomerSetting.Type">
+            <summary>
+            Gets the type.
+            </summary>
+        </member>
+        <member name="P:Comos.Platform.ProjectSettings.Core.CustomerSetting.AttributeName">
+            <summary>
+            Gets the name of the attribute.
+            </summary>
+            <value>
+            The name of the attribute.
+            </value>
+        </member>
+        <member name="P:Comos.Platform.ProjectSettings.Core.CustomerSetting.Caption">
+            <summary>
+            Gets the caption.
+            </summary>
+        </member>
+        <member name="P:Comos.Platform.ProjectSettings.Core.CustomerSetting.Assembly">
+            <summary>
+            Gets the assembly.
+            </summary>
+        </member>
+        <member name="P:Comos.Platform.ProjectSettings.Core.CustomerSetting.Class">
+            <summary>
+            Gets the class.
+            </summary>
+        </member>
+        <member name="P:Comos.Platform.ProjectSettings.Core.CustomerSetting.Category">
+            <summary>
+            Gets the category.
+            </summary>
+        </member>
+        <member name="P:Comos.Platform.ProjectSettings.Core.CustomerSetting.ObservedSettings">
+            <summary>
+            Gets the depends on.
+            </summary>
+        </member>
+        <member name="P:Comos.Platform.ProjectSettings.Core.CustomerSetting.DefaultValue">
+            <summary>
+            Gets the default value.
+            </summary>
+        </member>
+        <member name="P:Comos.Platform.ProjectSettings.Core.CustomerSetting.Value">
+            <summary>
+            Gets or sets the value.
+            </summary>
+            <value>
+            The value.
+            </value>
+        </member>
+        <member name="P:Comos.Platform.ProjectSettings.Core.CustomerSetting.Children">
+            <summary>
+            Gets the children.
+            </summary>
+        </member>
+        <member name="P:Comos.Platform.ProjectSettings.Core.CustomerSetting.Indent">
+            <summary>
+            Gets the indent.
+            </summary>
+        </member>
+        <member name="P:Comos.Platform.ProjectSettings.Core.CustomerSetting.ToolTip">
+            <summary>
+            Gets the tool tip.
+            </summary>
+        </member>
+        <member name="P:Comos.Platform.ProjectSettings.Core.CustomerSetting.IsVisible">
+            <summary>
+            Gets or sets a value indicating whether this instance is visible.
+            </summary>
+            <value>
+            	<c>true</c> if this instance is visible; otherwise, <c>false</c>.
+            </value>
+        </member>
+        <member name="P:Comos.Platform.ProjectSettings.Core.CustomerSetting.ItemsSource">
+            <summary>
+            Gets the items source.
+            </summary>
+        </member>
+        <member name="M:Comos.Platform.ProjectSettings.Core.CustomerSetting.AddItem(System.String,System.String,System.String,System.String,System.String)">
+            <summary>
+            Adds the item.
+            </summary>
+            <param name="id">The id.</param>
+            <param name="caption">The caption.</param>
+            <param name="value">The value.</param>
+            <param name="imageKey">The image key.</param>
+            <param name="toolTip">The tool tip.</param>
+            <returns></returns>
+        </member>
+        <member name="M:Comos.Platform.ProjectSettings.Core.CustomerSetting.AddItem(System.String,System.String,System.String,System.String,System.String,System.Int32)">
+            <summary>
+            Adds the item.
+            </summary>
+            <param name="id">The id.</param>
+            <param name="caption">The caption.</param>
+            <param name="value">The value.</param>
+            <param name="imageKey">The image key.</param>
+            <param name="toolTip">The tool tip.</param>
+            <param name="indent">The indent.</param>
+            <returns></returns>
+        </member>
+        <member name="M:Comos.Platform.ProjectSettings.Core.CustomerSetting.AddItem(System.String,System.String,System.String,System.String,System.String,System.Int32,System.String)">
+            <summary>
+            Adds the item.
+            </summary>
+            <param name="id">The id.</param>
+            <param name="caption">The caption.</param>
+            <param name="value">The value.</param>
+            <param name="imageKey">The image key.</param>
+            <param name="toolTip">The tool tip.</param>
+            <param name="indent">The indent.</param>
+            <param name="selectedCaption">The caption which is displayed when the item is selected.</param>
+            <returns></returns>
+        </member>
+        <member name="P:Comos.Platform.ProjectSettings.Core.CustomerSetting.FileOpenDialogFilter">
+            <summary>
+            Gets or sets the file open dialog filter.
+            </summary>
+            <value>
+            The file open dialog filter.
+            </value>
+        </member>
+        <member name="P:Comos.Platform.ProjectSettings.Core.CustomerSetting.FileOpenDialogFilterIndex">
+            <summary>
+            Gets or sets the index of the file open dialog filter.
+            </summary>
+            <value>
+            The index of the file open dialog filter.
+            </value>
+        </member>
+        <member name="P:Comos.Platform.ProjectSettings.Core.CustomerSetting.FileOpenDialogInitialDirectory">
+            <summary>
+            Gets or sets the file open dialog initial directory.
+            </summary>
+            <value>
+            The file open dialog initial directory.
+            </value>
+        </member>
+        <member name="P:Comos.Platform.ProjectSettings.Core.CustomerSetting.ObjectPointerDeleteIsEnabled">
+            <summary>
+            Gets or sets a value indicating whether [delete is enabled].
+            </summary>
+            <value>
+              <c>true</c> if [delete is enabled]; otherwise, <c>false</c>.
+            </value>
+        </member>
+        <member name="P:Comos.Platform.ProjectSettings.Core.CustomerSetting.ObjectPointerDeleteToolTip">
+            <summary>
+            Gets or sets the delete tool tip.
+            </summary>
+            <value>
+            The delete tool tip.
+            </value>
+        </member>
+        <member name="P:Comos.Platform.ProjectSettings.Core.CustomerSetting.ObjectPointerDeleteIsVisible">
+            <summary>
+            Gets or sets a value indicating whether [delete is visible].
+            </summary>
+            <value>
+              <c>true</c> if [delete is visible]; otherwise, <c>false</c>.
+            </value>
+        </member>
+        <member name="P:Comos.Platform.ProjectSettings.Core.CustomerSetting.ObjectPointerSelectIsEnabled">
+            <summary>
+            Gets or sets a value indicating whether [select is enabled].
+            </summary>
+            <value>
+              <c>true</c> if [select is enabled]; otherwise, <c>false</c>.
+            </value>
+        </member>
+        <member name="P:Comos.Platform.ProjectSettings.Core.CustomerSetting.ObjectPointerSelectToolTip">
+            <summary>
+            Gets or sets the select tool tip.
+            </summary>
+            <value>
+            The select tool tip.
+            </value>
+        </member>
+        <member name="P:Comos.Platform.ProjectSettings.Core.CustomerSetting.ObjectPointerSelectIsVisible">
+            <summary>
+            Gets or sets a value indicating whether [select is visible].
+            </summary>
+            <value>
+              <c>true</c> if [select is visible]; otherwise, <c>false</c>.
+            </value>
+        </member>
+        <member name="P:Comos.Platform.ProjectSettings.Core.CustomerSetting.ObjectPointerDropPicToolTip">
+            <summary>
+            Gets or sets the ToolTip text on the dropPic Image control.
+            </summary>
+            <value>
+            the ToolTip text on the dropPic Image control.
+            </value>
+        </member>
+        <member name="P:Comos.Platform.ProjectSettings.Core.CustomerSetting.IsEditable">
+            <summary>
+            Gets a value indicating whether this instance is editable.
+            </summary>
+            <value>
+            	<c>true</c> if this instance is editable; otherwise, <c>false</c>.
+            </value>
+        </member>
+        <member name="T:Comos.Platform.ProjectSettings.Core.CustomerSettingsController">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="M:Comos.Platform.ProjectSettings.Core.CustomerSettingsController.#ctor(Comos.Platform.ProjectSettings.SettingsController)">
+            <summary>
+            Initializes a new instance of the <see cref="T:Comos.Platform.ProjectSettings.Core.CustomerSettingsController"/> class.
+            </summary>
+        </member>
+        <member name="M:Comos.Platform.ProjectSettings.Core.CustomerSettingsController.Finalize">
+            <summary>
+            Releases unmanaged resources and performs other cleanup operations before the
+            <see cref="T:Comos.Platform.ProjectSettings.Core.CustomerSettingsController"/> is reclaimed by garbage collection.
+            </summary>
+        </member>
+        <member name="M:Comos.Platform.ProjectSettings.Core.CustomerSettingsController.GetSpecificationSet(Plt.IComosDProject)">
+            <summary>
+            Gets the specification set.
+            </summary>
+            <param name="project">The project.</param>
+        </member>
+        <member name="M:Comos.Platform.ProjectSettings.Core.CustomerSettingsController.GetSpecificationSetCObject(Plt.IComosDProject)">
+            <summary>
+            Gets the specification set C object.
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:Comos.Platform.ProjectSettings.Core.CustomerSettingsController.CreateCategoriesFromSpecificationSet(Plt.IComosDSpecificationSet)">
+            <summary>
+            Creates the categories from specification set.
+            </summary>
+            <param name="specificationSet">The specification set.</param>
+        </member>
+        <member name="M:Comos.Platform.ProjectSettings.Core.CustomerSettingsController.RegisterCategory(Comos.Platform.ProjectSettings.Interface.ICategory)">
+            <summary>
+            Registers the category.
+            </summary>
+            <param name="iCategory">The i category.</param>
+        </member>
+        <member name="M:Comos.Platform.ProjectSettings.Core.CustomerSettingsController.RegisterSetting(Comos.Platform.ProjectSettings.Interface.ISetting)">
+            <summary>
+            Registers the setting.
+            </summary>
+            <param name="iSetting">The i setting.</param>
+        </member>
+        <member name="P:Comos.Platform.ProjectSettings.Core.CustomerSettingsController.Categories">
+            <summary>
+            Gets the categories.
+            </summary>
+        </member>
+        <member name="P:Comos.Platform.ProjectSettings.Core.CustomerSettingsController.IsInitialized">
+            <summary>
+            Gets a value indicating whether this instance is initialized.
+            </summary>
+            <value>
+            	<c>true</c> if this instance is initialized; otherwise, <c>false</c>.
+            </value>
+        </member>
+        <member name="P:Comos.Platform.ProjectSettings.Core.CustomerSettingsController.IsReadOnly">
+            <summary>
+            Gets a value indicating whether this instance is read only.
+            </summary>
+            <value>
+            	<c>true</c> if this instance is read only; otherwise, <c>false</c>.
+            </value>
+        </member>
+        <member name="M:Comos.Platform.ProjectSettings.Core.CustomerSettingsController.Initialize(Plt.IComosDProject,System.Boolean)">
+            <summary>
+            Initializes this instance.
+            </summary>
+            <param name="comosProject"></param>
+            <param name="isReadOnly"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Comos.Platform.ProjectSettings.Core.CustomerSettingsController.CanExecuteAction(Comos.Platform.ProjectSettings.Interface.ISetting,System.String)">
+            <summary>
+            Determines whether the action of the passed in setting can be executed or not.
+            </summary>
+            <param name="setting">The setting.</param>
+            <param name="commandName">Name of the command.</param>
+            <returns>
+              <c>true</c> if the action of the passed in setting can be executed; otherwise, <c>false</c>.
+            </returns>
+        </member>
+        <member name="M:Comos.Platform.ProjectSettings.Core.CustomerSettingsController.ExecuteAction(Comos.Platform.ProjectSettings.Interface.ISetting,System.String)">
+            <summary>
+            Executes the action of the passed in setting.
+            </summary>
+            <param name="setting">The setting.</param>
+            <param name="commandName">Name of the command.</param>
+        </member>
+        <member name="M:Comos.Platform.ProjectSettings.Core.CustomerSettingsController.Dispose">
+            <summary>
+            Performs application-defined tasks associated with freeing, releasing, or resetting unmanaged resources.
+            </summary>
+        </member>
+        <member name="M:Comos.Platform.ProjectSettings.Core.CustomerSettingsController.Dispose(System.Boolean)">
+            <summary>
+            Releases unmanaged and - optionally - managed resources
+            </summary>
+            <param name="disposing"><c>true</c> to release both managed and unmanaged resources; <c>false</c> to release only unmanaged resources.</param>
+        </member>
+        <member name="T:Comos.Platform.ProjectSettings.Core.PltExtensions">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="M:Comos.Platform.ProjectSettings.Core.PltExtensions.#cctor">
+            <summary>
+            Initializes a new instance of the <see cref="T:Comos.Platform.ProjectSettings.Core.PltExtensions"/> class.
+            </summary>
+        </member>
+        <member name="M:Comos.Platform.ProjectSettings.Core.PltExtensions.IsChapter(Plt.IComosDSpecification)">
+            <summary>
+            Determines whether the specified spec is chapter.
+            </summary>
+            <param name="spec">The spec.</param>
+            <returns>
+              <c>true</c> if the specified spec is chapter; otherwise, <c>false</c>.
+            </returns>
+        </member>
+        <member name="T:Comos.Platform.ProjectSettings.Core.Setting">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="M:Comos.Platform.ProjectSettings.Core.Setting.#ctor(Comos.Platform.ProjectSettings.SettingsController)">
+            <summary>
+            Prevents a default instance of the <see cref="T:Comos.Platform.ProjectSettings.Core.Setting"/> class from being created.
+            </summary>
+            <param name="settingsController">The settings controller.</param>
+        </member>
+        <member name="M:Comos.Platform.ProjectSettings.Core.Setting.#ctor(Comos.Platform.ProjectSettings.XML.XmlSetting,Comos.Platform.ProjectSettings.SettingsController)">
+            <summary>
+            Initializes a new instance of the <see cref="T:Comos.Platform.ProjectSettings.Core.Setting"/> class.
+            </summary>
+            <param name="xmlSetting">The XML setting.</param>
+            <param name="settingsController">The settings controller.</param>
+        </member>
+        <member name="M:Comos.Platform.ProjectSettings.Core.Setting.#ctor(Comos.Platform.ProjectSettings.XML.XmlSettingRef,Comos.Platform.ProjectSettings.SettingsController,Comos.Platform.ProjectSettings.Interface.ICategory)">
+            <summary>
+            Initializes a new instance of the <see cref="T:Comos.Platform.ProjectSettings.Core.Setting"/> class.
+            </summary>
+            <param name="xmlSettingRef">The XML setting ref.</param>
+            <param name="settingsController">The settings controller.</param>
+            <param name="category">The category.</param>
+        </member>
+        <member name="P:Comos.Platform.ProjectSettings.Core.Setting.XmlSetting">
+            <summary>
+            Gets the XML setting.
+            </summary>
+        </member>
+        <member name="P:Comos.Platform.ProjectSettings.Core.Setting.SettingsController">
+            <summary>
+            Gets the settings controller.
+            </summary>
+        </member>
+        <member name="P:Comos.Platform.ProjectSettings.Core.Setting.Action">
+            <summary>
+            Gets the action.
+            </summary>
+            <value>
+            The action.
+            </value>
+        </member>
+        <member name="P:Comos.Platform.ProjectSettings.Core.Setting.CanExecuteAction">
+            <summary>
+            Gets the can execute action.
+            </summary>
+            <value>
+            The can execute action.
+            </value>
+        </member>
+        <member name="M:Comos.Platform.ProjectSettings.Core.Setting.Initialize">
+            <summary>
+            Initializes this instance.
+            </summary>
+        </member>
+        <member name="M:Comos.Platform.ProjectSettings.Core.Setting.DependentSettingChanged(Comos.Platform.ProjectSettings.Interface.ISetting)">
+            <summary>
+            Dependents the setting changed.
+            </summary>
+            <param name="dependentSetting">The dependent setting.</param>
+        </member>
+        <member name="P:Comos.Platform.ProjectSettings.Core.Setting.Id">
+            <summary>
+            Gets the ID.
+            </summary>
+        </member>
+        <member name="P:Comos.Platform.ProjectSettings.Core.Setting.Type">
+            <summary>
+            Gets the type.
+            </summary>
+        </member>
+        <member name="P:Comos.Platform.ProjectSettings.Core.Setting.AttributeName">
+            <summary>
+            Gets the name of the attribute.
+            </summary>
+            <value>
+            The name of the attribute.
+            </value>
+        </member>
+        <member name="P:Comos.Platform.ProjectSettings.Core.Setting.Caption">
+            <summary>
+            Gets the caption.
+            </summary>
+        </member>
+        <member name="P:Comos.Platform.ProjectSettings.Core.Setting.Assembly">
+            <summary>
+            Gets the assembly.
+            </summary>
+        </member>
+        <member name="P:Comos.Platform.ProjectSettings.Core.Setting.Class">
+            <summary>
+            Gets the class.
+            </summary>
+        </member>
+        <member name="P:Comos.Platform.ProjectSettings.Core.Setting.Parameters">
+            <summary>
+            Returns the setting extension parameters.
+            </summary>
+        </member>
+        <member name="P:Comos.Platform.ProjectSettings.Core.Setting.Category">
+            <summary>
+            Gets the category.
+            </summary>
+        </member>
+        <member name="P:Comos.Platform.ProjectSettings.Core.Setting.ObservedSettings">
+            <summary>
+            Gets the depends on.
+            </summary>
+        </member>
+        <member name="P:Comos.Platform.ProjectSettings.Core.Setting.DefaultValue">
+            <summary>
+            Gets the default value.
+            </summary>
+        </member>
+        <member name="P:Comos.Platform.ProjectSettings.Core.Setting.Value">
+            <summary>
+            Gets or sets the value.
+            </summary>
+            <value>
+            The value.
+            </value>
+        </member>
+        <member name="P:Comos.Platform.ProjectSettings.Core.Setting.Children">
+            <summary>
+            Gets the children.
+            </summary>
+        </member>
+        <member name="P:Comos.Platform.ProjectSettings.Core.Setting.Indent">
+            <summary>
+            Gets the indent.
+            </summary>
+        </member>
+        <member name="P:Comos.Platform.ProjectSettings.Core.Setting.ToolTip">
+            <summary>
+            Gets the tool tip.
+            </summary>
+        </member>
+        <member name="P:Comos.Platform.ProjectSettings.Core.Setting.IsVisible">
+            <summary>
+            Gets or sets a value indicating whether this instance is visible.
+            </summary>
+            <value>
+            	<c>true</c> if this instance is visible; otherwise, <c>false</c>.
+            </value>
+        </member>
+        <member name="P:Comos.Platform.ProjectSettings.Core.Setting.IsEditable">
+            <summary>
+            Gets a value indicating whether this instance is editable.
+            </summary>
+            <value>
+            	<c>true</c> if this instance is editable; otherwise, <c>false</c>.
+            </value>
+        </member>
+        <member name="P:Comos.Platform.ProjectSettings.Core.Setting.ItemsSource">
+            <summary>
+            Gets the items source.
+            </summary>
+        </member>
+        <member name="M:Comos.Platform.ProjectSettings.Core.Setting.AddItem(System.String,System.String,System.String,System.String,System.String)">
+            <summary>
+            Adds the item.
+            </summary>
+            <param name="id">The id.</param>
+            <param name="caption">The caption.</param>
+            <param name="value">The value.</param>
+            <param name="imageKey">The image key.</param>
+            <param name="toolTip">The tool tip.</param>
+            <returns></returns>
+        </member>
+        <member name="M:Comos.Platform.ProjectSettings.Core.Setting.AddItem(System.String,System.String,System.String,System.String,System.String,System.Int32)">
+            <summary>
+            Adds the item.
+            </summary>
+            <param name="id">The id.</param>
+            <param name="caption">The caption.</param>
+            <param name="value">The value.</param>
+            <param name="imageKey">The image key.</param>
+            <param name="toolTip">The tool tip.</param>
+            <param name="indent">The indent.</param>
+            <returns></returns>
+        </member>
+        <member name="M:Comos.Platform.ProjectSettings.Core.Setting.AddItem(System.String,System.String,System.String,System.String,System.String,System.Int32,System.String)">
+            <summary>
+            Adds the item.
+            </summary>
+            <param name="id">The id.</param>
+            <param name="caption">The caption.</param>
+            <param name="value">The value.</param>
+            <param name="imageKey">The image key.</param>
+            <param name="toolTip">The tool tip.</param>
+            <param name="indent">The indent.</param>
+            <param name="selectedCaption">The caption which is displayed when the item is selected.</param>
+            <returns></returns>
+        </member>
+        <member name="M:Comos.Platform.ProjectSettings.Core.Setting.AddItem(Comos.Platform.ProjectSettings.Interface.ISettingItem)">
+            <summary>
+            Adds the item.
+            </summary>
+            <param name="item">The item.</param>
+        </member>
+        <member name="P:Comos.Platform.ProjectSettings.Core.Setting.FileOpenDialogFilter">
+            <summary>
+            Gets or sets the file open dialog filter.
+            </summary>
+            <value>
+            The file open dialog filter.
+            </value>
+        </member>
+        <member name="P:Comos.Platform.ProjectSettings.Core.Setting.FileOpenDialogFilterIndex">
+            <summary>
+            Gets or sets the index of the file open dialog filter.
+            </summary>
+            <value>
+            The index of the file open dialog filter.
+            </value>
+        </member>
+        <member name="P:Comos.Platform.ProjectSettings.Core.Setting.FileOpenDialogInitialDirectory">
+            <summary>
+            Gets or sets the file open dialog initial directory.
+            </summary>
+            <value>
+            The file open dialog initial directory.
+            </value>
+        </member>
+        <member name="P:Comos.Platform.ProjectSettings.Core.Setting.ObjectPointerDeleteIsEnabled">
+            <summary>
+            Gets or sets a value indicating whether [delete is enabled].
+            </summary>
+            <value>
+              <c>true</c> if [delete is enabled]; otherwise, <c>false</c>.
+            </value>
+        </member>
+        <member name="P:Comos.Platform.ProjectSettings.Core.Setting.ObjectPointerDeleteToolTip">
+            <summary>
+            Gets or sets the delete tool tip.
+            </summary>
+            <value>
+            The delete tool tip.
+            </value>
+        </member>
+        <member name="P:Comos.Platform.ProjectSettings.Core.Setting.ObjectPointerDeleteIsVisible">
+            <summary>
+            Gets or sets a value indicating whether [delete is visible].
+            </summary>
+            <value>
+              <c>true</c> if [delete is visible]; otherwise, <c>false</c>.
+            </value>
+        </member>
+        <member name="P:Comos.Platform.ProjectSettings.Core.Setting.ObjectPointerSelectIsEnabled">
+            <summary>
+            Gets or sets a value indicating whether [select is enabled].
+            </summary>
+            <value>
+              <c>true</c> if [select is enabled]; otherwise, <c>false</c>.
+            </value>
+        </member>
+        <member name="P:Comos.Platform.ProjectSettings.Core.Setting.ObjectPointerSelectToolTip">
+            <summary>
+            Gets or sets the select tool tip.
+            </summary>
+            <value>
+            The select tool tip.
+            </value>
+        </member>
+        <member name="P:Comos.Platform.ProjectSettings.Core.Setting.ObjectPointerSelectIsVisible">
+            <summary>
+            Gets or sets a value indicating whether [select is visible].
+            </summary>
+            <value>
+              <c>true</c> if [select is visible]; otherwise, <c>false</c>.
+            </value>
+        </member>
+        <member name="P:Comos.Platform.ProjectSettings.Core.Setting.ObjectPointerDropPicToolTip">
+            <summary>
+            Gets or sets the ToolTip text on the dropPic Image control.
+            </summary>
+            <value>
+            the ToolTip text on the dropPic Image control.
+            </value>
+        </member>
+        <member name="P:Comos.Platform.ProjectSettings.Core.Setting.IsItemSetting">
+            <summary>
+            Gets a value indicating whether this instance is item setting.
+            </summary>
+            <value>
+            	<c>true</c> if this instance is item setting; otherwise, <c>false</c>.
+            </value>
+        </member>
+        <member name="P:Comos.Platform.ProjectSettings.Core.Setting.IsFileOpenDialogSetting">
+            <summary>
+            Gets a value indicating whether this instance is file open dialog.
+            </summary>
+            <value>
+            	<c>true</c> if this instance is file open dialog; otherwise, <c>false</c>.
+            </value>
+        </member>
+        <member name="P:Comos.Platform.ProjectSettings.Core.Setting.IsObjectPointerSetting">
+            <summary>
+            Gets a value indicating whether this instance is object pointer setting.
+            </summary>
+            <value>
+            	<c>true</c> if this instance is object pointer setting; otherwise, <c>false</c>.
+            </value>
+        </member>
+        <member name="M:Comos.Platform.ProjectSettings.Core.Setting.CheckSettingTypeForItemsSource">
+            <summary>
+            Checks the setting type for items source.
+            </summary>
+        </member>
+        <member name="M:Comos.Platform.ProjectSettings.Core.Setting.CheckSettingTypeForAddItem">
+            <summary>
+            Checks the setting type for add item.
+            </summary>
+        </member>
+        <member name="M:Comos.Platform.ProjectSettings.Core.Setting.CheckSettingTypeForFileOpenDialogProperty(System.String)">
+            <summary>
+            Checks the setting type file open dialog filter.
+            </summary>
+        </member>
+        <member name="M:Comos.Platform.ProjectSettings.Core.Setting.CheckSettingTypeForObjectPointerProperty(System.String)">
+            <summary>
+            Checks the setting type for object pointer property.
+            </summary>
+            <param name="propName">Name of the prop.</param>
+        </member>
+        <member name="E:Comos.Platform.ProjectSettings.Core.Setting.PropertyChanged">
+            <summary>
+            Occurs when a property value changes.
+            </summary>
+        </member>
+        <member name="M:Comos.Platform.ProjectSettings.Core.Setting.NotifyPropertyChanged(System.String[])">
+            <summary>
+            Notifies the property changed.
+            </summary>
+            <param name="propertyNames">The property names.</param>
+        </member>
+        <member name="T:Comos.Platform.ProjectSettings.Core.SettingAction">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="M:Comos.Platform.ProjectSettings.Core.SettingAction.Set(Comos.Platform.ProjectSettings.Interface.ISetting)">
+            <summary>
+            Sets the specified i setting.
+            </summary>
+            <param name="iSetting">The i setting.</param>
+        </member>
+        <member name="M:Comos.Platform.ProjectSettings.Core.SettingAction.SetCanExecuteAction(Comos.Platform.ProjectSettings.Core.Setting)">
+            <summary>
+            Sets the can execute action.
+            </summary>
+            <param name="setting">The setting.</param>
+        </member>
+        <member name="M:Comos.Platform.ProjectSettings.Core.SettingAction.SetExecuteAction(Comos.Platform.ProjectSettings.Core.Setting)">
+            <summary>
+            Sets the execute action.
+            </summary>
+            <param name="setting">The setting.</param>
+        </member>
+        <member name="M:Comos.Platform.ProjectSettings.Core.SettingAction.GetDefaultCanExecuteAction(Comos.Platform.ProjectSettings.Interface.ISetting)">
+            <summary>
+            Gets the default action.
+            </summary>
+            <param name="setting">The setting.</param>
+            <returns></returns>
+        </member>
+        <member name="M:Comos.Platform.ProjectSettings.Core.SettingAction.GetDefaultExecuteAction(Comos.Platform.ProjectSettings.Interface.ISetting)">
+            <summary>
+            Gets the default execute action.
+            </summary>
+            <param name="setting">The setting.</param>
+            <returns></returns>
+        </member>
+        <member name="M:Comos.Platform.ProjectSettings.Core.SettingAction.GetActionBehavior``2(Comos.Platform.ProjectSettings.Interface.ISettingExtension,System.Linq.Expressions.Expression{System.Func{``0,``1}})">
+            <summary>
+            Gets the action behavior.
+            </summary>
+            <typeparam name="T"></typeparam>
+            <typeparam name="TRes">The type of the es.</typeparam>
+            <param name="extension">The extension.</param>
+            <param name="expression">The expression.</param>
+            <returns></returns>
+        </member>
+        <member name="M:Comos.Platform.ProjectSettings.Core.SettingAction.GetActionBehavior``1(Comos.Platform.ProjectSettings.Interface.ISettingExtension,System.Linq.Expressions.Expression{System.Action{``0}})">
+            <summary>
+            Gets the action behavior.
+            </summary>
+            <typeparam name="T"></typeparam>
+            <param name="extension">The extension.</param>
+            <param name="expression">The expression.</param>
+            <returns></returns>
+        </member>
+        <member name="M:Comos.Platform.ProjectSettings.Core.SettingAction.GetActionBehavior(Comos.Platform.ProjectSettings.Interface.ISettingExtension,System.Linq.Expressions.MethodCallExpression)">
+            <summary>
+            Gets the action behavior.
+            </summary>
+            <param name="extension">The extension.</param>
+            <param name="methodCallExpression">The method call expression.</param>
+            <returns></returns>
+        </member>
+        <member name="T:Comos.Platform.ProjectSettings.Core.SettingAction.DefaultActions">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="M:Comos.Platform.ProjectSettings.Core.SettingAction.DefaultActions.FileOpenDialogCanExecuteAction(Comos.Platform.ProjectSettings.Interface.SettingExtensionArgument)">
+            <summary>
+            Files the open dialog can execute action.
+            </summary>
+            <param name="extensionArgument">The extension argument.</param>
+            <returns></returns>
+        </member>
+        <member name="M:Comos.Platform.ProjectSettings.Core.SettingAction.DefaultActions.FileOpenDialogExecuteAction(Comos.Platform.ProjectSettings.Interface.SettingExtensionArgument)">
+            <summary>
+            Files the open dialog action.
+            </summary>
+            <param name="extensionArgument">The extension argument.</param>
+        </member>
+        <member name="M:Comos.Platform.ProjectSettings.Core.SettingAction.DefaultActions.BrowseFolderDialogCanExecuteAction(Comos.Platform.ProjectSettings.Interface.SettingExtensionArgument)">
+            <summary>
+            Browses the folder dialog can execute action.
+            </summary>
+            <param name="extensionArgument">The extension argument.</param>
+            <returns></returns>
+        </member>
+        <member name="M:Comos.Platform.ProjectSettings.Core.SettingAction.DefaultActions.BrowseFolderDialogExecuteAction(Comos.Platform.ProjectSettings.Interface.SettingExtensionArgument)">
+            <summary>
+            Browses the folder dialog execute action.
+            </summary>
+            <param name="extensionArgument">The extension argument.</param>
+        </member>
+        <member name="M:Comos.Platform.ProjectSettings.Core.SettingAction.DefaultActions.ObjectPointerCanExecuteAction(Comos.Platform.ProjectSettings.Interface.SettingExtensionArgument)">
+            <summary>
+            Objects the pointer can execute action.
+            </summary>
+            <param name="extensionArgument">The extension argument.</param>
+            <returns></returns>
+        </member>
+        <member name="M:Comos.Platform.ProjectSettings.Core.SettingAction.DefaultActions.ObjectPointerExecuteAction(Comos.Platform.ProjectSettings.Interface.SettingExtensionArgument)">
+            <summary>
+            Objects the pointer execute action.
+            </summary>
+            <param name="extensionArgument">The extension argument.</param>
+        </member>
+        <member name="T:Comos.Platform.ProjectSettings.Core.SettingCategory">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="M:Comos.Platform.ProjectSettings.Core.SettingCategory.#ctor(Comos.Platform.ProjectSettings.XML.XmlCategoryRef,Comos.Platform.ProjectSettings.SettingsController)">
+            <summary>
+            Initializes a new instance of the <see cref="T:Comos.Platform.ProjectSettings.Core.SettingCategory"/> class.
+            </summary>
+            <param name="xmlCategoryRef">The XML category ref.</param>
+            <param name="settingsController">The settings controller.</param>
+        </member>
+        <member name="M:Comos.Platform.ProjectSettings.Core.SettingCategory.SetCategories(System.Collections.ObjectModel.ReadOnlyCollection{Comos.Platform.ProjectSettings.Interface.ICategory})">
+            <summary>
+            Sets the categories.
+            </summary>
+            <param name="newCategories">The new categories.</param>
+        </member>
+        <member name="P:Comos.Platform.ProjectSettings.Core.SettingCategory.ID">
+            <summary>
+            Gets the ID.
+            </summary>
+        </member>
+        <member name="P:Comos.Platform.ProjectSettings.Core.SettingCategory.Caption">
+            <summary>
+            Gets the caption.
+            </summary>
+        </member>
+        <member name="P:Comos.Platform.ProjectSettings.Core.SettingCategory.IsVisible">
+            <summary>
+            Gets or sets a value indicating whether this instance is visible.
+            </summary>
+            <value>
+            	<c>true</c> if this instance is visible; otherwise, <c>false</c>.
+            </value>
+        </member>
+        <member name="P:Comos.Platform.ProjectSettings.Core.SettingCategory.Settings">
+            <summary>
+            Gets the settings.
+            </summary>
+        </member>
+        <member name="P:Comos.Platform.ProjectSettings.Core.SettingCategory.Categories">
+            <summary>
+            Gets the categories.
+            </summary>
+        </member>
+        <member name="E:Comos.Platform.ProjectSettings.Core.SettingCategory.PropertyChanged">
+            <summary>
+            Occurs when a property value changes.
+            </summary>
+        </member>
+        <member name="M:Comos.Platform.ProjectSettings.Core.SettingCategory.NotifyPropertyChanged(System.String[])">
+            <summary>
+            Notifies the property changed.
+            </summary>
+            <param name="propertyNames">The property names.</param>
+        </member>
+        <member name="T:Comos.Platform.ProjectSettings.Core.SettingItem">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="M:Comos.Platform.ProjectSettings.Core.SettingItem.#ctor(Comos.Platform.ProjectSettings.XML.XmlSettingItem,Comos.Platform.ProjectSettings.Interface.ISetting)">
+            <summary>
+            Initializes a new instance of the <see cref="T:Comos.Platform.ProjectSettings.Core.SettingItem"/> class.
+            </summary>
+        </member>
+        <member name="M:Comos.Platform.ProjectSettings.Core.SettingItem.#ctor(System.String,System.String,System.String,System.String,System.String,Comos.Platform.ProjectSettings.Interface.ISetting,System.Int32,System.String)">
+            <summary>
+            Initializes a new instance of the <see cref="T:Comos.Platform.ProjectSettings.Core.SettingItem"/> class.
+            </summary>
+            <param name="id">The id.</param>
+            <param name="caption">The caption.</param>
+            <param name="value">The value.</param>
+            <param name="imageKey">The image key.</param>
+            <param name="toolTip">The tool tip.</param>
+            <param name="dedicatedSetting">The dedicated setting.</param>
+            <param name="indent">The indent.</param>
+            <param name="selectedCaption">The caption which is displayed when the item is selected.</param>
+        </member>
+        <member name="P:Comos.Platform.ProjectSettings.Core.SettingItem.DedicatedSetting">
+            <summary>
+            Gets the dedicated setting.
+            </summary>
+        </member>
+        <member name="M:Comos.Platform.ProjectSettings.Core.SettingItem.HandleDedicatedSettingValueChanged(System.Object,System.ComponentModel.PropertyChangedEventArgs)">
+            <summary>
+            Handles the dedicated setting value changed.
+            </summary>
+            <param name="sender">The sender.</param>
+            <param name="e">The <see cref="T:System.ComponentModel.PropertyChangedEventArgs"/> instance containing the event data.</param>
+        </member>
+        <member name="P:Comos.Platform.ProjectSettings.Core.SettingItem.Id">
+            <summary>
+            Gets the id.
+            </summary>
+        </member>
+        <member name="P:Comos.Platform.ProjectSettings.Core.SettingItem.Caption">
+            <summary>
+            Gets the caption.
+            </summary>
+        </member>
+        <member name="P:Comos.Platform.ProjectSettings.Core.SettingItem.SelectedCaption">
+            <summary>
+            Gets The caption which is displayed when the item is selected.
+            </summary>
+        </member>
+        <member name="P:Comos.Platform.ProjectSettings.Core.SettingItem.Value">
+            <summary>
+            Gets the value.
+            </summary>
+        </member>
+        <member name="P:Comos.Platform.ProjectSettings.Core.SettingItem.ImageKey">
+            <summary>
+            Gets the image key.
+            </summary>
+        </member>
+        <member name="P:Comos.Platform.ProjectSettings.Core.SettingItem.Indent">
+            <summary>
+            Gets the indent.
+            </summary>
+        </member>
+        <member name="P:Comos.Platform.ProjectSettings.Core.SettingItem.ToolTip">
+            <summary>
+            Gets the tool tip.
+            </summary>
+        </member>
+        <member name="P:Comos.Platform.ProjectSettings.Core.SettingItem.IsCurrentItem">
+            <summary>
+            Gets or sets a value indicating whether this instance is current item.
+            </summary>
+            <value>
+            	<c>true</c> if this instance is current item; otherwise, <c>false</c>.
+            </value>
+        </member>
+        <member name="E:Comos.Platform.ProjectSettings.Core.SettingItem.PropertyChanged">
+            <summary>
+            Occurs when a property value changes.
+            </summary>
+        </member>
+        <member name="M:Comos.Platform.ProjectSettings.Core.SettingItem.NotifyPropertyChanged(System.String[])">
+            <summary>
+            Notifies the property changed.
+            </summary>
+            <param name="propNames">The prop names.</param>
+        </member>
+        <member name="T:Comos.Platform.ProjectSettings.Core.SettingsEventTracer">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="M:Comos.Platform.ProjectSettings.Core.SettingsEventTracer.#cctor">
+            <summary>
+            Initializes a new instance of the <see cref="T:Comos.Platform.ProjectSettings.Core.SettingsEventTracer"/> class.
+            </summary>
+        </member>
+        <member name="M:Comos.Platform.ProjectSettings.Core.SettingsEventTracer.TraceSettingValueIsInvalid(System.String,System.Object[])">
+            <summary>
+            Traces the setting value is invalid.
+            </summary>
+            <param name="format">The format.</param>
+            <param name="args">The args.</param>
+        </member>
+        <member name="M:Comos.Platform.ProjectSettings.Core.SettingsEventTracer.TraceCustomerSettingsCategoryInvalid(System.String,System.Object[])">
+            <summary>
+            Traces the customer settings category not found.
+            </summary>
+            <param name="format">The format.</param>
+            <param name="args">The args.</param>
+        </member>
+        <member name="T:Comos.Platform.ProjectSettings.Interface.ActionBehavior">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:Comos.Platform.ProjectSettings.Interface.ActionBehavior.HandledOnlyByExtension">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:Comos.Platform.ProjectSettings.Interface.ActionBehavior.HandledOnlyByBase">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:Comos.Platform.ProjectSettings.Interface.ActionBehavior.HandledByExtensionAndBase">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:Comos.Platform.ProjectSettings.Interface.ActionBehavior.HandledByBaseAndExtension">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="T:Comos.Platform.ProjectSettings.Interface.ActionBehaviorAttribute">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="M:Comos.Platform.ProjectSettings.Interface.ActionBehaviorAttribute.#ctor">
+            <summary>
+            Initializes a new instance of the <see cref="T:Comos.Platform.ProjectSettings.Interface.ActionBehaviorAttribute"/> class.
+            </summary>
+        </member>
+        <member name="M:Comos.Platform.ProjectSettings.Interface.ActionBehaviorAttribute.#ctor(Comos.Platform.ProjectSettings.Interface.ActionBehavior)">
+            <summary>
+            Initializes a new instance of the <see cref="T:Comos.Platform.ProjectSettings.Interface.ActionBehaviorAttribute"/> class.
+            </summary>
+            <param name="behavior">The behavior.</param>
+        </member>
+        <member name="P:Comos.Platform.ProjectSettings.Interface.ActionBehaviorAttribute.Behavior">
+            <summary>
+            Gets or sets the behavior.
+            </summary>
+            <value>
+            The behavior.
+            </value>
+        </member>
+        <member name="T:Comos.Platform.ProjectSettings.Interface.ICategory">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Comos.Platform.ProjectSettings.Interface.ICategory.ID">
+            <summary>
+            Gets the ID.
+            </summary>
+        </member>
+        <member name="P:Comos.Platform.ProjectSettings.Interface.ICategory.Caption">
+            <summary>
+            Gets the caption.
+            </summary>
+        </member>
+        <member name="P:Comos.Platform.ProjectSettings.Interface.ICategory.Settings">
+            <summary>
+            Gets the settings.
+            </summary>
+        </member>
+        <member name="P:Comos.Platform.ProjectSettings.Interface.ICategory.Categories">
+            <summary>
+            Gets the categories.
+            </summary>
+        </member>
+        <member name="P:Comos.Platform.ProjectSettings.Interface.ICategory.IsVisible">
+            <summary>
+            Gets or sets a value indicating whether this instance is visible.
+            </summary>
+            <value>
+            	<c>true</c> if this instance is visible; otherwise, <c>false</c>.
+            </value>
+        </member>
+        <member name="P:Comos.Platform.ProjectSettings.Interface.ICategory.IsEnabled">
+            <summary>
+            Get or sets a value indicates whether this instance is enabled
+            </summary>
+        </member>
+        <member name="P:Comos.Platform.ProjectSettings.Interface.ICategory.HasOwnRightsManagement">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="T:Comos.Platform.ProjectSettings.Interface.IItemSettingExtension">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="M:Comos.Platform.ProjectSettings.Interface.IItemSettingExtension.AddItems(Comos.Platform.ProjectSettings.Interface.ISetting)">
+            <summary>
+            Adds the items.
+            </summary>
+            <param name="setting">The setting.</param>
+        </member>
+        <member name="T:Comos.Platform.ProjectSettings.Interface.IProjectSettingsSource">
+            <summary>
+            A project settings source is responsible for returning an XML stream describing
+            additional project settings.
+            
+            This Xml will be read and merged into the main project settings xml.
+            </summary>
+        </member>
+        <member name="M:Comos.Platform.ProjectSettings.Interface.IProjectSettingsSource.GetProjectSettingsXmlStream">
+            <summary>
+            Returns a stream containing the configuration XML for additional project settings.
+            </summary>
+            <returns>Stream containing XML data.</returns>
+        </member>
+        <member name="M:Comos.Platform.ProjectSettings.Interface.IProjectSettingsSource.ProjectSettingsChanged(Comos.Platform.ProjectSettings.Interface.ISettingsController)">
+            <summary>
+            Callback notifying that the project settings have changed.
+            The project settings source may update itself, if necessary in this handler.
+            </summary>
+        </member>
+        <member name="T:Comos.Platform.ProjectSettings.Interface.IProjectSettingsSourceHolder">
+            <summary>
+            Project settings source holder interface.
+            
+            A project settings source holder holds mulitple project settings sources.
+            </summary>
+        </member>
+        <member name="M:Comos.Platform.ProjectSettings.Interface.IProjectSettingsSourceHolder.NotifySourcesOfProjectSettingsChange">
+            <summary>
+            Notifies the project settings sources being hold, of a project settings
+            change.
+            </summary>
+        </member>
+        <member name="T:Comos.Platform.ProjectSettings.Interface.ISetting">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Comos.Platform.ProjectSettings.Interface.ISetting.Id">
+            <summary>
+            Gets the ID.
+            </summary>
+        </member>
+        <member name="P:Comos.Platform.ProjectSettings.Interface.ISetting.Type">
+            <summary>
+            Gets the type.
+            </summary>
+        </member>
+        <member name="P:Comos.Platform.ProjectSettings.Interface.ISetting.AttributeName">
+            <summary>
+            Gets the name of the attribute.
+            </summary>
+            <value>
+            The name of the attribute.
+            </value>
+        </member>
+        <member name="P:Comos.Platform.ProjectSettings.Interface.ISetting.Caption">
+            <summary>
+            Gets the caption.
+            </summary>
+        </member>
+        <member name="P:Comos.Platform.ProjectSettings.Interface.ISetting.Assembly">
+            <summary>
+            Gets the assembly.
+            </summary>
+        </member>
+        <member name="P:Comos.Platform.ProjectSettings.Interface.ISetting.Class">
+            <summary>
+            Gets the class.
+            </summary>
+        </member>
+        <member name="P:Comos.Platform.ProjectSettings.Interface.ISetting.Category">
+            <summary>
+            Gets the category.
+            </summary>
+        </member>
+        <member name="P:Comos.Platform.ProjectSettings.Interface.ISetting.ObservedSettings">
+            <summary>
+            Gets the depends on.
+            </summary>
+        </member>
+        <member name="P:Comos.Platform.ProjectSettings.Interface.ISetting.DefaultValue">
+            <summary>
+            Gets the default value.
+            </summary>
+        </member>
+        <member name="P:Comos.Platform.ProjectSettings.Interface.ISetting.Value">
+            <summary>
+            Gets or sets the value.
+            </summary>
+            <value>
+            The value.
+            </value>
+        </member>
+        <member name="P:Comos.Platform.ProjectSettings.Interface.ISetting.IsEditable">
+            <summary>
+            Gets a value indicating whether this instance is editable.
+            </summary>
+            <value>
+            	<c>true</c> if this instance is editable; otherwise, <c>false</c>.
+            </value>
+        </member>
+        <member name="P:Comos.Platform.ProjectSettings.Interface.ISetting.Children">
+            <summary>
+            Gets the children.
+            </summary>
+        </member>
+        <member name="P:Comos.Platform.ProjectSettings.Interface.ISetting.Indent">
+            <summary>
+            Gets the indent.
+            </summary>
+        </member>
+        <member name="P:Comos.Platform.ProjectSettings.Interface.ISetting.ToolTip">
+            <summary>
+            Gets the tool tip.
+            </summary>
+        </member>
+        <member name="P:Comos.Platform.ProjectSettings.Interface.ISetting.IsVisible">
+            <summary>
+            Gets or sets a value indicating whether this instance is visible.
+            </summary>
+            <value>
+            	<c>true</c> if this instance is visible; otherwise, <c>false</c>.
+            </value>
+        </member>
+        <member name="P:Comos.Platform.ProjectSettings.Interface.ISetting.ItemsSource">
+            <summary>
+            Gets the items source.
+            </summary>
+        </member>
+        <member name="M:Comos.Platform.ProjectSettings.Interface.ISetting.AddItem(System.String,System.String,System.String,System.String,System.String)">
+            <summary>
+            Adds the item.
+            </summary>
+            <param name="id">The id.</param>
+            <param name="caption">The caption.</param>
+            <param name="value">The value.</param>
+            <param name="imageKey">The image key.</param>
+            <param name="toolTip">The tool tip.</param>
+            <returns></returns>
+        </member>
+        <member name="M:Comos.Platform.ProjectSettings.Interface.ISetting.AddItem(System.String,System.String,System.String,System.String,System.String,System.Int32)">
+            <summary>
+            Adds the item.
+            </summary>
+            <param name="id">The id.</param>
+            <param name="caption">The caption.</param>
+            <param name="value">The value.</param>
+            <param name="imageKey">The image key.</param>
+            <param name="toolTip">The tool tip.</param>
+            <param name="indent">The indent.</param>
+            <returns></returns>
+        </member>
+        <member name="M:Comos.Platform.ProjectSettings.Interface.ISetting.AddItem(System.String,System.String,System.String,System.String,System.String,System.Int32,System.String)">
+            <summary>
+            Adds the item.
+            </summary>
+            <param name="id">The id.</param>
+            <param name="caption">The caption.</param>
+            <param name="value">The value.</param>
+            <param name="imageKey">The image key.</param>
+            <param name="toolTip">The tool tip.</param>
+            <param name="indent">The indent.</param>
+            <param name="selectedCaption">The caption which is displayed when the item is selected.</param>
+            <returns></returns>
+        </member>
+        <member name="P:Comos.Platform.ProjectSettings.Interface.ISetting.FileOpenDialogFilter">
+            <summary>
+            Gets or sets the file open dialog filter.
+            </summary>
+            <value>
+            The file open dialog filter.
+            </value>
+        </member>
+        <member name="P:Comos.Platform.ProjectSettings.Interface.ISetting.FileOpenDialogFilterIndex">
+            <summary>
+            Gets or sets the index of the file open dialog filter.
+            </summary>
+            <value>
+            The index of the file open dialog filter.
+            </value>
+        </member>
+        <member name="P:Comos.Platform.ProjectSettings.Interface.ISetting.FileOpenDialogInitialDirectory">
+            <summary>
+            Gets or sets the file open dialog initial directory.
+            </summary>
+            <value>
+            The file open dialog initial directory.
+            </value>
+        </member>
+        <member name="P:Comos.Platform.ProjectSettings.Interface.ISetting.ObjectPointerDeleteIsEnabled">
+            <summary>
+            Gets or sets a value indicating whether [delete is enabled].
+            </summary>
+            <value>
+              <c>true</c> if [delete is enabled]; otherwise, <c>false</c>.
+            </value>
+        </member>
+        <member name="P:Comos.Platform.ProjectSettings.Interface.ISetting.ObjectPointerDeleteToolTip">
+            <summary>
+            Gets or sets the delete tool tip.
+            </summary>
+            <value>
+            The delete tool tip.
+            </value>
+        </member>
+        <member name="P:Comos.Platform.ProjectSettings.Interface.ISetting.ObjectPointerDeleteIsVisible">
+            <summary>
+            Gets or sets a value indicating whether [delete is visible].
+            </summary>
+            <value>
+              <c>true</c> if [delete is visible]; otherwise, <c>false</c>.
+            </value>
+        </member>
+        <member name="P:Comos.Platform.ProjectSettings.Interface.ISetting.ObjectPointerSelectIsEnabled">
+            <summary>
+            Gets or sets a value indicating whether [select is enabled].
+            </summary>
+            <value>
+              <c>true</c> if [select is enabled]; otherwise, <c>false</c>.
+            </value>
+        </member>
+        <member name="P:Comos.Platform.ProjectSettings.Interface.ISetting.ObjectPointerSelectToolTip">
+            <summary>
+            Gets or sets the select tool tip.
+            </summary>
+            <value>
+            The select tool tip.
+            </value>
+        </member>
+        <member name="P:Comos.Platform.ProjectSettings.Interface.ISetting.ObjectPointerSelectIsVisible">
+            <summary>
+            Gets or sets a value indicating whether [select is visible].
+            </summary>
+            <value>
+              <c>true</c> if [select is visible]; otherwise, <c>false</c>.
+            </value>
+        </member>
+        <member name="P:Comos.Platform.ProjectSettings.Interface.ISetting.ObjectPointerDropPicToolTip">
+            <summary>
+            Gets or sets the ToolTip text on the dropPic Image control.
+            </summary>
+            <value>
+            the ToolTip text on the dropPic Image control.
+            </value>
+        </member>
+        <member name="T:Comos.Platform.ProjectSettings.Interface.ISettingExtension">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="M:Comos.Platform.ProjectSettings.Interface.ISettingExtension.ExecuteAction(Comos.Platform.ProjectSettings.Interface.SettingExtensionArgument)">
+            <summary>
+            Executes the action.
+            </summary>
+            <param name="settingArg">The setting arguments.</param>
+        </member>
+        <member name="M:Comos.Platform.ProjectSettings.Interface.ISettingExtension.CanExecuteAction(Comos.Platform.ProjectSettings.Interface.SettingExtensionArgument)">
+            <summary>
+            Determines whether this instance can execute the action with the specified <see cref="T:Comos.Platform.ProjectSettings.Interface.SettingExtensionArgument"/>.
+            </summary>
+            <param name="settingArg">The setting arguments.</param>
+            <returns>
+              <c>true</c> if this instance can execute the action with the specified <see cref="T:Comos.Platform.ProjectSettings.Interface.SettingExtensionArgument"/>; otherwise, <c>false</c>.
+            </returns>
+        </member>
+        <member name="M:Comos.Platform.ProjectSettings.Interface.ISettingExtension.DependentSettingChanged(Comos.Platform.ProjectSettings.Interface.SettingExtensionArgument,Comos.Platform.ProjectSettings.Interface.ISetting)">
+            <summary>
+            Notifies that a dependent setting has changed.
+            </summary>
+            <param name="settingArg">The setting arguments.</param>
+            <param name="dependentsetting">The dependentsetting.</param>
+        </member>
+        <member name="M:Comos.Platform.ProjectSettings.Interface.ISettingExtension.Initialized(Comos.Platform.ProjectSettings.Interface.SettingExtensionArgument)">
+            <summary>
+            Called when this <see cref="T:Comos.Platform.ProjectSettings.Interface.ISettingExtension"/> has been initialized.
+            </summary>
+            <param name="settingArg">The setting arguments.</param>
+        </member>
+        <member name="T:Comos.Platform.ProjectSettings.Interface.ISettingExtensionParameters">
+            <summary>
+            ADBRCH22: Extension iterface.
+            
+            This interface can be implemented by ISetting, in order to expose parameters
+            which should be passed over to the setting extension.
+            </summary>
+        </member>
+        <member name="P:Comos.Platform.ProjectSettings.Interface.ISettingExtensionParameters.Parameters">
+            <summary>
+            Gets the setting extension parameters
+            </summary>
+        </member>
+        <member name="T:Comos.Platform.ProjectSettings.Interface.ISettingItem">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Comos.Platform.ProjectSettings.Interface.ISettingItem.Id">
+            <summary>
+            Gets the id.
+            </summary>
+        </member>
+        <member name="P:Comos.Platform.ProjectSettings.Interface.ISettingItem.Caption">
+            <summary>
+            Gets the caption.
+            </summary>
+        </member>
+        <member name="P:Comos.Platform.ProjectSettings.Interface.ISettingItem.SelectedCaption">
+            <summary>
+            Gets the caption which is displayed when the item is selected.
+            </summary>
+        </member>
+        <member name="P:Comos.Platform.ProjectSettings.Interface.ISettingItem.Value">
+            <summary>
+            Gets the value.
+            </summary>
+        </member>
+        <member name="P:Comos.Platform.ProjectSettings.Interface.ISettingItem.ImageKey">
+            <summary>
+            Gets the image key.
+            </summary>
+        </member>
+        <member name="P:Comos.Platform.ProjectSettings.Interface.ISettingItem.Indent">
+            <summary>
+            Gets the indent.
+            </summary>
+        </member>
+        <member name="P:Comos.Platform.ProjectSettings.Interface.ISettingItem.ToolTip">
+            <summary>
+            Gets the tool tip.
+            </summary>
+        </member>
+        <member name="P:Comos.Platform.ProjectSettings.Interface.ISettingItem.IsCurrentItem">
+            <summary>
+            Gets or sets a value indicating whether this instance is current item.
+            </summary>
+            <value>
+            	<c>true</c> if this instance is current item; otherwise, <c>false</c>.
+            </value>
+        </member>
+        <member name="T:Comos.Platform.ProjectSettings.Interface.ISettingsController">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Comos.Platform.ProjectSettings.Interface.ISettingsController.Categories">
+            <summary>
+            Gets the categories.
+            </summary>
+        </member>
+        <member name="P:Comos.Platform.ProjectSettings.Interface.ISettingsController.IsInitialized">
+            <summary>
+            Gets a value indicating whether this instance is initialized.
+            </summary>
+            <value>
+            	<c>true</c> if this instance is initialized; otherwise, <c>false</c>.
+            </value>
+        </member>
+        <member name="M:Comos.Platform.ProjectSettings.Interface.ISettingsController.Initialize(Plt.IComosDProject,System.Boolean)">
+            <summary>
+            Initializes this instance.
+            </summary>
+            <param name="comosProject">The comos project.</param>
+            <param name="readOnly">if set to <c>true</c> [is read only].</param>
+            <returns></returns>
+        </member>
+        <member name="M:Comos.Platform.ProjectSettings.Interface.ISettingsController.CanExecuteAction(Comos.Platform.ProjectSettings.Interface.ISetting,System.String)">
+            <summary>
+            Determines whether the action of the passed in setting can be executed or not.
+            </summary>
+            <param name="setting">The setting.</param>
+            <param name="commandName">Name of the command.</param>
+            <returns>
+              <c>true</c> if the action of the passed in setting can be executed; otherwise, <c>false</c>.
+            </returns>
+        </member>
+        <member name="M:Comos.Platform.ProjectSettings.Interface.ISettingsController.ExecuteAction(Comos.Platform.ProjectSettings.Interface.ISetting,System.String)">
+            <summary>
+            Executes the action of the passed in setting.
+            </summary>
+            <param name="setting">The setting.</param>
+            <param name="commandName">Name of the command.</param>
+        </member>
+        <member name="P:Comos.Platform.ProjectSettings.Interface.ISettingsController.IsReadOnly">
+            <summary>
+            Gets a value indicating whether this instance is read only.
+            </summary>
+            <value>
+            	<c>true</c> if this instance is read only; otherwise, <c>false</c>.
+            </value>
+        </member>
+        <member name="T:Comos.Platform.ProjectSettings.Interface.ISettingValue">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Comos.Platform.ProjectSettings.Interface.ISettingValue.StringValue">
+            <summary>
+            Gets the string value.
+            </summary>
+        </member>
+        <member name="P:Comos.Platform.ProjectSettings.Interface.ISettingValue.BooleanValue">
+            <summary>
+            Gets the boolean value.
+            </summary>
+            <value>
+              <c>true</c> if [boolean value]; otherwise, <c>false</c>.
+            </value>
+        </member>
+        <member name="P:Comos.Platform.ProjectSettings.Interface.ISettingValue.ComosObjectValue">
+            <summary>
+            Gets the comos object value.
+            </summary>
+        </member>
+        <member name="T:Comos.Platform.ProjectSettings.Interface.SettingExtensionArgument">
+            <summary>
+             
+            </summary>
+        </member>
+        <member name="M:Comos.Platform.ProjectSettings.Interface.SettingExtensionArgument.#ctor(Comos.Platform.ProjectSettings.Interface.ISetting)">
+            <summary>
+            Initializes a new instance of the <see cref="T:Comos.Platform.ProjectSettings.Interface.SettingExtensionArgument"/> class.
+            </summary>
+            <param name="setting">The setting.</param>
+        </member>
+        <member name="M:Comos.Platform.ProjectSettings.Interface.SettingExtensionArgument.#ctor(System.Object,System.String,Comos.Platform.ProjectSettings.Interface.ISetting)">
+            <summary>
+            Initializes a new instance of the <see cref="T:Comos.Platform.ProjectSettings.Interface.SettingExtensionArgument"/> class.
+            </summary>
+            <param name="context">The logical context.</param>
+            <param name="commandName">Name of the command.</param>
+            <param name="setting">The setting.</param>
+        </member>
+        <member name="P:Comos.Platform.ProjectSettings.Interface.SettingExtensionArgument.Context">
+            <summary>
+            Gets the context.
+            </summary>
+        </member>
+        <member name="P:Comos.Platform.ProjectSettings.Interface.SettingExtensionArgument.CommandName">
+            <summary>
+            UI Context information, e.g ObjectPointerAction
+            </summary>
+        </member>
+        <member name="P:Comos.Platform.ProjectSettings.Interface.SettingExtensionArgument.Setting">
+            <summary>
+            Gets the setting.
+            </summary>
+        </member>
+        <member name="T:Comos.Platform.ProjectSettings.Interface.SettingType">
+            <summary>
+            The possible project setting types.
+            </summary>
+        </member>
+        <member name="F:Comos.Platform.ProjectSettings.Interface.SettingType.TextBox">
+            <summary>
+            Default TextBox to input text values
+            </summary>
+        </member>
+        <member name="F:Comos.Platform.ProjectSettings.Interface.SettingType.CheckBox">
+            <summary>
+            Default CheckBox
+            </summary>
+        </member>
+        <member name="F:Comos.Platform.ProjectSettings.Interface.SettingType.ComboBox">
+            <summary>
+            Default ComboBox
+            </summary>
+        </member>
+        <member name="F:Comos.Platform.ProjectSettings.Interface.SettingType.RadioButtonGroup">
+            <summary>
+            Default RadioButton
+            </summary>
+        </member>
+        <member name="F:Comos.Platform.ProjectSettings.Interface.SettingType.ObjectPointer">
+            <summary>
+            The standard COMOS object pointer control
+            </summary>
+        </member>
+        <member name="F:Comos.Platform.ProjectSettings.Interface.SettingType.Button">
+            <summary>
+            Default Button
+            </summary>
+        </member>
+        <member name="F:Comos.Platform.ProjectSettings.Interface.SettingType.FileOpenDialog">
+            <summary>
+            The standard COMOS file open dialog
+            </summary>
+        </member>
+        <member name="F:Comos.Platform.ProjectSettings.Interface.SettingType.UserControl">
+            <summary>
+            A self defined WPF user control
+            </summary>
+        </member>
+        <member name="F:Comos.Platform.ProjectSettings.Interface.SettingType.Group">
+            <summary>
+            A group of project settings either to define normal project settings groups
+            or to define groups for radio buttons
+            </summary>
+        </member>
+        <member name="F:Comos.Platform.ProjectSettings.Interface.SettingType.BrowseFolderDialog">
+            <summary>
+            The standard COMOS browse folder dialog
+            </summary>
+        </member>
+        <member name="F:Comos.Platform.ProjectSettings.Interface.SettingType.ToggleSwitch">
+            <summary>
+            UI Framework toggleswitch button.
+            </summary>
+        </member>
+        <member name="T:Comos.Platform.ProjectSettings.Interface.SettingValue">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="M:Comos.Platform.ProjectSettings.Interface.SettingValue.#ctor(Comos.Platform.ProjectSettings.Interface.ISetting)">
+            <summary>
+            Initializes a new instance of the <see cref="T:Comos.Platform.ProjectSettings.Interface.SettingValue"/> class.
+            </summary>
+            <param name="dedicatedSetting">The dedicated setting.</param>
+        </member>
+        <member name="P:Comos.Platform.ProjectSettings.Interface.SettingValue.StringValue">
+            <summary>
+            Gets or sets the string value.
+            </summary>
+            <value>
+            The string value.
+            </value>
+        </member>
+        <member name="P:Comos.Platform.ProjectSettings.Interface.SettingValue.BooleanValue">
+            <summary>
+            Gets or sets a value indicating whether [boolean value].
+            </summary>
+            <value>
+              <c>true</c> if [boolean value]; otherwise, <c>false</c>.
+            </value>
+        </member>
+        <member name="P:Comos.Platform.ProjectSettings.Interface.SettingValue.ComosObjectValue">
+            <summary>
+            Gets or sets the comos object value.
+            </summary>
+            <value>
+            The comos object value.
+            </value>
+        </member>
+        <member name="P:Comos.Platform.ProjectSettings.Interface.SettingValue.TemporaryValue">
+            <summary>
+            Gets the temporary value.
+            </summary>
+        </member>
+        <member name="P:Comos.Platform.ProjectSettings.Interface.SettingValue.IsInherited">
+            <summary>
+            Gets a value indicating whether this value is inherited.
+            </summary>
+            <value>
+            <c>true</c> if this value is inherited; otherwise, <c>false</c>.
+            </value>
+        </member>
+        <member name="M:Comos.Platform.ProjectSettings.Interface.SettingValue.CheckSettingTypeForStringValue">
+            <summary>
+            Checks the setting type for string value.
+            </summary>
+        </member>
+        <member name="M:Comos.Platform.ProjectSettings.Interface.SettingValue.CheckSettingTypeForBooleanValue">
+            <summary>
+            Checks the setting type for boolean value.
+            </summary>
+        </member>
+        <member name="M:Comos.Platform.ProjectSettings.Interface.SettingValue.CheckSettingTypeForComosObjectValue">
+            <summary>
+            Checks the setting type for comos object value.
+            </summary>
+        </member>
+        <member name="M:Comos.Platform.ProjectSettings.Interface.SettingValue.OnValueSet">
+            <summary>
+            Called when the value has been set.
+            </summary>
+        </member>
+        <member name="M:Comos.Platform.ProjectSettings.Interface.SettingValue.SetAttributeValue(System.String)">
+            <summary>
+            Sets the name of the attribute.
+            </summary>
+            <param name="value">The value.</param>
+        </member>
+        <member name="M:Comos.Platform.ProjectSettings.Interface.SettingValue.ConvertValue(System.String,System.String)">
+            <summary>
+            Converts the value.
+            </summary>
+            <param name="value">The value.</param>
+            <param name="convertCommandName">Name of the convert command.</param>
+            <returns></returns>
+        </member>
+        <member name="M:Comos.Platform.ProjectSettings.Interface.SettingValue.GetAttributeValue">
+            <summary>
+            Gets the attribute value.
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:Comos.Platform.ProjectSettings.Interface.SettingValue.SetLinkObjectValue(Plt.IComosBaseObject)">
+            <summary>
+            Sets the link object value.
+            </summary>
+            <param name="linkObject">The link object.</param>
+        </member>
+        <member name="M:Comos.Platform.ProjectSettings.Interface.SettingValue.IsSetValueAllowed(System.Object)">
+            <summary>
+            Determines whether write is allowed or not.
+            </summary>
+            <returns>
+              <c>true</c> if write is allowed; otherwise, <c>false</c>.
+            </returns>
+        </member>
+        <member name="M:Comos.Platform.ProjectSettings.Interface.SettingValue.GetLinkObjectValue">
+            <summary>
+            Gets the link object value.
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:Comos.Platform.ProjectSettings.Interface.SettingValue.ValidateLinkObject(System.Object)">
+            <summary>
+            Validates the link object.
+            </summary>
+            <param name="linkObject">The link object.</param>
+        </member>
+        <member name="M:Comos.Platform.ProjectSettings.Interface.SettingValue.ValidateAttributeName">
+            <summary>
+            Validates the name of the attribute.
+            </summary>
+        </member>
+        <member name="M:Comos.Platform.ProjectSettings.Interface.SettingValue.GetParameter">
+            <summary>
+            Gets the parameter.
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:Comos.Platform.ProjectSettings.Interface.SettingValue.GetOwnParameter">
+            <summary>
+            Gets the own parameter.
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:Comos.Platform.ProjectSettings.Interface.SettingValue.GetOwnParameter(System.Boolean)">
+            <summary>
+            Gets the own parameter.
+            </summary>
+            <param name="createNewWhenNotExists">if set to <c>true</c> the parameter will be created when it does not exist.</param>
+            <returns></returns>
+        </member>
+        <member name="M:Comos.Platform.ProjectSettings.Interface.SettingValue.GetIsInherited">
+            <summary>
+            Gets the is inherited.
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:Comos.Platform.ProjectSettings.Interface.SettingValue.NotifyChanges">
+            <summary>
+            Refreshes this instance.
+            </summary>
+        </member>
+        <member name="E:Comos.Platform.ProjectSettings.Interface.SettingValue.PropertyChanged">
+            <summary>
+            Occurs when a property value changes.
+            </summary>
+        </member>
+        <member name="M:Comos.Platform.ProjectSettings.Interface.SettingValue.NotifyAllPropertiesChanged">
+            <summary>
+            Notifies all properties changed.
+            </summary>
+        </member>
+        <member name="M:Comos.Platform.ProjectSettings.Interface.SettingValue.NotifyPropertyChanged(System.String[])">
+            <summary>
+            Notifies the property changed.
+            </summary>
+            <param name="propNames">The prop names.</param>
+        </member>
+        <member name="T:Comos.Platform.ProjectSettings.Interface.SettingValue.TemporarySettingValue">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="M:Comos.Platform.ProjectSettings.Interface.SettingValue.TemporarySettingValue.#ctor(Comos.Platform.ProjectSettings.Interface.SettingValue,System.Object)">
+            <summary>
+            Initializes a new instance of the <see cref="T:Comos.Platform.ProjectSettings.Interface.SettingValue.TemporarySettingValue"/> class.
+            </summary>
+            <param name="settingValue">The setting value.</param>
+            <param name="temporaryNewValue">The temporary new value.</param>
+        </member>
+        <member name="P:Comos.Platform.ProjectSettings.Interface.SettingValue.TemporarySettingValue.RawValue">
+            <summary>
+            Gets the raw value.
+            </summary>
+            <value>
+            The raw value.
+            </value>
+        </member>
+        <member name="P:Comos.Platform.ProjectSettings.Interface.SettingValue.TemporarySettingValue.StringValue">
+            <summary>
+            Gets the string value.
+            </summary>
+        </member>
+        <member name="P:Comos.Platform.ProjectSettings.Interface.SettingValue.TemporarySettingValue.BooleanValue">
+            <summary>
+            Gets the boolean value.
+            </summary>
+            <value>
+              <c>true</c> if [boolean value]; otherwise, <c>false</c>.
+            </value>
+        </member>
+        <member name="P:Comos.Platform.ProjectSettings.Interface.SettingValue.TemporarySettingValue.ComosObjectValue">
+            <summary>
+            Gets the comos object value.
+            </summary>
+        </member>
+        <member name="T:Comos.Platform.ProjectSettings.Interface.WellKnownCommandNames">
+            <summary>
+            Known Values of <see cref="P:Comos.Platform.ProjectSettings.Interface.SettingExtensionArgument.CommandName"/>.
+            </summary>
+        </member>
+        <member name="F:Comos.Platform.ProjectSettings.Interface.WellKnownCommandNames.SetValue">
+            <summary>
+            Command name used to notify that the setting's value was set.
+            </summary>
+        </member>
+        <member name="F:Comos.Platform.ProjectSettings.Interface.WellKnownCommandNames.ConvertValue">
+            <summary>
+            Command name used to notify that the setting's value can be converted before writing it to the attribute value.
+            </summary>
+        </member>
+        <member name="F:Comos.Platform.ProjectSettings.Interface.WellKnownCommandNames.ConvertValueBack">
+            <summary>
+            Command name used to notify that the setting's value can be converted after reading it from the attribute value.
+            </summary>
+        </member>
+        <member name="F:Comos.Platform.ProjectSettings.Interface.WellKnownCommandNames.IsEnabled">
+            <summary>
+            Command name used for the CanExecute Action. 
+            Return true to enable the dedicated setting; otherwise return false.
+            </summary>
+        </member>
+        <member name="F:Comos.Platform.ProjectSettings.Interface.WellKnownCommandNames.ItemPrefixSeperator">
+            <summary>
+            The item prefix seperator
+            </summary>
+        </member>
+        <member name="F:Comos.Platform.ProjectSettings.Interface.WellKnownCommandNames.IsEnabledForItemPrefix">
+            <summary>
+            Command name Prefix used for the CanExecute Action of an item of a setting (e.g. RadioButton of a RadioButtonGroup). 
+            Return true to enable the dedicated setting; otherwise return false.
+            </summary>
+        </member>
+        <member name="F:Comos.Platform.ProjectSettings.Interface.WellKnownCommandNames.ObjectPointerObjectDragOver">
+            <summary>
+            Command name for the object pointer's ObjectDragOver Event.
+            </summary>
+        </member>
+        <member name="F:Comos.Platform.ProjectSettings.Interface.WellKnownCommandNames.ObjectPointerObjectDrop">
+            <summary>
+            Command name for the object pointer's ObjectDrop Event.
+            </summary>
+        </member>
+        <member name="F:Comos.Platform.ProjectSettings.Interface.WellKnownCommandNames.ObjectPointerDelete">
+            <summary>
+            Command name for the object pointer's delete button.
+            </summary>
+        </member>
+        <member name="F:Comos.Platform.ProjectSettings.Interface.WellKnownCommandNames.ObjectPointerSelect">
+            <summary>
+            Command name for the object pointer's select button. 
+            </summary>
+        </member>
+        <member name="F:Comos.Platform.ProjectSettings.Interface.WellKnownCommandNames.BrowseDialog">
+            <summary>
+            Command name for browse (...) buttons.
+            </summary>
+        </member>
+        <member name="T:Comos.Platform.ProjectSettings.InvalidProjectSettingsSourceException">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="M:Comos.Platform.ProjectSettings.InvalidProjectSettingsSourceException.#ctor(System.String,System.String,System.String)">
+            <summary>
+            Initializes a new instance of the <see cref="T:Comos.Platform.ProjectSettings.InvalidProjectSettingsSourceException"/> class.
+            </summary>
+            <param name="assemblyName">Name of the assembly.</param>
+            <param name="className">Name of the class.</param>
+            <param name="message">The message.</param>
+        </member>
+        <member name="M:Comos.Platform.ProjectSettings.InvalidProjectSettingsSourceException.#ctor(System.String,System.String,System.Exception)">
+            <summary>
+            Initializes a new instance of the <see cref="T:Comos.Platform.ProjectSettings.InvalidProjectSettingsSourceException"/> class.
+            </summary>
+            <param name="assemblyName">Name of the assembly.</param>
+            <param name="className">Name of the class.</param>
+            <param name="innerException">The inner exception.</param>
+        </member>
+        <member name="P:Comos.Platform.ProjectSettings.InvalidProjectSettingsSourceException.AssemblyName">
+            <summary>
+            Gets the name of the assembly.
+            </summary>
+            <value>
+            The name of the assembly.
+            </value>
+        </member>
+        <member name="P:Comos.Platform.ProjectSettings.InvalidProjectSettingsSourceException.ClassName">
+            <summary>
+            Gets the name of the class.
+            </summary>
+            <value>
+            The name of the class.
+            </value>
+        </member>
+        <member name="M:Comos.Platform.ProjectSettings.InvalidProjectSettingsSourceException.GetObjectData(System.Runtime.Serialization.SerializationInfo,System.Runtime.Serialization.StreamingContext)">
+            <summary>
+            When overridden in a derived class, sets the <see cref="T:System.Runtime.Serialization.SerializationInfo"/> with information about the exception.
+            </summary>
+            <param name="info">The <see cref="T:System.Runtime.Serialization.SerializationInfo"/> that holds the serialized object data about the exception being thrown.</param>
+            <param name="context">The <see cref="T:System.Runtime.Serialization.StreamingContext"/> that contains contextual information about the source or destination.</param>
+            <exception cref="T:System.ArgumentNullException">The <paramref name="info"/> parameter is a null reference (Nothing in Visual Basic). </exception>
+              
+            <PermissionSet>
+              <IPermission class="System.Security.Permissions.FileIOPermission, mscorlib, Version=2.0.3600.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" version="1" Read="*AllFiles*" PathDiscovery="*AllFiles*"/>
+              <IPermission class="System.Security.Permissions.SecurityPermission, mscorlib, Version=2.0.3600.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" version="1" Flags="SerializationFormatter"/>
+              </PermissionSet>
+        </member>
+        <member name="T:Comos.Platform.ProjectSettings.InvalidSettingExtensionException">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="M:Comos.Platform.ProjectSettings.InvalidSettingExtensionException.#ctor(System.String,System.String,System.String)">
+            <summary>
+            Initializes a new instance of the <see cref="T:Comos.Platform.ProjectSettings.InvalidSettingExtensionException"/> class.
+            </summary>
+            <param name="assemblyName">Name of the assembly.</param>
+            <param name="className">Name of the class.</param>
+            <param name="message">The message.</param>
+        </member>
+        <member name="M:Comos.Platform.ProjectSettings.InvalidSettingExtensionException.#ctor(System.String,System.String,System.Exception)">
+            <summary>
+            Initializes a new instance of the <see cref="T:Comos.Platform.ProjectSettings.InvalidSettingExtensionException"/> class.
+            </summary>
+            <param name="assemblyName">Name of the assembly.</param>
+            <param name="className">Name of the class.</param>
+            <param name="innerException">The inner exception.</param>
+        </member>
+        <member name="P:Comos.Platform.ProjectSettings.InvalidSettingExtensionException.AssemblyName">
+            <summary>
+            Gets the name of the assembly.
+            </summary>
+            <value>
+            The name of the assembly.
+            </value>
+        </member>
+        <member name="P:Comos.Platform.ProjectSettings.InvalidSettingExtensionException.ClassName">
+            <summary>
+            Gets the name of the class.
+            </summary>
+            <value>
+            The name of the class.
+            </value>
+        </member>
+        <member name="M:Comos.Platform.ProjectSettings.InvalidSettingExtensionException.GetObjectData(System.Runtime.Serialization.SerializationInfo,System.Runtime.Serialization.StreamingContext)">
+            <summary>
+            When overridden in a derived class, sets the <see cref="T:System.Runtime.Serialization.SerializationInfo"/> with information about the exception.
+            </summary>
+            <param name="info">The <see cref="T:System.Runtime.Serialization.SerializationInfo"/> that holds the serialized object data about the exception being thrown.</param>
+            <param name="context">The <see cref="T:System.Runtime.Serialization.StreamingContext"/> that contains contextual information about the source or destination.</param>
+            <exception cref="T:System.ArgumentNullException">The <paramref name="info"/> parameter is a null reference (Nothing in Visual Basic). </exception>
+              
+            <PermissionSet>
+              <IPermission class="System.Security.Permissions.FileIOPermission, mscorlib, Version=2.0.3600.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" version="1" Read="*AllFiles*" PathDiscovery="*AllFiles*"/>
+              <IPermission class="System.Security.Permissions.SecurityPermission, mscorlib, Version=2.0.3600.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" version="1" Flags="SerializationFormatter"/>
+              </PermissionSet>
+        </member>
+        <member name="T:Comos.Platform.ProjectSettings.InvalidXmlRefException">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="M:Comos.Platform.ProjectSettings.InvalidXmlRefException.#ctor(Comos.Platform.ProjectSettings.XML.XmlCategoryRef,System.Exception)">
+            <summary>
+            Initializes a new instance of the <see cref="T:Comos.Platform.ProjectSettings.InvalidXmlRefException"/> class.
+            </summary>
+            <param name="xmlRef">The xmlref.</param>
+            <param name="innerException">The inner exception.</param>
+        </member>
+        <member name="M:Comos.Platform.ProjectSettings.InvalidXmlRefException.#ctor(Comos.Platform.ProjectSettings.XML.XmlSettingRef,System.Exception)">
+            <summary>
+            Initializes a new instance of the <see cref="T:Comos.Platform.ProjectSettings.InvalidXmlRefException"/> class.
+            </summary>
+            <param name="xmlRef">The xmlref.</param>
+            <param name="innerException">The inner exception.</param>
+        </member>
+        <member name="P:Comos.Platform.ProjectSettings.InvalidXmlRefException.XmlCategoryRef">
+            <summary>
+            Gets the XML category ref.
+            </summary>
+        </member>
+        <member name="P:Comos.Platform.ProjectSettings.InvalidXmlRefException.XmlSettingRef">
+            <summary>
+            Gets the XML setting ref.
+            </summary>
+        </member>
+        <member name="M:Comos.Platform.ProjectSettings.InvalidXmlRefException.GetObjectData(System.Runtime.Serialization.SerializationInfo,System.Runtime.Serialization.StreamingContext)">
+            <summary>
+            When overridden in a derived class, sets the <see cref="T:System.Runtime.Serialization.SerializationInfo"/> with information about the exception.
+            </summary>
+            <param name="info">The <see cref="T:System.Runtime.Serialization.SerializationInfo"/> that holds the serialized object data about the exception being thrown.</param>
+            <param name="context">The <see cref="T:System.Runtime.Serialization.StreamingContext"/> that contains contextual information about the source or destination.</param>
+            <exception cref="T:System.ArgumentNullException">The <paramref name="info"/> parameter is a null reference (Nothing in Visual Basic). </exception>
+              
+            <PermissionSet>
+              <IPermission class="System.Security.Permissions.FileIOPermission, mscorlib, Version=2.0.3600.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" version="1" Read="*AllFiles*" PathDiscovery="*AllFiles*"/>
+              <IPermission class="System.Security.Permissions.SecurityPermission, mscorlib, Version=2.0.3600.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" version="1" Flags="SerializationFormatter"/>
+              </PermissionSet>
+        </member>
+        <member name="T:Comos.Platform.ProjectSettings.Resources.SettingsEvent">
+            <summary>
+              Eine stark typisierte Ressourcenklasse zum Suchen von lokalisierten Zeichenfolgen usw.
+            </summary>
+        </member>
+        <member name="P:Comos.Platform.ProjectSettings.Resources.SettingsEvent.ResourceManager">
+            <summary>
+              Gibt die zwischengespeicherte ResourceManager-Instanz zurück, die von dieser Klasse verwendet wird.
+            </summary>
+        </member>
+        <member name="P:Comos.Platform.ProjectSettings.Resources.SettingsEvent.Culture">
+            <summary>
+              Überschreibt die CurrentUICulture-Eigenschaft des aktuellen Threads für alle
+              Ressourcenzuordnungen, die diese stark typisierte Ressourcenklasse verwenden.
+            </summary>
+        </member>
+        <member name="P:Comos.Platform.ProjectSettings.Resources.SettingsEvent.CustomerSettingsCategoryNotFound">
+            <summary>
+              Sucht eine lokalisierte Zeichenfolge, die The Customer Settings category is invalid. {0} ähnelt.
+            </summary>
+        </member>
+        <member name="P:Comos.Platform.ProjectSettings.Resources.SettingsEvent.ErrAlreadyInitialized">
+            <summary>
+              Sucht eine lokalisierte Zeichenfolge, die The SettingsController is already initilized. ähnelt.
+            </summary>
+        </member>
+        <member name="P:Comos.Platform.ProjectSettings.Resources.SettingsEvent.ErrArgNullExProjectCanNotBeNull">
+            <summary>
+              Sucht eine lokalisierte Zeichenfolge, die The Project can not be null. ähnelt.
+            </summary>
+        </member>
+        <member name="P:Comos.Platform.ProjectSettings.Resources.SettingsEvent.ErrGetCustomerSettingsWithoutProject">
+            <summary>
+              Sucht eine lokalisierte Zeichenfolge, die Cannot get customer settings without current project. ähnelt.
+            </summary>
+        </member>
+        <member name="P:Comos.Platform.ProjectSettings.Resources.SettingsEvent.ErrInvalidLinkObjectCast">
+            <summary>
+              Sucht eine lokalisierte Zeichenfolge, die Could not cast Link-Object to IComosBaseObject ähnelt.
+            </summary>
+        </member>
+        <member name="P:Comos.Platform.ProjectSettings.Resources.SettingsEvent.ErrInvalidSettingAttributeName">
+            <summary>
+              Sucht eine lokalisierte Zeichenfolge, die Invalid attributeName for Setting &apos;{0}&apos; (attributeName: &apos;{1}&apos;) ähnelt.
+            </summary>
+        </member>
+        <member name="P:Comos.Platform.ProjectSettings.Resources.SettingsEvent.ErrNoChapterSpec">
+            <summary>
+              Sucht eine lokalisierte Zeichenfolge, die Only specifications which are a chapter can be transformed into a Category. ähnelt.
+            </summary>
+        </member>
+        <member name="P:Comos.Platform.ProjectSettings.Resources.SettingsEvent.ErrSettingsControllerInitialization">
+            <summary>
+              Sucht eine lokalisierte Zeichenfolge, die Could not initialize &apos;{0}&apos;. ähnelt.
+            </summary>
+        </member>
+        <member name="P:Comos.Platform.ProjectSettings.Resources.SettingsEvent.SettingValueIsInvalid">
+            <summary>
+              Sucht eine lokalisierte Zeichenfolge, die The setting&apos;s value is invalid. {0} ähnelt.
+            </summary>
+        </member>
+        <member name="T:Comos.Platform.ProjectSettings.SettingsController">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="M:Comos.Platform.ProjectSettings.SettingsController.#cctor">
+            <summary>
+            Initializes the <see cref="T:Comos.Platform.ProjectSettings.SettingsController"/> class.
+            </summary>
+        </member>
+        <member name="M:Comos.Platform.ProjectSettings.SettingsController.#ctor">
+            <summary>
+            Initializes a new instance of the <see cref="T:Comos.Platform.ProjectSettings.SettingsController"/> class.
+            </summary>
+        </member>
+        <member name="M:Comos.Platform.ProjectSettings.SettingsController.#ctor(Comos.Platform.ProjectSettings.Interface.IProjectSettingsSource)">
+            <summary>
+            Initializes a new instance of the <see cref="T:Comos.Platform.ProjectSettings.SettingsController"/> class.
+            
+            This consturctor allows to specify a root project settings source, which will
+            from which the root project settings should be fetched instead of the default source.
+            </summary>
+            <param name="rootProjectSettingsSource">Project settings source, which should act as root.</param>
+        </member>
+        <member name="M:Comos.Platform.ProjectSettings.SettingsController.#ctor(System.Collections.Generic.IEnumerable{Comos.Platform.ProjectSettings.Interface.IProjectSettingsSource})">
+            <summary>
+            Initializes a new instance of the <see cref="T:Comos.Platform.ProjectSettings.SettingsController"/> class.
+            
+            This constructor allows to specify additional project setting sources, which will be merged
+            into the default root project settings.
+            </summary>
+            <param name="additionalProjectSettingsSources">Additional project setting sources, which should be merged in to the default project settings.</param>
+        </member>
+        <member name="M:Comos.Platform.ProjectSettings.SettingsController.#ctor(Comos.Platform.ProjectSettings.Interface.IProjectSettingsSource,System.Collections.Generic.IEnumerable{Comos.Platform.ProjectSettings.Interface.IProjectSettingsSource})">
+            <summary>
+            Initializes a new instance of the <see cref="T:Comos.Platform.ProjectSettings.SettingsController"/> class.
+            
+            This consturctor allows to specify a root project settings source, which will
+            from which the root project settings should be fetched instead of the default source.
+            Further it allows to specify additional project setting sources, which will be merged
+            into the default root project settings.
+            </summary>
+            <param name="rootProjectSettingsSource">Project settings source, which should act as root.</param>
+            <param name="additionalProjectSettingsSources">Additional project setting sources, which should be merged in to the default project settings.</param>
+        </member>
+        <member name="M:Comos.Platform.ProjectSettings.SettingsController.#ctor(Comos.Platform.ProjectSettings.Interface.IProjectSettingsSource,Comos.Platform.ProjectSettings.Interface.IProjectSettingsSource[])">
+            <summary>
+            Initializes a new instance of the <see cref="T:Comos.Platform.ProjectSettings.SettingsController"/> class.
+            
+            This consturctor allows to specify a root project settings source, which will
+            from which the root project settings should be fetched instead of the default source.
+            Further it allows to specify additional project setting sources, which will be merged
+            into the default root project settings.
+            </summary>
+            <param name="rootProjectSettingsSource">Project settings source, which should act as root. By specifying null here, the default source is used.</param>
+            <param name="additionalProjectSettingsSources">Additional project setting sources, which should be merged in to the default project settings.</param>
+        </member>
+        <member name="M:Comos.Platform.ProjectSettings.SettingsController.Finalize">
+            <summary>
+            Releases unmanaged resources and performs other cleanup operations before the
+            <see cref="T:Comos.Platform.ProjectSettings.SettingsController"/> is reclaimed by garbage collection.
+            </summary>
+        </member>
+        <member name="P:Comos.Platform.ProjectSettings.SettingsController.SettingItems">
+            <summary>
+            Gets the setting items.
+            </summary>
+        </member>
+        <member name="P:Comos.Platform.ProjectSettings.SettingsController.Project">
+            <summary>
+            Gets the project.
+            </summary>
+        </member>
+        <member name="M:Comos.Platform.ProjectSettings.SettingsController.GetXmlStream">
+            <summary>
+            Gets the XML stream.
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:Comos.Platform.ProjectSettings.SettingsController.ReadProjectSettings">
+            <summary>
+            Reads the project settings from the default stream.
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:Comos.Platform.ProjectSettings.SettingsController.ReadProjectSettings(System.IO.Stream)">
+            <summary>
+            Reads the project settings from a stream.
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:Comos.Platform.ProjectSettings.SettingsController.CreateCategories">
+            <summary>
+            Creates the categories.
+            </summary>
+        </member>
+        <member name="M:Comos.Platform.ProjectSettings.SettingsController.CreateCustomerCategories">
+            <summary>
+            Creates the custom categories.
+            </summary>
+        </member>
+        <member name="M:Comos.Platform.ProjectSettings.SettingsController.EnsureSolidBaseDb">
+            <summary>
+            Ensures the solid base db.
+            </summary>
+        </member>
+        <member name="M:Comos.Platform.ProjectSettings.SettingsController.RegisterCategory(Comos.Platform.ProjectSettings.Interface.ICategory)">
+            <summary>
+            Registers the category.
+            </summary>
+            <param name="iCategory">The i category.</param>
+        </member>
+        <member name="M:Comos.Platform.ProjectSettings.SettingsController.GetRegisteredCategory(System.String)">
+            <summary>
+            Gets the registered category.
+            </summary>
+            <param name="categoryId">The category id.</param>
+            <returns></returns>
+        </member>
+        <member name="M:Comos.Platform.ProjectSettings.SettingsController.RegisterSetting(Comos.Platform.ProjectSettings.Interface.ISetting)">
+            <summary>
+            Registers the setting.
+            </summary>
+            <param name="iSetting">The setting.</param>
+        </member>
+        <member name="M:Comos.Platform.ProjectSettings.SettingsController.GetRegisteredSetting(System.String)">
+            <summary>
+            Gets the registered setting.
+            </summary>
+            <param name="settingId">The setting id.</param>
+            <returns></returns>
+        </member>
+        <member name="M:Comos.Platform.ProjectSettings.SettingsController.GetDependentSettings(Comos.Platform.ProjectSettings.Interface.ISetting)">
+            <summary>
+            Gets the dependent settings.
+            </summary>
+            <param name="iSetting">The i setting.</param>
+            <returns></returns>
+        </member>
+        <member name="M:Comos.Platform.ProjectSettings.SettingsController.NotifyChangeToDependentSettings(Comos.Platform.ProjectSettings.Interface.ISetting)">
+            <summary>
+            Notifies the change to dependent settings.
+            </summary>
+            <param name="changedSetting">The changed setting.</param>
+        </member>
+        <member name="M:Comos.Platform.ProjectSettings.SettingsController.NotifyComosControlExtensions(System.EventArgs,System.String)">
+            <summary>
+            Notifies the comos controls.
+            </summary>
+            <param name="e">The <see cref="T:System.EventArgs"/> instance containing the event data.</param>
+            <param name="methodName">Name of the method.</param>
+        </member>
+        <member name="M:Comos.Platform.ProjectSettings.SettingsController.LoadAndMergeProjectSettingsFromProjectSettingSourcesWithRootProjectSettings(Comos.Platform.ProjectSettings.XML.XmlProjectSettings)">
+            <summary>
+            Loads additional project settings from the project setting sources specified
+            in the configuration xml.
+            </summary>
+            <param name="rootXmlProjectSettingsWithSettingSources">Project settings, whose project source settings should be </param>
+        </member>
+        <member name="M:Comos.Platform.ProjectSettings.SettingsController.ReadProjectSettingsFromSource(Comos.Platform.ProjectSettings.XML.XmlProjectSettingsSource)">
+            <summary>
+            Reads project settings from a project settings source.
+            </summary>
+            <param name="projectSettingsSource">Project settings source, from which project settings should be read.</param>
+            <returns>XmlProjectSettings object read from the specified project settings source.</returns>
+        </member>
+        <member name="M:Comos.Platform.ProjectSettings.SettingsController.LoadProjectSettingsSourceObject(System.String,System.String)">
+            <summary>
+            Loads the project settings source object.
+            </summary>
+            <param name="assemblyName">Name of the assembly.</param>
+            <param name="className">Name of the class.</param>
+            <returns></returns>
+        </member>
+        <member name="M:Comos.Platform.ProjectSettings.SettingsController.ConnectExtension(Comos.Platform.ProjectSettings.Interface.ISetting)">
+            <summary>
+            Connects the extension.
+            </summary>
+            <param name="iSetting">The setting.</param>
+        </member>
+        <member name="M:Comos.Platform.ProjectSettings.SettingsController.ApplySettingExtensionParameters(Comos.Platform.ProjectSettings.Interface.ISettingExtension,Comos.Platform.ProjectSettings.Interface.ISettingExtensionParameters)">
+            <summary>
+            Applies setting extension parameters to the setting extension object.
+            </summary>
+            <param name="settingExtension">Setting extension, to which should be initialized with parameters.</param>
+            <param name="settingExtensionParameters">Parameters to be passed over to the setting extension.</param>
+        </member>
+        <member name="M:Comos.Platform.ProjectSettings.SettingsController.LoadExtensionObject(System.String,System.String)">
+            <summary>
+            Loads the extension object.
+            </summary>
+            <param name="assemblyName">Name of the assembly.</param>
+            <param name="className">Name of the class.</param>
+            <returns></returns>
+        </member>
+        <member name="M:Comos.Platform.ProjectSettings.SettingsController.DisconnectExtension(Comos.Platform.ProjectSettings.Interface.ISetting)">
+            <summary>
+            Disconnects the extension.
+            </summary>
+            <param name="iSetting">The setting.</param>
+        </member>
+        <member name="M:Comos.Platform.ProjectSettings.SettingsController.HasSettingExtension(Comos.Platform.ProjectSettings.Interface.ISetting)">
+            <summary>
+            Determines whether [has setting extension] [the specified setting].
+            </summary>
+            <param name="iSetting">The setting.</param>
+            <returns>
+              <c>true</c> if [has setting extension] [the specified setting]; otherwise, <c>false</c>.
+            </returns>
+        </member>
+        <member name="M:Comos.Platform.ProjectSettings.SettingsController.HasConnectedExtension(Comos.Platform.ProjectSettings.Interface.ISetting)">
+            <summary>
+            Determines whether [has connected extension] [the specified setting].
+            </summary>
+            <param name="iSetting">The setting.</param>
+            <returns>
+              <c>true</c> if [has connected extension] [the specified setting]; otherwise, <c>false</c>.
+            </returns>
+        </member>
+        <member name="M:Comos.Platform.ProjectSettings.SettingsController.GetConnectedSettingExtension(Comos.Platform.ProjectSettings.Interface.ISetting)">
+            <summary>
+            Gets the connected setting extension.
+            </summary>
+            <param name="iSetting">The setting.</param>
+            <returns></returns>
+        </member>
+        <member name="M:Comos.Platform.ProjectSettings.SettingsController.CreateSettingExtensionArguments(Comos.Platform.ProjectSettings.Interface.ISetting,System.String)">
+            <summary>
+            Creates the setting extension arguments.
+            </summary>
+            <param name="iSetting">The i setting.</param>
+            <param name="commandName">Name of the command.</param>
+            <returns></returns>
+        </member>
+        <member name="M:Comos.Platform.ProjectSettings.SettingsController.InitializeComosControlIfNecessary(Comos.Platform.ProjectSettings.Interface.ISettingExtension)">
+            <summary>
+            Initializes the comos control if necessary.
+            </summary>
+            <param name="settingExtension">The setting extension.</param>
+        </member>
+        <member name="P:Comos.Platform.ProjectSettings.SettingsController.Comos#Platform#ProjectSettings#Interface#ISettingsController#Categories">
+            <summary>
+            Gets the categories.
+            </summary>
+        </member>
+        <member name="P:Comos.Platform.ProjectSettings.SettingsController.Comos#Platform#ProjectSettings#Interface#ISettingsController#IsInitialized">
+            <summary>
+            Gets a value indicating whether this instance is initialized.
+            </summary>
+            <value>
+            	<c>true</c> if this instance is initialized; otherwise, <c>false</c>.
+            </value>
+        </member>
+        <member name="P:Comos.Platform.ProjectSettings.SettingsController.Comos#Platform#ProjectSettings#Interface#ISettingsController#IsReadOnly">
+            <summary>
+            Gets a value indicating whether this instance is read only.
+            </summary>
+            <value>
+            	<c>true</c> if this instance is read only; otherwise, <c>false</c>.
+            </value>
+        </member>
+        <member name="M:Comos.Platform.ProjectSettings.SettingsController.Comos#Platform#ProjectSettings#Interface#ISettingsController#Initialize(Plt.IComosDProject,System.Boolean)">
+            <summary>
+            Initializes this instance.
+            </summary>
+            <param name="comosProject">The comos project.</param>
+            <param name="readOnly">if set to <c>true</c> [is read only].</param>
+            <returns></returns>
+        </member>
+        <member name="M:Comos.Platform.ProjectSettings.SettingsController.Comos#Platform#ProjectSettings#Interface#ISettingsController#CanExecuteAction(Comos.Platform.ProjectSettings.Interface.ISetting,System.String)">
+            <summary>
+            Determines whether the action of the passed in setting can be executed or not.
+            </summary>
+            <param name="iSetting">The setting.</param>
+            <param name="commandName">Name of the command.</param>
+            <returns>
+              <c>true</c> if the action of the passed in setting can be executed; otherwise, <c>false</c>.
+            </returns>
+        </member>
+        <member name="M:Comos.Platform.ProjectSettings.SettingsController.Comos#Platform#ProjectSettings#Interface#ISettingsController#ExecuteAction(Comos.Platform.ProjectSettings.Interface.ISetting,System.String)">
+            <summary>
+            Executes the action of the passed in setting.
+            </summary>
+            <param name="iSetting">The setting.</param>
+            <param name="commandName">Name of the command.</param>
+        </member>
+        <member name="M:Comos.Platform.ProjectSettings.SettingsController.Dispose">
+            <summary>
+            Performs application-defined tasks associated with freeing, releasing, or resetting unmanaged resources.
+            </summary>
+        </member>
+        <member name="M:Comos.Platform.ProjectSettings.SettingsController.Dispose(System.Boolean)">
+            <summary>
+            Releases unmanaged and - optionally - managed resources
+            </summary>
+            <param name="disposing"><c>true</c> to release both managed and unmanaged resources; <c>false</c> to release only unmanaged resources.</param>
+        </member>
+        <member name="T:Comos.Platform.ProjectSettings.XML.InvalidSettingsFormatException">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="M:Comos.Platform.ProjectSettings.XML.InvalidSettingsFormatException.#ctor(System.String)">
+            <summary>
+            Initializes a new instance of the <see cref="T:Comos.Platform.ProjectSettings.XML.InvalidSettingsFormatException"/> class.
+            </summary>
+        </member>
+        <member name="T:Comos.Platform.ProjectSettings.XML.XmlParameter">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="M:Comos.Platform.ProjectSettings.XML.XmlParameter.#ctor">
+            <summary>
+            Initializes a new instance of the <see cref="T:Comos.Platform.ProjectSettings.XML.XmlParameter"/> class.
+            </summary>
+        </member>
+        <member name="P:Comos.Platform.ProjectSettings.XML.XmlParameter.Name">
+            <summary>
+            Gets or sets the name of the parameter.
+            </summary>
+            <value>
+            The parameter name.
+            </value>
+        </member>
+        <member name="P:Comos.Platform.ProjectSettings.XML.XmlParameter.Value">
+            <summary>
+            Gets or sets the value of the parameter.
+            </summary>
+            <value>
+            The parameter value.
+            </value>
+        </member>
+        <member name="T:Comos.Platform.ProjectSettings.XML.FormatInfo">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Comos.Platform.ProjectSettings.XML.FormatInfo.Version">
+            <summary>
+            Gets or sets the version.
+            </summary>
+            <value>
+            The version.
+            </value>
+        </member>
+        <member name="T:Comos.Platform.ProjectSettings.XML.XmlProjectSettings">
+            <summary>
+            XML handling class for a single project setting.
+            </summary>
+        </member>
+        <member name="P:Comos.Platform.ProjectSettings.XML.XmlProjectSettings.FormatInfo">
+            <summary>
+            Gets or sets the format info.
+            </summary>
+            <value>
+            The format info.
+            </value>
+        </member>
+        <member name="P:Comos.Platform.ProjectSettings.XML.XmlProjectSettings.SettingSources">
+            <summary>
+            Gets or sets the project setting sources.
+            </summary>
+            <value>
+            The project setting sources.
+            </value>
+            <author>ADBRCH22</author>
+        </member>
+        <member name="P:Comos.Platform.ProjectSettings.XML.XmlProjectSettings.SettingItems">
+            <summary>
+            Gets or sets the setting items.
+            </summary>
+            <value>
+            The setting items.
+            </value>
+        </member>
+        <member name="P:Comos.Platform.ProjectSettings.XML.XmlProjectSettings.SettingsHierarchy">
+            <summary>
+            Gets or sets the settings hierarchy.
+            </summary>
+            <value>
+            The settings hierarchy.
+            </value>
+        </member>
+        <member name="M:Comos.Platform.ProjectSettings.XML.XmlProjectSettings.#ctor">
+            <summary>
+            Initializes a new instance of the <see cref="T:Comos.Platform.ProjectSettings.XML.XmlProjectSettings"/> class.
+            </summary>
+        </member>
+        <member name="M:Comos.Platform.ProjectSettings.XML.XmlProjectSettings.Merge(Comos.Platform.ProjectSettings.XML.XmlProjectSettings,Comos.Platform.ProjectSettings.XML.XmlProjectSettings)">
+            <summary>
+            Merges two XmlProjectSettings objects into a new one.
+            
+            In the first step the method merges the setting items entries. Here the original setting items have precedence
+            over the additional setting items, i.e. if a setting item with the same id exists in both sets, the original
+            one is taken.
+            
+            In the second step the method merges the setting hierarchies. The hierarchy merge functionality allows to 
+            attach external categories into existing ones, by simply using an id of an existing category as the root
+            category reference. Subitems and subcategories are merged recursively, which allows to append new settings or categories into existing
+            ones.
+            
+            </summary>
+            <param name="originalSettings">Original project settings.</param>
+            <param name="additionalSettings">Additional project settings</param>
+            <remarks>ATTENTION: This method also alters the elements contained in 'originalSettings', which means, that they are not in their original state after executing this method.</remarks>
+            <returns>Merged xml project settings.</returns>
+            <author>ADBRCH22</author>
+        </member>
+        <member name="M:Comos.Platform.ProjectSettings.XML.XmlProjectSettings.MergeSettingsHierarchies(Comos.Platform.ProjectSettings.XML.XmlCategoryRef[],Comos.Platform.ProjectSettings.XML.XmlCategoryRef[])">
+            <summary>
+            Merges two
+            </summary>
+            <param name="originalCategoryRefs">Original category roots.</param>
+            <param name="otherCategoryRefs">Other category roots.</param>
+            <returns>Merged settings hierarchy.</returns>
+            <author>ADBRCH22</author>
+        </member>
+        <member name="M:Comos.Platform.ProjectSettings.XML.XmlProjectSettings.FlattenHierarchy(Comos.Platform.ProjectSettings.XML.XmlCategoryRef[])">
+            <summary>
+            Flattens the whole hierarchy of multiple category refs.
+            </summary>
+            <param name="categoryRefs">CategoryRef roots, which should be flattened</param>
+            <returns>Flattened hierarchy of category refs.</returns>
+            <author>ADBRCH22</author>
+        </member>
+        <member name="M:Comos.Platform.ProjectSettings.XML.XmlProjectSettings.FlattenHierarchy(Comos.Platform.ProjectSettings.XML.XmlCategoryRef)">
+            <summary>
+            Flattens the category ref hierarchy.
+            </summary>
+            <param name="categoryRef">Category ref, whose hierarchy should be flattened.</param>
+            <returns>Flattened hierarchy of category refs.</returns>
+            <author>ADBRCH22</author>
+        </member>
+        <member name="M:Comos.Platform.ProjectSettings.XML.XmlProjectSettings.MergeCategoryRefs(Comos.Platform.ProjectSettings.XML.XmlCategoryRef,Comos.Platform.ProjectSettings.XML.XmlCategoryRef)">
+            <summary>
+            Merges two category references.
+            
+            The merge is performed recursively, i.e. matching sub category refs are merged into each other again.
+            </summary>
+            <param name="originalCategoryRef">Original category ref.</param>
+            <param name="otherCategoryRef">Other category ref, which should be merged into the existing one.</param>
+            <returns>Merged category ref.</returns>
+            <author>ADBRCH22</author>
+        </member>
+        <member name="M:Comos.Platform.ProjectSettings.XML.XmlProjectSettings.MergeSubSettings(Comos.Platform.ProjectSettings.XML.XmlSettingRef,Comos.Platform.ProjectSettings.XML.XmlSettingRef)">
+            <summary>
+            Merges the sub settings of two setting refs.
+            
+            The merge is performed recursively, i.e. matching sub setting refs are merged into each other again.
+            </summary>
+            <param name="originalSettingRef">Original setting ref.</param>
+            <param name="otherSettingRef">Other setting ref, whose sub settings should be merged into the original settings.</param>
+            <returns>Merged setting ref.</returns>
+            <author>ADBRCH22</author>
+        </member>
+        <member name="M:Comos.Platform.ProjectSettings.XML.XmlProjectSettings.MergeSets``2(``0[],``0[],System.Func{``0,``1},System.Boolean,System.Func{``0,``0,``0})">
+            <summary>
+            Generic function for merging two sets by an id.
+            
+            The elements of the additional set overwrite elements from the original set, if the element key matches.
+            </summary>
+            <typeparam name="ELEMENT_TYPE">Type of the element in the sets.</typeparam>
+            <typeparam name="KEY_TYPE">Type of the key identifying each element in the sets.</typeparam>
+            <param name="set">Original set.</param>
+            <param name="additionalSet">Additional set, which should be merged into the original set.</param>
+            <param name="keyFunc">Key function returning a key, which identifies an element in the set.</param>
+            <param name="overwrite">Determines, whether elements in the original set should be overwritten by elements in the additional set when the id matches.</param>
+            <param name="elementMergeFunc">Merge function to be used, when two elements should be merged.</param>
+            <returns>Merged set according to the specified key.</returns>
+            <author>ADBRCH22</author>
+        </member>
+        <member name="M:Comos.Platform.ProjectSettings.XML.XmlProjectSettings.MergeCategories(Comos.Platform.ProjectSettings.XML.XmlSettingCategory[],Comos.Platform.ProjectSettings.XML.XmlSettingCategory[])">
+            <summary>
+            Merges two category sets by category id.
+            
+            Original set wins, if an id exists in both sets. 
+            </summary>
+            <param name="categories">Original categories</param>
+            <param name="additionalCategories">Additional categories.</param>
+            <returns>Merged category set.</returns>
+            <author>ADBRCH22</author>
+        </member>
+        <member name="M:Comos.Platform.ProjectSettings.XML.XmlProjectSettings.MergeSettings(Comos.Platform.ProjectSettings.XML.XmlSetting[],Comos.Platform.ProjectSettings.XML.XmlSetting[])">
+            <summary>
+            Merges two setting  sets by setting id.
+            
+            Original set wins, if an id exists in both sets. 
+            </summary>
+            <param name="settings">Original settings</param>
+            <param name="additionalSettings">Additional settings.</param>
+            <returns>Merged setting set.</returns>
+            <author>ADBRCH22</author>
+        </member>
+        <member name="T:Comos.Platform.ProjectSettings.XML.XmlProjectSettingsSerializer">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="M:Comos.Platform.ProjectSettings.XML.XmlProjectSettingsSerializer.#cctor">
+            <summary>
+            Initializes the <see cref="T:Comos.Platform.ProjectSettings.XML.XmlProjectSettingsSerializer"/> class.
+            </summary>
+        </member>
+        <member name="M:Comos.Platform.ProjectSettings.XML.XmlProjectSettingsSerializer.WriteProjectSettings(System.IO.Stream,Comos.Platform.ProjectSettings.XML.XmlProjectSettings)">
+            <summary>
+            Writes the project settings.
+            </summary>
+            <param name="xmlStream">The XML stream.</param>
+            <param name="settings">The settings.</param>
+        </member>
+        <member name="M:Comos.Platform.ProjectSettings.XML.XmlProjectSettingsSerializer.ReadProjectSettings(System.IO.Stream)">
+            <summary>
+            Reads the project settings.
+            </summary>
+            <param name="xmlStream">The XML stream.</param>
+            <returns></returns>
+        </member>
+        <member name="M:Comos.Platform.ProjectSettings.XML.XmlProjectSettingsSerializer.CheckProjectSettingsVersion(Comos.Platform.ProjectSettings.XML.XmlProjectSettings)">
+            <summary>
+            Checks the project settings version.
+            </summary>
+            <param name="deserializationObj">The deserialization obj.</param>
+        </member>
+        <member name="T:Comos.Platform.ProjectSettings.XML.XmlProjectSettingsSource">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="M:Comos.Platform.ProjectSettings.XML.XmlProjectSettingsSource.#ctor">
+            <summary>
+            Initializes a new instance of the <see cref="T:Comos.Platform.ProjectSettings.XML.XmlProjectSettingsSource"/> class.
+            </summary>
+        </member>
+        <member name="P:Comos.Platform.ProjectSettings.XML.XmlProjectSettingsSource.Assembly">
+            <summary>
+            Gets or sets the assembly.
+            </summary>
+            <value>
+            The assembly.
+            </value>
+        </member>
+        <member name="P:Comos.Platform.ProjectSettings.XML.XmlProjectSettingsSource.Class">
+            <summary>
+            Gets or sets the class.
+            </summary>
+            <value>
+            The class.
+            </value>
+        </member>
+        <member name="T:Comos.Platform.ProjectSettings.XML.XmlProjectSettingsSources">
+            <summary>
+            XML handling class for project setting sources
+            </summary>
+        </member>
+        <member name="M:Comos.Platform.ProjectSettings.XML.XmlProjectSettingsSources.#ctor">
+            <summary>
+            Initializes a new instance of the <see cref="T:Comos.Platform.ProjectSettings.XML.XmlProjectSettingsSources"/> class.
+            </summary>
+        </member>
+        <member name="P:Comos.Platform.ProjectSettings.XML.XmlProjectSettingsSources.Sources">
+            <summary>
+            Gets or sets the list of available project setting sources.
+            </summary>
+            <value>
+            The list of project setting sources.
+            </value>
+        </member>
+        <member name="T:Comos.Platform.ProjectSettings.XML.XmlSetting">
+            <summary>
+            XML handling class for a single project setting.
+            </summary>
+        </member>
+        <member name="M:Comos.Platform.ProjectSettings.XML.XmlSetting.#ctor">
+            <summary>
+            Initializes a new instance of the <see cref="T:Comos.Platform.ProjectSettings.XML.XmlProjectSettings"/> class.
+            </summary>
+        </member>
+        <member name="P:Comos.Platform.ProjectSettings.XML.XmlSetting.Id">
+            <summary>
+            Gets or sets the id.
+            </summary>
+            <value>
+            The id.
+            </value>
+        </member>
+        <member name="P:Comos.Platform.ProjectSettings.XML.XmlSetting.Type">
+            <summary>
+            Gets or sets the type.
+            </summary>
+            <value>
+            The type.
+            </value>
+        </member>
+        <member name="P:Comos.Platform.ProjectSettings.XML.XmlSetting.Caption">
+            <summary>
+            Gets or sets the caption.
+            </summary>
+            <value>
+            The caption.
+            </value>
+        </member>
+        <member name="P:Comos.Platform.ProjectSettings.XML.XmlSetting.AttributeName">
+            <summary>
+            Gets or sets the name of the attribute.
+            </summary>
+            <value>
+            The name of the attribute.
+            </value>
+        </member>
+        <member name="P:Comos.Platform.ProjectSettings.XML.XmlSetting.IsEditable">
+            <summary>
+            Gets or sets a value indicating whether this instance is editable.
+            </summary>
+            <value>
+            	<c>true</c> if this instance is editable; otherwise, <c>false</c>.
+            </value>
+        </member>
+        <member name="P:Comos.Platform.ProjectSettings.XML.XmlSetting.ObservedSettingsAsText">
+            <summary>
+            Gets or sets the observed settings as text.
+            </summary>
+            <value>
+            The observed settings as text.
+            </value>
+        </member>
+        <member name="P:Comos.Platform.ProjectSettings.XML.XmlSetting.SettingClass">
+            <summary>
+            Gets or sets the setting class.
+            </summary>
+            <value>
+            The setting class.
+            </value>
+        </member>
+        <member name="P:Comos.Platform.ProjectSettings.XML.XmlSetting.ToolTip">
+            <summary>
+            Gets or sets the tool tip.
+            </summary>
+            <value>
+            The tool tip.
+            </value>
+        </member>
+        <member name="P:Comos.Platform.ProjectSettings.XML.XmlSetting.Items">
+            <summary>
+            Gets or sets the combo box items.
+            </summary>
+            <value>
+            The combo box items.
+            </value>
+        </member>
+        <member name="P:Comos.Platform.ProjectSettings.XML.XmlSetting.DefaultValue">
+            <summary>
+            Gets or sets the default value.
+            </summary>
+            <value>
+            The default value.
+            </value>
+        </member>
+        <member name="P:Comos.Platform.ProjectSettings.XML.XmlSetting.Indent">
+            <summary>
+            Gets or sets the indent.
+            </summary>
+            <value>
+            The indent.
+            </value>
+        </member>
+        <member name="P:Comos.Platform.ProjectSettings.XML.XmlSetting.ComosInternal">
+            <summary>
+            Gets or sets a value indicating whether [comos internal].
+            </summary>
+            <value>
+              <c>true</c> if [comos internal]; otherwise, <c>false</c>.
+            </value>
+        </member>
+        <member name="P:Comos.Platform.ProjectSettings.XML.XmlSetting.IsVisibleAsText">
+            <summary>
+            Gets or sets the is visible as text.
+            </summary>
+            <value>
+            The is visible as text.
+            </value>
+        </member>
+        <member name="P:Comos.Platform.ProjectSettings.XML.XmlSetting.IsVisible">
+            <summary>
+            Gets or sets a value indicating whether this instance is visible.
+            </summary>
+            <value>
+            	<c>true</c> if this instance is visible; otherwise, <c>false</c>.
+            </value>
+        </member>
+        <member name="P:Comos.Platform.ProjectSettings.XML.XmlSetting.FileOpenDialogFilter">
+            <summary>
+            Gets or sets the file open dialog filter.
+            </summary>
+            <value>
+            The file open dialog filter.
+            </value>
+        </member>
+        <member name="P:Comos.Platform.ProjectSettings.XML.XmlSetting.FileOpenDialogFilterIndex">
+            <summary>
+            Gets or sets the index of the file open dialog filter.
+            </summary>
+            <value>
+            The index of the file open dialog filter.
+            </value>
+        </member>
+        <member name="P:Comos.Platform.ProjectSettings.XML.XmlSetting.FileOpenDialogInitialDirectory">
+            <summary>
+            Gets or sets the file open dialog initial directory.
+            </summary>
+            <value>
+            The file open dialog initial directory.
+            </value>
+        </member>
+        <member name="P:Comos.Platform.ProjectSettings.XML.XmlSetting.ObjectPointerDeleteIsEnabled">
+            <summary>
+            Gets or sets a value indicating whether [delete is enabled].
+            </summary>
+            <value>
+              <c>true</c> if [delete is enabled]; otherwise, <c>false</c>.
+            </value>
+        </member>
+        <member name="P:Comos.Platform.ProjectSettings.XML.XmlSetting.ObjectPointerDeleteToolTip">
+            <summary>
+            Gets or sets the delete tool tip.
+            </summary>
+            <value>
+            The delete tool tip.
+            </value>
+        </member>
+        <member name="P:Comos.Platform.ProjectSettings.XML.XmlSetting.ObjectPointerDeleteIsVisible">
+            <summary>
+            Gets or sets a value indicating whether [delete is visible].
+            </summary>
+            <value>
+              <c>true</c> if [delete is visible]; otherwise, <c>false</c>.
+            </value>
+        </member>
+        <member name="P:Comos.Platform.ProjectSettings.XML.XmlSetting.ObjectPointerSelectIsEnabled">
+            <summary>
+            Gets or sets a value indicating whether [select is enabled].
+            </summary>
+            <value>
+              <c>true</c> if [select is enabled]; otherwise, <c>false</c>.
+            </value>
+        </member>
+        <member name="P:Comos.Platform.ProjectSettings.XML.XmlSetting.ObjectPointerSelectToolTip">
+            <summary>
+            Gets or sets the select tool tip.
+            </summary>
+            <value>
+            The select tool tip.
+            </value>
+        </member>
+        <member name="P:Comos.Platform.ProjectSettings.XML.XmlSetting.ObjectPointerSelectIsVisible">
+            <summary>
+            Gets or sets a value indicating whether [select is visible].
+            </summary>
+            <value>
+              <c>true</c> if [select is visible]; otherwise, <c>false</c>.
+            </value>
+        </member>
+        <member name="P:Comos.Platform.ProjectSettings.XML.XmlSetting.ObjectPointerDropPicToolTip">
+            <summary>
+            Gets or sets the ToolTip text on the dropPic Image control.
+            </summary>
+            <value>
+            the ToolTip text on the dropPic Image control.
+            </value>
+        </member>
+        <member name="T:Comos.Platform.ProjectSettings.XML.XmlSettingItem">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="M:Comos.Platform.ProjectSettings.XML.XmlSettingItem.#ctor">
+            <summary>
+            Initializes a new instance of the <see cref="T:Comos.Platform.ProjectSettings.XML.XmlSettingItem"/> class.
+            </summary>
+        </member>
+        <member name="P:Comos.Platform.ProjectSettings.XML.XmlSettingItem.Id">
+            <summary>
+            Gets or sets the id.
+            </summary>
+            <value>
+            The id.
+            </value>
+        </member>
+        <member name="P:Comos.Platform.ProjectSettings.XML.XmlSettingItem.Caption">
+            <summary>
+            Gets or sets the caption.
+            </summary>
+            <value>
+            The caption.
+            </value>
+        </member>
+        <member name="P:Comos.Platform.ProjectSettings.XML.XmlSettingItem.SelectedCaption">
+            <summary>
+            Gets or sets the selected caption.
+            </summary>
+            <value>
+            The selected caption.
+            </value>
+        </member>
+        <member name="P:Comos.Platform.ProjectSettings.XML.XmlSettingItem.Value">
+            <summary>
+            Gets or sets the caption.
+            </summary>
+            <value>
+            The caption.
+            </value>
+        </member>
+        <member name="P:Comos.Platform.ProjectSettings.XML.XmlSettingItem.ImageKey">
+            <summary>
+            Gets or sets the image key.
+            </summary>
+            <value>
+            The image key.
+            </value>
+        </member>
+        <member name="P:Comos.Platform.ProjectSettings.XML.XmlSettingItem.Indent">
+            <summary>
+            Gets the indent.
+            </summary>
+        </member>
+        <member name="P:Comos.Platform.ProjectSettings.XML.XmlSettingItem.ToolTip">
+            <summary>
+            Gets or sets the tool tip.
+            </summary>
+            <value>
+            The tool tip.
+            </value>
+        </member>
+        <member name="T:Comos.Platform.ProjectSettings.XML.XmlSettingCategory">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="M:Comos.Platform.ProjectSettings.XML.XmlSettingCategory.#ctor">
+            <summary>
+            Initializes a new instance of the <see cref="T:Comos.Platform.ProjectSettings.XML.XmlSettingCategory"/> class.
+            </summary>
+        </member>
+        <member name="P:Comos.Platform.ProjectSettings.XML.XmlSettingCategory.Id">
+            <summary>
+            Gets or sets the id.
+            </summary>
+            <value>
+            The id.
+            </value>
+        </member>
+        <member name="P:Comos.Platform.ProjectSettings.XML.XmlSettingCategory.Caption">
+            <summary>
+            Gets or sets the caption.
+            </summary>
+            <value>
+            The caption.
+            </value>
+        </member>
+        <member name="P:Comos.Platform.ProjectSettings.XML.XmlSettingCategory.ComosInternal">
+            <summary>
+            Gets or sets a value indicating whether [comos internal].
+            </summary>
+            <value>
+              <c>true</c> if [comos internal]; otherwise, <c>false</c>.
+            </value>
+        </member>
+        <member name="P:Comos.Platform.ProjectSettings.XML.XmlSettingCategory.IsVisibleAsText">
+            <summary>
+            Gets or sets the is visible as text.
+            </summary>
+            <value>
+            The is visible as text.
+            </value>
+        </member>
+        <member name="P:Comos.Platform.ProjectSettings.XML.XmlSettingCategory.IsVisible">
+            <summary>
+            Gets or sets a value indicating whether this instance is visible.
+            </summary>
+            <value>
+            	<c>true</c> if this instance is visible; otherwise, <c>false</c>.
+            </value>
+        </member>
+        <member name="P:Comos.Platform.ProjectSettings.XML.XmlSettingCategory.IsEnabledAsText">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Comos.Platform.ProjectSettings.XML.XmlSettingCategory.IsEnabled">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Comos.Platform.ProjectSettings.XML.XmlSettingCategory.HasOwnRightsManagementAsString">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Comos.Platform.ProjectSettings.XML.XmlSettingCategory.HasOwnRightsManagement">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="T:Comos.Platform.ProjectSettings.XML.XmlSettingClass">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="M:Comos.Platform.ProjectSettings.XML.XmlSettingClass.#ctor">
+            <summary>
+            Initializes a new instance of the <see cref="T:Comos.Platform.ProjectSettings.XML.XmlSettingClass"/> class.
+            </summary>
+        </member>
+        <member name="P:Comos.Platform.ProjectSettings.XML.XmlSettingClass.Assembly">
+            <summary>
+            Gets or sets the assembly.
+            </summary>
+            <value>
+            The assembly.
+            </value>
+        </member>
+        <member name="P:Comos.Platform.ProjectSettings.XML.XmlSettingClass.Class">
+            <summary>
+            Gets or sets the class.
+            </summary>
+            <value>
+            The class.
+            </value>
+        </member>
+        <member name="T:Comos.Platform.ProjectSettings.XML.XmlSettingItems">
+            <summary>
+            XML handling class for a single project setting.
+            </summary>
+        </member>
+        <member name="M:Comos.Platform.ProjectSettings.XML.XmlSettingItems.#ctor">
+            <summary>
+            Initializes a new instance of the <see cref="T:Comos.Platform.ProjectSettings.XML.XmlProjectSettings"/> class.
+            </summary>
+        </member>
+        <member name="P:Comos.Platform.ProjectSettings.XML.XmlSettingItems.Settings">
+            <summary>
+            Gets or sets the list of available serialized project settings.
+            </summary>
+            <value>
+            The list of project settings.
+            </value>
+        </member>
+        <member name="P:Comos.Platform.ProjectSettings.XML.XmlSettingItems.Categories">
+            <summary>
+            Gets or sets the list of available serialized project setting categories.
+            </summary>
+            <value>
+            The list of project setting categories.
+            </value>
+        </member>
+        <member name="T:Comos.Platform.ProjectSettings.XML.XmlCategoryRef">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Comos.Platform.ProjectSettings.XML.XmlCategoryRef.Id">
+            <summary>
+            Gets or sets the id.
+            </summary>
+            <value>
+            The id.
+            </value>
+        </member>
+        <member name="P:Comos.Platform.ProjectSettings.XML.XmlCategoryRef.SubCategories">
+            <summary>
+            Gets or sets the sub categories.
+            </summary>
+            <value>
+            The sub categories.
+            </value>
+        </member>
+        <member name="P:Comos.Platform.ProjectSettings.XML.XmlCategoryRef.SubSettings">
+            <summary>
+            Gets or sets the sub settings.
+            </summary>
+            <value>
+            The sub settings.
+            </value>
+        </member>
+        <member name="T:Comos.Platform.ProjectSettings.XML.XmlSettingRef">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Comos.Platform.ProjectSettings.XML.XmlSettingRef.Id">
+            <summary>
+            Gets or sets the id.
+            </summary>
+            <value>
+            The id.
+            </value>
+        </member>
+        <member name="P:Comos.Platform.ProjectSettings.XML.XmlSettingRef.SubSettings">
+            <summary>
+            Gets or sets the sub settings.
+            </summary>
+            <value>
+            The sub settings.
+            </value>
+        </member>
+        <member name="T:Comos.Platform.ProjectSettings.XML.XmlSettingsHierarchy">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="M:Comos.Platform.ProjectSettings.XML.XmlSettingsHierarchy.#ctor">
+            <summary>
+            Initializes a new instance of the <see cref="T:Comos.Platform.ProjectSettings.XML.XmlSettingsHierarchy"/> class.
+            </summary>
+        </member>
+        <member name="P:Comos.Platform.ProjectSettings.XML.XmlSettingsHierarchy.Categories">
+            <summary>
+            Gets or sets the categories.
+            </summary>
+            <value>
+            The categories.
+            </value>
+        </member>
+        <member name="T:Comos.Platform.ProjectSettings.XML.XmlSettingToolTip">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="M:Comos.Platform.ProjectSettings.XML.XmlSettingToolTip.#ctor">
+            <summary>
+            Initializes a new instance of the <see cref="T:Comos.Platform.ProjectSettings.XML.XmlSettingToolTip"/> class.
+            </summary>
+        </member>
+        <member name="P:Comos.Platform.ProjectSettings.XML.XmlSettingToolTip.Itx">
+            <summary>
+            Gets or sets the itx.
+            </summary>
+            <value>
+            The itx.
+            </value>
+        </member>
+    </members>
+</doc>

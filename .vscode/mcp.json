@@ -1,0 +1,9 @@
+{
+  "servers": {
+    "comos-pa-bridge": {
+      "type": "http",
+      "url": "http://localhost:3100/sse",
+      "description": "COMOS Power Automate Bridge — read PA requests and send COMOS attribute data for approval workflows"
+    }
+  }
+}

@@ -1,0 +1,404 @@
+﻿<!DOCTYPE	 html>
+<html lang="en">
+
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<meta http-equiv="X-UA-Compatible" content="ie=edge">
+	<meta name="Access-Control-Allow-Origin" value="*" />
+	<title>TwoDC Visualizer</title>
+
+	<style>
+		* {
+			margin: 0%;
+			padding: 0%;
+		}
+
+		.ui-container-docker {
+			display: none;
+		}
+	</style>
+
+</head>
+
+<body>
+	<twodc-ui-frame>
+		<twodc-ui-container>
+			<twodc-ui-panel>
+				<twodc-view>
+					<two-dc-layout id="layoutOne"
+								   source="default"
+								   twodc-zoom-toggle="true"
+								   twodc-mouse-control-toggle="true"
+								   twodc-scene-pannable-toggle="true"
+								   twodc-layout-control-toggle="true"
+								   twodc-birdController-fill-color="blue"
+								   twodc-birdController-fill-opacity="0.2"
+								   twodc-search-on="true"
+								   twodc-reset-on="true"
+								   twodc-print-on="false"
+								   twodc-pan-left-key="37, 65"
+								   twodc-pan-right-key="39, 68"
+								   twodc-pan-up-key="38, 87"
+								   twodc-pan-down-key="40, 83">
+					</two-dc-layout>
+					<progress-bar id="progressBar"></progress-bar>
+				</twodc-view>
+			</twodc-ui-panel>
+		</twodc-ui-container>
+	</twodc-ui-frame>
+
+	<script type="text/javascript">
+		//twodc-settings="off"
+		// ToDo: TwoDC communication
+		//(async function()
+		//{
+		//	await CefSharp.BindObjectAsync("TwoDcSetting");
+
+		//twoDcSetting.showBirdView().then(function (data){
+		//alert("function showBirdView: " +data+ "");
+		//document.getElementById("layoutOne").setAttribute("twodc-birdview-toggle", data);
+		//});
+
+		//The default is to camel case method names (the first letter of the method name is changed to lowercase)
+		//twoDcSetting.showJavascriptMassage("message from js");
+
+		//twoDcSetting.showSettings().then(function(data)
+		//{
+		//alert("ShowSettings: " + data+ " ");
+		//});
+
+		//twoDcSetting.getFilePath().then(function(data)
+		//{
+		//alert("file path: " + data+ " ");
+		//});
+		//})();
+	</script>
+	<script src="./twodcVisualizer.js"></script>
+	<script>
+		const layoutOneName = "layoutOne";
+		const layout = document.getElementById(layoutOneName);
+		var fileType;
+		var fileSource;
+		if (layout != undefined || layout != null) {
+			const urlParams = new URLSearchParams(window.location.search);
+
+			// following mapping is between Comos.WPF.ExtendedControls.TwoDcViewModel.TwoDcUiElementVisibility and 2DC attributes
+			const twoDcMappings = {
+				BirdView: "twodc-birdview-toggle",
+				Ruler: "twodc-settings-ruler",
+				Zoom: "twodc-settings-zoom",
+				Quadrant: "twodc-settings-quadrant",
+				Grid: "twodc-settings-grid",
+				Print: "twodc-settings-print",
+				Language: "twodc-settings-language",
+				Settings: "twodc-settings"
+			};
+
+			urlParams.forEach(function (value, key) {
+				if (key !== "source" && (twoDcMappings[key] != undefined || twoDcMappings[key] != null)) {
+					layout.setAttribute(twoDcMappings[key], value);
+				}
+			});
+
+			twodcVisualizer.init();
+			twodcVisualizer.load();
+
+			urlParams.forEach(function (value, key) {
+				if (key == "source") {
+					fileSource = value;
+				}
+			});
+
+			urlParams.forEach(async function (value, key) {
+				if (key == "extn") {
+					let extension;
+					console.log(value, key);
+					switch (value) {
+						case "pdf":
+							await loadPdfFile(value);
+							break;
+						case "json":
+							await loadJsonFile(fileSource);
+							break;
+						case "image":
+							await loadImageFile(value);
+							break;
+						case "video":
+							await loadVideoFile(value);
+							break;
+						case "proteusxml":
+							await loadProteusFile();
+							break;
+						case "twodc":
+							await loadTwoDCFile();
+							break;
+						default:
+							break;
+					}
+				}
+			});
+
+			async function loadPdfFile(extension) {
+				try {
+					const pdfFilePath = fileSource.split('localfolder://twodcvisualizer/')[1];
+					const textMappingJSON = twoDCTextObject.getPDFTextMapping(pdfFilePath);
+					await twodcVisualizer.setDataURL(layoutOneName, fileSource, extension, {
+						pdfTextMapping: JSON.parse(textMappingJSON)
+					});
+				} catch (e) {
+					console.error(e);
+				}
+			}
+
+			function loadJsonFile(filePath) {
+				return new Promise((resolve, reject) => {
+					const request = new XMLHttpRequest();
+					request.onload = async () => {
+						// parse data string to object
+						const jsonData = JSON.parse(request.responseText);
+						// create pagination options
+						const options = { startPage: 1, paginationType: "pageNumber" };
+						// if data is array with first page as Model, it is CAD file. Set paginationType to "pageName""
+						if (Array.isArray(jsonData) && jsonData.length > 0 && jsonData[0].ReportDrawing.name === "Model") {
+							options.paginationType = "pageName";
+						}
+						// call setDataString
+						await twodcVisualizer.setDataString(layoutOneName, jsonData, options);
+						resolve();
+					};
+					request.onerror = (e) => {
+						reject(e);
+					}
+					request.open("GET", filePath);
+					request.send();
+				});
+			}
+
+			async function loadImageFile(extension) {
+				try {
+					await twodcVisualizer.setDataURL(layoutOneName, fileSource, extension);
+				} catch (e) {
+					console.error(e);
+				}
+			}
+
+			async function loadVideoFile(extension) {
+				try {
+					await twodcVisualizer.setDataURL(layoutOneName, fileSource, extension);
+				} catch (e) {
+					console.error(e);
+				}
+			}
+
+			async function loadProteusFile(filePath) {
+				try {
+					await twodcVisualizer.setDataURL(layoutOneName, fileSource, 'proteusXML');
+				} catch (e) {
+					console.error(e);
+				}
+			}
+
+			async function loadTwoDCFile(extension) {
+				try {
+					await twodcVisualizer.setDataURL(layoutOneName, fileSource, extension);
+				} catch (e) {
+					console.error(e);
+				}
+			}
+
+
+			async function getTextMappingFromSVG() {
+				try {
+					const data = await twodcVisualizer.extractTextMappingFromSVG(layoutOneName);
+					console.log(data);
+					const result = JSON.stringify(data);
+					twoDCTextObject.mappingData(result);
+				}
+				catch (e) {
+					console.error(e);
+				}
+			}
+
+			window.getTextMappingFromSVG = getTextMappingFromSVG;
+
+			async function exportLayersAsPDF(layerConfigs, fileName) {
+				try {
+					const blob = await twodcVisualizer.exportLayersAsPDF(layoutOneName, JSON.parse(layerConfigs));
+					return downloadFile(blob, fileName);
+				}
+				catch (e) {
+					console.error(e);
+				}
+			}
+
+			window.exportLayersAsPDF = exportLayersAsPDF;
+
+			async function exportPDF(fileName) {
+				try {
+					const blob = await twodcVisualizer.exportPDF(layoutOneName);
+					return downloadFile(blob, fileName);
+				}
+				catch (e) {
+					console.error(e);
+				}
+			}
+
+			window.exportPDF = exportPDF;
+
+			const downloadFile = (blob, fileName) => {
+				try {
+					const link = document.createElement('a');
+					link.href = URL.createObjectURL(blob);
+					link.download = fileName;
+					link.style.display = 'none';
+					link.target = '_blank';
+					document.body.append(link);
+					link.click();
+					link.remove();
+					setTimeout(() => URL.revokeObjectURL(link.href), 7000);
+					return fileName;
+				}
+				catch (err) {
+					console.error(err);
+					return null;
+				}
+			};
+
+			// create a twodc plugin
+			class TwodcDesktopPlugin {
+				name = "TWODC_DESKTOP_PLUGIN";
+				constructor() {
+					// initial code comes here
+				}
+
+				/**
+				 * invoked when plugin is initialized
+				 */
+				onInit() {
+					selectionBoundObject.init();
+				}
+
+				/**
+				 * invoked when plugin is destroyed
+				 */
+				onDestroy() {
+					selectionBoundObject.onDispose();
+				}
+
+				/**
+				 * invoked when document rendering is completed
+				 */
+				onRender() {
+					// not implemented
+				}
+
+				/**
+				 * invoked when object(entity/markup) is selected
+				 * @param {docId, elements, pageNo} args - the properties returns be event
+				 */
+				onSelect(args) {
+					const { elements } = args;
+					// since it is single select we will always get one item in elements array.
+					const selectedElementData = elements[0];
+					const { Id, element, objectid, fullPath } = selectedElementData;
+					// "Id" is the id/lid of the selected object
+					// "element" is a proxy to the twodc internal object of the selected element. This can be used to modify the properties like position, color, svg node data, etc of the selected object
+					// for ex. to change stroke we can call "element.setStroke(10);" or to get bounding box "element.getBoundingBox()"
+					// "objectid" is the objectid of the selected object. Not every twodc entity has an objectid
+					console.log(Id, element, objectid);
+					if (fullPath && fullPath.trim() !== "") {
+						selectionBoundObject.onSelect(fullPath.trim(), objectid);
+					} else {
+						selectionBoundObject.onSelect(Id, objectid);
+					}
+				}
+
+				/**
+				 * invoked when object(entity/markup) is de-selected
+				 */
+				onDeselect() {
+					selectionBoundObject.onDeselect();
+				}
+
+				/**
+				 * invoked when object(entity/markup) is multiselected
+				 * @param {docId, elements, pageNo} args - the properties returns be event
+				 */
+				onMultiselect(args) {
+					const { elements } = args;
+					// elements is an array of data of all the elements selected by multiselection
+					console.log(elements);
+				}
+
+				/**
+				 * invoked when object(entity/markup) or its child is moved
+				 * This event wont trigger if Drag and Drop is not enabled
+				 */
+				onMove(args) {
+					// not implemented
+				}
+
+				/**
+				 * invoked when user starts drawing
+				 * This event wont trigger in Visualizer mode
+				 */
+				onDrawStart(args) {
+					// not implemented
+				}
+
+				/**
+				 * invoked when user is drawing
+				 * This event wont trigger in Visualizer mode
+				 */
+				onDraw(args) {
+					// not implemented
+				}
+
+				/**
+				 * invoked when user ends drawing
+				 * This event wont trigger in Visualizer mode
+				 */
+				onDrawEnd(args) {
+					// not implemented
+				}
+				/*
+				 other events that can be subscribed later
+				* onPointerDown
+				* onPointerMove
+				* onPointerUp
+				* onMouseWheel
+				* onTouchStart
+				* onTouchMove
+				* onTouchEnd
+				* onTap
+				* onDoubleTap
+				* onLongPress
+				* onPinch
+				* onSwipe
+				* onRelease
+				* onRotate
+				* onDragCanvas
+				* onDragShape
+				* onPanStart
+				* onPan
+				* onPanEnd
+				* onZoomStart
+				* onZoom
+				* onZoomEnd
+				* onPrint
+				* onPageChange
+				* onAddMarkup
+				* onDeleteMarkup
+				* onUpdateMarkup
+				*/
+			}
+
+			// register the plugin
+			const plugin = new TwodcDesktopPlugin();
+			twodcVisualizer.registerPlugin(plugin);
+		}
+	</script>
+</body>
+
+</html>

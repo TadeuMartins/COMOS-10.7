@@ -1,0 +1,18 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<Configuration>
+  <ActiveDirectories>
+    <ActiveDirectory Type="LocalAD" Active="true">
+    </ActiveDirectory>
+
+    <ActiveDirectory Type="AzureAD">
+      <Instance>https://login.microsoftonline.com/{0}</Instance>
+      <ApiUrl>https://graph.microsoft.com/</ApiUrl>
+      <Tenant></Tenant>
+      <ClientId></ClientId>
+      <ClientSecret></ClientSecret>
+      <CertificateName></CertificateName>
+    </ActiveDirectory>
+
+  </ActiveDirectories>
+  
+</Configuration>

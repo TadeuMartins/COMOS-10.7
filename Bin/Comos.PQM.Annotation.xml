@@ -1,0 +1,24 @@
+<pdfstamp xmlns="http://www.pdf-tools.com/pdfstamp/">
+  <Watermark>
+    <!--Water Mark stamp name-"Revision"-->
+    <stamp type="annotation" scale="relToA4" align="center middle" size="595 842" page="all" name="Revision" alpha="0.2" >
+      <rotate origin="298 421" angle="55" autoorientation="true">
+        <text align="center middle"  color="1 0 0" size="40" text="revision" font="Times New Roman,Bold" position="298 421" mode="fill"/>
+      </rotate>
+    </stamp>
+    <!--Additional Watermark default stamp name stamp name-"Watermark2"-->
+    <stamp type="annotation" page="all" name="Watermark2" alpha="0.5" relativepos="10 -10" >
+      <text align="left"  color="1 0 0" size="20" text="revision" font="Times New Roman,Bold"/>
+    </stamp>
+  </Watermark>
+  <Banner>
+    <!--Default Banner stamp name-"Banner"-->
+    <stamp page="all" size="540 0" position="-10 10" relativepos="-15 30" rotate="270" align="left"   alpha="1.0" type="annotation" name="Banner" >
+      <text font="Arial" rotate="180"  autoorientation="true"  size="8" color="1 0 0" format="true" text="Date: {LocalTime}"/>
+    </stamp>
+    <!--Additional Banner default stamp name-"Banner2"-->
+    <stamp page="all" size="0 0" position="-10 10" relativepos="-30 16"  alpha="1.0" type="annotation" name="Banner2" >
+      <text font="Arial" align="right middle"  autoorientation="true"  size="8" color="1 0 0" format="true" text=""/>
+    </stamp>
+  </Banner>
+</pdfstamp>

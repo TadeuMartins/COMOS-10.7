@@ -1,0 +1,67 @@
+﻿<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<assembly xmlns="urn:schemas-microsoft-com:asm.v1" manifestVersion="1.0">
+  <assemblyIdentity
+      name="ComosCommon"
+      version="1.0.0.0"
+      type="win32"
+      />
+
+  <!-- ************************************************************* -->
+  <!-- **              ComosCommon.manifest                       ** -->
+  <!-- **                                                         ** -->
+  <!-- **   Common Manifest References used by Comos.exe.manifest ** -->
+  <!-- **   and all other <xxxx>.exe.manifest's                   ** -->
+  <!-- **                                                         ** -->
+  <!-- **   used to have a single relevant manifest for all files ** -->
+  <!-- ************************************************************* -->
+
+  <!--
+  <dependency>
+    <dependentAssembly>
+      <assemblyIdentity
+          type="win32"
+          name="Microsoft.Windows.Common-Controls"
+          version="6.0.0.0"
+          processorArchitecture="X86"
+          publicKeyToken="6595b64144ccf1df"
+          language="*"
+        />
+    </dependentAssembly>
+  </dependency>
+  -->
+
+  <dependency>
+    <dependentAssembly>
+      <assemblyIdentity type="win32"
+                        name="ComosNet"
+                        version="1.0.0.0"
+      />
+    </dependentAssembly>
+  </dependency>
+
+
+
+<!-- ********************************************************* -->
+<!-- **   Special Dependencies for COMOS-Subfolders         ** -->  
+<!-- **   Embedded by SubAssemblies                         ** -->
+<!-- ********************************************************* -->
+  
+  <dependency>
+    <dependentAssembly>
+      <assemblyIdentity type="win32"
+                        name="ComosOcx"
+                        version="1.0.0.0"
+      />
+    </dependentAssembly>
+  </dependency>
+  
+  <dependency>
+    <dependentAssembly>
+      <assemblyIdentity type="win32"
+                        name="ComosCustomize"
+                        version="1.0.0.0"
+      />
+    </dependentAssembly>
+  </dependency>
+
+</assembly>

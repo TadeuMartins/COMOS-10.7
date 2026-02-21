@@ -1,0 +1,45 @@
+﻿/* Please make sure that the fonts are available in the fonts folder */
+
+/*@font-face {
+    font-family: 'ROMAND';
+    font-style: normal;
+    font-weight: 600;
+    src: local('ROMAND'), local('romanD'), url('./fonts/romand.ttf') format('truetype')
+}
+
+@font-face {
+    font-family: 'ROMANS';
+    font-style: normal;
+    font-weight: 600;
+    src: local('ROMANS'), local('romanS'), url('./fonts/romans.ttf') format('truetype')
+}
+
+@font-face {
+    font-family: 'ROMANT';
+    font-style: normal;
+    font-weight: 600;
+    src: local('ROMANT'), local('romanT'), url('./fonts/romant.ttf') format('truetype')
+}
+
+@font-face {
+    font-family: 'SIMPLEX';
+    font-style: normal;
+    font-weight: 600;
+    src: local('SIMPLEX'), local('simplex'), url('./fonts/simplex.ttf') format('truetype')
+}
+
+@font-face {
+    font-family: 'TXT';
+    font-style: normal;
+    font-weight: 600;
+    src: local('TXT'), local('txt'), url('./fonts/txt.ttf') format('truetype')
+}*/
+
+/* Example to add more fonts e.g. for abc.ttf: */
+
+/*@font-face {
+    font-family: 'ABC';
+    font-style: normal;
+    font-weight: 600;
+    src: local('ABC'), local('abc'), url('./fonts/abc.ttf') format('truetype')
+}*/

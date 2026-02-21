@@ -1,0 +1,3561 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>Comos.PublicApi.Services</name>
+    </assembly>
+    <members>
+        <member name="T:Comos.PublicApi.Services.Contracts.AppLicenseInformation">
+            <summary>
+            AppLicenseInformation
+            </summary>
+        </member>
+        <member name="P:Comos.PublicApi.Services.Contracts.AppLicenseInformation.IsAppUsageLicensed">
+            <summary>
+            IsAppUsageLicensed
+            </summary>
+        </member>
+        <member name="P:Comos.PublicApi.Services.Contracts.AppLicenseInformation.LicensingInformation">
+            <summary>
+            LicensingInformation
+            </summary>
+        </member>
+        <member name="T:Comos.PublicApi.Services.Contracts.Category">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:Comos.PublicApi.Services.Contracts.Category.Cardholders">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:Comos.PublicApi.Services.Contracts.Category.SavedSearches">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:Comos.PublicApi.Services.Contracts.Category.All">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:Comos.PublicApi.Services.Contracts.Category.Advanced">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Comos.PublicApi.Services.Contracts.Category.Index">
+            <summary>
+            Gets or sets the index.
+            </summary>
+            <value>
+            The index.
+            </value>
+        </member>
+        <member name="P:Comos.PublicApi.Services.Contracts.Category.Name">
+            <summary>
+            Gets or sets the name.
+            </summary>
+            <value>
+            The name.
+            </value>
+        </member>
+        <member name="P:Comos.PublicApi.Services.Contracts.Category.displayName">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="T:Comos.PublicApi.Services.Contracts.ComosSystemTypes">
+            <summary>
+            Enum ComosSystemTypes see original ComosSystemTypes enum in Interup.Plt.dll
+            </summary>
+        </member>
+        <member name="F:Comos.PublicApi.Services.Contracts.ComosSystemTypes.SystemTypeDevice">
+            <summary>
+            8
+            </summary>
+        </member>
+        <member name="F:Comos.PublicApi.Services.Contracts.ComosSystemTypes.SystemTypeDocObj">
+            <summary>
+            12
+            </summary>
+        </member>
+        <member name="F:Comos.PublicApi.Services.Contracts.ComosSystemTypes.SystemTypeCDevice">
+            <summary>
+            13
+            </summary>
+        </member>
+        <member name="F:Comos.PublicApi.Services.Contracts.ComosSystemTypes.SystemTypeDocument">
+            <summary>
+            29
+            </summary>
+        </member>
+        <member name="F:Comos.PublicApi.Services.Contracts.ComosSystemTypes.SystemTypeProject">
+            <summary>
+            2
+            </summary>
+        </member>
+        <member name="F:Comos.PublicApi.Services.Contracts.ComosSystemTypes.SystemTypeWorkingOverlay">
+            <summary>
+            42
+            </summary>
+        </member>
+        <member name="F:Comos.PublicApi.Services.Contracts.ComosSystemTypes.SystemTypeStandardTable">
+            <summary>
+            22
+            </summary>
+        </member>
+        <member name="T:Comos.PublicApi.Services.Contracts.CDeviceConstants">
+            <summary>
+            CDeviceConstants see original CDeviceConstants in Interup.Plt.dll
+            </summary>
+        </member>
+        <member name="F:Comos.PublicApi.Services.Contracts.CDeviceConstants.DeviceClassAction">
+            <summary>
+            return "J" 
+            </summary>
+        </member>
+        <member name="F:Comos.PublicApi.Services.Contracts.CDeviceConstants.DocumentTypeIReport">
+            <summary>
+            return "ComosIReport"
+            </summary>
+        </member>
+        <member name="F:Comos.PublicApi.Services.Contracts.CDeviceConstants.DocumentTypeComosReport">
+            <summary>
+            return "ComosReport"
+            </summary>
+        </member>
+        <member name="F:Comos.PublicApi.Services.Contracts.CDeviceConstants.DocumentTypeMasterIReport">
+            <summary>
+            return "ComosMasterIReport"
+            </summary>
+        </member>
+        <member name="F:Comos.PublicApi.Services.Contracts.CDeviceConstants.DocumentTypeMasterReport">
+            <summary>
+            return "ComosTypeMasterReport"
+            </summary>
+        </member>
+        <member name="T:Comos.PublicApi.Services.Contracts.ComosSystemConstants">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="T:Comos.PublicApi.Services.Contracts.ContextMenuItem">
+            <summary>
+            ContextMenuItem
+            </summary>
+        </member>
+        <member name="M:Comos.PublicApi.Services.Contracts.ContextMenuItem.#ctor">
+            <summary>
+            Ctor
+            </summary>
+        </member>
+        <member name="F:Comos.PublicApi.Services.Contracts.ContextMenuItem.Description">
+            <summary>
+            Description
+            </summary>
+        </member>
+        <member name="F:Comos.PublicApi.Services.Contracts.ContextMenuItem.Type">
+            <summary>
+            Type
+            </summary>
+        </member>
+        <member name="F:Comos.PublicApi.Services.Contracts.ContextMenuItem.Action">
+            <summary>
+            Action
+            </summary>
+        </member>
+        <member name="F:Comos.PublicApi.Services.Contracts.ContextMenuItem.Parameter">
+            <summary>
+            Parameter
+            </summary>
+        </member>
+        <member name="F:Comos.PublicApi.Services.Contracts.ContextMenuItem.Parameter2">
+            <summary>
+            Parameter2
+            </summary>
+        </member>
+        <member name="F:Comos.PublicApi.Services.Contracts.ContextMenuItem.Children">
+            <summary>
+            Children
+            </summary>
+        </member>
+        <member name="F:Comos.PublicApi.Services.Contracts.ContextMenuItem.IsChecked">
+            <summary>
+            IsChecked
+            </summary>
+        </member>
+        <member name="F:Comos.PublicApi.Services.Contracts.ContextMenuItem.IsDisabled">
+            <summary>
+            IsDisabled
+            </summary>
+        </member>
+        <member name="F:Comos.PublicApi.Services.Contracts.ContextMenuItem.HelpId">
+            <summary>
+            HelpId
+            </summary>
+        </member>
+        <member name="F:Comos.PublicApi.Services.Contracts.ContextMenuItem.Picture">
+            <summary>
+            Picture
+            </summary>
+        </member>
+        <member name="F:Comos.PublicApi.Services.Contracts.ContextMenuItem.IsClientPicture">
+            <summary>
+            IsClientPicture
+            </summary>
+        </member>
+        <member name="T:Comos.PublicApi.Services.Contracts.FieldsStrategyType">
+            <summary>
+            fields strategy type
+            </summary>
+        </member>
+        <member name="F:Comos.PublicApi.Services.Contracts.FieldsStrategyType.Default">
+            <summary>
+            default
+            </summary>
+        </member>
+        <member name="F:Comos.PublicApi.Services.Contracts.FieldsStrategyType.ComosObject">
+            <summary>
+            comos object
+            </summary>
+        </member>
+        <member name="F:Comos.PublicApi.Services.Contracts.FieldsStrategyType.BulkComosObject">
+            <summary>
+            Bulk comos object
+            </summary>
+        </member>
+        <member name="F:Comos.PublicApi.Services.Contracts.FieldsStrategyType.Specification">
+            <summary>
+            specification
+            </summary>
+        </member>
+        <member name="T:Comos.PublicApi.Services.Contracts.ImageType">
+            <summary>
+            Describes the type of an image.
+            </summary>
+        </member>
+        <member name="F:Comos.PublicApi.Services.Contracts.ImageType.Base64">
+            <summary>
+            The image is a base64 encoded string.
+            </summary>
+        </member>
+        <member name="F:Comos.PublicApi.Services.Contracts.ImageType.SVG">
+            <summary>
+            The image is a full path to a SVG icon.
+            </summary>
+        </member>
+        <member name="T:Comos.PublicApi.Services.Contracts.ServiceUser">
+            <summary>
+            Service user for the web client.
+            </summary>
+        </member>
+        <member name="P:Comos.PublicApi.Services.Contracts.ServiceUser.ComosUser">
+            <summary>
+            ComosUser
+            </summary>
+        </member>
+        <member name="P:Comos.PublicApi.Services.Contracts.ServiceUser.HasPmRights">
+            <summary>
+            HasPmRights
+            </summary>
+        </member>
+        <member name="T:Comos.PublicApi.Services.Contracts.Setting">
+            <summary>
+            ProductMetadata
+            </summary>
+        </member>
+        <member name="M:Comos.PublicApi.Services.Contracts.Setting.#ctor">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Comos.PublicApi.Services.Contracts.Setting.Id">
+            <summary>
+            Gets or sets the id
+            </summary>
+        </member>
+        <member name="P:Comos.PublicApi.Services.Contracts.Setting.Name">
+            <summary>
+            Gets or sets the name.
+            </summary>
+        </member>
+        <member name="P:Comos.PublicApi.Services.Contracts.Setting.DisplayName">
+            <summary>
+            Gets or sets a localizable display name
+            </summary>
+        </member>
+        <member name="P:Comos.PublicApi.Services.Contracts.Setting.Value">
+            <summary>
+            Gets or sets the Value.
+            </summary>
+        </member>
+        <member name="P:Comos.PublicApi.Services.Contracts.Setting.ValueOptionsId">
+            <summary>
+            Gets or sets the identifier for avaialable value options
+            </summary>
+        </member>
+        <member name="P:Comos.PublicApi.Services.Contracts.Setting.FilterSettings">
+            <summary>
+            gets or sets settings based on app filters
+            </summary>
+        </member>
+        <member name="P:Comos.PublicApi.Services.Contracts.Setting.SubSettings">
+            <summary>
+            gets or sets settings associated with this setting.
+            </summary>
+        </member>
+        <member name="P:Comos.PublicApi.Services.Contracts.Setting.User">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Comos.PublicApi.Services.Contracts.Setting.Application">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Comos.PublicApi.Services.Contracts.Setting.Computer">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Comos.PublicApi.Services.Contracts.Setting.ValueType">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Comos.PublicApi.Services.Contracts.Setting.NeedsReset">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="M:Comos.PublicApi.Services.Contracts.Setting.Clone">
+            <summary>
+            
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="T:Comos.PublicApi.Services.Contracts.SimpleFilter">
+            <summary>Filter to use in IdentityManagement.</summary>
+        </member>
+        <member name="M:Comos.PublicApi.Services.Contracts.SimpleFilter.#ctor">
+            <summary>
+            Ctor
+            </summary>
+        </member>
+        <member name="P:Comos.PublicApi.Services.Contracts.SimpleFilter.Id">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Comos.PublicApi.Services.Contracts.SimpleFilter.Category">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Comos.PublicApi.Services.Contracts.SimpleFilter.Name">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Comos.PublicApi.Services.Contracts.SimpleFilter.IsReadOnly">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Comos.PublicApi.Services.Contracts.SimpleFilter.QuickSearch">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="T:Comos.PublicApi.Services.Controllers.ApiControllerBase">
+            <summary>
+            Implementation of base WebView ApiController
+            </summary>
+        </member>
+        <member name="M:Comos.PublicApi.Services.Controllers.ApiControllerBase.#ctor(Microsoft.Extensions.Logging.ILogger{Comos.PublicApi.Services.Controllers.ApiControllerBase},Comos.Services.Common.Contracts.IServiceProxyProvider)">
+            <summary>
+            Ctor
+            </summary>
+            <param name="logger"></param>
+            <param name="serviceProxyProvider"></param>
+        </member>
+        <member name="T:Comos.PublicApi.Services.Controllers.PublicApiDiscoveryController">
+            <summary>
+            Provides discovery service endpoints for public web apis
+            </summary>
+        </member>
+        <member name="M:Comos.PublicApi.Services.Controllers.PublicApiDiscoveryController.#ctor(Microsoft.Extensions.Logging.ILogger{Comos.PublicApi.Services.Controllers.PublicApiProjectsController},Comos.Services.Common.Contracts.IServiceProxyProvider)">
+            <summary>
+            Public Api Discovery Controller
+            </summary>
+            <param name="logger"></param>
+            <param name="serviceProxyProvider"></param>
+        </member>
+        <member name="M:Comos.PublicApi.Services.Controllers.PublicApiDiscoveryController.GetDiscoveries">
+            <summary>
+            Provides discovery services for public apis
+            </summary>
+            <returns>Collection of discovery services</returns>
+        </member>
+        <member name="T:Comos.PublicApi.Services.Controllers.PublicApiDocumentsController">
+            <summary>
+            Provides document web api services for web client
+            </summary>  
+        </member>
+        <member name="M:Comos.PublicApi.Services.Controllers.PublicApiDocumentsController.#ctor(Microsoft.Extensions.Logging.ILogger{Comos.PublicApi.Services.Controllers.PublicApiDocumentsController},Comos.Services.Common.Contracts.IServiceProxyProvider,Comos.PublicApi.Services.Interfaces.IMapProvider)">
+            <summary>
+            Ctor
+            </summary>
+            <param name="logger"></param>
+            <param name="serviceProxyProvider"></param>
+            <param name="mapProvider"></param>
+        </member>
+        <member name="M:Comos.PublicApi.Services.Controllers.PublicApiDocumentsController.GetDocument(System.String,System.String,System.String,System.String,System.String,System.String)">
+            <summary>
+            Downloads a document based on document Id
+            </summary>
+            <remarks>
+            The supplied document ID can refer to documents of various types:
+            <ul>
+                <li>a plain COMOS document (including reports)</li> 
+                <li>a DDM (= versioned) document (in this case the latest version will be retrieved)</li> 
+                <li>a particular version of a DDM (= versioned) document</li> 
+                <li>a revision (in this case the parameter "docid" technically refers to COMOS device)</li>
+                <li>a redlining document of a revision</li>
+                <li>an additional document of a revision</li>
+            </ul>
+            </remarks>
+            <param name="dbid">Database Id</param>
+            <param name="projid">Project Id</param>
+            <param name="docid">Document Id</param>
+            <param name="overlayid">Working Overlay Id</param>
+            <param name="lcid">Language Id</param>
+            <param name="export_type">Export type. At the moment the types 'report2pdf' and 'report2excel' are supported. Note that docid must refer to a report in this case.</param>
+            <returns>The document contents as a download. </returns>
+            <response code="200">The document was found and the export was created</response>
+            <response code="404">If the resources could not be found.</response>
+        </member>
+        <member name="M:Comos.PublicApi.Services.Controllers.PublicApiDocumentsController.GetDocumentRevisions(System.String,System.String,System.String,System.String,System.String)">
+            <summary>
+            Gets the revisons of a document
+            </summary>
+            <param name="dbid">Database Id</param>
+            <param name="projid">Project Id</param>
+            <param name="docid">Document Id</param>
+            <param name="overlayid">Working Overlay Id</param>
+            <param name="lcid">Language Id</param>
+            <returns>The revisions of a document.</returns>
+            <response code="200">If the revision info on the document was found.</response>
+            <response code="404">If the resources could not be found.</response>
+        </member>
+        <member name="M:Comos.PublicApi.Services.Controllers.PublicApiDocumentsController.AcceptRevisionStep(System.String,System.String,System.String,Comos.PublicApi.Services.Models.RevisionStep,System.String,System.String)">
+            <summary>
+            Performs revision step on given revision.
+            </summary>
+            <param name="dbid">Database Id</param>
+            <param name="projid">Project Id</param>
+            <param name="revisionid">Revision Id</param>
+            <param name="step">Revision step object</param>
+            <param name="overlayid">Working Overlay Id</param>
+            <param name="lcid">Language Id</param>
+            <returns>A status code indicating whether the step was executed successfully</returns>
+            <response code="200">If the revision step was performed.</response>
+            <response code="400">If the revision could not be performed</response>
+        </member>
+        <member name="M:Comos.PublicApi.Services.Controllers.PublicApiDocumentsController.AddDocumentToObject(System.String,System.String,System.String,System.String,System.String)">
+            <summary>
+            Upload a document under a device/document as a copy.
+            </summary>
+            <remarks>
+            The uploaded document can be in the form of pdf, word document etc.
+            </remarks>
+            <param name="dbid">Database Id</param>
+            <param name="projid">Project Id</param>
+            <param name="objid">Object Id of parent</param>
+            <param name="overlayid">Overlay Id</param>
+            <param name="cobjectid">CObject Id</param>
+            <returns>UID of uploaded document</returns>
+            <response code="201">If the document was created successfully.</response>
+            <response code="400">If one of the parameters is invalid</response>
+        </member>
+        <member name="M:Comos.PublicApi.Services.Controllers.PublicApiDocumentsController.EStampDocument(System.String)">
+            <summary>
+            EStamp the given pdf document.
+            </summary>
+            <param name="dbid">Database Id</param>
+            <returns>The EStamped PDF Document</returns>
+            <response code="200">If the document could be estamped</response>
+            <response code="400">If one of the parameters is invalid</response>
+            <response code="404">If the related document could not be found</response>
+        </member>
+        <member name="M:Comos.PublicApi.Services.Controllers.PublicApiDocumentsController.PostDocumentCheckout(System.String,System.String,System.String,Comos.PublicApi.Services.Models.DocumentComment,System.String,System.String)">
+            <summary>
+             Checks out a document.
+            </summary>
+             <remarks>
+             Note that this operation does not do a download -
+             it must be done by calling the route "... {projid}/documents/{docid}".
+             </remarks>
+             <param name="dbid">Database Id</param>
+             <param name="projid">Project Id</param>
+             <param name="docid">Document Id</param>
+             <param name="overlayid">Overlay Id</param>
+             <param name="lcid">Project language</param>
+             <param name="comment">Checkout comment</param>
+             <returns></returns> 
+             <response code="204">If document is successfully checked out.</response>    
+              <response code="400">If the invalid parameters are provided.</response>      
+              <response code="403">For invalid session or missing license</response>    
+              <response code="404">For not found or missing rights or if the resources could not be found.</response>    
+              <response code="500">For unexpected error</response>  
+        </member>
+        <member name="M:Comos.PublicApi.Services.Controllers.PublicApiDocumentsController.PostDocumentUndoCheckout(System.String,System.String,System.String,Comos.PublicApi.Services.Models.DocumentComment,System.String,System.String)">
+            <summary>
+            Undoes a document checkout.
+            </summary>
+            <param name="dbid">Database Id</param>
+            <param name="projid">Project Id</param>
+            <param name="docid">Document Id</param>
+            <param name="overlayid">Overlay Id</param>
+            <param name="lcid">Project language</param>
+            <param name="comment">Checkout comment</param>
+            <returns></returns>
+            <response code="204">If document is successfully undo check out.</response>    
+             <response code="400">If the invalid parameters are provided.</response>      
+             <response code="403">For invalid session or missing license</response>    
+             <response code="404">For not found or missing rights or if the resources could not be found.</response>    
+             <response code="500">For unexpected error</response>        
+        </member>
+        <member name="M:Comos.PublicApi.Services.Controllers.PublicApiDocumentsController.PostDocumentRevisionRedlining(System.String,System.String,System.String,System.String,System.String)">
+            <summary>
+            Posts a new redlining document for a specific revision.
+            </summary>
+            <param name="dbid">Database Id</param>
+            <param name="projid">Project Id</param>
+            <param name="docid">revision Id</param>
+            <param name="overlayid">Overlay Id</param>
+            <param name="lcid">Project language</param>    
+            <returns></returns>
+            <response code="204">If redlining document is successfully added.</response>    
+             <response code="400">If the invalid parameters are provided.</response>      
+             <response code="403">For invalid session or missing license</response>    
+             <response code="404">For not found or missing rights or if the resources could not be found.</response>    
+             <response code="500">For unexpected error</response>  
+        </member>
+        <member name="M:Comos.PublicApi.Services.Controllers.PublicApiDocumentsController.PostDocumentCheckin(System.String,System.String,System.String,System.String,System.String)">
+            <summary>
+            Checks in a document 
+            </summary>
+            <remarks>
+            <para>This API can do a first checkin or a consecutive checkin.</para>
+            <ul>
+            <li>Check if the document can be checked in , eg Check if the document is checked out .</li>
+            <li>Checks for Mandatory Attributes</li>
+            <li>Check in the document</li> 
+            </ul>
+            The API expects multi-part form data that consists of      
+            <br/> 
+            Sample format
+            1. values        
+            [{
+                    "NestedName":"string",  //Required
+                    "Value":"string",   
+                    "SIValue":"double",
+                    "LinkObject":{
+                        "UID":"string",
+                        "ProjectUID":"string",
+                        "OverlayUID":"string"
+                    },
+                    "XValues":[{
+                        "Index":"int",
+                        "XValue":"string",
+                        "SIXValue":"double"
+                    }]
+            }]
+            2. comment
+            "comment":"string"
+            3. file : The file to be checked in 
+            </remarks>
+            <param name="dbid">Database id</param>
+            <param name="projid">Project id</param>
+            <param name="docid">Can be a Document Placeholder UID or a Document UID</param>
+            <param name="overlayid">Overlay id</param>
+            <param name="lcid">Language id</param>
+            <returns></returns>
+            <response code="204">If check-in is successful.</response>    
+             <response code="400">If invalid parameters are provided.</response>      
+             <response code="403">For invalid session or missing license</response>    
+             <response code="404">For not found or missing rights or if the resources could not be found.</response>    
+             <response code="500">For unexpected error</response> 
+        </member>
+        <member name="M:Comos.PublicApi.Services.Controllers.PublicApiDocumentsController.PostCreateDocumentRevision(System.String,System.String,System.String,System.String,System.String)">
+            <summary>
+            Posts a specific revision.
+            </summary>
+            <param name="dbid">Database Id</param>
+            <param name="projid">Project Id</param>
+            <param name="docid">Document Id</param>
+            <param name="overlayid">Overlay Id</param>
+            <param name="lcid">Project language</param>
+            <returns>Status </returns>
+             <response code="200">If the revision was posted successfully.</response>
+             <response code="404">If the referenced dicument could not be found.</response>
+        </member>
+        <member name="M:Comos.PublicApi.Services.Controllers.PublicApiDocumentsController.ReplaceDocument(System.String,System.String,System.String,System.String,System.String)">
+            <summary>
+            Replaces an existing document under an object with a new one while keeping the UID. Only for documents without version management (non DDMS)
+            </summary>
+            <remarks>
+            The uploaded document will replace the existing document identified by docid.
+            The request should be sent as multipart/form-data with the file content.
+            </remarks>
+            <param name="dbid">Database Id</param>
+            <param name="projid">Project Id</param>
+            <param name="docid">Document Id to be replaced</param>
+            <param name="overlayid">Overlay Id</param>
+            <param name="lcid">Language Id</param>
+            <returns>204 No Content if successful, error otherwise.</returns>
+             <response code="204">If replacement was successful.</response>    
+             <response code="400">If invalid parameters are provided.</response>      
+             <response code="403">For invalid session or missing license</response>    
+             <response code="404">For not found or missing rights or if the resources could not be found.</response>    
+             <response code="500">For unexpected error</response> 
+        </member>
+        <member name="T:Comos.PublicApi.Services.Controllers.PublicApiProjectsController">
+            <summary>
+            Provies projects services to web client
+            </summary>
+        </member>
+        <member name="M:Comos.PublicApi.Services.Controllers.PublicApiProjectsController.#ctor(Microsoft.Extensions.Logging.ILogger{Comos.PublicApi.Services.Controllers.PublicApiProjectsController},Comos.Services.Common.Contracts.IServiceProxyProvider,Comos.PublicApi.Services.Interfaces.IFieldsProvider,Comos.PublicApi.Services.Interfaces.IMapProvider)">
+            <summary>
+            Ctor
+            </summary>
+            <param name="logger"></param>
+            <param name="serviceProxyProvider"></param>
+            <param name="fieldsProvider"></param>
+            <param name="mapProvider"></param>
+        </member>
+        <member name="M:Comos.PublicApi.Services.Controllers.PublicApiProjectsController.GetProjects(System.String,System.String)">
+            <summary>
+            Gets a collection of projects
+            </summary>
+            <param name="dbid">Database Id</param>
+            <param name="lcid">Language Id</param>
+            <returns>Collection of projects</returns>
+            <response code="200">If the projects could be fetched.</response>
+            <response code="404">If the resources could not be found.</response>
+        </member>
+        <member name="M:Comos.PublicApi.Services.Controllers.PublicApiProjectsController.DeleteObject(System.String,System.String,System.String)">
+            <summary>
+            delete object
+            </summary>
+            <param name="dbid"></param>
+            <param name="projectid"></param>
+            <param name="objectid"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Comos.PublicApi.Services.Controllers.PublicApiProjectsController.GetWorkingOverlays(System.String,System.String,System.String,System.String)">
+            <summary>
+            Gets a collection of working overlays
+            </summary>
+            <param name="dbid">Database Id</param>
+            <param name="projid">Project Id</param>
+            <param name="overlayid">Working Overlay Id</param>
+            <param name="lcid">Language Id</param>
+            <returns>Collection of working overlays.</returns>
+            <response code="200">If the working layers could be fetched.</response>
+            <response code="404">If the resources could not be found.</response>
+        </member>
+        <member name="M:Comos.PublicApi.Services.Controllers.PublicApiProjectsController.CreateWorkingOverlay(System.String,System.String,Comos.PublicApi.Services.Models.WorkingOverlayPost)">
+            <summary>
+            Create a working layer
+            </summary>
+            <param name="dbid">Database Id</param>        
+            <param name="projid">Project name</param>
+            <param name="Overlay">New Working Overlay</param>
+            <returns>Newly created working overlay</returns>
+            <response code="201">If the working layer was created successfully.</response>
+            <response code="400">If the working layer could not be created because of invalid parameters</response>
+            <response code="404">If the resources could not be found.</response>
+        </member>
+        <member name="M:Comos.PublicApi.Services.Controllers.PublicApiProjectsController.GetComosObjectPropertiesById(System.String,System.String,System.String,System.String,System.String,System.String)">
+            <summary>
+            Gets an object
+            </summary>
+            <remarks>
+            <para>Object is fetched based on the object Id.</para>
+            <para>The fields parameter can have the following valid values:</para>
+            <ul>
+                <li>"" - Default set of fields for the object.</li>
+                <li>"*" - Full set of fields for the object.</li>
+                <li>"field1,field2" - Valid set of fields seperated by comma for the object. ex. Name,Description,...,etc</li>
+            </ul>
+            Note: Fields will be filtered out in case they are not applicable for the given object type. If all fields specified are invalid, then a BadRequest error will be thrown.<br/>
+            <br/>
+            Fields supported by Objects based on the object type:<br/>
+            <br/>
+            <table style="border:1px solid #000;word-break:break-all;padding:5px;">
+                <thead>
+                    <tr>
+                        <td style="width:15%;">Object Type</td>
+                        <td style="width:40%;">Default Fields</td>
+                        <td style="width:45%;">All Fields</td>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td style="width:10%;">CDevice</td>
+                        <td style="width:40%;">Name,Description,FullLabel,SystemType,UID,SystemUID,Class,XObjExist</td>
+                        <td style="width:50%;">Name,FullName,Description,Label,FullLabel,SystemType,Owner,UID,SystemUID,SystemTemporary,XObjExist,Class,DetailClass,OwnLabel</td>
+                    </tr>
+                    <tr>
+                        <td style="width:10%;">Device</td>
+                        <td style="width:40%;">Name,Description,FullLabel,SystemType,UID,SystemUID,Location,Unit</td>
+                        <td style="width:50%;">Name,FullName,Description,Label,FullLabel,SystemType,Owner,UID,SystemUID,SystemTemporary,XObjExist,Class,DetailClass,CDevice,BackPointerDocObjs,Documents,Devices,Location,Unit,Implementation,BackPointerDevicesWithImplementation,OwnLabel</td>
+                    </tr>
+                    <tr>
+                        <td style="width:10%;">Document</td>
+                        <td style="width:40%;">Name,Description,FullLabel,SystemType,UID,SystemUID,OrgDocument,Location,Unit,DocumentType</td>
+                        <td style="width:50%;">Name,FullName,Description,Description2,Description3,Label,FullLabel,SystemType,Owner,UID,SystemUID,SystemTemporary,XObjExist,OrgDocument,Location,Unit,DocumentType,BackPointerDocumentsWithOrgDocument,IsDdmDocument,IsDocumentExportable,DocumentExtension,DocumentHasReleaseRevision,OwnLabel,Documents,Devices,DocObjs</td>
+                    </tr>
+                    <tr>
+                        <td style="width:10%;">Project</td>
+                        <td style="width:40%;">Name,Description,FullLabel,SystemType,UID,SystemUID,OrgDocument,Location,Unit,DocumentType</td>
+                        <td style="width:50%;">Name,FullName,Description,Label,FullLabel,SystemType,Owner,UID,SystemUID,SystemTemporary,XObjExist,StandardTables,OwnStandardTables,Devices</td>
+                    </tr>         
+                    <tr>
+                        <td style="width:10%;">DocObj</td>
+                        <td style="width:40%;">Name,Description,FullLabel,SystemType,UID,SystemUID,Reference,Reference2</td>
+                        <td style="width:50%;">Name,FullName,Description,Label,FullLabel,SystemType,Owner,UID,SystemUID,SystemTemporary,XObjExist,Reference,Reference2</td>
+                    </tr>
+                    <tr>
+                        <td style="width:10%;">Other Types</td>
+                        <td style="width:40%;">Name,Description,FullLabel,SystemType,UID,SystemUID</td>
+                        <td style="width:50%;">Name,FullName,Description,Label,FullLabel,SystemType,Owner,UID,SystemUID,SystemTemporary,XObjExist</td>
+                    </tr>
+                </tbody>
+            </table>       
+            </remarks>
+            <param name="dbid">Database Id</param>
+            <param name="projid">Project Id</param>
+            <param name="objid">Object Id</param>
+            <param name="overlayid">Working Overlay Id</param>
+            <param name="lcid">Language Id</param>
+            <param name="fields">Fields to reduce the retrieved properties to</param>
+            <returns>Object details</returns>
+            <response code="200">If the object could be fetched.</response>
+            <response code="404">If the resources could not be found.</response>
+            <response code="400">If the request is invalid.</response>
+            GET  /api/webview/v1/dbs/{dbid}/projects/{projid}/objects/{objid}
+        </member>
+        <member name="M:Comos.PublicApi.Services.Controllers.PublicApiProjectsController.GetComosObjectPropertiesByPathFullName(System.String,System.String,System.String,System.String,System.String,System.String)">
+            <summary>
+            Gets the object properties
+            </summary>
+            <remarks>
+            <para>Object is fetched based on the object's path full name.</para>
+            <para>The fields parameter can have the following valid values:</para>
+            <ul>
+                <li>"" - Default set of fields for the object.</li>
+                <li>"*" - Full set of fields for the object.</li>
+                <li>"field1,field2" - Valid set of fields separated by comma for the object. ex. Name,Description,...,etc</li>
+            </ul>
+            Note: Fields will be filtered out in case they are not applicable for the given object type. If all fields specified are invalid, then a BadRequest error will be thrown.<br/>
+            <br/>
+            Fields supported by Objects based on the object type:<br/>
+            <br/>
+            <table style="border:1px solid #000;word-break:break-all;padding:5px;">
+                <thead>
+                    <tr>
+                        <td style="width:15%;">Object Type</td>
+                        <td style="width:40%;">Default Fields</td>
+                        <td style="width:45%;">All Fields</td>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td style="width:10%;">CDevice</td>
+                        <td style="width:40%;">Name,Description,FullLabel,SystemType,UID,SystemUID,Class,XObjExist</td>
+                        <td style="width:50%;">Name,FullName,Description,Label,FullLabel,SystemType,Owner,UID,SystemUID,SystemTemporary,XObjExist,Class,DetailClass,OwnLabel</td>
+                    </tr>
+                    <tr>
+                        <td style="width:10%;">Device</td>
+                        <td style="width:40%;">Name,Description,FullLabel,SystemType,UID,SystemUID,Location,Unit</td>
+                        <td style="width:50%;">Name,FullName,Description,Label,FullLabel,SystemType,Owner,UID,SystemUID,SystemTemporary,XObjExist,Class,DetailClass,CDevice,BackPointerDocObjs,Documents,Devices,Location,Unit,Implementation,BackPointerDevicesWithImplementation,OwnLabel</td>
+                    </tr>
+                    <tr>
+                        <td style="width:10%;">Document</td>
+                        <td style="width:40%;">Name,Description,FullLabel,SystemType,UID,SystemUID,OrgDocument,Location,Unit,DocumentType</td>
+                        <td style="width:50%;">Name,FullName,Description,Description2,Description3,Label,FullLabel,SystemType,Owner,UID,SystemUID,SystemTemporary,XObjExist,OrgDocument,Location,Unit,DocumentType,BackPointerDocumentsWithOrgDocument,IsDdmDocument,IsDocumentExportable,DocumentExtension,DocumentHasReleaseRevision,OwnLabel,Documents,Devices</td>
+                    </tr>
+                    <tr>
+                        <td style="width:10%;">Other Types</td>
+                        <td style="width:40%;">Name,Description,FullLabel,SystemType,UID,SystemUID</td>
+                        <td style="width:50%;">Name,FullName,Description,Label,FullLabel,SystemType,Owner,UID,SystemUID,SystemTemporary,XObjExist</td>
+                    </tr>
+                </tbody>
+            </table>       
+            </remarks>
+            <param name="dbid">Database Id</param>
+            <param name="projid">Project Id</param>
+            <param name="pathfullname">Path full name</param>
+            <param name="overlayid">Working Overlay Id</param>
+            <param name="lcid">Language Id</param>
+            <param name="fields">Fields to reduce the retrieved properties to</param>
+            <returns>Object details</returns>
+            <response code="200">If the object properties could be fetched.</response>
+            <response code="404">If the resources could not be found.</response>
+            <response code="400">If the request is invalid.</response>
+            GET  /api/webview/v1/dbs/{dbid}/projects/{projid}/object
+        </member>
+        <member name="M:Comos.PublicApi.Services.Controllers.PublicApiProjectsController.GetComosObjects(System.String,System.String,System.Collections.Generic.IEnumerable{Comos.PublicApi.Services.Models.ComosUIDObject},System.String,System.String,System.Int32,System.String,System.String)">
+            <summary>
+            Gets up to 1000 COMOS objects with given fields and specification information.
+            </summary>
+            <remarks>
+            <para>Objects is fetched based on an array of object UIDs.</para>
+            <para>The fields parameter can have the following valid values:</para>
+            <ul>
+                <li>"" - Default set of fields for the object.</li>
+                <li>"*" - Full set of fields for the object.</li>
+                <li>"field1,field2" - Valid set of fields seperated by comma for the object. ex. Name,Description,...,etc</li>
+            </ul>
+            Note: 
+            <para>Fields will be filtered out in case they are not applicable for the given object type. If all fields specified are invalid, then a BadRequest error will be thrown.<br/>
+            nested_names and recursion_depth are applicable for 'Specifications' field which needs to be explicitly passed or will be available with '*'.
+            <br/>
+            </para>
+            Fields supported by Objects based on the object type:<br/>
+            <br/>
+            <br/>
+            nested_names include the specification nested names. These can include the hierarchical child specifications as well.
+            recursion_depth can have the following values:
+            <ul>
+                <li>-1 : will fetch all the specification children until the maximum depth.</li>
+                <li>0 (default) : will fetch immediate object specifications.</li>
+                <li>2/3/4...etc : will fetch all the specification children until the specified recursion depth.</li>
+            </ul>      
+            <table style="border:1px solid #000;word-break:break-all;padding:5px;">
+                <thead>
+                    <tr>
+                        <td style="width:15%;">Object Type</td>
+                        <td style="width:40%;">Default Fields</td>
+                        <td style="width:45%;">All Fields</td>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td style="width:10%;">CDevice</td>
+                        <td style="width:40%;">Name,Description,FullLabel,SystemType,UID,SystemUID,Class,XObjExist</td>
+                        <td style="width:50%;">Name,FullName,Description,Label,FullLabel,SystemType,Owner,UID,SystemUID,SystemTemporary,XObjExist,Class,DetailClass,OwnLabel,Specifications</td>
+                    </tr>
+                    <tr>
+                        <td style="width:10%;">Device</td>
+                        <td style="width:40%;">Name,Description,FullLabel,SystemType,UID,SystemUID,Location,Unit</td>
+                        <td style="width:50%;">Name,FullName,Description,Label,FullLabel,SystemType,Owner,UID,SystemUID,SystemTemporary,XObjExist,Class,DetailClass,CDevice,BackPointerDocObjs,Documents,Devices,Location,Unit,Implementation,BackPointerDevicesWithImplementation,OwnLabel,Specifications</td>
+                    </tr>
+                    <tr>
+                        <td style="width:10%;">Document</td>
+                        <td style="width:40%;">Name,Description,Description2,Description3,FullLabel,SystemType,UID,SystemUID,OrgDocument,Location,Unit,DocumentType</td>
+                        <td style="width:50%;">Name,FullName,Description,Label,FullLabel,SystemType,Owner,UID,SystemUID,SystemTemporary,XObjExist,OrgDocument,Location,Unit,DocumentType,BackPointerDocumentsWithOrgDocument,IsDdmDocument,IsDocumentExportable,DocumentExtension,DocumentHasReleaseRevision,OwnLabel,Documents,Devices,Specifications,CObject</td>
+                    </tr>         
+                    <tr>
+                        <td style="width:10%;">DocObj</td>
+                        <td style="width:40%;">Name,Description,FullLabel,SystemType,UID,SystemUID,Reference,Reference2</td>
+                        <td style="width:50%;">Name,FullName,Description,Label,FullLabel,SystemType,Owner,UID,SystemUID,SystemTemporary,XObjExist,Reference,Reference2</td>
+                    </tr>
+                    <tr>
+                        <td style="width:10%;">Other Types</td>
+                        <td style="width:40%;">Name,Description,FullLabel,SystemType,UID,SystemUID</td>
+                        <td style="width:50%;">Name,FullName,Description,Label,FullLabel,SystemType,Owner,UID,SystemUID,SystemTemporary,XObjExist,Specifications</td>
+                    </tr>
+                </tbody>
+            </table>       
+            </remarks>
+            <param name="dbid">Database UID</param>
+            <param name="projid">Project UID</param>
+            <param name="filter">Filter to get only a part of the whole object list</param>
+            <param name="overlayid">Working Overlay Id</param>
+            <param name="lcid">Language Id</param>
+            <param name="fields">Fields to reduce the retrieved properties to</param>
+            <param name="nested_names">Specification nested names that should be returned additionally to the fields</param>
+            <param name="recursion_depth">Specifications children to be fetch until what depth.</param>
+            <returns>Array of object details with given fields and nested names</returns>
+            <response code="200">If the objects could be fetched.</response>
+            <response code="404">If the resources could not be found.</response>
+            <response code="400">If the request is invalid.</response>
+        </member>
+        <member name="M:Comos.PublicApi.Services.Controllers.PublicApiProjectsController.GetProjectLanguages(System.String,System.String,System.String,System.String)">
+            <summary>
+            Gets a collection of supported languages
+            </summary>
+            <param name="dbid">Database Id</param>
+            <param name="projid">Project Id</param>
+            <param name="overlayid">Working Overlay Id</param>
+            <param name="lcid">Language Id</param>
+            <returns>Collection of languages.</returns>
+            <response code="200">If the languages could be fetched.</response>
+            <response code="404">If the resources could not be found.</response>
+        </member>
+        <member name="M:Comos.PublicApi.Services.Controllers.PublicApiProjectsController.GetProjectDefaultLanguage(System.String,System.String)">
+            <summary>
+            Gets default project language
+            </summary>
+            <param name="dbid">Database Id</param>
+            <param name="projid">Project Id</param>
+            <returns>Default project language.</returns>
+            <response code="200">If the project language could be fetched.</response>
+            <response code="404">If the resources could not be found.</response>
+        </member>
+        <member name="M:Comos.PublicApi.Services.Controllers.PublicApiProjectsController.GetSpecifications(System.String,System.String,System.String,System.String,System.String,System.Int32,System.String,System.String)">
+            <summary>
+            Get the specifications for an object
+            </summary>
+            <remarks>
+            <para>The fields parameter can have the following valid values:</para>
+            <ul>
+                <li>"" - The specifications will have "Name,Description" fields.</li>
+                <li>"*" - The specifications will have "NestedName,Description,Value,DisplayValue,LValue,SIValue,ControlType,Unit,RangeType,Type,TabIndex,PhysUnitLabel,Precision,Length,Count,LinkObject,StandardTable,XValues" fields.</li>
+                <li>"field1,field2" - Valid set of fields seperated by comma for the object. ex. Name,Description,...,etc</li>
+            </ul>
+            Note: Fields will be filtered out in case they are not a part of the specifications. If all fields specified are invalid, then a BadRequest error will be thrown.<br/>
+            <br/>
+            <br/>
+            nested_names include the specification nested names. These can include the hierarchical child specifications as well.
+            recursion_depth can have the following values:
+            <ul>
+                <li>-1 : will fetch all the specification children until the maximum depth.</li>
+                <li>0 (default) : will fetch immediate object specifications.</li>
+                <li>2/3/4...etc : will fetch all the specification children until the specified recursion depth.</li>
+            </ul>      
+            </remarks>
+            <param name="dbid">Database id</param>
+            <param name="projid">Project id</param>
+            <param name="objid">Object Id</param>
+            <param name="fields">Fields to be displayed for specifications</param>
+            <param name="nested_names">Nested names of specifications to be included in response</param>
+            <param name="recursion_depth">Specifications children to be fetch until what depth.</param>
+            <param name="overlayid">Working Overlay Id</param>
+            <param name="lcid">Language id</param>
+            <response code="200">If the object specifications could be fetched.</response>
+            <response code="400">If the request is invalid.</response>
+            <response code="404">If the resources could not be found.</response>
+            <returns>Collection of specifications</returns>
+        </member>
+        <member name="M:Comos.PublicApi.Services.Controllers.PublicApiProjectsController.SetSpecifications(System.String,System.String,System.String,System.Collections.Generic.IEnumerable{System.Object},System.String,System.String,System.String)">
+            <summary>
+            Updates the specifications for an object
+            </summary>
+            <remarks>
+            <para>The fields parameter can have the following valid values:</para>
+            <ul>
+                <li>"" - The specifications will have "Name,Description" fields.</li>
+                <li>"*" - The specifications will have "NestedName,Description,Value,DisplayValue,LValue,SIValue,ControlType,Unit,RangeType,Type,TabIndex,PhysUnitLabel,Precision,Length,Count,LinkObject,XValues" fields.</li>
+                <li>"field1,field2" - Valid set of fields seperated by comma for the object. ex. Name,Description,...,etc</li>
+            </ul>
+            Note: fields will be filtered out in case they are not a part of the specifications. If all fields specified are invalid, then a BadRequest error will be thrown.<br/>
+            <br/>    
+            Sample request:
+            
+            PATCH
+            [
+                {
+                    "NestedName":"string",  //Required
+                    "Value":"string",   
+                    "SIValue":"double",
+                    "LinkObject":{
+                        "UID":"string",
+                        "ProjectUID":"string",
+                        "OverlayUID":"string"
+                    },
+                    "XValues":[{
+                        "Index":"int",
+                        "XValue":"string",
+                        "SIXValue":"double"
+                    }]
+                }
+            ]
+            </remarks>
+            <param name="dbid">Database id</param>
+            <param name="projid">Project id</param>
+            <param name="objid">Object id</param>
+            <param name="values">Collection of specifications to be updated.</param>
+            <param name="fields">Fields to be displayed for specifications</param>
+            <param name="overlayid">Working Overlay Id</param>
+            <param name="lcid">Language Id</param>
+            <response code="200">If the the specifications where updated successfully.</response>
+            <response code="400">If the request is invalid.</response>
+            <response code="404">If the resources could not be found.</response>
+            <returns>Collection of specifications</returns>
+        </member>
+        <member name="M:Comos.PublicApi.Services.Controllers.PublicApiProjectsController.ValidateSpecifications(System.String,System.String,System.String,System.Collections.Generic.IEnumerable{System.Object},System.String,System.String,System.String,System.Boolean)">
+            <summary>
+            Validates the specifications update 
+            </summary>
+            <remarks>
+            <para>This API will verify the request to update the specifications.(No specification will be updated).</para>
+            <para>The fields parameter can have the following valid values:</para>
+            <ul>
+                <li>"" - The specifications will have "Name,Description" fields.</li>
+                <li>"*" - The specifications will have "NestedName,Description,Value,DisplayValue,LValue,SIValue,ControlType,Unit,RangeType,Type,TabIndex,PhysUnitLabel,Precision,Length,Count,LinkObject,XValues" fields.</li>
+                <li>"field1,field2" - Valid set of fields seperated by comma for the object. ex. Name,Description,...,etc</li>
+            </ul>
+            Note: fields will be filtered out in case they are not a part of the specifications. If all fields specified are invalid, then a BadRequest error will be thrown.<br/>
+            <br/> 
+            Sample request:
+            
+            POST
+            [
+                {
+                    "NestedName":"string",  //Required
+                    "Value":"string",   
+                    "SIValue":"double",
+                    "LinkObject":{
+                        "UID":"string",
+                        "ProjectUID":"string",
+                        "OverlayUID":"string"
+                    },
+                    "XValues":[{
+                        "Index":"int",
+                        "XValue":"string",
+                        "SIXValue":"double"
+                    }]
+                }
+            ]   
+            </remarks>
+            <param name="dbid">Database id</param>
+            <param name="projid">Project id</param>
+            <param name="objid">Comos specifaction object id</param>
+            <param name="values">Collection of specifications to be updated.</param>
+            <param name="fields">Fields to be displayed for specifications</param>
+            <param name="overlayid">Overlay id</param>
+            <param name="lcid">Language id</param>
+            <param name="check_mandatory"></param>
+            <response code="200">If the specification update is valid.</response>
+            <response code="400">If the request is invalid.</response>
+            <returns>Collection of specifications</returns>
+        </member>
+        <member name="M:Comos.PublicApi.Services.Controllers.PublicApiProjectsController.GetQueryData(System.String,System.String,System.String,System.String,System.String,System.String,System.String)">
+            <summary>
+            Gets the data for a given query
+            </summary>
+            <param name="dbid">Database Id</param>
+            <param name="projid">Project Id</param>
+            <param name="qid">Query object Id</param>
+            <param name="start_objid">Start object for the query</param>
+            <param name="overlayid">Overlay Id</param>
+            <param name="lcid">Project language</param>
+            <param name="export_type">Export type. At the moment the type 'query2excel' is supported.</param>
+            <returns>Query data OR Query data exported file based on the export_type</returns>
+            <response code="200">If the data was found.</response>
+            <response code="404">If the resources could not be found.</response>
+        </member>
+        <member name="M:Comos.PublicApi.Services.Controllers.PublicApiProjectsController.UpdateObjectProperties(System.String,System.String,System.String,System.Object,System.String,System.String,System.String)">
+            <summary>
+            Updates the given object
+            </summary>
+            <remarks>
+            <para>The fields parameter can have the following valid values:</para>
+            <ul>
+                <li>"" - Default set of fields for the object.</li>
+                <li>"*" - Full set of fields for the object.</li>
+                <li>"field1,field2" - Valid set of fields seperated by comma for the object. ex. Name,Description,...,etc</li>
+            </ul>
+            Note: Fields will be filtered out in case they are not applicable for the given object type. If all fields specified are invalid, then a BadRequest error will be thrown.<br/>
+            <br/>
+            Fields supported by Objects based on the object type:<br/>
+            <br/>
+            <table style="border:1px solid #000;word-break:break-all;padding:5px;">
+                <thead>
+                    <tr>
+                        <td style="width:15%;">Object Type</td>
+                        <td style="width:40%;">Default Fields</td>
+                        <td style="width:45%;">All Fields</td>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td style="width:10%;">CDevice</td>
+                        <td style="width:40%;">Name,Description,FullLabel,SystemType,UID,SystemUID,Class,XObjExist</td>
+                        <td style="width:50%;">Name,FullName,Description,Label,FullLabel,SystemType,Owner,UID,SystemUID,SystemTemporary,XObjExist,Class,DetailClass,OwnLabel</td>
+                    </tr>
+                    <tr>
+                        <td style="width:10%;">Device</td>
+                        <td style="width:40%;">Name,Description,FullLabel,SystemType,UID,SystemUID,Location,Unit</td>
+                        <td style="width:50%;">Name,FullName,Description,Label,FullLabel,SystemType,Owner,UID,SystemUID,SystemTemporary,XObjExist,Class,DetailClass,CDevice,BackPointerDocObjs,Documents,Location,Unit,Implementation,BackPointerDevicesWithImplementation,OwnLabel,CObject</td>
+                    </tr>
+                    <tr>
+                        <td style="width:10%;">Document</td>
+                        <td style="width:40%;">Name,Description,FullLabel,SystemType,UID,SystemUID,OrgDocument,Location,Unit,DocumentType</td>
+                        <td style="width:50%;">Name,FullName,Description,Description2,Description3,Label,FullLabel,SystemType,Owner,UID,SystemUID,SystemTemporary,XObjExist,OrgDocument,Location,Unit,DocumentType,BackPointerDocumentsWithOrgDocument,IsDdmDocument,IsDocumentExportable,DocumentExtension,DocumentHasReleaseRevision,OwnLabel</td>
+                    </tr>
+                    <tr>
+                        <td style="width:10%;">Other Types</td>
+                        <td style="width:40%;">Name,Description,FullLabel,SystemType,UID,SystemUID</td>
+                        <td style="width:50%;">Name,FullName,Description,Label,FullLabel,SystemType,Owner,UID,SystemUID,SystemTemporary,XObjExist</td>
+                    </tr>
+                </tbody>
+            </table> 
+            <br/> 
+            Sample request for Device:
+            
+            PATCH
+            {
+                "Name":"string",
+                "Description":"string",
+                "Label":"string",
+                "CDevice":{
+                    "UID":"string"
+                },
+                "Owner":{
+                    "UID":"string"
+                }
+            }
+            Sample request for Document:
+            
+            PATCH
+            {
+                "Name":"string",
+                "Description":"string",
+                "Description2":"string",
+                "Description3":"string",
+                "Label":"string",
+                "CObject":{
+                    "UID":"string"
+                },
+                "DocumentType":{
+                    "UID":"string"
+                },
+                "OrgDocument":{
+                    "UID":"string"
+                },
+                "Owner":{
+                    "UID":"string"
+                }
+            }
+            </remarks>
+            <param name="dbid">Database Id</param>
+            <param name="projid">Project Id</param>
+            <param name="objid">Object Id</param>
+            <param name="value">COMOS object with properties to update</param>
+            <param name="fields">Fields to reduce the retrieved properties to</param>
+            <param name="overlayid">Working Overlay Id</param>
+            <param name="lcid">Language Id</param>
+            <response code="200">If the object properties were updated successfully.</response>
+            <response code="400">If the request is invalid.</response>
+            <response code="404">If the resources could not be found.</response>
+            <returns></returns>
+        </member>
+        <member name="M:Comos.PublicApi.Services.Controllers.PublicApiProjectsController.CreateComosObject(System.String,System.String,System.Object,System.String,System.String,System.String)">
+            <summary>
+            Create new object under the existing object
+            </summary>
+            <remarks>
+            <para>The fields parameter can have the following valid values:</para>
+            <ul>
+                <li>"" - Default set of fields for the object.</li>
+                <li>"*" - Full set of fields for the object.</li>
+                <li>"field1,field2" - Valid set of fields separated by comma for the object. ex. Name,Description,...,etc</li>
+            </ul>
+            Note: Fields will be filtered out in case they are not applicable for the given object type. If all fields specified are invalid, then a BadRequest error will be thrown.<br/>
+            <br/>
+            Fields supported by Objects based on the object type:<br/>
+            <br/>
+            <table style="border:1px solid #000;word-break:break-all;padding:5px;">
+                <thead>
+                    <tr>
+                        <td style="width:15%;">Object Type</td>
+                        <td style="width:40%;">Default Fields</td>
+                        <td style="width:45%;">All Fields</td>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td style="width:10%;">CDevice</td>
+                        <td style="width:40%;">Name,Description,FullLabel,SystemType,UID,SystemUID,Class,XObjExist</td>
+                        <td style="width:50%;">Name,FullName,Description,Description2,Description3,Label,FullLabel,SystemType,Owner,UID,SystemUID,SystemTemporary,XObjExist,Class,DetailClass,OwnLabel</td>
+                    </tr>
+                    <tr>
+                        <td style="width:10%;">Device</td>
+                        <td style="width:40%;">Name,Description,FullLabel,SystemType,UID,SystemUID,Location,Unit</td>
+                        <td style="width:50%;">Name,FullName,Description,Label,FullLabel,SystemType,Owner,UID,SystemUID,SystemTemporary,XObjExist,Class,DetailClass,CDevice,BackPointerDocObjs,Documents,Location,Unit,Implementation,BackPointerDevicesWithImplementation,OwnLabel</td>
+                    </tr>
+                    <tr>
+                        <td style="width:10%;">Document</td>
+                        <td style="width:40%;">Name,Description,FullLabel,SystemType,UID,SystemUID,OrgDocument,Location,Unit,DocumentType</td>
+                        <td style="width:50%;">Name,FullName,Description,Label,FullLabel,SystemType,Owner,UID,SystemUID,SystemTemporary,XObjExist,OrgDocument,Location,Unit,DocumentType,BackPointerDocumentsWithOrgDocument,IsDdmDocument,IsDocumentExportable,DocumentExtension,DocumentHasReleaseRevision,OwnLabel,CObject</td>
+                    </tr>
+                    <tr>
+                        <td style="width:10%;">Other Types</td>
+                        <td style="width:40%;">Name,Description,FullLabel,SystemType,UID,SystemUID</td>
+                        <td style="width:50%;">Name,FullName,Description,Label,FullLabel,SystemType,Owner,UID,SystemUID,SystemTemporary,XObjExist</td>
+                    </tr>
+                </tbody>
+            </table> 
+            <br/> 
+            Sample request for Device Object:
+            
+            POST
+            {
+                "Name":"string",
+                "Description":"string",
+                "Label":"string",
+                "CDevice":{
+                    "UID":"string"
+                },
+                "Owner":{   //Required
+                    "UID":"string"
+                }
+            }       
+               
+            Sample request for Document Object:
+            POST
+            {
+                "Name":"string",
+                "Description":"string",
+                "Description2":"string",
+                "Description3":"string",
+                "Label":"string",
+                "CObject":{  
+                    "UID":"string"
+                },
+                "DocumentType":{
+                    "UID":"string"
+                },
+                "OrgDocument":{
+                    "UID":"string"
+                },
+                "Owner":{   //Required
+                    "UID":"string"
+                }
+            }  
+            </remarks>
+            <param name="dbid">Database Id</param>
+            <param name="projid">Project Id</param>
+            <param name="value">New COMOS Object</param>
+            <param name="overlayid">Working Overlay Id</param>
+            <param name="lcid">Language Id</param>
+            <param name="fields">Fields to reduce the retrieved properties to</param>
+            <response code="201">If the object was created.</response>
+            <response code="400">If the request is invalid.</response>
+            <response code="404">If the parent object could not be found.</response>
+            <returns></returns>
+        </member>
+        <member name="M:Comos.PublicApi.Services.Controllers.PublicApiProjectsController.DeleteObject(System.String,System.String,System.String,System.String,System.String)">
+            <summary>
+            Deletes the COMOS Object
+            </summary>
+            <param name="dbid">Database ID</param>
+            <param name="projid">Project ID</param>
+            <param name="objid">Object ID</param>
+            <param name="overlayid">Overlay ID</param>
+            <param name="lcid">Project language</param>
+            <response code="201">If the object was deleted successfully.</response>
+            <response code="400">If the request is invalid.</response>
+            <response code="404">If the resources could not be found.</response>
+            <returns></returns>
+        </member>
+        <member name="M:Comos.PublicApi.Services.Controllers.PublicApiProjectsController.BulkUpdate(System.String,System.String,System.Object,System.String,System.String)">
+            <summary>
+            Update object properties in hierarchy
+            </summary>
+            <remarks>
+            <para>Input parameters for updating COMOS object</para>
+            <br/> 
+            
+            Sample request: 
+            {
+               "Selection":{ 
+                  "StartObject": {                            
+                        "UID": "string"
+                   }
+                },
+                "Update":{ 
+                   "Lock": false
+                }
+            }
+            </remarks>
+            <param name="dbid">Database ID</param>
+            <param name="projid">Project ID</param>
+            <param name="value">Input parameters for updating COMOS object</param>
+            <param name="overlayid">Overlay ID</param>
+            <param name="lcid">Project language ID</param>
+            <response code="200">If the objects were updated successfully.</response>
+            <response code="400">If the request is invalid.</response>
+            <response code="404">If the resources could not be found.</response>
+            <returns></returns>
+        </member>
+        <member name="M:Comos.PublicApi.Services.Controllers.PublicApiProjectsController.UpdateBulkObjectProperties(System.String,System.String,System.Collections.Generic.IEnumerable{System.Object},System.String,System.String,System.Int32,System.String,System.String)">
+            <summary>
+            Updates the given object
+            </summary>
+            <remarks>
+            <para>The fields parameter can have the following valid values:</para>
+            <ul>
+                <li>"" - Default set of fields for the object.</li>
+                <li>"*" - Full set of fields for the object.</li>
+                <li>"field1,field2" - Valid set of fields separated by comma for the object. ex. Name,Description,...,etc</li>
+                <li>"Specifications(Name,value,...)" - Special keyword Specifications to filter on specifications level</li>
+            </ul>
+            Note: Fields will be filtered out in case they are not applicable for the given object type. If all fields specified are invalid, then a BadRequest error will be thrown.<br/>
+            <br/>
+            <br/>
+            nested_names include the specification nested names. These can include the hierarchical child specifications as well.
+            recursion_depth can have the following values:
+            <ul>
+                <li>-1 : will fetch all the specification children until the maximum depth.</li>
+                <li>0 (default) : will fetch immediate object specifications.</li>
+                <li>2/3/4...etc : will fetch all the specification children until the specified recursion depth.</li>
+            </ul>      
+            Fields supported by Objects based on the object type:<br/>
+            <br/>
+            <table style="border:1px solid #000;word-break:break-all;padding:5px;">
+                <thead>
+                    <tr>
+                        <td style="width:15%;">Object Type</td>
+                        <td style="width:40%;">Default Fields</td>
+                        <td style="width:45%;">All Fields</td>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td style="width:10%;">CDevice</td>
+                        <td style="width:40%;">Name,Description,FullLabel,SystemType,UID,SystemUID,Class,XObjExist</td>
+                        <td style="width:50%;">Name,FullName,Description,Label,FullLabel,SystemType,Owner,UID,SystemUID,SystemTemporary,XObjExist,Class,DetailClass,OwnLabel,Specifications</td>
+                    </tr>
+                    <tr>
+                        <td style="width:10%;">Device</td>
+                        <td style="width:40%;">Name,Description,FullLabel,SystemType,UID,SystemUID,Location,Unit</td>
+                        <td style="width:50%;">Name,FullName,Description,Label,FullLabel,SystemType,Owner,UID,SystemUID,SystemTemporary,XObjExist,Class,DetailClass,CDevice,BackPointerDocObjs,Documents,Location,Unit,Implementation,BackPointerDevicesWithImplementation,OwnLabel,Specifications</td>
+                    </tr>
+                    <tr>
+                        <td style="width:10%;">Document</td>
+                        <td style="width:40%;">Name,Description,FullLabel,SystemType,UID,SystemUID,OrgDocument,Location,Unit,DocumentType</td>
+                        <td style="width:50%;">Name,FullName,Description,Description2,Description3,Label,FullLabel,SystemType,Owner,UID,SystemUID,SystemTemporary,XObjExist,OrgDocument,Location,Unit,DocumentType,BackPointerDocumentsWithOrgDocument,IsDdmDocument,IsDocumentExportable,DocumentExtension,DocumentHasReleaseRevision,OwnLabel,Specifications</td>
+                    </tr>
+                    <tr>
+                        <td style="width:10%;">Specifications</td>
+                        <td style="width:40%;">Name,Description</td>
+                        <td style="width:50%;">NestedName,Description,Value,DisplayValue,LValue,SIValue,ControlType,Unit,RangeType,Type,TabIndex,PhysUnitLabel,Precision,Length,Count,LinkObject,XValues,Specifications</td>
+                    </tr>
+                    <tr>
+                        <td style="width:10%;">Other Types</td>
+                        <td style="width:40%;">Name,Description,FullLabel,SystemType,UID,SystemUID</td>
+                        <td style="width:50%;">Name,FullName,Description,Label,FullLabel,SystemType,Owner,UID,SystemUID,SystemTemporary,XObjExist,Specifications</td>
+                    </tr>
+                </tbody>
+            </table> 
+            <br/> 
+            Sample request:
+            
+            POST
+            [
+                {   
+                   "UID": "string",
+                   "Specifications": [{
+                       "NestedName": "string",
+                       "Value": "string",
+                       "SIValue": "double",
+                       "LinkObject": {
+                           "UID": "string",
+                           "ProjectUID": "string",
+                           "OverlayUID": "string"
+                       },
+                       "XValues": [
+                       {
+                           "Index": "int",
+                           "XValue": "string",
+                           "SIXValue": "double"
+                       }
+                       ]
+                    }],
+                    "Name": "string",
+                    "Description": "string",
+                    "Label": "string",
+                    "CDevice": {
+                        "UID": "string"
+                    },
+                    "OrgDocument":{
+                        "UID":"string"
+                    },
+                    "Owner": {
+                        "UID": "string"
+                    }
+                },
+                {   //Sample request for Document
+                   "UID": "string",
+                   "Specifications": [{
+                       "NestedName": "string",
+                       "Value": "string",
+                       "SIValue": "double",
+                       "LinkObject": {
+                           "UID": "string",
+                           "ProjectUID": "string",
+                           "OverlayUID": "string"
+                       },
+                       "XValues": [
+                       {
+                           "Index": "int",
+                           "XValue": "string",
+                           "SIXValue": "double"
+                       }
+                       ]
+                    }],
+                    "Name":"string",
+                    "Description":"string",
+                    "Description2":"string",
+                    "Description3":"string",
+                    "Label":"string",
+                    "CObject":{
+                        "UID":"string"
+                     },
+                    "DocumentType":{
+                        "UID":"string"
+                    },
+                    "OrgDocument":{
+                        "UID":"string"
+                    },
+                    "Owner":{
+                        "UID":"string"
+                    }
+                }
+            ]
+            </remarks>
+            <param name="dbid">Database Id</param>
+            <param name="projid">Project Id</param>
+            <param name="values">COMOS objects with properties or specifications to update</param>
+            <param name="recursion_depth">Specifications children to be fetch until what depth.</param>
+            <param name="overlayid">Working Overlay Id</param>
+            <param name="lcid">Language Id</param>
+            <param name="fields">Fields to return in the response after update</param>
+            <param name="nested_names">List of specification nested names to return after update</param>
+            <response code="200">If properties were updated successfully.</response>
+            <response code="400">If the request is invalid.</response>
+            <response code="404">If the resources could not be found.</response>
+            <returns></returns>
+        </member>
+        <member name="M:Comos.PublicApi.Services.Controllers.PublicApiProjectsController.GetStandardTableValuesForAPI(System.String,System.String,System.String,System.String,System.String)">
+            <summary>
+            Get Standard Table Values.
+            </summary>
+            <param name="dbid">Database Id</param>
+            <param name="projid">Project Id</param>
+            <param name="objid">Object Id of standard table</param>
+            <param name="overlayid">Overlay Id</param>
+            <param name="lcid">Language Id</param>
+            <response code="200">If the standard table values could be fetched.</response>
+            <response code="404">If the resources could not be found.</response>
+            <returns>Standard Table Values</returns>
+        </member>
+        <member name="M:Comos.PublicApi.Services.Controllers.PublicApiProjectsController.ScriptExecution(System.String,System.String,Comos.PublicApi.Services.Models.ScriptExecutionInfo,System.String,System.String)">
+            <summary>
+            Executes a custom script for a given project.
+            </summary>
+            <remarks>
+            <p>This endpoint allows execution of a script defined in the COMOS system for a specific project.</p>
+            <p>The script must exist under the customer scripts path ("@20|A80|Z10|").</p>
+            <section>
+            <h4>Sample Request</h4>
+            <div><pre><b>
+            {
+                "SystemFullName": "@20|A80|Z10|ComosObjectName",    // Full system path of the COMOS object on which the script is to be executed. Required
+                "ScriptName": "CallScriptName",                     // Name of the script to execute. Required
+                "Params": [                                         // Array of parameters to pass to the script. Optional.
+                    null,                                           // Null parameter  
+                    "",                                             // Empty string parameter
+                    "string param",                                 // String parameter
+                    1,                                              // Integer\Long parameter
+                    22.5,                                           // Double parameter
+                    true,                                           // Boolean parameter (case sensitive)
+                    {"UID": "U:8:A3BQHN2KAR:U"},                    // Comos Object parameter by UID                            
+                    {"PathFullName": "08UP1§>08UH3"}                // Comos Object parameter by PathFullName
+                ]
+            }
+            </b></pre></div>
+            </section>
+            <section>
+            <h4>Sample Response</h4>
+            <div><pre><b>
+            {
+                "Result": 1 OR 22.5 OR true\false OR "string result" OR null OR {"UID":"U:8:A3BQHN2KAR:U"},
+                "Error": {              // Null if no error occurred during script execution.
+                    "Code": ,
+                    "Message": "string"
+                }
+            }
+            </b></pre></div>
+            <b>Result property inside the response can be one of the following types</b>
+            <ul>
+                <li><b>Numeric</b> Ex. 2 OR 22.56</li>
+                <li><b>String</b> Ex. "This is a response result string"</li>
+                <li><b>Boolean</b> Ex. true OR false</li>
+                <li><b>Comos Object</b> Ex. {"UID": "U:8:A3BQHN2KAR:U"}</li>
+                <li><b>null</b></li>
+            </ul>
+            <b><i>Note: </i>Error property inside the response, will be null for successful script execution.</b>
+            <b>In case of script execution error, Error property inside the response will have a message and the following code types</b>
+            <ul>
+                <li><b>6</b>: The script was invoked, but resulted in an error thrown by the script or the script with the given name does not exist under the object.</li>
+                <li><b>10</b>: The script executed successfully, but the returntype is not supported by this API.</li>        
+            </ul>
+            </section>
+            </remarks>
+            <param name="dbid">Database Id</param>
+            <param name="projid">Project Id</param>
+            <param name="scriptExecutionInfo">Script execution request body</param>
+            <param name="overlayid">Overlay Id</param>
+            <param name="lcid">Language Id</param>
+            <returns>Returns the result of the script execution.</returns>
+            <response code="200">Script executed successfully. Returns <see cref="T:Comos.PublicApi.Services.Models.ScriptExecutionResult"/>.</response>
+            <response code="400">Invalid request or parameters.</response>
+            <response code="404">Comos object or project not found.</response>
+        </member>
+        <member name="T:Comos.PublicApi.Services.Controllers.PublicApiSessionsController">
+            <summary>
+            Provies session services to public API web client
+            </summary>
+        </member>
+        <member name="M:Comos.PublicApi.Services.Controllers.PublicApiSessionsController.#ctor(Comos.Services.Sessions.ISessionManager,Microsoft.Extensions.Logging.ILogger{Comos.PublicApi.Services.Controllers.PublicApiSessionsController},Comos.Services.Common.Contracts.IServiceProxyProvider)">
+            <summary>
+            Ctor
+            </summary>
+            <param name="sessionManager"></param>
+            <param name="logger"></param>
+            <param name="serviceProxyProvider"></param>
+        </member>
+        <member name="M:Comos.PublicApi.Services.Controllers.PublicApiSessionsController.Login">
+            <summary>
+            Creates a new session for the current user
+            </summary>
+            <returns></returns>
+            POST /public/api/sessions/v1/sessions/actions/login
+        </member>
+        <member name="M:Comos.PublicApi.Services.Controllers.PublicApiSessionsController.DeleteSession">
+            <summary>
+            Remove the session based on session Id
+            </summary>
+            <returns></returns>
+            POST /public/api/sessions/v1/sessions/actions/logout
+        </member>
+        <member name="M:Comos.PublicApi.Services.Controllers.PublicApiSessionsController.SendHeartbeat">
+            <summary>
+            Update the specified session (heartbeat) passed
+            </summary>
+            <returns></returns>
+            POST /public/api/sessions/v1/sessions/actions/send_heartbeat
+        </member>
+        <member name="T:Comos.PublicApi.Services.Controllers.PublicApiUsersController">
+            <summary>
+            Provides the login data services
+            </summary>   
+        </member>
+        <member name="M:Comos.PublicApi.Services.Controllers.PublicApiUsersController.#ctor(Microsoft.Extensions.Logging.ILogger{Comos.PublicApi.Services.Controllers.PublicApiUsersController},Comos.Services.Common.Contracts.IServiceProxyProvider,Comos.PublicApi.Services.Interfaces.IMapProvider)">
+            <summary>
+            Ctor
+            </summary>
+            <param name="logger"></param>
+            <param name="serviceProxyProvider"></param>
+        </member>
+        <member name="M:Comos.PublicApi.Services.Controllers.PublicApiUsersController.GetCurrentUserFromUsersService">
+            <summary>
+            Get the details of the current user
+            </summary>
+            <response code="200">If the current user could be fetched.</response>
+            <response code="404">If no user was found.</response>
+            <returns>The current user</returns>
+        </member>
+        <member name="M:Comos.PublicApi.Services.Controllers.PublicApiUsersController.CreateUser(Comos.PublicApi.Services.Models.UserPost,System.String)">
+            <summary>
+            Creates a new user with the given details
+            </summary>
+            <param name="newUser">The details of the user to be created</param>
+            <param name="dbid">The database id in case the database configured in the users service is not to be used</param>
+            /// <response code="201">If new user is created.</response>
+            <response code="404">If invalid user details.</response>
+            <response code="403">If user does not have the rights to create user.</response>
+            <returns>Newly created user</returns>
+        </member>
+        <member name="M:Comos.PublicApi.Services.Controllers.PublicApiUsersController.AddUserToGroup(Comos.PublicApi.Services.Models.UserIdentifier,System.String,System.String,System.String,System.String)">
+            <summary>
+            Adds a user to a group
+            </summary>
+            <param name="userIdentifier">user identifier object with username</param>
+            <param name="group_name">Name of the group the user will be added to</param>
+            <param name="dbid">The database id in case the database configured in the users service is not to be used</param>
+            <param name="projid">The system UID of the project (only needed for roles)</param>
+            <param name="overlayid">The system UID of the working layer (only needed for roles)</param>
+            <returns></returns>
+            <response code="200">If the user was added to the group</response>
+            <response code="400">If one or more of the passed parameters was invalid</response>
+        </member>
+        <member name="M:Comos.PublicApi.Services.Controllers.PublicApiUsersController.RemoveUserFromGroup(System.String,System.String,System.String,System.String,System.String)">
+            <summary>
+            Removes a user from a group
+            </summary>
+            <param name="group_name">Name of the group the user will be removed from</param>
+            <param name="user_name">Name of the user</param>
+            <param name="dbid">The database id in case the database configured in the users service is not to be used</param>
+            <param name="projid">The system UID of the project (only needed for roles)</param>
+            <param name="overlayid">The system UID of the working layer (only needed for roles)</param>
+            <returns>A string indicating which user was removed from which group</returns>
+        </member>
+        <member name="M:Comos.PublicApi.Services.Helper.FieldsUtility.ExtractFields(System.String,System.String@,System.Collections.Generic.IEnumerable{System.String})">
+            <summary>
+            Used to extract fields from fieldExpression into dictionary.
+            </summary>
+            <param name="fields">Fields Expression</param>
+            <param name="newFieldsExpresssion">Entire fieldsExpression apart from the fields present in excludeFieldsExpression</param>
+            <param name="excludeFieldsFromExpression">These fields will be excluded from newFieldsExpression</param>
+            <returns></returns>
+        </member>
+        <member name="M:Comos.PublicApi.Services.Helper.FieldsUtility.ExtractFields(System.String)">
+            <summary>
+            Used to extract fields from fieldExpression into dictionary.
+            </summary>
+            <param name="fields">Fields Expression</param>
+            <returns></returns>
+        </member>
+        <member name="T:Comos.PublicApi.Services.Helper.LanguageHelper">
+            <summary>
+            Helper Methods
+            </summary>
+        </member>
+        <member name="M:Comos.PublicApi.Services.Helper.LanguageHelper.#ctor(Microsoft.Extensions.Logging.ILogger{Comos.PublicApi.Services.Helper.LanguageHelper})">
+            <summary>
+            
+            </summary>
+            <param name="logger"></param>
+        </member>
+        <member name="M:Comos.PublicApi.Services.Helper.LanguageHelper.GetCulture(System.String)">
+            <summary>
+            Extract the accepted languages from the header
+            </summary>
+            <param name="languageHeader"></param>
+            <returns></returns>
+        </member>
+        <member name="T:Comos.PublicApi.Services.Interfaces.IFieldsProvider">
+            <summary>
+            Interface of FieldsProvider
+            </summary>
+        </member>
+        <member name="M:Comos.PublicApi.Services.Interfaces.IFieldsProvider.ValidateFieldsExpression(System.String,Comos.PublicApi.Services.Contracts.FieldsStrategyType)">
+            <summary>
+            Validate Fields Expression
+            </summary>
+            <param name="fieldsExpression"></param>
+            <param name="fieldCarrier"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Comos.PublicApi.Services.Interfaces.IFieldsProvider.ValidateFieldsExpression(System.String,System.Int32,Comos.PublicApi.Services.Contracts.FieldsStrategyType)">
+            <summary>
+            Validate Fields Expression
+            </summary>
+            <param name="fieldsExpression"></param>
+            <param name="systemType"></param>
+            <param name="fieldCarrier"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Comos.PublicApi.Services.Interfaces.IFieldsProvider.ValidateFieldsExpression(System.String,System.String,Comos.PublicApi.Services.Contracts.FieldsStrategyType)">
+            <summary>
+            Validate Fields Expression
+            </summary>
+            <param name="fieldsExpression"></param>
+            <param name="objectId"></param>
+            <param name="fieldCarrier"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Comos.PublicApi.Services.Interfaces.IFieldsProvider.ValidateFieldsExpression(System.String,System.Collections.Generic.IEnumerable{System.String},Comos.PublicApi.Services.Contracts.FieldsStrategyType)">
+            <summary>
+            Validate Fields Expression for multiple object Ids
+            </summary>
+            <param name="fieldsExpression"></param>
+            <param name="objectIds"></param>
+            <param name="fieldCarrier"></param>
+            <returns></returns>
+        </member>
+        <member name="T:Comos.PublicApi.Services.Interfaces.IMapProvider">
+            <summary>
+            Interface for MapProvider
+            </summary>
+        </member>
+        <member name="M:Comos.PublicApi.Services.Interfaces.IMapProvider.DocElementMap(Comos.Gateway.Contracts.DocElement)">
+            <summary>
+            DocElementMap
+            </summary>
+            <param name="source"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Comos.PublicApi.Services.Interfaces.IMapProvider.DocElementMap(System.Collections.Generic.IEnumerable{Comos.Gateway.Contracts.DocElement})">
+            <summary>
+            DocElementMap
+            </summary>
+            <param name="source"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Comos.PublicApi.Services.Interfaces.IMapProvider.LanguageMap(Comos.Gateway.Contracts.GridItem)">
+            <summary>
+            LanguageMap
+            </summary>
+            <param name="source"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Comos.PublicApi.Services.Interfaces.IMapProvider.LanguageMap(System.Collections.Generic.IEnumerable{Comos.Gateway.Contracts.GridItem})">
+            <summary>
+            LanguageMap
+            </summary>
+            <param name="source"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Comos.PublicApi.Services.Interfaces.IMapProvider.ProjectMap(Comos.Gateway.Contracts.GridItem)">
+            <summary>
+            ProjectMap
+            </summary>
+            <param name="source"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Comos.PublicApi.Services.Interfaces.IMapProvider.ProjectMap(System.Collections.Generic.IEnumerable{Comos.Gateway.Contracts.GridItem})">
+            <summary>
+            ProjectMap
+            </summary>
+            <param name="source"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Comos.PublicApi.Services.Interfaces.IMapProvider.QueryResultColumnMap(Comos.Gateway.Contracts.QueryResultColumn)">
+            <summary>
+            QueryResultColumnMap
+            </summary>
+            <param name="source"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Comos.PublicApi.Services.Interfaces.IMapProvider.QueryResultColumnMap(System.Collections.Generic.IEnumerable{Comos.Gateway.Contracts.QueryResultColumn})">
+            <summary>
+            QueryResultColumnMap
+            </summary>
+            <param name="source"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Comos.PublicApi.Services.Interfaces.IMapProvider.QueryResultItemMap(Comos.Gateway.Contracts.QueryResultItem)">
+            <summary>
+            QueryResultItemMap
+            </summary>
+            <param name="source"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Comos.PublicApi.Services.Interfaces.IMapProvider.QueryResultItemMap(System.Collections.Generic.IEnumerable{Comos.Gateway.Contracts.QueryResultItem})">
+            <summary>
+            QueryResultItemMap
+            </summary>
+            <param name="source"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Comos.PublicApi.Services.Interfaces.IMapProvider.QueryResultMap(Comos.Gateway.Contracts.QueryResult)">
+            <summary>
+            QueryResultMap
+            </summary>
+            <param name="source"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Comos.PublicApi.Services.Interfaces.IMapProvider.QueryResultMap(System.Collections.Generic.IEnumerable{Comos.Gateway.Contracts.QueryResult})">
+            <summary>
+            QueryResultMap
+            </summary>
+            <param name="source"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Comos.PublicApi.Services.Interfaces.IMapProvider.QueryResultRowMap(Comos.Gateway.Contracts.QueryResultRow)">
+            <summary>
+            QueryResultRowMap
+            </summary>
+            <param name="source"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Comos.PublicApi.Services.Interfaces.IMapProvider.QueryResultRowMap(System.Collections.Generic.IEnumerable{Comos.Gateway.Contracts.QueryResultRow})">
+            <summary>
+            QueryResultRowMap
+            </summary>
+            <param name="source"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Comos.PublicApi.Services.Interfaces.IMapProvider.RevisionDataMap(Comos.Gateway.Contracts.RevisionList)">
+            <summary>
+            RevisionDataMap
+            </summary>
+            <param name="source"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Comos.PublicApi.Services.Interfaces.IMapProvider.RevisionDataMap(System.Collections.Generic.IEnumerable{Comos.Gateway.Contracts.RevisionList})">
+            <summary>
+            RevisionDataMap
+            </summary>
+            <param name="source"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Comos.PublicApi.Services.Interfaces.IMapProvider.RevisionElementMap(Comos.Gateway.Contracts.RevisionElement)">
+            <summary>
+            RevisionElementMap
+            </summary>
+            <param name="source"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Comos.PublicApi.Services.Interfaces.IMapProvider.RevisionElementMap(System.Collections.Generic.IEnumerable{Comos.Gateway.Contracts.RevisionElement})">
+            <summary>
+            RevisionElementMap
+            </summary>
+            <param name="source"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Comos.PublicApi.Services.Interfaces.IMapProvider.RevisionMap(Comos.Gateway.Contracts.RevisionItem)">
+            <summary>
+            RevisionMap
+            </summary>
+            <param name="source"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Comos.PublicApi.Services.Interfaces.IMapProvider.RevisionMap(System.Collections.Generic.IEnumerable{Comos.Gateway.Contracts.RevisionItem})">
+            <summary>
+            RevisionMap
+            </summary>
+            <param name="source"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Comos.PublicApi.Services.Interfaces.IMapProvider.Map``1(System.Object)">
+            <summary>
+            Generic Mapper
+            </summary>
+            <typeparam name="T"></typeparam>
+            <param name="source"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Comos.PublicApi.Services.Interfaces.IMapProvider.WorkingOverlayMap(Comos.Gateway.Contracts.GridItem)">
+            <summary>
+            WorkingOverlayMap
+            </summary>
+            <param name="source"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Comos.PublicApi.Services.Interfaces.IMapProvider.WorkingOverlayMap(System.Collections.Generic.IEnumerable{Comos.Gateway.Contracts.GridItem})">
+            <summary>
+            WorkingOverlayMap
+            </summary>
+            <param name="source"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Comos.PublicApi.Services.Interfaces.IMapProvider.WorkingOverlayReverseMap(Comos.PublicApi.Services.Models.WorkingOverlayPost)">
+            <summary>
+            WorkingOverlayReverseMap
+            </summary>
+            <param name="source"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Comos.PublicApi.Services.Interfaces.IMapProvider.SpecificationReverseMap(System.Collections.Generic.IEnumerable{System.Object})">
+            <summary>
+            SpecificationReverseMap
+            </summary>
+            <param name="specification"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Comos.PublicApi.Services.Interfaces.IMapProvider.SpecificationMap(System.Collections.Generic.IEnumerable{System.Object},System.String)">
+            <summary>
+            SpecificationMap
+            </summary>
+            <param name="specification"></param>
+            <param name="fieldsExpression"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Comos.PublicApi.Services.Interfaces.IMapProvider.ComosObjectPatchReverseMap(System.Object)">
+            <summary>
+            ComosObjectPatchReverseMap
+            </summary>
+            <param name="source"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Comos.PublicApi.Services.Interfaces.IMapProvider.ComosObjectPostReverseMap(System.Object)">
+            <summary>
+            ComosObjectPostReverseMap
+            </summary>
+            <param name="source"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Comos.PublicApi.Services.Interfaces.IMapProvider.ComosObjectMap(System.Object,System.Int32,System.String)">
+            <summary>
+            ComosObjectMap
+            </summary>
+            <param name="source"></param>
+            <param name="systemType"></param>
+            <param name="fieldsExpression"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Comos.PublicApi.Services.Interfaces.IMapProvider.ComosObjectsBulkMap(System.Collections.Generic.IEnumerable{System.Object},System.String)">
+            <summary>
+            ComosObjectsBulkMap
+            </summary>
+            <param name="source"></param>
+            <param name="fieldsExpression"></param>
+            <returns></returns>        
+        </member>
+        <member name="M:Comos.PublicApi.Services.Interfaces.IMapProvider.ComosObjectsBulkMetadataMap(System.Object,System.String)">
+            <summary>
+            ComosObjectsBulkMetadataMap
+            </summary>
+            <param name="source"></param>
+            <param name="fieldsExpression"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Comos.PublicApi.Services.Interfaces.IMapProvider.BulkUpdatePatchReverseMap(System.Object)">
+            <summary>
+            BulkUpdatePatchReverseMap
+            </summary>
+            <param name="source"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Comos.PublicApi.Services.Interfaces.IMapProvider.BulkUpdateObjectsReverseMap(System.Collections.Generic.IEnumerable{System.Object})">
+            <summary>
+            BulkUpdateObjectsReverseMap
+            </summary>
+            <param name="source"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Comos.PublicApi.Services.Interfaces.IMapProvider.StandardTableRowMap(Comos.Gateway.Contracts.StandardTableRow)">
+            <summary>
+            StandardTableRowMap
+            </summary>
+            <param name="source"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Comos.PublicApi.Services.Interfaces.IMapProvider.StandardTableRowMap(System.Collections.Generic.IEnumerable{Comos.Gateway.Contracts.StandardTableRow})">
+            <summary>
+            StandardTableRowMap
+            </summary>
+            <param name="source"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Comos.PublicApi.Services.Interfaces.IMapProvider.AddDocumentToObjectMap(Comos.Gateway.Contracts.ComosGatewayRefObject)">
+            <summary>
+            AddDocumentToObjectMap
+            </summary>
+            <param name="source"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Comos.PublicApi.Services.Interfaces.IMapProvider.ScriptExecutionInfoReverseMap(Comos.PublicApi.Services.Models.ScriptExecutionInfo,System.Collections.Generic.List{System.String})">
+            <summary>
+            ScriptExecutionInfoReverseMap
+            </summary>
+            <param name="source"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Comos.PublicApi.Services.Interfaces.IMapProvider.ScriptExecutionResultMap(Comos.Gateway.Contracts.ScriptExecutionResult)">
+            <summary>
+            ScriptExecutionResultMap
+            </summary>
+            <param name="source"></param>
+            <returns></returns>
+        </member>
+        <member name="T:Comos.PublicApi.Services.Models.Update">
+            <summary>
+            Object for Bulk Update of properties
+            </summary>
+        </member>
+        <member name="P:Comos.PublicApi.Services.Models.Update.Lock">
+            <summary>
+            Lock
+            </summary>
+        </member>
+        <member name="T:Comos.PublicApi.Services.Models.Selection">
+            <summary>
+            Object for selection of Start Object
+            </summary>
+        </member>
+        <member name="P:Comos.PublicApi.Services.Models.Selection.StartObject">
+            <summary>
+            StartObject
+            </summary>
+        </member>
+        <member name="T:Comos.PublicApi.Services.Models.BulkUpdatePatch">
+            <summary>
+            Object for Bulk Update 
+            </summary>
+        </member>
+        <member name="P:Comos.PublicApi.Services.Models.BulkUpdatePatch.Selection">
+            <summary>
+            Start Object selection
+            </summary>
+        </member>
+        <member name="P:Comos.PublicApi.Services.Models.BulkUpdatePatch.Update">
+            <summary>
+            Properties to update
+            </summary>
+        </member>
+        <member name="T:Comos.PublicApi.Services.Models.CDeviceComosObject">
+            <summary>
+            CDevice Comos Object
+            </summary>
+        </member>
+        <member name="P:Comos.PublicApi.Services.Models.CDeviceComosObject.Class">
+            <summary>
+            Class
+            </summary>
+        </member>
+        <member name="P:Comos.PublicApi.Services.Models.CDeviceComosObject.DetailClass">
+            <summary>
+            DetailClass
+            </summary>
+        </member>
+        <member name="P:Comos.PublicApi.Services.Models.CDeviceComosObject.OwnLabel">
+            <summary>
+            OwnLabel
+            </summary>
+        </member>
+        <member name="T:Comos.PublicApi.Services.Models.ComosLinkObject">
+            <summary>
+            Comos LinkObject
+            </summary>
+        </member>
+        <member name="P:Comos.PublicApi.Services.Models.ComosLinkObject.UID">
+            <summary>
+            LinkObject Id
+            </summary>
+        </member>
+        <member name="P:Comos.PublicApi.Services.Models.ComosLinkObject.ProjectUID">
+            <summary>
+            Project Id
+            </summary>
+        </member>
+        <member name="P:Comos.PublicApi.Services.Models.ComosLinkObject.OverlayUID">
+            <summary>
+            Working Overlay Id
+            </summary>
+        </member>
+        <member name="T:Comos.PublicApi.Services.Models.ComosObject">
+            <summary>
+            Comos Object
+            </summary>
+        </member>
+        <member name="P:Comos.PublicApi.Services.Models.ComosObject.Name">
+            <summary>
+            Name
+            </summary>
+        </member>
+        <member name="P:Comos.PublicApi.Services.Models.ComosObject.FullName">
+            <summary>
+            Full Name
+            </summary>
+        </member>
+        <member name="P:Comos.PublicApi.Services.Models.ComosObject.Description">
+            <summary>
+            Description
+            </summary>
+        </member>
+        <member name="P:Comos.PublicApi.Services.Models.ComosObject.Label">
+            <summary>
+            Label
+            </summary>
+        </member>
+        <member name="P:Comos.PublicApi.Services.Models.ComosObject.FullLabel">
+            <summary>
+            FullLabel
+            </summary>
+        </member>
+        <member name="P:Comos.PublicApi.Services.Models.ComosObject.SystemType">
+            <summary>
+            SystemType
+            </summary>
+        </member>
+        <member name="P:Comos.PublicApi.Services.Models.ComosObject.Owner">
+            <summary>
+            Owner
+            </summary>
+        </member>
+        <member name="P:Comos.PublicApi.Services.Models.ComosObject.UID">
+            <summary>
+            Comos Object UID
+            </summary>
+        </member>
+        <member name="P:Comos.PublicApi.Services.Models.ComosObject.SystemUID">
+            <summary>
+            System UIDs
+            </summary>
+        </member>
+        <member name="P:Comos.PublicApi.Services.Models.ComosObject.SystemTemporary">
+            <summary>
+            SystemTemporary
+            </summary>
+        </member>
+        <member name="P:Comos.PublicApi.Services.Models.ComosObject.XObjExist">
+            <summary>
+            XObjExist
+            </summary>
+        </member>
+        <member name="P:Comos.PublicApi.Services.Models.ComosObject.Specifications">
+            <summary>
+            Specifications
+            </summary>
+        </member>
+        <member name="T:Comos.PublicApi.Services.Models.ComosObjectBulkMetadata">
+            <summary>
+            ComosObjectBulkMetadata
+            </summary>
+        </member>
+        <member name="P:Comos.PublicApi.Services.Models.ComosObjectBulkMetadata.Objects">
+            <summary>
+            Comos Objects
+            </summary>
+        </member>
+        <member name="P:Comos.PublicApi.Services.Models.ComosObjectBulkMetadata.Errors">
+            <summary>
+            Errors
+            </summary>
+        </member>
+        <member name="T:Comos.PublicApi.Services.Models.ComosObjectPatch">
+            <summary>
+            Comos Object for Patch
+            </summary>
+        </member>
+        <member name="P:Comos.PublicApi.Services.Models.ComosObjectPatch.Name">
+            <summary>
+            Name
+            </summary>
+        </member>
+        <member name="P:Comos.PublicApi.Services.Models.ComosObjectPatch.Description">
+            <summary>
+            Description
+            </summary>
+        </member>
+        <member name="P:Comos.PublicApi.Services.Models.ComosObjectPatch.Description2">
+            <summary>
+            Description2
+            </summary>
+        </member>
+        <member name="P:Comos.PublicApi.Services.Models.ComosObjectPatch.Description3">
+            <summary>
+            Description3
+            </summary>
+        </member>
+        <member name="P:Comos.PublicApi.Services.Models.ComosObjectPatch.Label">
+            <summary>
+            Label
+            </summary>
+        </member>
+        <member name="P:Comos.PublicApi.Services.Models.ComosObjectPatch.CDevice">
+            <summary>
+            CDevice
+            </summary>
+        </member>
+        <member name="P:Comos.PublicApi.Services.Models.ComosObjectPatch.CObject">
+            <summary>
+            CObject
+            </summary>
+        </member>
+        <member name="P:Comos.PublicApi.Services.Models.ComosObjectPatch.DocumentType">
+            <summary>
+            DocumentType
+            </summary>
+        </member>
+        <member name="P:Comos.PublicApi.Services.Models.ComosObjectPatch.OrgDocument">
+            <summary>
+            OrgDocument
+            </summary>
+        </member>
+        <member name="P:Comos.PublicApi.Services.Models.ComosObjectPatch.Owner">
+            <summary>
+            Owner
+            </summary>
+        </member>
+        <member name="T:Comos.PublicApi.Services.Models.ComosObjectPost">
+            <summary>
+            Comos object for Post
+            </summary>
+        </member>
+        <member name="P:Comos.PublicApi.Services.Models.ComosObjectPost.Name">
+            <summary>
+            Name
+            </summary>
+        </member>
+        <member name="P:Comos.PublicApi.Services.Models.ComosObjectPost.Description">
+            <summary>
+            Description
+            </summary>
+        </member>
+        <member name="P:Comos.PublicApi.Services.Models.ComosObjectPost.Description2">
+            <summary>
+            Description2
+            </summary>
+        </member>
+        <member name="P:Comos.PublicApi.Services.Models.ComosObjectPost.Description3">
+            <summary>
+            Description3
+            </summary>
+        </member>
+        <member name="P:Comos.PublicApi.Services.Models.ComosObjectPost.Label">
+            <summary>
+            Label
+            </summary>
+        </member>
+        <member name="P:Comos.PublicApi.Services.Models.ComosObjectPost.CDevice">
+            <summary>
+            CDevice
+            </summary>
+        </member>
+        <member name="P:Comos.PublicApi.Services.Models.ComosObjectPost.CObject">
+            <summary>
+            CObject
+            </summary>
+        </member>
+        <member name="P:Comos.PublicApi.Services.Models.ComosObjectPost.OrgDocument">
+            <summary>
+            OrgDocument
+            </summary>
+        </member>
+        <member name="P:Comos.PublicApi.Services.Models.ComosObjectPost.DocumentType">
+            <summary>
+            DocumentType
+            </summary>
+        </member>
+        <member name="P:Comos.PublicApi.Services.Models.ComosObjectPost.Owner">
+            <summary>
+            Owner
+            </summary>
+        </member>
+        <member name="T:Comos.PublicApi.Services.Models.ComosObjectWithSpecPatch">
+            <summary>
+            Comos Object for Patch
+            </summary>
+        </member>
+        <member name="P:Comos.PublicApi.Services.Models.ComosObjectWithSpecPatch.UID">
+            <summary>
+            UID
+            </summary>
+        </member>
+        <member name="P:Comos.PublicApi.Services.Models.ComosObjectWithSpecPatch.Specifications">
+            <summary>
+            Specifications
+            </summary>
+        </member>
+        <member name="T:Comos.PublicApi.Services.Models.ComosUIDObject">
+            <summary>
+            UID Object
+            </summary>
+        </member>
+        <member name="P:Comos.PublicApi.Services.Models.ComosUIDObject.UID">
+            <summary>
+            UID
+            </summary>
+        </member>
+        <member name="T:Comos.PublicApi.Services.Models.ComosXValue">
+            <summary>
+            Comos XValue
+            </summary>
+        </member>
+        <member name="P:Comos.PublicApi.Services.Models.ComosXValue.Index">
+            <summary>
+            Index
+            </summary>
+        </member>
+        <member name="P:Comos.PublicApi.Services.Models.ComosXValue.XValue">
+            <summary>
+            XValue
+            </summary>
+        </member>
+        <member name="P:Comos.PublicApi.Services.Models.ComosXValue.DisplayXValue">
+            <summary>
+            Display XValue
+            </summary>
+        </member>
+        <member name="P:Comos.PublicApi.Services.Models.ComosXValue.LXValue">
+            <summary>
+            LXValue
+            </summary>
+        </member>
+        <member name="P:Comos.PublicApi.Services.Models.ComosXValue.SIXValue">
+            <summary>
+            SIXValue
+            </summary>
+        </member>
+        <member name="T:Comos.PublicApi.Services.Models.CurrentUser">
+            <summary>
+            Current User
+            </summary>
+        </member>
+        <member name="P:Comos.PublicApi.Services.Models.CurrentUser.IsPM">
+            <summary>
+            Is Project Manager
+            </summary>
+        </member>
+        <member name="T:Comos.PublicApi.Services.Models.DeviceComosObject">
+            <summary>
+            Device Comos object
+            </summary>
+        </member>
+        <member name="P:Comos.PublicApi.Services.Models.DeviceComosObject.Class">
+            <summary>
+            Class
+            </summary>
+        </member>
+        <member name="P:Comos.PublicApi.Services.Models.DeviceComosObject.DetailClass">
+            <summary>
+            DetailClasss
+            </summary>
+        </member>
+        <member name="P:Comos.PublicApi.Services.Models.DeviceComosObject.CDevice">
+            <summary>
+            CDevice
+            </summary>
+        </member>
+        <member name="P:Comos.PublicApi.Services.Models.DeviceComosObject.BackPointerDocObjs">
+            <summary>
+            BackPointerDocObjs
+            </summary>
+        </member>
+        <member name="P:Comos.PublicApi.Services.Models.DeviceComosObject.Documents">
+            <summary>
+            Documents
+            </summary>
+        </member>
+        <member name="P:Comos.PublicApi.Services.Models.DeviceComosObject.Devices">
+            <summary>
+            Devices
+            </summary>
+        </member>
+        <member name="P:Comos.PublicApi.Services.Models.DeviceComosObject.Location">
+            <summary>
+            Location
+            </summary>
+        </member>
+        <member name="P:Comos.PublicApi.Services.Models.DeviceComosObject.Unit">
+            <summary>
+            Unit
+            </summary>
+        </member>
+        <member name="P:Comos.PublicApi.Services.Models.DeviceComosObject.Implementation">
+            <summary>
+            Implementation
+            </summary>
+        </member>
+        <member name="P:Comos.PublicApi.Services.Models.DeviceComosObject.BackPointerDevicesWithImplementation">
+            <summary>
+            BackPointerDevicesWithImplementation
+            </summary>
+        </member>
+        <member name="P:Comos.PublicApi.Services.Models.DeviceComosObject.OwnLabel">
+            <summary>
+            OwnLabel
+            </summary>
+        </member>
+        <member name="T:Comos.PublicApi.Services.Models.Discovery">
+            <summary>
+            Discovery Model
+            </summary>
+        </member>
+        <member name="P:Comos.PublicApi.Services.Models.Discovery.Name">
+            <summary>
+            Service Name
+            </summary>
+        </member>
+        <member name="P:Comos.PublicApi.Services.Models.Discovery.Versions">
+            <summary>
+            Service Versions
+            </summary>
+        </member>
+        <member name="T:Comos.PublicApi.Services.Models.DiscoveryVersion">
+            <summary>
+            Discovery Version
+            </summary>
+        </member>
+        <member name="P:Comos.PublicApi.Services.Models.DiscoveryVersion.VersionNumber">
+            <summary>
+            VersionNumber
+            </summary>
+        </member>
+        <member name="P:Comos.PublicApi.Services.Models.DiscoveryVersion.Path">
+            <summary>
+            Path
+            </summary>
+        </member>
+        <member name="T:Comos.PublicApi.Services.Models.DocElement">
+            <summary>
+            Document Element
+            </summary>
+        </member>
+        <member name="P:Comos.PublicApi.Services.Models.DocElement.CreateUserName">
+            <summary>
+            CreateUserName
+            </summary>
+        </member>
+        <member name="P:Comos.PublicApi.Services.Models.DocElement.CreateTimestamp">
+            <summary>
+            CreateTimestamp
+            </summary>
+        </member>
+        <member name="P:Comos.PublicApi.Services.Models.DocElement.UID">
+            <summary>
+            Document element UID
+            </summary>
+        </member>
+        <member name="P:Comos.PublicApi.Services.Models.DocObjComosObject.Reference">
+            <summary>
+            Reference
+            </summary>
+        </member>
+        <member name="P:Comos.PublicApi.Services.Models.DocObjComosObject.Reference2">
+            <summary>
+            Reference2
+            </summary>
+        </member>
+        <member name="T:Comos.PublicApi.Services.Models.DocumentComment">
+            <summary>
+            checkout or Undo checkout comment
+            </summary>
+        </member>
+        <member name="P:Comos.PublicApi.Services.Models.DocumentComment.Comment">
+            <summary>
+            comment for checkout or Undo checkout comment
+            </summary>
+        </member>
+        <member name="T:Comos.PublicApi.Services.Models.DocumentComosObject">
+            <summary>
+            Document Comos Object
+            </summary>
+        </member>
+        <member name="P:Comos.PublicApi.Services.Models.DocumentComosObject.Description2">
+            <summary>
+            Description2
+            </summary>
+        </member>
+        <member name="P:Comos.PublicApi.Services.Models.DocumentComosObject.Description3">
+            <summary>
+            Description3
+            </summary>
+        </member>
+        <member name="P:Comos.PublicApi.Services.Models.DocumentComosObject.OrgDocument">
+            <summary>
+            OrgDocument
+            </summary>
+        </member>
+        <member name="P:Comos.PublicApi.Services.Models.DocumentComosObject.Location">
+            <summary>
+            Location
+            </summary>
+        </member>
+        <member name="P:Comos.PublicApi.Services.Models.DocumentComosObject.Unit">
+            <summary>
+            Unit
+            </summary>
+        </member>
+        <member name="P:Comos.PublicApi.Services.Models.DocumentComosObject.DocumentType">
+            <summary>
+            DocumentType
+            </summary>
+        </member>
+        <member name="P:Comos.PublicApi.Services.Models.DocumentComosObject.Documents">
+            <summary>
+            Documents
+            </summary>
+        </member>
+        <member name="P:Comos.PublicApi.Services.Models.DocumentComosObject.Devices">
+            <summary>
+            Devices
+            </summary>
+        </member>
+        <member name="P:Comos.PublicApi.Services.Models.DocumentComosObject.BackPointerDocumentsWithOrgDocument">
+            <summary>
+            BackPointerDocumentsWithOrgDocument
+            </summary>
+        </member>
+        <member name="P:Comos.PublicApi.Services.Models.DocumentComosObject.IsDdmDocument">
+            <summary>
+            IsDdmDocument
+            </summary>
+        </member>
+        <member name="P:Comos.PublicApi.Services.Models.DocumentComosObject.IsDocumentExportable">
+            <summary>
+            IsDocumentExportable
+            </summary>
+        </member>
+        <member name="P:Comos.PublicApi.Services.Models.DocumentComosObject.DocumentExtension">
+            <summary>
+            DocumentExtension
+            </summary>
+        </member>
+        <member name="P:Comos.PublicApi.Services.Models.DocumentComosObject.DocumentHasReleaseRevision">
+            <summary>
+            DocumentHasReleaseRevision
+            </summary>
+        </member>
+        <member name="P:Comos.PublicApi.Services.Models.DocumentComosObject.OwnLabel">
+            <summary>
+            OwnLabel
+            </summary>
+        </member>
+        <member name="P:Comos.PublicApi.Services.Models.DocumentComosObject.CObject">
+            <summary>
+            CObject
+            </summary>
+        </member>
+        <member name="P:Comos.PublicApi.Services.Models.DocumentComosObject.DocObjs">
+            <summary>
+            DocObjs
+            </summary>
+        </member>
+        <member name="T:Comos.PublicApi.Services.Models.Language">
+            <summary>
+            Language
+            </summary>
+        </member>
+        <member name="P:Comos.PublicApi.Services.Models.Language.LCID">
+            <summary>
+            Language Id
+            </summary>
+        </member>
+        <member name="P:Comos.PublicApi.Services.Models.Language.Description">
+            <summary>
+            Description
+            </summary>
+        </member>
+        <member name="T:Comos.PublicApi.Services.Models.Login">
+            <summary>
+            Login
+            </summary>
+        </member>
+        <member name="P:Comos.PublicApi.Services.Models.Login.SessionId">
+            <summary>
+            SessionId
+            </summary>
+        </member>
+        <member name="P:Comos.PublicApi.Services.Models.Login.UserName">
+            <summary>
+            UserName
+            </summary>
+        </member>
+        <member name="P:Comos.PublicApi.Services.Models.Login.HeartbeatInterval">
+            <summary>
+            HeartbeatInterval
+            </summary>
+        </member>
+        <member name="T:Comos.PublicApi.Services.Models.Logout">
+            <summary>
+            Logout
+            </summary>
+        </member>
+        <member name="P:Comos.PublicApi.Services.Models.Logout.SessionId">
+            <summary>
+            SessionId
+            </summary>
+        </member>
+        <member name="T:Comos.PublicApi.Services.Models.Project">
+            <summary>
+            Project
+            </summary>
+        </member>
+        <member name="P:Comos.PublicApi.Services.Models.Project.Name">
+            <summary>
+            Project Name
+            </summary>
+        </member>
+        <member name="P:Comos.PublicApi.Services.Models.Project.Description">
+            <summary>
+            Project Description
+            </summary>
+        </member>
+        <member name="P:Comos.PublicApi.Services.Models.Project.UID">
+            <summary>
+            Project UID
+            </summary>
+        </member>
+        <member name="P:Comos.PublicApi.Services.Models.Project.SystemFullName">
+            <summary>
+            Project System full name
+            </summary>
+        </member>
+        <member name="T:Comos.PublicApi.Services.Models.ProjectComosObject">
+            <summary>
+            Document Comos Object
+            </summary>
+        </member>
+        <member name="P:Comos.PublicApi.Services.Models.ProjectComosObject.StandardTables">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Comos.PublicApi.Services.Models.ProjectComosObject.OwnStandardTables">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Comos.PublicApi.Services.Models.ProjectComosObject.Devices">
+            <summary>
+            Devices
+            </summary>
+        </member>
+        <member name="T:Comos.PublicApi.Services.Models.QueryExportType">
+            <summary>
+            QueryExportType
+            </summary>
+        </member>
+        <member name="F:Comos.PublicApi.Services.Models.QueryExportType.query2excel">
+            <summary>
+            query2excel
+            </summary>
+        </member>
+        <member name="T:Comos.PublicApi.Services.Models.QueryResult">
+            <summary>
+            Query Result
+            </summary>
+        </member>
+        <member name="P:Comos.PublicApi.Services.Models.QueryResult.Columns">
+            <summary>
+            Query result columns
+            </summary>
+        </member>
+        <member name="P:Comos.PublicApi.Services.Models.QueryResult.Rows">
+            <summary>
+            Query result rows
+            </summary>
+        </member>
+        <member name="T:Comos.PublicApi.Services.Models.QueryResultColumn">
+            <summary>
+            Query Result Columns
+            </summary>
+        </member>
+        <member name="P:Comos.PublicApi.Services.Models.QueryResultColumn.Id">
+            <summary>
+            Id
+            </summary>
+        </member>
+        <member name="P:Comos.PublicApi.Services.Models.QueryResultColumn.Alignment">
+            <summary>
+            Alignment
+            </summary>
+        </member>
+        <member name="P:Comos.PublicApi.Services.Models.QueryResultColumn.Width">
+            <summary>
+            Width
+            </summary>
+        </member>
+        <member name="P:Comos.PublicApi.Services.Models.QueryResultColumn.Visible">
+            <summary>
+            Visible
+            </summary>
+        </member>
+        <member name="P:Comos.PublicApi.Services.Models.QueryResultColumn.DisplayDescription">
+            <summary>
+            Display Description
+            </summary>
+        </member>
+        <member name="P:Comos.PublicApi.Services.Models.QueryResultColumn.Numeric">
+            <summary>
+            Numeric
+            </summary>
+        </member>
+        <member name="P:Comos.PublicApi.Services.Models.QueryResultColumn.WrapText">
+            <summary>
+            WrapText
+            </summary>
+        </member>
+        <member name="P:Comos.PublicApi.Services.Models.QueryResultColumn.IsDate">
+            <summary>
+            IsDate
+            </summary>
+        </member>
+        <member name="T:Comos.PublicApi.Services.Models.QueryResultColumnAlignment">
+            <summary>
+            Query result column alignment
+            </summary>
+        </member>
+        <member name="F:Comos.PublicApi.Services.Models.QueryResultColumnAlignment.Left">
+            <summary>
+            Left
+            </summary>
+        </member>
+        <member name="F:Comos.PublicApi.Services.Models.QueryResultColumnAlignment.Right">
+            <summary>
+            Right
+            </summary>
+        </member>
+        <member name="F:Comos.PublicApi.Services.Models.QueryResultColumnAlignment.Center">
+            <summary>
+            Center
+            </summary>
+        </member>
+        <member name="T:Comos.PublicApi.Services.Models.QueryResultItem">
+            <summary>
+            Query Result Item
+            </summary>
+        </member>
+        <member name="P:Comos.PublicApi.Services.Models.QueryResultItem.UID">
+            <summary>
+            Item UID
+            </summary>
+        </member>
+        <member name="P:Comos.PublicApi.Services.Models.QueryResultItem.Text">
+            <summary>
+            Texts
+            </summary>
+        </member>
+        <member name="P:Comos.PublicApi.Services.Models.QueryResultItem.NumericValue">
+            <summary>
+            NumericValue
+            </summary>
+        </member>
+        <member name="T:Comos.PublicApi.Services.Models.QueryResultRow">
+            <summary>
+            Query Result Row
+            </summary>
+        </member>
+        <member name="P:Comos.PublicApi.Services.Models.QueryResultRow.UID">
+            <summary>
+            Row UID
+            </summary>
+        </member>
+        <member name="P:Comos.PublicApi.Services.Models.QueryResultRow.Items">
+            <summary>
+            Items
+            </summary>
+        </member>
+        <member name="T:Comos.PublicApi.Services.Models.ReportExportType">
+            <summary>
+            Export Types
+            </summary>
+        </member>
+        <member name="F:Comos.PublicApi.Services.Models.ReportExportType.report2pdf">
+            <summary>
+            report2pdf
+            </summary>
+        </member>
+        <member name="F:Comos.PublicApi.Services.Models.ReportExportType.report2excel">
+            <summary>
+            report2excel
+            </summary>
+        </member>
+        <member name="T:Comos.PublicApi.Services.Models.Revision">
+            <summary>
+            Revision
+            </summary>
+        </member>
+        <member name="P:Comos.PublicApi.Services.Models.Revision.Label">
+            <summary>
+            Label
+            </summary>
+        </member>
+        <member name="P:Comos.PublicApi.Services.Models.Revision.Elements">
+            <summary>
+            Elements
+            </summary>
+        </member>
+        <member name="P:Comos.PublicApi.Services.Models.Revision.AdditionalDocuments">
+            <summary>
+            AdditionalDocuments
+            </summary>
+        </member>
+        <member name="P:Comos.PublicApi.Services.Models.Revision.RedLinings">
+            <summary>
+            RedLinings
+            </summary>
+        </member>
+        <member name="P:Comos.PublicApi.Services.Models.Revision.IsFileAvailable">
+            <summary>
+            IsFileAvailable
+            </summary>
+        </member>
+        <member name="P:Comos.PublicApi.Services.Models.Revision.Name">
+            <summary>
+            Name
+            </summary>
+        </member>
+        <member name="P:Comos.PublicApi.Services.Models.Revision.Description">
+            <summary>
+            Description
+            </summary>
+        </member>
+        <member name="P:Comos.PublicApi.Services.Models.Revision.UID">
+            <summary>
+            UID
+            </summary>
+        </member>
+        <member name="P:Comos.PublicApi.Services.Models.Revision.ProjectUID">
+            <summary>
+            Project UID
+            </summary>
+        </member>
+        <member name="P:Comos.PublicApi.Services.Models.Revision.OverlayUID">
+            <summary>
+            Overlay UID
+            </summary>
+        </member>
+        <member name="T:Comos.PublicApi.Services.Models.RevisionData">
+            <summary>
+            RevisionData
+            </summary>
+        </member>
+        <member name="P:Comos.PublicApi.Services.Models.RevisionData.Steps">
+            <summary>
+            Steps
+            </summary>
+        </member>
+        <member name="P:Comos.PublicApi.Services.Models.RevisionData.Revisions">
+            <summary>
+            Revisions
+            </summary>
+        </member>
+        <member name="T:Comos.PublicApi.Services.Models.RevisionElement">
+            <summary>
+            Revision Element
+            </summary>
+        </member>
+        <member name="P:Comos.PublicApi.Services.Models.RevisionElement.Created">
+            <summary>
+            Created
+            </summary>
+        </member>
+        <member name="P:Comos.PublicApi.Services.Models.RevisionElement.Author">
+            <summary>
+            Author
+            </summary>
+        </member>
+        <member name="P:Comos.PublicApi.Services.Models.RevisionElement.OwnLabel">
+            <summary>
+            OwnLabel
+            </summary>
+        </member>
+        <member name="P:Comos.PublicApi.Services.Models.RevisionElement.OwnDescription">
+            <summary>
+            OwnDescription
+            </summary>
+        </member>
+        <member name="T:Comos.PublicApi.Services.Models.RevisionStep">
+            <summary>
+            Revision Step
+            </summary>
+        </member>
+        <member name="P:Comos.PublicApi.Services.Models.RevisionStep.StepId">
+            <summary>
+            Revision step Id. 1: Created By, 2: Checked By, 3: Released By
+            </summary>
+        </member>
+        <member name="P:Comos.PublicApi.Services.Models.RevisionStep.Label">
+            <summary>
+            Revision step label
+            </summary>
+        </member>
+        <member name="P:Comos.PublicApi.Services.Models.RevisionStep.Description">
+            <summary>
+            Revision step description
+            </summary>
+        </member>
+        <member name="T:Comos.PublicApi.Services.Models.ScriptExecutionInfo">
+            <summary>
+            ScriptExecutionInfo
+            </summary>
+        </member>
+        <member name="P:Comos.PublicApi.Services.Models.ScriptExecutionInfo.SystemFullName">
+            <summary>
+            SystemFullName
+            </summary>
+        </member>
+        <member name="P:Comos.PublicApi.Services.Models.ScriptExecutionInfo.ScriptName">
+            <summary>
+            ScriptName
+            </summary>
+        </member>
+        <member name="P:Comos.PublicApi.Services.Models.ScriptExecutionInfo.Params">
+            <summary>
+            Script Parameters
+            </summary>
+        </member>
+        <member name="T:Comos.PublicApi.Services.Models.ScriptExecutionResult">
+            <summary>
+            ScriptExecutionResult
+            </summary>
+        </member>
+        <member name="P:Comos.PublicApi.Services.Models.ScriptExecutionResult.Result">
+            <summary>
+            Result
+            </summary>
+        </member>
+        <member name="P:Comos.PublicApi.Services.Models.ScriptExecutionResult.Error">
+            <summary>
+            Error
+            </summary>
+        </member>
+        <member name="T:Comos.PublicApi.Services.Models.ScriptExecutionError">
+            <summary>
+            ScriptExecutionError
+            </summary>
+        </member>
+        <member name="P:Comos.PublicApi.Services.Models.ScriptExecutionError.Code">
+            <summary>
+            Error Code
+            </summary>
+        </member>
+        <member name="P:Comos.PublicApi.Services.Models.ScriptExecutionError.Message">
+            <summary>
+            Error Message
+            </summary>
+        </member>
+        <member name="T:Comos.PublicApi.Services.Models.Specification">
+            <summary>
+            Specification
+            </summary>
+        </member>
+        <member name="P:Comos.PublicApi.Services.Models.Specification.NestedName">
+            <summary>
+            NestedName
+            </summary>
+        </member>
+        <member name="P:Comos.PublicApi.Services.Models.Specification.Description">
+            <summary>
+            Description
+            </summary>
+        </member>
+        <member name="P:Comos.PublicApi.Services.Models.Specification.Value">
+            <summary>
+            Value
+            </summary>
+        </member>
+        <member name="P:Comos.PublicApi.Services.Models.Specification.DisplayValue">
+            <summary>
+            Display values
+            </summary>
+        </member>
+        <member name="P:Comos.PublicApi.Services.Models.Specification.LValue">
+            <summary>
+            LValue
+            </summary>
+        </member>
+        <member name="P:Comos.PublicApi.Services.Models.Specification.SIValue">
+            <summary>
+            SIValue
+            </summary>
+        </member>
+        <member name="P:Comos.PublicApi.Services.Models.Specification.ControlType">
+            <summary>
+            ControlType
+            </summary>
+        </member>
+        <member name="P:Comos.PublicApi.Services.Models.Specification.Unit">
+            <summary>
+            Unit
+            </summary>
+        </member>
+        <member name="P:Comos.PublicApi.Services.Models.Specification.RangeType">
+            <summary>
+            RangeType
+            </summary>
+        </member>
+        <member name="P:Comos.PublicApi.Services.Models.Specification.Type">
+            <summary>
+            Type
+            </summary>
+        </member>
+        <member name="P:Comos.PublicApi.Services.Models.Specification.TabIndex">
+            <summary>
+            TabIndex
+            </summary>
+        </member>
+        <member name="P:Comos.PublicApi.Services.Models.Specification.PhysUnitLabel">
+            <summary>
+            PhysUnitLabel
+            </summary>
+        </member>
+        <member name="P:Comos.PublicApi.Services.Models.Specification.Precision">
+            <summary>
+            Precision
+            </summary>
+        </member>
+        <member name="P:Comos.PublicApi.Services.Models.Specification.Length">
+            <summary>
+            Length
+            </summary>
+        </member>
+        <member name="P:Comos.PublicApi.Services.Models.Specification.Count">
+            <summary>
+            Count
+            </summary>
+        </member>
+        <member name="P:Comos.PublicApi.Services.Models.Specification.StandardTable">
+            <summary>
+            Standard table UID
+            </summary>
+        </member>
+        <member name="P:Comos.PublicApi.Services.Models.Specification.LinkObject">
+            <summary>
+            LinkObject
+            </summary>
+        </member>
+        <member name="P:Comos.PublicApi.Services.Models.Specification.XValues">
+            <summary>
+            XValues
+            </summary>
+        </member>
+        <member name="T:Comos.PublicApi.Services.Models.SpecificationPatch">
+            <summary>
+            Specification for Patch
+            </summary>
+        </member>
+        <member name="P:Comos.PublicApi.Services.Models.SpecificationPatch.NestedName">
+            <summary>
+            NestedName
+            </summary>
+        </member>
+        <member name="P:Comos.PublicApi.Services.Models.SpecificationPatch.Value">
+            <summary>
+            Value
+            </summary>
+        </member>
+        <member name="P:Comos.PublicApi.Services.Models.SpecificationPatch.SIValue">
+            <summary>
+            SIValue
+            </summary>
+        </member>
+        <member name="P:Comos.PublicApi.Services.Models.SpecificationPatch.LinkObject">
+            <summary>
+            LinkObject
+            </summary>
+        </member>
+        <member name="P:Comos.PublicApi.Services.Models.SpecificationPatch.XValues">
+            <summary>
+            XValues
+            </summary>
+        </member>
+        <member name="T:Comos.PublicApi.Services.Models.StandardTableComosObject">
+            <summary>
+            Document Comos Object
+            </summary>
+        </member>
+        <member name="P:Comos.PublicApi.Services.Models.StandardTableComosObject.DefaultValue">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Comos.PublicApi.Services.Models.StandardTableComosObject.StandardTables">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="T:Comos.PublicApi.Services.Models.StandardTableRow">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:Comos.PublicApi.Services.Models.StandardTableRow.Name">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:Comos.PublicApi.Services.Models.StandardTableRow.Description">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:Comos.PublicApi.Services.Models.StandardTableRow.XValueCount">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:Comos.PublicApi.Services.Models.StandardTableRow.XValue">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="T:Comos.PublicApi.Services.Models.StandardTableValue">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Comos.PublicApi.Services.Models.StandardTableValue.Value">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="T:Comos.PublicApi.Services.Models.User">
+            <summary>
+            User
+            </summary>
+        </member>
+        <member name="P:Comos.PublicApi.Services.Models.User.FirstName">
+            <summary>
+            FirstName
+            </summary>
+        </member>
+        <member name="P:Comos.PublicApi.Services.Models.User.LastName">
+            <summary>
+            LastName
+            </summary>
+        </member>
+        <member name="T:Comos.PublicApi.Services.Models.UserIdentifier">
+            <summary>
+            User Name Identifier object
+            </summary>
+        </member>
+        <member name="P:Comos.PublicApi.Services.Models.UserIdentifier.UserName">
+            <summary>
+            UserName
+            </summary>
+        </member>
+        <member name="T:Comos.PublicApi.Services.Models.UserPost">
+            <summary>
+            UserPost
+            </summary>
+        </member>
+        <member name="P:Comos.PublicApi.Services.Models.UserPost.DepartmentUID">
+            <summary>
+            DepartmentUID
+            </summary>
+        </member>
+        <member name="P:Comos.PublicApi.Services.Models.UserPost.Email">
+            <summary>
+            Email
+            </summary>
+        </member>
+        <member name="T:Comos.PublicApi.Services.Models.WorkingOverlay">
+            <summary>
+            Working Overlay
+            </summary>
+        </member>
+        <member name="P:Comos.PublicApi.Services.Models.WorkingOverlay.Name">
+            <summary>
+            Name
+            </summary>
+        </member>
+        <member name="P:Comos.PublicApi.Services.Models.WorkingOverlay.Description">
+            <summary>
+            Description
+            </summary>
+        </member>
+        <member name="P:Comos.PublicApi.Services.Models.WorkingOverlay.UID">
+            <summary>
+            Working Overlay UID
+            </summary>
+        </member>
+        <member name="P:Comos.PublicApi.Services.Models.WorkingOverlay.SystemFullName">
+            <summary>
+            System full Name
+            </summary>
+        </member>
+        <member name="T:Comos.PublicApi.Services.Models.WorkingOverlayPost">
+            <summary>
+            Working Overlay
+            </summary>
+        </member>
+        <member name="P:Comos.PublicApi.Services.Models.WorkingOverlayPost.Name">
+            <summary>
+            Name
+            </summary>
+        </member>
+        <member name="P:Comos.PublicApi.Services.Models.WorkingOverlayPost.Description">
+            <summary>
+            Description
+            </summary>
+        </member>
+        <member name="P:Comos.PublicApi.Services.Models.WorkingOverlayPost.Owner">
+            <summary>
+            Owner
+            </summary>
+        </member>
+        <member name="P:Comos.PublicApi.Services.Models.WorkingOverlayPost.ConnectedBaseWorkingOverlay">
+            <summary>
+            Connected base working overlay
+            </summary>
+        </member>
+        <member name="T:Comos.PublicApi.Services.Models.XValueData">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:Comos.PublicApi.Services.Models.XValueData.Index">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:Comos.PublicApi.Services.Models.XValueData.XValue">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="T:Comos.PublicApi.Services.ComosXValuePatch">
+            <summary>
+            Comos XValue for Patch
+            </summary>
+        </member>
+        <member name="P:Comos.PublicApi.Services.ComosXValuePatch.Index">
+            <summary>
+            Index
+            </summary>
+        </member>
+        <member name="P:Comos.PublicApi.Services.ComosXValuePatch.XValue">
+            <summary>
+            XValue
+            </summary>
+        </member>
+        <member name="P:Comos.PublicApi.Services.ComosXValuePatch.SIXValue">
+            <summary>
+            SIXValue
+            </summary>
+        </member>
+        <member name="T:Comos.PublicApi.Services.Providers.FieldsProvider">
+            <summary>
+            FieldsProvider
+            </summary>
+        </member>
+        <member name="M:Comos.PublicApi.Services.Providers.FieldsProvider.ValidateFieldsExpression(System.String,Comos.PublicApi.Services.Contracts.FieldsStrategyType)">
+            <summary>
+            ValidateFieldsExpression
+            </summary>
+            <param name="fieldsExpression"></param>
+            <param name="fieldsStrategy"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Comos.PublicApi.Services.Providers.FieldsProvider.ValidateFieldsExpression(System.String,System.String,Comos.PublicApi.Services.Contracts.FieldsStrategyType)">
+            <summary>
+            ValidateFieldsExpression
+            </summary>
+            <param name="fieldsExpression"></param>
+            <param name="objectId"></param>
+            <param name="fieldsStrategy"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Comos.PublicApi.Services.Providers.FieldsProvider.ValidateFieldsExpression(System.String,System.Collections.Generic.IEnumerable{System.String},Comos.PublicApi.Services.Contracts.FieldsStrategyType)">
+            <summary>
+            Field Validations for multiple objectIds
+            </summary>
+            <param name="fieldsExpression"></param>
+            <param name="objectIds"></param>
+            <param name="fieldsStrategy"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Comos.PublicApi.Services.Providers.FieldsProvider.ValidateFieldsExpression(System.String,System.Int32,Comos.PublicApi.Services.Contracts.FieldsStrategyType)">
+            <summary>
+            ValidateFieldsExpression
+            </summary>
+            <param name="fieldsExpression"></param>
+            <param name="systemType"></param>
+            <param name="fieldsStrategy"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Comos.PublicApi.Services.Providers.FieldsProvider.GetValidFields(System.String,System.Int32,Comos.PublicApi.Services.Contracts.FieldsStrategyType)">
+            <summary>
+            GetValidFields
+            </summary>
+            <param name="fieldsExpression"></param>
+            <param name="systemType"></param>
+            <param name="fieldsStrategy"></param>
+            <returns></returns>
+        </member>
+        <member name="T:Comos.PublicApi.Services.Providers.MapProvider">
+            <summary>
+            MapProvider
+            </summary>
+        </member>
+        <member name="M:Comos.PublicApi.Services.Providers.MapProvider.ComosObjectMap(System.Object,System.Int32,System.String)">
+            <summary>
+            ComosObjectMap
+            </summary>
+            <param name="source"></param>
+            <param name="systemType"></param>
+            <param name="fieldsExpression"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Comos.PublicApi.Services.Providers.MapProvider.ComosObjectsBulkMap(System.Collections.Generic.IEnumerable{System.Object},System.String)">
+            <summary>
+            ComosObjectsBulkMap
+            </summary>
+            <param name="source"></param>
+            <param name="fieldsExpression"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Comos.PublicApi.Services.Providers.MapProvider.ComosObjectsBulkMetadataMap(System.Object,System.String)">
+            <summary>
+            ComosObjectsBulkMetadataMap
+            </summary>
+            <param name="source"></param>
+            <param name="fieldsExpression"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Comos.PublicApi.Services.Providers.MapProvider.ComosObjectPatchReverseMap(System.Object)">
+            <summary>
+            ComosObjectPatchReverseMap
+            </summary>
+            <param name="source"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Comos.PublicApi.Services.Providers.MapProvider.ComosObjectPostReverseMap(System.Object)">
+            <summary>
+            ComosObjectPostReverseMap
+            </summary>
+            <param name="source"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Comos.PublicApi.Services.Providers.MapProvider.BulkUpdatePatchReverseMap(System.Object)">
+            <summary>
+            BulkUpdatePatchReverseMap
+            </summary>
+            <param name="source"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Comos.PublicApi.Services.Providers.MapProvider.BulkPatchReverseMap(System.Object)">
+            <summary>
+            BulkUpdatePatchReverseMap
+            </summary>
+            <param name="source"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Comos.PublicApi.Services.Providers.MapProvider.DocElementMap(Comos.Gateway.Contracts.DocElement)">
+            <summary>
+            DocElementMap
+            </summary>
+            <param name="source"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Comos.PublicApi.Services.Providers.MapProvider.DocElementMap(System.Collections.Generic.IEnumerable{Comos.Gateway.Contracts.DocElement})">
+            <summary>
+            DocElementMap
+            </summary>
+            <param name="source"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Comos.PublicApi.Services.Providers.MapProvider.LanguageMap(Comos.Gateway.Contracts.GridItem)">
+            <summary>
+            LanguageMap
+            </summary>
+            <param name="source"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Comos.PublicApi.Services.Providers.MapProvider.LanguageMap(System.Collections.Generic.IEnumerable{Comos.Gateway.Contracts.GridItem})">
+            <summary>
+            LanguageMap
+            </summary>
+            <param name="source"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Comos.PublicApi.Services.Providers.MapProvider.ProjectMap(Comos.Gateway.Contracts.GridItem)">
+            <summary>
+            ProjectMap
+            </summary>
+            <param name="source"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Comos.PublicApi.Services.Providers.MapProvider.ProjectMap(System.Collections.Generic.IEnumerable{Comos.Gateway.Contracts.GridItem})">
+            <summary>
+            ProjectMap
+            </summary>
+            <param name="source"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Comos.PublicApi.Services.Providers.MapProvider.QueryResultColumnMap(Comos.Gateway.Contracts.QueryResultColumn)">
+            <summary>
+            QueryResultColumnMap
+            </summary>
+            <param name="source"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Comos.PublicApi.Services.Providers.MapProvider.QueryResultColumnMap(System.Collections.Generic.IEnumerable{Comos.Gateway.Contracts.QueryResultColumn})">
+            <summary>
+            QueryResultColumnMap
+            </summary>
+            <param name="source"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Comos.PublicApi.Services.Providers.MapProvider.QueryResultItemMap(Comos.Gateway.Contracts.QueryResultItem)">
+            <summary>
+            QueryResultItemMap
+            </summary>
+            <param name="source"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Comos.PublicApi.Services.Providers.MapProvider.QueryResultItemMap(System.Collections.Generic.IEnumerable{Comos.Gateway.Contracts.QueryResultItem})">
+            <summary>
+            QueryResultItemMap
+            </summary>
+            <param name="source"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Comos.PublicApi.Services.Providers.MapProvider.QueryResultMap(Comos.Gateway.Contracts.QueryResult)">
+            <summary>
+            QueryResultMap
+            </summary>
+            <param name="source"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Comos.PublicApi.Services.Providers.MapProvider.QueryResultMap(System.Collections.Generic.IEnumerable{Comos.Gateway.Contracts.QueryResult})">
+            <summary>
+            QueryResultMap
+            </summary>
+            <param name="source"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Comos.PublicApi.Services.Providers.MapProvider.QueryResultRowMap(Comos.Gateway.Contracts.QueryResultRow)">
+            <summary>
+            QueryResultRowMap
+            </summary>
+            <param name="source"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Comos.PublicApi.Services.Providers.MapProvider.QueryResultRowMap(System.Collections.Generic.IEnumerable{Comos.Gateway.Contracts.QueryResultRow})">
+            <summary>
+            QueryResultRowMap
+            </summary>
+            <param name="source"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Comos.PublicApi.Services.Providers.MapProvider.RevisionDataMap(Comos.Gateway.Contracts.RevisionList)">
+            <summary>
+            RevisionDataMap
+            </summary>
+            <param name="source"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Comos.PublicApi.Services.Providers.MapProvider.RevisionDataMap(System.Collections.Generic.IEnumerable{Comos.Gateway.Contracts.RevisionList})">
+            <summary>
+            RevisionDataMap
+            </summary>
+            <param name="source"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Comos.PublicApi.Services.Providers.MapProvider.RevisionElementMap(Comos.Gateway.Contracts.RevisionElement)">
+            <summary>
+            RevisionElementMap
+            </summary>
+            <param name="source"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Comos.PublicApi.Services.Providers.MapProvider.RevisionElementMap(System.Collections.Generic.IEnumerable{Comos.Gateway.Contracts.RevisionElement})">
+            <summary>
+            RevisionElementMap
+            </summary>
+            <param name="source"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Comos.PublicApi.Services.Providers.MapProvider.RevisionMap(Comos.Gateway.Contracts.RevisionItem)">
+            <summary>
+            RevisionMap
+            </summary>
+            <param name="source"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Comos.PublicApi.Services.Providers.MapProvider.RevisionMap(System.Collections.Generic.IEnumerable{Comos.Gateway.Contracts.RevisionItem})">
+            <summary>
+            RevisionMap
+            </summary>
+            <param name="source"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Comos.PublicApi.Services.Providers.MapProvider.SpecificationMap(System.Collections.Generic.IEnumerable{System.Object},System.String)">
+            <summary>
+            SpecificationMap
+            </summary>
+            <param name="source"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Comos.PublicApi.Services.Providers.MapProvider.SpecificationReverseMap(System.Collections.Generic.IEnumerable{System.Object})">
+            <summary>
+            SpecificationReverseMap
+            </summary>
+            <param name="source"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Comos.PublicApi.Services.Providers.MapProvider.XValueData(Comos.Gateway.Contracts.XValueData)">
+            <summary>
+            XValueData
+            </summary>
+            <param name="source"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Comos.PublicApi.Services.Providers.MapProvider.XValueData(System.Collections.Generic.IEnumerable{Comos.Gateway.Contracts.XValueData})">
+            <summary>
+            XValueData
+            </summary>
+            <param name="source"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Comos.PublicApi.Services.Providers.MapProvider.StandardTableRowMap(Comos.Gateway.Contracts.StandardTableRow)">
+            <summary>
+            StandardTableRowMap
+            </summary>
+            <param name="source"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Comos.PublicApi.Services.Providers.MapProvider.StandardTableRowMap(System.Collections.Generic.IEnumerable{Comos.Gateway.Contracts.StandardTableRow})">
+            <summary>
+            StandardTableRowMap
+            </summary>
+            <param name="source"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Comos.PublicApi.Services.Providers.MapProvider.Map``1(System.Object)">
+            <summary>
+            Generic mapper
+            </summary>
+            <typeparam name="T"></typeparam>
+            <param name="source"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Comos.PublicApi.Services.Providers.MapProvider.WorkingOverlayMap(Comos.Gateway.Contracts.GridItem)">
+            <summary>
+            WorkingOverlayMap
+            </summary>
+            <param name="source"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Comos.PublicApi.Services.Providers.MapProvider.WorkingOverlayMap(System.Collections.Generic.IEnumerable{Comos.Gateway.Contracts.GridItem})">
+            <summary>
+            WorkingOverlayMap
+            </summary>
+            <param name="source"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Comos.PublicApi.Services.Providers.MapProvider.WorkingOverlayReverseMap(Comos.PublicApi.Services.Models.WorkingOverlayPost)">
+            <summary>
+            WorkingOverlayReverseMap
+            </summary>
+            <param name="source"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Comos.PublicApi.Services.Providers.MapProvider.AddDocumentToObjectMap(Comos.Gateway.Contracts.ComosGatewayRefObject)">
+            <summary>
+            AddDocumentToObjectMap
+            </summary>
+            <param name="source"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Comos.PublicApi.Services.Providers.MapProvider.BulkUpdateObjectsReverseMap(System.Collections.Generic.IEnumerable{System.Object})">
+            <summary>
+            BulkUpdateObjectsReverseMap
+            </summary>
+            <param name="source"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Comos.PublicApi.Services.Providers.MapProvider.ScriptExecutionInfoReverseMap(Comos.PublicApi.Services.Models.ScriptExecutionInfo,System.Collections.Generic.List{System.String})">
+            <summary>
+            ScriptExecutionInfoReverseMap
+            </summary>
+            <param name="source"></param>
+            <param name="jsonParams"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Comos.PublicApi.Services.Providers.MapProvider.ScriptExecutionResultMap(Comos.Gateway.Contracts.ScriptExecutionResult)">
+            <summary>
+            ScriptExecutionResultMap
+            </summary>
+            <param name="source"></param>
+            <returns></returns>
+            <exception cref="T:System.NotImplementedException"></exception>
+        </member>
+        <member name="T:Comos.PublicApi.Services.Sessions.CLSAuthorizeAttribute">
+            <summary>
+            Authorization attribute using the CLS to guard the Api methode.
+            </summary>
+        </member>
+        <member name="M:Comos.PublicApi.Services.Sessions.CLSAuthorizeAttribute.#ctor(Comos.Services.Sessions.WebLicense[])">
+            <summary>
+            Ctor
+            </summary>        
+            <param name="licenses">Licenses that grant the access right.</param>
+        </member>
+        <member name="M:Comos.PublicApi.Services.Sessions.CLSAuthorizeAttribute.OnAuthorization(System.Web.Http.Controllers.HttpActionContext)">
+            <summary>
+            Processes request authorization using ComosRequestContext.
+            </summary>
+            <param name="actionContext"></param>
+        </member>
+    </members>
+</doc>

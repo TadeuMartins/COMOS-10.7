@@ -1,0 +1,23 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<Configuration>
+    <Database>
+        <!-- Windows authentication within the same windows domain of service and database -->
+        <Connection encrypt="false">Data Source=SQL Server;Server=ServerAddressExample;Database=DbNameExample;Trusted_Connection=Yes;Connect Timeout=15;</Connection>
+
+        <!-- Base authentication with different domains of service and database. Please ensure a secure access to this password through file read rights only for service user -->
+        <!--<Connection>Data Source=SQL Server;Server=ServerAddressExample;Database=DbNameExample;Integrated Security=false;Connect Timeout=15;Encrypt=False;TrustServerCertificate=False;User Id=YourUserName;Password=YourPassword;</Connection>-->
+    </Database>
+
+    <!-- Comos Sync is handled by COMOS scripting (beginning at version v10.2 SP3). If this setting is NOT present, the old Comos Sync is activated -->
+    <ComosSyncVersion>1023</ComosSyncVersion>
+
+    <!-- Comos Full Sync stability and performance is improved (beginning at version v10.3 SP3). If this setting is present, the old Comos Full Sync is activated -->
+    <!--<ComosFullSyncVersion>1032</ComosFullSyncVersion>-->
+
+    <!-- Allowable file extensions for task attachments -->
+    <DeniedFileExtensions>exe,bat,cmd,com,msi,vbs,ps1,scr,hta</DeniedFileExtensions>
+    <!--<AllowedFileExtensions>pdf,jpg,jpeg,bmp,png,doc,xls,docx,xlsx,</AllowedFileExtensions>-->
+
+  <!-- Task Permissions configuration to limit the editability of tasks -->
+    <Permissions enable="true"/>
+</Configuration>

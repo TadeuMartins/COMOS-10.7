@@ -1,0 +1,82 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ComosProjectSettings>
+  <General version="1.0" />
+  <!--
+        Includes all single project setting items
+        (Categories, Groups and Settings)
+    -->
+  <SettingItems>
+    <!-- Teamcenter Interface -->
+    <Category id="CAT_TeamcenterInterface" caption="~0737a Teamcenter interface" />
+    <!--Group for Tc credentials-->
+    <Setting id="GRP_TeamcenterInterce_AccessInfo" type="Group" caption="~0737b Access Information" />
+    <Setting id="PO_M06_TeamcenterInterface_HostUri" type="TextBox" caption="~0737c Host URI" attributeName="TeamcenterInterface.HostUri" />
+    <Setting id="PO_M06_TeamcenterInterface_WebclientUritemplate" type="TextBox" caption="~07cee Web client URI template" attributeName="TeamcenterInterface.WebclientUritemplate" />
+    <Setting id="GRP_TeamcenterInterce_UserPass" type="Group" caption="~07a91 User credentials" indent="1"/>
+    <Setting id="PO_M06_TeamcenterInterface_UserId" type="TextBox" caption="~053aa User ID" attributeName="TeamcenterInterface.UserId" observedSettings="PO_M06_TeamcenterInterface_ActiveSSO">
+		<Class assembly="Comos.Tc.PDI.Global" class="Comos.Tc.PDI.Global.AccessInfoSettings"/>
+	</Setting>
+    <Setting id="PO_M06_TeamcenterInterface_Group" type="TextBox" caption="~0069f Group" attributeName="TeamcenterInterface.Group" />
+    <Setting id="PO_M06_TeamcenterInterface_Role" type="TextBox" caption="~0391d Role" attributeName="TeamcenterInterface.Role" />
+    <Setting id="GRP_TeamcenterInterce_SSOLogin" type="Group" caption="~07a8d Single sign-on" indent="1"/>
+    <Setting id="PO_M06_TeamcenterInterface_ActiveSSO" type="CheckBox" defaultValue="0"  caption="~07a8e Activate SSO Login" attributeName="TeamcenterInterface.ActiveSSO" >
+		<Class assembly="Comos.Tc.PDI.Global" class="Comos.Tc.PDI.Global.AccessInfoSettings"/>
+	</Setting>
+    <Setting id="PO_M06_TeamcenterInterface_SSOServer" type="TextBox" caption="~07a8f SSO Server" attributeName="TeamcenterInterface.SSOServer" observedSettings="PO_M06_TeamcenterInterface_ActiveSSO">
+		<Class assembly="Comos.Tc.PDI.Global" class="Comos.Tc.PDI.Global.AccessInfoSettings"/>
+	</Setting>
+    <Setting id="PO_M06_TeamcenterInterface_SSOApplicationId" type="TextBox" caption="~07a90 SSO Application Id" attributeName="TeamcenterInterface.SSOApplicationId" observedSettings="PO_M06_TeamcenterInterface_ActiveSSO">
+		<Class assembly="Comos.Tc.PDI.Global" class="Comos.Tc.PDI.Global.AccessInfoSettings"/>
+	</Setting>
+    <!--CrossSelection options-->
+    <Setting id="GRP_TeamcenterInterce_CrossSelection" type="Group" caption="~07373 Cross Selection" />
+    <!--ChangeManagement options-->
+    <Setting id="GRP_TeamcenterInterce_ChangeMgmt" type="Group" caption="~07374 Change management backlog" />
+    <Setting id="PO_M06_TeamcenterInterface_PreparedCO" type="ObjectPointer" caption="~07375 Prepared change objects" attributeName="TeamcenterInterface.PreparedCO" />
+    <Setting id="PO_M06_TeamcenterInterface_SubmittedCO" type="ObjectPointer" caption="~07376 Submitted change objects" attributeName="TeamcenterInterface.SubmittedCO" />
+    <!--Translation configuration-->
+    <Setting id="GRP_TeamcenterInterce_SyncConfig" type="Group" caption="~07379 Synchronization configuration" />
+    <Setting id="PO_M06_TeamcenterInterface_ResourceTran" type="FileOpenDialog" caption="~07377 Resource translation file" attributeName="TeamcenterInterface.ResourceTran" />
+    <Setting id="PO_M06_TeamcenterInterface_PlantTran" type="FileOpenDialog" caption="~07378 Plant structure translation file" attributeName="TeamcenterInterface.PlantTran" />
+	<!--Teamcenter UOM-->
+    <Setting id="GRP_TeamcenterInterce_UOM" type="Group" caption="~079ed Teamcenter unit of measurement" />
+    <Setting id="PO_M06_TeamcenterInterface_TcUomMappingTable" type="ObjectPointer" caption="~079ee Teamcenter uom mapping table" attributeName="TeamcenterInterface.TcUomMappingTable" />
+    <!--Context menu configuration-->
+    <Setting id="GRP_TeamcenterInterce_CMConfig" type="Group" caption="~076e5 Context menu configuration" />
+    <Setting id="PO_M06_TeamcenterInterface_ActiveCM" type="CheckBox" defaultValue="0"  caption="~076e6 Activate context menu" attributeName="TeamcenterInterface.ActivateContextMenu" />
+  </SettingItems>
+  <!--
+        discribes the hierarchy of the project setting items,
+        referencing the single project setting items from SettingItems range.
+    -->
+  <SettingsHierarchy>
+    <!-- Teamcenter Interface -->
+    <Category idref="CAT_TeamcenterInterface">
+      <Setting idref="GRP_TeamcenterInterce_CMConfig">
+        <Setting idref="PO_M06_TeamcenterInterface_ActiveCM" />
+      </Setting>
+      <Setting idref="GRP_TeamcenterInterce_AccessInfo">
+        <Setting idref="PO_M06_TeamcenterInterface_HostUri" />
+        <Setting idref="PO_M06_TeamcenterInterface_WebclientUritemplate" />
+        <Setting idref="GRP_TeamcenterInterce_UserPass">
+          <Setting idref="PO_M06_TeamcenterInterface_UserId" />
+          <Setting idref="PO_M06_TeamcenterInterface_Group" />
+          <Setting idref="PO_M06_TeamcenterInterface_Role" />
+        </Setting>
+        <Setting idref="GRP_TeamcenterInterce_SSOLogin">
+          <Setting idref="PO_M06_TeamcenterInterface_ActiveSSO" />
+          <Setting idref="PO_M06_TeamcenterInterface_SSOServer" />
+          <Setting idref="PO_M06_TeamcenterInterface_SSOApplicationId" />
+        </Setting>
+      </Setting>
+      <Setting idref="GRP_TeamcenterInterce_ChangeMgmt">
+        <Setting idref="PO_M06_TeamcenterInterface_PreparedCO" />
+        <Setting idref="PO_M06_TeamcenterInterface_SubmittedCO" />
+      </Setting>
+	    <Setting idref="GRP_TeamcenterInterce_UOM">
+        <Setting idref="PO_M06_TeamcenterInterface_TcUomMappingTable" />
+      </Setting>
+      <!--<Setting idref="GRP_TeamcenterInterce_SyncConfig"><Setting idref="PO_M06_TeamcenterInterface_ResourceTran" /><Setting idref="PO_M06_TeamcenterInterface_PlantTran" /></Setting>-->
+    </Category>
+  </SettingsHierarchy>
+</ComosProjectSettings>

@@ -1,0 +1,3 @@
+REF=#/components/schemas/DirectAnalyzeRequest
+SCHEMA_NAME=DirectAnalyzeRequest
+PROPS=file_path,pdf_base64,filename,diagram_type,dpi,grid,enable_electrical_quadrants,use_dynamic_tolerance,use_ocr_validation,use_geometric_refinement,use_geometric_refinement_electrical,use_pdf_alignment

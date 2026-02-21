@@ -1,0 +1,21 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<Configuration>
+  <RenewalInterval>120</RenewalInterval>
+  <Database>
+    <Key>db1</Key>
+  </Database>
+  <!-- Attribute definitions.-->
+  <!--
+  <Attributes>
+    <FirstName></FirstName>
+    <LastName></LastName>
+  </Attributes>
+  -->
+  <!-- Role definitions for COMOS Groups.-->
+  <!-- 
+  <Roles>
+	<Role name="RoleName1" systemname="ComosGroupName1"/>
+	<Role name="RoleName2" systemname="ComosGroupName2"/>	
+  </Roles> 
+  -->
+</Configuration>

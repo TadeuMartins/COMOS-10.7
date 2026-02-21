@@ -1,0 +1,69 @@
+--- START DLL STRING SEARCH ---
+
+========== PRIMARY SEARCH (error messages) ==========
+
+CHECKING: Comos.ChatBotInDesktop.dll
+  (no primary matches)
+
+CHECKING: Comos.EngineeringAssistant.ChatControl.dll
+  (no primary matches)
+
+CHECKING: Comos.EngineeringAssistant.HttpClient.dll
+  FOUND 'AI service' (UTF16) at index 3340
+  Context: ssistant/1.0.AIServiceClient.request./api/ai/v1/completions.AI Service request failed with status {0}: {1}.AI Service request timed out.Error communicating with AI Service: ............................................................................I..................................................
+
+CHECKING: Comos.Ai.Http.dll
+  FOUND 'AI service' (UTF16) at index 4434
+  Context: pi/ai/v1/completions/generate-title.AiServiceClient.request.AI Service Request to .: .AI Service Response from {0} (Status: {1}): {2}.AI Service request failed with status {0}: {1}.AI Service request timed out.Error communicating with AI Service: ./api/ai/v1/completions..............................
+
+CHECKING: Comos.WPF.ExtendedControls.dll
+  (no primary matches)
+
+========== SECONDARY SEARCH (code identifiers) ==========
+
+CHECKING: Comos.ChatBotInDesktop.dll
+  MATCH 'InitializeAsync' #1 (UTF8) idx=11940
+    mscorlib.<>c.System.Collections.Generic.InitializeAsync.RegisterComosChatFunctionsAsync.RegisterAIFunctionClassAsync.<<SendToUI>b__0>d.connectionId._contentLoaded.add_PropertyChanged.remove_PropertyCh
+
+CHECKING: Comos.EngineeringAssistant.ChatControl.dll
+  MATCH 'InitializeAsync' #1 (UTF8) idx=7803
+    waiter`1.IEnumerator`1.CS$<>8__locals1.<InitializeAsync>d__32.IDictionary`2.<SendToJS>d__7.<SendToJavaScript>d__8.<Module>.SendMessageToAI.EventSendToUI.System.IO.add_SendToJS.remove_SendToJS.mscorlib
+  MATCH 'InitializeAsync' #2 (UTF8) idx=8003
+    .System.Collections.Generic.InvokeAsync.InitializeAsync.<<SendToJS>b__1>d.connectionId.Add._contentLoaded.add_LoadingStateChanged.OnBrowserLoadingStateChanged.AwaitUnsafeOnCompleted.get_IsCompleted.On
+  MATCH 'InitializeAsync' #3 (UTF8) idx=15043
+    ingAssistant.ChatControl.AiChatControl+<InitializeAsync>d__32..$...PresentationBuildTasks.9.0.12.0...........`..[Comos.EngineeringAssistant.ChatControl.AiChatControl+<>c__DisplayClass7_1+<<SendToJS>b_
+  MATCH 'error' #1 (UTF8) idx=10096
+    builder.sender.Binder.get_Dispatcher.StdErrorHandler.System.CodeDom.Compiler.IContainer.get_ControlContainer.set_ControlContainer.CompositionContainer._container.ChromiumWebBrowser.add_ReceivedFromBro
+
+CHECKING: Comos.EngineeringAssistant.HttpClient.dll
+  MATCH 'ValidateConnection' #1 (UTF8) idx=4188
+    __2.<>u__2.<SendChatRequestAsync>d__13.<ValidateConnectionAsync>d__14.get_UTF8.<Module>.GC.mscorlib.SendAsync.ReadAsStringAsync.ValidateConnectionAsync.SendChatRequestAsync.PostAsync.get_Head.Add._dis
+  MATCH 'ValidateConnection' #2 (UTF8) idx=4276
+    GC.mscorlib.SendAsync.ReadAsStringAsync.ValidateConnectionAsync.SendChatRequestAsync.PostAsync.get_Head.Add._disposed.AwaitUnsafeOnCompleted.get_IsCompleted.get_IsCancellationRequested.HttpMethod.get_
+  MATCH 'ValidateConnection' #3 (UTF8) idx=8080
+    ngAssistant.HttpClient.AIServiceClient+<ValidateConnectionAsync>d__14...........|.....MP.........>... ..................'....>... ..............................RSDS^..l...J..oln.i.....D:\agent\_work\6
+
+CHECKING: Comos.Ai.Http.dll
+  MATCH 'ValidateConnection' #1 (UTF8) idx=5757
+    ......<GenerateFollowUpQuestions>d__20.<ValidateConnectionAsync>d__21.<>u__1.ConfiguredTaskAwaitable`1.Task`1.AsyncTaskMethodBuilder`1.Int32.<response>5__2.<>u__2.<PostToEndpointAsync>d__17.<SendChatC
+  MATCH 'ValidateConnection' #2 (UTF8) idx=6034
+    ta.mscorlib.SendAsync.ReadAsStringAsync.ValidateConnectionAsync.PostToEndpointAsync.SendChatCompletionRequestAsync.PostAsync.get_Head.Add._disposed.AwaitUnsafeOnCompleted.get_IsCompleted.HttpMethod.Sh
+  MATCH 'ValidateConnection' #3 (UTF8) idx=10925
+    _20..A..<Comos.Ai.Http.AiServiceClient+<ValidateConnectionAsync>d__21..................MP....z...,I..,+..................'....I...+..............................RSDS.....6.B............D:\agent\_work\
+  MATCH 'error' #1 (UTF8) idx=7566
+    ttpMessageInvoker.HttpMessageHandler.StdErrorHandler.HttpClientHandler.ConfiguredTaskAwaiter.GetAwaiter.Enter..ctor..cctor.Monitor.System.Diagnostics.Comos.Ai.Contracts.Interfaces.System.Runtime.Inter
+
+CHECKING: Comos.WPF.ExtendedControls.dll
+  MATCH 'error' #1 (UTF8) idx=116458
+    ResourceHandler>b__0.<ExtWebBrowser_LoadError>b__0.<ExtTwoDCVizualizer_LoadError>b__0.<ExportMarkups>b__0.<HandlePDFExport>b__0.<GetFirstResourceHandlerFromAssembly>b__0.<>p__0.<SetDocumentName>d__101
+  MATCH 'error' #2 (UTF8) idx=116493
+    _LoadError>b__0.<ExtTwoDCVizualizer_LoadError>b__0.<ExportMarkups>b__0.<HandlePDFExport>b__0.<GetFirstResourceHandlerFromAssembly>b__0.<>p__0.<SetDocumentName>d__101.<ActivateMultiSelect>d__111.<SendT
+  MATCH 'error' #3 (UTF8) idx=128147
+    .get_LengthofSide.set_LengthofSide.hide.errorCode.set_StatusCode.HttpStatusCode.FileMode.SwitchMode.GetMode.get_PrintMode.set_PrintMode.get_CategoryNode.set_CategoryNode.UrlDecode.mode.Magnitude.CefSh
+  MATCH 'error' #4 (UTF8) idx=128494
+    ge.MessageBoxImage.image.get_Message.ForErrorMessage.errorMessage.message.get_Language.set_Language.ChangeLanguage.CompareExchange.get_Stroke.set_Stroke.NonScalingStroke.get_stroke.set_stroke.EndInvok
+  MATCH 'error' #5 (UTF8) idx=128507
+    Image.image.get_Message.ForErrorMessage.errorMessage.message.get_Language.set_Language.ChangeLanguage.CompareExchange.get_Stroke.set_Stroke.NonScalingStroke.get_stroke.set_stroke.EndInvoke.BeginInvoke
+  ... and 6 more matches for 'error'
+
+=== ALL SEARCHES COMPLETE ===

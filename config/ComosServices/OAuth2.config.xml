@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!-- Copyright Siemens AG, 2025 -->
+<Configuration>
+  <Connections>
+    <!--AuthCodeFlowWebApp: This connection is used for WebApp (e.g.Mobile solutions)-->
+    <Connection Id="AuthCodeFlowWebApp">
+      <AuthUrl>https://login.microsoftonline.com/{TenantID}/oauth2/v2.0/authorize</AuthUrl>
+      <AccessTokenUrl>https://login.microsoftonline.com/{TenantID}/oauth2/v2.0/token</AccessTokenUrl>
+      <ClientId>{ClientId}</ClientId>
+      <IsClientSecretRequired>false</IsClientSecretRequired>
+      <ClientSecret></ClientSecret>
+      <IsPKCEEnabled>true</IsPKCEEnabled>
+      <RedirectUri>http://{ComosWebStartPage-HostedIISMachineUrl}:65200/webview/api/cloudauth/authcoderesp</RedirectUri>
+      <Scope>https://graph.microsoft.com/.default offline_access</Scope>
+      <GrantType>authorization_code</GrantType>
+      <ResponseType>code</ResponseType>
+      <PromptType>select_account</PromptType>
+    </Connection>
+    <!--AuthCodeFlowDesktopApp: This connection is used for DesktopApp (e.g. Comos Desktop)-->
+    <Connection Id="AuthCodeFlowDesktopApp">
+      <AuthUrl>https://login.microsoftonline.com/{TenantID}/oauth2/v2.0/authorize</AuthUrl>
+      <AccessTokenUrl>https://login.microsoftonline.com/{TenantID}/oauth2/v2.0/token</AccessTokenUrl>
+      <ClientId>{ClientId}</ClientId>
+      <IsClientSecretRequired>false</IsClientSecretRequired>
+      <ClientSecret></ClientSecret>
+      <IsPKCEEnabled>true</IsPKCEEnabled>
+      <RedirectUri>http://localhost/</RedirectUri>
+      <Scope>https://graph.microsoft.com/.default offline_access</Scope>
+      <GrantType>authorization_code</GrantType>
+      <ResponseType>code</ResponseType>
+      <PromptType>select_account</PromptType>
+    </Connection>
+    <!--Required in future for ServiceAppFlow, right now not required-->
+    <!--<Connection Id="AuthCodeFlowServiceApp">
+      <AuthUrl>https://login.microsoftonline.com/{TenantID}/oauth2/v2.0/authorize</AuthUrl>
+      <AccessTokenUrl>https://login.microsoftonline.com/{TenantID}/oauth2/v2.0/token</AccessTokenUrl>
+      <ClientId>{ClientId}</ClientId>
+      <IsClientSecretRequired>false</IsClientSecretRequired>
+      <ClientSecret></ClientSecret>
+      <IsPKCEEnabled>true</IsPKCEEnabled>
+      <RedirectUri>http://localhost/</RedirectUri>
+      <Scope>https://graph.microsoft.com/.default offline_access</Scope>
+      <GrantType>client_credentials</GrantType>
+      <ResponseType>code</ResponseType>
+      <PromptType>select_account</PromptType>
+    </Connection>-->
+  </Connections>
+</Configuration>

@@ -1,0 +1,4 @@
+﻿<%@ ServiceHost Language="C#" 
+    Debug="false" 
+    Service="Comos.Web.WebPDI.Services.WebPDIService, Comos.Web.WebPDI"
+%>

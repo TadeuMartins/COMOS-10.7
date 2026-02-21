@@ -1,0 +1,382 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<!--
+@<DEL>@ TEXT ENCLOSED within delete markers will be REMOVED
+/*==================================================================================================
+
+        COPYRIGHT 2012 SIEMENS PRODUCT LIFECYCLE MANAGEMENT SOFTWARE INC.
+                             ALL RIGHTS RESERVED.
+
+====================================================================================================
+File description:
+
+    XML Schema file for the Routing Specifications. Single Specification XML files loaded into
+    the Routing Reuse library in the Routing Mechanical/Electrical/Logical applications
+    are validated against file. Legacy multi-specification file 
+
+====================================================================================================
+   Date       Name                    Description of Change
+04-Mar-2013  Ravi Inti               Initial
+07-Mar-2013  Graham Bolton           Added documentation.
+$HISTORY$
+  TEXT ENCLOSED within delete markers will be REMOVED @<DEL>@
+-->
+<xs:schema attributeFormDefault="unqualified" elementFormDefault="qualified" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+  <xs:annotation>
+    <xs:documentation>
+      This file is available with NX OOTB kits folder UGII_ROUTING_APP_VIEW_DIR
+      Users of this schema should copy this to "C:/apps/".
+      In native mode, single specifications files should be put in the folder specified in the NX customer defaults:
+      File->Utilities->Customer Defaults->Routing->Part Library (Specifications tab).
+
+      In managed mode, single specification files should be put in the folder specified in the Teamcenter customer preference "TC_NX_Routing_specification_folder".
+
+      Site containing a lot of XML related information:
+      http://www.xml.org/
+
+      Introduction to XML Schema creation:
+      http://www.w3.org/TR/xmlschema-0/
+
+      Reference for XML Schema structures and datatypes:
+      http://www.w3.org/TR/xmlschema-1/
+      http://www.w3.org/TR/xmlschema-2/
+
+      Tutorial for Schema creation:
+      http://www.zvon.org/xxl/XMLSchemaTutorial/Output/index.html
+
+      Reference for the XPath language:
+      http://www.w3.org/TR/xpath
+
+      Quick reference for XML Schema elements:
+      http://doc.ddart.net/xmlsdk/htm/xsd_ref_1yer.htm
+
+      Validation of XML schema and instance [use Xerces-J2 validation]:
+      http://www.corefiling.com/opensource/schemaValidate.html
+    </xs:documentation>
+  </xs:annotation>
+  <xs:element name="RoutingSpecifications">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element name="Discipline">
+          <xs:complexType>
+            <xs:annotation>
+              <xs:documentation>
+                Discipline refers to the application domain for the specification. Recognised discipline names
+                in the application view of Routing Mechanical include "Piping","Tubing" and "HVAC".
+              </xs:documentation>
+            </xs:annotation>
+            <xs:sequence>
+              <xs:element name="Specification">
+                <xs:complexType>
+                  <xs:annotation>
+                    <xs:documentation>
+                      Specification is a set of selection criteria that are applied to items in the Routing Reuse library.
+                      Setting the specification active will result in a filtered Routing Reuse library, where objects
+                      not satisfying the specification are excluded in the Routing Reuse library navigator. 
+                      
+                      Attribute            Description
+                      ---------            -----------
+                      Name               : This name should be different to all other specifications loaded. This is the specification name displayed in the Routing Reuse Navigator.
+                      Description        : Text description.
+                      Author   (optional): Specifications can be selected for loading into nx based on this field.
+                                           Only "NX" authored specifications can be edited and deleted through nx.
+                      Released (optional): Only Released="false" specifications can be edited or deleted through nx. Use lower case "false" or "true" here.
+                      Status   (optional):  
+                      Version  (optional): A float representing the version, e.g. "1.0"
+                      VALID_NOMINAL_PIPE_SIZE_RANGE(optional): 
+                     </xs:documentation>
+                  </xs:annotation>
+                  <xs:sequence>
+                    <xs:element name="AttributeRelationships">
+                      <xs:complexType>
+                        <xs:annotation>
+                          <xs:documentation>
+                            Attribute relationships are a created on Routing Reuse library nodes in order to constrain the
+                            loading of objects on the node to those that satisfy the relationships, when the specification is active.
+                            Satisfying one relationship on a node will allow an object on the node to be included in the filtered library.
+                          </xs:documentation>
+                        </xs:annotation>
+                        <xs:sequence>
+                          <xs:element minOccurs="0" maxOccurs="unbounded" name="Relationship">
+                            <xs:complexType>
+                              <xs:annotation>
+                                <xs:documentation>
+                                  A relationship is applied on a Routing Library Reuse node. It consists of a set of value constraints on one or
+                                  more attributes on the node, which is identified by its NodeID string.
+                                </xs:documentation>
+                              </xs:annotation>
+                              <xs:sequence minOccurs="0">
+ 
+                                <xs:element maxOccurs="unbounded" name="FilterEntry">
+                                  <xs:complexType>
+                                    <xs:annotation>
+                                      <xs:documentation>
+                                        A filter entry is a filter on the values of a single attribute on a node. The node attribute is
+                                        identified by name and objects on the node with values not satisfying any of the filter
+                                        entry values will be excluded from the filtered library. The filter entry values can be simple values,
+                                        or expressions ( of type integer, real or string).
+                                        **Note: It is important to ensure that the type listed here ("0" through "5") corresponds with
+                                        both the attribute type in the part as well as the value listed in the specification xml file.
+
+                                        The expected types are as follows:
+
+                                        Reuse Library Type     Corresponding Filter Entry Type
+                                        ------------------     -------------------------------
+                                        INTEGER(0)             INTEGER, INTEGER_EXP(3)
+                                        REAL(1)                REAL,    REAL_EXP(4)
+                                        USTRING(2)             USTRING, USTRING_EXP(5)
+
+                                        Only simple expressions are supported:
+
+                                        Valid Expr.Character   Description
+                                        --------------------   ------------
+                                        =            Equality. This is generally not required. "=50" is the same as "50"
+                                        **Note: If zero is required, use the expressions "=0" (integer) or "=0.0" (real) instead of "0" or "0.0".
+                                        !            Not. If the value is to be excluded. For example, "!50" will exclude the value 50.
+                                        &gt;         Greater Than.
+                                        &lt;         Less Than.
+                                        -            Range. "50-60" translates to a range of 50 to 60 inclusive.
+                                        |            OR.    "50|60" translates to values of 50 or 60
+                                        *            Wildcard. "*ing" translates to any string ending in "ing".
+                                        "str*" translates to any string starting with "str".
+                                        "*in*" translates to any string containing "in".
+
+                                      </xs:documentation>
+                                    </xs:annotation>
+                                    <xs:attribute name="Name" type="xs:string" use="required" />
+                                    <xs:attribute name="Type" type="xs:unsignedByte" use="required" />
+                                    <xs:attribute name="Value" type="xs:string" use="required" />
+                                  </xs:complexType>
+                                </xs:element>
+                              </xs:sequence>
+                              <xs:attribute name="NodeID" type="xs:string" use="required" />
+                            </xs:complexType>
+                          </xs:element>
+                        </xs:sequence>
+                      </xs:complexType>
+                    </xs:element>
+                    <xs:element name="ConnectionCompatibility">
+                      <xs:complexType>
+                        <xs:annotation>
+                          <xs:documentation>
+                            Connection Compatibility is used to specify valid companion parts that are added when a connection is made.
+                          </xs:documentation>
+                        </xs:annotation>
+                        <xs:sequence>
+                          <xs:element minOccurs="0" maxOccurs="unbounded" name="CompatibilityEntry">
+                            <xs:complexType>
+                               <xs:sequence>
+                                <xs:element minOccurs="0" maxOccurs="unbounded" name="PostPlacementID">
+                                  <xs:complexType>
+                                    <xs:attribute name="Identifier" type="xs:unsignedByte" use="optional" />
+                                  </xs:complexType>
+                                </xs:element>
+                              </xs:sequence>
+                              <xs:attribute name="Name" type="xs:string" use="required" />
+                              <xs:attribute name="ValidMatch" type="xs:string" use="required" />
+                            </xs:complexType>
+                          </xs:element>
+                            <xs:sequence minOccurs="0" maxOccurs="1">
+                                <xs:element minOccurs="0" maxOccurs="1" name="PPBolt">
+                                    <xs:complexType>
+                                        <xs:sequence>
+                                            <xs:element minOccurs="0" maxOccurs="unbounded" name="AttribTitle">
+                                                <xs:complexType>
+                                                    <xs:attribute name="Value" type="xs:string" use="required" />
+                                                </xs:complexType>
+                                            </xs:element>
+                                        </xs:sequence>
+                                        <xs:attribute name="NODE" type="xs:string" use="required" />
+                                    </xs:complexType>
+                                </xs:element>
+                            <xs:element minOccurs="0" maxOccurs="1" name="PPGasket">
+                                <xs:complexType>
+                                    <xs:sequence>
+                                        <xs:element minOccurs="0" name="AttribTitle">
+                                            <xs:complexType>
+                                                <xs:attribute name="Value" type="xs:string" use="required" />
+                                            </xs:complexType>
+                                        </xs:element>
+                                    </xs:sequence>
+                                    <xs:attribute name="NODE" type="xs:string" use="required" />
+                                </xs:complexType>
+                            </xs:element>
+                                <xs:element minOccurs="0" maxOccurs="1" name="PPNut">
+                                    <xs:complexType>
+                                        <xs:sequence>
+                                            <xs:element minOccurs="0" maxOccurs="unbounded" name="AttribTitle">
+                                                <xs:complexType>
+                                                    <xs:attribute name="Value" type="xs:string" use="required" />
+                                                </xs:complexType>
+                                            </xs:element>
+                                        </xs:sequence>
+                                        <xs:attribute name="NODE" type="xs:string" use="required" />
+                                    </xs:complexType>
+                                </xs:element>
+                                <xs:element minOccurs="0" maxOccurs="1" name="PPRingJoint">
+                                    <xs:complexType>
+                                        <xs:sequence>
+                                            <xs:element minOccurs="0" maxOccurs="unbounded" name="AttribTitle">
+                                                <xs:complexType>
+                                                    <xs:attribute name="Value" type="xs:string" use="required" />
+                                                </xs:complexType>
+                                            </xs:element>
+                                        </xs:sequence>
+                                        <xs:attribute name="NODE" type="xs:string" use="required" />
+                                    </xs:complexType>
+                                </xs:element>
+                            <xs:element minOccurs="0" maxOccurs="1" name="PPStud">
+                                <xs:complexType>
+                                    <xs:sequence>
+                                        <xs:element minOccurs="0" maxOccurs="unbounded" name="AttribTitle">
+                                            <xs:complexType>
+                                                <xs:attribute name="Value" type="xs:string" use="required" />
+                                            </xs:complexType>
+                                        </xs:element>
+                                    </xs:sequence>
+                                    <xs:attribute name="NODE" type="xs:string" use="required" />
+                                </xs:complexType>
+                            </xs:element>
+                            <xs:element minOccurs="0" maxOccurs="1" name="PPWasher">
+                                <xs:complexType>
+                                    <xs:sequence>
+                                        <xs:element minOccurs="0" maxOccurs="unbounded" name="AttribTitle">
+                                            <xs:complexType>
+                                                <xs:attribute name="Value" type="xs:string" use="required" />
+                                            </xs:complexType>
+                                        </xs:element>
+                                    </xs:sequence>
+                                    <xs:attribute name="NODE" type="xs:string" use="required" />
+                                </xs:complexType>
+                            </xs:element>
+                            <xs:element minOccurs="0" maxOccurs="1" name="PPWeldRing">
+                                <xs:complexType>
+                                    <xs:sequence>
+                                        <xs:element minOccurs="0" maxOccurs="unbounded" name="AttribTitle">
+                                            <xs:complexType>
+                                                <xs:attribute name="Value" type="xs:string" use="required" />
+                                            </xs:complexType>
+                                        </xs:element>
+                                    </xs:sequence>
+                                    <xs:attribute name="NODE" type="xs:string" use="required" />
+                                </xs:complexType>
+                            </xs:element>
+                          <xs:element minOccurs="0" maxOccurs="1" name="PPFlange">
+                            <xs:complexType>
+                              <xs:sequence>
+                                <xs:element minOccurs="0" maxOccurs="unbounded" name="AttribTitle">
+                                  <xs:complexType>
+                                    <xs:attribute name="Value" type="xs:string" use="required" />
+                                  </xs:complexType>
+                                </xs:element>
+                              </xs:sequence>
+                              <xs:attribute name="NODE" type="xs:string" use="required" />
+                            </xs:complexType>
+                          </xs:element>
+                          <xs:element minOccurs="0" maxOccurs="1" name="PPWeld">
+                            <xs:complexType>
+                              <xs:sequence>
+                                <xs:element minOccurs="0" maxOccurs="unbounded" name="AttribTitle">
+                                  <xs:complexType>
+                                    <xs:attribute name="Value" type="xs:string" use="required" />
+                                  </xs:complexType>
+                                </xs:element>
+                              </xs:sequence>
+                              <xs:attribute name="NODE" type="xs:string" use="required" />
+                            </xs:complexType>
+                          </xs:element>
+                          </xs:sequence>
+                        </xs:sequence>
+                        <xs:attribute name="ReportNut" type="xs:boolean" use="optional" />
+                        <xs:attribute name="ReportBolt" type="xs:boolean" use="optional" />
+                        <xs:attribute name="ReportStud" type="xs:boolean" use="optional" />
+                        <xs:attribute name="ModelGaskets" type="xs:boolean" use="optional" />
+                        <xs:attribute name="ModelWeldGap" type="xs:boolean" use="optional" />
+                        <xs:attribute name="ReportGasket" type="xs:boolean" use="optional" />
+                        <xs:attribute name="ReportWasher" type="xs:boolean" use="optional" />
+                        <xs:attribute name="ReportWeldGap" type="xs:boolean" use="optional" />
+                        <xs:attribute name="ReportWeldRing" type="xs:boolean" use="optional" />
+                        <xs:attribute name="ReportRingJoint" type="xs:boolean" use="optional" />
+                        <xs:attribute name="WeldGapValue" type="xs:double" use="optional" />
+                        <xs:attribute name="AdditionalBoltLength" type="xs:double" use="optional" />
+                        <xs:attribute name="AdditionalStudLength" type="xs:double" use="optional" />
+                      </xs:complexType>
+                    </xs:element>
+                    <xs:element name="BranchCompatibility">
+                          <xs:complexType>
+                            <xs:annotation>
+                              <xs:documentation>
+                                Branch compatibility is used to specify valid pipe branches. It consists of (0..n) 
+                                nominal pipe specification pairs ( nps, nps_branch ). The pipe nps value
+                                should be greater than or equal to that of its branch.
+                              </xs:documentation>
+                            </xs:annotation>
+                              <xs:sequence>
+                                  <xs:element minOccurs="0" maxOccurs="unbounded" name="CompatibilityEntry">
+                                      <xs:complexType>
+                                          <xs:attribute name="Name" type="xs:float" use="required" />
+                                          <xs:attribute name="ValidMatch" type="xs:float" use="required" />
+                                      </xs:complexType>
+                                  </xs:element>
+                              </xs:sequence>
+                          </xs:complexType>
+                    </xs:element>
+                     <xs:element name="GenericPostPlacement">
+                      <xs:complexType>
+                        <xs:annotation>
+                          <xs:documentation>
+                            Generic Post Placement is used to specify an additional part to be placed along with the part being placed.
+                          </xs:documentation>
+                        </xs:annotation>
+                        <xs:sequence>
+                          <xs:element minOccurs="0" maxOccurs="unbounded" name="PostPlacementDefinition">
+                            <xs:complexType>
+                              <xs:sequence>
+                                <xs:element minOccurs="1" maxOccurs="1" name="PostPlaceConfig">
+                                  <xs:complexType>
+                                    <xs:sequence>
+                                      <xs:element minOccurs="0" maxOccurs="unbounded" name="AttribTitle">
+                                        <xs:complexType>
+                                          <xs:attribute name="Value" type="xs:string" use="required" />
+                                        </xs:complexType>
+                                      </xs:element>
+                                    </xs:sequence>
+                                    <xs:attribute name="NODE" type="xs:string" use="required" />
+                                  </xs:complexType>
+                                </xs:element>
+                                <xs:element minOccurs="0" maxOccurs="1" name="PostPlaceConfig2">
+                                  <xs:complexType>
+                                    <xs:sequence>
+                                      <xs:element maxOccurs="unbounded" name="AttribTitle">
+                                        <xs:complexType>
+                                          <xs:attribute name="Value" type="xs:string" use="required" />
+                                        </xs:complexType>
+                                      </xs:element>
+                                    </xs:sequence>
+                                    <xs:attribute name="NODE" type="xs:string" use="required" />
+                                  </xs:complexType>
+                                </xs:element>
+                              </xs:sequence>
+                              <xs:attribute name="SourceNode" type="xs:string" use="required" />
+                            </xs:complexType>
+                          </xs:element>
+                        </xs:sequence>
+                      </xs:complexType>
+                    </xs:element>
+                  </xs:sequence>
+                  <xs:attribute name="Name" type="xs:string" use="required" />
+                  <xs:attribute name="Description" type="xs:string" use="required" />
+                  <xs:attribute name="Author" type="xs:string" use="required" />
+                  <xs:attribute name="Released" type="xs:boolean" use="optional" />
+                  <xs:attribute name="Status" type="xs:string" use="optional" />
+                  <xs:attribute name="Version" type="xs:float" use="optional" />
+                  <xs:attribute name="VALID_NOMINAL_PIPE_SIZE_RANGE" type="xs:string" use="optional" />
+                </xs:complexType>
+              </xs:element>
+            </xs:sequence>
+            <xs:attribute name="Name" type="xs:string" use="required" />
+          </xs:complexType>
+        </xs:element>
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+</xs:schema>

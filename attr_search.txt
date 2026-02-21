@@ -1,0 +1,28 @@
+comos_gateway.py:206: max_tool_calls: int = Field(8, ge=1, le=20)
+comos_gateway.py:234: tool_calls: List[ToolCallLog] = Field(default_factory=list)
+comos_gateway.py:253: max_tool_calls: int = Field(8, ge=1, le=20)
+comos_gateway.py:263: tool_choice: Optional[Any] = None
+comos_gateway.py:416: max_tool_calls=req.max_tool_calls,
+comos_gateway.py:442: "tool_calls": [x.model_dump() for x in resp.tool_calls],
+comos_gateway.py:510: # max_tool_calls is the max number of executed tool calls. We allow one
+comos_gateway.py:512: remaining_tool_calls = req.max_tool_calls
+comos_gateway.py:513: for _ in range(req.max_tool_calls + 1):
+comos_gateway.py:522: kwargs["tool_choice"] = "auto"
+comos_gateway.py:529: tool_calls = list(getattr(choice_message, "tool_calls", None) or [])
+comos_gateway.py:535: if tool_calls:
+comos_gateway.py:536: assistant_msg["tool_calls"] = [
+comos_gateway.py:545: for tc in tool_calls
+comos_gateway.py:549: if not tool_calls:
+comos_gateway.py:566: tool_calls=tool_logs,
+comos_gateway.py:570: if remaining_tool_calls <= 0:
+comos_gateway.py:573: for tc in tool_calls:
+comos_gateway.py:574: if remaining_tool_calls <= 0:
+comos_gateway.py:576: remaining_tool_calls -= 1
+comos_gateway.py:604: "tool_call_id": tc.id,
+comos_gateway.py:650: "tool_call_id": tc.id,
+comos_gateway.py:773: kwargs["tool_choice"] = req.tool_choice if req.tool_choice is not None else "auto"
+comos_gateway.py:789: # Preserve tool_calls so COMOS can execute its native functions
+comos_gateway.py:790: tool_calls_raw = getattr(msg, "tool_calls", None)
+comos_gateway.py:791: if tool_calls_raw:
+comos_gateway.py:792: result_msg["tool_calls"] = [
+comos_gateway.py:801: for tc in tool_calls_raw

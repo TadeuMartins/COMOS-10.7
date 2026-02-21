@@ -1,0 +1,923 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RackAttack xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+<CreateDate>Mittwoch, 27. Januar 2010</CreateDate>
+<DeviceType>SIMATIC</DeviceType>
+<RackDescription>Station</RackDescription>
+<OrderNumber>xxxxxxxx</OrderNumber>
+<MaxRacks>27</MaxRacks>
+  <Racks>
+    <XMLRack>
+    <CreateDate>Montag, 25. Januar 2010</CreateDate>
+    <DeviceType>SIMATIC S7-300</DeviceType>
+    <RackDescription>PROFILSCHIENE, 160MM</RackDescription>
+    <OrderNumber>6ES73901AB600AA0</OrderNumber>
+    <RackUID>A2QVVJANFD</RackUID>
+    <CentralRackMode>3</CentralRackMode>
+    <MaxSlots>11</MaxSlots>
+    <Slots>
+      <XMLSlot Name="1">
+        <Class>PS</Class>
+      </XMLSlot>
+      <XMLSlot Name="2">
+        <Class>CU=1</Class>
+      </XMLSlot>
+      <XMLSlot Name="3">
+        <Class>IM</Class>
+      </XMLSlot>
+      <XMLSlot Name="4">
+        <Class>SI,FM,CP</Class>
+      </XMLSlot>
+      <XMLSlot Name="5">
+        <Class>SI,FM,CP</Class>
+      </XMLSlot>
+      <XMLSlot Name="6">
+        <Class>SI,FM,CP</Class>
+      </XMLSlot>
+      <XMLSlot Name="7">
+        <Class>SI,FM,CP</Class>
+      </XMLSlot>
+      <XMLSlot Name="8">
+        <Class>SI,FM,CP</Class>
+      </XMLSlot>
+      <XMLSlot Name="9">
+        <Class>SI,FM,CP</Class>
+      </XMLSlot>
+      <XMLSlot Name="10">
+        <Class>SI,FM,CP</Class>
+      </XMLSlot>
+      <XMLSlot Name="11">
+        <Class>SI,FM,CP</Class>
+      </XMLSlot>
+    </Slots>
+    </XMLRack>
+    <XMLRack>
+      <CreateDate>Donnerstag, 28. Januar 2010</CreateDate>
+      <DeviceType>SIMATIC S7-300</DeviceType>
+      <RackDescription>PROFILSCHIENE, 480MM</RackDescription>
+      <OrderNumber>6ES73901AE800AA0</OrderNumber>
+      <RackUID>A2QVVJB2FD</RackUID>
+      <CentralRackMode>3</CentralRackMode>
+      <MaxSlots>11</MaxSlots>
+      <Slots>
+        <XMLSlot Name="1">
+          <Class>PS</Class>
+        </XMLSlot>
+        <XMLSlot Name="2">
+          <Class>CU=1</Class>
+        </XMLSlot>
+        <XMLSlot Name="3">
+          <Class>IM</Class>
+        </XMLSlot>
+        <XMLSlot Name="4">
+          <Class>SI,FM,CP</Class>
+        </XMLSlot>
+        <XMLSlot Name="5">
+          <Class>SI,FM,CP</Class>
+        </XMLSlot>
+        <XMLSlot Name="6">
+          <Class>SI,FM,CP</Class>
+        </XMLSlot>
+        <XMLSlot Name="7">
+          <Class>SI,FM,CP</Class>
+        </XMLSlot>
+        <XMLSlot Name="8">
+          <Class>SI,FM,CP</Class>
+        </XMLSlot>
+        <XMLSlot Name="9">
+          <Class>SI,FM,CP</Class>
+        </XMLSlot>
+        <XMLSlot Name="10">
+          <Class>SI,FM,CP</Class>
+        </XMLSlot>
+        <XMLSlot Name="11">
+          <Class>SI,FM,CP</Class>
+        </XMLSlot>
+      </Slots>
+    </XMLRack>
+    <XMLRack>
+      <CreateDate>Donnerstag, 28. Januar 2010</CreateDate>
+      <DeviceType>SIMATIC S7-300</DeviceType>
+      <RackDescription>PROFILSCHIENE, 530MM</RackDescription>
+      <OrderNumber>6ES73901AF300AA0</OrderNumber>
+      <RackUID>A2QVVJBHFD</RackUID>
+      <CentralRackMode>3</CentralRackMode>
+      <MaxSlots>11</MaxSlots>
+      <Slots>
+        <XMLSlot Name="1">
+          <Class>PS</Class>
+        </XMLSlot>
+        <XMLSlot Name="2">
+          <Class>CU=1</Class>
+        </XMLSlot>
+        <XMLSlot Name="3">
+          <Class>IM</Class>
+        </XMLSlot>
+        <XMLSlot Name="4">
+          <Class>SI,FM,CP</Class>
+        </XMLSlot>
+        <XMLSlot Name="5">
+          <Class>SI,FM,CP</Class>
+        </XMLSlot>
+        <XMLSlot Name="6">
+          <Class>SI,FM,CP</Class>
+        </XMLSlot>
+        <XMLSlot Name="7">
+          <Class>SI,FM,CP</Class>
+        </XMLSlot>
+        <XMLSlot Name="8">
+          <Class>SI,FM,CP</Class>
+        </XMLSlot>
+        <XMLSlot Name="9">
+          <Class>SI,FM,CP</Class>
+        </XMLSlot>
+        <XMLSlot Name="10">
+          <Class>SI,FM,CP</Class>
+        </XMLSlot>
+        <XMLSlot Name="11">
+          <Class>SI,FM,CP</Class>
+        </XMLSlot>
+      </Slots>
+    </XMLRack>
+    <XMLRack>
+      <CreateDate>Donnerstag, 28. Januar 2010</CreateDate>
+      <DeviceType>SIMATIC S7-300</DeviceType>
+      <RackDescription>PROFILSCHIENE, 830MM</RackDescription>
+      <OrderNumber>6ES73901AJ300AA0</OrderNumber>
+      <RackUID>A2QVVJBWFD</RackUID>
+      <CentralRackMode>3</CentralRackMode>
+      <MaxSlots>11</MaxSlots>
+      <Slots>
+        <XMLSlot Name="1">
+          <Class>PS</Class>
+        </XMLSlot>
+        <XMLSlot Name="2">
+          <Class>CU=1</Class>
+        </XMLSlot>
+        <XMLSlot Name="3">
+          <Class>IM</Class>
+        </XMLSlot>
+        <XMLSlot Name="4">
+          <Class>SI,FM,CP</Class>
+        </XMLSlot>
+        <XMLSlot Name="5">
+          <Class>SI,FM,CP</Class>
+        </XMLSlot>
+        <XMLSlot Name="6">
+          <Class>SI,FM,CP</Class>
+        </XMLSlot>
+        <XMLSlot Name="7">
+          <Class>SI,FM,CP</Class>
+        </XMLSlot>
+        <XMLSlot Name="8">
+          <Class>SI,FM,CP</Class>
+        </XMLSlot>
+        <XMLSlot Name="9">
+          <Class>SI,FM,CP</Class>
+        </XMLSlot>
+        <XMLSlot Name="10">
+          <Class>SI,FM,CP</Class>
+        </XMLSlot>
+        <XMLSlot Name="11">
+          <Class>SI,FM,CP</Class>
+        </XMLSlot>
+      </Slots>
+    </XMLRack>
+    <XMLRack>
+      <CreateDate>Donnerstag, 28. Januar 2010</CreateDate>
+      <DeviceType>SIMATIC S7-300</DeviceType>
+      <RackDescription>PROFILSCHIENE, 2000MM</RackDescription>
+      <OrderNumber>6ES73901BC000AA0</OrderNumber>
+      <RackUID>A2QVVJCBFD</RackUID>
+      <CentralRackMode>3</CentralRackMode>
+      <MaxSlots>11</MaxSlots>
+      <Slots>
+        <XMLSlot Name="1">
+          <Class>PS</Class>
+        </XMLSlot>
+        <XMLSlot Name="2">
+          <Class>CU=1</Class>
+        </XMLSlot>
+        <XMLSlot Name="3">
+          <Class>IM</Class>
+        </XMLSlot>
+        <XMLSlot Name="4">
+          <Class>SI,FM,CP</Class>
+        </XMLSlot>
+        <XMLSlot Name="5">
+          <Class>SI,FM,CP</Class>
+        </XMLSlot>
+        <XMLSlot Name="6">
+          <Class>SI,FM,CP</Class>
+        </XMLSlot>
+        <XMLSlot Name="7">
+          <Class>SI,FM,CP</Class>
+        </XMLSlot>
+        <XMLSlot Name="8">
+          <Class>SI,FM,CP</Class>
+        </XMLSlot>
+        <XMLSlot Name="9">
+          <Class>SI,FM,CP</Class>
+        </XMLSlot>
+        <XMLSlot Name="10">
+          <Class>SI,FM,CP</Class>
+        </XMLSlot>
+        <XMLSlot Name="11">
+          <Class>SI,FM,CP</Class>
+        </XMLSlot>
+      </Slots>
+    </XMLRack>
+    <XMLRack>
+      <CreateDate>Freitag, 22. Januar 2010</CreateDate>
+      <DeviceType>SIMATIC S7-400</DeviceType>
+      <RackDescription>BAUGRUPPENTRAEGER, UR2</RackDescription>
+      <OrderNumber>6ES74001JA010AA0</OrderNumber>
+      <RackUID>A2QVVP43FD</RackUID>
+      <CentralRackMode>3</CentralRackMode>
+      <MaxSlots>9</MaxSlots>
+      <Slots>
+        <XMLSlot Name="1">
+          <Class>PS</Class>
+        </XMLSlot>
+        <XMLSlot Name="2">
+          <Class>SI,FM,CP,IM=1,CU=1</Class>
+        </XMLSlot>
+        <XMLSlot Name="3">
+          <Class>PS,SI,FM,CP,IM=1,CU=1</Class>
+        </XMLSlot>
+        <XMLSlot Name="4">
+          <Class>SI,FM,CP,IM=1,CU=1</Class>
+        </XMLSlot>
+        <XMLSlot Name="5">
+          <Class>SI,FM,CP,IM=1,CU=1</Class>
+        </XMLSlot>
+        <XMLSlot Name="6">
+          <Class>SI,FM,CP,IM=1,CU=1</Class>
+        </XMLSlot>
+        <XMLSlot Name="7">
+          <Class>SI,FM,CP,IM=1,CU=1</Class>
+        </XMLSlot>
+        <XMLSlot Name="8">
+          <Class>SI,FM,CP,IM=1,CU=1</Class>
+        </XMLSlot>
+        <XMLSlot Name="9">
+          <Class>SM=1,FM=1,CP=1,IM,CU=1</Class>
+        </XMLSlot>
+      </Slots>
+    </XMLRack>
+    <XMLRack>
+      <CreateDate>Mittwoch, 27. Januar 2010</CreateDate>
+      <DeviceType>SIMATIC S7-400</DeviceType>
+      <RackDescription>BAUGRUPPENTRAEGER, UR2, ALU</RackDescription>
+      <OrderNumber>6ES74001JA110AA0</OrderNumber>
+      <RackUID>A2QVVP4IFD</RackUID>
+      <CentralRackMode>3</CentralRackMode>
+      <MaxSlots>9</MaxSlots>
+      <Slots>
+        <XMLSlot Name="1">
+          <Class>PS</Class>
+        </XMLSlot>
+        <XMLSlot Name="2">
+          <Class>SI,FM,CP,IM=1,CU=1</Class>
+        </XMLSlot>
+        <XMLSlot Name="3">
+          <Class>PS,SI,FM,CP,IM=1,CU=1</Class>
+        </XMLSlot>
+        <XMLSlot Name="4">
+          <Class>SI,FM,CP,IM=1,CU=1</Class>
+        </XMLSlot>
+        <XMLSlot Name="5">
+          <Class>SI,FM,CP,IM=1,CU=1</Class>
+        </XMLSlot>
+        <XMLSlot Name="6">
+          <Class>SI,FM,CP,IM=1,CU=1</Class>
+        </XMLSlot>
+        <XMLSlot Name="7">
+          <Class>SI,FM,CP,IM=1,CU=1</Class>
+        </XMLSlot>
+        <XMLSlot Name="8">
+          <Class>SI,FM,CP,IM=1,CU=1</Class>
+        </XMLSlot>
+        <XMLSlot Name="9">
+          <Class>SM=1,FM=1,CP=1,IM,CU=1</Class>
+        </XMLSlot>
+      </Slots>
+    </XMLRack>
+    <XMLRack>
+      <CreateDate>Freitag, 22. Januar 2010</CreateDate>
+      <DeviceType>SIMATIC S7-400</DeviceType>
+      <RackDescription>BAUGRUPPENTRAEGER, UR1</RackDescription>
+      <OrderNumber>6ES74001TA010AA0</OrderNumber>
+      <RackUID>A2QVVP4XFD</RackUID>
+      <CentralRackMode>3</CentralRackMode>
+      <MaxSlots>18</MaxSlots>
+      <Slots>
+        <XMLSlot Name="1">
+          <Class>PS</Class>
+        </XMLSlot>
+        <XMLSlot Name="2">
+          <Class>SI,FM,CP,IM,CU=1</Class>
+        </XMLSlot>
+        <XMLSlot Name="3">
+          <Class>PS,SI,FM,CP,IM,CU=1</Class>
+        </XMLSlot>
+        <XMLSlot Name="4">
+          <Class>SI,FM,CP,IM,CU=1</Class>
+        </XMLSlot>
+        <XMLSlot Name="5">
+          <Class>SI,FM,CP,IM,CU=1</Class>
+        </XMLSlot>
+        <XMLSlot Name="6">
+          <Class>SI,FM,CP,IM,CU=1</Class>
+        </XMLSlot>
+        <XMLSlot Name="7">
+          <Class>SI,CU=1,FM,CP,IM</Class>
+        </XMLSlot>
+        <XMLSlot Name="8">
+          <Class>SI,CU=1,FM,CP,IM</Class>
+        </XMLSlot>
+        <XMLSlot Name="9">
+          <Class>SI,CU=1,FM,CP,IM</Class>
+        </XMLSlot>
+        <XMLSlot Name="10">
+          <Class>SI,CU=1,FM,CP,IM</Class>
+        </XMLSlot>
+        <XMLSlot Name="11">
+          <Class>SI,CU=1,FM,CP,IM</Class>
+        </XMLSlot>
+        <XMLSlot Name="12">
+          <Class>SI,CU=1,FM,CP,IM</Class>
+        </XMLSlot>
+        <XMLSlot Name="13">
+          <Class>SI,CU=1,FM,CP,IM</Class>
+        </XMLSlot>
+        <XMLSlot Name="14">
+          <Class>SI,CU=1,FM,CP,IM</Class>
+        </XMLSlot>
+        <XMLSlot Name="15">
+          <Class>SI,CU=1,FM,CP,IM</Class>
+        </XMLSlot>
+        <XMLSlot Name="16">
+          <Class>SI,CU=1,FM,CP,IM</Class>
+        </XMLSlot>
+        <XMLSlot Name="17">
+          <Class>SI,CU=1,FM,CP,IM</Class>
+        </XMLSlot>
+        <XMLSlot Name="18">
+          <Class>SM=1,CP=1,IM</Class>
+        </XMLSlot>
+      </Slots>
+    </XMLRack>
+    <XMLRack>
+      <CreateDate>Mittwoch, 27. Januar 2010</CreateDate>
+      <DeviceType>SIMATIC S7-400</DeviceType>
+      <RackDescription>BAUGRUPPENTRAEGER, UR1, ALU</RackDescription>
+      <OrderNumber>6ES74001TA110AA0</OrderNumber>
+      <RackUID>A2QVVP5CFD</RackUID>
+      <CentralRackMode>3</CentralRackMode>
+      <MaxSlots>18</MaxSlots>
+      <Slots>
+        <XMLSlot Name="1">
+          <Class>PS</Class>
+        </XMLSlot>
+        <XMLSlot Name="2">
+          <Class>SI,FM,CP,IM,CU=1</Class>
+        </XMLSlot>
+        <XMLSlot Name="3">
+          <Class>PS,SI,FM,CP,IM,CU=1</Class>
+        </XMLSlot>
+        <XMLSlot Name="4">
+          <Class>SI,FM,CP,IM,CU=1</Class>
+        </XMLSlot>
+        <XMLSlot Name="5">
+          <Class>SI,FM,CP,IM,CU=1</Class>
+        </XMLSlot>
+        <XMLSlot Name="6">
+          <Class>SI,FM,CP,IM,CU=1</Class>
+        </XMLSlot>
+        <XMLSlot Name="7">
+          <Class>SI,CU=1,FM,CP,IM</Class>
+        </XMLSlot>
+        <XMLSlot Name="8">
+          <Class>SI,CU=1,FM,CP,IM</Class>
+        </XMLSlot>
+        <XMLSlot Name="9">
+          <Class>SI,CU=1,FM,CP,IM</Class>
+        </XMLSlot>
+        <XMLSlot Name="10">
+          <Class>SI,CU=1,FM,CP,IM</Class>
+        </XMLSlot>
+        <XMLSlot Name="11">
+          <Class>SI,CU=1,FM,CP,IM</Class>
+        </XMLSlot>
+        <XMLSlot Name="12">
+          <Class>SI,CU=1,FM,CP,IM</Class>
+        </XMLSlot>
+        <XMLSlot Name="13">
+          <Class>SI,CU=1,FM,CP,IM</Class>
+        </XMLSlot>
+        <XMLSlot Name="14">
+          <Class>SI,CU=1,FM,CP,IM</Class>
+        </XMLSlot>
+        <XMLSlot Name="15">
+          <Class>SI,CU=1,FM,CP,IM</Class>
+        </XMLSlot>
+        <XMLSlot Name="16">
+          <Class>SI,CU=1,FM,CP,IM</Class>
+        </XMLSlot>
+        <XMLSlot Name="17">
+          <Class>SI,CU=1,FM,CP,IM</Class>
+        </XMLSlot>
+        <XMLSlot Name="18">
+          <Class>SM=1,CP=1,IM</Class>
+        </XMLSlot>
+      </Slots>
+    </XMLRack>
+    <XMLRack>
+      <CreateDate>Mittwoch, 27. Januar 2010</CreateDate>
+      <DeviceType>SIMATIC S7-400</DeviceType>
+      <RackDescription>BAUGRUPPENTRAEGER, UR2-H</RackDescription>
+      <OrderNumber>6ES74002JA000AA0</OrderNumber>
+      <RackUID>A2QVVP5RFD</RackUID>
+      <CentralRackMode>1</CentralRackMode>
+      <MaxSlots>18</MaxSlots>
+      <Slots>
+        <XMLSlot Name="1">
+          <Class>PS</Class>
+        </XMLSlot>
+        <XMLSlot Name="2">
+          <Class>SI,CU,FM,CP,IM</Class>
+        </XMLSlot>
+        <XMLSlot Name="3">
+          <Class>PS,CU,SI,FM,CP,IM</Class>
+        </XMLSlot>
+        <XMLSlot Name="4">
+          <Class>SI,CU,FM,CP,IM</Class>
+        </XMLSlot>
+        <XMLSlot Name="5">
+          <Class>SI,CU,FM,CP,IM</Class>
+        </XMLSlot>
+        <XMLSlot Name="6">
+          <Class>SI,CU,FM,CP,IM</Class>
+        </XMLSlot>
+        <XMLSlot Name="7">
+          <Class>SI,CU,FM,CP,IM</Class>
+        </XMLSlot>
+        <XMLSlot Name="8">
+          <Class>SI,CU,FM,CP,IM</Class>
+        </XMLSlot>
+        <XMLSlot Name="9">
+          <Class>SI,CU,CP,IM</Class>
+        </XMLSlot>
+        <XMLSlot Name="10">
+          <Class>PS</Class>
+        </XMLSlot>
+        <XMLSlot Name="11">
+          <Class>SI,CU,FM,CP,IM</Class>
+        </XMLSlot>
+        <XMLSlot Name="12">
+          <Class>PS,CU,SI,FM,CP,IM</Class>
+        </XMLSlot>
+        <XMLSlot Name="13">
+          <Class>SI,CU,FM,CP,IM</Class>
+        </XMLSlot>
+        <XMLSlot Name="14">
+          <Class>SI,CU,FM,CP,IM</Class>
+        </XMLSlot>
+        <XMLSlot Name="15">
+          <Class>SI,CU,FM,CP,IM</Class>
+        </XMLSlot>
+        <XMLSlot Name="16">
+          <Class>SI,CU,FM,CP,IM</Class>
+        </XMLSlot>
+        <XMLSlot Name="17">
+          <Class>SI,CU,FM,CP,IM</Class>
+        </XMLSlot>
+        <XMLSlot Name="18">
+          <Class>SI,CP,IM</Class>
+        </XMLSlot>
+      </Slots>
+    </XMLRack>
+    <XMLRack>
+      <CreateDate>Mittwoch, 27. Januar 2010</CreateDate>
+      <DeviceType>SIMATIC S7-400</DeviceType>
+      <RackDescription>BAUGRUPPENTRAEGER, UR2-H, ALU</RackDescription>
+      <OrderNumber>6ES74002JA100AA0</OrderNumber>
+      <RackUID>A2QVVP66FD</RackUID>
+      <CentralRackMode>1</CentralRackMode>
+      <MaxSlots>18</MaxSlots>
+      <Slots>
+        <XMLSlot Name="1">
+          <Class>PS</Class>
+        </XMLSlot>
+        <XMLSlot Name="2">
+          <Class>SI,CU,FM,CP,IM</Class>
+        </XMLSlot>
+        <XMLSlot Name="3">
+          <Class>PS,CU,SI,FM,CP,IM</Class>
+        </XMLSlot>
+        <XMLSlot Name="4">
+          <Class>SI,CU,FM,CP,IM</Class>
+        </XMLSlot>
+        <XMLSlot Name="5">
+          <Class>SI,CU,FM,CP,IM</Class>
+        </XMLSlot>
+        <XMLSlot Name="6">
+          <Class>SI,CU,FM,CP,IM</Class>
+        </XMLSlot>
+        <XMLSlot Name="7">
+          <Class>SI,CU,FM,CP,IM</Class>
+        </XMLSlot>
+        <XMLSlot Name="8">
+          <Class>SI,CU,FM,CP,IM</Class>
+        </XMLSlot>
+        <XMLSlot Name="9">
+          <Class>SI,CU,CP,IM</Class>
+        </XMLSlot>
+        <XMLSlot Name="1">
+          <Class>PS</Class>
+        </XMLSlot>
+        <XMLSlot Name="2">
+          <Class>SI,CU,FM,CP,IM</Class>
+        </XMLSlot>
+        <XMLSlot Name="3">
+          <Class>PS,CU,SI,FM,CP,IM</Class>
+        </XMLSlot>
+        <XMLSlot Name="4">
+          <Class>SI,CU,FM,CP,IM</Class>
+        </XMLSlot>
+        <XMLSlot Name="5">
+          <Class>SI,CU,FM,CP,IM</Class>
+        </XMLSlot>
+        <XMLSlot Name="6">
+          <Class>SI,CU,FM,CP,IM</Class>
+        </XMLSlot>
+        <XMLSlot Name="7">
+          <Class>SI,CU,FM,CP,IM</Class>
+        </XMLSlot>
+        <XMLSlot Name="8">
+          <Class>SI,CU,FM,CP,IM</Class>
+        </XMLSlot>
+        <XMLSlot Name="9">
+          <Class>SI,CU,CP,IM</Class>
+        </XMLSlot>
+      </Slots>
+    </XMLRack>
+    <XMLRack>
+      <CreateDate>Mittwoch, 27. Januar 2010</CreateDate>
+      <DeviceType>SIMATIC S7-400</DeviceType>
+      <RackDescription>BAUGRUPPENTRAEGER, CR3</RackDescription>
+      <OrderNumber>6ES74011DA010AA0</OrderNumber>
+      <RackUID>A2QVVP6LFD</RackUID>
+      <CentralRackMode>1</CentralRackMode>
+      <MaxSlots>4</MaxSlots>
+      <Slots>
+        <XMLSlot Name="1">
+          <Class>PS</Class>
+        </XMLSlot>
+        <XMLSlot Name="2">
+          <Class>SI,CU,FM,CP,IM</Class>
+        </XMLSlot>
+        <XMLSlot Name="3">
+          <Class>SI,CU,FM,CP,IM</Class>
+        </XMLSlot>
+        <XMLSlot Name="4">
+          <Class>SI,CP,IM</Class>
+        </XMLSlot>
+      </Slots>
+    </XMLRack>
+    <XMLRack>
+      <CreateDate>Mittwoch, 27. Januar 2010</CreateDate>
+      <DeviceType>SIMATIC S7-400</DeviceType>
+      <RackDescription>BAUGRUPPENTRAEGER, CR2</RackDescription>
+      <OrderNumber>6ES74012TA010AA0</OrderNumber>
+      <RackUID>A2QVVP70FD</RackUID>
+      <CentralRackMode>1</CentralRackMode>
+      <MaxSlots>18</MaxSlots>
+      <Slots>
+        <XMLSlot Name="1">
+          <Class>PS,SM</Class>
+        </XMLSlot>
+        <XMLSlot Name="2">
+          <Class>SI,CU,FM,CP,IM</Class>
+        </XMLSlot>
+        <XMLSlot Name="3">
+          <Class>PS,CU,SI,FM,CP,IM</Class>
+        </XMLSlot>
+        <XMLSlot Name="4">
+          <Class>SI,CU,FM,CP,IM</Class>
+        </XMLSlot>
+        <XMLSlot Name="5">
+          <Class>SI,CU,FM,CP,IM</Class>
+        </XMLSlot>
+        <XMLSlot Name="6">
+          <Class>SI,CU,FM,CP,IM</Class>
+        </XMLSlot>
+        <XMLSlot Name="7">
+          <Class>SI,CU,FM,CP,IM</Class>
+        </XMLSlot>
+        <XMLSlot Name="8">
+          <Class>SI,CU,FM,CP,IM</Class>
+        </XMLSlot>
+        <XMLSlot Name="9">
+          <Class>SI,CU,FM,CP,IM</Class>
+        </XMLSlot>
+        <XMLSlot Name="10">
+          <Class>SI,CU,FM,CP,IM</Class>
+        </XMLSlot>
+        <XMLSlot Name="11">
+          <Class>SI,CU,FM,CP,IM</Class>
+        </XMLSlot>
+        <XMLSlot Name="12">
+          <Class>SI,CU,FM,CP,IM</Class>
+        </XMLSlot>
+        <XMLSlot Name="13">
+          <Class>SI,CU,FM,CP,IM</Class>
+        </XMLSlot>
+        <XMLSlot Name="14">
+          <Class>SI,CU,FM,CP,IM</Class>
+        </XMLSlot>
+        <XMLSlot Name="15">
+          <Class>SI,CU,FM,CP,IM</Class>
+        </XMLSlot>
+        <XMLSlot Name="16">
+          <Class>SI,CU,FM,CP,IM</Class>
+        </XMLSlot>
+        <XMLSlot Name="17">
+          <Class>SI,CU,FM,CP,IM</Class>
+        </XMLSlot>
+        <XMLSlot Name="18">
+          <Class>IM</Class>
+        </XMLSlot>
+      </Slots>
+    </XMLRack>
+    <XMLRack>
+      <CreateDate>Mittwoch, 20. Januar 2010</CreateDate>
+      <DeviceType>SIMATIC S7-400</DeviceType>
+      <RackDescription>BAUGRUPPENTRAEGER, ER2</RackDescription>
+      <OrderNumber>6ES74031JA010AA0</OrderNumber>
+      <RackUID>A2QVVP7FFD</RackUID>
+      <CentralRackMode>2</CentralRackMode>
+      <MaxSlots>9</MaxSlots>
+      <Slots>
+        <XMLSlot Name="1">
+          <Class>PS,SM</Class>
+        </XMLSlot>
+        <XMLSlot Name="2">
+          <Class>SI</Class>
+        </XMLSlot>
+        <XMLSlot Name="3">
+          <Class>SI</Class>
+        </XMLSlot>
+        <XMLSlot Name="4">
+          <Class>SI</Class>
+        </XMLSlot>
+        <XMLSlot Name="5">
+          <Class>SI</Class>
+        </XMLSlot>
+        <XMLSlot Name="6">
+          <Class>SI</Class>
+        </XMLSlot>
+        <XMLSlot Name="7">
+          <Class>SI</Class>
+        </XMLSlot>
+        <XMLSlot Name="8">
+          <Class>SI</Class>
+        </XMLSlot>
+        <XMLSlot Name="9">
+          <Class>IM</Class>
+        </XMLSlot>
+      </Slots>
+    </XMLRack>
+    <XMLRack>
+      <CreateDate>Mittwoch, 20. Januar 2010</CreateDate>
+      <DeviceType>SIMATIC S7-400</DeviceType>
+      <RackDescription>BAUGRUPPENTRAEGER, ER2, ALU</RackDescription>
+      <OrderNumber>6ES74031JA110AA0</OrderNumber>
+      <RackUID>A2QVVP7UFD</RackUID>
+      <CentralRackMode>2</CentralRackMode>
+      <MaxSlots>9</MaxSlots>
+      <Slots>
+        <XMLSlot Name="1">
+          <Class>PS,SM</Class>
+        </XMLSlot>
+        <XMLSlot Name="2">
+          <Class>SI</Class>
+        </XMLSlot>
+        <XMLSlot Name="3">
+          <Class>SI</Class>
+        </XMLSlot>
+        <XMLSlot Name="4">
+          <Class>SI</Class>
+        </XMLSlot>
+        <XMLSlot Name="5">
+          <Class>SI</Class>
+        </XMLSlot>
+        <XMLSlot Name="6">
+          <Class>SI</Class>
+        </XMLSlot>
+        <XMLSlot Name="7">
+          <Class>SI</Class>
+        </XMLSlot>
+        <XMLSlot Name="8">
+          <Class>SI</Class>
+        </XMLSlot>
+        <XMLSlot Name="9">
+          <Class>IM</Class>
+        </XMLSlot>
+      </Slots>
+    </XMLRack>
+    <XMLRack>
+      <CreateDate>Dienstag, 26. Januar 2010</CreateDate>
+      <DeviceType>SIMATIC S7-400</DeviceType>
+      <RackDescription>BAUGRUPPENTRAEGER, ER1</RackDescription>
+      <OrderNumber>6ES74031TA010AA0</OrderNumber>
+      <RackUID>A2QVVP89FD</RackUID>
+      <CentralRackMode>2</CentralRackMode>
+      <MaxSlots>18</MaxSlots>
+      <Slots>
+        <XMLSlot Name="1">
+          <Class>PS,SM</Class>
+        </XMLSlot>
+        <XMLSlot Name="2">
+          <Class>SI</Class>
+        </XMLSlot>
+        <XMLSlot Name="3">
+          <Class>PS,SI</Class>
+        </XMLSlot>
+        <XMLSlot Name="4">
+          <Class>SI</Class>
+        </XMLSlot>
+        <XMLSlot Name="5">
+          <Class>SI</Class>
+        </XMLSlot>
+        <XMLSlot Name="6">
+          <Class>SI</Class>
+        </XMLSlot>
+        <XMLSlot Name="7">
+          <Class>SI</Class>
+        </XMLSlot>
+        <XMLSlot Name="8">
+          <Class>SI</Class>
+        </XMLSlot>
+        <XMLSlot Name="9">
+          <Class>SI</Class>
+        </XMLSlot>
+        <XMLSlot Name="10">
+          <Class>SI</Class>
+        </XMLSlot>
+        <XMLSlot Name="11">
+          <Class>SI</Class>
+        </XMLSlot>
+        <XMLSlot Name="12">
+          <Class>SI,</Class>
+        </XMLSlot>
+        <XMLSlot Name="13">
+          <Class>SI</Class>
+        </XMLSlot>
+        <XMLSlot Name="14">
+          <Class>SI</Class>
+        </XMLSlot>
+        <XMLSlot Name="15">
+          <Class>SI</Class>
+        </XMLSlot>
+        <XMLSlot Name="16">
+          <Class>SI</Class>
+        </XMLSlot>
+        <XMLSlot Name="17">
+          <Class>SI</Class>
+        </XMLSlot>
+        <XMLSlot Name="18">
+          <Class>IM</Class>
+        </XMLSlot>
+      </Slots>
+    </XMLRack>
+    <XMLRack>
+      <CreateDate>Mittwoch, 27. Januar 2010</CreateDate>
+      <DeviceType>SIMATIC S7-400</DeviceType>
+      <RackDescription>BAUGRUPPENTRAEGER, ER1, ALU</RackDescription>
+      <OrderNumber>6ES74031TA110AA0</OrderNumber>
+      <RackUID>A2QVVP8OFD</RackUID>
+      <CentralRackMode>2</CentralRackMode>
+      <MaxSlots>18</MaxSlots>
+      <Slots>
+        <XMLSlot Name="1">
+          <Class>PS,SM</Class>
+        </XMLSlot>
+        <XMLSlot Name="2">
+          <Class>SI</Class>
+        </XMLSlot>
+        <XMLSlot Name="3">
+          <Class>PS,SI</Class>
+        </XMLSlot>
+        <XMLSlot Name="4">
+          <Class>SI</Class>
+        </XMLSlot>
+        <XMLSlot Name="5">
+          <Class>SI</Class>
+        </XMLSlot>
+        <XMLSlot Name="6">
+          <Class>SI</Class>
+        </XMLSlot>
+        <XMLSlot Name="7">
+          <Class>SI</Class>
+        </XMLSlot>
+        <XMLSlot Name="8">
+          <Class>SI</Class>
+        </XMLSlot>
+        <XMLSlot Name="9">
+          <Class>SI</Class>
+        </XMLSlot>
+        <XMLSlot Name="10">
+          <Class>SI</Class>
+        </XMLSlot>
+        <XMLSlot Name="11">
+          <Class>SI</Class>
+        </XMLSlot>
+        <XMLSlot Name="12">
+          <Class>SI,</Class>
+        </XMLSlot>
+        <XMLSlot Name="13">
+          <Class>SI</Class>
+        </XMLSlot>
+        <XMLSlot Name="14">
+          <Class>SI</Class>
+        </XMLSlot>
+        <XMLSlot Name="15">
+          <Class>SI</Class>
+        </XMLSlot>
+        <XMLSlot Name="16">
+          <Class>SI</Class>
+        </XMLSlot>
+        <XMLSlot Name="17">
+          <Class>SI</Class>
+        </XMLSlot>
+        <XMLSlot Name="18">
+          <Class>IM</Class>
+        </XMLSlot>
+      </Slots>
+    </XMLRack>
+    <XMLRack>
+      <CreateDate>Mittwoch, 20. Januar 2010</CreateDate>
+      <DeviceType>DEFAULT</DeviceType>
+      <RackDescription>DEFAULT</RackDescription>
+      <OrderNumber>DEFAULT</OrderNumber>
+      <MaxSlots>18</MaxSlots>
+      <Slots>
+        <XMLSlot Name="1">
+          <Class>??</Class>
+        </XMLSlot>
+        <XMLSlot Name="2">
+          <Class>??</Class>
+        </XMLSlot>
+        <XMLSlot Name="3">
+          <Class>??</Class>
+        </XMLSlot>
+        <XMLSlot Name="4">
+          <Class>??</Class>
+        </XMLSlot>
+        <XMLSlot Name="5">
+          <Class>??</Class>
+        </XMLSlot>
+        <XMLSlot Name="6">
+          <Class>??</Class>
+        </XMLSlot>
+        <XMLSlot Name="7">
+          <Class>??</Class>
+        </XMLSlot>
+        <XMLSlot Name="8">
+          <Class>??</Class>
+        </XMLSlot>
+        <XMLSlot Name="9">
+          <Class>??</Class>
+        </XMLSlot>
+        <XMLSlot Name="10">
+          <Class>??</Class>
+        </XMLSlot>
+        <XMLSlot Name="11">
+          <Class>??</Class>
+        </XMLSlot>
+        <XMLSlot Name="12">
+          <Class>??</Class>
+        </XMLSlot>
+        <XMLSlot Name="13">
+          <Class>??</Class>
+        </XMLSlot>
+        <XMLSlot Name="14">
+          <Class>??</Class>
+        </XMLSlot>
+        <XMLSlot Name="15">
+          <Class>??</Class>
+        </XMLSlot>
+        <XMLSlot Name="16">
+          <Class>??</Class>
+        </XMLSlot>
+        <XMLSlot Name="17">
+          <Class>??</Class>
+        </XMLSlot>
+        <XMLSlot Name="18">
+          <Class>??</Class>
+        </XMLSlot>
+      </Slots>
+    </XMLRack>
+</Racks>
+</RackAttack>

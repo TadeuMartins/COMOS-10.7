@@ -1,0 +1,26 @@
+﻿<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>COMOS Engineering Assistant</title>
+    
+    <!-- Chat Widget Styles -->
+    <link rel="stylesheet" href="chat-widget.css" />
+</head>
+
+<body class="theme-brand-light">
+    <div class="container">
+        <div id="chat-widget" class="widget-container"></div>
+    </div>
+
+    <!-- Speech Recognition Polyfill (must load BEFORE widget) -->
+    <script src="speech-polyfill.js?v=4"></script>
+
+    <!-- Chat Widget Library -->
+    <script src="chat-widget.js"></script>
+    
+    <!-- Application Script -->
+    <script src="chat-app.js"></script>
+</body>
+</html>

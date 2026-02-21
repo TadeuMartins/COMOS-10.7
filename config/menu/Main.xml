@@ -1,0 +1,3224 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ComosMainMenu>
+  <General Version="1" />
+  <!-- Tags and values are case sensitive!
+        Examples:
+        Tool:
+                <Tool id="ID_DatabaseOpen" type="Button">
+                        - id is unique
+                        - type="PopupMenu"|"Button"|"StateButton"|"Separator"
+
+                        Description:
+                        <Caption>
+                                <Text itx="~041e6 **File"/>
+                        </Caption>
+                        or:
+                        <Caption>
+                                <Text xml:lang="en" value="File"/>
+                                <Text xml:lang="de-de"  value="Datei"/>
+                        </Caption>
+
+                        Picture:
+                        <Picture key="std_DB"/>
+
+                        NET-WPF-Control:
+                        <Class type="NET" assembly="Comos.PropertyTree" progid="Comos.Controls.PropertyTree.AttributePropertyGrid"/>
+                        NET-WPF-Method:
+                        <Class type="NET" assembly="TestNET" progid="TestNET.XY"  method="ABC"/>
+                        COM-PlugIn:
+                        <Class type="COM" progid="CPlugInWord.Word"/>
+                        COM-Method:
+                        <Class type="COM" assembly="ComosTest" progid="ComosTest.Test" method="ABC"/>
+
+                        Rights:
+                        <Rights dependencyProperty="Enabled" functionRights="1" />
+                        <Rights dependencyProperty="Visible" adminOnly="true" />
+                        - dependencyProperty="Enabled"|"Visible"
+                        - adminOnly="true"|"false"
+                        - functionRights are Workset.GetCurrentProject().GetFunctionRights(null)
+
+                        Binding:
+                        <Binding type="CDevice" root="@System|@O|@Print"/>
+                        <Binding type="CDevices" root="@System|@O|@Bulkprocessing|@Device"/>
+                        - type="CDevice"|"CDevices"|"DBKEYCDEVICES"|"DBKEYCDEVICE"
+                        - root is CDevice.SystemFullName or an iDB-DBKey
+
+                        Window:
+                        <Window type="Floating" width="9045" height="6810" scaleMode="twip" resizeMode="NoResize" />
+                        - type="Tab"|"Floating"|"Modal"                 default:"Tab"
+                        - area="Document"|"Document2"|"Navigator"       default:"Document"
+                        - subarea="Detail"                              default:""
+                        - scaleMode="twip"|"pixel"                      default:"pixel"
+                        - resizeMode="NoResize"|"Resize"                default:"Resize"
+                        - autoClose="true"|"false"                      default:"true" close by project or database change
+                        - state="Reuse"|"Unique"|"ReuseOnly"|"UniqueOnly"   default:"ReuseOnly"
+
+                        Database:
+                        <Database type="Any" />
+                        - type="Any"|"ComosDB"|"iDB"                    default:"Any"
+
+        Toolbar:
+                <Toolbar id="MainMenu" type="MainMenu"/>
+                - id is unique
+                - type="MainMenu"|"Toolbar"
+
+        -->
+  <!--
+        ##################################################
+                L I B:  TOOLS, TOOLBARS
+        ##################################################-->
+  <Lib>
+    <Tools>
+      <Tool id="@NET.Custom" type="Button">
+        <Caption>
+          <Text itx="~08af1 Report Configuration" />
+        </Caption>
+        <Class type="NET" assembly="MR_Config" progid="MR_Config.CustomUserControl" />
+        <Parameters>
+          <Parameter name="Dll" value="MR_Config.dll" />
+        </Parameters>
+        <Window state="ReuseOnly" />
+        <Picture key="std_CPMSchemaEditor" />
+      </Tool>
+      <!--##### Code Generator #####-->
+      <Tool id="Comos.ConfigUI" type="Button">
+        <Caption>
+          <Text itx="~075ad User settings" />
+        </Caption>
+        <Class type="NET" assembly="Comos.ConfigUI" progid="Comos.ConfigUI.ConfigUIStarter" method="ShowConfigUI" />
+        <Picture key="std_user_settings" />
+      </Tool>
+      <Tool id="@NET.Comos.CaseManager.CaseManagerUI" type="Button">
+        <Caption>
+          <Text itx="~071a1 Case Manager" />
+        </Caption>
+        <Class type="NET" assembly="Comos.CaseManager" progid="Comos.CaseManager.CaseManagerUI" />
+        <Window type="Tab" area="Document" />
+      </Tool>
+      <Tool id="@NET.Comos.FEED.ObjectMapping.ObjectMappingCtrl" type="Button">
+        <Caption>
+          <Text itx="~07bc1 Object mapping: Simulation to PFD" />
+        </Caption>
+        <Class type="NET" assembly="Comos.FEED.ObjectMapping" progid="Comos.FEED.ObjectMapping.ObjectMappingCtrl" />
+        <Window type="Tab" area="Document" />
+      </Tool>
+      <Tool id="ID_CGImport" type="Button">
+        <Caption>
+          <Text itx="~050cc STEP 7-Import" />
+        </Caption>
+        <Class type="NET" assembly="Comos.S7.Import" progid="Comos.S7.Import.UI.ImportPlugin" />
+      </Tool>
+      <Tool id="@NET.SpecPhysUnit">
+        <Class type="NET" assembly="Comos.SpecPhysUnit" progid="Comos.SpecPhysUnit.View" />
+      </Tool>
+      <Tool id="ID_Comos.ScriptProcessing.UCSearchScript" type="Button">
+        <Caption>
+          <Text itx="~07846 Script processing" />
+        </Caption>
+        <Picture key="std_script" />
+        <Class type="NET" progid="Comos.ScriptProcessing.UCSearchScript" assembly="Comos.ScriptProcessing" />
+        <Rights functionRights="1" dependencyProperty="Enabled" />
+      </Tool>
+      <Tool id="ID_Comos.GenericStructureImport" type="Button">
+        <Caption>
+          <Text itx="~07cfe Generic structure import" />
+        </Caption>
+        <Picture key="std_includemainobject" />
+        <Class type="NET" progid="Comos.TSImportTool.UctsImportMain" assembly="Comos.TSImportTool" />
+        <Rights functionRights="1" dependencyProperty="Enabled" />
+      </Tool>
+      <Tool id="ID_Comos.Traversal.ToolBox" type="Button">
+        <Caption>
+          <Text itx="~07db5 Traversal toolbox" />
+        </Caption>
+        <Picture key="std_cateview" />
+        <Class type="NET" assembly="Comos.Traversal.ToolBox" progid="Comos.Traversal.ToolBox.TraversalToolBoxMain" />
+        <Rights functionRights="1" dependencyProperty="Enabled" />
+      </Tool>
+      <!--<Tool id="ID_CGEditor" type="Button">
+            <Caption>
+               <Text itx="~050cd STEP 7-Editor"/>
+            </Caption>
+            <Class type="NET" assembly="Comos.CodeGenerator.Base" progid="Comos.CodeGenerator.Base.UserInterface.MainWindow"/>
+            <Parameters>
+               <Parameter name="Dll" value="Comos.CodeGenerator.STEP7.dll"/>
+            </Parameters>
+                 </Tool>-->
+      <!--<Tool id="@NET.HeaderTab" type="Button">
+            <Caption>
+               <Text itx="~050ce Kopfdaten"/>
+            </Caption>
+            <Class type="NET" assembly="Comos.CodeGenerator.Base" progid="Comos.CodeGenerator.Base.UserInterface.MainWindow"/>
+            <Parameters>
+               <Parameter name="Dll" value="Comos.CodeGenerator.STEP7.dll"/>
+            </Parameters>
+                 </Tool>-->
+      <!--<Tool id="@NET.ScriptTab" type="Button">
+            <Caption>
+               <Text itx="~050cf Scriptdaten"/>
+            </Caption>
+            <Class type="NET" assembly="Comos.CodeGenerator.Base" progid="Comos.CodeGenerator.Base.UserInterface.MainWindow"/>
+            <Parameters>
+               <Parameter name="Dll" value="Comos.CodeGenerator.Script.dll"/>
+            </Parameters>
+                 </Tool>-->
+      <Tool id="@NET.Comos.WSP.Connection.Merge.UI" type="Button">
+        <Caption>
+          <Text itx="~076ff Collision control for connection objects" />
+        </Caption>
+        <Class type="NET" assembly="Comos.WSP.Connection.UI" progid="Comos.WSP.Connection.UI.MergeUI.UserControls.MergeCandidateList" />
+        <Window type="Tab" area="Navigator" subarea="Detail" />
+      </Tool>
+      <Tool id="@X.Comos.WSP.ExtendedObjects.Views.Plugins.CoCollision" type="Button">
+        <Caption>
+          <Text itx="~076ff Collision control for connection objects" />
+        </Caption>
+        <Picture key="std_querymenu" />
+        <Class type="NET" assembly="Comos.WSP.ExtendedObjects" progid="Comos.WSP.ExtendedObjects.Views.Plugins.CoCollision" />
+        <Window type="Tab" area="Document" />
+      </Tool>
+      <Tool id="@NET.ConnectionTransform" type="Button">
+        <Caption>
+          <Text itx="~07fe4 Migrate connections" />
+        </Caption>
+        <Class type="NET" assembly="Comos.Application.Connections" progid="Comos.Application.Connections.Electrical.ConnectionObjects.Transform.TransformationView" />
+        <Window type="Tab" area="Document" autoClose="false" />
+        <Picture key="std_actmerge2" />
+      </Tool>
+      <Tool id="@NET.Comos.Controls.DocumentPreview" type="Button">
+        <Caption>
+          <Text itx="Document preview" />
+        </Caption>
+        <Class type="NET" assembly="Comos.Controls.DocumentPreview" progid="Comos.Controls.DocumentPreview.PreviewControl" />
+        <Window state="Unique" type="Tab" scaleMode="pixel" />
+      </Tool>
+      <Tool id="@X.Comos.WSP.ExtendedObjects.Views.Tabs.ConnectorsQuery" type="Button">
+        <Caption>
+          <Text itx="~00003 Connectors" />
+        </Caption>
+        <Class type="NET" assembly="Comos.WSP.ExtendedObjects" progid="Comos.WSP.ExtendedObjects.Views.Tabs.ConnectorsQuery" />
+        <Window type="Tab" area="Navigator" subarea="Detail" />
+      </Tool>
+      <Tool id="@X.Comos.WSP.ExtendedObjects.Views.Tabs.TerminalStripQuery" type="Button">
+        <Caption>
+          <Text itx="~00649 Terminal strip" />
+        </Caption>
+        <Class type="NET" assembly="Comos.WSP.ExtendedObjects" progid="Comos.WSP.ExtendedObjects.Views.Tabs.TerminalStripQuery" />
+        <Window type="Tab" area="Navigator" subarea="Detail" />
+      </Tool>
+      <!--<Tool id="ID_TOAI" type="Button">
+                        <Caption>
+               <Text itx="~04c60 **Generator f r STEP 7"/>
+            </Caption>
+            <Class type="NET" assembly="Comos.SIMATICExchange.Base" progid="Comos.SIMATICExchange.Base.UI.MainFrame"/>
+            <Parameters>
+               <Parameter name="Dll" value="Comos.CodeGenerator.STEP7.dll"/>
+            </Parameters>
+            <Picture key="std_generatestep7"/>
+                 </Tool>-->
+      <Tool id="@NET.PABase.SymbolTableTab" type="Button">
+        <Caption>
+          <Text itx="~057b1 **Symbol table (de: Symboltabelle)" />
+        </Caption>
+        <Class type="NET" assembly="PABase.SymbolTableUI" progid="PABase.SymbolTableUI.MainWindow" />
+        <Parameters>
+          <Parameter name="Dll" value="PABase.SymbolTableUI.dll" />
+        </Parameters>
+      </Tool>
+      <!--##### FreePropertyDesign #####-->
+      <Tool id="@NET.Comos.DataService.FreePropertyDesign" type="Button">
+        <Caption>
+          <Text itx="~06adb **Erweiterte Eigenschaften" />
+        </Caption>
+        <Picture key="std_property_setting" />
+        <Class type="NET" assembly="Comos.DataService.FreePropertyDesign" progid="Comos.DataService.FreePropertyDesign.FreePropertyDesignCtrlContainer" />
+      </Tool>
+      <Tool id="@NET.Comos.Login" type="Button">
+        <Caption>
+          <Text itx="~041e9 **Datenbank öffnen..." />
+        </Caption>
+        <Class type="NET" assembly="Comos.Login" progid="Comos.Login.MainControl" />
+        <Picture key="std_DB" />
+        <Window type="Modal" width="5500" height="2300" scaleMode="twip" resizeMode="NoResize" />
+      </Tool>
+      <Tool id="@NET.PatternDefinitionControl" type="Button">
+        <Caption>
+          <Text itx="~05fa8 Anschlussmuster Definition" />
+          <!-- ohne ** bzw. ohne & -->
+        </Caption>
+        <Class type="NET" assembly="Comos.IC.PatternDefinition" progid="Comos.IC.PatternDefinition.DefinitionControl" />
+        <Picture key="std_actionTry" />
+      </Tool>
+      <!--######################################################################-->
+      <Tool id="ID_mnuFile" type="PopupMenu">
+        <Caption>
+          <Text itx="~041e6 **File" />
+        </Caption>
+      </Tool>
+      <Tool id="ID_SysNaviBack" type="Button">
+        <Caption>
+          <Text itx="~041e7 **Back" />
+        </Caption>
+        <Picture key="std_NaviBack" />
+      </Tool>
+      <Tool id="ID_SysNaviForward" type="Button">
+        <Caption>
+          <Text itx="~041e8 **Forward" />
+        </Caption>
+        <Picture key="std_NaviForward" />
+      </Tool>
+      <Tool id="ID_DatabaseOpen" type="Button">
+        <Caption>
+          <Text itx="~041e9 **Datenbank  ffnen..." />
+        </Caption>
+        <Picture key="std_DB" />
+        <Window type="Modal" width="6255" height="3150" scaleMode="twip" resizeMode="NoResize" />
+      </Tool>
+      <Tool id="ID_ProjectOpen" type="Button">
+        <Caption>
+          <Text itx="~041ea **Projekt  ffnen" />
+        </Caption>
+        <Picture key="std_ProjectOpen" />
+      </Tool>
+      <Tool id="ID_PoolOpen" type="Button">
+        <Caption>
+          <Text itx="~07463 **Projekt im iDB-Update oeffnen" />
+        </Caption>
+        <Picture key="std_PoolOpen" />
+        <Rights dependencyProperty="Visible" withDBUpdateRightOnly="true" />
+        <Database type="iDB" />
+      </Tool>
+      <Tool id="ID_ProjectClose" type="Button">
+        <Caption>
+          <Text itx="~041eb **Projekt schlie en" />
+        </Caption>
+        <Picture key="std_ProjectClose" />
+      </Tool>
+      <Tool id="ID_SysWorkingOverlayClose" type="Button">
+        <Caption>
+          <Text itx="~041ec **Arbeitsschicht schlie en" />
+        </Caption>
+        <Picture key="std_ProjectClose" />
+      </Tool>
+      <Tool id="ID_Save" type="Button">
+        <Caption>
+          <Text itx="~04c41 **Projekt speichern" />
+        </Caption>
+        <Picture key="std_Save" />
+      </Tool>
+      <Tool id="@NET.Comos.LanguageWizard" type="Button">
+        <Caption>
+          <Text itx="~041ee **Sprachen..." />
+        </Caption>
+        <Picture key="std_@X.CPlugInLanguageWizard.LanguageWizardCls" />
+        <Class type="NET" assembly="Comos.LanguageWizard" progid="Comos.LanguageWizard.LanguageView" />
+        <Window type="Floating" width="4500" height="1800" scaleMode="twip" resizeMode="NoResize" />
+      </Tool>
+      <Tool id="ID_Exit" type="Button">
+        <Caption>
+          <Text itx="~041ef **Beenden" />
+        </Caption>
+        <Picture key="std_Exit" />
+      </Tool>
+      <!--######################################################################-->
+      <Tool id="ID_mnuEdit" type="PopupMenu">
+        <Caption>
+          <Text itx="~041f0 **Bearbeiten" />
+        </Caption>
+      </Tool>
+      <Tool id="ID_Delete" type="Button">
+        <Caption>
+          <Text itx="~041f1 **L schen" />
+        </Caption>
+        <Picture key="std_Delete" />
+      </Tool>
+      <Tool id="ID_Cut" type="Button">
+        <Caption>
+          <Text itx="~041f2 **Ausschneiden" />
+        </Caption>
+        <Picture key="std_Cut" />
+      </Tool>
+      <Tool id="ID_Copy" type="Button">
+        <Caption>
+          <Text itx="~041f3 **Kopieren" />
+        </Caption>
+        <Picture key="std_Copy" />
+      </Tool>
+      <Tool id="ID_Paste" type="Button">
+        <Caption>
+          <Text itx="~041f4 **Einf gen" />
+        </Caption>
+        <Picture key="std_Paste" />
+      </Tool>
+      <Tool id="ID_PasteRef" type="Button">
+        <Caption>
+          <Text itx="~041f5 **Verkn pfung einf gen" />
+        </Caption>
+        <Picture key="std_PasteRef" />
+      </Tool>
+      <!--######################################################################-->
+      <Tool id="ID_mnuView" type="PopupMenu">
+        <Caption>
+          <Text itx="~041f6 **Ansicht" />
+        </Caption>
+      </Tool>
+      <Tool id="ID_Screen2" type="StateButton">
+        <Caption>
+          <Text itx="~041f7 **Bildschirm 2" />
+        </Caption>
+      </Tool>
+      <Tool id="ID_QuickStart" type="StateButton">
+        <Caption>
+          <Text itx="~041f8 **Direktstart" />
+        </Caption>
+      </Tool>
+      <Tool id="ID_CAOptions" type="PopupMenu">
+        <Picture key="std_Properties" />
+      </Tool>
+      <!--Old PDMS interface is now discontinued-->
+      <!--<Tool id="ID_CADisplayReport" type="Button">
+        <Caption>
+          <Text itx="~041f9 **Construction Assistent Log"/>
+        </Caption>
+        <Class type="COM" progid="ComosCALog.CALog"/>
+        -->
+      <!-- edit this -->
+      <!--
+        <Picture key="std_SymbPrev"/>
+        <Window type="Tab" area="Navigator" subarea="Detail"/>
+      </Tool>-->
+      <Tool id="ID_EnableAutoCollapse" type="StateButton">
+        <Caption>
+          <Text itx="~041fa **AutoCollapse" />
+        </Caption>
+      </Tool>
+      <Tool id="ID_Explorer" type="StateButton">
+        <Caption>
+          <Text itx="~041fb **Navigator" />
+        </Caption>
+      </Tool>
+      <Tool id="ID_Nav" type="Button">
+        <Caption>
+          <Text itx="~041fc **Zus tzlicher Navigator" />
+        </Caption>
+        <Picture key="std_Nav" />
+      </Tool>
+      <!--########################################-->
+      <Tool id="ID_mnuIconPlaceInfo" type="PopupMenu">
+        <Caption>
+          <Text itx="~041fd **Icon mit Platzierungsinformation" />
+        </Caption>
+      </Tool>
+      <Tool id="ID_ShowNo" type="StateButton">
+        <Caption>
+          <Text itx="~041fe **Nicht anzeigen" />
+        </Caption>
+      </Tool>
+      <Tool id="ID_ShowAll" type="StateButton">
+        <Caption>
+          <Text itx="~041ff **F r alle platzierten Objekte" />
+        </Caption>
+      </Tool>
+      <Tool id="ID_ShowOnlyElements" type="StateButton">
+        <Caption>
+          <Text itx="~04200 **Nur f r platzierte Elemente" />
+        </Caption>
+      </Tool>
+      <!--########################################-->
+      <Tool id="@NET.AttributePropertyGrid" type="Button">
+        <Caption>
+          <Text itx="~04c42 **Eigenschaftenbaum" />
+        </Caption>
+        <Class type="NET" assembly="Comos.PropertyTree" progid="Comos.Controls.PropertyTree.AttributePropertyGrid" />
+        <Picture key="std_PropTree" />
+        <Window type="Tab" area="Navigator" subarea="Detail" />
+      </Tool>
+      <Tool id="@NET.StatusWindow" type="Button">
+        <Caption>
+          <Text itx="~0627d Statusfenster" />
+        </Caption>
+        <Class type="NET" assembly="Comos.Controls.StatusWindow" progid="Comos.Controls.StatusWindow.StatusWindow" />
+        <Picture key="std_status" />
+        <Window type="Tab" area="Navigator" subarea="Detail" />
+      </Tool>
+      <Tool id="SymbolPreView" type="Button">
+        <Caption>
+          <Text itx="~04202 **Symbol- und Dokumentenvorschau" />
+        </Caption>
+        <Class type="COM" progid="ComosSymbPreview.SymbPreview" />
+        <Picture key="std_SymbPrev" />
+        <Window type="Tab" area="Navigator" subarea="Detail" />
+      </Tool>
+      <Tool id="@NET.UIFormsList" type="Button">
+        <Caption>
+          <Text itx="~04203 **Fensterliste" />
+        </Caption>
+        <Class type="NET" assembly="Comos.UIF" progid="Comos.UIF.UIControls.UIFormsList" />
+        <Picture key="std_windowList" />
+        <Window type="Tab" area="Navigator" subarea="Detail" autoClose="false" />
+      </Tool>
+      <Tool id="@NET.UIFavoritesList" type="Button">
+        <Caption>
+          <Text itx="~04204 **Favoriten" />
+        </Caption>
+        <Class type="NET" assembly="Comos.UIF.UIControls.UIFavorites" progid="Comos.UIF.UIControls.UIFavoritesList" />
+        <Picture key="std_PICKLIST" />
+        <Window type="Tab" area="Navigator" subarea="Detail" autoClose="false" />
+      </Tool>
+      <!--######################################################################-->
+      <Tool id="ID_mnuAdmin" type="PopupMenu">
+        <Caption>
+          <Text itx="~04205 **Administrator" />
+        </Caption>
+        <Rights dependencyProperty="Enabled" functionRights="1" />
+      </Tool>
+      <Tool id="ID_mnuBaseObjects" type="PopupMenu">
+        <Caption>
+          <Text itx="~04206 **Stammdaten" />
+        </Caption>
+        <Rights dependencyProperty="Enabled" functionRights="1" />
+      </Tool>
+      <Tool id="ID_StdTbMgr" type="Button">
+        <Caption>
+          <Text itx="~04207 **Auswahllisten..." />
+        </Caption>
+        <Picture key="std_StdTbMgr" />
+        <Rights dependencyProperty="Enabled" functionRights="1" />
+      </Tool>
+      <Tool id="ID_PhysUnit" type="Button">
+        <Caption>
+          <Text itx="~04208 **Einheitensysteme..." />
+        </Caption>
+        <Picture key="std_PhysUnit" />
+        <Rights dependencyProperty="Enabled" functionRights="1" />
+      </Tool>
+      <Tool id="ID_DocTyp" type="Button">
+        <Caption>
+          <Text itx="~04209 **Dokumententypen" />
+        </Caption>
+        <Picture key="std_DocTyp" />
+        <Rights dependencyProperty="Enabled" functionRights="1" />
+      </Tool>
+      <!--
+      <Tool id="@X.CPlugInECADImp.ECADImpCls" type="Button">
+        <Caption>
+          <Text itx="~0420a **ECAD-Bauteile-Import..."/>
+        </Caption>
+        <Picture key="std_@X.CPlugInECADImp.ECADImpCls"/>
+        <Rights dependencyProperty="Enabled" functionRights="1"/>
+        <Class type="COM" progid="CPlugInECADImp.ECADImpCls"/>
+        <Database type="ComosDB" />
+      </Tool>
+      -->
+      <Tool id="@X.CPlugInPipeClass.PipeClass" type="Button">
+        <Caption>
+          <Text itx="~0420b **Rohrklassen..." />
+        </Caption>
+        <Picture key="std_@X.CPlugInPipeClass.PipeClass" />
+        <Rights dependencyProperty="Enabled" functionRights="1" />
+        <Class type="COM" progid="CPlugInPipeClass.PipeClass" />
+        <Database type="Any" />
+      </Tool>
+      <Tool id="ID_MultiCrp" type="Button">
+        <Caption>
+          <Text itx="~04c43 **Massenbearbeitung von Reportvorlagen" />
+        </Caption>
+        <Picture key="std_RepDes_ReplaceText" />
+        <Rights dependencyProperty="Enabled" functionRights="1" />
+        <Class type="COM" progid="CPlugInMultiCrp.MultiCrp" />
+      </Tool>
+      <Tool id="@NET.ConnectionPossibleMatrix" type="Button">
+        <Caption>
+          <Text itx="~05fab Erlaubte Anschlusstyp-Kombinationen" />
+        </Caption>
+        <Class type="NET" assembly="Comos.WSP.ConnectionPossibleMatrix" progid="Comos.WSP.ConnectionPossibleMatrix.MatrixControl" />
+        <Picture key="std_gl_Grid" />
+      </Tool>
+      <!--########################################-->
+      <Tool id="ID_mnuSystem" type="PopupMenu">
+        <Caption>
+          <Text itx="~0420d **System" />
+        </Caption>
+      </Tool>
+      <Tool id="@NET.DataService" type="Button">
+        <Caption>
+          <Text itx="~04c44 **Datenwartung (Support)" />
+        </Caption>
+        <Class type="NET" assembly="Comos.DataService" progid="Comos.DataService.DataService" />
+        <Picture key="std_Support" />
+      </Tool>
+      <Tool id="ID_UserMgr" type="Button">
+        <Caption>
+          <Text itx="~0420f **Benutzerverwaltung..." />
+        </Caption>
+        <Picture key="std_UserMgr" />
+        <Rights dependencyProperty="Enabled" functionRights="8" />
+      </Tool>
+      <!--<Tool id="@X.CPlugInDBConvert.DBConvert" type="Button">
+            <Caption>
+               <Text itx="~04210 **Datenbankanpassungen..."/>
+            </Caption>
+            <Picture key="std_@X.CPlugInDBConvert.DBConvert"/>
+            <Rights dependencyProperty="Enabled" functionRights="8"/>
+            <Class type="COM" progid="CPlugInDBConvert.DBConvert"/>
+            <Window type="Tab" area="Document"/>
+         </Tool>-->
+      <Tool id="@X.CPlugInDocFileEqual.DocFileEqual" type="Button">
+        <Caption>
+          <Text itx="~04211 **Projektverzeichnisabgleich..." />
+        </Caption>
+        <Picture key="std_@X.CPlugInDocFileEqual.DocFileEqual" />
+        <Rights dependencyProperty="Enabled" functionRights="8" />
+        <Class type="COM" progid="CPlugInDocFileEqual.DocFileEqual" />
+      </Tool>
+      <!--########################################-->
+      <Tool id="ID_mnuClassification" type="PopupMenu">
+        <Caption>
+          <Text itx="~04212 **Update Classification" />
+        </Caption>
+      </Tool>
+      <Tool id="ID_ClassificationCurProjects" type="Button">
+        <Caption>
+          <Text itx="~04213 **Current Project" />
+        </Caption>
+        <Class type="NET" assembly="Comos.ClassificationMenu" progid="Comos.ClassificationMenu.ClassificationCurProject" />
+        <Rights dependencyProperty="Enabled" functionRights="8" />
+      </Tool>
+      <Tool id="ID_ClassificationAllProjects" type="Button">
+        <Caption>
+          <Text itx="~04214 **All Projects" />
+        </Caption>
+        <Class type="NET" assembly="Comos.ClassificationMenu" progid="Comos.ClassificationMenu.ClassificationAllProjs" />
+        <Rights dependencyProperty="Enabled" functionRights="8" />
+      </Tool>
+      <!--########################################-->
+      <Tool id="ID_ScriptErrorHandling" type="StateButton">
+        <Caption>
+          <Text itx="~04215 **Script-Fehlerbehandlung" />
+        </Caption>
+        <Rights dependencyProperty="Visible" functionRights="1" />
+      </Tool>
+      <Tool id="ID_Zoom" type="StateButton">
+        <Caption>
+          <Text itx="~007e7 **Zoom" />
+        </Caption>
+        <Rights dependencyProperty="Visible" functionRights="1" />
+      </Tool>
+      <!--######################################################################-->
+      <Tool id="ID_mnuExtra" type="PopupMenu">
+        <Caption>
+          <Text itx="~04216 **Extra" />
+        </Caption>
+      </Tool>
+      <!--########################################-->
+      <Tool id="ID_Documents" type="PopupMenu">
+        <Caption>
+          <Text itx="~04217 **Dokumente" />
+        </Caption>
+      </Tool>
+      <!--<Tool id="ID_Print" type="Button">
+            <Caption>
+               <Text itx="~04218 **Drucken"/>
+            </Caption>
+            <Picture key="std_Print"/>
+            <Binding type="CDevice" root="@System|@O|@Print"/>
+            <Parameters>
+               <Parameter name="Action" value="Print" />
+            </Parameters>
+         </Tool>-->
+      <Tool id="ID_Print" type="Button">
+        <Caption>
+          <Text itx="~04218 **Drucken" />
+        </Caption>
+        <Picture key="std_Print" />
+        <Binding type="DBKeyCDevice" root="_System__O__Print___99_A20_M00_A60_A10" />
+        <Parameters>
+          <Parameter name="Action" value="Print" />
+        </Parameters>
+      </Tool>
+      <!--<Tool id="ID_CheckDocs" type="Button">
+            <Caption>
+               <Text itx="~04c45 **Auswerten"/>
+            </Caption>
+            <Picture key="std_DRun"/>
+            <Binding type="CDevice" root="@System|@O|@Print"/>
+            <Parameters>
+               <Parameter name="Action" value="Check" />
+            </Parameters>
+         </Tool>-->
+      <Tool id="ID_CheckDocs" type="Button">
+        <Caption>
+          <Text itx="~04c45 **Auswerten" />
+        </Caption>
+        <Picture key="std_DRun" />
+        <Binding type="DBKeyCDevice" root="_System__O__Print___99_A20_M00_A60_A10" />
+        <Parameters>
+          <Parameter name="Action" value="Check" />
+        </Parameters>
+      </Tool>
+      <!--<Tool id="ID_Revision" type="Button">
+            <Caption>
+               <Text itx="~0421a **Revisionieren"/>
+            </Caption>
+            <Picture key="std_Revision"/>
+            <Binding type="CDevice" root="@System|@O|@Print"/>
+            <Parameters>
+               <Parameter name="Action" value="Revision" />
+            </Parameters>
+         </Tool>-->
+      <Tool id="ID_Revision" type="Button">
+        <Caption>
+          <Text itx="~0421a **Revisionieren" />
+        </Caption>
+        <Picture key="std_Revision" />
+        <Binding type="DBKeyCDevice" root="_System__O__Print___99_A20_M00_A60_A10" />
+        <Parameters>
+          <Parameter name="Action" value="Revision" />
+        </Parameters>
+      </Tool>
+      <!--<Tool id="ID_SaveInFile" type="Button">
+            <Caption>
+               <Text itx="~0421b **DWG/DXF-Export"/>
+            </Caption>
+            <Picture key="std_reporttodwg"/>
+            <Binding type="CDevice" root="@System|@O|@Print"/>
+            <Parameters>
+               <Parameter name="Action" value="SaveInFile" />
+            </Parameters>
+         </Tool>-->
+      <Tool id="ID_SaveInFile" type="Button">
+        <Caption>
+          <Text itx="~0421b **DWG/DXF-Export" />
+        </Caption>
+        <Picture key="std_reporttodwg" />
+        <Binding type="DBKeyCDevice" root="_System__O__Print___99_A20_M00_A60_A10" />
+        <Parameters>
+          <Parameter name="Action" value="SaveInFile" />
+        </Parameters>
+      </Tool>
+      <Tool id="ID_ReportToDGN" type="Button">
+        <Caption>
+          <Text itx="~08235 **DGN-Export" />
+          <!-- TODO adwoan10 Create ITX-Key -->
+        </Caption>
+        <Picture key="std_reporttodgn" />
+        <Binding type="DBKeyCDevice" root="_System__O__Print___99_A20_M00_A60_A10" />
+        <Parameters>
+          <Parameter name="Action" value="DGNExport" />
+        </Parameters>
+      </Tool>
+      <Tool id="ID_ReportToDGN_Settings" type="Button">
+        <Caption>
+          <Text itx="~082d9 DGN export project settings" />
+        </Caption>
+        <Picture key="std_reporttodgn" />
+        <Class type="NET" assembly="ExportDGN.UI" progid="ExportDGN.UI.Controls.DocumentExportDGNProjectSettingsControl" />
+        <Window type="Tab" area="Document" autoClose="true" />
+        <Database type="ComosDB" />
+      </Tool>
+      <!--<Tool id="ID_SaveTiff" type="Button">
+            <Caption>
+               <Text itx="~04c46 **TIFF-/PDF-Datei der freigegebenen Revision kopieren"/>
+            </Caption>
+            <Picture key="std_SaveTiff"/>
+            <Binding type="CDevice" root="@System|@O|@Print"/>
+            <Parameters>
+               <Parameter name="Action" value="SaveTiff" />
+            </Parameters>
+         </Tool>-->
+      <Tool id="ID_SaveTiff" type="Button">
+        <Caption>
+          <Text itx="~04c46 **TIFF-/PDF-Datei der freigegebenen Revision kopieren" />
+        </Caption>
+        <Picture key="std_SaveTiff" />
+        <Binding type="DBKeyCDevice" root="_System__O__Print___99_A20_M00_A60_A10" />
+        <Parameters>
+          <Parameter name="Action" value="SaveTiff" />
+        </Parameters>
+      </Tool>
+      <!--<Tool id="ID_ReportToExcel" type="Button">
+            <Caption>
+               <Text itx="~0421e **Excel-Export"/>
+            </Caption>
+            <Picture key="std_ReportToExcel"/>
+            <Binding type="CDevice" root="@System|@O|@Print"/>
+            <Parameters>
+               <Parameter name="Action" value="ExcelExport" />
+            </Parameters>
+         </Tool>-->
+      <Tool id="ID_ReportToExcel" type="Button">
+        <Caption>
+          <Text itx="~0421e **Excel-Export" />
+        </Caption>
+        <Picture key="std_ReportToExcel" />
+        <Binding type="DBKeyCDevice" root="_System__O__Print___99_A20_M00_A60_A10" />
+        <Parameters>
+          <Parameter name="Action" value="ExcelExport" />
+        </Parameters>
+      </Tool>
+      <!--<Tool id="ID_ReportToPDF" type="Button">
+            <Caption>
+               <Text itx="~0421f **PDF-Export"/>
+            </Caption>
+            <Picture key="std_ReportToPDF"/>
+            <Binding type="CDevice" root="@System|@O|@Print"/>
+            <Parameters>
+               <Parameter name="Action" value="PDFExport" />
+            </Parameters>
+         </Tool>-->
+      <Tool id="ID_ReportToPDF" type="Button">
+        <Caption>
+          <Text itx="~0421f **PDF-Export" />
+        </Caption>
+        <Picture key="std_ReportToPDF" />
+        <Binding type="DBKeyCDevice" root="_System__O__Print___99_A20_M00_A60_A10" />
+        <Parameters>
+          <Parameter name="Action" value="PDFExport" />
+        </Parameters>
+      </Tool>
+      <!--<Tool id="ID_PrintRevisionFile" type="Button">
+            <Caption>
+               <Text itx="~04220 **Aktuelle Revisionsdatei drucken"/>
+            </Caption>
+            <Picture key="std_PrintRevisionFile"/>
+            <Binding type="CDevice" root="@System|@O|@Print"/>
+            <Parameters>
+               <Parameter name="Action" value="PrintRevisionFile" />
+            </Parameters>
+         </Tool>-->
+      <Tool id="ID_PrintRevisionFile" type="Button">
+        <Caption>
+          <Text itx="~04220 **Aktuelle Revisionsdatei drucken" />
+        </Caption>
+        <Picture key="std_PrintRevisionFile" />
+        <Binding type="DBKeyCDevice" root="_System__O__Print___99_A20_M00_A60_A10" />
+        <Parameters>
+          <Parameter name="Action" value="PrintRevisionFile" />
+        </Parameters>
+      </Tool>
+      <!--<Tool id="ID_PrintToRevPrinter" type="Button">
+            <Caption>
+               <Text itx="~04221 **Print with revision printer"/>
+            </Caption>
+            <Picture key="std_PrintToRevPrinter"/>
+            <Binding type="CDevice" root="@System|@O|@Print"/>
+            <Parameters>
+               <Parameter name="Action" value="PrintToRevPrinter" />
+            </Parameters>
+         </Tool>-->
+      <Tool id="ID_PrintToRevPrinter" type="Button">
+        <Caption>
+          <Text itx="~04221 **Print with revision printer" />
+        </Caption>
+        <Picture key="std_PrintToRevPrinter" />
+        <Binding type="DBKeyCDevice" root="_System__O__Print___99_A20_M00_A60_A10" />
+        <Parameters>
+          <Parameter name="Action" value="PrintToRevPrinter" />
+        </Parameters>
+      </Tool>
+      <!--<Tool id="ID_DocQuery" type="Button">
+            <Caption>
+               <Text itx="~04222 **Gesammelte Dokumentenwerkzeuge"/>
+            </Caption>
+            <Picture key="std_QueryMenu"/>
+            <Binding type="CDevice" root="@System|@O|@Print"/>
+         </Tool>-->
+      <Tool id="ID_DocQuery" type="Button">
+        <Caption>
+          <Text itx="~04222 **Gesammelte Dokumentenwerkzeuge" />
+        </Caption>
+        <Picture key="std_QueryMenu" />
+        <Binding type="DBKeyCDevice" root="_System__O__Print___99_A20_M00_A60_A10" />
+      </Tool>
+      <!--########################################-->
+      <Tool id="ID_mnuBulk" type="PopupMenu">
+        <Caption>
+          <Text itx="~04223 **Massenbearbeitung" />
+        </Caption>
+      </Tool>
+      <!--<Tool id="@X.DBulkProcess" type="PopupMenu">
+                <Caption>
+                    <Text itx="~04224 **Massenbearbeitung f r Planungsobjekte"/>
+                </Caption>
+                <Binding type="CDevices" root="@System|@O|@Bulkprocessing|@Device"/>
+            </Tool>-->
+      <Tool id="@X.DBulkProcess" type="PopupMenu">
+        <Caption>
+          <Text itx="~04224 **Massenbearbeitung f r Planungsobjekte" />
+        </Caption>
+        <Binding type="DBKeyCDevices" root="_System__O__Bulkprocessing__Device___99_A20_M00_A40_A20_A10" />
+      </Tool>
+      <!--<Tool id="@X.CBulkProcess" type="PopupMenu">
+            <Caption>
+               <Text itx="~04225 **Massenbearbeitung f r Stammobjekte"/>
+            </Caption>
+            <Binding type="CDevices" root="@System|@O|@Bulkprocessing|@CDevice"/>
+            <Rights dependencyProperty="Enabled" functionRights="1" />
+         </Tool>-->
+      <Tool id="@X.CBulkProcess" type="PopupMenu">
+        <Caption>
+          <Text itx="~04225 **Massenbearbeitung f r Stammobjekte" />
+        </Caption>
+        <Binding type="DBKeyCDevices" root="_System__O__Bulkprocessing__CDevice___99_A20_M00_A40_A20_A20" />
+        <Rights dependencyProperty="Enabled" functionRights="1" />
+      </Tool>
+      <!--<Tool id="@X.SBulkProcess" type="PopupMenu">
+            <Caption>
+               <Text itx="~04226 **Massenbearbeitung f r Attribute"/>
+            </Caption>
+            <Binding type="CDevices" root="@System|@O|@Bulkprocessing|@Specification"/>
+            <Rights dependencyProperty="Enabled" functionRights="1" />
+         </Tool>-->
+      <Tool id="@X.SBulkProcess" type="PopupMenu">
+        <Caption>
+          <Text itx="~04226 **Massenbearbeitung f r Attribute" />
+        </Caption>
+        <Binding type="DBKeyCDevices" root="_System__O__Bulkprocessing__Specification___99_A20_M00_A40_A20_A30" />
+        <Rights dependencyProperty="Enabled" functionRights="1" />
+      </Tool>
+      <!--<Tool id="@System|@O|@Bulkprocessing|@Document" type="PopupMenu">
+            <Caption>
+               <Text itx="~04227 **Massenbearbeitung f r Dokumente"/>
+            </Caption>
+            <Binding type="CDevices" root="@System|@O|@Bulkprocessing|@Document"/>
+         </Tool>-->
+      <Tool id="@System|@O|@Bulkprocessing|@Document" type="PopupMenu">
+        <Caption>
+          <Text itx="~04227 **Massenbearbeitung f r Dokumente" />
+        </Caption>
+        <Binding type="DBKeyCDevices" root="_System__O__Bulkprocessing__Document___99_A20_M00_A40_A20_A40" />
+      </Tool>
+      <!--<Tool id="@System|@O|@Bulkprocessing|@Connector" type="PopupMenu">
+            <Caption>
+               <Text itx="~04228 **Massenbearbeitung f r Anschl sse"/>
+            </Caption>
+            <Binding type="CDevices" root="@System|@O|@Bulkprocessing|@Connector"/>
+         </Tool>-->
+      <Tool id="@System|@O|@Bulkprocessing|@Connector" type="PopupMenu">
+        <Caption>
+          <Text itx="~04228 **Massenbearbeitung f r Anschl sse" />
+        </Caption>
+        <Binding type="DBKeyCDevices" root="_System__O__Bulkprocessing__Connector___99_A20_M00_A40_A20_A50" />
+      </Tool>
+      <!--########################################-->
+      <!--<Tool id="ID_Query" type="PopupMenu">
+            <Caption>
+               <Text itx="~04229 **Abfrage"/>
+            </Caption>
+            <Binding type="CDevices" root="@System|@O|@Query"/>
+         </Tool>-->
+      <Tool id="ID_Query" type="PopupMenu">
+        <Caption>
+          <Text itx="~04229 **Abfrage" />
+        </Caption>
+        <Binding type="DBKeyCDevices" root="_System__O__Query___99_A20_M00_A40_A10" />
+      </Tool>
+      <!--########################################-->
+      <!--<Tool id="ID_Import" type="PopupMenu">
+            <Caption>
+               <Text itx="~0422a **Standardimport"/>
+            </Caption>
+            <Binding type="CDevices" root="@System|@O|@StdImport"/>
+         </Tool>-->
+      <Tool id="ID_Import" type="PopupMenu">
+        <Caption>
+          <Text itx="~0422a **Standardimport" />
+        </Caption>
+        <Binding type="DBKeyCDevices" root="_System__O__StdImport___99_A20_M00_A40_A30" />
+      </Tool>
+      <!--########################################-->
+      <Tool id="ID_mnuLanguages" type="PopupMenu">
+        <Caption>
+          <Text itx="~0422b **Sprach bersetzung" />
+        </Caption>
+      </Tool>
+      <Tool id="ID_Language" type="Button">
+        <Caption>
+          <Text itx="~0422c **Einzel bersetzer" />
+        </Caption>
+        <Picture key="std_Language" />
+        <Window type="Floating" width="4600" height="2400" scaleMode="twip" />
+      </Tool>
+      <!--<Tool id="@X.Translate" type="Button">
+            <Caption>
+               <Text itx="~0422d **Mengen bersetzer"/>
+            </Caption>
+            <Picture key="std_Translate"/>
+            <Binding type="CDevice" root="@System|@O|@Trans"/>
+         </Tool>-->
+      <Tool id="@X.Translate" type="Button">
+        <Caption>
+          <Text itx="~0422d **Mengen bersetzer" />
+        </Caption>
+        <Picture key="std_Translate" />
+        <Binding type="DBKeyCDevice" root="_System__O__Trans___20_A70_Y20_M00_A60" />
+      </Tool>
+      <Tool id="@X.CPlugInLangDB.LangDB" type="Button">
+        <Caption>
+          <Text itx="~04255 ** bersetzungsdatenbank" />
+        </Caption>
+        <Picture key="std_@X.CPlugInLangDB.LangDB" />
+        <Class type="COM" progid="CPlugInLangDB.LangDB" />
+      </Tool>
+      <!--<Tool id="@NET.ProjectTrans" type="Button">
+                        <Caption>
+                             <Text itx="~0422e **Projekt bersetzer" />
+                        </Caption>
+                        <Class type="NET" assembly="Comos.Translation.Project" progid="Comos.Translation.Project.ProjectTranslator" />
+                        <Picture key="std_@x.cplugintrdb.trdbcls" />
+                        <Parameters>
+                             <Parameter name="P1" value="WPF" />
+                        </Parameters>
+                 </Tool>-->
+      <Tool id="@NET.SearchDBString" type="Button">
+        <Caption>
+          <Text itx="~05c9a  bersetzungssuche" />
+        </Caption>
+        <Class type="NET" assembly="Comos.Translation.SearchDBString" progid="Comos.Translation.SearchDBString.Main" />
+        <Picture key="std_Translate" />
+      </Tool>
+      <!--########################################-->
+      <Tool id="ID_mnuCheck" type="PopupMenu">
+        <Caption>
+          <Text itx="~0422f **Pr fen" />
+        </Caption>
+      </Tool>
+      <Tool id="ID_ObjectCheck" type="Button">
+        <Caption>
+          <Text itx="~04230 **Objekt-Test..." />
+        </Caption>
+        <Picture key="std_ObjectCheck" />
+      </Tool>
+      <Tool id="@X.CPlugInCheckInstances.CheckInstances" type="Button">
+        <Caption>
+          <Text itx="~04231 **Instanzen bearbeiten..." />
+        </Caption>
+        <Picture key="std_@X.CPlugInCheckInstances.CheckInstances" />
+        <Rights dependencyProperty="Enabled" functionRights="1" />
+        <Class type="COM" progid="CPlugInCheckInstances.CheckInstances" />
+      </Tool>
+      <!--########################################-->
+      <Tool id="ID_mnuDetail" type="PopupMenu">
+        <Caption>
+          <Text itx="~04233 **Detail" />
+        </Caption>
+      </Tool>
+      <Tool id="ID_SignalMgr" type="Button">
+        <Caption>
+          <Text itx="~04235 **Signalmanager..." />
+        </Caption>
+        <Picture key="std_SignalMgr" />
+      </Tool>
+      <Tool id="@X.CPlugInModNameLbl.ModNameLbl" type="Button">
+        <Caption>
+          <Text itx="~04236 **Modifikation von Name/Kennzeichen..." />
+        </Caption>
+        <Picture key="std_@X.CPlugInModNameLbl.ModNameLbl" />
+        <Class type="COM" progid="CPlugInModNameLbl.ModNameLbl" />
+      </Tool>
+      <!--<Tool id="@X.CPlugInSearchProductD.SearchProductD" type="Button">
+            <Caption>
+               <Text itx="~04237 **Ger teauswahl (Produktdaten)..."/>
+            </Caption>
+            <Picture key="std_@X.CPlugInSearchProductD.SearchProductD"/>
+            <Binding type="CDevice" root="@System|@O|@Product"/>
+         </Tool>-->
+      <Tool id="@X.CPlugInSearchProductD.SearchProductD" type="Button">
+        <Caption>
+          <Text itx="~04237 **Ger teauswahl (Produktdaten)..." />
+        </Caption>
+        <Picture key="std_@X.CPlugInSearchProductD.SearchProductD" />
+        <Binding type="DBKeyCDevice" root="_System__O__Product___99_A20_M00_A40_A50_A10" />
+      </Tool>
+      <Tool id="@X.CPlugInSetGeneralWire.SetGeneralWire" type="Button">
+        <Caption>
+          <Text itx="~04238 **Merkmale f r Verbindungen..." />
+        </Caption>
+        <Picture key="std_@X.CPlugInSetGeneralWire.SetGeneralWire" />
+        <Class type="NET" assembly="Comos.Plugin.SetGeneralWire" progid="Comos.Plugin.SetGeneralWire.SetGeneralWireCtl" />
+      </Tool>
+      <Tool id="@X.Comos.HalfOpenConnsQExtender" type="Button">
+        <Caption>
+          <Text itx="~060dd **Massenbearbeitung halboffener Verbindungen" />
+        </Caption>
+        <Picture key="std_querymenu" />
+        <Class type="NET" assembly="Comos.HalfOpenConnsQExtender" progid="Comos.HalfOpenConnsQExtender.View.HalfOpenConnsUI" />
+        <Window type="Tab" area="Document" />
+      </Tool>
+      <Tool id="@X.Comos.WSP.ExtendedObjects.Views.Plugins.ConnectionAttributes" type="Button">
+        <Caption>
+          <Text itx="~07700 Connection Attributes" />
+        </Caption>
+        <Picture key="std_querymenu" />
+        <Class type="NET" assembly="Comos.WSP.ExtendedObjects" progid="Comos.WSP.ExtendedObjects.Views.Plugins.ConnectionAttributes" />
+        <Window type="Tab" area="Document" />
+      </Tool>
+      <Tool id="@X.Comos.WSP.ExtendedObjects.Views.Plugins.ConnectedDevices" type="Button">
+        <Caption>
+          <Text itx="~0801b Potential – assigned devices" />
+        </Caption>
+        <Picture key="std_potential" />
+        <Class type="NET" assembly="Comos.WSP.ExtendedObjects" progid="Comos.WSP.ExtendedObjects.Views.Plugins.ConnectedDevices" />
+        <Window type="Tab" area="Document" />
+      </Tool>
+      <Tool id="@NET.Comos.WSP.ExtendedObjects.ConnectedDevicesTab" type="Button">
+        <Caption>
+          <Text itx="~0801b Potential – assigned devices" />
+        </Caption>
+        <Class type="NET" assembly="Comos.WSP.ExtendedObjects" progid="Comos.WSP.ExtendedObjects.Views.Tabs.ConnectedDevicesTab" />
+      </Tool>
+      <Tool id="@X.Comos.WSP.Connection.UI" type="Button">
+        <Caption>
+          <Text itx="~07701 Connection Properties" />
+        </Caption>
+        <Class type="NET" assembly="Comos.WSP.Connection.UI" progid="Comos.WSP.Connection.UI.PropUI.MainViewConnectionObject" />
+        <Window type="Tab" area="Document" />
+      </Tool>
+      <Tool id="ID_DevEditTwo" type="Button">
+        <Caption>
+          <Text itx="~04239 **Betriebsmittel anschlie en..." />
+        </Caption>
+        <Picture key="std_DevEditTwo" />
+      </Tool>
+      <!--########################################-->
+      <Tool id="ID_mnuOverlayHistory" type="PopupMenu">
+        <Caption>
+          <Text itx="~0423a **Arbeitsschichten/Historien" />
+        </Caption>
+      </Tool>
+      <Tool id="ID_WOManager" type="Button">
+        <Caption>
+          <Text itx="~0423b **Verwaltung..." />
+        </Caption>
+        <Picture key="std_History" />
+        <Window autoClose="false" />
+      </Tool>
+      <Tool id="ID_WOStatusInfo" type="Button">
+        <Caption>
+          <Text itx="~0423c **Objektstatus..." />
+        </Caption>
+        <Picture key="std_WOStatusInfo" />
+        <Window type="Tab" area="Document" />
+      </Tool>
+      <Tool id="@X.CPlugInPlantRevs.PlantRevs" type="Button">
+        <Caption>
+          <Text itx="~0423d **Freigabemanager..." />
+        </Caption>
+        <Picture key="std_@X.CPlugInPlantRevs.PlantRevs" />
+        <Class type="COM" progid="CPlugInPlantRevs.PlantRevs" />
+      </Tool>
+      <!--########################################-->
+      <Tool id="ID_3DReview" type="PopupMenu">
+        <Caption>
+          <Text itx="~06abf ** 3D Review" />
+        </Caption>
+      </Tool>
+      <Tool id="ID_Viper_D3D" type="Button">
+        <Caption>
+          <Text itx="~06ac0 ** 3D View" />
+        </Caption>
+        <!--Picture key="std_Viper_CM_1561"/-->
+        <Picture key="std_Viper_D3D" />
+      </Tool>
+      <Tool id="ID_Viper_SymEd" type="Button">
+        <Caption>
+          <Text itx="~04241 **Symbol-Editor" />
+        </Caption>
+        <Picture key="std_Viper_CM_1561" />
+      </Tool>
+      <!--########################################-->
+      <Tool id="@X.CPlugInMatchTree.MatchTreeCls" type="Button">
+        <Caption>
+          <Text itx="~04242 **Objektvergleicher..." />
+        </Caption>
+        <Picture key="std_MatchTree" />
+        <Class type="COM" progid="CPlugInMatchTree.MatchTreeCls" />
+      </Tool>
+      <Tool id="@NET.Comos.CopyInProject" type="Button">
+        <Caption>
+          <Text itx="~04243 **Projekt bergreifendes Kopieren..." />
+        </Caption>
+        <Picture key="std_@X.CPlugInCopyInProject.CopyInProjectCls" />
+        <Class type="NET" assembly="Comos.CopyInProject" progid="Comos.CopyInProject.View.CopyInProjectView" />
+      </Tool>
+      <Tool id="ID_ReportDesigner" type="Button">
+        <Caption>
+          <Text itx="~04244 **Report-Designer..." />
+        </Caption>
+        <Picture key="std_ReportDesigner" />
+        <Rights dependencyProperty="Enabled" functionRights="1" />
+      </Tool>
+      <Tool id="@X.CPlugInAReImport.AReImport" type="Button">
+        <Caption>
+          <Text itx="~04245 **ReImport..." />
+        </Caption>
+        <Picture key="std_@X.CPlugInAReImport.AReImport" />
+        <Class type="COM" progid="CPlugInAReImport.AReImport" />
+        <!--<Window type="Floating" width="10410" height="4480" scaleMode="twip" />-->
+      </Tool>
+      <Tool id="@NET.Comos.Layers" type="Button">
+        <Caption>
+          <Text itx="~04246 **Arbeitsbereiche einschr nken..." />
+        </Caption>
+        <Picture key="std_@X.CPlugInLayerForSession.LayerForSession" />
+        <Class type="NET" assembly="Comos.Layers" progid="Comos.Layers.Lib" method="CallFromMainXml" />
+      </Tool>
+      <Tool id="ID_ObjectDebug" type="Button">
+        <Caption>
+          <Text itx="~04247 **Objekt-Debugger..." />
+        </Caption>
+        <Picture key="std_ObjectDebug" />
+        <Rights dependencyProperty="Enabled" functionRights="4" />
+        <Window type="Tab" area="Document" autoClose="true" />
+      </Tool>
+      <!--########################################-->
+      <Tool id="ID_Monitor" type="PopupMenu">
+        <Caption>
+          <Text itx="~04248 ** berwachung" />
+        </Caption>
+      </Tool>
+      <Tool id="@Net.Comos.SystemMonitor" type="Button">
+        <Caption>
+          <Text itx="~04249 **System-Monitor..." />
+        </Caption>
+        <Picture key="std_@X.CPlugInSysMonitor.SysMonitor" />
+        <Class type="NET" assembly="Comos.SystemMonitor" progid="Comos.SystemMonitor.SysMonView" />
+        <Window type="Tab" area="Document2" />
+      </Tool>
+      <Tool id="@X.CPlugInPerfMon.PerfMonCls" type="Button">
+        <Caption>
+          <Text itx="~0424a **Performance-Monitor..." />
+        </Caption>
+        <Picture key="std_@X.CPlugInPerfMon.PerfMonCls" />
+        <Rights dependencyProperty="Enabled" adminOnly="true" />
+        <Class type="COM" progid="CPlugInPerfMon.PerfMonCls" />
+        <Window type="Tab" area="Document2" autoClose="false" />
+      </Tool>
+      <Tool id="@NET.PPM" type="Button">
+        <Caption>
+          <Text itx="~07c15 **Performance monitor for query analysis" />
+        </Caption>
+        <Class type="NET" assembly="Comos.PPM" progid="Comos.PPM.Browser" />
+        <Picture key="std_@X.CPlugInPerfMon.PerfMonCls" />
+        <Window type="Floating" width="850" height="700" scaleMode="pixel" autoClose="false" />
+      </Tool>
+      <Tool id="@X.CPlugInSMSConsole.SMSConsolePlugIn" type="Button">
+        <Caption>
+          <Text itx="~07c10 **Session-Monitor" />
+        </Caption>
+        <Picture key="std_@X.CPlugInSMSConsole.SMSConsolePlugIn" />
+        <Rights dependencyProperty="Enabled" adminOnly="true" />
+        <Class type="COM" progid="CPlugInSMSConsole.SMSConsolePlugIn" />
+        <Window type="Tab" area="Document2" />
+      </Tool>
+      <Tool id="@X.CPlugInDBPerform.DBPerform" type="Button">
+        <Caption>
+          <Text itx="~0424d **Datenbankperformance..." />
+        </Caption>
+        <Picture key="std_@X.CPlugInDBPerform.DBPerform" />
+        <Class type="COM" progid="CPlugInDBPerform.DBPerform" />
+        <Window type="Tab" area="Document2" />
+      </Tool>
+      <!--######################################################################-->
+      <Tool id="ID_ExtPlugins" type="PopupMenu">
+        <Caption>
+          <Text itx="~0424e **Plugins" />
+        </Caption>
+      </Tool>
+      <Tool id="ID_ExtPluginsBasic" type="PopupMenu">
+        <Caption>
+          <Text itx="~0424f **Basic" />
+        </Caption>
+      </Tool>
+      <Tool id="ID_DataBaseToolkit" type="PopupMenu">
+        <Caption>
+          <Text itx="~07db4 Database toolkit" />
+        </Caption>
+      </Tool>
+      <Tool id="@X.CPlugInSpColorLegend.SpColorLegend" type="Button">
+        <Caption>
+          <Text itx="~04250 **Spezifikationsfarben definieren" />
+        </Caption>
+        <Picture key="std_@X.CPlugInSpColorLegend.SpColorLegend" />
+        <Class type="COM" progid="CPlugInSpColorLegend.SpColorLegend" />
+      </Tool>
+      <Tool id="@X.CPluginCDI.CDI" type="Button">
+        <Caption>
+          <Text itx="~04251 **Dokument-Interface" />
+        </Caption>
+        <Picture key="std_@X.CPluginCDI.CDI" />
+        <Class type="COM" progid="CPluginCDI.CDI" />
+      </Tool>
+      <Tool id="@X.CPlugInComosXMLIE.ComosXMLIE" type="Button">
+        <Caption>
+          <Text itx="~04252 **Nativer Objekt XML Import Export" />
+        </Caption>
+        <Picture key="std_@X.CPlugInComosXMLIE.ComosXMLIE" />
+        <Class type="COM" progid="CPlugInComosXMLIE.ComosXMLIE" />
+      </Tool>
+      <Tool id="@X.CPlugInCopyClasses.CopyClasses" type="Button">
+        <Caption>
+          <Text itx="~04253 **Klassen bergreifendes Kopieren" />
+        </Caption>
+        <Picture key="std_@X.CPlugInCopyClasses.CopyClasses" />
+        <Class type="COM" progid="CPlugInCopyClasses.CopyClasses" />
+      </Tool>
+      <Tool id="@X.CPlugInFullTextSearch.FullTextSearch" type="Button">
+        <Caption>
+          <Text itx="~04254 **Volltextsuche" />
+        </Caption>
+        <Picture key="std_@X.CPlugInFullTextSearch.FullTextSearch" />
+        <Class type="COM" progid="CPlugInFullTextSearch.FullTextSearch" />
+      </Tool>
+      <Tool id="@NET.Comos.SQLFullTextSearch" type="Button">
+        <Caption>
+          <Text itx="~07fe6 SQL full-text search" />
+        </Caption>
+        <Class type="NET" assembly="Comos.SQLFullTextSearch.View" progid="Comos.SQLFullTextSearch.View.Search" />
+        <Picture key="std_@X.CPlugInFullTextSearch.FullTextSearch" />
+        <Window />
+      </Tool>
+      <Tool id="@NET.Comos.IncludeDocuments" type="Button">
+        <Caption>
+          <Text itx="~04282 **Dokumente erfassen" />
+        </Caption>
+        <Class type="NET" assembly="Comos.IncludeDocuments" progid="Comos.IncludeDocuments.IncludeTabView" />
+        <Picture key="std_@X.CPlugInMandCheckIn.MandCheckIn" />
+        <Window />
+      </Tool>
+      <Tool id="@X.CPlugInUserRoleMgr.UserRoleMgr" type="Button">
+        <Caption>
+          <Text itx="~04256 **Permissions" />
+        </Caption>
+        <Picture key="std_Right" />
+        <Class type="COM" progid="CPlugInUserRoleMgr.UserRoleMgr" />
+      </Tool>
+      <Tool id="@X.CPlugInUnitConverter.UnitConverter" type="Button">
+        <Caption>
+          <Text itx="~04257 **Einheitenumrechnung" />
+        </Caption>
+        <Picture key="std_@X.CPlugInUnitConverter.UnitConverter" />
+        <Class type="COM" progid="CPlugInUnitConverter.UnitConverter" />
+        <Database type="COMOSDB" />
+      </Tool>
+      <Tool id="@X.CPlugInD3ErrorAnalyzer.D3ErrorAnalyzer" type="Button">
+        <Caption>
+          <Text itx="~04c49 **Fehleranalyse f r 3D-Objekte" />
+        </Caption>
+        <Picture key="std_@X.CPlugInD3ErrorAnalyzer.D3ErrorAnalyzer" />
+        <Class type="NET" assembly="Comos.D3ObjectAnalyzer" progid="Comos.D3ObjectAnalyzer.Analyzer" />
+      </Tool>
+      <Tool id="@X.CPlugInUIMTO.UIMTO" type="Button">
+        <Caption>
+          <Text itx="~05f2a Material Management Assistant" />
+        </Caption>
+        <Picture key="std_materialsourcing" />
+        <Class type="NET" assembly="Comos.UIMTO" progid="Comos.UIMTO.UC_UIMTO" />
+        <Database type="Any" />
+      </Tool>
+      <Tool id="@NET.CPlugIN.DWGMappingEditor" type="Button">
+        <Caption>
+          <Text itx="~04259 **DWG/DXF Mapping-Editor" />
+        </Caption>
+        <Picture key="std_@X.CPlugInDXFConfig.DXFConfig" />
+        <Class type="NET" assembly="Comos.DWGMappingEditor" progid="Comos.DWGMappingEditor.View.MainView" />
+        <Window type="Tab" area="document" width="850" height="600" scaleMode="pixel" resizeMode="Resize" />
+      </Tool>
+      <Tool id="Comos.Sap.Xml.ConnectionsCControl" type="Button">
+        <Caption>
+          <Text itx="~057a3 **SAP Login" />
+        </Caption>
+        <Class type="NET" assembly="Comos.Sap.Xml" progid="Comos.Sap.Xml.ConnectionsCControl" />
+        <Picture key="std_sap_login" />
+      </Tool>
+      <Tool id="Comos.Sap.Xml.ConfigWizardView" type="Button">
+        <Caption>
+          <Text itx="~047eb **SAP interface configuration" />
+        </Caption>
+        <Class type="NET" assembly="Comos.Sap.Xml" progid="Comos.Sap.Xml.ConfigWizardView" />
+        <Picture key="std_SAP_IKonfig" />
+        <Window autoClose="false" />
+      </Tool>
+      <Tool id="ID_ExtPluginsFactory" type="PopupMenu">
+        <Caption>
+          <Text itx="~0425b **Factory" />
+        </Caption>
+        <Database type="Any" />
+      </Tool>
+      <Tool id="ID_ExtPluginsFactoryMaintenance" type="PopupMenu">
+        <Caption>
+          <Text itx="~0425d **Maintenance" />
+        </Caption>
+        <Picture key="std_MntcAuto" />
+      </Tool>
+      <Tool id="ID_ExtPluginsFactoryEvents" type="PopupMenu">
+        <Caption>
+          <Text itx="~0425e **Events" />
+        </Caption>
+        <Picture key="std_EventManag1" />
+      </Tool>
+      <Tool id="ID_ExtPluginsFactoryStock" type="PopupMenu">
+        <Caption>
+          <Text itx="~0425f **Stockmanagement" />
+        </Caption>
+        <Picture key="std_@X.CPlugInStoreMng.StoreMngClass" />
+        <Database type="Any" />
+      </Tool>
+      <Tool id="@X.CPlugInCATAP.CATAPClass" type="Button">
+        <Caption>
+          <Text itx="~04261 **Shutdown Management" />
+        </Caption>
+        <Picture key="std_@X.CPlugInCATAP.CATAPClass" />
+        <Class type="COM" progid="CPlugInCATAP.CATAPClass" />
+      </Tool>
+      <Tool id="@X.CPlugInMntcOrder.MntcOrderClass" type="Button">
+        <Caption>
+          <Text itx="~04263 **Wartungsauftrag" />
+        </Caption>
+        <Picture key="std_@X.CPlugInMntcOrder.MntcOrderClass" />
+        <Class type="COM" progid="CPlugInMntcOrder.MntcOrderClass" />
+      </Tool>
+      <Tool id="@X.CPlugInMntcPreview.MntcPreviewClass" type="Button">
+        <Caption>
+          <Text itx="~04264 **Manuelle Wartungsvorschau" />
+        </Caption>
+        <Picture key="std_@X.CPlugInMntcPreview.MntcPreviewClass" />
+        <Class type="COM" progid="CPlugInSearchObject.MntcPreviewClass" />
+      </Tool>
+      <Tool id="@X.CPlugInSearchObject.SearchObjectClass" type="Button">
+        <Caption>
+          <Text itx="~0330c Objektsuche" />
+        </Caption>
+        <Picture key="std_@X.CPlugInSearchObject.SearchObjectClass" />
+        <Class type="COM" progid="CPlugInSearchObject.SearchObjectClass" />
+      </Tool>
+      <Tool id="@ResourceManagement" type="PopupMenu">
+        <Caption>
+          <Text itx="~038ca Resource management" />
+        </Caption>
+        <Picture key="std_@X.CPlugInRema.RemaClass" />
+      </Tool>
+      <Tool id="@ResourceMonitor" type="Button">
+        <Caption>
+          <Text itx="~03978 Resource monitor" />
+        </Caption>
+        <Picture key="std_@X.CPlugInRema.RemaClass" />
+        <Class type="NET" assembly="Comos.Rema.UI" progid="Comos.Rema.UI.RemaMonitorControl" />
+      </Tool>
+      <Tool id="@ResourcePlanning" type="Button">
+        <Caption>
+          <Text itx="~08b85 Resource planning" />
+        </Caption>
+        <Picture key="std_@X.CPlugInMntcPreview.MntcPreviewClass" />
+        <Class type="NET" assembly="Comos.Rema.UI" progid="Comos.Rema.UI.RemaPluginControl" />
+      </Tool>
+      <Tool id="@X.CPlugInStoreMng.StoreMngClass" type="Button">
+        <Caption>
+          <Text itx="~04269 **Lager-Management" />
+        </Caption>
+        <Picture key="std_@X.CPlugInStoreMng.StoreMngClass" />
+        <Class type="COM" progid="CPlugInStoreMng.StoreMngClass" />
+      </Tool>
+      <Tool id="@NET.Comos.EquipmentReceipt" type="Button">
+        <Caption>
+          <Text itx="~0426b **Goods receipt - In" />
+        </Caption>
+        <Class type="NET" assembly="Comos.EquipmentReceipt" progid="Comos.EquipmentReceipt.EquipmentReceiptControl" />
+        <Picture key="std_storemngnew1" />
+        <Database type="iDB" />
+      </Tool>
+      <Tool id="@X.iPlugInWIn.WINClassIF" type="Button">
+        <Caption>
+          <Text itx="~0426b **Goods receipt - In" />
+        </Caption>
+        <Picture key="std_StoreMngIn" />
+        <Class type="COM" progid="iPlugInWIn.WINClassIF" />
+        <Database type="ComosDB" />
+      </Tool>
+      <Tool id="@X.iPlugInWIn.WOUTClassIF" type="Button">
+        <Caption>
+          <Text itx="~0426c **Goods receipt - Out" />
+        </Caption>
+        <Picture key="std_StoreMngOut" />
+        <Class type="COM" progid="iPlugInWIn.WOUTClassIF" />
+        <Database type="ComosDB" />
+      </Tool>
+      <Tool id="@X.EventManager.EventMangerClass" type="Button">
+        <Caption>
+          <Text itx="~0426d **Eventmanager" />
+        </Caption>
+        <Picture key="std_EventManag2" />
+        <Class type="COM" progid="EventManager.EventManagerClass" />
+      </Tool>
+      <Tool id="@X.MaintenanceDemon.MaintenanceDemonClass" type="Button">
+        <Caption>
+          <Text itx="~0426e **Maintenance Demon" />
+        </Caption>
+        <Picture key="std_MntcAuto" />
+        <Rights dependencyProperty="Enabled" adminOnly="true" />
+        <Class type="COM" progid="MaintenanceDemon.MaintenanceDemonClass" />
+      </Tool>
+      <Tool id="@NET.TaskManager" type="Button">
+        <Caption>
+          <Text itx="~06351 Task Management" />
+        </Caption>
+        <Picture key="std_textdb" />
+        <Class type="NET" assembly="Comos.TaskManager" progid="Comos.TaskManager.View.TaskManagerView" />
+        <Window type="Tab" area="Document" autoClose="false" />
+        <Database type="Any" />
+      </Tool>
+      <!-- ######## TaskManagerWeb Plugin ########-->
+      <!--
+      <Tool id="@NET.TaskManager" type="Button">
+				<Caption>
+					<Text itx="~06351 Task Management"/>
+				</Caption>
+				<Picture key="std_textdb"/>
+				<Class type="NET" assembly="Comos.TaskManagerWeb" progid="Comos.TaskManagerWeb.View.TaskManagerView"/>
+				<Window type="Tab" area="Document" autoClose="false"/>
+				<Database type="Any" />
+			</Tool>
+      -->
+      <Tool id="ID_ExtPluginsFactoryInspection" type="PopupMenu">
+        <Caption>
+          <Text itx="~03108 Inspection" />
+        </Caption>
+        <Picture key="std_PipeInspection" />
+        <Database type="Any" />
+      </Tool>
+      <Tool id="@X.CPlugInInspection.InspectionClass" type="Button">
+        <Caption>
+          <Text itx="~03108 Inspection" />
+        </Caption>
+        <Picture key="std_PipeInspection" />
+        <Class type="COM" progid="CPlugInInspection.InspectionClass" />
+        <Parameters>
+          <Parameter name="OpenControlsOnOpen" value="@X.ComosCommonFilter.FilterCtrl" />
+          <Parameter name="CloseControlsOnOpen" value="1" />
+          <Parameter name="CloseControlsOnClose" value="1" />
+        </Parameters>
+      </Tool>
+      <Tool id="@X.CPlugInInspection.InspDiagramClass" type="Button">
+        <Caption>
+          <Text itx="~04161 Inspection Diagram" />
+        </Caption>
+        <Picture key="std_InspectionDiagramm" />
+        <Class type="COM" progid="CPlugInInspection.InspDiagramClass" />
+        <Parameters>
+          <Parameter name="OpenControlsOnOpen" value="" />
+          <Parameter name="CloseControlsOnOpen" value="0" />
+          <Parameter name="CloseControlsOnClose" value="0" />
+        </Parameters>
+      </Tool>
+      <Tool id="@NET.DWHControl" type="Button">
+        <Caption>
+          <Text itx="~08212 Data Warehouse" />
+        </Caption>
+        <Class type="NET" assembly="DWHGui" progid="DWHGui.DWHControl" />
+        <Picture key="std_graph3d" />
+        <Parameters>
+          <Parameter name="P1" value="ABC" />
+        </Parameters>
+      </Tool>
+      <Tool id="@X.Comos.3DSmartChart.ChartPlugin" type="Button">
+        <Caption>
+          <Text itx="~06ac5 ** 3D Risk Chart" />
+        </Caption>
+        <Picture key="std_@X.CPlugInD3ErrorAnalyzer.D3ErrorAnalyzer" />
+        <Class type="NET" assembly="Comos.3DSmartChart" progid="ComosRiskPlugin.ChartPlugin" />
+        <Parameters>
+          <Parameter name="RenderOnStart" value="1" />
+          <Parameter name="XAxisText" value="Fault Frequency" />
+          <Parameter name="YAxisText" value="Items" />
+          <Parameter name="ZAxisText" value="Consequence" />
+          <Parameter name="ShowLabels" value="1" />
+          <!--<Parameter name="DefaultNode" value="A2JGFYKFEN" />-->
+          <Parameter name="ToolId" value="@X.Comos.3DSmartChart.ChartPlugin" />
+        </Parameters>
+      </Tool>
+      <!-- WPF Filter Control -->
+      <Tool id="@X.ComosCommonFilter.FilterCtrl" type="Button">
+        <Caption>
+          <Text itx="~00181 Filter" />
+        </Caption>
+        <Picture key="std_@X.CPlugInSearchObject.SearchObjectClass" />
+        <Class type="NET" assembly="ComosCommonFilter" progid="ComosCommonFilter.FilterCtrl" />
+        <Window type="Tab" area="Navigator" subarea="Detail" />
+        <Parameters>
+          <Parameter name="HeaderText" value="Inspection Filter" />
+          <!-- ITX -->
+          <Parameter name="FilterButtonText" value="" />
+          <!-- ITX -->
+          <Parameter name="FilterButtonVisible" value="1" />
+          <Parameter name="AutoScan" value="0" />
+          <Parameter name="ToolId" value="@X.ComosCommonFilter.FilterCtrl" />
+        </Parameters>
+      </Tool>
+      <!-- 02.11.2009 Device Property Handler -->
+      <Tool id="LCLINK_FORWARD" type="Button">
+        <Caption>
+          <Text itx="~00181 Filter" />
+        </Caption>
+        <Picture key="std_@X.CPlugInSearchObject.SearchObjectClass" />
+        <Class type="NET" assembly="Comos.Maintenance.Navigator" progid="Comos.Maintenance.Navigator.DevicePropertyHandler" />
+        <!--
+                                <Window type="Tab" area="Navigator" subarea="Detail"/>
+                                <Parameters>
+                                        <Parameter name="CloseWindow" value="1" />
+                                </Parameters>
+                        -->
+      </Tool>
+      <Tool id="ID_ExtPluginsMechatronic" type="PopupMenu">
+        <Caption>
+          <Text itx="~0426f **Mechatronic" />
+        </Caption>
+        <Database type="ComosDB" />
+      </Tool>
+      <Tool id="@X.CPlugInCatiaInterface.CatiaInterface" type="Button">
+        <Caption>
+          <Text itx="~04270 **Comos-Catia Schnittstelle" />
+        </Caption>
+        <Picture key="std_@X.CPlugInCatiaInterface.CatiaInterface" />
+        <Class type="COM" progid="CPlugInCatiaInterface.CatiaInterface" />
+      </Tool>
+      <Tool id="@X.CPlugInMaKonf.MaKonf" type="Button">
+        <Caption>
+          <Text itx="~04271 **Anlagen- und Maschienenkonfigurator" />
+        </Caption>
+        <Picture key="std_@X.CPlugInMaKonf.MaKonf" />
+        <Class type="COM" progid="CPlugInMaKonf.MaKonf" />
+        <Database type="ComosDB" />
+      </Tool>
+      <Tool id="@X.CPlugInZWD.ZWD" type="Button">
+        <Caption>
+          <Text itx="~04272 **Zeit-Weg-Diagram" />
+        </Caption>
+        <Picture key="std_@X.CPlugInZWD.ZWD" />
+        <Class type="COM" progid="CPlugInZWD.ZWD" />
+        <Database type="ComosDB" />
+      </Tool>
+      <Tool id="ID_ExtPluginsPT" type="PopupMenu">
+        <Caption>
+          <Text itx="~0580e Automation (de: Automation)" />
+        </Caption>
+      </Tool>
+      <Tool id="@X.CPlugInConvertTriga.ConvertTriga" type="Button">
+        <Caption>
+          <Text itx="~04277 **Stammdatenimprt Triga 1.04 nach Comos" />
+        </Caption>
+        <Picture key="std_@X.CPlugInConvertTriga.ConvertTriga" />
+        <Class type="COM" progid="CPlugInConvertTriga.ConvertTriga" />
+      </Tool>
+      <!--<Tool id="@X.CPlugInElmChk.ElmChkCls" type="Button">
+                                <Caption>
+                                        <Text itx="~04278 ** berbelegungs-Manager"/>
+                                </Caption>
+                                <Picture key="std_@X.CPlugInElmChk.ElmChkCls"/>
+                                <Class type="COM" progid="CPlugInElmChk.ElmChkCls"/>
+                        </Tool>-->
+      <Tool id="@X.IECJICConverterUI1" type="Button">
+        <Caption>
+          <Text itx="~01fd6 Konvertiert IEC nach JIC" />
+        </Caption>
+        <Database type="ComosDB" />
+        <Picture key="std_@X.CPlugInIECtoJIC.IECtoJIC" />
+        <Class type="NET" assembly="Comos.Elo.IECJICConverterUI" progid="Comos.Elo.IECJICConverterUI.ConversionPluginCtrl" />
+      </Tool>
+      <Tool id="@X.Comos.StringRuleManager" type="Button">
+        <Caption>
+          <Text itx="~06ac3 ** String-Regelmanager" />
+        </Caption>
+        <Rights dependencyProperty="Enabled" adminOnly="true" />
+        <Picture key="std_StringDefinitionForObjectImport" />
+        <Class type="NET" assembly="Comos.StringRuleManager" progid="Comos.StringRuleManager.Plugin.RulesetManagerPlugin" />
+      </Tool>
+      <Tool id="@X.Comos.WSP.LTMEditor" type="Button">
+        <Caption>
+          <Text itx="~05c7e Linientypen zuweisen" />
+        </Caption>
+        <Picture key="std_linetypes" />
+        <Class type="NET" assembly="Comos.WSP.LTMEditor" progid="Comos.WSP.LTMEditor.LTMEditor" />
+      </Tool>
+      <Tool id="@X.Comos.PipeSpecMapper" type="Button">
+        <Caption>
+          <Text itx="~0850b Pipe spec mapper" />
+        </Caption>
+        <Picture key="std_CPMSchemaEditor" />
+        <Class type="NET" assembly="Comos.PipeSpecMapper" progid="Comos.PipeSpecMapper.PipeSpecMapperUI" />
+      </Tool>
+      <Tool id="@X.CPlugInIECtoJIC.IECtoJIC" type="Button">
+        <Caption>
+          <Text itx="~0427a **Konvertiert IEC nach JIC" />
+        </Caption>
+        <Picture key="std_@X.CPlugInIECtoJIC.IECtoJIC" />
+        <Class type="COM" progid="CPlugInIECtoJIC.IECtoJIC" />
+      </Tool>
+      <Tool id="@X.CPlugInLoopMgr.LoopMgrCls" type="Button">
+        <Caption>
+          <Text itx="~0427b **Rangiermanagement" />
+        </Caption>
+        <Picture key="std_@X.CPlugInLoopMgr.LoopMgrCls" />
+        <Class type="COM" progid="CPlugInLoopMgr.LoopMgrCls" />
+      </Tool>
+      <Tool id="ID_ExtPluginsPQM" type="PopupMenu">
+        <Caption>
+          <Text itx="~08663 **DDMS" />
+        </Caption>
+      </Tool>
+      <Tool id="ID_ExtPluginsSAP" type="PopupMenu">
+        <Caption>
+          <Text itx="~057ae SAP" />
+        </Caption>
+      </Tool>
+      <Tool id="StartExcel" type="Button">
+        <Caption>
+          <Text itx="~0427d **Excel starten" />
+        </Caption>
+        <Picture key="std_@X.CPlugInExcel.Excel" />
+        <Class type="NET" assembly="Comos.StartOfficeApp" progid="Comos.StartOfficeApp.StartOffice" method="StartOfficeApp" />
+        <Parameters>
+          <Parameter name="OAppName" value="EXCEL.EXE" />
+        </Parameters>
+      </Tool>
+      <Tool id="StartOutlook" type="Button">
+        <Caption>
+          <Text itx="~0427e **Outlook starten" />
+        </Caption>
+        <Picture key="std_@X.CPlugInOutlook.Outlook" />
+        <Class type="NET" assembly="Comos.StartOfficeApp" progid="Comos.StartOfficeApp.StartOffice" method="StartOfficeApp" />
+        <Parameters>
+          <Parameter name="OAppName" value="OUTLOOK.EXE" />
+        </Parameters>
+      </Tool>
+      <Tool id="StartPowerpoint" type="Button">
+        <Caption>
+          <Text itx="~0427f **Powerpoint starten" />
+        </Caption>
+        <Picture key="std_@X.CPlugInPowerpoint.Powerpoint" />
+        <Class type="NET" assembly="Comos.StartOfficeApp" progid="Comos.StartOfficeApp.StartOffice" method="StartOfficeApp" />
+        <Parameters>
+          <Parameter name="OAppName" value="POWERPNT.EXE" />
+        </Parameters>
+      </Tool>
+      <Tool id="StartVisio" type="Button">
+        <Caption>
+          <Text itx="~04280 **Visio starten" />
+        </Caption>
+        <Picture key="std_@X.CPlugInVisio.Visio" />
+        <Class type="NET" assembly="Comos.StartOfficeApp" progid="Comos.StartOfficeApp.StartOffice" method="StartOfficeApp" />
+        <Parameters>
+          <Parameter name="OAppName" value="VISIO.EXE" />
+        </Parameters>
+      </Tool>
+      <Tool id="StartWord" type="Button">
+        <Caption>
+          <Text itx="~04281 **Word starten" />
+        </Caption>
+        <Picture key="std_@X.CPlugInWord.Word" />
+        <Class type="NET" assembly="Comos.StartOfficeApp" progid="Comos.StartOfficeApp.StartOffice" method="StartOfficeApp" />
+        <Parameters>
+          <Parameter name="OAppName" value="WINWORD.EXE" />
+        </Parameters>
+      </Tool>
+      <Tool id="@X.CPlugInMandCheckIn.MandCheckIn" type="Button">
+        <Caption>
+          <Text itx="~04282 **Dokumente erfassen" />
+        </Caption>
+        <Picture key="std_@X.CPlugInMandCheckIn.MandCheckIn" />
+        <Class type="COM" progid="CPlugInMandCheckIn.MandCheckIn" />
+      </Tool>
+      <Tool id="@X.CPlugInFileTrans.FileTrans" type="Button">
+        <Caption>
+          <Text itx="~04283 **Batch mode document acquisition" />
+        </Caption>
+        <Picture key="std_@X.CPlugInFileTrans.FileTrans" />
+        <Class type="COM" progid="CPlugInFileTrans.FileTrans" />
+      </Tool>
+      <Tool id="@X.CPlugInUserSystem.UserSystem" type="Button">
+        <Caption>
+          <Text itx="~04284 **Benutzerinformationen" />
+        </Caption>
+        <Picture key="std_@X.CPlugInUserSystem.UserSystem" />
+        <Class type="COM" progid="CPlugInUserSystem.UserSystem" />
+      </Tool>
+      <Tool id="@NET.ComosViewer" type="Button">
+        <Caption>
+          <Text itx="~04c4a **Viewer Einstellungen" />
+        </Caption>
+        <Class type="NET" assembly="Comos.Viewer" progid="Comos.Viewer.Configurator" />
+        <Picture key="std_construction" />
+        <Window />
+      </Tool>
+      <Tool id="@NET.DocumentCreation" type="Button">
+        <Caption>
+          <Text itx="~07c7b Document Execution Plan" />
+        </Caption>
+        <Class type="NET" assembly="Comos.DocumentCreation.View" progid="Comos.DocumentCreation.View.CreateDocument" />
+        <Picture key="std_DocMatrix_c" />
+        <Window />
+      </Tool>
+      <Tool id="@NET.DocumentTransfer.DocumentTransferView" type="Button">
+        <Caption>
+          <Text itx="~06eb6 Document transfer" />
+        </Caption>
+        <Class type="NET" assembly="Comos.DocumentTransfer.UsersView" progid="Comos.DocumentTransfer.UsersView.DocumentTransferView" />
+        <Picture key="std_documentTransfer_3" />
+      </Tool>
+      <Tool id="DVM Abfragen" type="Button">
+        <Caption>
+          <Text itx="~0656e DVM Abfragen" />
+        </Caption>
+        <Picture key="std_QueryMenu" />
+        <Binding type="DBKeyCDevices" root="_System__O__Query_DVM___20_A70_Y10_M65" />
+      </Tool>
+      <Tool id="ID_VDI2770" type="Button">
+        <Caption>
+          <Text itx="~085cf VDI2770" />
+        </Caption>
+        <Class type="NET" assembly="Comos.VDI2770" progid="Comos.VDI2770.UserControlVDI2770" />
+        <Picture key="std_vdi" />
+      </Tool>
+      <!--<Tool id="@NET.Comos.PQM.ESignCertificateManager.Control" type="Button">
+       <Caption>
+          <Text itx="~08827 ESign Certificate Configurator"/>
+       </Caption>
+       <Class type="NET" assembly="Comos.PQM.ESignCertificateManager.Control" progid="Comos.PQM.ESignCertificateManager.Control.Views.CertificateTabView"/>
+       <Picture key="std_@X.CPlugInMandCheckIn.MandCheckIn"/>
+       <Window/>
+       </Tool>-->
+      <!-- Template Administration -->
+      <Tool id="ID_PluginsTemplate" type="PopupMenu">
+        <Caption>
+          <Text itx="~003f9 Kopiervorlagen" />
+        </Caption>
+        <Picture key="std_template_base" />
+      </Tool>
+      <Tool id="@NET.Comos.Template.AdministrationUI" type="Button">
+        <Caption>
+          <Text itx="~078ec Template Administration" />
+        </Caption>
+        <Picture key="std_template_admin" />
+        <Class type="NET" assembly="Comos.Template.AdministrationUI" progid="Comos.Template.AdministrationUI.Controls.AdministrationUI" />
+        <Window type="Tab" state="ReuseOnly" />
+      </Tool>
+      <!--AssemblyUpdater-->
+      <Tool id="@NET.eBlock.EngineeringManager.AssemblyUpdater" type="Button">
+        <Caption>
+          <Text itx="~07911 Assembly update" />
+        </Caption>
+        <Picture key="std_template_update" />
+        <Class type="NET" assembly="Comos.eBlock.AssemblyUpdaterUI" progid="Comos.eBlock.AssemblyUpdaterUI.AssemblyUpdaterPlugin" />
+        <Window type="Tab" state="ReuseOnly" />
+      </Tool>
+      <!--CabinetEquipmentAssistant-->
+      <Tool id="@NET.ELO.CabinetEquipmentAssistant" type="Button">
+        <Caption>
+          <Text itx="~06ac6 **Cabinet Equipment Assistant" />
+        </Caption>
+        <Picture key="std_cabinet" />
+        <Class type="NET" assembly="Comos.Elo.CabinetEquipmentAssistant" progid="Comos.Elo.CabinetEquipmentAssistant.CabinetEquipmentAssistantUI" />
+        <Window type="Tab" area="Navigator" subarea="Detail" state="ReuseOnly" />
+      </Tool>
+      <!--RulesetAdmin-->
+      <Tool id="ID_ModularEngineering" type="PopupMenu">
+        <Caption>
+          <Text itx="~08085 Modular Engineering" />
+        </Caption>
+        <Picture key="std_construction" />
+      </Tool>
+      <Tool id="ID_ModularReport" type="PopupMenu">
+        <Caption>
+          <Text itx="Modular Report" />
+        </Caption>
+        <Picture key="std_DocTyp" />
+      </Tool>
+      <Tool id="@NET.Comos.Configurator" type="Button">
+        <Caption>
+          <Text itx="~07fe2 Modular Configurator" />
+        </Caption>
+        <Picture key="DEVICE,Structured\Icons\ModularConcept\std_MC_plugin" />
+        <Class type="NET" assembly="Comos.Configurator.Plugin" progid="Comos.Configurator.MainControl" />
+        <Window type="Tab" area="Document" />
+      </Tool>
+      <!--RulesetAdmin-->
+      <Tool id="@NET.Comos.RulesetAdministration" type="Button">
+        <Caption>
+          <Text itx="~08084 Ruleset Administration" />
+        </Caption>
+        <Picture key="std_template_admin" />
+        <Class type="NET" assembly="Comos.RulesetAdministration" progid="Comos.RulesetAdministration.Views.RulesetAdministrationView" />
+        <Window type="Tab" />
+      </Tool>
+      <!--RulesetUpdater-->
+      <Tool id="@NET.Comos.RulesetUpdater" type="Button">
+        <Caption>
+          <Text itx="~08083 Ruleset Updater" />
+        </Caption>
+        <Picture key="std_template_update" />
+        <Class type="NET" assembly="Comos.RulesetUpdater" progid="Comos.RulesetUpdater.RulesetUpdaterPlugin" />
+        <Window type="Tab" />
+      </Tool>
+      <!--Doxie-->
+      <Tool id="@NET.Comos.Doxie" type="Button">
+        <Caption>
+          <Text itx="~07fe3 COMOS-2-COMOS Interface (DOXIE)" />
+        </Caption>
+        <Picture key="std_@x.cplugincomosxmlie.comosxmlie" />
+        <Class type="NET" assembly="Comos.Doxie.UI" progid="Comos.Doxie.UI.DoxieUI" />
+        <Window type="Tab" />
+      </Tool>
+      <Tool id="@NET.ReportComparerUI" type="Button">
+        <Caption>
+          <Text itx="~07f61 Compatibility Problems Detector" />
+        </Caption>
+        <Picture key="pcs7_status" />
+        <Class type="NET" assembly="Comos.Report.Comparer.UI" progid="Comos.Report.Comparer.UI.ReportComparerUI" />
+        <Window type="Tab" />
+      </Tool>
+      <Tool id="@NET.Comos.Report.Comparer.DetailUI" type="Button">
+        <Caption>
+          <Text itx="~07f61 Compatibility Problems Detector" />
+        </Caption>
+        <Picture key="pcs7_status" />
+        <Class type="NET" assembly="Comos.Report.Comparer.DetailUI" progid="Comos.Report.Comparer.DetailUI.DetailUiControl" />
+        <Window type="Tab" area="Navigator" subarea="Detail" state="ReuseOnly" />
+      </Tool>
+      <Tool id="@NET.LineTypesOverview" type="Button">
+        <Caption>
+          <Text itx="~07fe7 Line types overview" />
+        </Caption>
+        <Class type="NET" assembly="Comos.LineTypeOverview" progid="Comos.LineTypeOverview.UserControls.LineTypeOverview" />
+        <Picture key="std_linetypes" />
+      </Tool>
+      <!--######################################################################-->
+      <Tool id="ID_Help" type="PopupMenu">
+        <Caption>
+          <Text itx="~04285 **Hilfe" />
+        </Caption>
+      </Tool>
+      <Tool id="ID_QuickSearch" type="SearchComboBox">
+        <Caption>
+          <Text itx="~087f3 **Quick Search" />
+        </Caption>
+      </Tool>
+      <Tool id="ID_StartHelpFileShow" type="StateButton">
+        <Caption>
+          <Text itx="~04286 **Hilfe beim Starten anzeigen" />
+        </Caption>
+      </Tool>
+      <Tool id="ID_StartVersionCheckMessageShow" type="StateButton">
+        <Caption>
+          <Text itx="~082f5 Perform **version check at start" />
+        </Caption>
+      </Tool>
+      <Tool id="ID_ComosInfo" type="Button">
+        <Caption>
+          <Text itx="~04287 **Comos-Info" />
+        </Caption>
+        <Class type="NET" assembly="Comos.UIF" progid="Comos.UIF.UIControls.ComosInfo" />
+        <Window type="Floating" />
+      </Tool>
+      <Tool id="ID_DbInfo" type="Button">
+        <Caption>
+          <Text itx="~0491b **Database info" />
+        </Caption>
+        <Class type="NET" assembly="Comos.UIF" progid="Comos.UIF.UIControls.DbInfo" />
+        <Window type="Modal" />
+      </Tool>
+      <Tool id="ID_BugReport" type="Button">
+        <Caption>
+          <Text itx="Report an issue" />
+        </Caption>
+        <Class type="NET" assembly="Comos.BugReport.UI" progid="Comos.BugReport.UI.BugReportDialog" />
+        <Picture key="std_@X.CPlugInLanguageWizard.LanguageWizardCls" />
+        <Window type="Tab" />
+      </Tool>
+      <Tool id="ID_EngineeringStandards" type="Button">
+        <Caption>
+          <!-- <Text itx="~0711b Working Overlay Test"/> -->
+          <Text itx="~084d2 Overview of available standards in iDB" />
+        </Caption>
+        <Picture key="std_QueryMenu" />
+        <Binding type="CDevice" root="@99|A30|M00|A90|A10" />
+        <Rights functionRights="1" dependencyProperty="Enabled" />
+      </Tool>
+      <!--######################################################################-->
+      <Tool id="ID_AliasCheck" type="StateButton">
+        <Caption>
+          <Text itx="~04288 **Alias f r Kennzeichen" />
+        </Caption>
+        <Picture key="std_AliasCheck" />
+      </Tool>
+      <Tool id="ID_ProjCasesCB" type="ComboBox" Visible="0" Enabled="1">
+        <Caption>
+          <Text itx="~04289 **Fahrf lle" />
+        </Caption>
+      </Tool>
+      <Tool id="separator" type="Separator" />
+      <!--################### intern only!!! ComosX-Forms #############################-->
+      <Tool id="ComosSUIEdit.SUIEditProp" type="">
+        <Caption>
+          <Text itx="~0428a **Darstellung des Attributs" />
+        </Caption>
+        <Window type="Floating" width="6650" height="9530" scaleMode="twip" resizeMode="NoResize" />
+      </Tool>
+      <Tool id="ComosSUIBorder.SUIBorderProp" type="">
+        <Caption>
+          <Text itx="~0428a **Darstellung des Attributs" />
+        </Caption>
+        <Window type="Floating" width="6200" height="3200" scaleMode="twip" resizeMode="NoResize" />
+      </Tool>
+      <Tool id="ComosSUIButton.SUIButtonProp" type="">
+        <Caption>
+          <Text itx="~0428a **Darstellung des Attributs" />
+        </Caption>
+        <Window type="Floating" width="4100" height="3700" scaleMode="twip" resizeMode="NoResize" />
+      </Tool>
+      <Tool id="ComosSUICheck.SUICheckProp" type="">
+        <Caption>
+          <Text itx="~0428a **Darstellung des Attributs" />
+        </Caption>
+        <Window type="Floating" width="4600" height="3900" scaleMode="twip" resizeMode="NoResize" />
+      </Tool>
+      <Tool id="ComosSUIDate.SUIDateProp" type="">
+        <Caption>
+          <Text itx="~0428a **Darstellung des Attributs" />
+        </Caption>
+        <Window type="Floating" width="4100" height="3800" scaleMode="twip" resizeMode="NoResize" />
+      </Tool>
+      <Tool id="ComosSUIFOpen.SUIFOpenProp" type="">
+        <Caption>
+          <Text itx="~0428a **Darstellung des Attributs" />
+        </Caption>
+        <Window type="Floating" width="4600" height="4100" scaleMode="twip" resizeMode="NoResize" />
+      </Tool>
+      <Tool id="ComosSUIExcel.SUIExcelProp" type="">
+        <Caption>
+          <Text itx="~0428a **Darstellung des Attributs" />
+        </Caption>
+        <Window type="Floating" width="3100" height="3200" scaleMode="twip" resizeMode="NoResize" />
+      </Tool>
+      <Tool id="ComosSUIImage.SUIImageProp" type="">
+        <Caption>
+          <Text itx="~0428a **Darstellung des Attributs" />
+        </Caption>
+        <Window type="Floating" width="5750" height="4800" scaleMode="twip" resizeMode="NoResize" />
+      </Tool>
+      <Tool id="ComosSUILabel.SUILabelProp" type="">
+        <Caption>
+          <Text itx="~0428a **Darstellung des Attributs" />
+        </Caption>
+        <Window type="Floating" width="4500" height="2450" scaleMode="twip" resizeMode="NoResize" />
+      </Tool>
+      <Tool id="ComosSUILink.SUILinkProp" type="">
+        <Caption>
+          <Text itx="~0428a **Darstellung des Attributs" />
+        </Caption>
+        <Window type="Floating" width="4200" height="7000" scaleMode="twip" resizeMode="NoResize" />
+      </Tool>
+      <Tool id="ComosSUIMemo.SUIMemoProp" type="">
+        <Caption>
+          <Text itx="~0428a **Darstellung des Attributs" />
+        </Caption>
+        <Window type="Floating" width="4700" height="4300" scaleMode="twip" resizeMode="NoResize" />
+      </Tool>
+      <Tool id="ComosSUIQuery.SUIQueryProp" type="">
+        <Caption>
+          <Text itx="~0428a **Darstellung des Attributs" />
+        </Caption>
+        <Window type="Floating" width="6100" height="5400" scaleMode="twip" resizeMode="NoResize" />
+      </Tool>
+      <Tool id="ComosSUIRepeater.SUIRepeaterProp" type="">
+        <Caption>
+          <Text itx="~0428a **Darstellung des Attributs" />
+        </Caption>
+        <Window type="Floating" width="5000" height="3500" scaleMode="twip" resizeMode="NoResize" />
+      </Tool>
+      <Tool id="ComosSUIRtf.SUIRtfProp" type="">
+        <Caption>
+          <Text itx="~0428a **Darstellung des Attributs" />
+        </Caption>
+        <Window type="Floating" width="5600" height="3500" scaleMode="twip" resizeMode="NoResize" />
+      </Tool>
+      <Tool id="ComosSUISignature.SUISignProp" type="">
+        <Caption>
+          <Text itx="~0428a **Darstellung des Attributs" />
+        </Caption>
+        <Window type="Floating" width="4100" height="3000" scaleMode="twip" resizeMode="NoResize" />
+      </Tool>
+      <Tool id="ComosX.frmLogin" type="">
+        <Caption>
+          <Text itx="~0428b **Datenbank  ffnen" />
+        </Caption>
+        <Picture key="std_DB" />
+        <Window type="Modal" width="6255" height="3150" scaleMode="twip" resizeMode="NoResize" />
+      </Tool>
+      <Tool id="ComosX.frmViper" type="">
+        <Caption>
+          <Text itx="~0428c **Viper" />
+        </Caption>
+      </Tool>
+      <Tool id="ComosX.frmMdiProperties" type="">
+        <Caption>
+          <Text itx="~0428d **Eigenschaften" />
+        </Caption>
+        <Picture key="std_Properties" />
+        <!--<Window type="Modal" width="750" height="750" scaleMode="pixel" resizeMode="Resize" />-->
+      </Tool>
+      <Tool id="ComosSUIProj.SUIProj" type="">
+        <Caption>
+          <Text itx="~0428d **Eigenschaften" />
+        </Caption>
+        <Picture key="std_Properties" />
+        <Window type="Tab" area="Document" />
+      </Tool>
+      <Tool id="ComosX.frmSignalMgr" type="">
+        <Caption>
+          <Text itx="~04235 **Signalmanager..." />
+        </Caption>
+        <Picture key="std_SignalMgr" />
+      </Tool>
+      <Tool id="ComosX.frmProjects" type="">
+        <Caption>
+          <Text itx="~041ea **Projekt  ffnen" />
+        </Caption>
+        <Picture key="std_ProjectOpen" />
+      </Tool>
+      <Tool id="ComosReportViewer.ReportViewer" type="">
+        <Caption>
+          <Text itx="~0428e **Dokument" />
+        </Caption>
+        <Window type="Tab" area="Document2" />
+      </Tool>
+      <Tool id="ComosX.frmPdfViewer" type="">
+        <Caption>
+          <Text itx="~0428e **Dokument" />
+        </Caption>
+        <Window type="Tab" area="Document2" />
+      </Tool>
+      <Tool id="ComosX.frmRevViewer" type="">
+        <Caption>
+          <Text itx="~0428f **Revision" />
+        </Caption>
+        <Window type="Tab" area="Document2" />
+      </Tool>
+      <Tool id="ComosX.frmErrorObj" type="">
+        <Caption>
+          <Text itx="~04290 **Objekttest" />
+        </Caption>
+      </Tool>
+      <Tool id="CmdLineInfo" type="">
+        <Caption>
+          <Text itx="~04291 **Comos command line syntax" />
+        </Caption>
+        <Class type="NET" assembly="Comos.UIF" progid="Comos.UIF.UIControls.CmdLineInfo" />
+        <Window type="Modal" />
+      </Tool>
+      <Tool id="ComosCDevEdSp.CDevEdSp" type="">
+        <Caption>
+          <Text itx="~04292 **Eigenschaften der Spezifikation" />
+        </Caption>
+        <Window type="Floating" width="6600" height="9900" scaleMode="twip" />
+      </Tool>
+      <Tool id="ComosRightsEd.RightsEd" type="">
+        <Caption>
+          <Text itx="~04293 **Eigenschaften des Rechtes" />
+        </Caption>
+        <Window type="Floating" width="4600" height="4000" scaleMode="twip" />
+      </Tool>
+      <Tool id="ComosSpChapEd.SpChapEd" type="">
+        <Caption>
+          <Text itx="~04294 **Eigenschaften der Kapitelkarte" />
+        </Caption>
+        <Window type="Floating" width="9500" height="5000" scaleMode="twip" />
+      </Tool>
+      <Tool id="ComosSpecChapter.SpecChapter" type="">
+        <Caption>
+          <Text itx="~0428d **Eigenschaften" />
+        </Caption>
+        <Window type="Floating" width="9500" height="6000" scaleMode="twip" />
+      </Tool>
+      <Tool id="ComosUsrEd.UsrEd" type="">
+        <Caption>
+          <Text itx="~04295 **Eigenschaften des Benutzers" />
+        </Caption>
+        <Window type="Floating" width="7500" height="8100" scaleMode="twip" />
+      </Tool>
+      <Tool id="ComosUsrGrpEd.UsrGrpEd" type="">
+        <Caption>
+          <Text itx="~04296 **Eigenschaften der Gruppe" />
+        </Caption>
+        <Window type="Floating" width="6500" height="6000" scaleMode="twip" />
+      </Tool>
+      <Tool id="ComosObjRight.ObjRight" type="">
+        <Caption>
+          <Text itx="~04297 **Objektverwaltung" />
+        </Caption>
+        <Window type="Floating" width="6300" height="8200" scaleMode="twip" />
+      </Tool>
+      <Tool id="ComosObjectTranslate.ObjectTranslate" type="">
+        <Caption>
+          <Text itx="~04298 **Einzelobjekt" />
+        </Caption>
+        <Window type="Floating" width="4600" height="2400" scaleMode="twip" />
+      </Tool>
+      <Tool id="ComosCDevEdCo.CDevEdCo" type="">
+        <Caption>
+          <Text itx="~04299 **Eigenschaften des Anschlusses" />
+        </Caption>
+        <Window type="Floating" width="5250" height="7000" scaleMode="twip" />
+      </Tool>
+      <Tool id="ComosFRightsEd.FRightsEd" type="">
+        <Caption>
+          <Text itx="~0429a **Eigenschaften des Funktionsrechtes" />
+        </Caption>
+        <Window type="Floating" />
+      </Tool>
+      <Tool id="ComosLanguageEdit.LanguageEdit" type="">
+        <Caption>
+          <Text itx="~0429b **Eigenschaften der Sprache" />
+        </Caption>
+        <Window type="Floating" width="6000" height="3800" scaleMode="twip" />
+      </Tool>
+      <Tool id="ComosPhysUGEd.PhysUGEd" type="">
+        <Caption>
+          <Text itx="~0429c **Eigenschaften der Einheitengruppe" />
+        </Caption>
+        <Window type="Floating" width="4400" height="3200" scaleMode="twip" />
+      </Tool>
+      <Tool id="ComosPhysUnEd.PhysUnEd" type="">
+        <Caption>
+          <Text itx="~0429d **Eigenschaften der Einheit" />
+        </Caption>
+        <Window type="Floating" width="6800" height="7300" scaleMode="twip" />
+      </Tool>
+      <Tool id="ComosStdTbEd.StdTbEd" type="">
+        <Caption>
+          <Text itx="~0429e **Auswahlliste Eigenschaften" />
+        </Caption>
+        <Window type="Tab" area="Document" />
+      </Tool>
+      <Tool id="ComosWkgOverlayEd.WkgOverlayEd" type="">
+        <Caption>
+          <Text itx="~0429f **Eigenschaften der Arbeitsschicht" />
+        </Caption>
+        <Window type="Floating" width="8000" height="8500" scaleMode="twip" />
+      </Tool>
+      <Tool id="ComosDocTypeEdit.DocTypeEdit" type="">
+        <Caption>
+          <Text itx="~042a0 **Eigenschaften des Dokumententyps" />
+        </Caption>
+        <Window type="Floating" width="5700" height="4000" scaleMode="twip" />
+      </Tool>
+      <Tool id="ComosStdVaEd.StdVaEd" type="">
+        <Caption>
+          <Text itx="~042a1 **Eigenschaften des Auswahllistenwertes" />
+        </Caption>
+        <Window type="Floating" width="5700" height="4000" scaleMode="twip" />
+      </Tool>
+      <Tool id="ComosCaseProp.CaseProp" type="">
+        <Caption>
+          <Text itx="~042a2 **Fahrfall-Eigenschaften" />
+        </Caption>
+        <Window type="Floating" width="5100" height="2300" scaleMode="twip" />
+      </Tool>
+      <Tool id="ComosDBConvSysStrcA.DBConvSysStrcA" type="">
+        <Caption>
+          <Text itx="~04210 **Datenbankanpassungen..." />
+        </Caption>
+        <Window type="Floating" width="6500" height="4400" scaleMode="twip" />
+      </Tool>
+      <Tool id="ComosDBConvSysStuct.DBConvSysStuct" type="">
+        <Caption>
+          <Text itx="~04210 **Datenbankanpassungen..." />
+        </Caption>
+        <Window type="Floating" width="6500" height="2000" scaleMode="twip" />
+      </Tool>
+      <Tool id="ComosDBConvSysDocs.DBConvSysDocs" type="">
+        <Caption>
+          <Text itx="~04210 **Datenbankanpassungen..." />
+        </Caption>
+        <Window type="Floating" width="5200" height="7000" scaleMode="twip" />
+      </Tool>
+      <Tool id="ComosDBConv3D.DBConv3D" type="">
+        <Caption>
+          <Text itx="~04210 **Datenbankanpassungen..." />
+        </Caption>
+        <Window type="Floating" width="4800" height="3800" scaleMode="twip" />
+      </Tool>
+      <Tool id="ComosDBConvDocSp.DBConvDocSp" type="">
+        <Caption>
+          <Text itx="~04210 **Datenbankanpassungen..." />
+        </Caption>
+        <Window type="Floating" width="5000" height="4300" scaleMode="twip" />
+      </Tool>
+      <Tool id="ComosDBConvDocGrpSp.DBConvDocGrpSp" type="">
+        <Caption>
+          <Text itx="~04210 **Datenbankanpassungen..." />
+        </Caption>
+        <Window type="Floating" width="5200" height="5000" scaleMode="twip" />
+      </Tool>
+      <Tool id="ComosDBConvCrStatus.DBConvCrStatus" type="">
+        <Caption>
+          <Text itx="~04210 **Datenbankanpassungen..." />
+        </Caption>
+        <Window type="Floating" width="4000" height="2000" scaleMode="twip" />
+      </Tool>
+      <Tool id="ComosDBConvBldPlan.DBConvBldPlan" type="">
+        <Caption>
+          <Text itx="~04210 **Datenbankanpassungen..." />
+        </Caption>
+        <Window type="Floating" width="4800" height="3800" scaleMode="twip" />
+      </Tool>
+      <Tool id="ComosDBConvDrillPlan.DBConvDrillPlan" type="">
+        <Caption>
+          <Text itx="~04210 **Datenbankanpassungen..." />
+        </Caption>
+        <Window type="Floating" width="4800" height="3800" scaleMode="twip" />
+      </Tool>
+      <Tool id="ComosXDBConvPrototype.DBConvPrototype" type="">
+        <Caption>
+          <Text itx="~04210 **Datenbankanpassungen..." />
+        </Caption>
+        <Window type="Floating" width="6500" height="2000" scaleMode="twip" />
+      </Tool>
+      <Tool id="ComosDBConvStdTables.DBConvStdTables" type="">
+        <Caption>
+          <Text itx="~04210 **Datenbankanpassungen..." />
+        </Caption>
+        <Window type="Floating" width="5100" height="6000" scaleMode="twip" />
+      </Tool>
+      <Tool id="ComosDBConvSysESBatch.DBConvSysESBatch" type="">
+        <Caption>
+          <Text itx="~04210 **Datenbankanpassungen..." />
+        </Caption>
+        <Window type="Floating" width="6500" height="3000" scaleMode="twip" />
+      </Tool>
+      <Tool id="ComosDBConvAssemblies.DBConvAssemblies" type="">
+        <Caption>
+          <Text itx="~04210 **Datenbankanpassungen..." />
+        </Caption>
+        <Window type="Floating" width="5000" height="3000" scaleMode="twip" />
+      </Tool>
+      <Tool id="ComosDBConvSysProf.DBConvSysProf" type="">
+        <Caption>
+          <Text itx="~04210 **Datenbankanpassungen..." />
+        </Caption>
+        <Window type="Floating" width="6500" height="2000" scaleMode="twip" />
+      </Tool>
+      <Tool id="ComosDBConvSysStdTab.DBConvSysStdTab" type="">
+        <Caption>
+          <Text itx="~04210 **Datenbankanpassungen..." />
+        </Caption>
+        <Window type="Floating" width="6500" height="2000" scaleMode="twip" />
+      </Tool>
+      <Tool id="ComosDBConvSysStrc.DBConvSysStrc" type="">
+        <Caption>
+          <Text itx="~04210 **Datenbankanpassungen..." />
+        </Caption>
+        <Window type="Floating" width="5000" height="10000" scaleMode="twip" />
+      </Tool>
+      <!--################################################-->
+      <!-- Eintr ge f r die alternative Abfrage A4231, A4236 -->
+      <!-- F r jeden TopQueryBrowser wird hier ein Eintrag mit dem NET.QGrid Prefix erzeugt -->
+      <Tool id="NET.QGrid" type="Button">
+        <Caption>
+          <Text itx="~053cd Abfrage in List/Edit Ansicht" />
+        </Caption>
+        <Class type="NET" assembly="Comos.NQuery.Grid" progid="Comos.NQuery.Grid.QGrid" />
+        <Picture key="std_QueryMenu" />
+        <Window state="Unique" />
+      </Tool>
+      <!-- TopQBrwDevices -->
+      <Tool id="NET.QGrid***ComosTopQBrowsers.TopQBrwDevices" type="Button">
+        <Class type="NET" assembly="Comos.NQuery.Grid" progid="Comos.NQuery.Grid.QGrid" />
+        <Window state="Unique" />
+      </Tool>
+      <!-- TopQBrwCDevices -->
+      <Tool id="NET.QGrid***ComosTopQBrowsers.TopQBrwCDevices" type="Button">
+        <Class type="NET" assembly="Comos.NQuery.Grid" progid="Comos.NQuery.Grid.QGrid" />
+        <Window state="Unique" />
+      </Tool>
+      <!-- TopQBrwConnectors -->
+      <Tool id="NET.QGrid***ComosTopQBrowsers.TopQBrwConnectors" type="Button">
+        <Class type="NET" assembly="Comos.NQuery.Grid" progid="Comos.NQuery.Grid.QGrid" />
+        <Window state="Unique" />
+      </Tool>
+      <!-- TopQBrwDocuments -->
+      <Tool id="NET.QGrid***ComosTopQBrowsers.TopQBrwDocuments" type="Button">
+        <Class type="NET" assembly="Comos.NQuery.Grid" progid="Comos.NQuery.Grid.QGrid" />
+        <Window state="Unique" />
+      </Tool>
+      <!-- TopQBrwGeneral -->
+      <Tool id="NET.QGrid***ComosTopQBrowsers.TopQBrwGeneral" type="Button">
+        <Class type="NET" assembly="Comos.NQuery.Grid" progid="Comos.NQuery.Grid.QGrid" />
+        <Window state="Unique" />
+      </Tool>
+      <!-- TopQBrwReImport -->
+      <Tool id="NET.QGrid***ComosTopQBrowsers.TopQBrwReImport" type="Button">
+        <Class type="NET" assembly="Comos.NQuery.Grid" progid="Comos.NQuery.Grid.QGrid" />
+        <Window state="Unique" />
+      </Tool>
+      <!-- TopQBrwSpecifications -->
+      <Tool id="NET.QGrid***ComosTopQBrowsers.TopQBrwSpecifications" type="Button">
+        <Class type="NET" assembly="Comos.NQuery.Grid" progid="Comos.NQuery.Grid.QGrid" />
+        <Window state="Unique" />
+      </Tool>
+      <!-- TopQBrwStdTables -->
+      <Tool id="NET.QGrid***ComosTopQBrowsers.TopQBrwStdTables" type="Button">
+        <Class type="NET" assembly="Comos.NQuery.Grid" progid="Comos.NQuery.Grid.QGrid" />
+        <Window state="Unique" />
+      </Tool>
+      <!-- TopQBrwStdValues -->
+      <Tool id="NET.QGrid***ComosTopQBrowsers.TopQBrwStdValues" type="Button">
+        <Class type="NET" assembly="Comos.NQuery.Grid" progid="Comos.NQuery.Grid.QGrid" />
+        <Window state="Unique" />
+      </Tool>
+      <!-- TopQBrwTranslate -->
+      <Tool id="NET.QGrid***ComosTopQBrowsers.TopQBrwTranslate" type="Button">
+        <Class type="NET" assembly="Comos.NQuery.Grid" progid="Comos.NQuery.Grid.QGrid" />
+        <Window state="Unique" />
+      </Tool>
+      <!--################################################-->
+      <Tool id="@NET.DevEdit" type="Button">
+        <Caption>
+          <Text itx="~0494d .NET DevEdit" />
+        </Caption>
+        <Class type="NET" assembly="Comos.Controls" progid="Comos.Controls.DevEditView" />
+        <Window type="Tab" area="Document" />
+      </Tool>
+      <!--################# AML INTERFACE ################-->
+      <Tool id="@NET.ObjectGenerator" type="Button">
+        <Caption>
+          <Text itx="~04c4c **Statisches Neu-Men " />
+        </Caption>
+        <Class type="NET" assembly="Comos.Controls.ObjectGenerator" progid="Comos.Controls.ObjectGeneratorView" />
+        <Picture key="std_New" />
+        <Window type="Tab" area="Navigator" subarea="Detail" />
+      </Tool>
+      <Tool id="@NET.MacroBlock.TemplateUpdater" type="Button">
+        <Caption>
+          <Text itx="~057a2 MakroBaustein Updater" />
+        </Caption>
+        <Class type="NET" assembly="Comos.Logical.MacroBlock.TemplateUpdater" progid="Comos.Logical.MacroBlock.TemplateUpdater.UpdatePluginCtrl" />
+        <Picture key="std_@cpluginmacroblocks" />
+      </Tool>
+      <Tool id="@NET.Import.GenericExcelImportUI" type="Button">
+        <Caption>
+          <Text itx="~058f4 Generischer Excel-Import" />
+        </Caption>
+        <Class type="NET" assembly="Comos.Import.GenericExcelImportUI" progid="Comos.Import.GenericExcelImportUI.GenericExcelImportUI" />
+        <Picture key="std_import_excel_general" />
+      </Tool>
+      <Tool id="@NET.IC.BrownFieldLoopWizard" type="Button">
+        <Caption>
+          <Text itx="Brownfield Loop Wizard" />
+        </Caption>
+        <Class type="NET" assembly="Comos.IC.BrownFieldLoopWizard" progid="Comos.IC.BrownFieldLoopWizard.Controls.BrownFieldLoopWizard" />
+        <Picture key="std_import_excel_loop" />
+      </Tool>
+      <Tool id="@NET.IC.MarshallingDesigner" type="Button">
+        <Caption>
+          <Text itx="~019d6 Rangiermanagement" />
+        </Caption>
+        <Class type="NET" assembly="Comos.IC.MarshallingDesigner" progid="Comos.IC.MarshallingDesigner.MarshallingDesignerUI" />
+      </Tool>
+      <Tool id="@NET.IC.PatternDefinitionPlugin" type="Button">
+        <Caption>
+          <Text itx="~06ada **Anschlussmuster Definition" />
+        </Caption>
+        <Class type="NET" assembly="Comos.IC.PatternDefinition" progid="Comos.IC.PatternDefinition.DefinitionPlugin" />
+        <Picture key="std_drun" />
+      </Tool>
+      <Tool id="@NET.SignalCrossReferences" type="Button">
+        <Caption>
+          <Text itx="~057fc **Signal-Querverweise" />
+        </Caption>
+        <Class type="NET" assembly="Comos.Logical.SignalCrossReferences" progid="Comos.Logical.SignalCrossReferences.SignalCrossRefBrowser" />
+        <Window type="Tab" area="Navigator" subarea="Detail" autoClose="false" />
+        <Picture key="std_signalmgr" />
+      </Tool>
+      <Tool id="@NET.CPlugInICSignals.ICSignals" type="Button">
+        <Caption>
+          <Text itx="~05ca2 Signal/Ger tezuweisung Manager" />
+        </Caption>
+        <Class type="NET" assembly="Comos.IC.Signal" progid="Comos.IC.Signal.UserControl1" />
+        <Picture key="std_signalmgr" />
+      </Tool>
+      <Tool id="@NET.CPlugInLoops.ICLoopDocMngr" type="Button">
+        <Caption>
+          <Text itx="~05e0c Loop Dokument Manager" />
+        </Caption>
+        <Class type="NET" assembly="Comos.IC.LoopDocMngr" progid="Comos.IC.LoopDocMngr.LoopDocMngr" />
+        <Picture key="std_implement" />
+      </Tool>
+      <!--################# PIPESPECMAPPING ################-->
+      <Tool id="@NET.PipeSpecMapping" type="Button">
+        <Caption>
+          <Text itx="~05c46 Pipe Spec Mapping" />
+        </Caption>
+        <Class type="NET" assembly="Comos.PipeSpec.Mapping" progid="Comos.PipeSpec.Mapping.UCPanel" />
+        <Picture key="std_pipespecassign" />
+        <Window state="Unique" type="Tab" scaleMode="pixel" />
+        <Database type="Any" />
+      </Tool>
+      <Tool id="@NET.NumberRanges" type="Button">
+        <Caption>
+          <Text itx="~06ad9 **Number Ranges" />
+        </Caption>
+        <Class type="NET" assembly="Comos.Rules.NumberRanges" progid="Comos.Rules.NumberRanges.View.NumberRangesListView" />
+        <Picture key="std_numberranges" />
+        <Window state="Unique" type="Tab" scaleMode="pixel" />
+      </Tool>
+      <!--##### CrossProject Queries #####-->
+      <!-- CrossProject Devices -->
+      <Tool id="@NET.XPROJQ_TopQBrwDevicesWrapper" type="Button">
+        <Class type="NET" assembly="Comos.Query.CrossProject" progid="Comos.Query.CrossProject.TopQBrwDevicesWrapper" />
+        <Window autoClose="false" />
+      </Tool>
+      <!-- QGrid CrossProject for Devices -->
+      <Tool id="NET.QGrid***@NET.XPROJQ_TopQBrwDevicesWrapper" type="Button">
+        <Class type="NET" assembly="Comos.Query.CrossProject" progid="Comos.Query.CrossProject.QGridWrapper" />
+        <Window autoClose="false" />
+      </Tool>
+      <!-- CrossProject CDevices -->
+      <Tool id="@NET.XPROJQ_TopQBrwCDevicesWrapper" type="Button">
+        <Class type="NET" assembly="Comos.Query.CrossProject" progid="Comos.Query.CrossProject.TopQBrwCDevicesWrapper" />
+        <Window autoClose="false" />
+      </Tool>
+      <!-- QGrid CrossProject for CDevices -->
+      <Tool id="NET.QGrid***@NET.XPROJQ_TopQBrwCDevicesWrapper" type="Button">
+        <Class type="NET" assembly="Comos.Query.CrossProject" progid="Comos.Query.CrossProject.QGridWrapper" />
+        <Window autoClose="false" />
+      </Tool>
+      <!-- CrossProject Documents -->
+      <Tool id="@NET.XPROJQ_TopQBrwDocumentsWrapper" type="Button">
+        <Class type="NET" assembly="Comos.Query.CrossProject" progid="Comos.Query.CrossProject.TopQBrwDocumentsWrapper" />
+        <Window autoClose="false" />
+      </Tool>
+      <!-- QGrid CrossProject for Documents -->
+      <Tool id="NET.QGrid***@NET.XPROJQ_TopQBrwDocumentsWrapper" type="Button">
+        <Class type="NET" assembly="Comos.Query.CrossProject" progid="Comos.Query.CrossProject.QGridWrapper" />
+        <Window autoClose="false" />
+      </Tool>
+      <!-- CrossProject General -->
+      <Tool id="@NET.XPROJQ_TopQBrwGeneralWrapper" type="Button">
+        <Class type="NET" assembly="Comos.Query.CrossProject" progid="Comos.Query.CrossProject.TopQBrwGeneralWrapper" />
+        <Window autoClose="false" />
+      </Tool>
+      <!-- QGrid CrossProject for General -->
+      <Tool id="NET.QGrid***@NET.XPROJQ_TopQBrwGeneralWrapper" type="Button">
+        <Class type="NET" assembly="Comos.Query.CrossProject" progid="Comos.Query.CrossProject.QGridWrapper" />
+        <Window autoClose="false" />
+      </Tool>
+      <!-- Project properties -->
+      <Tool id="@NET.ProjectSettings" type="Button">
+        <Caption>
+          <Text itx="~06ac4 ** Project Settings" />
+        </Caption>
+        <Class type="NET" assembly="Comos.Platform.ProjectSettings.UI" progid="Comos.Platform.ProjectSettings.UI.ProjectSettingsView" />
+        <Parameters>
+          <Parameter name="DisplayMode" value="Auto" />
+        </Parameters>
+        <Picture key="project" />
+        <Database type="iDB" />
+      </Tool>
+      <Tool id="@NET.ProjectSettings.Edit" type="Button">
+        <Caption>
+          <Text itx="~06ac4 ** Project Settings" />
+        </Caption>
+        <Class type="NET" assembly="Comos.Platform.ProjectSettings.UI" progid="Comos.Platform.ProjectSettings.UI.ProjectSettingsView" />
+        <Parameters>
+          <Parameter name="DisplayMode" value="Edit" />
+        </Parameters>
+        <Picture key="project" />
+        <Database type="iDB" />
+      </Tool>
+      <!-- /Project properties -->
+      <Tool id="@NET.Updateability" type="Button">
+        <Caption>
+          <Text itx="~06677 Database update" />
+        </Caption>
+        <Class type="NET" assembly="Comos.Platform.Updateability.UI" progid="Comos.Platform.Updateability.UI.View.UpdateToolView" />
+        <Picture key="std_ImportPool" />
+        <Rights dependencyProperty="Enabled" functionRights="8" />
+        <Database type="iDB" />
+        <Window autoClose="false" state="UniqueOnly" type="Modal" scaleMode="pixel" />
+      </Tool>
+      <Tool id="@NET.Comos.C3DView.AutoAssign" type="Button">
+        <Caption>
+          <Text itx="~06654 Walkinside Object Assignment" />
+        </Caption>
+        <Picture key="std_@x.cpluginautoassigndevto3d" />
+        <Class type="NET" assembly="Comos.C3DView.AutoAssign" progid="Comos.C3DView.AutoAssign.UI.AutoAssignComosPlugin" />
+        <Window type="Tab" area="Document" autoClose="true" />
+      </Tool>
+      <Tool id="ComosSnapshot" type="Button">
+        <Caption>
+          <Text itx="~07fe5 Snapshot" />
+        </Caption>
+        <Picture key="std_snapshot" />
+        <Class type="NET" assembly="Comos.Snapshot.Presentation" progid="Comos.Snapshot.Presentation.Lib.Starter" method="Init" />
+      </Tool>
+      <Tool id="ComosSnapshotLocal" type="Button">
+        <Caption>
+          <Text itx="~06c9a Snapshot for query" />
+        </Caption>
+        <Class type="NET" assembly="Comos.Snapshot.Presentation" progid="Comos.Snapshot.Presentation.Views.UCComosLocal" />
+        <Window type="Tab" area="Document" autoClose="false" state="Reuse" />
+      </Tool>
+      <Tool id="ID_FactoryOptions.OptWorkStation" type="Button">
+        <Caption>
+          <Text itx="~06c4f ** Maintenance Options" />
+        </Caption>
+        <Picture key="std_options" />
+        <Class type="COM" progid="Chemserv.OptionsClass" method="ShowOptions" />
+        <Database type="iDB" />
+      </Tool>
+      <!-- SIMIT Interface -->
+      <Tool id="ID_PluginsSimitInterface" type="PopupMenu">
+        <Caption>
+          <Text itx="~074c6 SIMIT interface" />
+        </Caption>
+      </Tool>
+      <Tool id="ID_PluginsSimitInterface.Configuration" type="Button">
+        <Caption>
+          <Text itx="~07573 SIMIT interface configuration" />
+        </Caption>
+        <Class type="NET" assembly="Comos.SimitInterface.Mapping" progid="Comos.SimitInterface.Mapping.ComponentMappingPlugin" />
+        <Picture key="std_simit_config" />
+      </Tool>
+      <Tool id="ID_PluginsSimitInterface.Export" type="Button">
+        <Caption>
+          <Text itx="~07477 SIMIT export" />
+        </Caption>
+        <Class type="NET" assembly="Comos.SimitInterface.Export" progid="Comos.SimitInterface.Export.TempHelper" />
+        <Picture key="std_export_simit" />
+      </Tool>
+      <!-- Comos Engineering Adapter -->
+      <Tool id="ID_ExtPlugins3DEngineeringAdapter" type="PopupMenu">
+        <Caption>
+          <Text itx="~08aef CAE Interop" />
+        </Caption>
+      </Tool>
+      <Tool id="@NET.Comos.EngineeringAdapter.Common.Configuration" type="Button">
+        <Caption>
+          <Text itx="~06ec8 Engineering Adapter Configuration" />
+        </Caption>
+        <Picture key="std_property_setting" />
+        <Class type="NET" assembly="Comos.EngineeringAdapter.Comos.Configuration" progid="Comos.EngineeringAdapter.Comos.Configuration.UI.EngineeringAdapterProjectSettingsControl" />
+        <Window type="Tab" area="Document" autoClose="true" />
+        <Database type="ComosDB" />
+      </Tool>
+      <Tool id="ID_ExtPluginsPIDExchange" type="PopupMenu">
+        <Caption>
+          <Text itx="~08199 P&amp;ID" />
+        </Caption>
+        <Picture key="std_@x.cpluginPID" />
+      </Tool>
+      <Tool id="ID_ExtPluginsSpecifications" type="PopupMenu">
+        <Caption>
+          <Text itx="~08af0 Specifications" />
+        </Caption>
+        <Picture key="std_@x.cpluginSpecifications" />
+      </Tool>
+      <Tool id="ID_ExtPluginsConfiguration" type="PopupMenu">
+        <Caption>
+          <Text itx="~01cdd Configuration" />
+        </Caption>
+        <Picture key="std_@x.cpluginConfiguration" />
+      </Tool>
+      <Tool id="ID_ExtPluginsAvevaPDMSE3D" type="PopupMenu">
+        <Caption>
+          <Text itx="AVEVA" />
+        </Caption>
+        <Picture key="std_@x.cpluginaveva" />
+      </Tool>
+      <Tool id="@NET.Comos.PipeSpec.ImportExport" type="Button">
+        <Caption>
+          <Text itx="~07535 PDMS/E3D pipe spec import" />
+        </Caption>
+        <Picture key="std_@x.cpluginaveva.pipespecimport" />
+        <Class type="NET" assembly="Comos.PipeSpec.ImportExport" progid="Comos.PipeSpec.ImportExport.UI" />
+        <Rights dependencyProperty="Visible" functionRights="1" />
+        <Database type="Any" />
+      </Tool>
+      <Tool id="@NET.Comos.EngineeringAdapter.Common.PDMSScopeDefinition" type="Button">
+        <Caption>
+          <Text itx="~07536 PDMS pipe spec export" />
+        </Caption>
+        <Picture key="std_@x.cpluginaveva.pipespecexport" />
+        <Class type="NET" assembly="Comos.EngineeringAdapter.Comos.Scope" progid="Comos.EngineeringAdapter.Comos.Scope.ComosScopeDefinitionControl" />
+        <Parameters>
+          <Parameter name="EngineeringAdapterId" value="Engineering Adapter: PDMS" />
+        </Parameters>
+        <Window type="Tab" area="Document" autoClose="true" />
+      </Tool>
+      <Tool id="@X.CPlugInPDMSInterface.PDMSInterface.Design" type="Button">
+        <Caption>
+          <Text itx="~08aee CA Engineering Interface" />
+        </Caption>
+        <Picture key="std_@x.cpluginaveva.engineeringinterface" />
+        <Class type="NET" assembly="Comos.PDMSInterface.Comos" progid="Comos.PDMSInterface.Comos.ComosPlugin" />
+      </Tool>
+      <Tool id="@X.CPlugInPIDExchangeInterface.GeneralPIDExchange.PID" type="Button">
+        <Caption>
+          <Text itx="~08302 General P&amp;ID exchange" />
+        </Caption>
+        <Picture key="std_@x.cpluginGeneralPIDExchange" />
+        <Class type="NET" assembly="Comos.SP.PID.Exchange" progid="Comos.SP.PID.Exchange.ComosPlugin" />
+      </Tool>
+      <Tool id="@X.CPlugInPIDExchangeInterface.SymbolMappingEditor.PID" type="Button">
+        <Caption>
+          <Text itx="~08afd General P&amp;ID exchange (Config)" />
+        </Caption>
+        <Picture key="std_includemainobject" />
+        <Class type="NET" assembly="Comos.General.SymbolMappingEditor" progid="Comos.General.SymbolMappingEditor.EditorPlugin" />
+      </Tool>
+      <Tool id="@NET.Comos.Data.Mapper" type="Button">
+        <Caption>
+          <Text itx="~06ec6 Generic Data Mapper" />
+        </Caption>
+        <Picture key="std_CPMSchemaEditor" />
+        <Class type="NET" assembly="Comos.Data.Mapping.Comos" progid="Comos.Data.Mapping.Comos.UI.SchemaBasedMapperComosPlugin" />
+        <Window type="Tab" area="Document" autoClose="true" />
+      </Tool>
+      <!--<Tool id="ID_ExtPluginsBentley_OpenPlantModeler" type="PopupMenu">
+				<Caption>
+					<Text itx="Bentley"/>
+				</Caption>
+				<Picture key="std_@x.cpluginbentley"/>
+			</Tool>-->
+      <Tool id="ID_ExtPluginsProteus" type="PopupMenu">
+        <Caption>
+          <Text itx="Proteus" />
+        </Caption>
+        <Picture key="std_@x.cpluginbentley" />
+      </Tool>
+      <!--<Tool id="@NET.Comos.EngineeringAdapter.iModel.PlantSight.WorkingOverlayExport" type="Button">
+				<Caption>
+					<Text itx="~0863e COMOD PID process data export to iModel (working overlay)" />
+				</Caption>
+				<Picture key="std_@x.cpluginbentley"/>
+				<Class type="NET" assembly="Comos.EngineeringAdapter.Comos.Scope" progid="Comos.EngineeringAdapter.Comos.Scope.ComosWorkingOverlayScopeDefinitionControl" />
+				<Parameters>
+					<Parameter name="EngineeringAdapterId" value="Engineering Adapter: PlantSight (WorkingOverlay)"/>
+				</Parameters>
+				<Window type="Tab" area="Document" autoClose="true" />
+			</Tool>
+
+			<Tool id="@NET.Comos.EngineeringAdapter.iModel.PlantSight.Export" type="Button">
+				<Caption>
+					<Text itx="~083ea COMOS PID process data export to PlantSight" />
+				</Caption>
+				<Picture key="std_@x.cpluginbentley"/>
+				<Class type="NET" assembly="Comos.EngineeringAdapter.Comos.Scope" progid="Comos.EngineeringAdapter.Comos.Scope.ComosScopeDefinitionControl" />
+				<Parameters>
+					<Parameter name="EngineeringAdapterId" value="Engineering Adapter: PlantSight"/>
+				</Parameters>
+				<Window type="Tab" area="Document" autoClose="true" />
+			</Tool>-->
+      <Tool id="@NET.Comos.EngineeringAdapter.Proteus.XMLDataExport" type="Button">
+        <Caption>
+          <Text itx="~07aff COMOS XML process data export" />
+        </Caption>
+        <Picture key="std_@x.cpluginbentley" />
+        <Class type="NET" assembly="Comos.EngineeringAdapter.Comos.Scope" progid="Comos.EngineeringAdapter.Comos.Scope.ComosScopeDefinitionControl" />
+        <Parameters>
+          <Parameter name="EngineeringAdapterId" value="Engineering Adapter: Proteus" />
+        </Parameters>
+        <Window type="Tab" area="Document" autoClose="true" />
+      </Tool>
+      <Tool id="@NET.Comos.EngineeringAdapter.Proteus.XMLDataImport" type="Button">
+        <Caption>
+          <Text itx="~087c0 COMOS XML process data import" />
+        </Caption>
+        <Picture key="std_@x.cpluginbentley" />
+        <Class type="NET" assembly="Comos.EngineeringAdapter.Proteus.Scope" progid="Comos.EngineeringAdapter.Proteus.Scope.ProteusProcessDataImportControl" />
+        <Parameters>
+          <Parameter name="EngineeringAdapterId" value="Engineering Adapter: Proteus" />
+        </Parameters>
+        <Window type="Tab" area="Document" autoClose="true" />
+      </Tool>
+      <!--Tool id="@NET.Comos.EngineeringAdapter.iModel.OpenPlantModeler.Import" type="Button">
+        <Caption>
+          <Text itx="~07647 Bentley process data import"/>
+        </Caption>
+        <Picture key="std_@x.cpluginbentley"/>
+        <Class type="NET" assembly="Comos.EngineeringAdapter.iModel.Scope" progid="Comos.EngineeringAdapter.iModel.Scope.IModelProcessDataImportControl"/>
+        <Parameters>
+          <Parameter name="EngineeringAdapterId" value="Engineering Adapter: iModel"/>
+        </Parameters>
+      </Tool-->
+      <Tool id="@NET.Comos.ScopeControl" type="Button">
+        <Caption>
+          <Text itx="Scope" />
+        </Caption>
+        <Class type="NET" assembly="Comos.ScopeControl" progid="Comos.ScopeControl.MainControl" />
+      </Tool>
+      <!--
+        #################   Example for customizing Comos start up parameters ########################-->
+      <Tool id="Example.CreateNewWO" type="Command">
+        <Caption>
+          <Text itx="Test for Commander with Custom CommandLine" />
+        </Caption>
+        <Class type="NET" assembly="Comos.CreateNewWO" progid="Comos.CreateNewWO.Starter" />
+      </Tool>
+      <Tool id="ComosAssemblyActions.AssemblyActions" type="Button">
+        <Caption>
+          <Text itx="~020b1 Tasks" />
+        </Caption>
+        <Class type="NET" assembly="Comos.eblock.AssemblyActions" progid="ComosAssemblyActions.AssemblyActions" />
+        <Window type="Tab" area="Navigator" subarea="Detail" />
+      </Tool>
+      <!--############### Inhouse Tools ######################-->
+      <Tool id="InhouseTools" type="PopupMenu">
+        <Caption>
+          <Text itx="Inhouse Tools" />
+        </Caption>
+      </Tool>
+      <Tool id="QueryImplementationVB6" type="Button">
+        <Caption>
+          <Text itx="Query Implementation: --&gt; VB6" />
+        </Caption>
+        <Class type="NET" assembly="Comos.Query.Tools" progid="Comos.Query.Options.NetVB6Toggle" method="QueryImplementationToVB6" />
+      </Tool>
+      <Tool id="QueryImplementationNET" type="Button">
+        <Caption>
+          <Text itx="Query Implementation: --&gt; NET" />
+        </Caption>
+        <Class type="NET" assembly="Comos.Query.Tools" progid="Comos.Query.Options.NetVB6Toggle" method="QueryImplementationToNET" />
+      </Tool>
+      <Tool id="QueryImplementationState" type="Button">
+        <Caption>
+          <Text itx="Query Implementation: State ?" />
+        </Caption>
+        <Class type="NET" assembly="Comos.Query.Tools" progid="Comos.Query.Options.NetVB6Toggle" method="QueryImplementationState" />
+      </Tool>
+      <!--#####################################-->
+      <!--<Tool id="AIChat" type="Button">
+				<Caption>
+					<Text itx="Engineering Copilot COMOS"/>
+				</Caption>
+				<Class type="NET" assembly="Comos.EngineeringAssistant.ChatControl" progid="Comos.EngineeringAssistant.ChatControl.AiChatControl"/>
+				<Picture key="std_chat"/>
+				<Window type="Tab" area="Navigator" state="Unique"/>
+			</Tool>-->
+      <!--#####################################-->
+      <Tool id="AIChat" type="Button">
+        <Caption>
+          <Text itx="Engineering Copilot COMOS" />
+        </Caption>
+        <Class type="NET" assembly="Comos.EngineeringAssistant.ChatControl" progid="Comos.EngineeringAssistant.ChatControl.AiChatControl" />
+        <Picture key="std_ai" />
+        <Window area="SidePanel" />
+      </Tool>
+      <Tool id="@NET.TestExtensionPlugin" type="Button">
+        <Caption>
+          <Text itx="Comos Test Extension Plugin" />
+        </Caption>
+        <Class type="NET" assembly="Comos.TA.App.Plugin" progid="Comos.TA.App.Plugin.ObjectFingerprints.ObjectFingerprints" />
+        <Picture key="std_@x.cplugpdmsinterface.pdmsinterface" />
+        <Window type="Tab" area="Document" subarea="Detail" autoClose="false" />
+      </Tool>
+      <Tool id="@NET.FingerprintCreator" type="Button">
+        <Caption>
+          <Text itx="Create reference fingerprint for open report" />
+        </Caption>
+        <Class type="NET" assembly="Comos.TA.App.Plugin" progid="Comos.TA.App.Plugin.ReportAutoFingerprintUtility" method="CreateReportReferenceFingerprint" />
+        <Picture key="std_@x.CPlugin_TA_CreateReferenceFingerprint.ico" />
+      </Tool>
+      <Tool id="@NET.FingerprintComparer" type="Button">
+        <Caption>
+          <Text itx="Create fingerprint for open report and compare it with existing reference fingerprint" />
+        </Caption>
+        <Class type="NET" assembly="Comos.TA.App.Plugin" progid="Comos.TA.App.Plugin.ReportAutoFingerprintUtility" method="CompareFingerprints" />
+        <Picture key="std_@x.CPlugin_TA_CompareFingerprints.ico" />
+      </Tool>
+      <Tool id="@NET.FingerprintExternComparer" type="Button">
+        <Caption>
+          <Text itx="Compares the existing fingerprints in an external program. The external program can be defined in the settings section." />
+        </Caption>
+        <Class type="NET" assembly="Comos.TA.App.Plugin" progid="Comos.TA.App.Plugin.ReportAutoFingerprintUtility" method="CompareFingerprintsExtern" />
+        <Picture key="std_@x.CPlugin_TA_CompareFingerprints_Ex.ico" />
+      </Tool>
+      <Tool id="@NET.FingerprintModeSettings" type="Button">
+        <Caption>
+          <Text itx="Report-Quicktest settings" />
+        </Caption>
+        <Class type="NET" assembly="Comos.TA.App.Plugin" progid="Comos.TA.App.Plugin.ReportQuickTests.SettingsGUI" />
+        <Picture key="std_@x.CPlugin_TA_FingerprintSettings.ico" />
+        <Window type="Tab" area="Document" subarea="Detail" autoClose="false" />
+      </Tool>
+    </Tools>
+    <Toolbars>
+      <Toolbar id="MainMenu" type="MainMenu" />
+      <Toolbar id="ConststrutionAssistantMain" type="Toolbar" />
+      <Toolbar id="SysNavi" type="Toolbar" />
+      <Toolbar id="MainExit" type="Toolbar" />
+      <Toolbar id="File" type="Toolbar" />
+      <Toolbar id="Query_Main" type="Toolbar" />
+      <Toolbar id="Extras" type="Toolbar" />
+      <Toolbar id="NETInfo" type="Toolbar" />
+      <Toolbar id="Exefunctions" type="Toolbar" />
+      <Toolbar id="ConststructionAssistantMain" type="Toolbar" />
+      <Toolbar id="SidePanel" type="Toolbar" />
+      <Toolbar id="TestAutomation" type="Toolbar" />
+    </Toolbars>
+  </Lib>
+  <!--
+        ##################################################
+                M E N U
+        ##################################################-->
+  <Menu>
+    <Toolbars>
+      <Toolbar idref="MainMenu">
+        <Tool idref="ID_mnuFile">
+          <Tool idref="ID_DatabaseOpen" />
+          <Tool idref="ID_ProjectOpen" />
+          <Tool idref="ID_PoolOpen" />
+          <Tool idref="ID_ProjectClose" />
+          <Tool idref="ID_SysWorkingOverlayClose" />
+          <Tool idref="ID_Save" />
+          <Tool idref="@NET.Comos.LanguageWizard" />
+          <Tool idref="Comos.ConfigUI" />
+          <Tool idref="ID_Exit" />
+        </Tool>
+        <Tool idref="ID_mnuView">
+          <Tool idref="ID_SysNaviBack" />
+          <Tool idref="ID_SysNaviForward" />
+          <Tool idref="separator" />
+          <Tool idref="ID_QuickStart" />
+          <Tool idref="ID_Screen2" />
+          <Tool idref="ID_mnuIconPlaceInfo">
+            <Tool idref="ID_ShowNo" />
+            <Tool idref="ID_ShowAll" />
+            <Tool idref="ID_ShowOnlyElements" />
+          </Tool>
+          <Tool idref="separator" />
+          <Tool idref="@NET.AttributePropertyGrid" />
+          <Tool idref="@NET.StatusWindow" />
+          <Tool idref="SymbolPreView" />
+          <Tool idref="@NET.UIFormsList" />
+          <Tool idref="@NET.UIFavoritesList" />
+          <Tool idref="@NET.ObjectGenerator" />
+        </Tool>
+        <Tool idref="ID_mnuAdmin">
+          <Tool idref="ID_ScriptErrorHandling" />
+          <Tool idref="ID_Zoom" />
+          <Tool idref="ID_mnuBaseObjects">
+            <Tool idref="ID_StdTbMgr" />
+            <Tool idref="ID_PhysUnit" />
+            <Tool idref="ID_DocTyp" />
+            <!--<Tool idref="@X.CPlugInECADImp.ECADImpCls"/> -->
+            <Tool idref="@X.CPlugInPipeClass.PipeClass" />
+            <Tool idref="ID_MultiCrp" />
+            <Tool idref="@NET.Comos.DataService.FreePropertyDesign" />
+            <Tool idref="@NET.ConnectionPossibleMatrix" />
+            <Tool idref="@X.Comos.StringRuleManager" />
+            <!--			<Tool idref="@NET.ReportComparerUI"/>
+			<Tool idref="@NET.Comos.Report.Comparer.DetailUI" /-->
+          </Tool>
+          <Tool idref="ID_mnuSystem">
+            <Tool idref="@NET.DataService" />
+            <Tool idref="ID_UserMgr" />
+            <Tool idref="@X.CPlugInUserRoleMgr.UserRoleMgr" />
+            <!--Tool idref="@X.CPlugInDBConvert.DBConvert"/-->
+            <Tool idref="@NET.Updateability" />
+            <Tool idref="@X.CPlugInDocFileEqual.DocFileEqual" />
+            <Tool idref="@NET.NumberRanges" />
+          </Tool>
+          <Tool idref="ID_mnuClassification">
+            <Tool idref="ID_ClassificationCurProjects" />
+            <Tool idref="ID_ClassificationAllProjects" />
+          </Tool>
+        </Tool>
+        <Tool idref="ID_Documents">
+          <Tool idref="ID_Print" />
+          <Tool idref="ID_CheckDocs" />
+          <Tool idref="ID_Revision" />
+          <Tool idref="separator" />
+          <Tool idref="ID_SaveInFile" />
+          <Tool idref="ID_ReportToDGN" />
+          <Tool idref="ID_ReportToDGN_Settings" />
+          <Tool idref="ID_ReportToExcel" />
+          <Tool idref="ID_ReportToPDF" />
+          <Tool idref="separator" />
+          <Tool idref="ID_SaveTiff" />
+          <Tool idref="ID_PrintRevisionFile" />
+          <Tool idref="ID_PrintToRevPrinter" />
+          <Tool idref="separator" />
+          <Tool idref="ID_DocQuery" />
+          <Tool idref="separator" />
+          <Tool idref="@NET.ReportComparerUI" />
+        </Tool>
+        <Tool idref="ID_mnuExtra">
+          <Tool idref="ID_mnuBulk">
+            <Tool idref="@X.DBulkProcess" />
+            <Tool idref="@X.CBulkProcess" />
+            <Tool idref="@X.SBulkProcess" />
+            <Tool idref="@System|@O|@Bulkprocessing|@Document" />
+            <Tool idref="@System|@O|@Bulkprocessing|@Connector" />
+          </Tool>
+          <Tool idref="ID_Query" />
+          <Tool idref="ID_Import" />
+          <Tool idref="ID_mnuLanguages">
+            <Tool idref="ID_Language" />
+            <Tool idref="@X.Translate" />
+            <Tool idref="@X.CPlugInLangDB.LangDB" />
+            <Tool idref="@NET.SearchDBString" />
+          </Tool>
+          <Tool idref="ID_mnuCheck">
+            <Tool idref="ID_ObjectCheck" />
+            <Tool idref="@X.CPlugInCheckInstances.CheckInstances" />
+          </Tool>
+          <Tool idref="ID_mnuDetail">
+            <Tool idref="@X.CPlugInModNameLbl.ModNameLbl" />
+            <Tool idref="@X.CPlugInSearchProductD.SearchProductD" />
+            <Tool idref="@X.CPlugInSetGeneralWire.SetGeneralWire" />
+            <Tool idref="@NET.SignalCrossReferences" />
+            <Tool idref="@NET.ConnectionTransform" />
+          </Tool>
+          <Tool idref="ID_mnuOverlayHistory">
+            <Tool idref="ID_WOManager" />
+            <Tool idref="ID_WOStatusInfo" />
+            <Tool idref="@X.CPlugInPlantRevs.PlantRevs" />
+          </Tool>
+          <Tool idref="ID_3DReview">
+            <Tool idref="ID_Viper_D3D" />
+            <Tool idref="ID_Viper_SymEd" />
+          </Tool>
+          <Tool idref="@X.CPlugInMatchTree.MatchTreeCls" />
+          <Tool idref="@NET.Comos.CopyInProject" />
+          <Tool idref="ID_ReportDesigner" />
+          <Tool idref="@X.CPlugInAReImport.AReImport" />
+          <Tool idref="@NET.Comos.Layers" />
+          <Tool idref="ID_ObjectDebug" />
+          <Tool idref="ID_Monitor">
+            <Tool idref="@Net.Comos.SystemMonitor" />
+            <Tool idref="@X.CPlugInPerfMon.PerfMonCls" />
+            <Tool idref="@NET.PPM" />
+            <Tool idref="@X.CPlugInSMSConsole.SMSConsolePlugIn" />
+            <Tool idref="@X.CPlugInDBPerform.DBPerform" />
+          </Tool>
+        </Tool>
+        <Tool idref="ID_ExtPlugins">
+          <Tool idref="ID_ExtPluginsBasic">
+            <Tool idref="@X.CPlugInSpColorLegend.SpColorLegend" />
+            <Tool idref="@X.CPluginCDI.CDI" />
+            <Tool idref="@X.CPlugInComosXMLIE.ComosXMLIE" />
+            <Tool idref="@NET.Comos.Doxie" />
+            <Tool idref="@X.CPlugInCopyClasses.CopyClasses" />
+            <Tool idref="@X.CPlugInFullTextSearch.FullTextSearch" />
+            <Tool idref="@NET.Comos.SQLFullTextSearch" />
+            <Tool idref="ID_ModularReport">
+              <Tool idref="@NET.Custom" />
+            </Tool>
+            <Tool idref="@X.CPlugInUnitConverter.UnitConverter" />
+            <Tool idref="@X.CPlugInD3ErrorAnalyzer.D3ErrorAnalyzer" />
+            <Tool idref="@NET.CPlugIN.DWGMappingEditor" />
+            <Tool idref="@NET.Comos.C3DView.AutoAssign" />
+            <Tool idref="@X.Comos.WSP.LTMEditor" />
+            <Tool idref="@X.Comos.PipeSpecMapper" />
+            <Tool idref="@NET.PipeSpecMapping" />
+            <Tool idref="@X.CPlugInUIMTO.UIMTO" />
+            <Tool idref="@NET.TaskManager" />
+            <Tool idref="@NET.DWHControl" />
+            <Tool idref="ComosSnapshot" />
+            <Tool idref="@NET.Comos.Data.Mapper" />
+            <Tool idref="ID_Comos.ScriptProcessing.UCSearchScript" />
+            <Tool idref="ID_ModularEngineering">
+              <Tool idref="@NET.Comos.Configurator" />
+              <Tool idref="@NET.Comos.RulesetAdministration" />
+              <Tool idref="@NET.Comos.RulesetUpdater" />
+            </Tool>
+            <Tool idref="@NET.LineTypesOverview" />
+          </Tool>
+          <Tool idref="ID_ExtPluginsFactory">
+            <!-- Maintenance -->
+            <Tool idref="ID_ExtPluginsFactoryMaintenance">
+              <Tool idref="@X.CPlugInMntcOrder.MntcOrderClass" />
+              <Tool idref="@X.CPlugInMntcPreview.MntcPreviewClass" />
+              <Tool idref="@X.MaintenanceDemon.MaintenanceDemonClass" />
+            </Tool>
+            <!-- Events -->
+            <Tool idref="ID_ExtPluginsFactoryEvents">
+              <Tool idref="@X.EventManager.EventMangerClass" />
+            </Tool>
+            <!-- Shutdown -->
+            <Tool idref="@X.CPlugInCATAP.CATAPClass" />
+            <!-- Goodmovement -->
+            <Tool idref="ID_ExtPluginsFactoryStock">
+              <Tool idref="@X.CPlugInStoreMng.StoreMngClass" />
+              <Tool idref="@X.iPlugInWIn.WINClassIF" />
+              <Tool idref="@X.iPlugInWIn.WOUTClassIF" />
+              <Tool idref="@NET.Comos.EquipmentReceipt" />
+            </Tool>
+            <!-- Inspection -->
+            <Tool idref="ID_ExtPluginsFactoryInspection">
+              <Tool idref="@X.CPlugInInspection.InspectionClass" />
+              <Tool idref="@X.CPlugInInspection.InspDiagramClass" />
+            </Tool>
+            <!-- Risk Chart -->
+            <Tool idref="@X.Comos.3DSmartChart.ChartPlugin" />
+            <!-- Search -->
+            <Tool idref="@X.CPlugInSearchObject.SearchObjectClass" />
+            <!-- Settings -->
+            <Tool idref="ID_FactoryOptions.OptWorkStation" />
+            <!-- ResoureManagement -->
+            <Tool idref="@ResourceManagement">
+              <Tool idref="@ResourceMonitor" />
+              <Tool idref="@ResourcePlanning" />
+            </Tool>
+          </Tool>
+          <!--<Tool idref="ID_ExtPluginsMechatronic">
+                  <Tool idref="@X.CPlugInMaKonf.MaKonf"/>
+                  <Tool idref="@X.CPlugInZWD.ZWD"/>
+               </Tool>-->
+          <Tool idref="ID_ExtPluginsPT">
+            <Tool idref="@NET.CPlugInICSignals.ICSignals" />
+            <Tool idref="@NET.MacroBlock.TemplateUpdater" />
+            <Tool idref="@X.Comos.HalfOpenConnsQExtender" />
+            <Tool idref="@X.Comos.WSP.ExtendedObjects.Views.Plugins.ConnectionAttributes" />
+            <Tool idref="@NET.Import.GenericExcelImportUI" />
+            <Tool idref="@NET.IC.BrownFieldLoopWizard" />
+            <Tool idref="ID_PluginsTemplate">
+              <Tool idref="@NET.Comos.Template.AdministrationUI" />
+              <Tool idref="@NET.eBlock.EngineeringManager.AssemblyUpdater" />
+            </Tool>
+            <Tool idref="@NET.IC.PatternDefinitionPlugin" />
+            <!--<Tool idref="@X.IECJICConverterUI1"/>-->
+            <Tool idref="@NET.CPlugInLoops.ICLoopDocMngr" />
+            <Tool idref="@NET.ELO.CabinetEquipmentAssistant" />
+            <!--Tool idref="@NET.Comos.Doxie"/-->
+            <Tool idref="ID_PluginsSimitInterface">
+              <Tool idref="ID_PluginsSimitInterface.Configuration" />
+              <Tool idref="ID_PluginsSimitInterface.Export" />
+            </Tool>
+            <Tool idref="@X.Comos.WSP.ExtendedObjects.Views.Plugins.CoCollision" />
+            <Tool idref="@X.Comos.WSP.ExtendedObjects.Views.Plugins.ConnectedDevices" />
+          </Tool>
+          <Tool idref="ID_ExtPluginsPQM">
+            <!-- <Tool idref="@X.CPlugInMandCheckIn.MandCheckIn"/>-->
+            <Tool idref="@NET.Comos.IncludeDocuments" />
+            <Tool idref="@X.CPlugInFileTrans.FileTrans" />
+            <Tool idref="@NET.DocumentTransfer.DocumentTransferView" />
+            <!--<Tool idref="StartExcel"/>
+                  <Tool idref="StartOutlook"/>
+                  <Tool idref="StartPowerpoint"/>
+                  <Tool idref="StartVisio"/>
+                  <Tool idref="StartWord"/>-->
+            <Tool idref="@NET.DocumentCreation" />
+            <Tool idref="@NET.ComosViewer" />
+            <Tool idref="DVM Abfragen" />
+            <Tool idref="ID_VDI2770" />
+            <!--<Tool idref="@NET.Comos.PQM.ESignCertificateManager.Control"/>-->
+          </Tool>
+          <Tool idref="ID_ExtPluginsSAP">
+            <Tool idref="Comos.Sap.Xml.ConnectionsCControl" />
+            <Tool idref="Comos.Sap.Xml.ConfigWizardView" />
+          </Tool>
+          <Tool idref="ID_ExtPlugins3DEngineeringAdapter">
+            <Tool idref="@NET.Comos.EngineeringAdapter.Common.Configuration" />
+            <Tool idref="@X.CPlugInPDMSInterface.PDMSInterface.Design" />
+            <!--<Tool idref="ID_ExtPluginsBentley_OpenPlantModeler">
+							<Tool idref="@NET.Comos.EngineeringAdapter.iModel.OpenPlantModeler.Import"/>
+							<Tool idref="@NET.Comos.EngineeringAdapter.iModel.PlantSight.WorkingOverlayExport" />
+							<Tool idref="@NET.Comos.EngineeringAdapter.iModel.PlantSight.Export"/>
+						</Tool>-->
+            <Tool idref="ID_ExtPluginsPIDExchange">
+              <Tool idref="@NET.Comos.EngineeringAdapter.Proteus.XMLDataExport" />
+              <Tool idref="@NET.Comos.EngineeringAdapter.Proteus.XMLDataImport" />
+              <Tool idref="@X.CPlugInPIDExchangeInterface.GeneralPIDExchange.PID" />
+            </Tool>
+            <Tool idref="ID_ExtPluginsSpecifications">
+              <Tool idref="@NET.Comos.PipeSpec.ImportExport" />
+              <Tool idref="@NET.Comos.EngineeringAdapter.Common.PDMSScopeDefinition" />
+            </Tool>
+            <Tool idref="ID_ExtPluginsConfiguration">
+              <Tool idref="@X.CPlugInPIDExchangeInterface.SymbolMappingEditor.PID" />
+            </Tool>
+          </Tool>
+          <Tool idref="ID_DataBaseToolkit">
+            <Tool idref="ID_Comos.GenericStructureImport" />
+            <Tool idref="ID_Comos.Traversal.ToolBox" />
+          </Tool>
+        </Tool>
+        <Tool idref="ID_Help">
+          <Tool idref="separator" />
+          <Tool idref="ID_StartHelpFileShow" />
+          <Tool idref="ID_StartVersionCheckMessageShow" />
+          <Tool idref="separator" />
+          <Tool idref="ID_ComosInfo" />
+          <Tool idref="ID_DbInfo" />
+          <Tool idref="separator" />
+          <Tool idref="ID_EngineeringStandards" />
+          <Tool idref="separator" />
+          <Tool idref="ID_BugReport" />
+        </Tool>
+        <Tool idref="InhouseTools">
+          <Tool idref="QueryImplementationNET" />
+          <Tool idref="QueryImplementationVB6" />
+          <Tool idref="separator" />
+          <Tool idref="QueryImplementationState" />
+        </Tool>
+        <Tool idref="ID_QuickSearch" />
+        <Tool idref="separator" />
+        <Tool idref="separator" />
+        <Tool idref="separator" />
+        <Tool idref="separator" />
+        <Tool idref="separator" />
+        <Tool idref="separator" />
+        <Tool idref="separator" />
+        <Tool idref="separator" />
+        <Tool idref="separator" />
+        <Tool idref="separator" />
+      </Toolbar>
+      <Toolbar idref="SysNavi">
+        <Tool idref="ID_SysNaviBack" />
+        <Tool idref="ID_SysNaviForward" />
+      </Toolbar>
+      <Toolbar idref="File">
+        <Tool idref="ID_DatabaseOpen" />
+        <Tool idref="ID_ProjectOpen" />
+        <!-- Tool idref="ID_PoolOpen"/ -->
+        <Tool idref="ID_Save" />
+        <Tool idref="ID_Print" />
+      </Toolbar>
+      <Toolbar idref="Query_Main">
+        <Tool idref="ID_Query" />
+      </Toolbar>
+      <Toolbar idref="Extras">
+        <Tool idref="@X.Translate" />
+        <Tool idref="ID_Revision" />
+        <Tool idref="@X.CPlugInAReImport.AReImport" />
+        <Tool idref="@X.CPlugInComosXMLIE.ComosXMLIE" />
+        <Tool idref="@X.CPlugInFullTextSearch.FullTextSearch" />
+      </Toolbar>
+      <Toolbar idref="NETInfo">
+        <Tool idref="@NET.AttributePropertyGrid" />
+        <Tool idref="@NET.StatusWindow" />
+        <Tool idref="SymbolPreView" />
+        <Tool idref="@NET.UIFormsList" />
+        <Tool idref="@NET.UIFavoritesList" />
+        <Tool idref="@NET.ObjectGenerator" />
+      </Toolbar>
+      <Toolbar idref="Exefunctions">
+        <Tool idref="ID_AliasCheck" />
+        <Tool idref="separator" />
+        <Tool idref="ID_ProjCasesCB" />
+      </Toolbar>
+      <Toolbar idref="TestAutomation">
+        <Tool idref="@NET.TestExtensionPlugin" />
+        <Tool idref="separator" />
+        <Tool idref="@NET.FingerprintCreator" />
+        <Tool idref="@NET.FingerprintComparer" />
+        <Tool idref="@NET.FingerprintExternComparer" />
+        <Tool idref="@NET.FingerprintModeSettings" />
+      </Toolbar>
+    </Toolbars>
+    <RightToolbar idref="SidePanel">
+      <Tool idref="AIChat" />
+    </RightToolbar>
+  </Menu>
+</ComosMainMenu>

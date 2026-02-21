@@ -1,0 +1,190 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<assembly xmlns="urn:schemas-microsoft-com:asm.v1" manifestVersion="1.0">
+  <assemblyIdentity
+      version="9.0.0.0"
+      processorArchitecture="X86"
+      name="FTIndexUpdater"
+      type="win32"
+      />
+	  
+  <!-- Disable UAC in Windows 7 // F18277, Thorsten Zens, 03.02.2011 -->
+  <trustInfo xmlns="urn:schemas-microsoft-com:asm.v3">
+    <security>
+      <requestedPrivileges>
+        <requestedExecutionLevel level="asInvoker" uiAccess="false"/>
+      </requestedPrivileges>
+    </security>
+  </trustInfo>
+  
+  <!-- ************************************************************* -->
+  <!-- **              FTIndexUpdater.exe.manifest                         ** -->
+  <!-- **                                                         ** -->
+  <!-- **   mainfest for FTIndexUpdater.exe                       ** -->
+  <!-- **   refers to ComosCommon.manifest                        ** -->
+  <!-- **                                                         ** -->
+  <!-- **          !!!!  don't edit this file   !!!!              ** -->
+  <!-- **          !!!!  don't edit this file   !!!!              ** -->
+  <!-- **          !!!!  don't edit this file   !!!!              ** -->
+  <!-- **          !!!!  don't edit this file   !!!!              ** -->
+  <!-- **                                                         ** -->
+  <!-- **   Please make changes in                                ** -->
+  <!-- ************************************************************* -->
+
+
+<!-- ComosSxsMaker BEGIN**[..\..\..\BIN\SYSTEM32\DTEN600.DLL]**  -->
+
+<!--<file name="system32\dten600.dll">-->
+<file name="system32\dten600.dll">
+ <comClass
+     clsid="{36A0E3F8-5BD1-4ED6-B6D1-4519A2FC6D23}"
+     description="SearchFilter Class"
+     tlbid="{A967E5C4-B0E1-11D3-B57C-00105AA461D0}"
+     threadingModel="both"
+     progid="dtSearchEngine6.SearchFilter.1">
+    <progid>dtSearchEngine6.SearchFilter</progid>
+ </comClass>
+ <comClass
+     clsid="{697DF023-B24E-11D3-B57C-00105AA461D0}"
+     description="IndexJob Class"
+     tlbid="{A967E5C4-B0E1-11D3-B57C-00105AA461D0}"
+     threadingModel="both"
+     progid="Dten600.IndexJob.1">
+    <progid>Dten600.IndexJob</progid>
+ </comClass>
+ <comClass
+     clsid="{697DF025-B24E-11D3-B57C-00105AA461D0}"
+     description="SearchJob Class"
+     tlbid="{A967E5C4-B0E1-11D3-B57C-00105AA461D0}"
+     threadingModel="both"
+     progid="Dten600.SearchJob.1">
+    <progid>Dten600.SearchJob</progid>
+ </comClass>
+ <comClass
+     clsid="{697DF027-B24E-11D3-B57C-00105AA461D0}"
+     description="FileConverter Class"
+     tlbid="{A967E5C4-B0E1-11D3-B57C-00105AA461D0}"
+     threadingModel="both"
+     progid="Dten600.FileConverter.1">
+    <progid>Dten600.FileConverter</progid>
+ </comClass>
+ <comClass
+     clsid="{697DF029-B24E-11D3-B57C-00105AA461D0}"
+     description="SearchReportJob Class"
+     tlbid="{A967E5C4-B0E1-11D3-B57C-00105AA461D0}"
+     threadingModel="both"
+     progid="Dten600.SearchReportJob.1">
+    <progid>Dten600.SearchReportJob</progid>
+ </comClass>
+ <comClass
+     clsid="{697DF02B-B24E-11D3-B57C-00105AA461D0}"
+     description="Options Class"
+     tlbid="{A967E5C4-B0E1-11D3-B57C-00105AA461D0}"
+     threadingModel="both"
+     progid="Dten600.Options.1">
+    <progid>Dten600.Options</progid>
+ </comClass>
+ <comClass
+     clsid="{697DF02D-B24E-11D3-B57C-00105AA461D0}"
+     description="WordListBuilder Class"
+     tlbid="{A967E5C4-B0E1-11D3-B57C-00105AA461D0}"
+     threadingModel="both"
+     progid="Dten600.WordListBuilder.1">
+    <progid>Dten600.WordListBuilder</progid>
+ </comClass>
+ <comClass
+     clsid="{798CBE35-B27D-11D3-B57C-00105AA461D0}"
+     description="SearchResults Class"
+     tlbid="{A967E5C4-B0E1-11D3-B57C-00105AA461D0}"
+     threadingModel="both"
+     progid="Dten600.SearchResults.1">
+    <progid>Dten600.SearchResults</progid>
+ </comClass>
+ <comClass
+     clsid="{A967E5D2-B0E1-11D3-B57C-00105AA461D0}"
+     description="Server Class"
+     tlbid="{A967E5C4-B0E1-11D3-B57C-00105AA461D0}"
+     threadingModel="both"
+     progid="dtSearchEngine6.Server.1">
+    <progid>dtSearchEngine6.Server</progid>
+ </comClass>
+ <comClass
+     clsid="{A967E5D6-B0E1-11D3-B57C-00105AA461D0}"
+     description="JobErrorInfo Class"
+     tlbid="{A967E5C4-B0E1-11D3-B57C-00105AA461D0}"
+     threadingModel="both"
+     progid="dten600.JobErrorInfo.1">
+    <progid>dten600.JobErrorInfo</progid>
+ </comClass>
+ <comClass
+     clsid="{C6D67878-15E2-4488-9981-2182B0652E8E}"
+     description="IndexCache Class"
+     tlbid="{A967E5C4-B0E1-11D3-B57C-00105AA461D0}"
+     threadingModel="both"
+     progid="dtengine.IndexCache.1">
+    <progid>dtengine.IndexCache</progid>
+ </comClass>
+ <typelib
+     tlbid="{A967E5C4-B0E1-11D3-B57C-00105AA461D0}"
+     version="1.0"
+     helpdir=""
+     flags="hasdiskimage"/>
+</file>
+
+<comInterfaceExternalProxyStub 
+     iid="{697DF022-B24E-11D3-B57C-00105AA461D0}"
+     name="IIndexJob"
+     tlbid="{A967E5C4-B0E1-11D3-B57C-00105AA461D0}"
+     proxyStubClsid32="{00020424-0000-0000-C000-000000000046}"/>
+<comInterfaceExternalProxyStub 
+     iid="{697DF024-B24E-11D3-B57C-00105AA461D0}"
+     name="ISearchJob"
+     tlbid="{A967E5C4-B0E1-11D3-B57C-00105AA461D0}"
+     proxyStubClsid32="{00020424-0000-0000-C000-000000000046}"/>
+<comInterfaceExternalProxyStub 
+     iid="{697DF026-B24E-11D3-B57C-00105AA461D0}"
+     name="IFileConverter"
+     tlbid="{A967E5C4-B0E1-11D3-B57C-00105AA461D0}"
+     proxyStubClsid32="{00020424-0000-0000-C000-000000000046}"/>
+<comInterfaceExternalProxyStub 
+     iid="{697DF028-B24E-11D3-B57C-00105AA461D0}"
+     name="ISearchReportJob"
+     tlbid="{A967E5C4-B0E1-11D3-B57C-00105AA461D0}"
+     proxyStubClsid32="{00020424-0000-0000-C000-000000000046}"/>
+<comInterfaceExternalProxyStub 
+     iid="{697DF02A-B24E-11D3-B57C-00105AA461D0}"
+     name="IOptions"
+     tlbid="{A967E5C4-B0E1-11D3-B57C-00105AA461D0}"
+     proxyStubClsid32="{00020424-0000-0000-C000-000000000046}"/>
+<comInterfaceExternalProxyStub 
+     iid="{697DF02C-B24E-11D3-B57C-00105AA461D0}"
+     name="IWordListBuilder"
+     tlbid="{A967E5C4-B0E1-11D3-B57C-00105AA461D0}"
+     proxyStubClsid32="{00020424-0000-0000-C000-000000000046}"/>
+<comInterfaceExternalProxyStub 
+     iid="{6D615A9E-73D4-4FEF-A0DA-6973C26C17B2}"
+     name="ISearchFilter"
+     tlbid="{A967E5C4-B0E1-11D3-B57C-00105AA461D0}"
+     proxyStubClsid32="{00020424-0000-0000-C000-000000000046}"/>
+<comInterfaceExternalProxyStub 
+     iid="{798CBE34-B27D-11D3-B57C-00105AA461D0}"
+     name="ISearchResults"
+     tlbid="{A967E5C4-B0E1-11D3-B57C-00105AA461D0}"
+     proxyStubClsid32="{00020424-0000-0000-C000-000000000046}"/>
+<comInterfaceExternalProxyStub 
+     iid="{84FE534D-B891-4E87-9D3D-6969F71E3628}"
+     name="IIndexCache"
+     tlbid="{A967E5C4-B0E1-11D3-B57C-00105AA461D0}"
+     proxyStubClsid32="{00020424-0000-0000-C000-000000000046}"/>
+<comInterfaceExternalProxyStub 
+     iid="{A967E5D1-B0E1-11D3-B57C-00105AA461D0}"
+     name="IServer"
+     tlbid="{A967E5C4-B0E1-11D3-B57C-00105AA461D0}"
+     proxyStubClsid32="{00020424-0000-0000-C000-000000000046}"/>
+<comInterfaceExternalProxyStub 
+     iid="{A967E5D5-B0E1-11D3-B57C-00105AA461D0}"
+     name="IJobErrorInfo"
+     tlbid="{A967E5C4-B0E1-11D3-B57C-00105AA461D0}"
+     proxyStubClsid32="{00020424-0000-0000-C000-000000000046}"/>
+
+<!-- ComosSxsMaker END**[..\BIN\SYSTEM32\DTEN600.DLL]**  -->
+</assembly>

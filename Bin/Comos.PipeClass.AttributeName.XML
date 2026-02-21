@@ -1,0 +1,1046 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>Comos.PipeClass.AttributeName</name>
+    </assembly>
+    <members>
+        <member name="P:Comos.PipeClass.IAttributeSetProvider.IsSolidBase">
+            <summary>
+            get uses AppGlobal.Workset.IsSolidBaseDb() per default.
+            Once IsSolidBase is set manually it doesn't change automaticly anymore!
+            </summary>
+        </member>
+        <member name="P:Comos.PipeClass.IAttributeSetProvider.Characteristics_">
+            <summary>  Y00T00047 (C1)</summary>
+        </member>
+        <member name="P:Comos.PipeClass.IAttributeSetProvider.PipeSpecLimits_">
+            <summary>  Y00T00062 (C2)</summary>
+        </member>
+        <member name="P:Comos.PipeClass.IAttributeSetProvider.Dimensions_">
+            <summary>  Y00T00055 (StdVal)</summary>
+        </member>
+        <member name="P:Comos.PipeClass.IAttributeSetProvider.External3DInterface_">
+            <summary>  Y00T00012 (E3D)</summary>
+        </member>
+        <member name="P:Comos.PipeClass.IAttributeSetProvider.Geometry3D_">
+            <summary>  Y00T00011 (GD)</summary>
+        </member>
+        <member name="P:Comos.PipeClass.IAttributeSetProvider.SystemInformation_">
+            <summary>  Y00T00002 (SYS)</summary>
+        </member>
+        <member name="P:Comos.PipeClass.IAttributeSetProvider.SystemInformation_ISO_">
+            <summary>  Y00T00002 (SYSISO)</summary>
+        </member>
+        <member name="P:Comos.PipeClass.IAttributeSetProvider.ParameterTable_">
+            <summary>  Y00A00125 (V1)</summary>
+        </member>
+        <member name="P:Comos.PipeClass.IAttributeSetProvider.Characteristics">
+            <summary>  Y00T00047 (C1)</summary>
+        </member>
+        <member name="P:Comos.PipeClass.IAttributeSetProvider.PipeSpecLimits">
+            <summary>  Y00T00062 (C2)</summary>
+        </member>
+        <member name="P:Comos.PipeClass.IAttributeSetProvider.Dimensions">
+            <summary>  Y00T00055 (StdVal)</summary>
+        </member>
+        <member name="P:Comos.PipeClass.IAttributeSetProvider.External3DInterface">
+            <summary>  Y00T00012 (E3D)</summary>
+        </member>
+        <member name="P:Comos.PipeClass.IAttributeSetProvider.Geometry3D">
+            <summary>  Y00T00011 (GD)</summary>
+        </member>
+        <member name="P:Comos.PipeClass.IAttributeSetProvider.SystemInformation">
+            <summary>  Y00T00002 (SYS)</summary>
+        </member>
+        <member name="P:Comos.PipeClass.IAttributeSetProvider.SystemInformation_ISO">
+            <summary>  Y00T00002 (SYSISO)</summary>
+        </member>
+        <member name="P:Comos.PipeClass.IAttributeSetProvider.ParameterTable">
+            <summary>  Y00A00125 (V1)</summary>
+        </member>
+        <member name="P:Comos.PipeClass.IAttributeSetProvider.NominalDiameterColumn">
+            <summary>  Y00A00003 (ND)</summary>
+        </member>
+        <member name="P:Comos.PipeClass.IAttributeSetProvider.Standard">
+            <summary>  Y00A00004 (VSTD)</summary>
+        </member>
+        <member name="P:Comos.PipeClass.IAttributeSetProvider.NominalDiameterTo">
+            <summary>  Y00A02744 (NDMAX)</summary>
+        </member>
+        <member name="P:Comos.PipeClass.IAttributeSetProvider.NominalDiameterFrom">
+            <summary>  Y00A02745 (NDMIN)</summary>
+        </member>
+        <member name="P:Comos.PipeClass.IAttributeSetProvider.NominalDiameterRange">
+            <summary>  Y00A04288 (NDRange)</summary>
+        </member>
+        <member name="P:Comos.PipeClass.IAttributeSetProvider.VSUIAttributes">
+            <summary>  Y00A02625 (VSUI)</summary>
+        </member>
+        <member name="P:Comos.PipeClass.IAttributeSetProvider.NominalDiameter">
+            <summary>  Y00A00420 (PDMSND2)</summary>
+        </member>
+        <member name="P:Comos.PipeClass.IAttributeSetProvider.PDMSGTYPE">
+            <summary>  Y00A02123 (GTYPE)</summary>
+        </member>
+        <member name="P:Comos.PipeClass.IAttributeSetProvider.GeometryTable">
+            <summary>  Y00A00567 (V)</summary>
+        </member>
+        <member name="P:Comos.PipeClass.IAttributeSetProvider.Dimensions2">
+            <summary>  Y00T00056 (StdVal)</summary>
+        </member>
+        <member name="P:Comos.PipeClass.IAttributeSetProvider.NominalSizeColumn1">
+            <summary>  Y00A00003AA01 (VC11)</summary>
+        </member>
+        <member name="P:Comos.PipeClass.IAttributeSetProvider.GeometryTable_">
+            <summary>  Y00A00567 (V)</summary>
+        </member>
+        <member name="P:Comos.PipeClass.IAttributeSetProvider.Selector">
+            <summary>  Y00A00134 (Selector)</summary>
+        </member>
+        <member name="P:Comos.PipeClass.IAttributeSetProvider.Answer">
+            <summary>  Y00A04570 (Answer)</summary>
+        </member>
+        <member name="P:Comos.PipeClass.IAttributeSetProvider.Question">
+            <summary>  Y00A04574 (Question)</summary>
+        </member>
+        <member name="P:Comos.PipeClass.IAttributeSetProvider.Selector_">
+            <summary>   (Sele)</summary>
+        </member>
+        <member name="P:Comos.PipeClass.IAttributeSetProvider.Dimensions2_">
+            <summary>  Y00T00056 (StdVal)</summary>
+        </member>
+        <member name="P:Comos.PipeClass.IAttributeSetProvider.DefaultAnswer">
+            <summary>  Y00A04571 (DefAnswer)</summary>
+        </member>
+        <member name="P:Comos.PipeClass.IAttributeSetProvider.NominalSizeColumn2">
+            <summary>  Y00A00003AA02 (VC21)</summary>
+        </member>
+        <member name="P:Comos.PipeClass.IAttributeSetProvider.ConnectorChapterBase">
+            <summary>  Y00T00050 (Y00T00050)</summary>
+        </member>
+        <member name="P:Comos.PipeClass.IAttributeSetProvider.ConnectorChapterBase_">
+            <summary>  Y00T00050 (Y00T00050)</summary>
+        </member>
+        <member name="P:Comos.PipeClass.IAttributeSetProvider.ParameterName">
+            <summary>  Y00A00027 (Rule)</summary>
+        </member>
+        <member name="P:Comos.PipeClass.IAttributeSetProvider.ChapterOfParameterName">
+            <summary>  Y00T00055 (BMP)</summary>
+        </member>
+        <member name="P:Comos.PipeClass.IAttributeSetProvider.ChapterOfParameterName_">
+            <summary>  Y00T00055 (BMP)</summary>
+        </member>
+        <member name="P:Comos.PipeClass.IAttributeSetProvider.PIDDevice">
+            <summary>  Y00A02133 (PDMSCPID)</summary>
+        </member>
+        <member name="P:Comos.PipeClass.IAttributeSetProvider.BoltSet">
+            <summary>  Y00A00137 (BTSE)</summary>
+        </member>
+        <member name="P:Comos.PipeClass.IAttributeSetProvider.PIDTechnicalData">
+            <summary>  Y00T00135 (PI030)</summary>
+        </member>
+        <member name="P:Comos.PipeClass.IAttributeSetProvider.PIDNominalSize1">
+            <summary>  Y00A00744 (PIA008)</summary>
+        </member>
+        <member name="P:Comos.PipeClass.IAttributeSetProvider.PIDNominalSize2">
+            <summary>  Y00A00744AA02 (PIA008a)</summary>
+        </member>
+        <member name="P:Comos.PipeClass.IAttributeSetProvider.PIDPipeClass">
+            <summary>  Y00A00052 (PIA012)</summary>
+        </member>
+        <member name="P:Comos.PipeClass.IAttributeSetProvider.PIDTechnicalData_">
+            <summary>  Y00T00135 (PI030)</summary>
+        </member>
+        <member name="P:Comos.PipeClass.IAttributeSetProvider.CreateImplementation">
+            <summary>  Y00A04545 (VIMPL)</summary>
+        </member>
+        <member name="P:Comos.PipeClass.IAttributeSetProvider.PDMSCreateImplementation">
+            <summary>  Y00A04545 (CreateImplementation)</summary>
+        </member>
+        <member name="P:Comos.PipeClass.IAttributeSetProvider.VSUIChapter">
+            <summary>  Y00T00011 (GD)</summary>
+        </member>
+        <member name="P:Comos.PipeClass.IAttributeSetProvider.VSUIChapter_">
+            <summary>  Y00T00011 (GD)</summary>
+        </member>
+        <member name="P:Comos.PipeClass.IAttributeSetProvider.PIDFunctionCode">
+            <summary>  Y00A00002 (PIA600)</summary>
+        </member>
+        <member name="P:Comos.PipeClass.IAttributeSetProvider.System">
+            <summary>  Y00T00001 (SYS)</summary>
+        </member>
+        <member name="P:Comos.PipeClass.IAttributeSetProvider.System_">
+            <summary>  Y00T00001 (SYS)</summary>
+        </member>
+        <member name="P:Comos.PipeClass.IAttributeSetProvider.Rating">
+            <summary>  Y00A00025 (V2)</summary>
+        </member>
+        <member name="P:Comos.PipeClass.IAttributeSetProvider.PressureRange">
+            <summary>  Y00A01019 (P)</summary>
+        </member>
+        <member name="P:Comos.PipeClass.IAttributeSetProvider.Rating_">
+            <summary>  Y00A00025 (V2)</summary>
+        </member>
+        <member name="P:Comos.PipeClass.IAttributeSetProvider.Link">
+            <summary>  Y00T00040 (PI010)</summary>
+        </member>
+        <member name="P:Comos.PipeClass.IAttributeSetProvider.AssignedProcessStream">
+            <summary>  Y00A03516 (PIA902)</summary>
+        </member>
+        <member name="P:Comos.PipeClass.IAttributeSetProvider.Link_">
+            <summary>  Y00T00040 (PI010)</summary>
+        </member>
+        <member name="P:Comos.PipeClass.IAttributeSetProvider.ConnectorNameInput">
+            <summary>  Y00A01393 (ND0298)</summary>
+        </member>
+        <member name="P:Comos.PipeClass.IAttributeSetProvider.ConnectorNameOutput">
+            <summary>  Y00A01392 (ND0299)</summary>
+        </member>
+        <member name="P:Comos.PipeClass.IAttributeSetProvider.ConnectorNameBranch">
+            <summary>  Y00A01391 (ND0300)</summary>
+        </member>
+        <member name="P:Comos.PipeClass.IAttributeSetProvider.Datasheet">
+            <summary>  Y00T00006 (VDM)</summary>
+        </member>
+        <member name="P:Comos.PipeClass.IAttributeSetProvider.DatasheetTable">
+            <summary>  Y00A00594 (V)</summary>
+        </member>
+        <member name="P:Comos.PipeClass.IAttributeSetProvider.SelectorChapter">
+            <summary>  Y00T00282 (Sele)</summary>
+        </member>
+        <member name="P:Comos.PipeClass.IAttributeSetProvider.SelectorChapter_">
+            <summary>  Y00T00282 (Sele)</summary>
+        </member>
+        <member name="P:Comos.PipeClass.IAttributeSetProvider.Datasheet_">
+            <summary>  Y00T00006 (VDM)</summary>
+        </member>
+        <member name="P:Comos.PipeClass.IAttributeSetProvider.Connections">
+            <summary>  Connect (Connect)</summary>
+        </member>
+        <member name="P:Comos.PipeClass.IAttributeSetProvider.Exceptions">
+            <summary>  Exceptions (Exceptions)</summary>
+        </member>
+        <member name="P:Comos.PipeClass.IAttributeSetProvider.Connections_">
+            <summary>  Connect (Connect)</summary>
+        </member>
+        <member name="P:Comos.PipeClass.IAttributeSetProvider.TemperatureRange">
+            <summary>  Y00A01069 (T)</summary>
+        </member>
+        <member name="P:Comos.PipeClass.IAttributeSetProvider.PDMSRIGTYPE">
+            <summary>  Y00A02123 (PDMS003)</summary>
+        </member>
+        <member name="P:Comos.PipeClass.IAttributeSetProvider.NameGeneration">
+            <summary>  Y00A00588 (PDMSList)</summary>
+        </member>
+        <member name="P:Comos.PipeClass.IAttributeSetProvider.Material">
+            <summary>  Y00A01256 (SMTE)</summary>
+        </member>
+        <member name="P:Comos.PipeClass.IAttributeSetProvider.Detail">
+            <summary>  Y00A00624 (DETAIL)</summary>
+        </member>
+        <member name="P:Comos.PipeClass.IAttributeSetProvider.DetailReference">
+            <summary>  Y00A00591 (DETREF)</summary>
+        </member>
+        <member name="P:Comos.PipeClass.IAttributeSetProvider.PartSpecification">
+            <summary>  Y00T00060 (VDD)</summary>
+        </member>
+        <member name="P:Comos.PipeClass.IAttributeSetProvider.TemperatureValues">
+            <summary>  Y00A00043 (VS100)</summary>
+        </member>
+        <member name="P:Comos.PipeClass.IAttributeSetProvider.PDMSPipeSpecElements">
+            <summary>  Y00T00061 (PDMSName)</summary>
+        </member>
+        <member name="P:Comos.PipeClass.IAttributeSetProvider.DependentAttribute">
+            <summary>  Y00A00590 (PDMSName)</summary>
+        </member>
+        <member name="P:Comos.PipeClass.IAttributeSetProvider.PDMSPBOR">
+            <summary>  Y00A01553 (VC11)</summary>
+        </member>
+        <member name="P:Comos.PipeClass.IAttributeSetProvider.PDMSPBOR2">
+            <summary>  Y00A01553AA02 (VC21)</summary>
+        </member>
+        <member name="P:Comos.PipeClass.IAttributeSetProvider.Name">
+            <summary>  Y00A01154 (Name)</summary>
+        </member>
+        <member name="P:Comos.PipeClass.IAttributeSetProvider.PDMSState">
+            <summary>  Y00A02127 (State)</summary>
+        </member>
+        <member name="P:Comos.PipeClass.IAttributeSetProvider.MaterialText">
+            <summary>  Y00A00585 (MATXT)</summary>
+        </member>
+        <member name="P:Comos.PipeClass.IAttributeSetProvider.DetailReferenceOwner">
+            <summary>  Y00A00587 (DetrefOwner)</summary>
+        </member>
+        <member name="P:Comos.PipeClass.IAttributeSetProvider.Detail_">
+            <summary>  Y00A00624 (DETAIL)</summary>
+        </member>
+        <member name="P:Comos.PipeClass.IAttributeSetProvider.DependentAttribute_">
+            <summary>  Y00A00590 (PDMSName)</summary>
+        </member>
+        <member name="P:Comos.PipeClass.IAttributeSetProvider.PDMSPipeSpecElements_">
+            <summary>  Y00T00061 (PDMSName)</summary>
+        </member>
+        <member name="P:Comos.PipeClass.IAttributeSetProvider.PartSpecification_">
+            <summary>  Y00T00060 (VDD)</summary>
+        </member>
+        <member name="P:Comos.PipeClass.IAttributeSetProvider.ValidArea">
+            <summary>  ValidArea (ValidArea)</summary>
+        </member>
+        <member name="P:Comos.PipeClass.IAttributeSetProvider.Exceptions_">
+            <summary>  Exceptions (Exceptions)</summary>
+        </member>
+        <member name="P:Comos.PipeClass.IAttributeSetProvider.StandardSystem">
+            <summary>  Y00A00038 (VSTD)</summary>
+        </member>
+        <member name="P:Comos.PipeClass.IAttributeSetProvider.PipeSpec">
+            <summary>  Y00A00052 (VPCL)</summary>
+        </member>
+        <member name="P:Comos.PipeClass.IAttributeSetProvider.GeoType">
+            <summary>  Y00A00009 (VGEO)</summary>
+        </member>
+        <member name="P:Comos.PipeClass.IAttributeSetProvider.FunctionCode">
+            <summary>  Y00A00002 (VFCD)</summary>
+        </member>
+        <member name="P:Comos.PipeClass.IAttributeSetProvider.FlangeStandard">
+            <summary>  Y00A00004 (VFLG)</summary>
+        </member>
+        <member name="P:Comos.PipeClass.IAttributeSetProvider.PipeSpecDependent">
+            <summary>  Y00A00007 (PSDP)</summary>
+        </member>
+        <member name="P:Comos.PipeClass.IAttributeSetProvider.PressureValues">
+            <summary>   (VS101)</summary>
+        </member>
+        <member name="P:Comos.PipeClass.IAttributeSetProvider.Length">
+            <summary>  Y00A00209 (V002)</summary>
+        </member>
+        <member name="P:Comos.PipeClass.IAttributeSetProvider.Filter">
+            <summary>  Y00A00579 (VC11)</summary>
+        </member>
+        <member name="P:Comos.PipeClass.IAttributeSetProvider.State">
+            <summary>  Y00A02127 (State)</summary>
+        </member>
+        <member name="P:Comos.PipeClass.IAttributeSetProvider.DatasheetTable_">
+            <summary>  Y00A00594 (V)</summary>
+        </member>
+        <member name="P:Comos.PipeClass.IAttributeSetProvider.Color">
+            <summary>  Y00A03980 (VCOL)</summary>
+        </member>
+        <member name="P:Comos.PipeClass.IAttributeSetProvider.OuterDiameter">
+            <summary>  Y00A00657AA01 (V001)</summary>
+        </member>
+        <member name="P:Comos.PipeClass.IAttributeSetProvider.CatalogReference">
+            <summary>  Y00A01239 (CATREF)</summary>
+        </member>
+        <member name="P:Comos.PipeClass.IAttributeSetProvider.MandatoryAttributes">
+            <summary>  Y00A04614 (VAMI)</summary>
+        </member>
+        <member name="P:Comos.PipeClass.IAttributeSetProvider.SkipAttributes">
+            <summary>  Y00A00005 (VASI)</summary>
+        </member>
+        <member name="P:Comos.PipeClass.IAttributeSetProvider.ReportHeaderAttributes">
+            <summary>  Y00A04615 (VARH)</summary>
+        </member>
+        <member name="P:Comos.PipeClass.IAttributeSetProvider.NominalSize1">
+            <summary>  Y00A00003AA01 (VC11)</summary>
+        </member>
+        <member name="P:Comos.PipeClass.IAttributeSetProvider.NominalSize2">
+            <summary>  Y00A00003AA02 (VC21)</summary>
+        </member>
+        <member name="P:Comos.PipeClass.IAttributeSetProvider.NominalSize3">
+            <summary>  Y00A00003AA03 (VC31)</summary>
+        </member>
+        <member name="P:Comos.PipeClass.IAttributeSetProvider.NominalSize4">
+            <summary>  Y00A00003AA04 (VC41)</summary>
+        </member>
+        <member name="P:Comos.PipeClass.IAttributeSetProvider.CharacteristicDefinition">
+            <summary>  Y00T00046 (Definition)</summary>
+        </member>
+        <member name="P:Comos.PipeClass.IAttributeSetProvider.CharacteristicDefinition_">
+            <summary>  Y00T00046 (Definition)</summary>
+        </member>
+        <member name="P:Comos.PipeClass.IAttributeSetProvider.Layer">
+            <summary>  Y00A00186 (LAYER)</summary>
+        </member>
+        <member name="P:Comos.PipeClass.IAttributeSetProvider.PlantCoordinateSystem">
+            <summary>  Y00T00279 (WORLD)</summary>
+        </member>
+        <member name="P:Comos.PipeClass.IAttributeSetProvider.EndpositionOnYAxis">
+            <summary>  Y00A04563 (YAxis)</summary>
+        </member>
+        <member name="P:Comos.PipeClass.IAttributeSetProvider.NameOfYPosition">
+            <summary>  Y00A04565 (Name)</summary>
+        </member>
+        <member name="P:Comos.PipeClass.IAttributeSetProvider.XPosition">
+            <summary>  Y00A00065 (XPosition)</summary>
+        </member>
+        <member name="P:Comos.PipeClass.IAttributeSetProvider.AxisFolder">
+            <summary>  Y00R00031 (@AXIS)</summary>
+        </member>
+        <member name="P:Comos.PipeClass.IAttributeSetProvider.PlantCoordinateSystem_">
+            <summary>  Y00T00279 (WORLD)</summary>
+        </member>
+        <member name="P:Comos.PipeClass.IAttributeSetProvider.Isomet">
+            <summary>  Y00A00061 (ISOMET)</summary>
+        </member>
+        <member name="P:Comos.PipeClass.IAttributeSetProvider.Nozzle">
+            <summary>  Y00R00026 (NOZZLE)</summary>
+        </member>
+        <member name="P:Comos.PipeClass.IAttributeSetProvider.CollectorDocumentForMacroElements">
+            <summary>  Y00R00019 (@VIPER)</summary>
+        </member>
+        <member name="P:Comos.PipeClass.IAttributeSetProvider.SelectorType">
+            <summary>  Y00A00737 (SeleType)</summary>
+        </member>
+        <member name="P:Comos.PipeClass.IAttributeSetProvider.PDMSSelectorTree">
+            <summary>  Y00A04575 (PDMSTree)</summary>
+        </member>
+        <member name="P:Comos.PipeClass.IAttributeSetProvider.ScrewDimensionFrom">
+            <summary>  Y00A00609 (VS1911Min)</summary>
+        </member>
+        <member name="P:Comos.PipeClass.IAttributeSetProvider.ScrewDimensionTo">
+            <summary>  Y00A00609AA02 (VS1911Max)</summary>
+        </member>
+        <member name="P:Comos.PipeClass.IAttributeSetProvider.BaseObjectStream">
+            <summary>  Y00A04646AB (CSTREAM)</summary>
+        </member>
+        <member name="P:Comos.PipeClass.IAttributeSetProvider.BaseObjectPipeOwner">
+            <summary>  Y00A00160 (CPIPEOWNER)</summary>
+        </member>
+        <member name="P:Comos.PipeClass.IAttributeSetProvider.PDMSMapping">
+            <summary>  Y00A00135 (PDMSMap)</summary>
+        </member>
+        <member name="P:Comos.PipeClass.IAttributeSetProvider.Data">
+            <summary>  Y00A00147 (DATA)</summary>
+        </member>
+        <member name="P:Comos.PipeClass.IAttributeSetProvider.SelectorTree">
+            <summary>  Y00R00045 (Sele)</summary>
+        </member>
+        <member name="P:Comos.PipeClass.IAttributeSetProvider.UsableAsBranch">
+            <summary>  Y00A04633 (BranchPP)</summary>
+        </member>
+        <member name="P:Comos.PipeClass.IAttributeSetProvider.AllowNonStandardND">
+            <summary>  Y00A04645 (VSTDX)</summary>
+        </member>
+        <member name="P:Comos.PipeClass.IAttributeSetProvider.CheckSchedule">
+            <summary>  Y00A04646 (CFDD)</summary>
+        </member>
+        <member name="P:Comos.PipeClass.IAttributeSetProvider.ShopSingle">
+            <summary>  Y00A04647 (SHOPSingle)</summary>
+        </member>
+        <member name="P:Comos.PipeClass.IAttributeSetProvider.AddObject">
+            <summary>  Y00A02115 (PCOMPlus)</summary>
+        </member>
+        <member name="P:Comos.PipeClass.IAttributeSetProvider.Mounting">
+            <summary>  Mounting (Mounting)</summary>
+        </member>
+        <member name="P:Comos.PipeClass.IAttributeSetProvider.NominalDiameterColumn1">
+            <summary>  Y00A00003AA01 (ND1)</summary>
+        </member>
+        <member name="P:Comos.PipeClass.IAttributeSetProvider.NominalDiameterColumn2">
+            <summary>  Y00A00003AA02 (ND2)</summary>
+        </member>
+        <member name="P:Comos.PipeClass.IAttributeSetProvider.Attachment">
+            <summary>  Attachment (Attachment)</summary>
+        </member>
+        <member name="P:Comos.PipeClass.IAttributeSetProvider.DynamicAttributes">
+            <summary>  Y00T00009 (Y00T00009)</summary>
+        </member>
+        <member name="P:Comos.PipeClass.IAttributeSetProvider.DynamicAttributes_">
+            <summary>  Y00T00009 (Y00T00009)</summary>
+        </member>
+        <member name="P:Comos.PipeClass.IAttributeSetProvider.StateColumn">
+            <summary>  Y00A02127 (State)</summary>
+        </member>
+        <member name="P:Comos.PipeClass.IAttributeSetProvider.CatalogReferenceColumn">
+            <summary>  Y00A01239 (Catref)</summary>
+        </member>
+        <member name="P:Comos.PipeClass.IAttributeSetProvider.DetailReferenceColumn">
+            <summary>  Y00A00591 (Detref)</summary>
+        </member>
+        <member name="P:Comos.PipeClass.IAttributeSetProvider.ReferenceNumber">
+            <summary>  Y00A01244 (RefNo)</summary>
+        </member>
+        <member name="P:Comos.PipeClass.IAttributeSetProvider.BoltingReference">
+            <summary>  Y00A00584 (BLTREF)</summary>
+        </member>
+        <member name="P:Comos.PipeClass.IAttributeSetProvider.ComponentReference">
+            <summary>  Y00A00586 (CMPREF)</summary>
+        </member>
+        <member name="P:Comos.PipeClass.IAttributeSetProvider.SpecificationParameter">
+            <summary>  Y00A00589 ()</summary>
+        </member>
+        <member name="P:Comos.PipeClass.IAttributeSetProvider.PDMSCheck">
+            <summary>   (Check)</summary>
+        </member>
+        <member name="P:Comos.PipeClass.IAttributeSetProvider.PDMSCate">
+            <summary>  Y00A01220 (Cate)</summary>
+        </member>
+        <member name="P:Comos.PipeClass.IAttributeSetProvider.IndentificationYAxis">
+            <summary>  Y00A04564 (YAxis)</summary>
+        </member>
+        <member name="P:Comos.PipeClass.IAttributeSetProvider.IndentificationYAxis_">
+            <summary>  Y00A04564 (YAxis)</summary>
+        </member>
+        <member name="P:Comos.PipeClass.IAttributeSetProvider.AttachmentsConfigurationTab">
+            <summary>  Y00T00192 (Info)</summary>
+        </member>
+        <member name="P:Comos.PipeClass.IAttributeSetProvider.OppositeAttachmentsTable">
+            <summary>  Y00A00567AA01 (Opposite)</summary>
+        </member>
+        <member name="P:Comos.PipeClass.IAttributeSetProvider.DefaultAttachmentsTable">
+            <summary>  Y00A00567AA02 (Default)</summary>
+        </member>
+        <member name="P:Comos.PipeClass.IAttributeSetProvider.FirstAttachmentType">
+            <summary>  Y00A04970AA01 (first)</summary>
+        </member>
+        <member name="P:Comos.PipeClass.IAttributeSetProvider.SecondAttachmentType">
+            <summary>  Y00A04970AA02 (second)</summary>
+        </member>
+        <member name="P:Comos.PipeClass.IAttributeSetProvider.FunctionCodeGroup">
+            <summary>  Y00A00002 (FunctionCodeGroup)</summary>
+        </member>
+        <member name="P:Comos.PipeClass.IAttributeSetProvider.DefaultAttachmentsTable_">
+            <summary>  Y00A00567AA02 (Default)</summary>
+        </member>
+        <member name="P:Comos.PipeClass.IAttributeSetProvider.AttachmentsConfigurationTab_">
+            <summary>  Y00T00192 (Info)</summary>
+        </member>
+        <member name="P:Comos.PipeClass.IAttributeSetProvider.OppositeAttachmentsTable_">
+            <summary>  Y00A00567AA01 (Opposite)</summary>
+        </member>
+        <member name="P:Comos.PipeClass.IAttributeSetProvider.OuterDiameterColumn">
+            <summary>  Y00A00657 (DA)</summary>
+        </member>
+        <member name="P:Comos.PipeClass.IAttributeSetProvider.WallThiknessColumn">
+            <summary>  Y00A01708 (S)</summary>
+        </member>
+        <member name="P:Comos.PipeClass.IAttributeSetProvider.CatalogColumnOuterDiameter">
+            <summary>  Y00A00012 (VS003)</summary>
+        </member>
+        <member name="P:Comos.PipeClass.IAttributeSetProvider.CatalogColumnWallThikness">
+            <summary>  Y00A00012AA02 (VS501)</summary>
+        </member>
+        <member name="P:Comos.PipeClass.IAttributeSetProvider.CatalogueOuterDiameter">
+            <summary>  Y00A00014AA02 (ADCat)</summary>
+        </member>
+        <member name="P:Comos.PipeClass.IAttributeSetProvider.CatalogueWallThikness">
+            <summary>  Y00A00014 (WDCat)</summary>
+        </member>
+        <member name="P:Comos.PipeClass.AttributeName.Characteristics_">
+            <summary>  Y00T00047 (C1)</summary>
+        </member>
+        <member name="P:Comos.PipeClass.AttributeName.PipeSpecLimits_">
+            <summary>  Y00T00062 (C2)</summary>
+        </member>
+        <member name="P:Comos.PipeClass.AttributeName.Dimensions_">
+            <summary>  Y00T00055 (StdVal)</summary>
+        </member>
+        <member name="P:Comos.PipeClass.AttributeName.External3DInterface_">
+            <summary>  Y00T00012 (E3D)</summary>
+        </member>
+        <member name="P:Comos.PipeClass.AttributeName.Geometry3D_">
+            <summary>  Y00T00011 (GD)</summary>
+        </member>
+        <member name="P:Comos.PipeClass.AttributeName.SystemInformation_">
+            <summary>  Y00T00002 (SYS)</summary>
+        </member>
+        <member name="P:Comos.PipeClass.AttributeName.SystemInformation_ISO_">
+            <summary>  Y00T00002 (SYSISO)</summary>
+        </member>
+        <member name="P:Comos.PipeClass.AttributeName.ParameterTable_">
+            <summary>  Y00A00125 (V1)</summary>
+        </member>
+        <member name="P:Comos.PipeClass.AttributeName.Characteristics">
+            <summary>  Y00T00047 (C1)</summary>
+        </member>
+        <member name="P:Comos.PipeClass.AttributeName.PipeSpecLimits">
+            <summary>  Y00T00062 (C2)</summary>
+        </member>
+        <member name="P:Comos.PipeClass.AttributeName.Dimensions">
+            <summary>  Y00T00055 (StdVal)</summary>
+        </member>
+        <member name="P:Comos.PipeClass.AttributeName.External3DInterface">
+            <summary>  Y00T00012 (E3D)</summary>
+        </member>
+        <member name="P:Comos.PipeClass.AttributeName.Geometry3D">
+            <summary>  Y00T00011 (GD)</summary>
+        </member>
+        <member name="P:Comos.PipeClass.AttributeName.SystemInformation">
+            <summary>  Y00T00002 (SYS)</summary>
+        </member>
+        <member name="P:Comos.PipeClass.AttributeName.SystemInformation_ISO">
+            <summary>  Y00T00002 (SYSISO)</summary>
+        </member>
+        <member name="P:Comos.PipeClass.AttributeName.ParameterTable">
+            <summary>  Y00A00125 (V1)</summary>
+        </member>
+        <member name="P:Comos.PipeClass.AttributeName.NominalDiameterColumn">
+            <summary>  Y00A00003 (ND)</summary>
+        </member>
+        <member name="P:Comos.PipeClass.AttributeName.Standard">
+            <summary>  Y00A00004 (VSTD)</summary>
+        </member>
+        <member name="P:Comos.PipeClass.AttributeName.NominalDiameterTo">
+            <summary>  Y00A02744 (NDMAX)</summary>
+        </member>
+        <member name="P:Comos.PipeClass.AttributeName.NominalDiameterFrom">
+            <summary>  Y00A02745 (NDMIN)</summary>
+        </member>
+        <member name="P:Comos.PipeClass.AttributeName.NominalDiameterRange">
+            <summary>  Y00A04288 (NDRange)</summary>
+        </member>
+        <member name="P:Comos.PipeClass.AttributeName.VSUIAttributes">
+            <summary>  Y00A02625 (VSUI)</summary>
+        </member>
+        <member name="P:Comos.PipeClass.AttributeName.NominalDiameter">
+            <summary>  Y00A00420 (PDMSND2)</summary>
+        </member>
+        <member name="P:Comos.PipeClass.AttributeName.PDMSGTYPE">
+            <summary>  Y00A02123 (GTYPE)</summary>
+        </member>
+        <member name="P:Comos.PipeClass.AttributeName.GeometryTable">
+            <summary>  Y00A00567 (V)</summary>
+        </member>
+        <member name="P:Comos.PipeClass.AttributeName.Dimensions2">
+            <summary>  Y00T00056 (StdVal)</summary>
+        </member>
+        <member name="P:Comos.PipeClass.AttributeName.NominalSizeColumn1">
+            <summary>  Y00A00003AA01 (VC11)</summary>
+        </member>
+        <member name="P:Comos.PipeClass.AttributeName.GeometryTable_">
+            <summary>  Y00A00567 (V)</summary>
+        </member>
+        <member name="P:Comos.PipeClass.AttributeName.Selector">
+            <summary>  Y00A00134 (Selector)</summary>
+        </member>
+        <member name="P:Comos.PipeClass.AttributeName.Answer">
+            <summary>  Y00A04570 (Answer)</summary>
+        </member>
+        <member name="P:Comos.PipeClass.AttributeName.Question">
+            <summary>  Y00A04574 (Question)</summary>
+        </member>
+        <member name="P:Comos.PipeClass.AttributeName.Selector_">
+            <summary>   (Sele)</summary>
+        </member>
+        <member name="P:Comos.PipeClass.AttributeName.Dimensions2_">
+            <summary>  Y00T00056 (StdVal)</summary>
+        </member>
+        <member name="P:Comos.PipeClass.AttributeName.DefaultAnswer">
+            <summary>  Y00A04571 (DefAnswer)</summary>
+        </member>
+        <member name="P:Comos.PipeClass.AttributeName.NominalSizeColumn2">
+            <summary>  Y00A00003AA02 (VC21)</summary>
+        </member>
+        <member name="P:Comos.PipeClass.AttributeName.ConnectorChapterBase">
+            <summary>  Y00T00050 (Y00T00050)</summary>
+        </member>
+        <member name="P:Comos.PipeClass.AttributeName.ConnectorChapterBase_">
+            <summary>  Y00T00050 (Y00T00050)</summary>
+        </member>
+        <member name="P:Comos.PipeClass.AttributeName.ParameterName">
+            <summary>  Y00A00027 (Rule)</summary>
+        </member>
+        <member name="P:Comos.PipeClass.AttributeName.ChapterOfParameterName">
+            <summary>  Y00T00055 (BMP)</summary>
+        </member>
+        <member name="P:Comos.PipeClass.AttributeName.ChapterOfParameterName_">
+            <summary>  Y00T00055 (BMP)</summary>
+        </member>
+        <member name="P:Comos.PipeClass.AttributeName.PIDDevice">
+            <summary>  Y00A02133 (PDMSCPID)</summary>
+        </member>
+        <member name="P:Comos.PipeClass.AttributeName.BoltSet">
+            <summary>  Y00A00137 (BTSE)</summary>
+        </member>
+        <member name="P:Comos.PipeClass.AttributeName.PIDTechnicalData">
+            <summary>  Y00T00135 (PI030)</summary>
+        </member>
+        <member name="P:Comos.PipeClass.AttributeName.PIDNominalSize1">
+            <summary>  Y00A00744 (PIA008)</summary>
+        </member>
+        <member name="P:Comos.PipeClass.AttributeName.PIDNominalSize2">
+            <summary>  Y00A00744AA02 (PIA008a)</summary>
+        </member>
+        <member name="P:Comos.PipeClass.AttributeName.PIDPipeClass">
+            <summary>  Y00A00052 (PIA012)</summary>
+        </member>
+        <member name="P:Comos.PipeClass.AttributeName.PIDTechnicalData_">
+            <summary>  Y00T00135 (PI030)</summary>
+        </member>
+        <member name="P:Comos.PipeClass.AttributeName.CreateImplementation">
+            <summary>  Y00A04545 (VIMPL)</summary>
+        </member>
+        <member name="P:Comos.PipeClass.AttributeName.PDMSCreateImplementation">
+            <summary>  Y00A04545 (CreateImplementation)</summary>
+        </member>
+        <member name="P:Comos.PipeClass.AttributeName.VSUIChapter">
+            <summary>  Y00T00011 (GD)</summary>
+        </member>
+        <member name="P:Comos.PipeClass.AttributeName.VSUIChapter_">
+            <summary>  Y00T00011 (GD)</summary>
+        </member>
+        <member name="P:Comos.PipeClass.AttributeName.PIDFunctionCode">
+            <summary>  Y00A00002 (PIA600)</summary>
+        </member>
+        <member name="P:Comos.PipeClass.AttributeName.System">
+            <summary>  Y00T00001 (SYS)</summary>
+        </member>
+        <member name="P:Comos.PipeClass.AttributeName.System_">
+            <summary>  Y00T00001 (SYS)</summary>
+        </member>
+        <member name="P:Comos.PipeClass.AttributeName.Rating">
+            <summary>  Y00A00025 (V2)</summary>
+        </member>
+        <member name="P:Comos.PipeClass.AttributeName.PressureRange">
+            <summary>  Y00A01019 (P)</summary>
+        </member>
+        <member name="P:Comos.PipeClass.AttributeName.Rating_">
+            <summary>  Y00A00025 (V2)</summary>
+        </member>
+        <member name="P:Comos.PipeClass.AttributeName.Link">
+            <summary>  Y00T00040 (PI010)</summary>
+        </member>
+        <member name="P:Comos.PipeClass.AttributeName.AssignedProcessStream">
+            <summary>  Y00A03516 (PIA902)</summary>
+        </member>
+        <member name="P:Comos.PipeClass.AttributeName.Link_">
+            <summary>  Y00T00040 (PI010)</summary>
+        </member>
+        <member name="P:Comos.PipeClass.AttributeName.ConnectorNameInput">
+            <summary>  Y00A01393 (ND0298)</summary>
+        </member>
+        <member name="P:Comos.PipeClass.AttributeName.ConnectorNameOutput">
+            <summary>  Y00A01392 (ND0299)</summary>
+        </member>
+        <member name="P:Comos.PipeClass.AttributeName.ConnectorNameBranch">
+            <summary>  Y00A01391 (ND0300)</summary>
+        </member>
+        <member name="P:Comos.PipeClass.AttributeName.Datasheet">
+            <summary>  Y00T00006 (VDM)</summary>
+        </member>
+        <member name="P:Comos.PipeClass.AttributeName.DatasheetTable">
+            <summary>  Y00A00594 (V)</summary>
+        </member>
+        <member name="P:Comos.PipeClass.AttributeName.SelectorChapter">
+            <summary>  Y00T00282 (Sele)</summary>
+        </member>
+        <member name="P:Comos.PipeClass.AttributeName.SelectorChapter_">
+            <summary>  Y00T00282 (Sele)</summary>
+        </member>
+        <member name="P:Comos.PipeClass.AttributeName.Datasheet_">
+            <summary>  Y00T00006 (VDM)</summary>
+        </member>
+        <member name="P:Comos.PipeClass.AttributeName.Connections">
+            <summary>  Connect (Connect)</summary>
+        </member>
+        <member name="P:Comos.PipeClass.AttributeName.Exceptions">
+            <summary>  Exceptions (Exceptions)</summary>
+        </member>
+        <member name="P:Comos.PipeClass.AttributeName.Connections_">
+            <summary>  Connect (Connect)</summary>
+        </member>
+        <member name="P:Comos.PipeClass.AttributeName.TemperatureRange">
+            <summary>  Y00A01069 (T)</summary>
+        </member>
+        <member name="P:Comos.PipeClass.AttributeName.PDMSRIGTYPE">
+            <summary>  Y00A02123 (PDMS003)</summary>
+        </member>
+        <member name="P:Comos.PipeClass.AttributeName.NameGeneration">
+            <summary>  Y00A00588 (PDMSList)</summary>
+        </member>
+        <member name="P:Comos.PipeClass.AttributeName.Material">
+            <summary>  Y00A01256 (SMTE)</summary>
+        </member>
+        <member name="P:Comos.PipeClass.AttributeName.Detail">
+            <summary>  Y00A00624 (DETAIL)</summary>
+        </member>
+        <member name="P:Comos.PipeClass.AttributeName.DetailReference">
+            <summary>  Y00A00591 (DETREF)</summary>
+        </member>
+        <member name="P:Comos.PipeClass.AttributeName.PartSpecification">
+            <summary>  Y00T00060 (VDD)</summary>
+        </member>
+        <member name="P:Comos.PipeClass.AttributeName.TemperatureValues">
+            <summary>  Y00A00043 (VS100)</summary>
+        </member>
+        <member name="P:Comos.PipeClass.AttributeName.PDMSPipeSpecElements">
+            <summary>  Y00T00061 (PDMSName)</summary>
+        </member>
+        <member name="P:Comos.PipeClass.AttributeName.DependentAttribute">
+            <summary>  Y00A00590 (PDMSName)</summary>
+        </member>
+        <member name="P:Comos.PipeClass.AttributeName.PDMSPBOR">
+            <summary>  Y00A01553 (VC11)</summary>
+        </member>
+        <member name="P:Comos.PipeClass.AttributeName.PDMSPBOR2">
+            <summary>  Y00A01553AA02 (VC21)</summary>
+        </member>
+        <member name="P:Comos.PipeClass.AttributeName.Name">
+            <summary>  Y00A01154 (Name)</summary>
+        </member>
+        <member name="P:Comos.PipeClass.AttributeName.PDMSState">
+            <summary>  Y00A02127 (State)</summary>
+        </member>
+        <member name="P:Comos.PipeClass.AttributeName.MaterialText">
+            <summary>  Y00A00585 (MATXT)</summary>
+        </member>
+        <member name="P:Comos.PipeClass.AttributeName.DetailReferenceOwner">
+            <summary>  Y00A00587 (DetrefOwner)</summary>
+        </member>
+        <member name="P:Comos.PipeClass.AttributeName.Detail_">
+            <summary>  Y00A00624 (DETAIL)</summary>
+        </member>
+        <member name="P:Comos.PipeClass.AttributeName.DependentAttribute_">
+            <summary>  Y00A00590 (PDMSName)</summary>
+        </member>
+        <member name="P:Comos.PipeClass.AttributeName.PDMSPipeSpecElements_">
+            <summary>  Y00T00061 (PDMSName)</summary>
+        </member>
+        <member name="P:Comos.PipeClass.AttributeName.PartSpecification_">
+            <summary>  Y00T00060 (VDD)</summary>
+        </member>
+        <member name="P:Comos.PipeClass.AttributeName.ValidArea">
+            <summary>  ValidArea (ValidArea)</summary>
+        </member>
+        <member name="P:Comos.PipeClass.AttributeName.Exceptions_">
+            <summary>  Exceptions (Exceptions)</summary>
+        </member>
+        <member name="P:Comos.PipeClass.AttributeName.StandardSystem">
+            <summary>  Y00A00038 (VSTD)</summary>
+        </member>
+        <member name="P:Comos.PipeClass.AttributeName.PipeSpec">
+            <summary>  Y00A00052 (VPCL)</summary>
+        </member>
+        <member name="P:Comos.PipeClass.AttributeName.GeoType">
+            <summary>  Y00A00009 (VGEO)</summary>
+        </member>
+        <member name="P:Comos.PipeClass.AttributeName.FunctionCode">
+            <summary>  Y00A00002 (VFCD)</summary>
+        </member>
+        <member name="P:Comos.PipeClass.AttributeName.FlangeStandard">
+            <summary>  Y00A00004 (VFLG)</summary>
+        </member>
+        <member name="P:Comos.PipeClass.AttributeName.PipeSpecDependent">
+            <summary>  Y00A00007 (PSDP)</summary>
+        </member>
+        <member name="P:Comos.PipeClass.AttributeName.PressureValues">
+            <summary>   (VS101)</summary>
+        </member>
+        <member name="P:Comos.PipeClass.AttributeName.Length">
+            <summary>  Y00A00209 (V002)</summary>
+        </member>
+        <member name="P:Comos.PipeClass.AttributeName.Filter">
+            <summary>  Y00A00579 (VC11)</summary>
+        </member>
+        <member name="P:Comos.PipeClass.AttributeName.State">
+            <summary>  Y00A02127 (State)</summary>
+        </member>
+        <member name="P:Comos.PipeClass.AttributeName.DatasheetTable_">
+            <summary>  Y00A00594 (V)</summary>
+        </member>
+        <member name="P:Comos.PipeClass.AttributeName.Color">
+            <summary>  Y00A03980 (VCOL)</summary>
+        </member>
+        <member name="P:Comos.PipeClass.AttributeName.OuterDiameter">
+            <summary>  Y00A00657AA01 (V001)</summary>
+        </member>
+        <member name="P:Comos.PipeClass.AttributeName.CatalogReference">
+            <summary>  Y00A01239 (CATREF)</summary>
+        </member>
+        <member name="P:Comos.PipeClass.AttributeName.MandatoryAttributes">
+            <summary>  Y00A04614 (VAMI)</summary>
+        </member>
+        <member name="P:Comos.PipeClass.AttributeName.SkipAttributes">
+            <summary>  Y00A00005 (VASI)</summary>
+        </member>
+        <member name="P:Comos.PipeClass.AttributeName.ReportHeaderAttributes">
+            <summary>  Y00A04615 (VARH)</summary>
+        </member>
+        <member name="P:Comos.PipeClass.AttributeName.NominalSize1">
+            <summary>  Y00A00003AA01 (VC11)</summary>
+        </member>
+        <member name="P:Comos.PipeClass.AttributeName.NominalSize2">
+            <summary>  Y00A00003AA02 (VC21)</summary>
+        </member>
+        <member name="P:Comos.PipeClass.AttributeName.NominalSize3">
+            <summary>  Y00A00003AA03 (VC31)</summary>
+        </member>
+        <member name="P:Comos.PipeClass.AttributeName.NominalSize4">
+            <summary>  Y00A00003AA04 (VC41)</summary>
+        </member>
+        <member name="P:Comos.PipeClass.AttributeName.CharacteristicDefinition">
+            <summary>  Y00T00046 (Definition)</summary>
+        </member>
+        <member name="P:Comos.PipeClass.AttributeName.CharacteristicDefinition_">
+            <summary>  Y00T00046 (Definition)</summary>
+        </member>
+        <member name="P:Comos.PipeClass.AttributeName.Layer">
+            <summary>  Y00A00186 (LAYER)</summary>
+        </member>
+        <member name="P:Comos.PipeClass.AttributeName.PlantCoordinateSystem">
+            <summary>  Y00T00279 (WORLD)</summary>
+        </member>
+        <member name="P:Comos.PipeClass.AttributeName.EndpositionOnYAxis">
+            <summary>  Y00A04563 (YAxis)</summary>
+        </member>
+        <member name="P:Comos.PipeClass.AttributeName.NameOfYPosition">
+            <summary>  Y00A04565 (Name)</summary>
+        </member>
+        <member name="P:Comos.PipeClass.AttributeName.XPosition">
+            <summary>  Y00A00065 (XPosition)</summary>
+        </member>
+        <member name="P:Comos.PipeClass.AttributeName.AxisFolder">
+            <summary>  Y00R00031 (@AXIS)</summary>
+        </member>
+        <member name="P:Comos.PipeClass.AttributeName.PlantCoordinateSystem_">
+            <summary>  Y00T00279 (WORLD)</summary>
+        </member>
+        <member name="P:Comos.PipeClass.AttributeName.Isomet">
+            <summary>  Y00A00061 (ISOMET)</summary>
+        </member>
+        <member name="P:Comos.PipeClass.AttributeName.Nozzle">
+            <summary>  Y00R00026 (NOZZLE)</summary>
+        </member>
+        <member name="P:Comos.PipeClass.AttributeName.CollectorDocumentForMacroElements">
+            <summary>  Y00R00019 (@VIPER)</summary>
+        </member>
+        <member name="P:Comos.PipeClass.AttributeName.SelectorType">
+            <summary>  Y00A00737 (SeleType)</summary>
+        </member>
+        <member name="P:Comos.PipeClass.AttributeName.PDMSSelectorTree">
+            <summary>  Y00A04575 (PDMSTree)</summary>
+        </member>
+        <member name="P:Comos.PipeClass.AttributeName.ScrewDimensionFrom">
+            <summary>  Y00A00609 (VS1911Min)</summary>
+        </member>
+        <member name="P:Comos.PipeClass.AttributeName.ScrewDimensionTo">
+            <summary>  Y00A00609AA02 (VS1911Max)</summary>
+        </member>
+        <member name="P:Comos.PipeClass.AttributeName.BaseObjectStream">
+            <summary>  Y00A04646AB (CSTREAM)</summary>
+        </member>
+        <member name="P:Comos.PipeClass.AttributeName.BaseObjectPipeOwner">
+            <summary>  Y00A00160 (CPIPEOWNER)</summary>
+        </member>
+        <member name="P:Comos.PipeClass.AttributeName.PDMSMapping">
+            <summary>  Y00A00135 (PDMSMap)</summary>
+        </member>
+        <member name="P:Comos.PipeClass.AttributeName.Data">
+            <summary>  Y00A00147 (DATA)</summary>
+        </member>
+        <member name="P:Comos.PipeClass.AttributeName.SelectorTree">
+            <summary>  Y00R00045 (Sele)</summary>
+        </member>
+        <member name="P:Comos.PipeClass.AttributeName.UsableAsBranch">
+            <summary>  Y00A04633 (BranchPP)</summary>
+        </member>
+        <member name="P:Comos.PipeClass.AttributeName.AllowNonStandardND">
+            <summary>  Y00A04645 (VSTDX)</summary>
+        </member>
+        <member name="P:Comos.PipeClass.AttributeName.CheckSchedule">
+            <summary>  Y00A04646 (CFDD)</summary>
+        </member>
+        <member name="P:Comos.PipeClass.AttributeName.ShopSingle">
+            <summary>  Y00A04647 (SHOPSingle)</summary>
+        </member>
+        <member name="P:Comos.PipeClass.AttributeName.AddObject">
+            <summary>  Y00A02115 (PCOMPlus)</summary>
+        </member>
+        <member name="P:Comos.PipeClass.AttributeName.Mounting">
+            <summary>  Mounting (Mounting)</summary>
+        </member>
+        <member name="P:Comos.PipeClass.AttributeName.NominalDiameterColumn1">
+            <summary>  Y00A00003AA01 (ND1)</summary>
+        </member>
+        <member name="P:Comos.PipeClass.AttributeName.NominalDiameterColumn2">
+            <summary>  Y00A00003AA02 (ND2)</summary>
+        </member>
+        <member name="P:Comos.PipeClass.AttributeName.Attachment">
+            <summary>  Attachment (Attachment)</summary>
+        </member>
+        <member name="P:Comos.PipeClass.AttributeName.DynamicAttributes">
+            <summary>  Y00T00009 (Y00T00009)</summary>
+        </member>
+        <member name="P:Comos.PipeClass.AttributeName.DynamicAttributes_">
+            <summary>  Y00T00009 (Y00T00009)</summary>
+        </member>
+        <member name="P:Comos.PipeClass.AttributeName.StateColumn">
+            <summary>  Y00A02127 (State)</summary>
+        </member>
+        <member name="P:Comos.PipeClass.AttributeName.CatalogReferenceColumn">
+            <summary>  Y00A01239 (Catref)</summary>
+        </member>
+        <member name="P:Comos.PipeClass.AttributeName.DetailReferenceColumn">
+            <summary>  Y00A00591 (Detref)</summary>
+        </member>
+        <member name="P:Comos.PipeClass.AttributeName.ReferenceNumber">
+            <summary>  Y00A01244 (RefNo)</summary>
+        </member>
+        <member name="P:Comos.PipeClass.AttributeName.BoltingReference">
+            <summary>  Y00A00584 (BLTREF)</summary>
+        </member>
+        <member name="P:Comos.PipeClass.AttributeName.ComponentReference">
+            <summary>  Y00A00586 (CMPREF)</summary>
+        </member>
+        <member name="P:Comos.PipeClass.AttributeName.SpecificationParameter">
+            <summary>  Y00A00589 ()</summary>
+        </member>
+        <member name="P:Comos.PipeClass.AttributeName.PDMSCheck">
+            <summary>   (Check)</summary>
+        </member>
+        <member name="P:Comos.PipeClass.AttributeName.PDMSCate">
+            <summary>  Y00A01220 (Cate)</summary>
+        </member>
+        <member name="P:Comos.PipeClass.AttributeName.IndentificationYAxis">
+            <summary>  Y00A04564 (YAxis)</summary>
+        </member>
+        <member name="P:Comos.PipeClass.AttributeName.IndentificationYAxis_">
+            <summary>  Y00A04564 (YAxis)</summary>
+        </member>
+        <member name="P:Comos.PipeClass.AttributeName.AttachmentsConfigurationTab">
+            <summary>  Y00T00192 (Info)</summary>
+        </member>
+        <member name="P:Comos.PipeClass.AttributeName.OppositeAttachmentsTable">
+            <summary>  Y00A00567AA01 (Opposite)</summary>
+        </member>
+        <member name="P:Comos.PipeClass.AttributeName.DefaultAttachmentsTable">
+            <summary>  Y00A00567AA02 (Default)</summary>
+        </member>
+        <member name="P:Comos.PipeClass.AttributeName.FirstAttachmentType">
+            <summary>  Y00A04970AA01 (first)</summary>
+        </member>
+        <member name="P:Comos.PipeClass.AttributeName.SecondAttachmentType">
+            <summary>  Y00A04970AA02 (second)</summary>
+        </member>
+        <member name="P:Comos.PipeClass.AttributeName.FunctionCodeGroup">
+            <summary>  Y00A00002 (FunctionCodeGroup)</summary>
+        </member>
+        <member name="P:Comos.PipeClass.AttributeName.DefaultAttachmentsTable_">
+            <summary>  Y00A00567AA02 (Default)</summary>
+        </member>
+        <member name="P:Comos.PipeClass.AttributeName.AttachmentsConfigurationTab_">
+            <summary>  Y00T00192 (Info)</summary>
+        </member>
+        <member name="P:Comos.PipeClass.AttributeName.OppositeAttachmentsTable_">
+            <summary>  Y00A00567AA01 (Opposite)</summary>
+        </member>
+        <member name="P:Comos.PipeClass.AttributeName.OuterDiameterColumn">
+            <summary>  Y00A00657 (DA)</summary>
+        </member>
+        <member name="P:Comos.PipeClass.AttributeName.WallThiknessColumn">
+            <summary>  Y00A01708 (S)</summary>
+        </member>
+        <member name="P:Comos.PipeClass.AttributeName.CatalogColumnOuterDiameter">
+            <summary>  Y00A00012 (VS003)</summary>
+        </member>
+        <member name="P:Comos.PipeClass.AttributeName.CatalogColumnWallThikness">
+            <summary>  Y00A00012AA02 (VS501)</summary>
+        </member>
+        <member name="P:Comos.PipeClass.AttributeName.CatalogueOuterDiameter">
+            <summary>  Y00A00014AA02 (ADCat)</summary>
+        </member>
+        <member name="P:Comos.PipeClass.AttributeName.CatalogueWallThikness">
+            <summary>  Y00A00014 (WDCat)</summary>
+        </member>
+    </members>
+</doc>

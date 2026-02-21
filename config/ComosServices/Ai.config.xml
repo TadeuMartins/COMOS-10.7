@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Configuration>
+  <Models>
+    <Model>
+      <ModelName>serviceipid-gateway</ModelName>
+      <ProviderParams>
+        <Model>vllm_hosted/serviceipid-comos-gateway</Model>
+        <ApiBase>http://localhost:8100/v1/chat/completions</ApiBase>
+        <Seed>12</Seed>
+        <Timeout>90000</Timeout>
+      </ProviderParams>
+    </Model>
+  </Models>
+  <LlmModel>serviceipid-gateway</LlmModel>
+  <EmbeddingModel />
+</Configuration>

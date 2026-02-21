@@ -1,0 +1,25 @@
+﻿(\v~
+0.0.0.0
+000004b0
+Assembly Version
+Comos.EngineeringAssistant.DesktopCommunication.dll
+Engineering Assistant: Error in ClearProcessingStatusUI: 
+Engineering Assistant: Error in SetProcessingStatusUI: 
+Engineering Assistant: Failed to process assembly 
+Engineering Assistant: Failed to register function type 
+Engineering Assistant: Registered AI function class: 
+FileDescription
+FileVersion
+InternalName
+LegalCopyright
+Oops! I couldn't connect to the AI service. Please check your connection and try again.
+OriginalFilename
+ProductVersion
+StringFileInfo
+Translation
+VarFileInfo
+VS_VERSION_INFO
+window.clearProcessingStatus && window.clearProcessingStatus();
+window.setFollowupPrompts && window.setFollowupPrompts('
+window.setProcessingStatus && window.setProcessingStatus(
+window.updateConversationTitle && window.updateConversationTitle('

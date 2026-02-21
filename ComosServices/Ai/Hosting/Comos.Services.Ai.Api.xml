@@ -1,0 +1,120 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>Comos.Services.Ai.Api</name>
+    </assembly>
+    <members>
+        <member name="M:Comos.Services.Ai.Api.AppRoot.CreateDefaultAIProviderConfiguration">
+            <summary>
+            Creates a default AIProviderConfiguration with ollama-llama3.1-8b model.
+            </summary>
+        </member>
+        <member name="M:Comos.Services.Ai.Api.AppRoot.CreateHttpClientHandler(Microsoft.Extensions.Configuration.IConfiguration)">
+            <summary>
+            Creates a configured HttpClientHandler with SSL certificate validation.
+            In Development environment, all certificates are accepted.
+            In other environments, only valid certificates are accepted.
+            </summary>
+            <param name="configuration">Configuration to determine the current environment.</param>
+            <returns>Configured HttpClientHandler instance.</returns>
+        </member>
+        <member name="T:Comos.Services.Ai.Api.AppRoot.DevelopmentServiceConfiguration">
+            <summary>
+            Custom IServiceConfiguration implementation for development environment.
+            Returns the AI config file path from the content root directory.
+            </summary>
+        </member>
+        <member name="T:Comos.Services.Ai.Api.Controllers.CompletionsController">
+            <summary>
+            REST API controller for interacting with various LLM providers.
+            This controller acts as an entry point for chat completion requests,
+            dynamically routing them to the appropriate LLM service based on configuration.
+            </summary>
+        </member>
+        <member name="M:Comos.Services.Ai.Api.Controllers.CompletionsController.#ctor(Microsoft.Extensions.Logging.ILogger{Comos.Services.Ai.Api.Controllers.CompletionsController},Comos.Services.Ai.ChatModelProviderFactory)">
+            <summary>
+            Initializes a new instance of the <see cref="T:Comos.Services.Ai.Api.Controllers.CompletionsController"/> class.
+            </summary>
+            <param name="logger">The logger instance for logging controller actions and errors.</param>
+            <param name="llmChatProviderFactory">The factory to create LLM chat clients dynamically.</param>
+        </member>
+        <member name="M:Comos.Services.Ai.Api.Controllers.CompletionsController.RequestChatCompletion(Comos.Services.Ai.SharedContracts.Request.ChatCompletionRequest)">
+            <summary>
+            Sends a chat completion request to the LLM backend. Maintains chat history using the provided SessionId.
+            </summary>
+            <param name="request">Chat completion request containing model, messages, and session identifier.</param>
+            <returns>LLM response for the chat completion.</returns>
+        </member>
+        <member name="M:Comos.Services.Ai.Api.Controllers.CompletionsController.EvaluateFunctionCall(Comos.Services.Ai.SharedContracts.Request.ToolsEvaluationRequest)">
+            <summary>
+            Evaluates a function (tool) call continuation using the specified (or default) provider/model.
+            provider/model/systemPrompt come from the query string.
+            POST /api/ai/v1/completions/evaluation
+            </summary>
+        </member>
+        <member name="M:Comos.Services.Ai.Api.Controllers.CompletionsController.GenerateTitle(Comos.Services.Ai.SharedContracts.Request.ChatCompletionRequest)">
+            <summary>
+            Handles a POST request to generate a title using the LLM backend.
+            </summary>
+            <param name="request">The chat completion request containing the model, messages, and session identifier.</param>
+            <returns>
+            An <see cref="T:Microsoft.AspNetCore.Mvc.IActionResult"/> containing the LLM's generated title response if successful, 
+            or an error response if the operation fails.
+            </returns>
+            
+        </member>
+        <member name="M:Comos.Services.Ai.Api.Controllers.CompletionsController.GenerateFollowUpQuestions(Comos.Services.Ai.SharedContracts.Request.ChatCompletionRequest)">
+            <summary>
+            Handles a POST request to generate a title using the LLM backend.
+            </summary>
+            <param name="request">The chat completion request containing the model, messages, and session identifier.</param>
+            <returns>
+            An <see cref="T:Microsoft.AspNetCore.Mvc.IActionResult"/> containing the LLM's generated title response if successful, 
+            or an error response if the operation fails.
+            </returns>
+            
+        </member>
+        <member name="T:Comos.Services.Ai.Api.Controllers.RAGController">
+            <summary>
+            REST API controller for interacting with Vector Services using RAG (Retrieval-Augmented Generation) and LLM.
+            This controller acts as an entry point for chat completion requests,
+            dynamically routing them to the appropriate LLM service based on configuration.
+            </summary>
+        </member>
+        <member name="M:Comos.Services.Ai.Api.Controllers.RAGController.#ctor(Microsoft.Extensions.Logging.ILogger{Comos.Services.Ai.Api.Controllers.RAGController},Comos.Services.Ai.ChatModelProviderFactory)">
+            <summary>
+            Initializes a new instance of the <see cref="T:Comos.Services.Ai.Api.Controllers.RAGController"/> class.
+            </summary>
+            <param name="logger">The logger instance for logging controller actions and errors.</param>
+            <param name="llmChatProviderFactory">The factory to create LLM chat clients dynamically.</param>
+        </member>
+        <member name="T:Comos.Services.Ai.Configuration.AIApiServiceConfiguration">
+            <summary>
+            Loader/parser responsible for creating <see cref="T:Comos.Services.Ai.Configuration.AIProviderConfiguration"/> from the AI API XML config file.
+            </summary>
+        </member>
+        <member name="M:Comos.Services.Ai.Configuration.AIApiServiceConfiguration.#ctor(Comos.Services.Core.Abstractions.IServiceConfiguration,Microsoft.Extensions.Logging.ILogger{Comos.Services.Ai.Configuration.AIApiServiceConfiguration})">
+            <param name="commonServiceConfiguration"></param>
+            <param name="logger"></param>
+        </member>
+        <member name="M:Comos.Services.Ai.Configuration.AIApiServiceConfiguration.ReadConfigurationSettings(System.Xml.XmlDocument)">
+            <summary>
+            Loads AI service configuration from an XML file path.
+            </summary>
+            <summary>
+            Read all configuration settings from the XML document and populate AIProviderConfig.
+            Parses model definitions and optional default model settings.
+            </summary>
+            <param name="doc">The XML configuration document</param>
+        </member>
+        <member name="M:Comos.Services.Ai.Configuration.AIApiServiceConfiguration.GetAliasModel(System.Xml.XmlElement)">
+            <summary>
+            Retrieves the LLM model alias from environment variable or XML configuration.
+            Environment variable 'COMOS_LLM_MODEL' takes precedence over XML LlmModel element.
+            </summary>
+            <param name="root">The root XML element containing the configuration</param>
+            <returns>The LLM model alias name</returns>
+            <exception cref="T:System.InvalidOperationException">Thrown when neither environment variable nor XML element provides a valid model alias</exception>
+        </member>
+    </members>
+</doc>

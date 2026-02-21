@@ -1,0 +1,3926 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>Comos.PicturesLibrary</name>
+    </assembly>
+    <members>
+        <member name="T:Comos.PicturesLibrary.Colors">
+            <summary>
+            Defines some Colors and corresponding operations.
+            </summary>
+        </member>
+        <member name="F:Comos.PicturesLibrary.Colors.InnotecGreen100">
+            <summary>
+            InnotecGreen (Hex: 00aa99)
+            </summary>
+        </member>
+        <member name="F:Comos.PicturesLibrary.Colors.InnotecGreen50">
+            <summary>
+            InnotecGreen (Hex: 4cc3b7)
+            </summary>
+        </member>
+        <member name="F:Comos.PicturesLibrary.Colors.InnotecGreen35">
+            <summary>
+            InnotecGreen (Hex: bddad7)
+            </summary>
+        </member>
+        <member name="F:Comos.PicturesLibrary.Colors.InnotecGreen25">
+            <summary>
+            InnotecGreen (Hex: a4e0da)
+            </summary>
+        </member>
+        <member name="F:Comos.PicturesLibrary.Colors.InnotecGreen10">
+            <summary>
+            InnotecGreen (Hex: f0faf9)
+            </summary>
+        </member>
+        <member name="M:Comos.PicturesLibrary.Colors.ToWhite(System.Windows.Media.Color,System.Double,System.Double)">
+            <summary>
+            Toes the white.
+            </summary>
+            <param name="c">The color.</param>
+            <param name="percent">The percent.</param>
+            <param name="transparent">The transparent.</param>
+            <returns>The calculated color.</returns>
+        </member>
+        <member name="M:Comos.PicturesLibrary.Colors.GetRValue(System.Int32)">
+            <summary>
+            Gets the red value of a color.
+            </summary>
+            <param name="rgb">The RGB value.</param>
+            <returns>The red value of a color</returns>
+        </member>
+        <member name="M:Comos.PicturesLibrary.Colors.GetGValue(System.Int32)">
+            <summary>
+            Gets the green value of a color.
+            </summary>
+            <param name="rgb">The RGB value.</param>
+            <returns>The green value of a color</returns>
+        </member>
+        <member name="M:Comos.PicturesLibrary.Colors.GetBValue(System.Int32)">
+            <summary>
+            Gets the blue value of a color.
+            </summary>
+            <param name="rgb">The RGB value.</param>
+            <returns>The blue value of a color</returns>
+        </member>
+        <member name="M:Comos.PicturesLibrary.Colors.GetAValue(System.Int32)">
+            <summary>
+            Gets the alpha value of a color.
+            </summary>
+            <param name="rgb">The RGB value.</param>
+            <returns>The alpha value of a color</returns>
+        </member>
+        <member name="M:Comos.PicturesLibrary.Colors.RecolorToDisabledGray(System.Drawing.Bitmap)">
+            <summary>
+            Recolors to disabled gray.
+            </summary>
+            <param name="bmp">The Bitmap.</param>
+        </member>
+        <member name="M:Comos.PicturesLibrary.Colors.RecolorToDisabledDarkGray(System.Drawing.Bitmap)">
+            <summary>
+            Recolors to disabled dark gray.
+            </summary>
+            <param name="bmp">The bitmap.</param>
+        </member>
+        <member name="M:Comos.PicturesLibrary.Colors.RecolorToDisabled(System.Drawing.Bitmap,System.Boolean)">
+            <summary>
+            Recolors to disabled.
+            </summary>
+            <param name="bmp">The bitmap.</param>
+            <param name="darkGray">if set to <c>true</c> [dark gray].</param>
+        </member>
+        <member name="M:Comos.PicturesLibrary.Colors.RecolorToDisabledGray(System.Windows.Controls.Canvas)">
+            <summary>
+            Recolors to disabled gray.
+            </summary>
+            <param name="canvas">The canvas.</param>
+        </member>
+        <member name="M:Comos.PicturesLibrary.Colors.BlackToWhite(System.Windows.Controls.Canvas)">
+            <summary>
+            Blacks to white.
+            </summary>
+            <param name="canvas">The canvas.</param>
+        </member>
+        <member name="M:Comos.PicturesLibrary.Colors.BlackToWhite(System.Drawing.Bitmap)">
+            <summary>
+            Blacks to white.
+            </summary>
+            <param name="bmp">The bitmap.</param>
+        </member>
+        <member name="T:Comos.PicturesLibrary.Constants">
+            <summary>
+            Contains all constants which have to be shared between classes or other types.
+            </summary>
+        </member>
+        <member name="T:Comos.PicturesLibrary.DrawnShowMode">
+            <summary>
+            Specifies how and if Icons are displayed with placing information.
+            </summary>
+        </member>
+        <member name="F:Comos.PicturesLibrary.DrawnShowMode.None">
+            <summary>
+            Indicates that no placing information is displayed.
+            </summary>
+        </member>
+        <member name="F:Comos.PicturesLibrary.DrawnShowMode.ElementsOnly">
+            <summary>
+            Indicates that placing information is displayed for elemets only.
+            </summary>
+        </member>
+        <member name="F:Comos.PicturesLibrary.DrawnShowMode.All">
+            <summary>
+            Indicates that placing information is displayed for all objects.
+            </summary>
+        </member>
+        <member name="T:Comos.PicturesLibrary.ExtendedInfo">
+            <summary>
+            Contains values which are needed for extended information within keys.
+            </summary>
+        </member>
+        <member name="F:Comos.PicturesLibrary.ExtendedInfo.General">
+            <summary>
+            Default value.
+            </summary>
+        </member>
+        <member name="F:Comos.PicturesLibrary.ExtendedInfo.Virtual">
+            <summary>
+            Indicates that the CDevice is a Element and its virtual property is set to <c>virtuel 1/N</c>.
+            </summary>
+        </member>
+        <member name="F:Comos.PicturesLibrary.ExtendedInfo.Drawn">
+            <summary>
+            Placed, only for Device.
+            </summary>
+        </member>
+        <member name="F:Comos.PicturesLibrary.ExtendedInfo.CEDefault">
+            <summary>
+            Indicates that the CDevice is a Element and its virtual property is set to <c>virtuel-default</c>.
+            </summary>
+        </member>
+        <member name="F:Comos.PicturesLibrary.ExtendedInfo.CEReal">
+            <summary>
+            Indicates that the CDevice is a Element and its virtual property is set to <c>real</c>.
+            </summary>
+        </member>
+        <member name="F:Comos.PicturesLibrary.ExtendedInfo.CDeviceStructure">
+            <summary>
+            Indicates that the CDevice's CreateOption-Property is set to <c>CDeviceCreateOptionStructureGroup</c>.
+            </summary>
+        </member>
+        <member name="F:Comos.PicturesLibrary.ExtendedInfo.CDeviceGroup">
+            <summary>
+            Indicates that the CDevice's CreateOption-Property is set to <c>CDeviceCreateOptionGroup</c>.
+            </summary>
+        </member>
+        <member name="F:Comos.PicturesLibrary.ExtendedInfo.InheritStatusE">
+            <summary>
+            adv only for DeviceClassDocumentGroup, Status 'E'.
+            </summary>
+        </member>
+        <member name="T:Comos.PicturesLibrary.Global">
+            <summary>
+            Groups some global values.
+            </summary>
+        </member>
+        <member name="P:Comos.PicturesLibrary.Global.ActiveStatus">
+            <summary>
+            Gets or sets the currently active status.
+            </summary>
+            <value>The currently active status.</value>
+        </member>
+        <member name="P:Comos.PicturesLibrary.Global.DrawnShow">
+            <summary>
+            Gets or sets the currently active drawn show mode.
+            </summary>
+            <value>The currently active drawn show mode.</value>
+        </member>
+        <member name="P:Comos.PicturesLibrary.Global.UserName">
+            <summary>
+            Gets or sets the name of the currently loged in user.
+            </summary>
+            <remarks>
+            This value is used to check if the user has changed 
+            to invalidate the StatusColorSet.
+            </remarks>
+            <value>The name of the currently loged in user.</value>
+        </member>
+        <member name="P:Comos.PicturesLibrary.Global.ProjectName">
+            <summary>
+            Gets or sets the name of the currently opened project.
+            </summary>
+            <remarks>
+            This value is used to check if the project has changed 
+            to invalidate the StatusColorSet.
+            </remarks>
+            <value>The name of the currently opened project.</value>
+        </member>
+        <member name="P:Comos.PicturesLibrary.Global.WOPathFullName">
+            <summary>
+            Gets or sets the PathFullName of the currently opened workingoverlay.
+            </summary>
+            <remarks>
+            This value is used to check if the workingoverlay has changed 
+            to invalidate the StatusColorSet.
+            </remarks>
+            <value>The PathFullName of the currently opened workingoverlay.</value>
+        </member>
+        <member name="P:Comos.PicturesLibrary.Global.StatusColorSet">
+            <summary>
+            Gets or sets the StatusColorSet.
+            </summary>
+            <value>The StatusColorSet.</value>
+        </member>
+        <member name="P:Comos.PicturesLibrary.Global.StatusProfileStorage">
+            <summary>
+            Gets or sets the StatusProfileStorage.
+            </summary>
+            <value>The StatusProfileStorage.</value>
+        </member>
+        <member name="P:Comos.PicturesLibrary.Global.WoColorSet">
+            <summary>
+            Gets or sets the wo color set.
+            </summary>
+            <value>The wo color set.</value>
+        </member>
+        <member name="P:Comos.PicturesLibrary.Global.WoColorProfileStorage">
+            <summary>
+            Gets or sets the wo color profile storage.
+            </summary>
+            <value>The wo color profile storage.</value>
+        </member>
+        <member name="M:Comos.PicturesLibrary.Global.GetResourceReader">
+            <summary>
+            Gets a <see cref="T:System.Resources.ResourceReader"/> for the Comos.PicturesLibrary Assemby.
+            </summary>
+            <returns>A <see cref="T:System.Resources.ResourceReader"/> for the Comos.PicturesLibrary Assembly.</returns>
+        </member>
+        <member name="M:Comos.PicturesLibrary.Global.GetVarstorageObject``1(System.String)">
+            <summary>
+            Gets the var storage object.
+            </summary>
+            <typeparam name="T"></typeparam>
+            <param name="key">The key.</param>
+            <returns></returns>
+        </member>
+        <member name="M:Comos.PicturesLibrary.Global.InvokeLibMethod``1(System.String,System.Object[])">
+            <summary>
+            Invokes the lib method.
+            </summary>
+            <typeparam name="T"></typeparam>
+            <param name="methodName">Name of the method.</param>
+            <param name="parameters">The parameters.</param>
+            <returns></returns>
+        </member>
+        <member name="M:Comos.PicturesLibrary.Global.TraceInformation(System.String,System.Object[])">
+            <summary>
+            Traces the information.
+            </summary>
+            <param name="format">The format.</param>
+            <param name="args">The args.</param>
+        </member>
+        <member name="T:Comos.PicturesLibrary.Legend.ForegroundBrushConverter">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="M:Comos.PicturesLibrary.Legend.ForegroundBrushConverter.Convert(System.Object,System.Type,System.Object,System.Globalization.CultureInfo)">
+            <summary>
+            Converts a value.
+            </summary>
+            <param name="value">The value produced by the binding source.</param>
+            <param name="targetType">The type of the binding target property.</param>
+            <param name="parameter">The converter parameter to use.</param>
+            <param name="culture">The culture to use in the converter.</param>
+            <returns>
+            A converted value. If the method returns null, the valid null value is used.
+            </returns>
+        </member>
+        <member name="M:Comos.PicturesLibrary.Legend.ForegroundBrushConverter.ConvertBack(System.Object,System.Type,System.Object,System.Globalization.CultureInfo)">
+            <summary>
+            Converts a value.
+            </summary>
+            <param name="value">The value that is produced by the binding target.</param>
+            <param name="targetType">The type to convert to.</param>
+            <param name="parameter">The converter parameter to use.</param>
+            <param name="culture">The culture to use in the converter.</param>
+            <returns>
+            A converted value. If the method returns null, the valid null value is used.
+            </returns>
+        </member>
+        <member name="T:Comos.PicturesLibrary.Legend.LegendColorViewModel">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Comos.PicturesLibrary.Legend.LegendColorViewModel.Color">
+            <summary>
+            Gets or sets the color.
+            </summary>
+            <value>The color.</value>
+        </member>
+        <member name="P:Comos.PicturesLibrary.Legend.LegendColorViewModel.PickColorCommand">
+            <summary>
+            Gets the command to pick a color.
+            </summary>
+            <value>The command to pick a color.</value>
+        </member>
+        <member name="M:Comos.PicturesLibrary.Legend.LegendColorViewModel.OnCanExecutePickColor(System.Object)">
+            <summary>
+            Called when [can execute pick color].
+            </summary>
+            <param name="parameters">The parameters.</param>
+            <returns>
+            <c>true</c> when selecting a new color is allowed; otherwise <c>false</c>.#
+            </returns>
+        </member>
+        <member name="M:Comos.PicturesLibrary.Legend.LegendColorViewModel.OnExecutePickColor(System.Object)">
+            <summary>
+            Called when [execute pick color].
+            </summary>
+            <param name="parameters">The parameters.</param>
+        </member>
+        <member name="M:Comos.PicturesLibrary.Legend.LegendColorViewModel.ChangeColor">
+            <summary>
+            Displays a <see cref="T:System.Windows.Forms.ColorDialog">ColorDialog</see>
+            and changes the color for this instance.
+            </summary>
+        </member>
+        <member name="T:Comos.PicturesLibrary.Legend.LegendItemViewModel">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="M:Comos.PicturesLibrary.Legend.LegendItemViewModel.#ctor(System.String)">
+            <summary>
+            Initializes a new instance of the <see cref="T:Comos.PicturesLibrary.Legend.LegendItemViewModel"/> class.
+            </summary>
+            <param name="displayName">The display name.</param>
+        </member>
+        <member name="P:Comos.PicturesLibrary.Legend.LegendItemViewModel.DisplayName">
+            <summary>
+            Gets or sets the display name.
+            </summary>
+            <value>The display name.</value>
+        </member>
+        <member name="P:Comos.PicturesLibrary.Legend.LegendItemViewModel.HasChanges">
+            <summary>
+            Gets or sets a value indicating whether this instance has changes.
+            </summary>
+            <value>
+            	<c>true</c> if this instance has changes; otherwise, <c>false</c>.
+            </value>
+        </member>
+        <member name="P:Comos.PicturesLibrary.Legend.LegendItemViewModel.ItxColor">
+            <summary>
+            Gets the ITX of "Color".
+            </summary>
+            <value>The ITX of "Color".</value>
+        </member>
+        <member name="P:Comos.PicturesLibrary.Legend.LegendItemViewModel.ItxStandardColors">
+            <summary>
+            Gets the ITX of "Standard colors".
+            </summary>
+            <value>The ITX of "Standard colors".</value>
+        </member>
+        <member name="P:Comos.PicturesLibrary.Legend.LegendItemViewModel.SaveSettingsCommand">
+            <summary>
+            Gets the save settings command.
+            </summary>
+            <value>The save settings command.</value>
+        </member>
+        <member name="M:Comos.PicturesLibrary.Legend.LegendItemViewModel.OnCanExecuteSaveSettings(System.Object)">
+            <summary>
+            Called when [can execute save settings].
+            </summary>
+            <param name="parameters">The parameters.</param>
+            <returns></returns>
+        </member>
+        <member name="M:Comos.PicturesLibrary.Legend.LegendItemViewModel.OnExecuteSaveSettings(System.Object)">
+            <summary>
+            Called when [execute save settings].
+            </summary>
+            <param name="parameters">The parameters.</param>
+        </member>
+        <member name="P:Comos.PicturesLibrary.Legend.LegendItemViewModel.ResetCommand">
+            <summary>
+            Gets the reset command.
+            </summary>
+            <value>The reset command.</value>
+        </member>
+        <member name="M:Comos.PicturesLibrary.Legend.LegendItemViewModel.OnCanExecuteReset(System.Object)">
+            <summary>
+            Called when [can execute reset].
+            </summary>
+            <param name="parameters">The parameters.</param>
+            <returns></returns>
+        </member>
+        <member name="M:Comos.PicturesLibrary.Legend.LegendItemViewModel.OnExecuteReset(System.Object)">
+            <summary>
+            Called when [execute reset].
+            </summary>
+            <param name="parameters">The parameters.</param>
+        </member>
+        <member name="T:Comos.PicturesLibrary.Legend.LegendView">
+            <summary>
+            Interaction logic for LegendView.xaml
+            </summary>
+        </member>
+        <member name="M:Comos.PicturesLibrary.Legend.LegendView.#ctor">
+            <summary>
+            Initializes a new instance of the <see cref="T:Comos.PicturesLibrary.Legend.LegendView"/> class.
+            </summary>
+        </member>
+        <member name="P:Comos.PicturesLibrary.Legend.LegendView.ViewModel">
+            <summary>
+            Gets the view model.
+            </summary>
+            <value>The view model.</value>
+        </member>
+        <member name="M:Comos.PicturesLibrary.Legend.LegendView.OnOkAbortLoaded(System.Object,System.Windows.RoutedEventArgs)">
+            <summary>
+            Called when the OkAbort control was loaded.
+            </summary>
+            <param name="sender">The sender.</param>
+            <param name="e">The <see cref="T:System.Windows.RoutedEventArgs"/> instance containing the event data.</param>
+        </member>
+        <member name="M:Comos.PicturesLibrary.Legend.LegendView.OnCloseClick(System.Object,System.Windows.RoutedEventArgs)">
+            <summary>
+            Called when the close buton of the OkAbort control was clicked.
+            </summary>
+            <param name="sender">The sender.</param>
+            <param name="e">The <see cref="T:System.Windows.RoutedEventArgs"/> instance containing the event data.</param>
+        </member>
+        <member name="M:Comos.PicturesLibrary.Legend.LegendView.OnClosing(System.ComponentModel.CancelEventArgs)">
+            <summary>
+            Raises the <see cref="E:System.Windows.Window.Closing"/> event.
+            </summary>
+            <param name="e">A <see cref="T:System.ComponentModel.CancelEventArgs"/> that contains the event data.</param>
+        </member>
+        <member name="M:Comos.PicturesLibrary.Legend.LegendView.RefreshNavigator">
+            <summary>
+            Refreshes the navigator.
+            </summary>
+        </member>
+        <member name="M:Comos.PicturesLibrary.Legend.LegendView.InitializeComponent">
+            <summary>
+            InitializeComponent
+            </summary>
+        </member>
+        <member name="T:Comos.PicturesLibrary.Legend.LegendViewModel">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="M:Comos.PicturesLibrary.Legend.LegendViewModel.#ctor">
+            <summary>
+            Initializes a new instance of the <see cref="T:Comos.PicturesLibrary.Legend.LegendViewModel"/> class.
+            </summary>
+        </member>
+        <member name="P:Comos.PicturesLibrary.Legend.LegendViewModel.LegendItems">
+            <summary>
+            Gets the legend items.
+            </summary>
+            <value>The legend items.</value>
+        </member>
+        <member name="P:Comos.PicturesLibrary.Legend.LegendViewModel.HasChanges">
+            <summary>
+            Gets a value indicating whether this instance has changes.
+            </summary>
+            <value>
+            	<c>true</c> if this instance has changes; otherwise, <c>false</c>.
+            </value>
+        </member>
+        <member name="M:Comos.PicturesLibrary.Legend.LegendViewModel.Initialize">
+            <summary>
+            Initializes this instance.
+            </summary>
+        </member>
+        <member name="T:Comos.PicturesLibrary.PictureCache">
+            <summary>
+            Represents a cache of Pictures. Pictures are identified by a key.
+            </summary>
+        </member>
+        <member name="M:Comos.PicturesLibrary.PictureCache.#cctor">
+            <summary>
+            Initializes static members of the <see cref="T:Comos.PicturesLibrary.PictureCache"/> class.
+            </summary>
+        </member>
+        <member name="M:Comos.PicturesLibrary.PictureCache.#ctor">
+            <summary>
+            Prevents a default instance of the PictureCache class from being created.
+            </summary>
+        </member>
+        <member name="P:Comos.PicturesLibrary.PictureCache.Instance">
+            <summary>
+            Gets the one and only instance of the <see cref="T:Comos.PicturesLibrary.PictureCache"/> class.
+            </summary>
+        </member>
+        <member name="P:Comos.PicturesLibrary.PictureCache.IsDisposed">
+            <summary>
+            Gets a value indicating whether this instance is disposed.
+            </summary>
+            <value>
+            <c>true</c> if this instance is disposed; otherwise, <c>false</c>.
+            </value>
+        </member>
+        <member name="P:Comos.PicturesLibrary.PictureCache.Item(System.String)">
+            <summary>
+            Gets the <see cref="T:System.Windows.Media.Imaging.BitmapImage"/> with the specified key.
+            </summary>
+            <value></value>
+            <param name="key">The key of the picture which shoul be returned.</param>
+            <returns>
+            The <see cref="T:System.Windows.Media.Imaging.BitmapImage"/> dedicated 
+            to the specified key if it exists otherwise null (<b>Nothing</b> in Visual Basic).
+            </returns>
+        </member>
+        <member name="M:Comos.PicturesLibrary.PictureCache.AddPicture(System.String,System.Windows.Media.Imaging.BitmapImage)">
+            <summary>
+            Adds a picture to the Cache.
+            </summary>
+            <param name="key">The key for the Picture.</param>
+            <param name="newPicture">The Picture it self.</param>
+        </member>
+        <member name="M:Comos.PicturesLibrary.PictureCache.AddPicture(System.String,System.Windows.Media.Imaging.BitmapImage,System.Nullable{System.DateTime})">
+            <summary>
+            Adds the picture.
+            </summary>
+            <param name="key">The key.</param>
+            <param name="newPicture">The new picture.</param>
+            <param name="timeStamp">The time stamp.</param>
+            <exception cref="T:System.ObjectDisposedException">PictureCache</exception>
+        </member>
+        <member name="M:Comos.PicturesLibrary.PictureCache.InvalidatePicture(System.String,System.DateTime)">
+            <summary>
+            Removes the picture.
+            </summary>
+            <param name="key">The key.</param>
+            <param name="newTimeStamp">The new time stamp.</param>
+        </member>
+        <member name="M:Comos.PicturesLibrary.PictureCache.GetPicture(System.String)">
+            <summary>
+            Gets the picture.
+            </summary>
+            <param name="key">The key.</param>
+            <returns></returns>
+        </member>
+        <member name="M:Comos.PicturesLibrary.PictureCache.GetWpfPicture(System.String)">
+            <summary>
+            Gets the WPF picture.
+            </summary>
+            <param name="key">The key.</param>
+            <returns></returns>
+        </member>
+        <member name="M:Comos.PicturesLibrary.PictureCache.Dispose">
+            <summary>
+            Performs application-defined tasks associated with freeing, releasing, or resetting unmanaged resources.
+            </summary>
+        </member>
+        <member name="M:Comos.PicturesLibrary.PictureCache.Dispose(System.Boolean)">
+            <summary>
+            Releases unmanaged and - optionally - managed resources
+            </summary>
+            <param name="disposing"><c>true</c> to release both managed and unmanaged resources; <c>false</c> to release only unmanaged resources.</param>
+        </member>
+        <member name="T:Comos.PicturesLibrary.PictureCache.CacheEntry">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="M:Comos.PicturesLibrary.PictureCache.CacheEntry.#ctor">
+            <summary>
+            Initializes a new instance of the <see cref="T:Comos.PicturesLibrary.PictureCache.CacheEntry"/> class.
+            </summary>
+        </member>
+        <member name="P:Comos.PicturesLibrary.PictureCache.CacheEntry.WpfImage">
+            <summary>
+            Gets or sets the image.
+            </summary>
+            <value>
+            The image.
+            </value>
+        </member>
+        <member name="P:Comos.PicturesLibrary.PictureCache.CacheEntry.TimeStamp">
+            <summary>
+            Gets or sets the time stamp.
+            </summary>
+            <value>
+            The time stamp.
+            </value>
+        </member>
+        <member name="T:Comos.PicturesLibrary.PictureKeyGenerator">
+            <summary>
+            Provides fuctionality for generating keys in different ways which than can be
+            used to find the correct picture.
+            </summary>
+        </member>
+        <!-- Badly formed XML comment ignored for member "M:Comos.PicturesLibrary.PictureKeyGenerator.KeyByKey(System.String)" -->
+        <member name="M:Comos.PicturesLibrary.PictureKeyGenerator.KeyByObject(Plt.IComosBaseObject)">
+            <summary>
+            Gets the picture key assigned to the passed
+            in <see cref="T:Plt.IComosBaseObject"/>.
+            </summary>
+            <param name="comosObject">The <see cref="T:Plt.IComosBaseObject"/>
+            for which the picture key should be returned.</param>
+            <returns>
+            The picture key assigned to the passed
+            in <see cref="T:Plt.IComosBaseObject"/>.
+            </returns>
+        </member>
+        <member name="M:Comos.PicturesLibrary.PictureKeyGenerator.KeyByObject(Plt.IComosBaseObject,System.Boolean,System.Boolean)">
+            <summary>
+            Gets the picture key assigned to the passed
+            in <see cref="T:Plt.IComosBaseObject"/>.
+            </summary>
+            <param name="comosObject">
+            The <see cref="T:Plt.IComosBaseObject"/>
+            for which the picture key should be returned.
+            </param>
+            <param name="isDevice">
+            Indicates whether the generared picture key should 
+            be generated for a device or not.
+            </param>
+            <param name="originalOnly">
+            Indicates whether the retunred picture should be the 
+            original or not. That means that no dyed or combined 
+            picture will be returned.
+            </param>
+            <returns>
+            The picture key assigned to the passed
+            in <see cref="T:Plt.IComosBaseObject"/>.
+            </returns>
+        </member>
+        <member name="M:Comos.PicturesLibrary.PictureKeyGenerator.KeyForDocument(Plt.IComosDDocument)">
+            <summary>
+            Gets the picture key for the passed in <see cref="T:Plt.IComosDDocument"/>.
+            </summary>
+            <param name="comosDoc">The comos document for which the picture key should be generated.</param>
+            <returns>The picture key for the passed in <see cref="T:Plt.IComosDDocument"/>.</returns>
+        </member>
+        <member name="M:Comos.PicturesLibrary.PictureKeyGenerator.KeyForGeneralDocument(Plt.IComosDDocument)">
+            <summary>
+            Gets the picture key for the passed in <see cref="T:Plt.IComosDDocument"/>. 
+            This document should be of the Type: 
+            <see cref="F:Plt.CDeviceConstants.DocumentTypeGeneralDocument">DocumentTypeGeneralDocument</see>
+            otherwise <see cref="F:System.String.Empty"/> will be returned.
+            </summary>
+            <param name="comosDoc">
+            The comos document for which the picture key should be generated.
+            This document should be of the Type: 
+            <see cref="F:Plt.CDeviceConstants.DocumentTypeGeneralDocument">DocumentTypeGeneralDocument</see>
+            otherwise <see cref="F:System.String.Empty"/> will be returned.
+            </param>
+            <returns>
+            The picture key for the passed in <see cref="T:Plt.IComosDDocument"/>.
+            If the passed in <see cref="T:Plt.IComosDDocument"/> isn't of the Type:
+            <see cref="F:Plt.CDeviceConstants.DocumentTypeGeneralDocument">DocumentTypeGeneralDocument</see>
+            <c>null</c> (<b>Nothing</b> in VisualBasic) will be returned.
+            </returns>
+            IVO RQ949611 07.04.2014: so genannte Netlogin Dokumente haben den gleichen Type wie DDM-Dokumente, 
+        </member>
+        <member name="M:Comos.PicturesLibrary.PictureKeyGenerator.KeyForDocumentType(Plt.IComosDDocumentType)">
+            <summary>
+            Gets the key for the document type.
+            </summary>
+            <param name="comosDocType">Type of the comos document.</param>
+            <returns>The key for the document type.</returns>
+        </member>
+        <member name="M:Comos.PicturesLibrary.PictureKeyGenerator.KeyForDeviceOrCDevice(Plt.IComosBaseObject,System.Boolean)">
+            <summary>
+            Gets a picture key for a device or cdevice.
+            </summary>
+            <param name="comosObject">The device or cdevice.</param>
+            <param name="isDevice">
+            Indicates whether the generared picture key should 
+            be generated for a device or not.
+            </param>
+            <returns>The generated picture key.</returns>
+        </member>
+        <member name="M:Comos.PicturesLibrary.PictureKeyGenerator.KeyForUser(Plt.IComosDUser)">
+            <summary>
+            Gets the picture key for the user.
+            </summary>
+            <param name="comosUser">The comos user.</param>
+            <returns>The key for the user.</returns>
+        </member>
+        <member name="M:Comos.PicturesLibrary.PictureKeyGenerator.KeyForCustomPicture(Plt.IComosBaseObject,System.Boolean)">
+            <summary>
+            Gets the picture key for a custom picture.
+            </summary>
+            <param name="comosObject">The comos object.</param>
+            <param name="original">if set to <c>true</c> the key for the original picture is returned.</param>
+            <returns>The picture key for a custem picture.</returns>
+        </member>
+        <member name="M:Comos.PicturesLibrary.PictureKeyGenerator.KeyForIconUnderProject(Plt.IComosDCDevice,System.Windows.Media.SolidColorBrush)">
+            <summary>
+            Gets the picture key for the icon under a project.
+            </summary>
+            <param name="comosObject">The comos object.</param>
+            <param name="brush">The brush.</param>
+            <returns>The picture key for the icon under a project.</returns>
+        </member>
+        <member name="M:Comos.PicturesLibrary.PictureKeyGenerator.KeyForOrigUserPicture(Plt.IComosDProject,System.String)">
+            <summary>
+            Gets a key for the original user picture. 
+            This key doesn't contain color information or something like that.
+            </summary>
+            <param name="project">The <see cref="T:Plt.IComosDProject"/> where to find the icon.</param>
+            <param name="iconFileName">The releative path to the icon under the project</param>
+            <returns>The key for the original user picture. </returns>
+        </member>
+        <member name="M:Comos.PicturesLibrary.PictureKeyGenerator.KeyForDevice(System.String,System.String,Comos.PicturesLibrary.ExtendedInfo)">
+            <summary>
+            Gets the picture key assigned to the passed in
+            Device class and detail class coresponding to the
+            specified <see cref="T:Comos.PicturesLibrary.ExtendedInfo"/>.
+            </summary>
+            <param name="deviceCass">The class of a Device.</param>
+            <param name="subClass">The detail class of a Device.</param>
+            <param name="extendedInfo">One of the values of <see cref="T:Comos.PicturesLibrary.ExtendedInfo"/>.</param>
+            <returns>
+            The picture key assigned to the passed in
+            Device class and detail class coresponding to the
+            specified <see cref="T:Comos.PicturesLibrary.ExtendedInfo"/>.
+            </returns>
+        </member>
+        <member name="M:Comos.PicturesLibrary.PictureKeyGenerator.KeyForDeviceByCDevice(Plt.IComosDCDevice,System.Boolean)">
+            <summary>
+            Gets a picture key for a Device by CDevice.
+            </summary>
+            <param name="cdevice">The cdevice.</param>
+            <param name="originalOnly">
+            Indicates whether the retunred picture should be the 
+            original or not. That means that no dyed or combined 
+            picture will be returned.
+            </param>
+            <returns>
+            The picture key for the Device by CDevice.
+            </returns>
+        </member>
+        <member name="M:Comos.PicturesLibrary.PictureKeyGenerator.KeyForCDevice(System.String,System.String,Comos.PicturesLibrary.ExtendedInfo)">
+            <summary>
+            Gets the picture key assigned to the passed in
+            CDevice class and detail class coresponding to the
+            specified <see cref="T:Comos.PicturesLibrary.ExtendedInfo"/>.
+            </summary>
+            <param name="cdeviceCass">The class of a CDevice.</param>
+            <param name="subClass">The detail class of a CDevice.</param>
+            <param name="extendedInfo">One of the values of <see cref="T:Comos.PicturesLibrary.ExtendedInfo"/>.</param>
+            <returns>
+            The picture key assigned to the passed in
+            CDevice class and detail class coresponding to the
+            specified <see cref="T:Comos.PicturesLibrary.ExtendedInfo"/>.
+            </returns>
+        </member>
+        <member name="M:Comos.PicturesLibrary.PictureKeyGenerator.KeyForSpecification(System.String)">
+            <summary>
+            Gets the picture key assigned to the passed in
+            Unit of a Specification/Attribute.
+            </summary>
+            <param name="specUnit">The Unit of the Specification/Attribute for which
+            the key should be generated.</param>
+            <returns>
+            The picture key assigned to the passed in
+            Unit of a Specification/Attribute.
+            </returns>
+        </member>
+        <member name="M:Comos.PicturesLibrary.PictureKeyGenerator.KeyForDocument(System.String)">
+            <summary>
+            Gets the picture key assigned to the passed in
+            DocumentTypeName.
+            </summary>
+            <param name="documentTypeName">The DocumentTypeName for which the key
+            should be generated.</param>
+            <returns>
+            The picture key assigned to the passed in
+            DocumentTypeName.
+            </returns>
+        </member>
+        <member name="M:Comos.PicturesLibrary.PictureKeyGenerator.KeyForConnector(System.String)">
+            <summary>
+            Gets the picture key assigned to the passed in
+            Connector Layer.
+            </summary>
+            <param name="layer">The Connector Layer for which the key
+            should be generated.</param>
+            <returns>
+            The picture key assigned to the passed in
+            Connector Layer.
+            </returns>
+        </member>
+        <member name="M:Comos.PicturesLibrary.PictureKeyGenerator.KeyForCombinedPicture(System.String,System.String)">
+            <summary>
+            Gets a picture key for a combined picture.
+            </summary>
+            <param name="originalKey">The picture key of the original picture.</param>
+            <param name="combineKey">The picture key of the picture which is layed over the original.</param>
+            <returns>The picture key for the combine picture.</returns>
+        </member>
+        <member name="M:Comos.PicturesLibrary.PictureKeyGenerator.KeyInNewColor(System.String,System.Windows.Media.SolidColorBrush)">
+            <summary>
+            Gets the picture key assigned to the specified
+            key with new color information.
+            </summary>
+            <param name="key">The key of the picture which should be dyed.</param>
+            <param name="color">The brush in which the picture
+            should be dyed.</param>
+            <returns>
+            The picture key assigned to the specified
+            key with new color information.
+            </returns>
+        </member>
+        <member name="M:Comos.PicturesLibrary.PictureKeyGenerator.KeyForWindowsIcon(System.String)">
+            <summary>
+            Gets a picture key for a icon returned by Windows.
+            </summary>
+            <param name="filePath">The file path.</param>
+            <returns>The generated picture key.</returns>
+        </member>
+        <member name="M:Comos.PicturesLibrary.PictureKeyGenerator.KeyByParameters(System.String,System.String,System.String,System.Windows.Media.SolidColorBrush,Comos.PicturesLibrary.ExtendedInfo)">
+            <summary>
+            Build a valid picture key by means of the parameters.
+            </summary>
+            <param name="systemTypeName">Name of the system type.</param>
+            <param name="param1">The param1. Mostly something like a Class of a Device/CDevice or the Layer.</param>
+            <param name="param2">The param2. Mostly something like a Detail Class of a Device/CDevice.</param>
+            <param name="color">The brush for the color information.</param>
+            <param name="extendedInfo">The extended info.</param>
+            <returns>
+            A valid picture key build by means of parameters.
+            </returns>
+        </member>
+        <member name="M:Comos.PicturesLibrary.PictureKeyGenerator.GetExistingKeyByParameters(System.String,System.String,System.String,System.Windows.Media.SolidColorBrush,Comos.PicturesLibrary.ExtendedInfo)">
+            <summary>
+            Gets the existing key by parameters.
+            </summary>
+            <param name="systemTypeName">Name of the system type.</param>
+            <param name="param1">The param1.</param>
+            <param name="param2">The param2.</param>
+            <param name="color">The color.</param>
+            <param name="extendedInfo">The extended info.</param>
+            <returns>The generated key.</returns>
+        </member>
+        <member name="M:Comos.PicturesLibrary.PictureKeyGenerator.GetKeyByParameters(System.String,System.String,System.String,System.Windows.Media.SolidColorBrush,Comos.PicturesLibrary.ExtendedInfo)">
+            <summary>
+            Build a valid picture key by means of parameters.
+            </summary>
+            <param name="systemTypeName">Name of the system type.</param>
+            <param name="param1">The param1. Mostly something like a Class of a Device/CDevice or the Layer.</param>
+            <param name="param2">The param2. Mostly something like a Detail Class of a Device/CDevice.</param>
+            <param name="color">The color.</param>
+            <param name="extendedInfo">The extended info.</param>
+            <returns>a valid picture key build by means of parameters.</returns>
+        </member>
+        <member name="M:Comos.PicturesLibrary.PictureKeyGenerator.CreateKey(System.Collections.Generic.IEnumerable{System.String})">
+            <summary>
+            Creates the key.
+            </summary>
+            <param name="keyParameters">The key parameters.</param>
+            <returns>The generated key.</returns>
+        </member>
+        <member name="M:Comos.PicturesLibrary.PictureKeyGenerator.RemoveSuperfluousSeparators(System.Text.StringBuilder@)">
+            <summary>
+            Removes the superfluous separators.
+            </summary>
+            <param name="keyBuilder">The keyBuilder.</param>
+        </member>
+        <member name="M:Comos.PicturesLibrary.PictureKeyGenerator.GetNextKey(System.String)">
+            <summary>
+            Gets the next key. 
+            </summary>
+            <param name="key">The picture key.</param>
+            <returns>The neyt key.</returns>
+        </member>
+        <member name="M:Comos.PicturesLibrary.PictureKeyGenerator.GetKeyWithStatusCheck(System.String,Plt.IComosBaseObject)">
+            <summary>
+            Gets the key with status check.
+            </summary>
+            <param name="key">The picture key.</param>
+            <param name="comosObject">The comos object.</param>
+            <returns>The checked key.</returns>
+        </member>
+        <member name="M:Comos.PicturesLibrary.PictureKeyGenerator.GetCombiKeyOnly(System.String,Plt.IComosBaseObject)">
+            <summary>
+            Checks if it is necessary to combine the picture.
+            </summary>
+            <param name="key">The picture key.</param>
+            <param name="comosObject">The comos object.</param>
+            <returns>The checked and maybe manipulated key.</returns>
+        </member>
+        <member name="M:Comos.PicturesLibrary.PictureKeyGenerator.GetOrgDoc(Plt.IComosDDocument,System.Boolean@,System.Boolean@)">
+            <summary>
+            Gets the orginal document.
+            </summary>
+            <param name="orgDoc">The document.</param>
+            <param name="docWithLink">if set to <c>true</c> the document is with link.</param>
+            <param name="docWithDDM">if set to <c>true</c> the document is with DDM.</param>
+            <returns>The original document.</returns>
+        </member>
+        <member name="M:Comos.PicturesLibrary.PictureKeyGenerator.GetExtendedInfoForCDevice(Plt.IComosDCDevice)">
+            <summary>
+            Gets the extended information for a CDevice.
+            </summary>
+            <param name="cdev">The CDevice.</param>
+            <returns>The extended information for a CDevice.</returns>
+        </member>
+        <member name="M:Comos.PicturesLibrary.PictureKeyGenerator.GetBrushForCDevice(Comos.PicturesLibrary.ExtendedInfo)">
+            <summary>
+            Gets the brush for a CDevice.
+            </summary>
+            <param name="extInfo">One of the values of <see cref="T:Comos.PicturesLibrary.ExtendedInfo"/>.</param>
+            <returns>
+            The brush in the color which is assosiated with the passed in value of <see cref="T:Comos.PicturesLibrary.ExtendedInfo"/>.
+            </returns>
+        </member>
+        <member name="M:Comos.PicturesLibrary.PictureKeyGenerator.GetKeyPrefix(System.String)">
+            <summary>
+            Gets the key prefix.
+            </summary>
+            <param name="iconFileName">Name of the icon file.</param>
+            <returns>The key prefix.</returns>
+        </member>
+        <member name="M:Comos.PicturesLibrary.PictureKeyGenerator.GetRessourcePicKey(System.String,System.String)">
+            <summary>
+            Gets the ressource pic key.
+            </summary>
+            <param name="iconFileName">Name of the icon file.</param>
+            <param name="prefix">The key prefix.</param>
+            <returns>The ressource pic key.</returns>
+        </member>
+        <member name="M:Comos.PicturesLibrary.PictureKeyGenerator.GetFullFileNameForDDM(Plt.IComosDDocument)">
+            <summary>
+            Gets the full file name for DDM.
+            </summary>
+            <param name="comosDoc">The comos document.</param>
+            <returns>The full file name for DDM</returns>
+        </member>
+        <member name="M:Comos.PicturesLibrary.PictureKeyGenerator.GetDDMStatus(Plt.IComosDDocument)">
+            <summary>
+            Gets the DDM status for a document.
+            </summary>
+            <param name="orgDoc">The orginal document.</param>
+            <returns>The DDM status for the document</returns>
+        </member>
+        <member name="M:Comos.PicturesLibrary.PictureKeyGenerator.GetOwnerWithIcon(Plt.IComosDCDevice)">
+            <summary>
+            Gets the owner of the specified <see cref="T:Plt.IComosDCDevice"/>
+            which has a IconFileName set.
+            </summary>
+            <param name="cdevice">The cdevice for which the owner with IconFileName should be returned.</param>
+            <returns>
+            The owner of the specified <see cref="T:Plt.IComosDCDevice"/>
+            which has a IconFileName set.
+            </returns>
+        </member>
+        <member name="M:Comos.PicturesLibrary.PictureKeyGenerator.GetBrushFromKey(System.String)">
+            <summary>
+            Gets the brush from a picture key.
+            </summary>
+            <param name="key">The picture key.</param>
+            <returns>The brush from a picture key.</returns>
+        </member>
+        <member name="M:Comos.PicturesLibrary.PictureKeyGenerator.GetOrigKey(System.String)">
+            <summary>
+            Gets the original picture key.
+            </summary>
+            <param name="key">The picture key.</param>
+            <returns>The original picture key.</returns>
+        </member>
+        <member name="M:Comos.PicturesLibrary.PictureKeyGenerator.GetUidFromKey(System.String,System.Int32@,System.Int32@)">
+            <summary>
+            Gets the uid from key.
+            </summary>
+            <param name="key">The picture key.</param>
+            <param name="commaIndex">Index of the comma.</param>
+            <param name="underscoreIndex">Index of the underscore.</param>
+            <returns>A UID which was stored within the key.</returns>
+        </member>
+        <member name="M:Comos.PicturesLibrary.PictureKeyGenerator.IsWOBillOfMaterial(Plt.IComosDWorkingOverlay)">
+            <summary>
+            Determines whether [is WO bill of material] [the specified working overlay].
+            </summary>
+            <param name="workingOverlay">The working overlay.</param>
+            <returns>
+            	<c>true</c> if [is WO bill of material] [the specified working overlay]; otherwise, <c>false</c>.
+            </returns>
+        </member>
+        <member name="M:Comos.PicturesLibrary.PictureKeyGenerator.IsKeyWithColor(System.String,System.String)">
+            <summary>
+            Determines whether the key is with color information.
+            </summary>
+            <param name="key">The key.</param>
+            <param name="assumedColorInfo">The assumed color info.</param>
+            <returns>
+            	<c>true</c> if the key is with color information; otherwise, <c>false</c>.
+            </returns>
+            <history>
+            [CEA 2010-09-17 F20787]
+            Created.
+            Es gibt Icons mit einer Zahl am ende, diese wurde dann fälschlicher Weise 
+            als Farbe interpretiert, daher hier die anzahl der Kommata prüfen.
+            </history>
+        </member>
+        <member name="T:Comos.PicturesLibrary.IPictures">
+            <summary>
+            COM-Interface for the <see cref="T:Comos.PicturesLibrary.Pictures"/> class.
+            </summary>
+        </member>
+        <member name="M:Comos.PicturesLibrary.IPictures.PictureByKey(System.String)">
+            <summary>
+            Gets the Picture assigned to the specified key.
+            </summary>
+            <param name="pictureKey">The key of the picture.</param>
+            <returns>
+            A <see cref="T:System.Windows.Media.Imaging.BitmapImage"/> instance
+            containing the key assigned picture or the std_NoSymbol icon if the picture
+            with the specified key was not found.
+            </returns>
+        </member>
+        <member name="M:Comos.PicturesLibrary.IPictures.OLEPictureByKey(System.String)">
+            <summary>
+            Gets the picture assigned to the specified key as <see cref="T:stdole.StdPicture"/>.
+            </summary>
+            <param name="pictureKey">The key of the picture.</param>
+            <returns>
+            A <see cref="T:stdole.StdPicture"/> instance
+            containing the key assigned picture or the std_NoSymbol icon if the picture
+            with the specified key was not found.
+            </returns>
+        </member>
+        <member name="M:Comos.PicturesLibrary.IPictures.WpfPictureByKey(System.String)">
+            <summary>
+            Gets a <see cref="T:Comos.PicturesLibrary.WpfImage"/> instance containing the Picture 
+            assigned to the specified key.
+            </summary>
+            <param name="pictureKey">The key of the picture.</param>
+            <returns>
+            A <see cref="T:Comos.PicturesLibrary.WpfImage"/> instance
+            containing the key assigned picture or the std_NoSymbol icon if the picture
+            with the specified key was not found.
+            </returns>
+        </member>
+        <member name="M:Comos.PicturesLibrary.IPictures.OLEPictureByObject(Plt.IComosBaseObject)">
+            <summary>
+            Gets the picture assigned to the passed in <see cref="T:Plt.IComosBaseObject"/>
+            as <see cref="T:stdole.StdPicture"/>.
+            </summary>
+            <param name="comosObject">
+            The <see cref="T:Plt.IComosBaseObject"/> 
+            for which the picture should be returned.
+            </param>
+            <returns>
+            A <see cref="T:stdole.StdPicture"/> instance
+            containing the picture assigned to the passed in
+            <see cref="T:Plt.IComosBaseObject"/> or the std_NoSymbol 
+            icon if the picture for the specified object was not found.
+            </returns>
+        </member>
+        <member name="M:Comos.PicturesLibrary.IPictures.OLEPictureByParameters(System.String,System.Int32,System.String,System.String,Comos.PicturesLibrary.ExtendedInfo)">
+            <summary>
+            Gets a picture by means of  the parameters.
+            </summary>
+            <param name="systemTypeName">
+            The SystemTypeName of a comos object for which a pictire is searched.
+            </param>
+            <param name="rgbColor">
+            The color in OLE format in which the picture should appear.
+            Use -1 for the original color of the picture.
+            </param>
+            <param name="param1">
+            A string value. Mostly something like 
+            the class or layer of a <see cref="T:Plt.IComosDDevice"/> or 
+            <see cref="T:Plt.IComosDDevice"/>. Can also be null or empty.
+            </param>
+            <param name="param2">
+            A string value. Mostly something like 
+            the detail class of a <see cref="T:Plt.IComosDDevice"/> or 
+            <see cref="T:Plt.IComosDDevice"/>. Can also be null or empty.
+            </param>
+            <param name="extendedInfo">
+            One of the values of <see cref="T:Comos.PicturesLibrary.ExtendedInfo"/>.
+            </param>
+            <returns>
+            A <see cref="T:stdole.StdPicture"/> instance
+            containing the picture which was found by 
+            means of the parameters or the std_NoSymbol 
+            icon if the picture for the specified parameters was not found.
+            </returns>
+        </member>
+        <member name="M:Comos.PicturesLibrary.IPictures.OLEPictureForDevice(System.String,System.String,Comos.PicturesLibrary.ExtendedInfo)">
+            <summary>
+            Gets the picture assigned to the passed in 
+            Device class and detail class coresponding to the
+            specified <see cref="T:Comos.PicturesLibrary.ExtendedInfo"/>
+            as <see cref="T:stdole.StdPicture"/>.
+            </summary>
+            <param name="deviceCass">The class of a Device.</param>
+            <param name="subClass">The detail class of a Device.</param>
+            <param name="extendedInfo">
+            One of the values of <see cref="T:Comos.PicturesLibrary.ExtendedInfo"/>.
+            </param>
+            <returns>
+            A <see cref="T:stdole.StdPicture"/> instance
+            containing the picture which was found by 
+            means of the parameters or the std_NoSymbol 
+            icon if the picture for the specified parameters was not found.
+            </returns>
+        </member>
+        <member name="M:Comos.PicturesLibrary.IPictures.OLEPictureForCDevice(System.String,System.String,Comos.PicturesLibrary.ExtendedInfo)">
+            <summary>
+            Gets the picture assigned to the passed in 
+            CDevice class and detail class coresponding to the
+            specified <see cref="T:Comos.PicturesLibrary.ExtendedInfo"/>
+            as <see cref="T:stdole.StdPicture"/>.
+            </summary>
+            <param name="cdeviceCass">The class of a CDevice.</param>
+            <param name="subClass">The detail class of a CDevice.</param>
+            <param name="extendedInfo">
+            One of the values of <see cref="T:Comos.PicturesLibrary.ExtendedInfo"/>.
+            </param>
+            <returns>
+            A <see cref="T:stdole.StdPicture"/> instance
+            containing the picture which was found by 
+            means of the parameters or the std_NoSymbol 
+            icon if the picture for the specified parameters was not found.
+            </returns>
+        </member>
+        <member name="M:Comos.PicturesLibrary.IPictures.OLEPictureForSpecification(System.String)">
+            <summary>
+            Gets the picture assigned to the passed in 
+            Unit of a Specification/Attribute.
+            as <see cref="T:stdole.StdPicture"/>.
+            </summary>
+            <param name="specUnit">
+            The Unit of the Specification/Attribute for which
+            the pictur eshould be found.
+            </param>
+            <returns>
+            A <see cref="T:stdole.StdPicture"/> instance
+            containing the picture which was found by 
+            means of the Specification/Attribute unit or 
+            the std_NoSymbol icon if the picture for the 
+            specified unit was not found.
+            </returns>
+        </member>
+        <member name="M:Comos.PicturesLibrary.IPictures.OLEPictureForDocument(System.String)">
+            <summary>
+            Gets the picture assigned to the passed in 
+            DocumentTypeName as <see cref="T:stdole.StdPicture"/>.
+            </summary>
+            <param name="documentTypeName">
+            The DocumentTypeName for which the picture
+            should be found.
+            </param>
+            <returns>
+            A <see cref="T:stdole.StdPicture"/> instance
+            containing the picture assigned to the passed in
+            DocumentTypeName or the std_NoSymbol 
+            icon if the picture for the specified DocumentTypeName was not found.
+            </returns>
+        </member>
+        <member name="M:Comos.PicturesLibrary.IPictures.OLEPictureForConnector(System.String)">
+            <summary>
+            Gets the picture assigned to the passed in 
+            Connector Layer as <see cref="T:stdole.StdPicture"/>.
+            </summary>
+            <param name="layer">
+            The Connector Layer for which the picture
+            should be found.
+            </param>
+            <returns>
+            A <see cref="T:stdole.StdPicture"/> instance
+            containing the picture assigned to the passed in
+            Connector Layer or the std_NoSymbol 
+            icon if the picture for the specified Connector Layer 
+            was not found.
+            </returns>
+        </member>
+        <member name="M:Comos.PicturesLibrary.IPictures.OLECombinedPicture(System.String,System.String)">
+            <summary>
+            Gets a picture which is combined of to
+            as <see cref="T:stdole.StdPicture"/>.
+            The pictures to combine are found by means
+            of the original picture key and combine
+            picture key.
+            </summary>
+            <param name="originalKey">
+            The picture key of the original picture.
+            </param>
+            <param name="combineKey">
+            The picture key of the picture which is layed over the original.
+            </param>
+            <returns>
+            The combined picture.
+            </returns>
+        </member>
+        <member name="M:Comos.PicturesLibrary.IPictures.OLEPictureInNewColor(System.String,System.Int32)">
+            <summary>
+            Gets the picture assigned to the specified key 
+            as <see cref="T:stdole.StdPicture"/>.
+            </summary>
+            <param name="key">
+            The key of the picture which scould be dyed.
+            </param>
+            <param name="rgbColor">
+            The color in OLE format in which the picture
+            should be dyed.
+            </param>
+            <returns>
+            A <see cref="T:stdole.StdPicture"/> instance
+            containing the dyed picture.
+            </returns>
+        </member>
+        <member name="M:Comos.PicturesLibrary.IPictures.KeyByObject(Plt.IComosBaseObject)">
+            <summary>
+            Gets the picture key assigned to the passed 
+            in <see cref="T:Plt.IComosBaseObject"/>.
+            </summary>
+            <param name="comosObject">
+            The <see cref="T:Plt.IComosBaseObject"/> 
+            for which the picture key should be returned.
+            </param>
+            <returns>
+            The picture key assigned to the passed 
+            in <see cref="T:Plt.IComosBaseObject"/>.
+            </returns>
+        </member>
+        <member name="M:Comos.PicturesLibrary.IPictures.KeyByKey(System.String)">
+            <summary>
+            Chacks some creteria on the picture key and returns it.
+            </summary>
+            <param name="key">The picture key to check.</param>
+            <returns>The checkt picture key</returns>
+        </member>
+        <member name="M:Comos.PicturesLibrary.IPictures.KeyByParameters(System.String,System.String,System.String,System.Int32,Comos.PicturesLibrary.ExtendedInfo)">
+            <summary>
+            Build a valid picture key by means of the parameters.
+            </summary>
+            <param name="systemTypeName">Name of the system type.</param>
+            <param name="param1">The param1. Mostly something like a Class of a Device/CDevice or the Layer.</param>
+            <param name="param2">The param2. Mostly something like a Detail Class of a Device/CDevice.</param>
+            <param name="rgbColor">The color in OLE format.</param>
+            <param name="extendedInfo">The extended info.</param>
+            <returns>A valid picture key build by means of parameters.</returns>
+        </member>
+        <member name="M:Comos.PicturesLibrary.IPictures.KeyForDevice(System.String,System.String,Comos.PicturesLibrary.ExtendedInfo)">
+            <summary>
+            Gets the picture key assigned to the passed in 
+            Device class and detail class coresponding to the
+            specified <see cref="T:Comos.PicturesLibrary.ExtendedInfo"/>.
+            </summary>
+            <param name="deviceCass">The class of a Device.</param>
+            <param name="subClass">The detail class of a Device.</param>
+            <param name="extendedInfo">
+            One of the values of <see cref="T:Comos.PicturesLibrary.ExtendedInfo"/>.
+            </param>
+            <returns>
+            The picture key assigned to the passed in 
+            Device class and detail class coresponding to the
+            specified <see cref="T:Comos.PicturesLibrary.ExtendedInfo"/>.
+            </returns>
+        </member>
+        <member name="M:Comos.PicturesLibrary.IPictures.KeyForCDevice(System.String,System.String,Comos.PicturesLibrary.ExtendedInfo)">
+            <summary>
+            Gets the picture key assigned to the passed in 
+            CDevice class and detail class coresponding to the
+            specified <see cref="T:Comos.PicturesLibrary.ExtendedInfo"/>.
+            </summary>
+            <param name="cdeviceCass">The class of a CDevice.</param>
+            <param name="subClass">The detail class of a CDevice.</param>
+            <param name="extendedInfo">
+            One of the values of <see cref="T:Comos.PicturesLibrary.ExtendedInfo"/>.
+            </param>
+            <returns>
+            The picture key assigned to the passed in 
+            CDevice class and detail class coresponding to the
+            specified <see cref="T:Comos.PicturesLibrary.ExtendedInfo"/>.
+            </returns>
+        </member>
+        <member name="M:Comos.PicturesLibrary.IPictures.KeyForSpecification(System.String)">
+            <summary>
+            Gets the picture key assigned to the passed in 
+            Unit of a Specification/Attribute.
+            </summary>
+            <param name="specUnit">
+            The Unit of the Specification/Attribute for which
+            the key should be generated.
+            </param>
+            <returns>
+            The picture key assigned to the passed in 
+            Unit of a Specification/Attribute.
+            </returns>
+        </member>
+        <member name="M:Comos.PicturesLibrary.IPictures.KeyForDocument(System.String)">
+            <summary>
+            Gets the picture key assigned to the passed in 
+            DocumentTypeName.
+            </summary>
+            <param name="documentTypeName">
+            The DocumentTypeName for which the key
+            should be generated.
+            </param>
+            <returns>
+            The picture key assigned to the passed in 
+            DocumentTypeName.
+            </returns>
+        </member>
+        <member name="M:Comos.PicturesLibrary.IPictures.KeyForConnector(System.String)">
+            <summary>
+            Gets the picture key assigned to the passed in 
+            Connector Layer.
+            </summary>
+            <param name="layer">
+            The Connector Layer for which the key
+            should be generated.
+            </param>
+            <returns>
+            The picture key assigned to the passed in 
+            Connector Layer.
+            </returns>
+        </member>
+        <member name="M:Comos.PicturesLibrary.IPictures.KeyCombinedPicture(System.String,System.String)">
+            <summary>
+            Gets a picture key for a combined picture.
+            </summary>
+            <param name="originalKey">
+            The picture key of the original picture.
+            </param>
+            <param name="combineKey">
+            The picture key of the picture which is layed over the original.
+            </param>
+            <returns>
+            The picture key for the combine picture.
+            </returns>
+        </member>
+        <member name="M:Comos.PicturesLibrary.IPictures.KeyInNewColor(System.String,System.Int32)">
+            <summary>
+            Gets the picture key assigned to the specified 
+            key with new color information.
+            </summary>
+            <param name="key">
+            The key of the picture which should be dyed.
+            </param>
+            <param name="rgbColor">
+            The color in OLE format in which the picture
+            should be dyed.
+            </param>
+            <returns>
+            The picture key assigned to the specified 
+            key with new color information.
+            </returns>
+        </member>
+        <member name="P:Comos.PicturesLibrary.IPictures.ActiveStatus">
+            <summary>
+            Gets or sets the status which is currently active in Comos.
+            </summary>
+            <value>The status which is currently active in Comos.</value>
+        </member>
+        <member name="M:Comos.PicturesLibrary.IPictures.ShowStatusLegend">
+            <summary>
+            Shows the status legend.
+            </summary>
+        </member>
+        <member name="M:Comos.PicturesLibrary.IPictures.ShowUserPicSelect(Plt.IComosDCDevice)">
+            <summary>
+            Shows the user pic select window.
+            </summary>
+            <param name="cdevice">
+            The cdevice for which a 
+            icon should be selected by the user.
+            </param>
+            <returns>
+            The dialog result. <c>true</c> if the user clicked ok otherwise <c>false</c>.
+            </returns>
+        </member>
+        <member name="P:Comos.PicturesLibrary.IPictures.DrawnShow">
+            <summary>
+            Gets or sets the currently active drawn show mode
+            which specifies how and if Icons are displayed 
+            with placing information.
+            </summary>
+            <value>
+            The drawn show mode which is currently active in Comos.
+            </value>
+        </member>
+        <member name="M:Comos.PicturesLibrary.IPictures.GetOwnerWithIcon(Plt.IComosDCDevice)">
+            <summary>
+            Gets the owner of the specified <see cref="T:Plt.IComosDCDevice"/>
+            which has a IconFileName set.
+            </summary>
+            <param name="cdevice">
+            The cdevice for which the owner with IconFileName should be returned.
+            </param>
+            <returns>
+            The owner of the specified <see cref="T:Plt.IComosDCDevice"/>
+            which has a IconFileName set.
+            </returns>
+        </member>
+        <member name="M:Comos.PicturesLibrary.IPictures.WpfPictureByObject(Plt.IComosBaseObject)">
+            <summary>
+            Gets the picture assigned to the passed in <see cref="T:Plt.IComosBaseObject"/>
+            as <see cref="T:Comos.PicturesLibrary.WpfImage"/>.
+            </summary>
+            <param name="comosObject">
+            The <see cref="T:Plt.IComosBaseObject"/> 
+            for which the picture should be returned.
+            </param>
+            <returns>
+            A <see cref="T:Comos.PicturesLibrary.WpfImage"/> instance
+            containing the picture assigned to the passed in
+            <see cref="T:Plt.IComosBaseObject"/> or the std_NoSymbol 
+            icon if the picture for the specified object was not found.
+            </returns>
+        </member>
+        <member name="M:Comos.PicturesLibrary.IPictures.WpfPictureByParameters(System.String,System.Int32,System.String,System.String,Comos.PicturesLibrary.ExtendedInfo)">
+            <summary>
+            Gets a picture by means of  the parameters
+            as <see cref="T:Comos.PicturesLibrary.WpfImage"/>
+            </summary>
+            <param name="systemTypeName">
+            The SystemTypeName of a comos object for which a pictire is searched.
+            </param>
+            <param name="rgbColor">
+            The color in OLE format in which the picture should appear.
+            Use -1 for the original color of the picture.
+            </param>
+            <param name="param1">
+            A string value. Mostly something like 
+            the class or layer of a <see cref="T:Plt.IComosDDevice"/> or 
+            <see cref="T:Plt.IComosDDevice"/>. Can also be null or empty.
+            </param>
+            <param name="param2">
+            A string value. Mostly something like 
+            the detail class of a <see cref="T:Plt.IComosDDevice"/> or 
+            <see cref="T:Plt.IComosDDevice"/>. Can also be null or empty.
+            </param>
+            <param name="extendedInfo">
+            One of the values of <see cref="T:Comos.PicturesLibrary.ExtendedInfo"/>.
+            </param>
+            <returns>
+            A <see cref="T:Comos.PicturesLibrary.WpfImage"/> instance
+            containing the picture which was found by 
+            means of the parameters or the std_NoSymbol 
+            icon if the picture for the specified parameters was not found.
+            </returns>
+        </member>
+        <member name="M:Comos.PicturesLibrary.IPictures.RGBColorByStatus(Plt.IComosBaseObject,System.Int32)">
+            <summary>
+            Gets the RGB color by status.
+            </summary>
+            <param name="comosObject">The comos object.</param>
+            <param name="status">The status.</param>
+            <returns>
+            The RGB color assigned to the passed in status corresponding on the comos object.
+            </returns>
+        </member>
+        <member name="M:Comos.PicturesLibrary.IPictures.RGBColorForStatusValue(System.Int32,System.Int32)">
+            <summary>
+            Gets the RGB color for a status value.
+            </summary>
+            <param name="statusValue">The status value.</param>
+            <param name="status">The status.</param>
+            <returns>The RGB color for a status value.</returns>
+        </member>
+        <member name="M:Comos.PicturesLibrary.IPictures.KeyForDeviceByCDevice(Plt.IComosDCDevice,System.Boolean)">
+            <summary>
+            Gets a picture key for a Device by CDevice.
+            </summary>
+            <param name="cdevice">The cdevice.</param>
+            <param name="originalOnly">
+            Indicates whether the retunred picture should be the 
+            original or not. That means that no dyed or combined 
+            picture will be returned.
+            </param>
+            <returns>The picture key for the Device by CDevice.</returns>
+        </member>
+        <member name="M:Comos.PicturesLibrary.IPictures.BitmapByKey(System.String,stdole.StdPicture)">
+            <summary>
+            Gets a <see cref="T:stdole.StdPicture"/> by key in bitmap format.
+            Optional you can pass in a original picture which is used.
+            </summary>
+            <param name="key">The picture key.</param>
+            <param name="orgPicture">The org picture.</param>
+            <returns>
+            A <see cref="T:stdole.StdPicture"/> instance containing the 
+            to the picture key assigned picture in bitmap format.
+            </returns>
+        </member>
+        <member name="M:Comos.PicturesLibrary.IPictures.BitmapByPicture(stdole.StdPicture)">
+            <summary>
+            Converts a <see cref="T:stdole.StdPicture"/> to a <see cref="T:stdole.StdPicture"/> in Bitmap format.
+            </summary>
+            <param name="orgPicture">The orginal picture.</param>
+            <returns>The converted picture</returns>
+        </member>
+        <member name="M:Comos.PicturesLibrary.IPictures.OLEPictureForDeviceByCDevice(Plt.IComosDCDevice,System.Boolean)">
+            <summary>
+            Gets a picture for a Device by CDevice.
+            </summary>
+            <param name="cdevice">The cdevice.</param>
+            <param name="originalOnly">
+            Indicates whether the retunred picture should be the 
+            original or not. That means that no dyed or combined 
+            picture will be returned.
+            </param>
+            <returns>The picture for the Device by CDevice.</returns>
+        </member>
+        <member name="M:Comos.PicturesLibrary.IPictures.OLEWindowsIcon(System.String)">
+            <summary>
+            Gets a icon from Windows as <see cref="T:stdole.IPictureDisp"/>.
+            </summary>
+            <param name="fileName">Name of the file.</param>
+            <returns>A icon from Windows as <see cref="T:stdole.IPictureDisp"/>.</returns>
+        </member>
+        <member name="M:Comos.PicturesLibrary.IPictures.ConvertWpfImageToOlePicture(Comos.PicturesLibrary.IWpfImage)">
+            <summary>
+            Converts a <see cref="T:Comos.PicturesLibrary.WpfImage"/> to a <see cref="T:stdole.StdPicture"/>.
+            </summary>
+            <param name="wpfImage">The <see cref="T:Comos.PicturesLibrary.WpfImage"/> instance to convert.</param>
+            <returns>
+            The converted image as <see cref="T:stdole.StdPicture"/> 
+            if the conversion was successful; otherwise <c>null</c> (<b>Nothing</b> in Visual Basic).
+            </returns>
+        </member>
+        <member name="M:Comos.PicturesLibrary.IPictures.ConvertOlePictureToWpfImage(stdole.StdPicture)">
+            <summary>
+            Converts a <see cref="T:stdole.StdPicture"/> to a <see cref="T:Comos.PicturesLibrary.WpfImage"/>.
+            </summary>
+            <param name="olePicture">The <see cref="T:stdole.StdPicture"/> instance to convert.</param>
+            <returns>
+            The converted image as <see cref="T:Comos.PicturesLibrary.WpfImage"/> 
+            if the conversion was successful; otherwise <c>null</c> (<b>Nothing</b> in Visual Basic).
+            </returns>
+        </member>
+        <member name="M:Comos.PicturesLibrary.IPictures.KeyForWindowsIcon(System.String)">
+            <summary>
+            Gets a picture keys for a windows icon.
+            </summary>
+            <param name="fileName">The Name of the file.</param>
+            <returns>The picture keys for the windows icon.</returns>
+        </member>
+        <member name="M:Comos.PicturesLibrary.IPictures.WpfLoadPicture(System.String)">
+            <summary>
+            Loads a picture from a file as <see cref="T:Comos.PicturesLibrary.WpfImage"/>.
+            </summary>
+            <param name="path">The path to the picture file.</param>
+            <returns>A picture loaded from a file as <see cref="T:Comos.PicturesLibrary.WpfImage"/>.</returns>
+        </member>
+        <member name="M:Comos.PicturesLibrary.IPictures.PictureExistsByKey(System.String)">
+            <summary>
+            Gets a value indicating the requested picture exists or not.
+            </summary>
+            <param name="pictureKey">The picture key.</param>
+            <returns><c>true</c> if the requested picture exists; otherwise <c>false</c>.</returns>
+        </member>
+        <member name="M:Comos.PicturesLibrary.IPictures.RGBColorForWoLevel(Plt.IComosDProject)">
+            <summary>
+            Gets the RGB color for the Workingoverlay-Level 
+            specified via a <see cref="T:Plt.IComosDProject"/>.
+            Also <c>null</c> (<c>Nothing</c> in Visual Basic) can be passed in, 
+            than the current Project will be used.
+            </summary>
+            <param name="project">The project.</param>
+            <returns>The RGB color for the Workingoverlay-Level.</returns>
+        </member>
+        <member name="M:Comos.PicturesLibrary.IPictures.GetBridgeImageName(System.String)">
+            <summary>
+            Gets the name of the bridge image from new picturesLibrary.
+            It uses old searchString from old PT55/BrideImages.OCX to preserve
+            compatibility with ComosDB's
+            </summary>
+            <param name="oldBrideImagesOcxLookupString">The old (PT55/BrideImages.OCX) BridgeIconName.</param>
+            <returns></returns>
+        </member>
+        <member name="T:Comos.PicturesLibrary.Pictures">
+            <summary>
+            Offers all necessary operations which are required by comos to manage images.
+            </summary>
+        </member>
+        <member name="M:Comos.PicturesLibrary.Pictures.#cctor">
+            <summary>
+            Initializes static members of the <see cref="T:Comos.PicturesLibrary.Pictures"/> class.
+            </summary>
+        </member>
+        <member name="M:Comos.PicturesLibrary.Pictures.#ctor">
+            <summary>
+            Initializes a new instance of the <see cref="T:Comos.PicturesLibrary.Pictures"/> class.
+            </summary>
+        </member>
+        <member name="M:Comos.PicturesLibrary.Pictures.Finalize">
+            <summary>
+            Finalizes an instance of the Pictures class.
+            Also releases unmanaged resources and performs other cleanup operations before the
+            <see cref="T:Comos.PicturesLibrary.Pictures"/> is reclaimed by garbage collection.
+            </summary>
+        </member>
+        <member name="P:Comos.PicturesLibrary.Pictures.Instance">
+            <summary>
+            Gets the one and only instance of the <see cref="T:Comos.PicturesLibrary.Pictures"/> class.
+            </summary>
+            <value>
+            The one and only instance of the <see cref="T:Comos.PicturesLibrary.Pictures"/> class.
+            </value>
+        </member>
+        <member name="P:Comos.PicturesLibrary.Pictures.NoSymbol">
+            <summary>
+            Gets the no symbol.
+            </summary>
+            <value>The no symbol.</value>
+        </member>
+        <member name="P:Comos.PicturesLibrary.Pictures.IsDisposed">
+            <summary>
+            Gets a value indicating whether this instance is disposed.
+            </summary>
+            <value>
+               <c>True</c> if this instance is disposed; otherwise, <c>false</c>.
+            </value>
+        </member>
+        <member name="P:Comos.PicturesLibrary.Pictures.ActiveStatus">
+            <summary>
+            Gets or sets the status which is currently active in Comos.
+            </summary>
+            <value>The status which is currently active in Comos.</value>
+        </member>
+        <member name="P:Comos.PicturesLibrary.Pictures.DrawnShow">
+            <summary>
+            Gets or sets the currently active drawn show mode
+            which specifies how and if Icons are displayed
+            with placing information.
+            </summary>
+            <value>The drawn show mode which is currently active in Comos.</value>
+        </member>
+        <member name="M:Comos.PicturesLibrary.Pictures.Initialize">
+            <summary>
+            Initializes this instance of the <see cref="T:Comos.PicturesLibrary.Pictures"/> class.
+            </summary>
+        </member>
+        <member name="M:Comos.PicturesLibrary.Pictures.PictureByKey(System.String)">
+            <summary>
+            Gets the picture assigned to the specified key.
+            </summary>
+            <param name="key">The key of the picture.</param>
+            <returns>
+            A <see cref="T:System.Windows.Media.Imaging.BitmapImage"/> instance
+            containing the key assigned picture or the std_NoSymbol icon if the picture
+            with the specified key was not found.
+            </returns>
+        </member>
+        <member name="M:Comos.PicturesLibrary.Pictures.PictureByKey(System.String,System.Boolean@)">
+            <summary>
+            Gets the picture assigned to the specified key.
+            </summary>
+            <param name="key">The key of the picture.</param>
+            <param name="pictureFound">[out] indicates whether the picture was found or not.</param>
+            <returns>
+            A <see cref="T:System.Windows.Media.Imaging.BitmapImage"/> instance
+            containing the key assigned picture or the std_NoSymbol icon if the picture
+            with the specified key was not found.
+            </returns>
+        </member>
+        <member name="M:Comos.PicturesLibrary.Pictures.PictureByObject(Plt.IComosBaseObject)">
+            <summary>
+            Gets the picture assigned to the passed in <see cref="T:Plt.IComosBaseObject"/>.
+            </summary>
+            <param name="comosObject">The <see cref="T:Plt.IComosBaseObject"/>
+            for which the picture should be returned.</param>
+            <returns>
+            A <see cref="T:System.Windows.Media.Imaging.BitmapImage"/> instance
+            containing the picture assigned to the passed in
+            <see cref="T:Plt.IComosBaseObject"/> or the std_NoSymbol
+            icon if the picture for the specified object was not found.
+            </returns>
+        </member>
+        <member name="M:Comos.PicturesLibrary.Pictures.PictureByParameters(System.String,System.String,System.String,System.Windows.Media.SolidColorBrush,Comos.PicturesLibrary.ExtendedInfo)">
+            <summary>
+            Gets a picture by means of  the parameters.
+            </summary>
+            <param name="systemTypeName">The SystemTypeName of a comos object for which a pictire is searched.</param>
+            <param name="param1">
+            A string value. Mostly something like
+            the class or layer of a <see cref="T:Plt.IComosDDevice"/> or
+            <see cref="T:Plt.IComosDDevice"/>. Can also be null or empty.
+            </param>
+            <param name="param2">
+            A string value. Mostly something like
+            the detail class of a <see cref="T:Plt.IComosDDevice"/> or
+            <see cref="T:Plt.IComosDDevice"/>. Can also be null or empty.
+            </param>
+            <param name="color">The brush in which the picture should appear.
+            Use -1 for the original color of the picture.
+            </param>
+            <param name="extendedInfo">One of the values of <see cref="T:Comos.PicturesLibrary.ExtendedInfo"/>.</param>
+            <returns>
+            A <see cref="T:System.Windows.Media.Imaging.BitmapImage"/> instance
+            containing the picture which was found by
+            means of the parameters or the std_NoSymbol
+            icon if the picture for the specified parameters was not found.
+            </returns>
+        </member>
+        <member name="M:Comos.PicturesLibrary.Pictures.PictureForDevice(System.String,System.String,Comos.PicturesLibrary.ExtendedInfo)">
+            <summary>
+            Gets the picture assigned to the passed in
+            Device class and detail class coresponding to the
+            specified <see cref="T:Comos.PicturesLibrary.ExtendedInfo"/>.
+            </summary>
+            <param name="deviceCass">The class of a Device.</param>
+            <param name="subClass">The detail class of a Device.</param>
+            <param name="extendedInfo">One of the values of <see cref="T:Comos.PicturesLibrary.ExtendedInfo"/>.</param>
+            <returns>
+            A <see cref="T:System.Windows.Media.Imaging.BitmapImage"/> instance
+            containing the picture which was found by
+            means of the parameters or the std_NoSymbol
+            icon if the picture for the specified parameters was not found.
+            </returns>
+        </member>
+        <member name="M:Comos.PicturesLibrary.Pictures.PictureForCDevice(System.String,System.String,Comos.PicturesLibrary.ExtendedInfo)">
+            <summary>
+            Gets the picture assigned to the passed in
+            CDevice class and detail class coresponding to the
+            specified <see cref="T:Comos.PicturesLibrary.ExtendedInfo"/>.
+            </summary>
+            <param name="cdeviceCass">The class of a CDevice.</param>
+            <param name="subClass">The detail class of a CDevice.</param>
+            <param name="extendedInfo">One of the values of <see cref="T:Comos.PicturesLibrary.ExtendedInfo"/>.</param>
+            <returns>
+            A <see cref="T:System.Windows.Media.Imaging.BitmapImage"/> instance
+            containing the picture which was found by
+            means of the parameters or the std_NoSymbol
+            icon if the picture for the specified parameters was not found.
+            </returns>
+        </member>
+        <member name="M:Comos.PicturesLibrary.Pictures.PictureForSpecification(System.String)">
+            <summary>
+            Gets the picture assigned to the passed in
+            Unit of a Specification/Attribute.
+            </summary>
+            <param name="specUnit">The Unit of the Specification/Attribute for which
+            the pictur eshould be found.</param>
+            <returns>
+            A <see cref="T:System.Windows.Media.Imaging.BitmapImage"/> instance
+            containing the picture which was found by
+            means of the Specification/Attribute unit or
+            the std_NoSymbol icon if the picture for the
+            specified unit was not found.
+            </returns>
+        </member>
+        <member name="M:Comos.PicturesLibrary.Pictures.PictureForDocument(System.String)">
+            <summary>
+            Gets the picture assigned to the passed in
+            DocumentTypeName.
+            </summary>
+            <param name="documentTypeName">The DocumentTypeName for which the picture
+            should be found.</param>
+            <returns>
+            A <see cref="T:System.Windows.Media.Imaging.BitmapImage"/> instance
+            containing the picture assigned to the passed in
+            DocumentTypeName or the std_NoSymbol
+            icon if the picture for the specified DocumentTypeName was not found.
+            </returns>
+        </member>
+        <member name="M:Comos.PicturesLibrary.Pictures.PictureForConnector(System.String)">
+            <summary>
+            Gets the picture assigned to the passed in
+            Connector Layer.
+            </summary>
+            <param name="layer">The Connector Layer for which the picture
+            should be found.</param>
+            <returns>
+            A <see cref="T:System.Windows.Media.Imaging.BitmapImage"/> instance
+            containing the picture assigned to the passed in
+            Connector Layer or the std_NoSymbol
+            icon if the picture for the specified Connector Layer
+            was not found.
+            </returns>
+        </member>
+        <member name="M:Comos.PicturesLibrary.Pictures.PictureForDeviceByCDevice(Plt.IComosDCDevice,System.Boolean)">
+            <summary>
+            Gets a picture for a Device by CDevice.
+            </summary>
+            <param name="cdevice">The cdevice.</param>
+            <param name="originalOnly">
+            Indicates whether the retunred picture should be the 
+            original or not. That means that no dyed or combined 
+            picture will be returned.
+            </param>
+            <returns>The picture for the Device by CDevice.</returns>
+        </member>
+        <member name="M:Comos.PicturesLibrary.Pictures.PictureForIconUnderProject(System.String)">
+            <summary>
+            Gets a picture which is stored in the DocumentDirectory under the project.
+            </summary>
+            <param name="key">The pricture key.</param>
+            <returns>The loaded picture.</returns>
+        </member>
+        <member name="M:Comos.PicturesLibrary.Pictures.CombinedPicture(System.String,System.String)">
+            <summary>
+            Gets a picture which is combined of to.
+            The pictures to combine are found by means
+            of the original picture key and combine
+            picture key.
+            </summary>
+            <param name="originalKey">The picture key of the original picture.</param>
+            <param name="combineKey">The picture key of the picture which is layed over the original.</param>
+            <returns>The combined picture.</returns>
+        </member>
+        <member name="M:Comos.PicturesLibrary.Pictures.PictureInNewColor(System.String,System.Windows.Media.SolidColorBrush)">
+            <summary>
+            Gets the picture assigned to the specified key.
+            </summary>
+            <param name="key">The key of the picture which scould be dyed.</param>
+            <param name="color">
+            The brush in which the picture should be dyed.
+            </param>
+            <returns>
+            A <see cref="T:System.Windows.Media.Imaging.BitmapImage"/> instance
+            containing the dyed picture.
+            </returns>
+        </member>
+        <member name="M:Comos.PicturesLibrary.Pictures.ConvertWpfImageToOlePicture(Comos.PicturesLibrary.IWpfImage)">
+            <summary>
+            Converts a <see cref="T:Comos.PicturesLibrary.WpfImage"/> to a <see cref="T:stdole.StdPicture"/>.
+            </summary>
+            <param name="wpfImage">The <see cref="T:Comos.PicturesLibrary.WpfImage"/> instance to convert.</param>
+            <returns>
+            The converted image as <see cref="T:stdole.StdPicture"/> 
+            if the conversion was successful; otherwise <c>null</c> (<b>Nothing</b> in Visual Basic).
+            </returns>
+        </member>
+        <member name="M:Comos.PicturesLibrary.Pictures.ConvertOlePictureToWpfImage(stdole.StdPicture)">
+            <summary>
+            Converts a <see cref="T:stdole.StdPicture"/> to a <see cref="T:Comos.PicturesLibrary.WpfImage"/>.
+            </summary>
+            <param name="olePicture">The <see cref="T:stdole.StdPicture"/> instance to convert.</param>
+            <returns>
+            The converted image as <see cref="T:Comos.PicturesLibrary.WpfImage"/> 
+            if the conversion was successful; otherwise <c>null</c> (<b>Nothing</b> in Visual Basic).
+            </returns>
+        </member>
+        <member name="M:Comos.PicturesLibrary.Pictures.WindowsIcon(System.String)">
+            <summary>
+            Gets a icon from Windows..
+            </summary>
+            <param name="fileName">Name of the file.</param>
+            <returns>
+            A icon from Windows.
+            </returns>
+        </member>
+        <member name="M:Comos.PicturesLibrary.Pictures.LoadPicture(System.String)">
+            <summary>
+            Loads a picture from a file as <see cref="T:System.Windows.Media.Imaging.BitmapImage"/>.
+            </summary>
+            <param name="path">The path to the picture file.</param>
+            <returns>
+            A picture loaded from a file as <see cref="T:System.Windows.Media.Imaging.BitmapImage"/>.
+            </returns>
+        </member>
+        <member name="M:Comos.PicturesLibrary.Pictures.GetPicture(System.String)">
+            <summary>
+            Gets the picture assigned to the specified picture key.
+            </summary>
+            <param name="key">The picture key</param>
+            <returns>The picture assigned to the specified picture key.</returns>
+        </member>
+        <member name="M:Comos.PicturesLibrary.Pictures.GetOrigPicture(System.String,System.Boolean@)">
+            <summary>
+            Gets the original picture.
+            </summary>
+            <param name="key">
+            The picture key.
+            </param>
+            <param name="isWithColor">
+            [out] If set to <c>true</c> the original picture is stored with color information in the resources.
+            </param>
+            <returns>The original picture.</returns>
+        </member>
+        <member name="M:Comos.PicturesLibrary.Pictures.GetRessourcePicture(System.String)">
+            <summary>
+            Gets a picture assigned to the specified picture key out of the ressources.
+            </summary>
+            <param name="key">The picture key.</param>
+            <returns>
+            The picture assigned to the specified picture key when it was found otherwise <c>null</c>.
+            </returns>
+        </member>
+        <member name="M:Comos.PicturesLibrary.Pictures.InvalidatePictureByPath(System.String)">
+            <summary>
+            Invalidates the picture by path.
+            </summary>
+            <param name="path">The path.</param>
+            <returns></returns>
+        </member>
+        <member name="M:Comos.PicturesLibrary.Pictures.KeyByObject(Plt.IComosBaseObject)">
+            <summary>
+            Gets the picture key assigned to the passed
+            in <see cref="T:Plt.IComosBaseObject"/>.
+            </summary>
+            <param name="comosObject">The <see cref="T:Plt.IComosBaseObject"/>
+            for which the picture key should be returned.</param>
+            <returns>
+            The picture key assigned to the passed
+            in <see cref="T:Plt.IComosBaseObject"/>.
+            </returns>
+        </member>
+        <member name="M:Comos.PicturesLibrary.Pictures.KeyByKey(System.String)">
+            <summary>
+            Chacks some creteria on the picture key and returns it.
+            </summary>
+            <param name="key">The picture key to check.</param>
+            <returns>The checkt picture key</returns>
+        </member>
+        <member name="M:Comos.PicturesLibrary.Pictures.KeyByParameters(System.String,System.String,System.String,System.Int32,Comos.PicturesLibrary.ExtendedInfo)">
+            <summary>
+            Build a valid picture key by means of the parameters.
+            </summary>
+            <param name="systemTypeName">Name of the system type.</param>
+            <param name="param1">The param1. Mostly something like a Class of a Device/CDevice or the Layer.</param>
+            <param name="param2">The param2. Mostly something like a Detail Class of a Device/CDevice.</param>
+            <param name="rgbColor">The color in OLE format.</param>
+            <param name="extendedInfo">The extended info.</param>
+            <returns>
+            A valid picture key build by means of parameters.
+            </returns>
+        </member>
+        <member name="M:Comos.PicturesLibrary.Pictures.KeyByParameters(System.String,System.String,System.String,System.Windows.Media.SolidColorBrush,Comos.PicturesLibrary.ExtendedInfo)">
+            <summary>
+            Build a valid picture key by means of the parameters.
+            </summary>
+            <param name="systemTypeName">Name of the system type.</param>
+            <param name="param1">The param1. Mostly something like a Class of a Device/CDevice or the Layer.</param>
+            <param name="param2">The param2. Mostly something like a Detail Class of a Device/CDevice.</param>
+            <param name="color">The brush which is used.</param>
+            <param name="extendedInfo">The extended info.</param>
+            <returns>
+            A valid picture key build by means of parameters.
+            </returns>
+        </member>
+        <member name="M:Comos.PicturesLibrary.Pictures.KeyForDevice(System.String,System.String,Comos.PicturesLibrary.ExtendedInfo)">
+            <summary>
+            Gets the picture key assigned to the passed in
+            Device class and detail class coresponding to the
+            specified <see cref="T:Comos.PicturesLibrary.ExtendedInfo"/>.
+            </summary>
+            <param name="deviceCass">The class of a Device.</param>
+            <param name="subClass">The detail class of a Device.</param>
+            <param name="extendedInfo">One of the values of <see cref="T:Comos.PicturesLibrary.ExtendedInfo"/>.</param>
+            <returns>
+            The picture key assigned to the passed in
+            Device class and detail class coresponding to the
+            specified <see cref="T:Comos.PicturesLibrary.ExtendedInfo"/>.
+            </returns>
+        </member>
+        <member name="M:Comos.PicturesLibrary.Pictures.KeyForCDevice(System.String,System.String,Comos.PicturesLibrary.ExtendedInfo)">
+            <summary>
+            Gets the picture key assigned to the passed in
+            CDevice class and detail class coresponding to the
+            specified <see cref="T:Comos.PicturesLibrary.ExtendedInfo"/>.
+            </summary>
+            <param name="cdeviceCass">The class of a CDevice.</param>
+            <param name="subClass">The detail class of a CDevice.</param>
+            <param name="extendedInfo">One of the values of <see cref="T:Comos.PicturesLibrary.ExtendedInfo"/>.</param>
+            <returns>
+            The picture key assigned to the passed in
+            CDevice class and detail class coresponding to the
+            specified <see cref="T:Comos.PicturesLibrary.ExtendedInfo"/>.
+            </returns>
+        </member>
+        <member name="M:Comos.PicturesLibrary.Pictures.KeyForSpecification(System.String)">
+            <summary>
+            Gets the picture key assigned to the passed in
+            Unit of a Specification/Attribute.
+            </summary>
+            <param name="specUnit">The Unit of the Specification/Attribute for which
+            the key should be generated.</param>
+            <returns>
+            The picture key assigned to the passed in
+            Unit of a Specification/Attribute.
+            </returns>
+        </member>
+        <member name="M:Comos.PicturesLibrary.Pictures.KeyForDocument(System.String)">
+            <summary>
+            Gets the picture key assigned to the passed in
+            DocumentTypeName.
+            </summary>
+            <param name="documentTypeName">The DocumentTypeName for which the key
+            should be generated.</param>
+            <returns>
+            The picture key assigned to the passed in
+            DocumentTypeName.
+            </returns>
+        </member>
+        <member name="M:Comos.PicturesLibrary.Pictures.KeyForConnector(System.String)">
+            <summary>
+            Gets the picture key assigned to the passed in
+            Connector Layer.
+            </summary>
+            <param name="layer">The Connector Layer for which the key
+            should be generated.</param>
+            <returns>
+            The picture key assigned to the passed in
+            Connector Layer.
+            </returns>
+        </member>
+        <member name="M:Comos.PicturesLibrary.Pictures.KeyCombinedPicture(System.String,System.String)">
+            <summary>
+            Gets a picture key for a combined picture.
+            </summary>
+            <param name="originalKey">The picture key of the original picture.</param>
+            <param name="combineKey">The picture key of the picture which is layed over the original.</param>
+            <returns>The picture key for the combine picture.</returns>
+        </member>
+        <member name="M:Comos.PicturesLibrary.Pictures.KeyInNewColor(System.String,System.Int32)">
+            <summary>
+            Gets the picture key assigned to the specified
+            key with new color information.
+            </summary>
+            <param name="key">The key of the picture which should be dyed.</param>
+            <param name="rgbColor">The color in OLE format in which the picture
+            should be dyed.</param>
+            <returns>
+            The picture key assigned to the specified
+            key with new color information.
+            </returns>
+        </member>
+        <member name="M:Comos.PicturesLibrary.Pictures.KeyInNewColor(System.String,System.Windows.Media.SolidColorBrush)">
+            <summary>
+            Gets the picture key assigned to the specified
+            key with new color information.
+            </summary>
+            <param name="key">The key of the picture which should be dyed.</param>
+            <param name="color">The brush in which the picture
+            should be dyed.</param>
+            <returns>
+            The picture key assigned to the specified
+            key with new color information.
+            </returns>
+        </member>
+        <member name="M:Comos.PicturesLibrary.Pictures.ShowStatusLegend">
+            <summary>
+            Shows the status legend.
+            </summary>
+        </member>
+        <member name="M:Comos.PicturesLibrary.Pictures.ShowUserPicSelect(Plt.IComosDCDevice)">
+            <summary>
+            Shows the user pic select window.
+            </summary>
+            <param name="cdevice">The cdevice for which a
+            icon should be selected by the user.</param>
+            <returns>
+            The dialog result. <c>true</c> if the user clicked ok otherwise <c>false</c>.
+            </returns>
+        </member>
+        <member name="M:Comos.PicturesLibrary.Pictures.GetOwnerWithIcon(Plt.IComosDCDevice)">
+            <summary>
+            Gets the owner of the specified <see cref="T:Plt.IComosDCDevice"/>
+            which has a IconFileName set.
+            </summary>
+            <param name="cdevice">The cdevice for which the owner with IconFileName should be returned.</param>
+            <returns>
+            The owner of the specified <see cref="T:Plt.IComosDCDevice"/>
+            which has a IconFileName set.
+            </returns>
+        </member>
+        <member name="M:Comos.PicturesLibrary.Pictures.GetBrushByStatus(Plt.IComosBaseObject,System.Int32)">
+            <summary>
+            Gets the RGB color by status.
+            </summary>
+            <param name="comosObject">The comos object.</param>
+            <param name="status">The status.</param>
+            <returns>
+            The brush assigned to the passed in status corresponding on the comos object.
+            </returns>
+        </member>
+        <member name="M:Comos.PicturesLibrary.Pictures.GetBrushForStatusValue(System.Int32,System.Int32)">
+            <summary>
+            Gets the RGB color for a status value.
+            </summary>
+            <param name="statusValue">The status value.</param>
+            <param name="status">The status.</param>
+            <returns>The brush for a status value.</returns>
+        </member>
+        <member name="M:Comos.PicturesLibrary.Pictures.GetBrushForWoLevel(Plt.IComosDProject)">
+            <summary>
+            Gets the <see cref="T:System.Windows.Media.SolidColorBrush"/> for the Workingoverlay-Level
+            specified via a <see cref="T:Plt.IComosDProject"/>.
+            Also <c>null</c> (<c>Nothing</c> in Visual Basic) can be passed in,
+            than the current Project will be used.
+            </summary>
+            <param name="project">The project.</param>
+            <returns>
+            The <see cref="T:System.Windows.Media.SolidColorBrush"/> for the Workingoverlay-Level.
+            </returns>
+        </member>
+        <member name="M:Comos.PicturesLibrary.Pictures.KeyForDeviceByCDevice(Plt.IComosDCDevice,System.Boolean)">
+            <summary>
+            Gets a picture key for a Device by CDevice.
+            </summary>
+            <param name="cdevice">The cdevice.</param>
+            <param name="originalOnly">
+            Indicates whether the retunred picture should be the 
+            original or not. That means that no dyed or combined 
+            picture will be returned.
+            </param>
+            <returns>
+            The picture key for the Device by CDevice.
+            </returns>
+        </member>
+        <member name="M:Comos.PicturesLibrary.Pictures.KeyForWindowsIcon(System.String)">
+            <summary>
+            Gets a picture keys for a windows icon.
+            </summary>
+            <param name="fileName">The Name of the file.</param>
+            <returns>The picture keys for the windows icon.</returns>
+        </member>
+        <member name="M:Comos.PicturesLibrary.Pictures.PictureExistsByKey(System.String)">
+            <summary>
+            Gets a value indicating the requested picture exists or not.
+            </summary>
+            <param name="pictureKey">The picture key.</param>
+            <returns>
+            	<c>true</c> if the requested picture exists; otherwise <c>false</c>.
+            </returns>
+        </member>
+        <member name="M:Comos.PicturesLibrary.Pictures.OLEPictureByKey(System.String)">
+            <summary>
+            Gets the picture assigned to the specified key as <see cref="T:stdole.StdPicture"/>.
+            </summary>
+            <param name="pictureKey">The key of the picture.</param>
+            <returns>
+            A <see cref="T:stdole.StdPicture"/> instance
+            containing the key assigned picture or the std_NoSymbol icon if the picture
+            with the specified key was not found.
+            </returns>
+        </member>
+        <member name="M:Comos.PicturesLibrary.Pictures.OLEPictureByObject(Plt.IComosBaseObject)">
+            <summary>
+            Gets the picture assigned to the passed in <see cref="T:Plt.IComosBaseObject"/>
+            as <see cref="T:stdole.StdPicture"/>.
+            </summary>
+            <param name="comosObject">The <see cref="T:Plt.IComosBaseObject"/>
+            for which the picture should be returned.</param>
+            <returns>
+            A <see cref="T:stdole.StdPicture"/> instance
+            containing the picture assigned to the passed in
+            <see cref="T:Plt.IComosBaseObject"/> or the std_NoSymbol
+            icon if the picture for the specified object was not found.
+            </returns>
+        </member>
+        <member name="M:Comos.PicturesLibrary.Pictures.OLEPictureByParameters(System.String,System.Int32,System.String,System.String,Comos.PicturesLibrary.ExtendedInfo)">
+            <summary>
+            Gets a picture by means of  the parameters
+            as <see cref="T:stdole.StdPicture"/>.
+            </summary>
+            <param name="systemTypeName">The SystemTypeName of a comos object for which a pictire is searched.</param>
+            <param name="rgbColor">The color in OLE format in which the picture should appear.
+            Use -1 for the original color of the picture.</param>
+            <param name="param1">A string value. Mostly something like
+            the class or layer of a <see cref="T:Plt.IComosDDevice"/> or
+            <see cref="T:Plt.IComosDDevice"/>. Can also be null or empty.</param>
+            <param name="param2">A string value. Mostly something like
+            the detail class of a <see cref="T:Plt.IComosDDevice"/> or
+            <see cref="T:Plt.IComosDDevice"/>. Can also be null or empty.</param>
+            <param name="extendedInfo">One of the values of <see cref="T:Comos.PicturesLibrary.ExtendedInfo"/>.</param>
+            <returns>
+            A <see cref="T:stdole.StdPicture"/> instance
+            containing the picture which was found by
+            means of the parameters or the std_NoSymbol
+            icon if the picture for the specified parameters was not found.
+            </returns>
+        </member>
+        <member name="M:Comos.PicturesLibrary.Pictures.OLEPictureForDevice(System.String,System.String,Comos.PicturesLibrary.ExtendedInfo)">
+            <summary>
+            Gets the picture assigned to the passed in
+            Device class and detail class coresponding to the
+            specified <see cref="T:Comos.PicturesLibrary.ExtendedInfo"/>
+            as <see cref="T:stdole.StdPicture"/>.
+            </summary>
+            <param name="deviceCass">The class of a Device.</param>
+            <param name="subClass">The detail class of a Device.</param>
+            <param name="extendedInfo">One of the values of <see cref="T:Comos.PicturesLibrary.ExtendedInfo"/>.</param>
+            <returns>
+            A <see cref="T:stdole.StdPicture"/> instance
+            containing the picture which was found by
+            means of the parameters or the std_NoSymbol
+            icon if the picture for the specified parameters was not found.
+            </returns>
+        </member>
+        <member name="M:Comos.PicturesLibrary.Pictures.OLEPictureForCDevice(System.String,System.String,Comos.PicturesLibrary.ExtendedInfo)">
+            <summary>
+            Gets the picture assigned to the passed in
+            CDevice class and detail class coresponding to the
+            specified <see cref="T:Comos.PicturesLibrary.ExtendedInfo"/>
+            as <see cref="T:stdole.StdPicture"/>.
+            </summary>
+            <param name="cdeviceCass">The class of a CDevice.</param>
+            <param name="subClass">The detail class of a CDevice.</param>
+            <param name="extendedInfo">One of the values of <see cref="T:Comos.PicturesLibrary.ExtendedInfo"/>.</param>
+            <returns>
+            A <see cref="T:stdole.StdPicture"/> instance
+            containing the picture which was found by
+            means of the parameters or the std_NoSymbol
+            icon if the picture for the specified parameters was not found.
+            </returns>
+        </member>
+        <member name="M:Comos.PicturesLibrary.Pictures.OLEPictureForSpecification(System.String)">
+            <summary>
+            Gets the picture assigned to the passed in
+            Unit of a Specification/Attribute.
+            as <see cref="T:stdole.StdPicture"/>.
+            </summary>
+            <param name="specUnit">The Unit of the Specification/Attribute for which
+            the pictur eshould be found.</param>
+            <returns>
+            A <see cref="T:stdole.StdPicture"/> instance
+            containing the picture which was found by
+            means of the Specification/Attribute unit or
+            the std_NoSymbol icon if the picture for the
+            specified unit was not found.
+            </returns>
+        </member>
+        <member name="M:Comos.PicturesLibrary.Pictures.OLEPictureForDocument(System.String)">
+            <summary>
+            Gets the picture assigned to the passed in
+            DocumentTypeName as <see cref="T:stdole.StdPicture"/>.
+            </summary>
+            <param name="documentTypeName">The DocumentTypeName for which the picture
+            should be found.</param>
+            <returns>
+            A <see cref="T:stdole.StdPicture"/> instance
+            containing the picture assigned to the passed in
+            DocumentTypeName or the std_NoSymbol
+            icon if the picture for the specified DocumentTypeName was not found.
+            </returns>
+        </member>
+        <member name="M:Comos.PicturesLibrary.Pictures.OLEPictureForConnector(System.String)">
+            <summary>
+            Gets the picture assigned to the passed in
+            Connector Layer as <see cref="T:stdole.StdPicture"/>.
+            </summary>
+            <param name="layer">The Connector Layer for which the picture
+            should be found.</param>
+            <returns>
+            A <see cref="T:stdole.StdPicture"/> instance
+            containing the picture assigned to the passed in
+            Connector Layer or the std_NoSymbol
+            icon if the picture for the specified Connector Layer
+            was not found.
+            </returns>
+        </member>
+        <member name="M:Comos.PicturesLibrary.Pictures.OLECombinedPicture(System.String,System.String)">
+            <summary>
+            Gets a picture which is combined of to
+            as <see cref="T:stdole.StdPicture"/>.
+            The pictures to combine are found by means
+            of the original picture key and combine
+            picture key.
+            </summary>
+            <param name="originalKey">The picture key of the original picture.</param>
+            <param name="combineKey">The picture key of the picture which is layed over the original.</param>
+            <returns>The combined picture.</returns>
+        </member>
+        <member name="M:Comos.PicturesLibrary.Pictures.OLEPictureInNewColor(System.String,System.Int32)">
+            <summary>
+            Gets the picture assigned to the specified key
+            as <see cref="T:stdole.StdPicture"/>.
+            </summary>
+            <param name="key">The key of the picture which scould be dyed.</param>
+            <param name="rgbColor">The color in OLE format in which the picture
+            should be dyed.</param>
+            <returns>
+            A <see cref="T:stdole.StdPicture"/> instance
+            containing the dyed picture.
+            </returns>
+        </member>
+        <member name="M:Comos.PicturesLibrary.Pictures.OLEPictureForDeviceByCDevice(Plt.IComosDCDevice,System.Boolean)">
+            <summary>
+            Gets a picture for a Device by CDevice as <see cref="T:stdole.StdPicture"/>.
+            </summary>
+            <param name="cdevice">The cdevice.</param>
+            <param name="originalOnly">
+            Indicates whether the retunred picture should be the 
+            original or not. That means that no dyed or combined 
+            picture will be returned.
+            </param>
+            <returns>The picture for the Device by CDevice.</returns>
+        </member>
+        <member name="M:Comos.PicturesLibrary.Pictures.OLEWindowsIcon(System.String)">
+            <summary>
+            Gets a icon from Windows as <see cref="T:stdole.StdPicture"/>.
+            </summary>
+            <param name="fileName">Name of the file.</param>
+            <returns>
+            A icon from Windows as <see cref="T:stdole.StdPicture"/>.
+            </returns>
+        </member>
+        <member name="M:Comos.PicturesLibrary.Pictures.BitmapByKey(System.String,stdole.StdPicture)">
+            <summary>
+            Gets a <see cref="T:stdole.StdPicture"/> by key in bitmap format.
+            Optional you can pass in a original picture which is used.
+            </summary>
+            <param name="key">The picture key.</param>
+            <param name="orgPicture">The org picture.</param>
+            <returns>
+            A <see cref="T:stdole.StdPicture"/> instance containing the
+            to the picture key assigned picture in bitmap format.
+            </returns>
+        </member>
+        <member name="M:Comos.PicturesLibrary.Pictures.BitmapByPicture(stdole.StdPicture)">
+            <summary>
+            Converts a <see cref="T:stdole.StdPicture"/> to a <see cref="T:stdole.StdPicture"/> in Bitmap format.
+            </summary>
+            <param name="orgPicture">The orginal picture.</param>
+            <returns>The converted picture</returns>
+        </member>
+        <member name="M:Comos.PicturesLibrary.Pictures.RGBColorForStatusValue(System.Int32,System.Int32)">
+            <summary>
+            Gets the RGB color for a status value.
+            </summary>
+            <param name="statusValue">The status value.</param>
+            <param name="status">The status.</param>
+            <returns>The RGB color for a status value.</returns>
+        </member>
+        <member name="M:Comos.PicturesLibrary.Pictures.RGBColorForWoLevel(Plt.IComosDProject)">
+            <summary>
+            Gets the RGB color for the Workingoverlay-Level
+            specified via a <see cref="T:Plt.IComosDProject"/>.
+            Also <c>null</c> (<c>Nothing</c> in Visual Basic) can be passed in,
+            than the current Project will be used.
+            </summary>
+            <param name="project">The project.</param>
+            <returns>
+            The RGB color for the Workingoverlay-Level.
+            </returns>
+        </member>
+        <member name="M:Comos.PicturesLibrary.Pictures.RGBColorByStatus(Plt.IComosBaseObject,System.Int32)">
+            <summary>
+            Gets the RGB color by status.
+            </summary>
+            <param name="comosObject">The comos object.</param>
+            <param name="status">The status.</param>
+            <returns>
+            The RGB color assigned to the passed in status corresponding on the comos object.
+            </returns>
+        </member>
+        <member name="M:Comos.PicturesLibrary.Pictures.GetDefinitionOfCurrentStatus">
+            <summary>
+             Gets a snapshot of the setup for the current status
+            See <see cref="T:Comos.PicturesLibrary.Status.StatusDefinition"/>
+            </summary>
+        </member>
+        <member name="M:Comos.PicturesLibrary.Pictures.WpfPictureByKey(System.String)">
+            <summary>
+            Gets a <see cref="T:Comos.PicturesLibrary.WpfImage"/> instance containing the Picture
+            assigned to the specified key.
+            </summary>
+            <param name="pictureKey">The key of the picture.</param>
+            <returns>
+            A <see cref="T:Comos.PicturesLibrary.WpfImage"/> instance
+            containing the key assigned picture or the std_NoSymbol icon if the picture
+            with the specified key was not found.
+            </returns>
+        </member>
+        <member name="M:Comos.PicturesLibrary.Pictures.WpfPictureByObject(Plt.IComosBaseObject)">
+            <summary>
+            Gets a <see cref="T:Comos.PicturesLibrary.WpfImage"/> by object.
+            </summary>
+            <param name="comosObject">The comos object.</param>
+            <returns>
+            A <see cref="T:Comos.PicturesLibrary.WpfImage"/> instance
+            containing the picture assigned to the passed in
+            <see cref="T:Plt.IComosBaseObject"/> or the std_NoSymbol
+            icon if the picture for the specified object was not found.
+            </returns>
+        </member>
+        <member name="M:Comos.PicturesLibrary.Pictures.WpfPictureByParameters(System.String,System.Int32,System.String,System.String,Comos.PicturesLibrary.ExtendedInfo)">
+            <summary>
+            Gets a picture by means of  the parameters
+            as <see cref="T:Comos.PicturesLibrary.WpfImage"/>
+            </summary>
+            <param name="systemTypeName">The SystemTypeName of a comos object for which a pictire is searched.</param>
+            <param name="rgbColor">The color in OLE format in which the picture should appear.
+            Use -1 for the original color of the picture.</param>
+            <param name="param1">A string value. Mostly something like
+            the class or layer of a <see cref="T:Plt.IComosDDevice"/> or
+            <see cref="T:Plt.IComosDDevice"/>. Can also be null or empty.</param>
+            <param name="param2">A string value. Mostly something like
+            the detail class of a <see cref="T:Plt.IComosDDevice"/> or
+            <see cref="T:Plt.IComosDDevice"/>. Can also be null or empty.</param>
+            <param name="extendedInfo">One of the values of <see cref="T:Comos.PicturesLibrary.ExtendedInfo"/>.</param>
+            <returns>
+            A <see cref="T:Comos.PicturesLibrary.WpfImage"/> instance
+            containing the picture which was found by
+            means of the parameters or the std_NoSymbol
+            icon if the picture for the specified parameters was not found.
+            </returns>
+        </member>
+        <member name="M:Comos.PicturesLibrary.Pictures.WpfLoadPicture(System.String)">
+            <summary>
+            Loads a picture from a file as <see cref="T:Comos.PicturesLibrary.WpfImage"/>.
+            </summary>
+            <param name="path">The path to the picture file.</param>
+            <returns>
+            A picture loaded from a file as <see cref="T:Comos.PicturesLibrary.WpfImage"/>.
+            </returns>
+        </member>
+        <member name="F:Comos.PicturesLibrary.Pictures.OLD_BRIDGENAME_SEPARATOR">
+            -------------------------------------------------------------------------------------------
+             DMY/ADMADI 2010-04-28
+             F16025 (GDI-Resourcen)  (Klemmenplan-Listy (ConList.OCX)
+             Re-Implementierung der Icons aus BridgeImages.OCX (PT55-Level) für Wpf-Umgebung.
+             Dandaurndes OlePictureByKey und Umfärben mit PicMgr.XPicture bewirken,
+             dass die GDI-Handles bei alten Klemmenplan-Listys (Device/ConList.OCX) sehr stark
+             ansteigen. Daher Umbau und Verlagerung in gecachte PicturesLibrary
+             
+             Betroffene Module: 
+                 DEVICE/Conlist
+                 QUERY/ExtendedObjects
+            -------------------------------------------------------------------------------------------
+        </member>
+        <member name="M:Comos.PicturesLibrary.Pictures.Initialize_OldBridgesMappingTable">
+            <summary>
+            Static constructor: Initializes the <see cref="T:Comos.PicturesLibrary.Pictures"/> class.
+            Fills up the MappingDictionary for retrievement of old BridgeNames 
+            (TerminalStrip/Bridges) / (Klemmenplan / Brücken)
+            </summary>
+        </member>
+        <member name="M:Comos.PicturesLibrary.Pictures.GetBridgeImageNameInternalLookup(System.String)">
+            <summary>
+            Innere methode, die den Lookup macht,
+            extra ausgekapselt, damit man in der unteren interfa the name of the get bridge image.
+            </summary>
+            <param name="oldBridgeImagesOcxLookupString">The old bride images ocx lookup string.</param>
+            <returns></returns>
+        </member>
+        <member name="M:Comos.PicturesLibrary.Pictures.GetBridgeImageName(System.String)">
+            <summary>
+            Gets the name of the bridge image from new picturesLibrary.
+            It uses old searchString from old PT55/BrideImages.OCX to preserve
+            compatibility with ComosDB's
+            </summary>
+            <param name="oldBridgeImagesOcxLookupString">The old lookup string from PT55/BridgeImages.OCX.</param>
+            <returns>BridgeImageName from new Pictures Library</returns>
+        </member>
+        <member name="M:Comos.PicturesLibrary.Pictures.Dispose">
+            <summary>
+            Performs application-defined tasks associated with freeing, releasing, or resetting unmanaged resources.
+            </summary>
+        </member>
+        <member name="M:Comos.PicturesLibrary.Pictures.Dispose(System.Boolean)">
+            <summary>
+            Releases unmanaged and - optionally - managed resources.
+            </summary>
+            <param name="disposing"><c>True</c> to release both managed and unmanaged resources; <c>false</c> to release only unmanaged resources.</param>
+        </member>
+        <member name="M:Comos.PicturesLibrary.Pictures.ClearCache">
+            <summary>
+            Clears the cache.
+            </summary>
+        </member>
+        <member name="T:Comos.PicturesLibrary.PictureUtilities">
+            <summary>
+            A static class which provides useful utilities for manipulating 
+            <see cref="T:System.Windows.Media.Imaging.BitmapImage"/> instances.
+            </summary>
+        </member>
+        <member name="M:Comos.PicturesLibrary.PictureUtilities.#cctor">
+            <summary>
+            Initializes all static members the <see cref="T:Comos.PicturesLibrary.PictureUtilities"/> class.
+            </summary>
+        </member>
+        <member name="M:Comos.PicturesLibrary.PictureUtilities.CombinePictures(System.Windows.Media.Imaging.BitmapImage,System.Windows.Media.Imaging.BitmapImage)">
+            <summary>
+            Combines two pictures.
+            </summary>
+            <param name="origin">The origin which should be overlied.</param>
+            <param name="combiPicture">The picture which will be overlieing the origin.</param>
+            <returns>
+            A <see cref="T:System.Windows.Media.Imaging.BitmapSource"/> instance 
+            containing a combination of the origin and the compiPicture.
+            In case of an error <c>null</c> will be returned (<b>Nothing</b> in Visual Basic).
+            </returns>
+        </member>
+        <member name="M:Comos.PicturesLibrary.PictureUtilities.DyePicture(System.Windows.Media.Imaging.BitmapImage,System.Windows.Media.SolidColorBrush)">
+            <summary>
+            Dyes the picture into the specified color.
+            </summary>
+            <param name="origin">
+            The origin which should be dyed into the ew Color.
+            </param>
+            <param name="colorBrush">
+            A <see cref="T:System.Windows.Media.SolidColorBrush"/> instance
+            containing the new color data.
+            </param>
+            <returns>
+            A <see cref="T:System.Windows.Media.Imaging.BitmapImage"/> instance 
+            containing the origin BitmapImage dyed in the new color.
+            In case of an error <c>null</c> will be returned (<b>Nothing</b> in Visual Basic).
+            </returns>
+        </member>
+        <member name="M:Comos.PicturesLibrary.PictureUtilities.DyePictureToDisabledGray(System.Windows.Media.Imaging.BitmapImage)">
+            <summary>
+            Dyes the picture to disabled gray.
+            </summary>
+            <param name="origin">The origin which should be dyed.</param>
+            <returns>The dyed picture.</returns>
+        </member>
+        <member name="M:Comos.PicturesLibrary.PictureUtilities.MakeBmpTransparent(System.Drawing.Bitmap@)">
+            <summary>
+            Makes the passed in <see cref="T:System.Drawing.Bitmap">Bitmap</see> transparent.
+            </summary>
+            <param name="bitmap">The bitmap which is made transparent.</param>
+        </member>
+        <member name="M:Comos.PicturesLibrary.PictureUtilities.LoadPicture(System.String)">
+            <summary>
+            Loads a Picture from the specified path.
+            </summary>
+            <param name="path">The path to the file containing the image data.</param>
+            <returns>
+            A <see cref="T:System.Windows.Media.Imaging.BitmapImage"/> instance 
+            containing the loaded image data.
+            In case of an error <c>null</c> will be returned (<b>Nothing</b> in Visual Basic).
+            </returns>
+            <history>[CEA: 2010-04-15 F17053] Added support for Cursor files.</history>
+        </member>
+        <member name="M:Comos.PicturesLibrary.PictureUtilities.LoadPicture(System.String,System.Boolean)">
+            <summary>
+            Loads the picture.
+            </summary>
+            <param name="path">The path.</param>
+            <param name="withAutoNetworkLogin">if set to <c>true</c> [with auto network login].</param>
+            <returns></returns>
+        </member>
+        <member name="M:Comos.PicturesLibrary.PictureUtilities.LoadWindowsPicture(System.String)">
+            <summary>
+            Loads a picture associated with a file.
+            </summary>
+            <param name="filePath">The path to the file.</param>
+            <returns>
+            A <see cref="T:System.Windows.Media.Imaging.BitmapImage"/> instance containing the picture which
+            was returned by Windows. If no picture was returned by Windows,
+            <c>null</c> (<b>Nothing</b> in VisualBasic) will be returned.
+            </returns>
+        </member>
+        <member name="M:Comos.PicturesLibrary.PictureUtilities.GetBitmapImageFromStream(System.IO.Stream,System.Boolean)">
+            <summary>
+            Creates a <see cref="T:System.Windows.Media.Imaging.BitmapImage"/> from a Stream.
+            </summary>
+            <param name="bmpStream">
+            The <see cref="T:System.IO.Stream"/> containing the image data.
+            </param>
+            <param name="isIco">
+            Indicates whether the <see cref="T:System.IO.Stream"/> contains data in the Icon-Format or not.
+            </param>
+            <returns>
+            The created <see cref="T:System.Windows.Media.Imaging.BitmapImage"/> based on the image data.
+            In case of an error <c>null</c> will be returned (<b>Nothing</b> in Visual Basic).
+            </returns>
+        </member>
+        <member name="M:Comos.PicturesLibrary.PictureUtilities.ConvertBitmapImageToOlePicture(System.Windows.Media.Imaging.BitmapImage)">
+            <summary>
+            Converts a <see cref="T:System.Windows.Media.Imaging.BitmapImage"/> instance
+            to a <see cref="T:stdole.StdPicture"/> instance.
+            </summary>
+            <param name="origin">
+            The <see cref="T:System.Windows.Media.Imaging.BitmapImage"/> instance which should be converted.
+            </param>
+            <returns>
+            The <see cref="T:stdole.StdPicture"/> instance which contains the image data of the
+            <see cref="T:System.Windows.Media.Imaging.BitmapImage"/> instance.
+            In case of an error <c>null</c> will be returned (<b>Nothing</b> in Visual Basic).
+            </returns>
+        </member>
+        <member name="M:Comos.PicturesLibrary.PictureUtilities.ConvertOlePictureToBitmapImage(System.Object,System.Boolean)">
+            <summary>
+            Converts the OLE picture to <see cref="T:System.Windows.Media.Imaging.BitmapImage"/>.
+            </summary>
+            <param name="olePicture">The OLE picture.</param>
+            <param name="isDisabled">if set to <c>true</c> [is disabled].</param>
+            <returns>The to <see cref="T:System.Windows.Media.Imaging.BitmapImage"/> converted picture.</returns>
+        </member>
+        <member name="M:Comos.PicturesLibrary.PictureUtilities.GetPicFromOLEPicure(System.Object,System.Boolean)">
+            <summary>
+            Convert a COM stdole image to a .NET 3.0 System.Windows.Media.Imaging.BitmapImage image.
+            </summary>
+            <param name="value">COM stdole image</param>
+            <param name="disabled">Indicates whether the image should be dyed to gray or not.</param>
+            <returns>The resulting System.Windows.Media.Imaging.BitmapImage image</returns>
+        </member>
+        <member name="M:Comos.PicturesLibrary.PictureUtilities.ConvertStdOleImageToBitmap(System.Object)">
+            <summary>
+            Convert a COM stdole image to a .NET Framework 2.0 System.Drawing.Bitmap image.
+            </summary>
+            <param name="value">COM stdole image</param>
+            <returns>System.Drawing.Bitmap image</returns>
+        </member>
+        <member name="M:Comos.PicturesLibrary.PictureUtilities.GetBrushFromRGB(System.Int32)">
+            <summary>
+            Gets the brush from RGB.
+            </summary>
+            <param name="rgb">The RGB color in OLE format.</param>
+            <returns>
+            A <see cref="T:System.Windows.Media.SolidColorBrush"/> instance containing the color information of the OLE-RGB code.
+            </returns>
+        </member>
+        <member name="M:Comos.PicturesLibrary.PictureUtilities.GetRGBColorFromBrush(System.Windows.Media.SolidColorBrush)">
+            <summary>
+            Gets the RGB color from a <see cref="T:System.Windows.Media.SolidColorBrush"/> in OLE format.
+            </summary>
+            <param name="brush">The brush.</param>
+            <returns>The color of the brush in OLE format.</returns>
+        </member>
+        <member name="M:Comos.PicturesLibrary.PictureUtilities.ConvertDrawingBitmapToBitmapImage(System.Drawing.Image)">
+            <summary>
+            Converts the drawing bitmap to a bitmap source.
+            </summary>
+            <param name="source">The source.</param>
+            <returns>The converted picture.</returns>
+        </member>
+        <member name="M:Comos.PicturesLibrary.PictureUtilities.ConvertDrawingIconToBitmapSource(System.Drawing.Icon)">
+            <summary>
+            Converts the drawing icon to a bitmap source.
+            </summary>
+            <param name="source">The source.</param>
+            <returns>The converted picture.</returns>
+        </member>
+        <member name="M:Comos.PicturesLibrary.PictureUtilities.ConvertDrawingIconToBitmapSource(System.IntPtr)">
+            <summary>
+            Converts the drawing icon to a bitmap source.
+            </summary>
+            <param name="handle">The handle of the icon.</param>
+            <returns>The converted picture.</returns>
+        </member>
+        <member name="M:Comos.PicturesLibrary.PictureUtilities.GetBitmapImageFromSource(System.Windows.Media.Imaging.BitmapSource)">
+            <summary>
+            Converts a <see cref="T:System.Windows.Media.Imaging.BitmapImage"/> to a <see cref="T:System.Windows.Media.Imaging.BitmapImage"/>.
+            </summary>
+            <param name="source">The source.</param>
+            <returns>
+            The converted <see cref="T:System.Windows.Media.Imaging.BitmapImage"/> as <see cref="T:System.Windows.Media.Imaging.BitmapImage"/>.
+            </returns>
+        </member>
+        <member name="M:Comos.PicturesLibrary.PictureUtilities.GetPictureStreamByKey(System.String,System.Boolean@)">
+            <summary>
+            Gets a stream containing the image data by key.
+            </summary>
+            <param name="key">The picture key.</param>
+            <param name="isIco">if <c>true</c> the found picture is a Icon.</param>
+            <returns>A stream containing the image data.</returns>
+        </member>
+        <member name="M:Comos.PicturesLibrary.PictureUtilities.GetPixelArray(System.Windows.Media.Imaging.BitmapSource,System.Int32@,System.Int32@)">
+            <summary>
+            Gets a <see cref="T:System.Byte"/> array which contains the pixel data.
+            </summary>
+            <param name="bs">The <see cref="T:System.Windows.Media.Imaging.BitmapSource"/> of which the pixel data should be extracted.</param>
+            <param name="bytesPerPixel">The number bytes per pixel.</param>
+            <param name="stride">The stride.</param>
+            <returns>A <see cref="T:System.Byte"/> array which contains the pixel data.</returns>
+        </member>
+        <member name="M:Comos.PicturesLibrary.PictureUtilities.SaveToBitmapImage(System.Windows.Media.Imaging.WriteableBitmap,System.Byte[]@,System.Int32)">
+            <summary>
+            Saves a <see cref="T:System.Windows.Media.Imaging.WriteableBitmap"/> to a 
+            <see cref="T:System.Windows.Media.Imaging.BitmapImage"/>.
+            </summary>
+            <param name="wb">
+            The <see cref="T:System.Windows.Media.Imaging.WriteableBitmap"/> which should be saved 
+            to a <see cref="T:System.Windows.Media.Imaging.BitmapImage"/>.
+            </param>
+            <param name="pixelArray">A <see cref="T:System.Byte"/> array which contains the pixel data. (<seealso cref="M:Comos.PicturesLibrary.PictureUtilities.GetPixelArray(System.Windows.Media.Imaging.BitmapSource,System.Int32@,System.Int32@)"/>)</param>
+            <param name="stride">The stride.</param>
+            <returns>The resulting <see cref="T:System.Windows.Media.Imaging.BitmapImage"/>.</returns>
+        </member>
+        <member name="M:Comos.PicturesLibrary.PictureUtilities.GetChannelOffsets(System.Windows.Media.Imaging.BitmapImage,System.Int16@,System.Int16@,System.Int16@,System.Int16@)">
+            <summary>
+            Gets the channel offsets.
+            </summary>
+            <param name="source">The source.</param>
+            <param name="channelOffsetA">The channel offset A.</param>
+            <param name="channelOffsetR">The channel offset R.</param>
+            <param name="channelOffsetG">The channel offset G.</param>
+            <param name="channelOffsetB">The channel offset B.</param>
+            <returns><c>true</c> if the Format of the <see cref="T:System.Windows.Media.Imaging.BitmapImage"/> is supported; otherwise <c>false</c>.</returns>
+        </member>
+        <member name="M:Comos.PicturesLibrary.PictureUtilities.ResourceExists(System.String,System.String@)">
+            <summary>
+            Resources the exists.
+            </summary>
+            <param name="resourceKey">The resource key.</param>
+            <param name="extension">The extension.</param>
+            <returns></returns>
+        </member>
+        <member name="M:Comos.PicturesLibrary.PictureUtilities.ResourceExistsByKey(System.String,System.String@)">
+            <summary>
+            Resources the exists by key.
+            </summary>
+            <param name="pictureKey">The picture key.</param>
+            <param name="resourceKey">The resource key.</param>
+            <returns></returns>
+        </member>
+        <member name="M:Comos.PicturesLibrary.PictureUtilities.ResourceExistsByKey(System.String,System.String,System.String@)">
+            <summary>
+            Resources the exists by key.
+            </summary>
+            <param name="pictureKey">The picture key.</param>
+            <param name="resourceDir">The resource dir.</param>
+            <param name="resourceKey">The resource key.</param>
+            <returns></returns>
+        </member>
+        <member name="M:Comos.PicturesLibrary.PictureUtilities.GetFileExtension(System.String)">
+            <summary>
+            Gets the file extension.
+            </summary>
+            <param name="path">The path.</param>
+            <returns></returns>
+        </member>
+        <member name="M:Comos.PicturesLibrary.PictureUtilities.GetSnapshotOfCurrentStatus">
+            <summary>
+             Provides a snapshot of the current status legend.
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="T:Comos.PicturesLibrary.Status.StatusDefinition">
+            <summary>
+            Snapshot of a status as defined in COMOS.
+            Containing definitions for it's values.
+            </summary>
+        </member>
+        <member name="P:Comos.PicturesLibrary.Status.StatusDefinition.Name">
+            <summary>
+            Name of the status
+            </summary>
+        </member>
+        <member name="P:Comos.PicturesLibrary.Status.StatusDefinition.Values">
+            <summary>
+            Collection of the values available for this Status
+            </summary>
+        </member>
+        <member name="T:Comos.PicturesLibrary.Status.StatusValue">
+            <summary>
+            Snapshot of a status' value as defined in COMOS 
+            including its according color
+            </summary>
+        </member>
+        <member name="P:Comos.PicturesLibrary.Status.StatusValue.Value">
+            <summary>
+            Value that can be evaluated for objects during the run
+            of a status query
+            </summary>
+        </member>
+        <member name="P:Comos.PicturesLibrary.Status.StatusValue.Description">
+            <summary>
+            Informal description of <see cref="P:Comos.PicturesLibrary.Status.StatusValue.Value"/>
+            </summary>
+        </member>
+        <member name="P:Comos.PicturesLibrary.Status.StatusValue.Color">
+            <summary>
+            Color currently defined for this value <see cref="P:Comos.PicturesLibrary.Status.StatusValue.Value"/>
+            </summary>
+        </member>
+        <member name="T:Comos.PicturesLibrary.Status.StatusColor">
+            <summary>
+            Represents a color which is identified via a <see cref="P:Comos.PicturesLibrary.Status.StatusColor.Status"/> and a <see cref="T:Comos.PicturesLibrary.Status.StatusColor"/>.
+            </summary>
+        </member>
+        <member name="P:Comos.PicturesLibrary.Status.StatusColor.Status">
+            <summary>
+            Gets or sets the status.
+            </summary>
+            <value>The status.</value>
+        </member>
+        <member name="P:Comos.PicturesLibrary.Status.StatusColor.StatusValue">
+            <summary>
+            Gets or sets the status value.
+            </summary>
+            <value>The status value.</value>
+        </member>
+        <member name="P:Comos.PicturesLibrary.Status.StatusColor.Brush">
+            <summary>
+            Gets or sets the brush dedicated to the 
+            <see cref="P:Comos.PicturesLibrary.Status.StatusColor.Status"/> and <see cref="P:Comos.PicturesLibrary.Status.StatusColor.StatusValue"/>.
+            </summary>
+            <value>
+            The brush dedicated to the <see cref="P:Comos.PicturesLibrary.Status.StatusColor.Status"/> 
+            and <see cref="P:Comos.PicturesLibrary.Status.StatusColor.StatusValue"/>.
+            </value>
+        </member>
+        <member name="T:Comos.PicturesLibrary.Status.StatusHelper">
+            <summary>
+            Helper class to manage things with the status.
+            </summary>
+        </member>
+        <member name="M:Comos.PicturesLibrary.Status.StatusHelper.GetProfileMaster">
+            <summary>
+            Gets the <see cref="T:ComosProfileMaster.ProfileMasterClass">ProfileMaster</see>.
+            </summary>
+            <returns>The <see cref="T:ComosProfileMaster.ProfileMasterClass">ProfileMaster</see>.</returns>
+        </member>
+        <member name="M:Comos.PicturesLibrary.Status.StatusHelper.GetStatusRootCDevice(System.Int32)">
+            <summary>
+            Gets the root Cdevice for the status.
+            </summary>
+            <param name="status">The status.</param>
+            <returns>The root CDevice for the status.</returns>
+        </member>
+        <member name="M:Comos.PicturesLibrary.Status.StatusHelper.InitializeStatusColorSet">
+            <summary>
+            Initializes the status color set.
+            </summary>
+            <returns>The initialized status color set.</returns>
+        </member>
+        <member name="M:Comos.PicturesLibrary.Status.StatusHelper.LoadStatusColorSet">
+            <summary>
+            Loads the status color set.
+            </summary>
+        </member>
+        <member name="M:Comos.PicturesLibrary.Status.StatusHelper.SaveStatusColorSet">
+            <summary>
+            Saves the status color set.
+            </summary>
+        </member>
+        <member name="M:Comos.PicturesLibrary.Status.StatusHelper.GetStandardStatusColors(System.Int32)">
+            <summary>
+            Gets the standard status colors for the specified status..
+            </summary>
+            <param name="status">The status.</param>
+            <returns>The standard colors for the specified status.</returns>
+        </member>
+        <member name="M:Comos.PicturesLibrary.Status.StatusHelper.GetStandardConsolidationColors">
+            <summary>
+            Gets the standard consolidation colors.
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:Comos.PicturesLibrary.Status.StatusHelper.GetStandardCompareOverlayColors">
+            <summary>
+            Gets the standard compare overlay colors.
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:Comos.PicturesLibrary.Status.StatusHelper.GetStandardOverlayColors">
+            <summary>
+            Gets the standard overlay colors.
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:Comos.PicturesLibrary.Status.StatusHelper.IsStatusByQuery(System.Int32)">
+            <summary>
+            Determines whether the status is defined via a Query or not.
+            </summary>
+            <param name="status">The status.</param>
+            <returns>
+            <c>true</c> if the status is defined via a Query; otherwise, <c>false</c>.
+            </returns>
+        </member>
+        <member name="M:Comos.PicturesLibrary.Status.StatusHelper.GetKeyStatusColor(System.Int32,System.Int32)">
+            <summary>
+            Gets a key for the status color.
+            </summary>
+            <param name="status">The status.</param>
+            <param name="statusValue">The status value.</param>
+            <returns>The generated key for the color.</returns>
+        </member>
+        <member name="M:Comos.PicturesLibrary.Status.StatusHelper.ResetStatusColor(System.Int32)">
+            <summary>
+            Resets the color of the status in the status color set.
+            </summary>
+            <param name="status">The status.</param>
+        </member>
+        <member name="M:Comos.PicturesLibrary.Status.StatusHelper.GetBrushByStatus(Plt.IComosBaseObject,System.Int32)">
+            <summary>
+            Gets a brush by status.
+            </summary>
+            <param name="comosObject">The comos object.</param>
+            <param name="status">The status.</param>
+            <returns>The brush dedicated to the specified status.</returns>
+        </member>
+        <member name="M:Comos.PicturesLibrary.Status.StatusHelper.GetBrushForStatusValue(System.Int32)">
+            <summary>
+            Gets a brush for the status value.
+            </summary>
+            <param name="statusValue">The status value.</param>
+            <returns>The brush dedicated to the specified statsu value.</returns>
+        </member>
+        <member name="M:Comos.PicturesLibrary.Status.StatusHelper.GetBrushForStatusValue(System.Int32,System.Int32)">
+            <summary>
+            Gets a brush for the status value.
+            </summary>
+            <param name="statusValue">The status value.</param>
+            <param name="status">The status. Pass in -1 for the active status.</param>
+            <returns>The brush dedicated to the specified statsu value.</returns>
+        </member>
+        <member name="M:Comos.PicturesLibrary.Status.StatusHelper.GetStatusColorSet">
+            <summary>
+            Gets the status color set.
+            </summary>
+            <returns>The status color set.</returns>
+        </member>
+        <member name="M:Comos.PicturesLibrary.Status.StatusHelper.ResetStatusColorSetByProfile">
+            <summary>
+            Resets the status color set by profile.
+            </summary>
+        </member>
+        <member name="M:Comos.PicturesLibrary.Status.StatusHelper.IsStatusValid(System.Int32)">
+            <summary>
+            Determines whether [is status valid] [the specified status].
+            </summary>
+            <param name="status">The status.</param>
+            <returns>
+              <c>true</c> if [is status valid] [the specified status]; otherwise, <c>false</c>.
+            </returns>
+        </member>
+        <member name="T:Comos.PicturesLibrary.Status.StatusColorViewModel">
+            <summary>
+            View model of the <see cref="T:Comos.PicturesLibrary.Status.StatusColor"/>.
+            </summary>
+        </member>
+        <member name="M:Comos.PicturesLibrary.Status.StatusColorViewModel.#ctor(Comos.PicturesLibrary.Status.StatusColor)">
+            <summary>
+            Initializes a new instance of the <see cref="T:Comos.PicturesLibrary.Status.StatusColorViewModel"/> class.
+            </summary>
+            <param name="statusColor">Color of the status.</param>
+        </member>
+        <member name="P:Comos.PicturesLibrary.Status.StatusColorViewModel.StatusValueText">
+            <summary>
+            Gets or sets the text for the 
+            <see cref="P:Comos.PicturesLibrary.Status.StatusColor.StatusValue">StatusValue</see> 
+            of the <see cref="T:Comos.PicturesLibrary.Status.StatusColor"/>.
+            </summary>
+            <value>
+            The text for the 
+            <see cref="P:Comos.PicturesLibrary.Status.StatusColor.StatusValue">StatusValue</see> 
+            of the <see cref="T:Comos.PicturesLibrary.Status.StatusColor"/>.
+            </value>
+        </member>
+        <member name="P:Comos.PicturesLibrary.Status.StatusColorViewModel.StatusValue">
+            <summary>
+            Gets or sets the <see cref="P:Comos.PicturesLibrary.Status.StatusColor.StatusValue">StatusValue</see> 
+            of the <see cref="T:Comos.PicturesLibrary.Status.StatusColor"/>.
+            </summary>
+            <value>
+            The <see cref="P:Comos.PicturesLibrary.Status.StatusColor.StatusValue">StatusValue</see> 
+            of the <see cref="T:Comos.PicturesLibrary.Status.StatusColor"/>.
+            </value>
+        </member>
+        <member name="P:Comos.PicturesLibrary.Status.StatusColorViewModel.HasChanges">
+            <summary>
+            Gets or sets a value indicating whether this instance has changes.
+            </summary>
+            <value>
+            	<c>true</c> if this instance has changes; otherwise, <c>false</c>.
+            </value>
+        </member>
+        <member name="P:Comos.PicturesLibrary.Status.StatusColorViewModel.Color">
+            <summary>
+            Gets or sets the color for the <see cref="T:Comos.PicturesLibrary.Status.StatusColor"/>.
+            </summary>
+            <value>The color for the <see cref="T:Comos.PicturesLibrary.Status.StatusColor"/>.</value>
+        </member>
+        <member name="T:Comos.PicturesLibrary.Status.StatusLegendView">
+            <summary>
+            Interaktionslogik für StatusLegend.xaml
+            </summary>
+            <exclude />
+        </member>
+        <member name="M:Comos.PicturesLibrary.Status.StatusLegendView.#ctor">
+            <summary>
+            Initializes a new instance of the <see cref="T:Comos.PicturesLibrary.Status.StatusLegendView"/> class.
+            </summary>
+        </member>
+        <member name="M:Comos.PicturesLibrary.Status.StatusLegendView.InitializeComponent">
+            <summary>
+            InitializeComponent
+            </summary>
+        </member>
+        <member name="T:Comos.PicturesLibrary.Status.StatusLegendViewModel">
+            <summary>
+            View model for the <see cref="T:Comos.PicturesLibrary.Status.StatusLegendView"/>.
+            </summary>
+        </member>
+        <member name="M:Comos.PicturesLibrary.Status.StatusLegendViewModel.#ctor">
+            <summary>
+            Initializes a new instance of the <see cref="T:Comos.PicturesLibrary.Status.StatusLegendViewModel"/> class.
+            </summary>
+        </member>
+        <member name="P:Comos.PicturesLibrary.Status.StatusLegendViewModel.StatusItems">
+            <summary>
+            Gets the status items.
+            </summary>
+            <value>The status items.</value>
+        </member>
+        <member name="P:Comos.PicturesLibrary.Status.StatusLegendViewModel.SelectedStatusItem">
+            <summary>
+            Gets or sets the selected status item.
+            </summary>
+            <value>The selected status item.</value>
+        </member>
+        <member name="P:Comos.PicturesLibrary.Status.StatusLegendViewModel.ItxCurrentStatus">
+            <summary>
+            Gets the ITX of the current status.
+            </summary>
+            <value>he ITX of the current status.</value>
+        </member>
+        <member name="P:Comos.PicturesLibrary.Status.StatusLegendViewModel.ItxStatusValue">
+            <summary>
+            Gets the ITX of "Status value".
+            </summary>
+            <value>The ITX of "Status value".</value>
+        </member>
+        <member name="M:Comos.PicturesLibrary.Status.StatusLegendViewModel.InitializeStatusItems">
+            <summary>
+            Initializes the <see cref="P:Comos.PicturesLibrary.Status.StatusLegendViewModel.StatusItems"/>.
+            </summary>
+        </member>
+        <member name="P:Comos.PicturesLibrary.Status.StatusLegendViewModel.HasChanges">
+            <summary>
+            Gets or sets a value indicating whether this instance has changes.
+            </summary>
+            <value>
+            	<c>true</c> if this instance has changes; otherwise, <c>false</c>.
+            </value>
+        </member>
+        <member name="M:Comos.PicturesLibrary.Status.StatusLegendViewModel.OnCanExecuteSaveSettings(System.Object)">
+            <summary>
+            Called when [can execute save settings].
+            </summary>
+            <param name="parameters">The parameters.</param>
+            <returns></returns>
+        </member>
+        <member name="M:Comos.PicturesLibrary.Status.StatusLegendViewModel.OnExecuteSaveSettings(System.Object)">
+            <summary>
+            Called when [execute save settings].
+            </summary>
+            <param name="parameters">The parameters.</param>
+        </member>
+        <member name="M:Comos.PicturesLibrary.Status.StatusLegendViewModel.OnCanExecuteReset(System.Object)">
+            <summary>
+            Called when [can execute reset].
+            </summary>
+            <param name="parameters">The parameters.</param>
+            <returns><c>true</c> if the <see cref="P:Comos.PicturesLibrary.Legend.LegendItemViewModel.ResetCommand"/> can be executed; otherwise, <c>false</c>.</returns>
+        </member>
+        <member name="M:Comos.PicturesLibrary.Status.StatusLegendViewModel.OnExecuteReset(System.Object)">
+            <summary>
+            Called when [execute reset].
+            </summary>
+            <param name="parameters">The parameters.</param>
+        </member>
+        <member name="T:Comos.PicturesLibrary.Status.StatusProfileStorage">
+            <exclude />
+            <summary>
+            Represents the <see cref="T:ComosQueryInterface.IProfileStorage"/> for the status.
+            </summary>
+        </member>
+        <member name="P:Comos.PicturesLibrary.Status.StatusProfileStorage.StatusColorSet">
+            <summary>
+            Gets or sets the status color set.
+            </summary>
+            <value>The status color set.</value>
+        </member>
+        <member name="P:Comos.PicturesLibrary.Status.StatusProfileStorage.ComosQueryInterface#IProfileStorage#Version">
+            <summary>
+            Gets the version.
+            </summary>
+            <value>The version.</value>
+        </member>
+        <member name="P:Comos.PicturesLibrary.Status.StatusProfileStorage.ComosQueryInterface#IProfileStorage#ArchiveVersion">
+            <summary>
+            Gets the archive version.
+            </summary>
+            <value>The archive version.</value>
+        </member>
+        <member name="P:Comos.PicturesLibrary.Status.StatusProfileStorage.ComosQueryInterface#IProfileStorage#Name">
+            <summary>
+            Gets the name of the <see cref="T:ComosQueryInterface.IProfileStorage">ProfileStorage</see>.
+            </summary>
+            <value>The name of the <see cref="T:ComosQueryInterface.IProfileStorage">ProfileStorage</see>.</value>
+        </member>
+        <member name="M:Comos.PicturesLibrary.Status.StatusProfileStorage.ComosQueryInterface#IProfileStorage#Save(MSXML.IXMLDOMNode)">
+            <summary>
+            Saves the current status color set.
+            </summary>
+            <param name="currentNode">The <see cref="T:MSXML.IXMLDOMNode"/> node where to save.</param>
+        </member>
+        <member name="M:Comos.PicturesLibrary.Status.StatusProfileStorage.ComosQueryInterface#IProfileStorage#Load(MSXML.IXMLDOMNode)">
+            <summary>
+            Loads the status color set.
+            </summary>
+            <param name="currentNode">The <see cref="T:MSXML.IXMLDOMNode"/> where to load from.</param>
+        </member>
+        <member name="T:Comos.PicturesLibrary.UserPicSelect.IconLibraryItemViewModel">
+            <summary>
+            Represents a icon library.
+            </summary>
+        </member>
+        <member name="P:Comos.PicturesLibrary.UserPicSelect.IconLibraryItemViewModel.Name">
+            <summary>
+            Gets or sets the name of this instance.
+            </summary>
+            <value>The name of this instance.</value>
+        </member>
+        <member name="P:Comos.PicturesLibrary.UserPicSelect.IconLibraryItemViewModel.FullName">
+            <summary>
+            Gets or sets the full name.
+            </summary>
+            <value>The full name.</value>
+        </member>
+        <member name="P:Comos.PicturesLibrary.UserPicSelect.IconLibraryItemViewModel.IconSource">
+            <summary>
+            Gets or sets the icon source.
+            </summary>
+            <value>The icon source.</value>
+        </member>
+        <member name="P:Comos.PicturesLibrary.UserPicSelect.IconLibraryItemViewModel.IconLibraryItems">
+            <summary>
+            Gets or sets the icon library items.
+            </summary>
+            <value>The icon library items.</value>
+        </member>
+        <member name="P:Comos.PicturesLibrary.UserPicSelect.IconLibraryItemViewModel.IsExpanded">
+            <summary>
+            Gets or sets a value indicating whether this instance is expanded.
+            </summary>
+            <value>
+            <c>true</c> if this instance is expanded; otherwise, <c>false</c>.
+            </value>
+        </member>
+        <member name="P:Comos.PicturesLibrary.UserPicSelect.IconLibraryItemViewModel.IsSelected">
+            <summary>
+            Gets or sets a value indicating whether this instance is selected.
+            </summary>
+            <value>
+            <c>true</c> if this instance is selected; otherwise, <c>false</c>.
+            </value>
+        </member>
+        <member name="M:Comos.PicturesLibrary.UserPicSelect.IconLibraryItemViewModel.op_Equality(Comos.PicturesLibrary.UserPicSelect.IconLibraryItemViewModel,Comos.PicturesLibrary.UserPicSelect.IconLibraryItemViewModel)">
+            <summary>
+            Implements the operator ==.
+            </summary>
+            <param name="item1">The item1.</param>
+            <param name="item2">The item2.</param>
+            <returns>The result of the operator.</returns>
+        </member>
+        <member name="M:Comos.PicturesLibrary.UserPicSelect.IconLibraryItemViewModel.op_Inequality(Comos.PicturesLibrary.UserPicSelect.IconLibraryItemViewModel,Comos.PicturesLibrary.UserPicSelect.IconLibraryItemViewModel)">
+            <summary>
+            Implements the operator !=.
+            </summary>
+            <param name="item1">The item1.</param>
+            <param name="item2">The item2.</param>
+            <returns>The result of the operator.</returns>
+        </member>
+        <member name="M:Comos.PicturesLibrary.UserPicSelect.IconLibraryItemViewModel.GetHashCode">
+            <summary>
+            Returns a hash code for this instance.
+            </summary>
+            <returns>
+            A hash code for this instance, suitable for use in hashing algorithms and data structures like a hash table. 
+            </returns>
+        </member>
+        <member name="M:Comos.PicturesLibrary.UserPicSelect.IconLibraryItemViewModel.Equals(System.Object)">
+            <summary>
+            Indicates whether this instance and a specified object are equal.
+            </summary>
+            <param name="obj">Another object to compare to.</param>
+            <returns>
+            true if <paramref name="obj"/> and this instance are the same type and represent the same value; otherwise, false.
+            </returns>
+        </member>
+        <member name="M:Comos.PicturesLibrary.UserPicSelect.IconLibraryItemViewModel.ToString">
+            <summary>
+            Returns the fully qualified type name of this instance.
+            </summary>
+            <returns>
+            A <see cref="T:System.String"/> containing a fully qualified type name.
+            </returns>
+        </member>
+        <member name="T:Comos.PicturesLibrary.UserPicSelect.PicSelectView">
+            <summary>
+            Interaktionslogik für PicSelect.xaml
+            </summary>
+        </member>
+        <member name="M:Comos.PicturesLibrary.UserPicSelect.PicSelectView.#ctor">
+            <summary>
+            Initializes a new instance of the <see cref="T:Comos.PicturesLibrary.UserPicSelect.PicSelectView"/> class.
+            </summary>
+        </member>
+        <member name="M:Comos.PicturesLibrary.UserPicSelect.PicSelectView.#ctor(Plt.IComosDCDevice)">
+            <summary>
+            Initializes a new instance of the <see cref="T:Comos.PicturesLibrary.UserPicSelect.PicSelectView"/> class.
+            </summary>
+            <param name="cdevice">The cdevice.</param>
+        </member>
+        <member name="M:Comos.PicturesLibrary.UserPicSelect.PicSelectView.OnOkAbortLoaded(System.Object,System.Windows.RoutedEventArgs)">
+            <summary>
+            Called when the OkAbort control was loaded.
+            </summary>
+            <param name="sender">The sender.</param>
+            <param name="e">The <see cref="T:System.Windows.RoutedEventArgs"/> instance containing the event data.</param>
+        </member>
+        <member name="M:Comos.PicturesLibrary.UserPicSelect.PicSelectView.OnSelectedItemChanged(System.Object,System.Windows.RoutedPropertyChangedEventArgs{System.Object})">
+            <summary>
+            Called when the selected item has changed.
+            </summary>
+            <param name="sender">The sender of the event.</param>
+            <param name="e">The <see cref="T:System.Windows.RoutedPropertyChangedEventArgs`1"/> instance containing the event data.</param>
+        </member>
+        <member name="M:Comos.PicturesLibrary.UserPicSelect.PicSelectView.OnClose(Comos.PicturesLibrary.UserPicSelect.PicSelectViewModel.PicSelectResult)">
+            <summary>
+            Called when [close].
+            </summary>
+            <param name="result">The result.</param>
+        </member>
+        <member name="M:Comos.PicturesLibrary.UserPicSelect.PicSelectView.InitializeComponent">
+            <summary>
+            InitializeComponent
+            </summary>
+        </member>
+        <member name="T:Comos.PicturesLibrary.UserPicSelect.CloseHandler">
+            <summary>
+            Handler for reacting on the close event.
+            </summary>
+            <param name="result">The result which the user has selected.</param>
+        </member>
+        <member name="T:Comos.PicturesLibrary.UserPicSelect.SelectItemHandler">
+            <summary>
+            Handler for reacting on the select item event.
+            </summary>
+            <param name="item">The item which was selected.</param>
+        </member>
+        <member name="T:Comos.PicturesLibrary.UserPicSelect.PicSelectViewModel">
+            <summary>
+            View model of the <see cref="T:Comos.PicturesLibrary.UserPicSelect.PicSelectView"/>.
+            </summary>
+        </member>
+        <member name="M:Comos.PicturesLibrary.UserPicSelect.PicSelectViewModel.#ctor">
+            <summary>
+            Initializes a new instance of the <see cref="T:Comos.PicturesLibrary.UserPicSelect.PicSelectViewModel"/> class.
+            </summary>
+        </member>
+        <member name="P:Comos.PicturesLibrary.UserPicSelect.PicSelectViewModel.ITXIconLibrary">
+            <summary>
+            Gets the ITX of "icon library".
+            </summary>
+            <value>The ITX of "icon library".</value>
+        </member>
+        <member name="P:Comos.PicturesLibrary.UserPicSelect.PicSelectViewModel.ITXFile">
+            <summary>
+            Gets the ITX of  "file".
+            </summary>
+            <value>The ITX of "file".</value>
+        </member>
+        <member name="P:Comos.PicturesLibrary.UserPicSelect.PicSelectViewModel.ITXManageIcon">
+            <summary>
+            Gets the ITX manage icon.
+            </summary>
+            <value>The ITX manage icon.</value>
+        </member>
+        <member name="P:Comos.PicturesLibrary.UserPicSelect.PicSelectViewModel.CurrentIcon">
+            <summary>
+            Gets or sets the current icon.
+            </summary>
+            <value>The current icon.</value>
+        </member>
+        <member name="P:Comos.PicturesLibrary.UserPicSelect.PicSelectViewModel.CommandDeleteIcon">
+            <summary>
+            Gets the command "DeleteIcon".
+            </summary>
+            <value>The command "DeleteIcon".</value>
+        </member>
+        <member name="P:Comos.PicturesLibrary.UserPicSelect.PicSelectViewModel.CommandBrowseIcon">
+            <summary>
+            Gets the command "BrowseIcon".
+            </summary>
+            <value>The command "BrowseIcon".</value>
+        </member>
+        <member name="P:Comos.PicturesLibrary.UserPicSelect.PicSelectViewModel.CommandOk">
+            <summary>
+            Gets the command ok.
+            </summary>
+            <value>The command ok.</value>
+        </member>
+        <member name="P:Comos.PicturesLibrary.UserPicSelect.PicSelectViewModel.CommandAbort">
+            <summary>
+            Gets the command abort.
+            </summary>
+            <value>The command abort.</value>
+        </member>
+        <member name="P:Comos.PicturesLibrary.UserPicSelect.PicSelectViewModel.IconFileName">
+            <summary>
+            Gets or sets the name of the icon file.
+            </summary>
+            <value>The name of the icon file.</value>
+        </member>
+        <member name="P:Comos.PicturesLibrary.UserPicSelect.PicSelectViewModel.IconLibraries">
+            <summary>
+            Gets all availlable icon libraries.
+            </summary>
+            <value>All availlable icon libraries.</value>
+        </member>
+        <member name="P:Comos.PicturesLibrary.UserPicSelect.PicSelectViewModel.CDevice">
+            <summary>
+            Gets or sets the CDevice.
+            </summary>
+            <value>The C device.</value>
+        </member>
+        <member name="P:Comos.PicturesLibrary.UserPicSelect.PicSelectViewModel.IsLibraryIcon">
+            <summary>
+            Gets or sets a value indicating whether this instance is library icon.
+            </summary>
+            <value>
+            <c>true</c> if this instance is library icon; otherwise, <c>false</c>.
+            </value>
+        </member>
+        <member name="P:Comos.PicturesLibrary.UserPicSelect.PicSelectViewModel.IsIconFile">
+            <summary>
+            Gets or sets a value indicating whether this instance is icon file.
+            </summary>
+            <value>
+            <c>true</c> if this instance is icon file; otherwise, <c>false</c>.
+            </value>
+        </member>
+        <member name="P:Comos.PicturesLibrary.UserPicSelect.PicSelectViewModel.IconTextStyle">
+            <summary>
+            Gets the icon text style.
+            </summary>
+            <value>The icon text style.</value>
+        </member>
+        <member name="E:Comos.PicturesLibrary.UserPicSelect.PicSelectViewModel.Close">
+            <summary>
+            Occurs when [close].
+            </summary>
+        </member>
+        <member name="M:Comos.PicturesLibrary.UserPicSelect.PicSelectViewModel.OnClose(Comos.PicturesLibrary.UserPicSelect.PicSelectViewModel.PicSelectResult)">
+            <summary>
+            Raises the <see cref="E:Close"/> event.
+            </summary>
+            <param name="result">The result.</param>
+        </member>
+        <member name="M:Comos.PicturesLibrary.UserPicSelect.PicSelectViewModel.GetAvailableIconLibraries">
+            <summary>
+            Gets all availlable icon libraries.
+            </summary>
+            <returns>All availlable icon libraries.</returns>
+        </member>
+        <member name="M:Comos.PicturesLibrary.UserPicSelect.PicSelectViewModel.FillIconLibraryItems(System.String,Comos.PicturesLibrary.UserPicSelect.IconLibraryItemViewModel,System.Collections.DictionaryEntry)">
+            <summary>
+            Fills the icon library items.
+            </summary>
+            <param name="croppedResKey">The cropped resource key.</param>
+            <param name="root">The root of items.</param>
+            <param name="resourceEntry">The resource entry.</param>
+        </member>
+        <member name="M:Comos.PicturesLibrary.UserPicSelect.PicSelectViewModel.GetSelectedIconLibraryItem(System.String,System.Collections.ObjectModel.ObservableCollection{Comos.PicturesLibrary.UserPicSelect.IconLibraryItemViewModel})">
+            <summary>
+            Selects the icon library item.
+            </summary>
+            <param name="iconFileName">Name of the icon file.</param>
+            <param name="curCollection">The current collection.</param>
+            <returns>The icon library item.</returns>
+        </member>
+        <member name="M:Comos.PicturesLibrary.UserPicSelect.PicSelectViewModel.Refresh">
+            <summary>
+            Refreshes this instance.
+            </summary>
+        </member>
+        <member name="M:Comos.PicturesLibrary.UserPicSelect.PicSelectViewModel.ShowBrowseFileDialog">
+            <summary>
+            Shows the browse file dialog.
+            </summary>
+        </member>
+        <member name="M:Comos.PicturesLibrary.UserPicSelect.PicSelectViewModel.VerifyIconFileName(System.String)">
+            <summary>
+            Verifies the name of the icon file.
+            </summary>
+            <param name="fileName">Name of the file.</param>
+            <returns></returns>
+        </member>
+        <member name="M:Comos.PicturesLibrary.UserPicSelect.PicSelectViewModel.GetParentWithIcon(Plt.IComosDCDevice)">
+            <summary>
+            Gets the parent with icon.
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="T:Comos.PicturesLibrary.UserPicSelect.PicSelectViewModel.PicSelectResult">
+            <summary>
+            Results of the PicSelect dialog.
+            </summary>
+        </member>
+        <member name="F:Comos.PicturesLibrary.UserPicSelect.PicSelectViewModel.PicSelectResult.OK">
+            <summary>
+            Indicates that the user clicked 'OK'.
+            </summary>
+        </member>
+        <member name="F:Comos.PicturesLibrary.UserPicSelect.PicSelectViewModel.PicSelectResult.Abort">
+            <summary>
+            Indicates that the user clicked 'Abort'.
+            </summary>
+        </member>
+        <member name="T:Comos.PicturesLibrary.SH_FILEINFOFLAGS">
+            <summary>
+            Flags for file information operations.
+            </summary>
+        </member>
+        <member name="F:Comos.PicturesLibrary.SH_FILEINFOFLAGS.SHGFI_ICON">
+            <summary>
+            Get the file Icon.
+            </summary>
+        </member>
+        <member name="F:Comos.PicturesLibrary.SH_FILEINFOFLAGS.SHGFI_DISPLAYNAME">
+            <summary>
+            Get display name.
+            </summary>
+        </member>
+        <member name="F:Comos.PicturesLibrary.SH_FILEINFOFLAGS.SHGFI_TYPENAME">
+            <summary>
+            Get type name.
+            </summary>
+        </member>
+        <member name="F:Comos.PicturesLibrary.SH_FILEINFOFLAGS.SHGFI_ATTRIBUTES">
+            <summary>
+            Get attributes.
+            </summary>
+        </member>
+        <member name="F:Comos.PicturesLibrary.SH_FILEINFOFLAGS.SHGFI_ICONLOCATION">
+            <summary>
+            Get icon location.
+            </summary>
+        </member>
+        <member name="F:Comos.PicturesLibrary.SH_FILEINFOFLAGS.SHGFI_EXETYPE">
+            <summary>
+            Return exe type.
+            </summary>
+        </member>
+        <member name="F:Comos.PicturesLibrary.SH_FILEINFOFLAGS.SHGFI_SYSICONINDEX">
+            <summary>
+            Get system icon index.
+            </summary>
+        </member>
+        <member name="F:Comos.PicturesLibrary.SH_FILEINFOFLAGS.SHGFI_LINKOVERLAY">
+            <summary>
+            Put a link overlay on icon.
+            </summary>
+        </member>
+        <member name="F:Comos.PicturesLibrary.SH_FILEINFOFLAGS.SHGFI_SELECTED">
+            <summary>
+            Show icon in selected state.
+            </summary>
+        </member>
+        <member name="F:Comos.PicturesLibrary.SH_FILEINFOFLAGS.SHGFI_ATTR_SPECIFIED">
+            <summary>
+            Get only specified attributes.
+            </summary>
+        </member>
+        <member name="F:Comos.PicturesLibrary.SH_FILEINFOFLAGS.SHGFI_LARGEICON">
+            <summary>
+            Get large icon.
+            </summary>
+        </member>
+        <member name="F:Comos.PicturesLibrary.SH_FILEINFOFLAGS.SHGFI_SMALLICON">
+            <summary>
+            Get small icon.
+            </summary>
+        </member>
+        <member name="F:Comos.PicturesLibrary.SH_FILEINFOFLAGS.SHGFI_OPENICON">
+            <summary>
+            Get open icon.
+            </summary>
+        </member>
+        <member name="F:Comos.PicturesLibrary.SH_FILEINFOFLAGS.SHGFI_SHELLICONSIZE">
+            <summary>
+            Get shell size icon.
+            </summary>
+        </member>
+        <member name="F:Comos.PicturesLibrary.SH_FILEINFOFLAGS.SHGFI_PIDL">
+            <summary>
+            pszPath is a pidl.
+            </summary>
+        </member>
+        <member name="F:Comos.PicturesLibrary.SH_FILEINFOFLAGS.SHGFI_USEFILEATTRIBUTES">
+            <summary>
+            Use passed dwFileAttribute.
+            </summary>
+        </member>
+        <member name="F:Comos.PicturesLibrary.SH_FILEINFOFLAGS.SHGFI_ADDOVERLAYS">
+            <summary>
+            Apply the appropriate overlays
+            </summary>
+        </member>
+        <member name="F:Comos.PicturesLibrary.SH_FILEINFOFLAGS.SHGFI_OVERLAYINDEX">
+            <summary>
+            Get the index of the overlay in the upper 8 bits of the iIcon.
+            </summary>
+        </member>
+        <member name="T:Comos.PicturesLibrary.SH_FILEINFO">
+            <summary>
+            Contains information about a file which is compatible with the Windows API.
+            </summary>
+        </member>
+        <member name="F:Comos.PicturesLibrary.SH_FILEINFO.IconHandle">
+            <summary>
+            Handle to the icon that represents the file. 
+            </summary>
+        </member>
+        <member name="F:Comos.PicturesLibrary.SH_FILEINFO.IconIndex">
+            <summary>
+            Index of the icon image within the system image list. 
+            </summary>
+        </member>
+        <member name="F:Comos.PicturesLibrary.SH_FILEINFO.Attributes">
+            <summary>
+            Array of values that indicates the attributes of the file object. 
+            </summary>
+        </member>
+        <member name="F:Comos.PicturesLibrary.SH_FILEINFO.DisplayName">
+            <summary>
+            String that contains the name of the file as it appears 
+            in the Microsoft Windows Shell, or the path and file 
+            name of the file that contains the icon representing the file.
+            </summary>
+        </member>
+        <member name="F:Comos.PicturesLibrary.SH_FILEINFO.TypeName">
+            <summary>
+            String that describes the type of file.
+            </summary>
+        </member>
+        <member name="T:Comos.PicturesLibrary.WinApi">
+            <summary>
+            Managed wrapper class for native operations.
+            </summary>
+        </member>
+        <member name="M:Comos.PicturesLibrary.WinApi.SHGetFileInfo(System.String,System.UInt32,Comos.PicturesLibrary.SH_FILEINFO@,System.UInt32,System.UInt32)">
+            <summary>
+            Gets the file information for the specified file.
+            </summary>
+            <param name="pszPath">The filepath.</param>
+            <param name="dwFileAttributes">The file attributes.</param>
+            <param name="psfi">The FileInfo object.</param>
+            <param name="cbSizeFileInfo">The size file info.</param>
+            <param name="uFlags">The flags.</param>
+            <returns>The pointer to the return value.</returns>
+        </member>
+        <member name="M:Comos.PicturesLibrary.WinApi.DestroyIcon(System.IntPtr)">
+            <summary>
+            Releases an icon.
+            </summary>
+            <param name="hIcon">The handle to the icon which should be released.</param>
+            <returns><c>true</c> on succsess; otherwise <c>false</c></returns>
+        </member>
+        <member name="M:Comos.PicturesLibrary.WinApi.DeleteObject(System.IntPtr)">
+            <summary>
+            Releases a GDI-Object.
+            </summary>
+            <param name="hObject">The handel to the GDI-Object which should be released.</param>
+            <returns><c>true</c> on succsess; otherwise <c>false</c></returns>
+        </member>
+        <member name="T:Comos.PicturesLibrary.WoColor.BoolToFontWeightConverter">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="M:Comos.PicturesLibrary.WoColor.BoolToFontWeightConverter.#ctor">
+            <summary>
+            Initializes a new instance of the <see cref="T:Comos.PicturesLibrary.WoColor.BoolToFontWeightConverter"/> class.
+            </summary>
+        </member>
+        <member name="M:Comos.PicturesLibrary.WoColor.BoolToFontWeightConverter.Convert(System.Object,System.Type,System.Object,System.Globalization.CultureInfo)">
+            <summary>
+            Converts a value.
+            </summary>
+            <param name="value">The value produced by the binding source.</param>
+            <param name="targetType">The type of the binding target property.</param>
+            <param name="parameter">The converter parameter to use.</param>
+            <param name="culture">The culture to use in the converter.</param>
+            <returns>
+            A converted value. If the method returns null, the valid null value is used.
+            </returns>
+        </member>
+        <member name="M:Comos.PicturesLibrary.WoColor.BoolToFontWeightConverter.ConvertBack(System.Object,System.Type,System.Object,System.Globalization.CultureInfo)">
+            <summary>
+            Converts a value.
+            </summary>
+            <param name="value">The value that is produced by the binding target.</param>
+            <param name="targetType">The type to convert to.</param>
+            <param name="parameter">The converter parameter to use.</param>
+            <param name="culture">The culture to use in the converter.</param>
+            <returns>
+            A converted value. If the method returns null, the valid null value is used.
+            </returns>
+        </member>
+        <member name="P:Comos.PicturesLibrary.WoColor.WoColor.WoLevelCDevName">
+            <summary>
+            Gets or sets the wo level C device.
+            </summary>
+            <value>The wo level C device.</value>
+        </member>
+        <member name="P:Comos.PicturesLibrary.WoColor.WoColor.Brush">
+            <summary>
+            Gets or sets the brush.
+            </summary>
+            <value>The brush.</value>
+        </member>
+        <member name="T:Comos.PicturesLibrary.WoColor.WoColorHelper">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="M:Comos.PicturesLibrary.WoColor.WoColorHelper.GetProfileMaster">
+            <summary>
+            Gets the profile master.
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:Comos.PicturesLibrary.WoColor.WoColorHelper.InitializeStatusColorSet">
+            <summary>
+            Initializes the status color set.
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:Comos.PicturesLibrary.WoColor.WoColorHelper.GetStandardWoColors">
+            <summary>
+            Gets the standard wo colors.
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:Comos.PicturesLibrary.WoColor.WoColorHelper.GetWoColorSet">
+            <summary>
+            Gets the wo color set.
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:Comos.PicturesLibrary.WoColor.WoColorHelper.LoadWoColorSet">
+            <summary>
+            Loads the status color set.
+            </summary>
+        </member>
+        <member name="M:Comos.PicturesLibrary.WoColor.WoColorHelper.SaveWoColorSet">
+            <summary>
+            Saves the status color set.
+            </summary>
+        </member>
+        <member name="M:Comos.PicturesLibrary.WoColor.WoColorHelper.GetKeyWoColor(Plt.IComosDCDevice)">
+            <summary>
+            Gets the key for the specified @WOLevel|* CDevice.
+            </summary>
+            <param name="woLevelCDev">The @WOLevel|* CDevice.</param>
+            <returns></returns>
+        </member>
+        <member name="M:Comos.PicturesLibrary.WoColor.WoColorHelper.GetWoLevel(Plt.IComosBaseObject,System.Int32@)">
+            <summary>
+            Gets the wo level.
+            </summary>
+            <param name="projOrWo">The proj or wo.</param>
+            <param name="woLevel">The wo level.</param>
+        </member>
+        <member name="M:Comos.PicturesLibrary.WoColor.WoColorHelper.GetWoLevelCDevice(System.String)">
+            <summary>
+            Gets the wo level C device.
+            </summary>
+            <param name="name">The name.</param>
+            <returns></returns>
+        </member>
+        <member name="M:Comos.PicturesLibrary.WoColor.WoColorHelper.ResetWoColorSet">
+            <summary>
+            Resets the wo color set.
+            </summary>
+        </member>
+        <member name="M:Comos.PicturesLibrary.WoColor.WoColorHelper.ResetWoColorSetByProfile">
+            <summary>
+            Resets the wo color set by profile.
+            </summary>
+        </member>
+        <member name="T:Comos.PicturesLibrary.WoColor.WoColorProfileStorage">
+            <exclude />
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="M:Comos.PicturesLibrary.WoColor.WoColorProfileStorage.#ctor">
+            <summary>
+            Initializes a new instance of the <see cref="T:Comos.PicturesLibrary.WoColor.WoColorProfileStorage"/> class.
+            </summary>
+        </member>
+        <member name="P:Comos.PicturesLibrary.WoColor.WoColorProfileStorage.WoColorSet">
+            <summary>
+            Gets or sets the wo color set.
+            </summary>
+            <value>The wo color set.</value>
+        </member>
+        <member name="P:Comos.PicturesLibrary.WoColor.WoColorProfileStorage.ComosQueryInterface#IProfileStorage#Version">
+            <summary>
+            Gets the version.
+            </summary>
+            <value>The version.</value>
+        </member>
+        <member name="P:Comos.PicturesLibrary.WoColor.WoColorProfileStorage.ComosQueryInterface#IProfileStorage#ArchiveVersion">
+            <summary>
+            Gets the archive version.
+            </summary>
+            <value>The archive version.</value>
+        </member>
+        <member name="P:Comos.PicturesLibrary.WoColor.WoColorProfileStorage.ComosQueryInterface#IProfileStorage#Name">
+            <summary>
+            Gets the name.
+            </summary>
+            <value>The name.</value>
+        </member>
+        <member name="M:Comos.PicturesLibrary.WoColor.WoColorProfileStorage.ComosQueryInterface#IProfileStorage#Save(MSXML.IXMLDOMNode)">
+            <summary>
+            Saves the Workingoverlay Color Settings to the Profile.
+            </summary>
+            <param name="currentNode">The current node.</param>
+        </member>
+        <member name="M:Comos.PicturesLibrary.WoColor.WoColorProfileStorage.ComosQueryInterface#IProfileStorage#Load(MSXML.IXMLDOMNode)">
+            <summary>
+            Loads the Workingoverlay Color Settings from the Profile.
+            </summary>
+            <param name="currentNode">The current node.</param>
+        </member>
+        <member name="T:Comos.PicturesLibrary.WoColor.WoColorSelectView">
+            <summary>
+            Interaction logic for WoColorSelectView.xaml
+            </summary>
+            <exclude />
+        </member>
+        <member name="M:Comos.PicturesLibrary.WoColor.WoColorSelectView.#ctor">
+            <summary>
+            Initializes a new instance of the <see cref="T:Comos.PicturesLibrary.WoColor.WoColorSelectView"/> class.
+            </summary>
+        </member>
+        <member name="M:Comos.PicturesLibrary.WoColor.WoColorSelectView.InitializeComponent">
+            <summary>
+            InitializeComponent
+            </summary>
+        </member>
+        <member name="T:Comos.PicturesLibrary.WoColor.WoColorSelectViewModel">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="M:Comos.PicturesLibrary.WoColor.WoColorSelectViewModel.#ctor">
+            <summary>
+            Initializes a new instance of the <see cref="T:Comos.PicturesLibrary.WoColor.WoColorSelectViewModel"/> class.
+            </summary>
+        </member>
+        <member name="P:Comos.PicturesLibrary.WoColor.WoColorSelectViewModel.WoColorItems">
+            <summary>
+            Gets or sets the wo colors.
+            </summary>
+            <value>The wo colors.</value>
+        </member>
+        <member name="P:Comos.PicturesLibrary.WoColor.WoColorSelectViewModel.ITXLevel">
+            <summary>
+            Gets the ITX of "level".
+            </summary>
+            <value>The ITX of "level".</value>
+        </member>
+        <member name="P:Comos.PicturesLibrary.WoColor.WoColorSelectViewModel.ITXWoColorSettings">
+            <summary>
+            Gets the ITX of "Workingoverlay Color Settings".
+            </summary>
+            <value>The ITX wo color settings.</value>
+        </member>
+        <member name="M:Comos.PicturesLibrary.WoColor.WoColorSelectViewModel.InitializeWoColorItems">
+            <summary>
+            Initializes the wo color items.
+            </summary>
+        </member>
+        <member name="P:Comos.PicturesLibrary.WoColor.WoColorSelectViewModel.HasChanges">
+            <summary>
+            Gets or sets a value indicating whether this instance has changes.
+            </summary>
+            <value>
+            	<c>true</c> if this instance has changes; otherwise, <c>false</c>.
+            </value>
+        </member>
+        <member name="M:Comos.PicturesLibrary.WoColor.WoColorSelectViewModel.OnCanExecuteSaveSettings(System.Object)">
+            <summary>
+            Called when [can execute save settings].
+            </summary>
+            <param name="parameters">The parameters.</param>
+            <returns></returns>
+        </member>
+        <member name="M:Comos.PicturesLibrary.WoColor.WoColorSelectViewModel.OnExecuteSaveSettings(System.Object)">
+            <summary>
+            Called when [execute save settings].
+            </summary>
+            <param name="parameters">The parameters.</param>
+        </member>
+        <member name="M:Comos.PicturesLibrary.WoColor.WoColorSelectViewModel.OnCanExecuteReset(System.Object)">
+            <summary>
+            Called when [can execute reset].
+            </summary>
+            <param name="parameters">The parameters.</param>
+            <returns><c>true</c> if the <see cref="P:Comos.PicturesLibrary.Legend.LegendItemViewModel.ResetCommand"/> can be executed; otherwise, <c>false</c>.</returns>
+        </member>
+        <member name="M:Comos.PicturesLibrary.WoColor.WoColorSelectViewModel.OnExecuteReset(System.Object)">
+            <summary>
+            Called when [execute reset].
+            </summary>
+            <param name="parameters">The parameters.</param>
+        </member>
+        <member name="T:Comos.PicturesLibrary.WoColor.WoColorViewModel">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="M:Comos.PicturesLibrary.WoColor.WoColorViewModel.#ctor">
+            <summary>
+            Initializes a new instance of the <see cref="T:Comos.PicturesLibrary.WoColor.WoColorViewModel"/> class.
+            </summary>
+        </member>
+        <member name="M:Comos.PicturesLibrary.WoColor.WoColorViewModel.#ctor(Comos.PicturesLibrary.WoColor.WoColor)">
+            <summary>
+            Initializes a new instance of the <see cref="T:Comos.PicturesLibrary.WoColor.WoColorViewModel"/> class.
+            </summary>
+        </member>
+        <member name="P:Comos.PicturesLibrary.WoColor.WoColorViewModel.WoLevelText">
+            <summary>
+            Gets the wo level.
+            </summary>
+            <value>The wo level.</value>
+        </member>
+        <member name="P:Comos.PicturesLibrary.WoColor.WoColorViewModel.IsCurrentWoLevelColor">
+            <summary>
+            Gets a value indicating whether this instance is current wo level color.
+            </summary>
+            <value>
+            	<c>true</c> if this instance is current wo level color; otherwise, <c>false</c>.
+            </value>
+        </member>
+        <member name="P:Comos.PicturesLibrary.WoColor.WoColorViewModel.Color">
+            <summary>
+            Gets or sets the color.
+            </summary>
+            <value>The color.</value>
+        </member>
+        <member name="T:Comos.PicturesLibrary.IWpfImage">
+            <summary>
+            COM-Interface for the <see cref="T:Comos.PicturesLibrary.WpfImage"/> class.
+            </summary>
+        </member>
+        <member name="P:Comos.PicturesLibrary.IWpfImage.ImageObject">
+            <summary>
+            Gets or sets the image object.
+            </summary>
+            <value>The image object.</value>
+        </member>
+        <member name="T:Comos.PicturesLibrary.WpfImage">
+            <summary>
+            Wrapper class to pass Images through COM/VB.
+            </summary>
+        </member>
+        <member name="M:Comos.PicturesLibrary.WpfImage.#ctor">
+            <summary>
+            Initializes a new instance of the <see cref="T:Comos.PicturesLibrary.WpfImage"/> class.
+            </summary>
+        </member>
+        <member name="P:Comos.PicturesLibrary.WpfImage.DisabledImageObject">
+            <summary>
+            Gets or sets the disabled image object.
+            </summary>
+            <value>The disabled image object.</value>
+        </member>
+        <member name="P:Comos.PicturesLibrary.WpfImage.OLEPicture">
+            <summary>
+            Gets or sets the OLE picture.
+            </summary>
+            <value>
+            The OLE picture.
+            </value>
+        </member>
+        <member name="P:Comos.PicturesLibrary.WpfImage.ImageObject">
+            <summary>
+            Gets or sets the image object.
+            </summary>
+            <value>The image object.</value>
+        </member>
+        <member name="T:XamlGeneratedNamespace.GeneratedInternalTypeHelper">
+            <summary>
+            GeneratedInternalTypeHelper
+            </summary>
+        </member>
+        <member name="M:XamlGeneratedNamespace.GeneratedInternalTypeHelper.CreateInstance(System.Type,System.Globalization.CultureInfo)">
+            <summary>
+            CreateInstance
+            </summary>
+        </member>
+        <member name="M:XamlGeneratedNamespace.GeneratedInternalTypeHelper.GetPropertyValue(System.Reflection.PropertyInfo,System.Object,System.Globalization.CultureInfo)">
+            <summary>
+            GetPropertyValue
+            </summary>
+        </member>
+        <member name="M:XamlGeneratedNamespace.GeneratedInternalTypeHelper.SetPropertyValue(System.Reflection.PropertyInfo,System.Object,System.Object,System.Globalization.CultureInfo)">
+            <summary>
+            SetPropertyValue
+            </summary>
+        </member>
+        <member name="M:XamlGeneratedNamespace.GeneratedInternalTypeHelper.CreateDelegate(System.Type,System.Object,System.String)">
+            <summary>
+            CreateDelegate
+            </summary>
+        </member>
+        <member name="M:XamlGeneratedNamespace.GeneratedInternalTypeHelper.AddEventHandler(System.Reflection.EventInfo,System.Object,System.Delegate)">
+            <summary>
+            AddEventHandler
+            </summary>
+        </member>
+    </members>
+</doc>

@@ -1,0 +1,58 @@
+﻿<ComosMainMenu>
+  <General Version="1" />
+
+  <!-- Tags and values are case sensitive!
+  ##################################################
+  M E N U
+  ##################################################-->
+
+  <Menu>
+    <Toolbars>
+      <Toolbar idref="ConststructionAssistantMain">
+
+        <Tool idref="ID_SysNaviBack"/>
+        <Tool idref="ID_SysNaviForward"/>
+
+        <Tool idref="separator"/>
+
+        <Tool idref="ID_DatabaseOpen"/>
+        <Tool idref="ID_ProjectOpen"/>
+
+        <Tool idref="separator"/>
+		
+        <Tool idref="ID_CADisplayReport" />
+	<Tool idref="ID_Query" />
+        
+        <Tool idref="ID_Save"/>
+        <Tool idref="ID_Print"/>
+
+        <Tool idref="separator"/>
+
+        <Tool idref="ID_CAOptions">
+          <Tool idref="ID_QuickStart"/>
+          <Tool idref="ID_EnableAutoCollapse"/>
+        </Tool>
+
+        <Tool idref="ID_Help">
+          <Tool idref="separator"/>
+          <Tool idref="ID_StartHelpFileShow"/>
+          <Tool idref="separator"/>
+          <Tool idref="ID_ComosInfo"/>
+        </Tool>
+        
+        <Tool idref="ID_ExtPlugins">
+          <Tool idref="ID_ExtPlugins3DEngineeringAdapter" type="PopupMenu">
+            <Caption>
+              <Text itx="~079a2 CAE Apps"/>
+            </Caption>
+            <Tool idref="@X.CPlugInPDMSInterface.PDMSInterface.Design" />
+          </Tool>
+        </Tool>
+
+      </Toolbar>
+
+
+    </Toolbars>
+  </Menu>
+
+</ComosMainMenu>

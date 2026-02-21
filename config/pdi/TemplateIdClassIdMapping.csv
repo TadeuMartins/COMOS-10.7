@@ -1,0 +1,129 @@
+Status as of 14th Jan 2013;;;;;;;
+;;;;;;;
+Sr No ;Type of Pipe Part;Connection type;Mapping sheet no;Status of NX template part;TEMPLATE_ITEM_ID;CLASS_ID;COMOS Part Node name
+;;;;;;;
+1;Pipe Cap;Butt weld;1;Done;Dished_endcap_butt_weld_mm;Dish_end_BW;PIPECAP BW_BUTT WELD CAP_DIN 2617_WDR1_P235GH
+2;Pipe Plug;Thread outside;1;Done;Pipe_plug_thread_outside_mm;Plug_th_out;
+3;Pipe Plug;Thread inside;1;Done;Pipe_plug_thread_inside_mm;Plug_th_in;
+4;Pipe Coupling;Thread inside;1;Done;Pipe_coupling_thread_inside_mm;Coupling_th_in;
+5;Pipe Coupling reducing ;Thread inside;1;Done;Reducing_coupling_thread_inside_mm;Red_coupling_th_in;
+6;Pipe Nipple;Thread outside;1;Done; Pipe_nipple_thread_outside_mm;Nipple_th_out;
+7;Pipe Nipple reducing ;Thread outside;1;Done;Reducing_nipple_thread_outside_mm;Red_Nipple_th_out;
+8;Double pipe nipple;Thread outside;1;Done;Double_nipple_thread_outside_mm;Double_nip_th_out;
+9;Pipe Bush;Thread inside/outside;1;Done;Pipe_bushing_thread_mm;Bush_th_in_out;
+;;;;;;;
+10;Pipe;Butt weld;1;Done;Welding_pipe_butt_weld_mm;DIN_10220_Pipe_BW;WELDING PIPE_PIPE SEAMLESS_DIN EN 10220_WDR1_P235GH or WELDING PIPE_PIPE STRAIGHT BEAD_DIN EN 10220_WDR3_P235GH
+12;Pipe;Thread inside;1;Done;Pipe_thread_inside_mm;DIN_2440_Pipe_TH_IN;
+13;Pipe;Thread outside;1;Done;Pipe_thread_outside_mm;DIN_2440_Pipe_TH_OUT;
+;;;;;;;
+14;Elbow;Flange;2;Done;Flanged_elbow_mm;Elbow_FL;
+15;Elbow;Butt weld;2;Done;Elbow_welding_mm;Elbow_BW;ELBOW_PIPE ELBOW 90ø FORM A_EN 10253/T2_WDR1_P235GH or ELBOW_BUTTWELD ELBOW 90ø TYPE B_EN 10253/T2_WDR3_P235GH or ELBOW_PIPE ELBOW 45ø FORM B_EN 10253/T2_WDR3_P235GH or ELBOW_PIPE ELBOW 45ø FORM B_EN 10253/T1_WDR3_P235GH
+16;Elbow;Thread outside;2;Done;Elbow_thread_outside_mm;Elbow_TO;
+17;Elbow;Thread inside;2;Done;Elbow_thread_inside_mm;Elbow_TI;
+18;Angled Elbow;Thread outside;2;Done;Elbow_angle_thread_outside_mm;Angle_elbow_TO;
+19;Angled Elbow;Thread inside;2;Done;Elbow_angle_thread_inside_mm;Angle_elbow_TI;
+20;Miter Elbow;Butt weld;2;Done;Mitre_elbows_butt_weld_mm;Mit_elbow_BW;
+21;Miter Elbow;Flange;2;Done;Mitre_elbows_flanged_mm;Mit_elbow_FL;
+22;U elbow;Flange;2;Done;U_elbows_flanged_mm;U_Elbow_FL;
+23;U elbow;Butt weld;2;Done; U_elbows_butt_weld_mm;U_Elbow_BW;
+24;U elbow;Thread outside;2;Done;U_elbows_thread_outside_mm;U_Elbow_TO;
+25;U elbow;Thread inside;2;Done;U_elbows_thread_inside_mm;U_Elbow_TI;
+26;Elbow Reducing;Flange;2;Done;Reducing_elbows_flanged_mm;Red_Elbow_FL;
+27;Elbow Reducing;Butt weld;2;Done;Reducing_elbows_butt_weld_mm;Red_Elbow_BW;
+28;Elbow Reducing;Thread outside;2;Done;Reducing_elbows_threaded_outside_mm;Red_Elbow_TO;
+29;Elbow Reducing;Thread inside;2;Done;Reducing_elbows_thread_inside_mm;Red_Elbow_TI;
+30;Angled Elbow Reducing;Thread outside;2;Done;Reducing_angle_elbow_thread_outside_mm;Red_ang_elbow_TO;
+31;Angled Elbow Reducing;Thread inside;2;Done;Reducing_angle_elbow_thread_inside_mm;Red_ang_elbow_TI;
+;;;;;;;
+32;Flange Weldneck;Butt weld;3;Done;Weld_neck_flange_mm;Weldneck_flange;FLANGE_WELD NECK FLANGE, BORED_EN 1092/T1_WDR1_P245GH or FLANGE_WELD NECK FLANGE_EN 1092/T1_WDR1_P245GH or FLANGE_WELD NECK FLANGE_EN 1092/T1_WDR3_P245GH
+33;Flange Socketweld;Socket weld;3;Done;Socket_weld_flange_mm;Socket_weld_flange;
+34;Flange Slipon;Slip on;3;Done;Slip_on_flange_mm;Slipon_flange;
+35;Flange Slipon Plate;Slip on;3;Done;Slip_on_Plate_flange_mm;Slipon_Plate_flange;
+36;Flange Loose;;3;Done;Loose_flange_mm;Loose_flange;
+37;Flange Stub end;Stub end;3;Done;Stub_end_flange_mm;Stubend_flange;
+38;Flange Blind;Flange;3;Done;Blind_flange_mm;Blind_flange;FLANGE_BLIND FLANGES BORED_EN 1092/T1__P265GH or FLANGE_BLIND FLANGES_EN 1092/T1__P265GH
+;;;;;;;
+39;Concentric Reducer;Flange;4;Done;Reducer_con_flanged_mm;Con_Reducer_FL;
+40;Concentric Reducer;Butt weld;4;Done;Reducer_con_butt_weld_mm;Con_Reducer_BW;REDUCER_WELDING REDUCER_DIN 2616/T2_WDR1_P235GH
+41;Concentric Reducer;Thread outside;4;Done;Reducer_con_thread_outside_mm;Con_Reducer_TO;
+42;Concentric Reducer;Thread inside;4;Done;Reducer_con_thread_inside_mm;Con_Reducer_TI;
+43;Eccentric Reducer;Flange;4;Done;Reducer_ecc_flanged_m;Ecc_Reducer_FL;
+44;Eccentric Reducer;Butt weld;4;Done;Reducer_ecc_butt_weld_mm;Ecc_Reducer_BW;
+45;Eccentric Reducer;Thread outside;4;Done;Reducer_ecc_thread_outside_mm;Ecc_Reducer_TO;
+46;Eccentric Reducer;Thread inside;4;Done;Reducer_ecc_thread_inside_mm;Ecc_Reducer_TI;
+;;;;;;;
+47;Tee;Flange;4;Done;Tee_flanged_mm;Tee_FL;
+48;Tee;Butt weld;4;Done;Tee_butt_weld_mm;Tee_BW;T-PIECE_WELDED TEE_EN 10253/T2_WDR1_16MO 3
+49;Tee;Thread outside;4;Done;Tee_thread_outside_mm;Tee_TO;
+50;Tee;Thread inside;4;Done;Tee_thread_inside_mm;Tee_TI;
+;;;;;;;
+51;Cross;Flange;4;Done;Cross_flanged_mm;Cross_FL;
+52;Cross;Butt weld;4;Done;Cross_butt_weld_mm;Cross_BW;
+53;Cross;Thread outside;4;Done;Cross_thread_outside_mm;Cross_TO;
+54;Cross;Thread inside;4;Done;Cross_thread_inside_mm;Cross_TI;
+;;;;;;;
+55;Wye;Flange;4;Done;Wye_flanged_mm;Wye_FL;
+56;Wye;Butt weld;4;Done;Wye_butt_weld_mm;Wye_BW;
+;;;;;;;
+57;2 Way Globe Valve;Flange;5;Done;Globe_2_way_valves_flanged_mm;2w_Globe_valve_FL;
+58;2 Way Globe Valve;Butt weld;5;Inprocess;;;
+59;2 Way Globe Valve;Thread outside;5;Inprocess;;;
+60;2 Way Globe Valve;Thread inside;5;Inprocess;;;
+61;2 Way Ball Valve;Flange;5;Done;Ball_2_way_valves_flanged_mm;2w_Ball_valve_FL;VALVE_BALL VALVE_DIN 3202/T1_PN 16_GG-150 HB or BALL VALVE_BALL VALVE_DIN 3202/T1_PN 16_GG-150 HB
+62;2 Way Ball Valve;Butt weld;5;Inprocess;;;
+63;2 Way Ball Valve;Thread outside;5;Inprocess;;;
+64;2 Way Ball Valve;Thread inside;5;Inprocess;;;
+65;2 Way Gate Valve;Flange;5;Done;Gate_2_way_valves_flanged_mm.prt;2w_Gate_Flanged;GATE VALVE_GATE VALVE_DIN 3202/T1_PN 16_GG-220 HB or GATE VALVE_SHIM PLATE SLIDER_DIN 3202/T1_PN 16_GG-150 HB or GATE VALVE_GATE VALVE_DIN 3202/T1_PN 16_GG-220 HB
+66;2 Way Gate Valve;Butt weld;5;Inprocess;;;
+67;2 Way Gate Valve;Thread outside;5;Inprocess;;;
+68;2 Way Gate Valve;Thread inside;5;Inprocess;;;
+69;2 Way Gate Valve;Flange Wafer;5;Inprocess;;;
+70;2 Way Plug Valve;Flange;5;Done;Plug_2_way_valves_flanged_mm;2w_Plug_valve_FL;"PLUG VALVE_PLUG VALVE_DIN 3202/T1_PN 16_GG-240 HB"" "
+71;2 Way Plug Valve;Butt weld;5;Inprocess;;;
+72;2 Way Plug Valve;Thread outside;5;Inprocess;;;
+73;2 Way Plug Valve;Thread inside;5;Inprocess;;;
+74;2 Way Butterfly Valve;Flange;5;Done;Butterfly_2_way_valves_flanged_mm;2w_Bfly_Flanged;
+75;2 Way Butterfly Valve;Butt weld;5;Inprocess;;;
+76;2 Way Butterfly Valve;Thread outside;5;Inprocess;;;
+77;2 Way Butterfly Valve;Thread inside;5;Inprocess;;;
+78;2 Way Butterfly Valve;Flange Wafer;5;Inprocess;;;
+79;2 Way Check Valve;Flange;5;Done;Check_2_way_valves_flanged_mm;2w_Chk_Flanged;VALVE_BALL CHECK VALVE_DIN 3202/T1_PN 16_GG-150 HB or VALVE_CHECK VALVE_DIN 3202/T1_PN 16_GG-30
+80;2 Way Check Valve;Butt weld;5;Inprocess;;;
+81;2 Way Check Valve;Thread outside;5;Inprocess;;;
+82;2 Way Check Valve;Thread inside;5;Inprocess;;;
+83;2 Way Check Valve;Flange Wafer;5;Inprocess;;;
+;;;;;;;
+84;3 Way Ball Valve;Flange;5;Not started;;;
+85;3 Way Ball Valve;Butt weld;5;Not started;;;
+86;3 Way Ball Valve;Thread outside;5;Not started;;;
+87;3 Way Ball Valve;Thread inside;5;Not started;;;
+88;3 Way Plug Valve;Flange;5;Not started;;;
+89;3 Way Plug Valve;Butt weld;5;Not started;;;
+90;3 Way Plug Valve;Thread outside;5;Not started;;;
+91;3 Way Plug Valve;Thread inside;5;Not started;;;
+;;;;;;;
+92;4 Way Ball Valve;Flange;5;Not started;;;
+93;4 Way Ball Valve;Butt weld;5;Not started;;;
+94;4 Way Ball Valve;Thread outside;5;Not started;;;
+95;4 Way Ball Valve;Thread inside;5;Not started;;;
+96;4 Way Plug Valve;Flange;5;Not started;;;
+97;4 Way Plug Valve;Butt weld;5;Not started;;;
+98;4 Way Plug Valve;Thread outside;5;Not started;;;
+99;4 Way Plug Valve;Thread inside;5;Not started;;;
+;;;;;;;
+100;Angled Globe Valve;Flange;5;Not started;;;
+101;Angled Globe Valve;Butt weld;5;Not started;;;
+102;Angled Globe Valve;Thread outside;5;Not started;;;
+103;Angled Globe Valve;Thread inside;5;Not started;;;
+104;Angled Ball Valve;Flange;5;Not started;;;
+105;Angled Ball Valve;Butt weld;5;Not started;;;
+106;Angled Ball Valve;Thread outside;5;Not started;;;
+107;Angled Ball Valve;Thread inside;5;Not started;;;
+108;Angled Plug Valve;Flange;5;Not started;;;
+109;Angled Plug Valve;Butt weld;5;Not started;;;
+110;Angled Plug Valve;Thread outside;5;Not started;;;
+111;Angled Plug Valve;Thread inside;5;Not started;;;
+112;Angled Safety Valve;Flange;5;Not started;;;
+113;Angled Safety Valve;Butt weld;5;Not started;;;
+114;Angled Safety Valve;Thread outside;5;Not started;;;
+115;Angled Safety Valve;Thread inside;5;Not started;;;

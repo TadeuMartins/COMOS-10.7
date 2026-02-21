@@ -1,0 +1,14 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Configuration>
+  <Databases>
+    <Database>
+      <Key>db1</Key>
+      <!-- Windows authentication within the same windows domain of service and database -->
+      <Connection encrypt="false" dbKey="db1">Data Source=SQL Server;Server=ServerAddressExample;Database=DbNameExample;Trusted_Connection=Yes;Connect Timeout=15;Encrypt=false;</Connection>
+    </Database>
+    <!--<Database>-->
+      <!-- Base authentication with different domains of service and database. Please ensure a secure access to this password through file read rights only for service user -->
+      <!--<Connection encrypt="true">Data Source=SQL Server;Server=ServerAddressExample;Database=DbNameExample;Integrated Security=false;Connect Timeout=15;Encrypt=False;TrustServerCertificate=False;User Id=YourUserName;Password=YourPassword;</Connection>-->
+    <!--</Database>-->
+  </Databases>
+</Configuration>

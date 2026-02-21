@@ -1,0 +1,26 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<Configuration>
+  <Database>
+    <!-- Base Authentication with different domains of service and database. Please ensure a secure access to this password through file read rights only for service user -->
+    <Connection>Data Source=SQL Server;Server=ServerAddressExample;Database=DbNameExample;Trusted_Connection=Yes;Connect Timeout=15;</Connection>
+  </Database>
+  <!--<EventListeners>
+        <EventListener>
+            <ServiceName>Kafka_Listener</ServiceName>
+            <ServicePath>https://pkc-6ojv2.us-west4.gcp.confluent.cloud:443/kafka/v3/clusters/lkc-3rgqym/topics/topic-1/records</ServicePath>
+            <RequestBody>{"value": {"type": "JSON","data": {0} }}</RequestBody>
+            <AuthToken>Basic WUVRSk9NUU9IWEI1QTRNSTp2</AuthToken>
+        </EventListener>
+		<EventListener>
+			<ServiceName>Listener_1</ServiceName>
+			<ServicePath>http://localhost:31120/weatherforecast</ServicePath>
+		</EventListener>
+	</EventListeners>-->
+
+  <!-- Max retry count for failed notifications -->
+  <MaxRetryCount>3</MaxRetryCount>
+  
+  <!-- Time Interval (milliseconds) configuration needed to process events (It is recommended to uncomment this configuration in case load balancer is configured) -->
+  <!-- <EventProcessingTimeInterval>300000</EventProcessingTimeInterval> -->
+
+</Configuration>

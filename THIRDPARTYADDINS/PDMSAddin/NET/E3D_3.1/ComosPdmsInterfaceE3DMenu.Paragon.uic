@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="utf-8"?>
+<UserInterfaceCustomization xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns="www.aveva.com">
+  <Tools>
+    <ButtonTool Name="buttonPipeSpecExport">
+      <Command>
+        <Type>Macro</Type>
+        <Macro>!!paragonUIController.ExportCE()</Macro>
+        <Key>Macro:2BDAFD8E-3F52-45E3-97A5-9B00FEFB683C</Key>
+        <Arguments />
+      </Command>
+      <Image />
+      <Caption>Export specification</Caption>
+      <DisplayStyle>Default</DisplayStyle>
+    </ButtonTool>
+    <ButtonTool Name="buttonPipeSpecImport">
+      <Command>
+        <Type>Macro</Type>
+        <Macro>!!SAGShowPDMSPipeSpecAndCatalogImporter()</Macro>
+        <Key>Macro:643A4D74-64FF-4924-BBCD-7CC752BFEB0B</Key>
+        <Arguments />
+      </Command>
+      <Image />
+      <Caption>Import pipe specs and catalogues</Caption>
+      <DisplayStyle>Default</DisplayStyle>
+    </ButtonTool>
+	<ButtonTool Name="buttonSchemaExport">
+      <Command>
+        <Type>Macro</Type>
+        <Macro>!!SAGShowPDMSSchemaExporter()</Macro>
+        <Key>Macro:F8CB85A4-AE1F-41E6-BB8D-AEF367205158</Key>
+        <Arguments />
+      </Command>
+      <Image />
+      <Caption>Export E3D schema</Caption>
+      <DisplayStyle>Default</DisplayStyle>
+    </ButtonTool>
+	<ButtonTool Name="COMOS.Interface.Start">
+      <Command>  
+        <Type>Macro</Type>
+        <Macro>!!SAGLaunchInterface()</Macro>
+        <Key>COMOS.Interface.Start</Key>
+        <Arguments />
+      </Command>
+      <Image>
+      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
+      </Image>
+      <Caption>Launch</Caption>
+      <Tooltip>Launches the interface.</Tooltip>
+      <TooltipTitle>Launch interface</TooltipTitle>
+      <DisplayStyle>Default</DisplayStyle>
+      <Category>Interface</Category>
+      <DropDownArrowStyle>Segmented</DropDownArrowStyle>
+      <IsContextMenu>false</IsContextMenu>
+    </ButtonTool>
+  </Tools>
+ 
+  <Tabs>
+	<Tab Name="ComosMenu">
+      <Caption>COMOS</Caption>
+      <Command>
+        <Type>Instance</Type>
+        <Key />
+        <Arguments />
+      </Command>
+      <ContextualTabGroup>
+        <Item>None</Item>
+      </ContextualTabGroup>
+      <Groups>
+	    <Group Name="Comos.InterfaceGroup">
+          <Tools>
+            <Tool Name="COMOS.Interface.Start" LargeImage="True"/>
+          </Tools>
+          <Caption>Interface</Caption>
+        </Group>
+        <Group Name="Comos.SpecImportExportGroup">
+          <Tools>
+            <Tool Name="buttonPipeSpecExport" />
+            <Tool Name="buttonPipeSpecImport" />
+			<Tool Name="buttonSchemaExport" />
+          </Tools>
+          <Caption>Specifications</Caption>
+        </Group>
+      </Groups>
+    </Tab>
+  </Tabs>
+</UserInterfaceCustomization>

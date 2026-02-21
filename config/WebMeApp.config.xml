@@ -1,0 +1,6 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<Configuration>
+  <Domain>siemens-00085.eu.auth0.com</Domain>
+  <ClientId>vLY9VKf095BTJYjzd9WhHosDJ80dxPbK</ClientId>
+  <Audience>https://comosmeweb.siemens.com/api/v1</Audience>
+</Configuration>

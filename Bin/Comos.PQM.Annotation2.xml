@@ -1,0 +1,73 @@
+<pdftron>
+  <!--Water Mark stamp name-"Revision" -->
+  <stamp type="annotation" sizescale="fontsize" size="595 842" positionscale="absolute" hzalign="center" vralign="center" page="all" name="Revision" opacity="0.2" rotation="-55" textalign="center" textcolor="1 0 0" fontsize="40" font="Arial" position="10 10">
+  </stamp>
+  <!--Water Mark stamp name-"Watermark" -->
+  <stamp type="annotation" sizescale="fontsize" size="595 842" positionscale="absolute" hzalign="center" vralign="center" page="all" name="Watermark" opacity="0.2" rotation="-55" textalign="center" textcolor="1 0 0" fontsize="40" font="Arial" position="10 10">
+  </stamp>
+  <!--Water Mark stamp name-"Watermark2" -->
+  <stamp type="annotation" sizescale="fontsize" size="595 842" hzalign="left" vralign="top" positionscale="absolute" position="42 11" page="all" name="Watermark2" opacity="0.2" rotation="0" textalign="left" textcolor="1 0 0" fontsize="18" font="Times New Roman,Bold">
+  </stamp>
+  <!--Water Mark stamp name-"Banner1" -->
+  <stamp type="annotation" sizescale="fontsize" size="802 30" hzalign="right" vralign="bottom" positionscale="absolute" position="16 16" page="all" name="Banner" opacity="0.75" rotation="270" textalign="left" textcolor="1 0 0" fontsize="8" font="Arial">
+  </stamp>
+  <!-- sizescale="absolute" size="802 30" this is optional as it does not has any impact if the font size is set. It is an either or concept -->
+  <!--Water Mark stamp name-"Banner2" -->
+  <stamp type="annotation" sizescale="fontsize" size="10 10" hzalign="right" vralign="bottom" positionscale="absolute" position="32 16" page="all" name="Banner2" opacity="0.75" rotation="0" textalign="left" textcolor="1 0 0" fontsize="8" font="Arial">
+  </stamp>
+</pdftron>
+
+<!--
+
+AttributeName = []
+PossibleValues = {}
+
+
+1. [type] = {annotation} 
+This is the default value
+
+2. [positionscale] = {absolute,relative} 
+This defines the unit of [position] attribute. ('x' and 'y' coordinates of the stamp being added from the horizontal and vertical edges of the page)
+If [positionscale] = {relative} then [position] values entered as %
+If [positionscale] = {absolute} then [position] values are actual values specified in pdfpoints.
+NOTE: The edges are defined on the basis of the horizontal and vertical allignment selected using [hzalign] and [vralign]
+
+3. [position] = {x y}
+The value x,y is based on [positionscale]. If [positionscale] ={relative} then the x,y ranges between 0-1.
+else it ranges from 0 to PDF page dimensions specified in pdfpoints.
+
+4. [sizescale] = {relative, fontsize} 
+This defines if the size of stamp is controlled by the [fontsize]. 
+If value is set to {fontsize} then [fontsize] value will be considered for stamp size and In this case set [size]="1 1" 
+If value is set to {relative} then [size] value will be considered for stamp size and In this case set [fontsize]="0" 
+
+5. [size] 
+This defines the size of the stamp, its value ranges between 0 and 1 with 1 being the largest size equals to the page size
+
+6. [fontsize]
+This is relevant only if the [sizescale] = {fontsize}}
+
+7. [font]
+Name of the font family
+
+8. [textcolor]
+Colour of the font specified in RGB for e.g.  "1 0 0" (Red colour)
+
+9. [hzalign] = {left, right, center}
+Defines the orientation of the stamp on the pdf page from its horiztonal edges for e.g. if [horzalign] = {left}, then the x coordinate in [position] defines the distance of the stamp from the left boundary of the page else if the [horzalign] = {right} then from the right boundary of the page.
+
+10. [vralign] = {top, bottom, center}
+Defines the orientation of the stamp on the pdf page from its vertical edges. e.g. if [vralign] = {top}, then the y coordinate in [position] value defines the distance of the stamp from the top boundary of the page else if the [vralign] = {bottom} then from the bottom boundary of the page.
+
+11. [page] = {"all", "odd", "even", "first", "last", "notfirst", "notlast"}
+This defines the pages on which the stamp has to be added.
+
+12. [name]= <name of the banner>
+
+13. [opacity] = {0 to 1} 
+Value ranges from 0 to 1, it defines the opacity of the stamp font colour
+
+14. [rotation] = {0 to 360}
+Defines the rotation of the stamp w.r.t the pdf page in degrees.
+
+-->

@@ -1,0 +1,412 @@
+{
+  "runtimeTarget": {
+    "name": ".NETCoreApp,Version=v8.0",
+    "signature": ""
+  },
+  "compilationOptions": {},
+  "targets": {
+    ".NETCoreApp,Version=v8.0": {
+      "Comos.Services.AasIntegration.Api/1.0.0": {
+        "dependencies": {
+          "Comos.Services.AasIntegration": "1.0.0",
+          "Comos.Services.AasIntegration.Abstractions": "1.0.0",
+          "Comos.Services.Common": "1.0.0",
+          "Comos.Services.Discovery": "3.2.0",
+          "Swashbuckle.AspNetCore": "9.0.1"
+        },
+        "runtime": {
+          "Comos.Services.AasIntegration.Api.dll": {}
+        }
+      },
+      "Comos.Services.Common/1.0.0": {
+        "dependencies": {
+          "Comos.Services.Common.Contracts": "3.2.0",
+          "IdentityModel": "1.9.2",
+          "Microsoft.AspNet.WebApi.Client": "5.2.3",
+          "Microsoft.AspNet.WebApi.Core": "5.2.3",
+          "Microsoft.Extensions.Logging.Abstractions": "8.0.0",
+          "Microsoft.Owin": "3.0.1",
+          "Microsoft.Owin.StaticFiles": "3.0.0",
+          "Newtonsoft.Json": "13.0.3",
+          "System.IdentityModel.Tokens.Jwt": "4.0.2.206221351"
+        },
+        "runtime": {
+          "lib/net461/Comos.Services.Common.dll": {
+            "assemblyVersion": "1.0.0.0",
+            "fileVersion": "1.0.0.0"
+          }
+        }
+      },
+      "Comos.Services.Common.Contracts/3.2.0": {
+        "runtime": {
+          "lib/netstandard2.0/Comos.Services.Common.Contracts.dll": {
+            "assemblyVersion": "3.2.0.0",
+            "fileVersion": "3.2.0.0"
+          }
+        }
+      },
+      "Comos.Services.Discovery/3.2.0": {
+        "dependencies": {
+          "Comos.Services.Common.Contracts": "3.2.0"
+        },
+        "runtime": {
+          "lib/netstandard2.0/Comos.Services.Discovery.dll": {
+            "assemblyVersion": "3.2.0.0",
+            "fileVersion": "3.2.0.0"
+          }
+        }
+      },
+      "IdentityModel/1.9.2": {
+        "dependencies": {
+          "Newtonsoft.Json": "13.0.3"
+        },
+        "runtime": {
+          "lib/net45/IdentityModel.dll": {
+            "assemblyVersion": "1.0.0.0",
+            "fileVersion": "1.0.0.0"
+          }
+        }
+      },
+      "Microsoft.AspNet.WebApi.Client/5.2.3": {
+        "dependencies": {
+          "Newtonsoft.Json": "13.0.3"
+        },
+        "runtime": {
+          "lib/net45/System.Net.Http.Formatting.dll": {
+            "assemblyVersion": "5.2.3.0",
+            "fileVersion": "5.2.30128.0"
+          }
+        }
+      },
+      "Microsoft.AspNet.WebApi.Core/5.2.3": {
+        "dependencies": {
+          "Microsoft.AspNet.WebApi.Client": "5.2.3"
+        },
+        "runtime": {
+          "lib/net45/System.Web.Http.dll": {
+            "assemblyVersion": "5.2.3.0",
+            "fileVersion": "5.2.30128.0"
+          }
+        }
+      },
+      "Microsoft.Extensions.ApiDescription.Server/8.0.0": {},
+      "Microsoft.Extensions.DependencyInjection.Abstractions/8.0.0": {},
+      "Microsoft.Extensions.Logging.Abstractions/8.0.0": {
+        "dependencies": {
+          "Microsoft.Extensions.DependencyInjection.Abstractions": "8.0.0"
+        }
+      },
+      "Microsoft.OpenApi/1.6.23": {
+        "runtime": {
+          "lib/netstandard2.0/Microsoft.OpenApi.dll": {
+            "assemblyVersion": "1.6.23.0",
+            "fileVersion": "1.6.23.0"
+          }
+        }
+      },
+      "Microsoft.Owin/3.0.1": {
+        "dependencies": {
+          "Owin": "1.0.0"
+        },
+        "runtime": {
+          "lib/net45/Microsoft.Owin.dll": {
+            "assemblyVersion": "3.0.1.0",
+            "fileVersion": "3.0.40213.64"
+          }
+        }
+      },
+      "Microsoft.Owin.FileSystems/3.0.0": {
+        "runtime": {
+          "lib/net45/Microsoft.Owin.FileSystems.dll": {
+            "assemblyVersion": "3.0.0.0",
+            "fileVersion": "3.0.30819.47"
+          }
+        }
+      },
+      "Microsoft.Owin.StaticFiles/3.0.0": {
+        "dependencies": {
+          "Microsoft.Owin": "3.0.1",
+          "Microsoft.Owin.FileSystems": "3.0.0",
+          "Owin": "1.0.0"
+        },
+        "runtime": {
+          "lib/net45/Microsoft.Owin.StaticFiles.dll": {
+            "assemblyVersion": "3.0.0.0",
+            "fileVersion": "3.0.30819.47"
+          }
+        }
+      },
+      "Newtonsoft.Json/13.0.3": {
+        "runtime": {
+          "lib/net6.0/Newtonsoft.Json.dll": {
+            "assemblyVersion": "13.0.0.0",
+            "fileVersion": "13.0.3.27908"
+          }
+        }
+      },
+      "Owin/1.0.0": {
+        "runtime": {
+          "lib/net40/Owin.dll": {
+            "assemblyVersion": "1.0.0.0",
+            "fileVersion": "1.0.0.0"
+          }
+        }
+      },
+      "Swashbuckle.AspNetCore/9.0.1": {
+        "dependencies": {
+          "Microsoft.Extensions.ApiDescription.Server": "8.0.0",
+          "Swashbuckle.AspNetCore.Swagger": "9.0.1",
+          "Swashbuckle.AspNetCore.SwaggerGen": "9.0.1",
+          "Swashbuckle.AspNetCore.SwaggerUI": "9.0.1"
+        }
+      },
+      "Swashbuckle.AspNetCore.Swagger/9.0.1": {
+        "dependencies": {
+          "Microsoft.OpenApi": "1.6.23"
+        },
+        "runtime": {
+          "lib/net8.0/Swashbuckle.AspNetCore.Swagger.dll": {
+            "assemblyVersion": "9.0.1.0",
+            "fileVersion": "9.0.1.1541"
+          }
+        }
+      },
+      "Swashbuckle.AspNetCore.SwaggerGen/9.0.1": {
+        "dependencies": {
+          "Swashbuckle.AspNetCore.Swagger": "9.0.1"
+        },
+        "runtime": {
+          "lib/net8.0/Swashbuckle.AspNetCore.SwaggerGen.dll": {
+            "assemblyVersion": "9.0.1.0",
+            "fileVersion": "9.0.1.1541"
+          }
+        }
+      },
+      "Swashbuckle.AspNetCore.SwaggerUI/9.0.1": {
+        "runtime": {
+          "lib/net8.0/Swashbuckle.AspNetCore.SwaggerUI.dll": {
+            "assemblyVersion": "9.0.1.0",
+            "fileVersion": "9.0.1.1541"
+          }
+        }
+      },
+      "System.IdentityModel.Tokens.Jwt/4.0.2.206221351": {
+        "runtime": {
+          "lib/net45/System.IdentityModel.Tokens.Jwt.dll": {
+            "assemblyVersion": "4.0.20622.1351",
+            "fileVersion": "4.0.20622.1351"
+          }
+        }
+      },
+      "Comos.Services.AasIntegration/1.0.0": {
+        "dependencies": {
+          "Comos.Services.AasIntegration.Abstractions": "1.0.0",
+          "Comos.Services.AasIntegration.InternalContracts": "1.0.0",
+          "Comos.Services.AasIntegration.SharedContracts": "1.0.0",
+          "Microsoft.Extensions.Logging.Abstractions": "8.0.0",
+          "Newtonsoft.Json": "13.0.3"
+        },
+        "runtime": {
+          "Comos.Services.AasIntegration.dll": {
+            "assemblyVersion": "1.0.0.0",
+            "fileVersion": "1.0.0.0"
+          }
+        }
+      },
+      "Comos.Services.AasIntegration.Abstractions/1.0.0": {
+        "dependencies": {
+          "Comos.Services.AasIntegration.SharedContracts": "1.0.0"
+        },
+        "runtime": {
+          "Comos.Services.AasIntegration.Abstractions.dll": {
+            "assemblyVersion": "1.0.0.0",
+            "fileVersion": "1.0.0.0"
+          }
+        }
+      },
+      "Comos.Services.AasIntegration.InternalContracts/1.0.0": {
+        "runtime": {
+          "Comos.Services.AasIntegration.InternalContracts.dll": {
+            "assemblyVersion": "1.0.0.0",
+            "fileVersion": "1.0.0.0"
+          }
+        }
+      },
+      "Comos.Services.AasIntegration.SharedContracts/1.0.0": {
+        "runtime": {
+          "Comos.Services.AasIntegration.SharedContracts.dll": {
+            "assemblyVersion": "1.0.0.0",
+            "fileVersion": "1.0.0.0"
+          }
+        }
+      }
+    }
+  },
+  "libraries": {
+    "Comos.Services.AasIntegration.Api/1.0.0": {
+      "type": "project",
+      "serviceable": false,
+      "sha512": ""
+    },
+    "Comos.Services.Common/1.0.0": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-Ax3/y5PONMCWX9+53KNq1cQ13lusjvCApDEb1x5nd8RMRLKiQtxbh6EZvIxVDZAmwxA6ATMOeZAJhJ6+E9wbXw==",
+      "path": "comos.services.common/1.0.0",
+      "hashPath": "comos.services.common.1.0.0.nupkg.sha512"
+    },
+    "Comos.Services.Common.Contracts/3.2.0": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-IKY01IHsVQr8ZEK5tKDEehyX5wTikqO7XLA7DsmYQ64BDHE60pP3Dz2xH4fU1er7F50XaElMCj7PU7Nt9onT2g==",
+      "path": "comos.services.common.contracts/3.2.0",
+      "hashPath": "comos.services.common.contracts.3.2.0.nupkg.sha512"
+    },
+    "Comos.Services.Discovery/3.2.0": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-194LUz134f+DQ5U6RlSmcJ8UtfZOerQCK+45XOjJASctfgUlzepOBNKfHCLx/JbyjAZ/6qPm1Ciri/acct9DMA==",
+      "path": "comos.services.discovery/3.2.0",
+      "hashPath": "comos.services.discovery.3.2.0.nupkg.sha512"
+    },
+    "IdentityModel/1.9.2": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-q7u80YTRipSqH20En5ZI+zvFtiHcMgJ+HRDwSXKyz9B20sd47ISN3+GCalcOFowt5d181Zoag4cwyi/pQRdLPA==",
+      "path": "identitymodel/1.9.2",
+      "hashPath": "identitymodel.1.9.2.nupkg.sha512"
+    },
+    "Microsoft.AspNet.WebApi.Client/5.2.3": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-3kiI8peSXbXHDDrRuo+QaX0iCEVRe0nvn2dBDRw656uPX32UalbBlSIDUDlJxu05eau4tnuhsikiUuugvvoUoQ==",
+      "path": "microsoft.aspnet.webapi.client/5.2.3",
+      "hashPath": "microsoft.aspnet.webapi.client.5.2.3.nupkg.sha512"
+    },
+    "Microsoft.AspNet.WebApi.Core/5.2.3": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-o90QYlRV8VKR1S7+EcJw9w8WSyVFLl+IIzN8ILZ+n2t6rsc/KS8kBxRzA7wCFPRUHhebCfLqilBk39phvanx3g==",
+      "path": "microsoft.aspnet.webapi.core/5.2.3",
+      "hashPath": "microsoft.aspnet.webapi.core.5.2.3.nupkg.sha512"
+    },
+    "Microsoft.Extensions.ApiDescription.Server/8.0.0": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-jDM3a95WerM8g6IcMiBXq1qRS9dqmEUpgnCk2DeMWpPkYtp1ia+CkXabOnK93JmhVlUmv8l9WMPsCSUm+WqkIA==",
+      "path": "microsoft.extensions.apidescription.server/8.0.0",
+      "hashPath": "microsoft.extensions.apidescription.server.8.0.0.nupkg.sha512"
+    },
+    "Microsoft.Extensions.DependencyInjection.Abstractions/8.0.0": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-cjWrLkJXK0rs4zofsK4bSdg+jhDLTaxrkXu4gS6Y7MAlCvRyNNgwY/lJi5RDlQOnSZweHqoyvgvbdvQsRIW+hg==",
+      "path": "microsoft.extensions.dependencyinjection.abstractions/8.0.0",
+      "hashPath": "microsoft.extensions.dependencyinjection.abstractions.8.0.0.nupkg.sha512"
+    },
+    "Microsoft.Extensions.Logging.Abstractions/8.0.0": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-arDBqTgFCyS0EvRV7O3MZturChstm50OJ0y9bDJvAcmEPJm0FFpFyjU/JLYyStNGGey081DvnQYlncNX5SJJGA==",
+      "path": "microsoft.extensions.logging.abstractions/8.0.0",
+      "hashPath": "microsoft.extensions.logging.abstractions.8.0.0.nupkg.sha512"
+    },
+    "Microsoft.OpenApi/1.6.23": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-tZ1I0KXnn98CWuV8cpI247A17jaY+ILS9vvF7yhI0uPPEqF4P1d7BWL5Uwtel10w9NucllHB3nTkfYTAcHAh8g==",
+      "path": "microsoft.openapi/1.6.23",
+      "hashPath": "microsoft.openapi.1.6.23.nupkg.sha512"
+    },
+    "Microsoft.Owin/3.0.1": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-64yZsGN9uRnXNVAyAT4F6KWmdDUJ6yX4uqzxKTdGANKH1oMt0IKZ7THRRa3mXIOo8iSu4tq/DCBUycUY9pXZzw==",
+      "path": "microsoft.owin/3.0.1",
+      "hashPath": "microsoft.owin.3.0.1.nupkg.sha512"
+    },
+    "Microsoft.Owin.FileSystems/3.0.0": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-R9RQxqdd7XMAVEXRgpDxA96I19XSes2OLMIdls5cG6ZtRmqunA58ZcPExq0d6RotCaksQyzYSBFQbFFeWJvNUQ==",
+      "path": "microsoft.owin.filesystems/3.0.0",
+      "hashPath": "microsoft.owin.filesystems.3.0.0.nupkg.sha512"
+    },
+    "Microsoft.Owin.StaticFiles/3.0.0": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-UJ6VJF0VdTrvB6pnP5t8mRrbIpGPr/0YYvQtIw8ZegqNnO1ZczSl3YclE+G6WchZGzxuDckCdKsm4IhEMBiQGg==",
+      "path": "microsoft.owin.staticfiles/3.0.0",
+      "hashPath": "microsoft.owin.staticfiles.3.0.0.nupkg.sha512"
+    },
+    "Newtonsoft.Json/13.0.3": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-HrC5BXdl00IP9zeV+0Z848QWPAoCr9P3bDEZguI+gkLcBKAOxix/tLEAAHC+UvDNPv4a2d18lOReHMOagPa+zQ==",
+      "path": "newtonsoft.json/13.0.3",
+      "hashPath": "newtonsoft.json.13.0.3.nupkg.sha512"
+    },
+    "Owin/1.0.0": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-OseTFniKmyp76mEzOBwIKGBRS5eMoYNkMKaMXOpxx9jv88+b6mh1rSaw43vjBOItNhaLFG3d0a20PfHyibH5sw==",
+      "path": "owin/1.0.0",
+      "hashPath": "owin.1.0.0.nupkg.sha512"
+    },
+    "Swashbuckle.AspNetCore/9.0.1": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-lmaz0juKGq8VgeCOki98OUVdEH7rvgBST0QrlWXNOxBl7ujNWyqdqj2SMAdgpQfTtBlSQUTHRslRM+0j7El5tA==",
+      "path": "swashbuckle.aspnetcore/9.0.1",
+      "hashPath": "swashbuckle.aspnetcore.9.0.1.nupkg.sha512"
+    },
+    "Swashbuckle.AspNetCore.Swagger/9.0.1": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-4/9tBsbeCN+ewwqjEBPq3BszNE9tOvA1iDogwT7qW7L0Uh942IozhtF9VaICD70XyZIlKNiHjc2Vt5QE09P4nw==",
+      "path": "swashbuckle.aspnetcore.swagger/9.0.1",
+      "hashPath": "swashbuckle.aspnetcore.swagger.9.0.1.nupkg.sha512"
+    },
+    "Swashbuckle.AspNetCore.SwaggerGen/9.0.1": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-Za5w1NfLMF0Tt4GTgC491wfmuuMwNw8A5nwZuytpBd4UXYZxkwNJa3QnRYGbUQD9MjLzQCYnKc8rMrr5LglW6A==",
+      "path": "swashbuckle.aspnetcore.swaggergen/9.0.1",
+      "hashPath": "swashbuckle.aspnetcore.swaggergen.9.0.1.nupkg.sha512"
+    },
+    "Swashbuckle.AspNetCore.SwaggerUI/9.0.1": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-UuU+RvZbJZmnciVzi8G0jb3c6xeA4O8pQGrxl30eCK3pRNvurzZgS6shEei27q9wgvp0/UrTUNUM/a1kSlTfzw==",
+      "path": "swashbuckle.aspnetcore.swaggerui/9.0.1",
+      "hashPath": "swashbuckle.aspnetcore.swaggerui.9.0.1.nupkg.sha512"
+    },
+    "System.IdentityModel.Tokens.Jwt/4.0.2.206221351": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-bBOwCeNaLK86xlBwAjuQ772eHFekr4pQQmPwgcVfQ2OMqGILCJp8YCEZfT3YBSYw3WEFM04vfLST4hmDtuKePQ==",
+      "path": "system.identitymodel.tokens.jwt/4.0.2.206221351",
+      "hashPath": "system.identitymodel.tokens.jwt.4.0.2.206221351.nupkg.sha512"
+    },
+    "Comos.Services.AasIntegration/1.0.0": {
+      "type": "project",
+      "serviceable": false,
+      "sha512": ""
+    },
+    "Comos.Services.AasIntegration.Abstractions/1.0.0": {
+      "type": "project",
+      "serviceable": false,
+      "sha512": ""
+    },
+    "Comos.Services.AasIntegration.InternalContracts/1.0.0": {
+      "type": "project",
+      "serviceable": false,
+      "sha512": ""
+    },
+    "Comos.Services.AasIntegration.SharedContracts/1.0.0": {
+      "type": "project",
+      "serviceable": false,
+      "sha512": ""
+    }
+  }
+}

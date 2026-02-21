@@ -1,0 +1,159 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<!-- Copyright Siemens AG, 2018 -->
+<Configuration>
+  <Login>
+    <Databases>
+      <!--SQL-->
+      <Database>
+        <Key>db1</Key>
+        <Name>SQL_SERVER</Name>
+        <Connection>[SQL - SERVER]PT_SQL_SERVER</Connection>
+      </Database>
+    </Databases>
+  </Login>
+  <Worker>
+    <PoolSize>4</PoolSize>
+    <LongRunningPoolSize>2</LongRunningPoolSize>
+    <!-- 0 = no limit -->
+    <!--<MaxConcurrentRequestsPerUser>0</MaxConcurrentRequestsPerUser>-->
+  </Worker>
+  <!--<OverlayLevel>1</OverlayLevel>-->
+
+  <UseNavigatorTextScript>false</UseNavigatorTextScript>
+  <NavigatorType>drilldown</NavigatorType>
+
+  <!--<TaskmanagementType>101</TaskmanagementType>-->
+
+  <UseAliasForLabelFunctions>false</UseAliasForLabelFunctions>
+
+<!-- For FreeProperty table we are appending the "FP_" prefix at client side code. Kindly mentioned the property name without "FP_" prefix.-->
+  <!--<DocumentSearch>
+    <Default>-->
+      <!--In the settings the customer can set a specific e.g. project or working layer as the default instead of all searching though all at once-->
+	    <!--<Settings>
+			<Categories>
+			    <Category>
+				  	<Name>Project</Name>
+					  <Visible>true</Visible>
+			  		<Default></Default>
+			  	</Category>
+			  	<Category>
+			  		<Name>Workingoverlay</Name>
+			  		<Visible>true</Visible>
+				  	<Default></Default>
+		  		</Category>
+			  	<Category>
+				  	<Name>Unit</Name>
+		  			<Visible>true</Visible>
+		  			<Default></Default>
+	  			</Category>
+	  			<Category>
+	  				<Name>Location</Name>
+	  				<Visible>true</Visible>
+	  				<Default></Default>
+	  			</Category>
+	  			<Category>
+	  				<Name>Objecttype</Name>
+  					<Visible>true</Visible>
+	  				<Default></Default>
+	  			</Category>
+	  		</Categories>
+  		</Settings>-->
+      <!--<Columns> -->
+            <!-- It is not recommended to use global search for Name, Label in huge databases, use free properties instead. -->
+          <!--<Column>
+            <SpecName>Name</SpecName>
+            <PropertyName>Name</PropertyName>
+            <DisplayName>Name</DisplayName>
+            <IsVisible>1</IsVisible>
+            <Width>100</Width>
+          </Column>
+          <Column>
+            <SpecName>Label</SpecName>
+            <PropertyName>Label</PropertyName>
+            <DisplayName>Label</DisplayName>
+            <IsVisible>1</IsVisible>
+            <Width>100</Width>
+          </Column>-->
+           <!--Example of a free property to display in a column. Free properties are recommended from performance view. Best remove all non free property columns to reach a high perforamance even for millions of hits.-->
+		  <!--<Column>
+            <PropertyName>FREEPROPERTY_GROUPNAME.FREEPROPERTY_NAME</PropertyName>
+            <DisplayName>Free Property</DisplayName>
+            <IsVisible>1</IsVisible>
+            <Width>100</Width>
+          </Column>-->
+		  <!--Example of a attribute of objects to search for. Not as fast as the free properties but lees configurations and database preparation needed.-->
+		  <!--<Column>
+            <SpecName>CHAPTERCARD.SPEC</SpecName>
+            <DisplayName>COMOS Attribute Name</DisplayName>
+            <IsVisible>1</IsVisible>
+            <Width>100</Width>
+          </Column>-->
+		  <!--Examples of DDMS attributes to have a better out of the box columns definition if customer using DDMS content layer-->
+		  <!--<Column>
+            <SpecName>Y00T00125.Y00A00662</SpecName>
+            <PropertyName>FP_TEST_EXT.FP_AUTHOR</PropertyName>
+            <DisplayName>Author</DisplayName>
+            <IsVisible>1</IsVisible>
+            <Width>100</Width>
+          </Column>
+		  <Column>
+            <SpecName>Y00T00125.Y00A01054</SpecName>
+            <PropertyName>FP_TEST_EXT.FP_SUBJECT</PropertyName>
+            <DisplayName>Subject</DisplayName>
+            <IsVisible>1</IsVisible>
+            <Width>100</Width>
+          </Column>
+		  <Column>
+            <SpecName>Y00T00125.Y00A02655</SpecName>
+            <PropertyName>FP_TEST_EXT.FP_DOCUMENT_NUMBER</PropertyName>
+            <DisplayName>Document Name</DisplayName>
+            <IsVisible>1</IsVisible>
+            <Width>100</Width>
+          </Column>
+        </Columns>
+      </Default>
+    <Projects>-->
+			<!--In the projects section customer can change the default columns for specific projects. Optional section.-->
+      <!--<Project>
+        <UID>U:2:A3BQHFA8AR:</UID>
+        <Columns>
+          <Column>
+            <SpecName>Name</SpecName>
+            <PropertyName>Name</PropertyName>
+            <DisplayName>Name</DisplayName>
+            <IsVisible>1</IsVisible>
+            <Width>100</Width>
+          </Column>
+          <Column>
+            <SpecName>Label</SpecName>
+            <PropertyName>Label</PropertyName>
+            <DisplayName>Label</DisplayName>
+            <IsVisible>1</IsVisible>
+            <Width>100</Width>
+          </Column>
+        </Columns>
+      </Project>
+    </Projects>
+  </DocumentSearch>-->
+  <!-- in case of using the scheduler service for data imports and in case of using load balancing
+   it is recommended to have a shared folder between the web-servers which store the import input and result data during the time of processing-->
+  <!--<JobHandling>
+        <JobProcessingSharedDataFolder>PATH OF SHARED FOLDER</JobProcessingSharedDataFolder>
+		<AutoRemoveTimeSpan>3.00:00:00</AutoRemoveTimeSpan>
+      </JobHandling>-->
+  <!--<Teamcenter>
+    <RequirementManagementUrl>http://vc6s004:7001/lis/oslc/rm/selector</RequirementManagementUrl>
+    <ChangeManagementUrl>http://vc6s004:7001/lis/oslc/cm/selector</ChangeManagementUrl>
+    <RequirementSpecNestedRoot>Y00T00449.Y00A00750</RequirementSpecNestedRoot>
+    <RequirementSpecNestedName>Y00T00449.Y00A00750.Y00A01154</RequirementSpecNestedName>
+    <RequirementSpecNestedUrl>Y00T00449.Y00A00750.Y00A05953</RequirementSpecNestedUrl>
+    <ExportDirectory>D:\TC\COMOS-TC-DEAP\Archives\TCExportREsult\LongRunningAsyncResults\</ExportDirectory>
+    <ExportNestedNames>Y00T00041,Y00T00135</ExportNestedNames>
+    <ExportRecursionDepth>2</ExportRecursionDepth>
+    -->
+  <!--Expiration period in days , export files would be deleted post this number of days-->
+  <!--
+    <ExportFileExpiration>10</ExportFileExpiration>
+  </Teamcenter>-->
+</Configuration>

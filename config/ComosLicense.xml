@@ -1,0 +1,28 @@
+<Root>
+  <Informations Vendor="Siemens AG" Client="Siemens Industry Software Martins, Tadeu (ext) (DI PA SW ID DS BR)" />
+  <Restrictions Type="LOCAL" Hardware="HARDDISK" ID="DE210F7A" Version="1" ComosVersion="6" />
+  <SpecialHandling>
+    <SecondCheckoutNamedUser AdditionalLicense="Administrator" />
+    <ExtendedCheckout AdditionalLicense="Administrator" />
+  </SpecialHandling>
+  <Sequence ID="001" />
+  <Products>
+    <TESTDEMO-Modul Expiration="31.12.2026" />
+  </Products>
+  <Dependencies />
+  <Packages />
+  <Signature xmlns="http://www.w3.org/2000/09/xmldsig#">
+    <SignedInfo>
+      <CanonicalizationMethod Algorithm="http://www.w3.org/TR/2001/REC-xml-c14n-20010315" />
+      <SignatureMethod Algorithm="http://www.w3.org/2000/09/xmldsig#rsa-sha1" />
+      <Reference URI="">
+        <Transforms>
+          <Transform Algorithm="http://www.w3.org/2000/09/xmldsig#enveloped-signature" />
+        </Transforms>
+        <DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha1" />
+        <DigestValue>0NWFkg+isfJKNV8crKPqy0dKbsY=</DigestValue>
+      </Reference>
+    </SignedInfo>
+    <SignatureValue>QVTXP3LfzdW4I4sFR77QIvQefY1h8bpOKO9urlmDWz7PFoDLBCx0DOMkEZLPa/DUzHUJOq17i4IjuXdS4GQ0Mx37qRCztp3p3aDrNvUcj61lpewlizF2SKohljimp5xU0h183M4ZGBpUy0SRsrjHDnSFEqq3U3sUquB422oG8IKnu1m+GBNjq5E9F7WNb9r/WsJRQyLB5t5z40nLt9P/QW4sZ5Cjsu3moPRW0LtqqybRybaWYFvTIYXfhrLURTePVitxN5ujTiudUoX4qRAM7ZU3nzQ+No7tI41eOPH6PkLg0T9NlKTbKAt2T8RLp7M2GdzU5d9sPn9prosEMG0RGg==</SignatureValue>
+  </Signature>
+</Root>

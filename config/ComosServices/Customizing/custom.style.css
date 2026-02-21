@@ -1,0 +1,38 @@
+/* Add custom fonts */
+@import './custom.fonts.css';
+
+/* Example to change the application logo via svg */
+/*.siemens-logo {
+    content: url(custom_logo.svg) !important;
+    max-height: 30px !important;
+}*/
+
+/* Example to change the application logo */
+/* .siemens-logo {
+    content: url(logo.png) !important;
+    width: 900px !important;
+    height: 9rem !important;
+    max-height: 30px !important;
+} */
+
+/* Example to change the background color of the header */
+/* ix-application-header {
+	background-color: deepskyblue !important;
+    color: transparent !important;
+} */
+
+/* Example to hide the help button in the menu */
+/* ix-menu-item[icon*="question"] {
+    display: none;
+} */
+
+/* Example to hide the Team selection */
+/*.team-toggle {
+	display: none;
+} */
+
+/* Example to hide 'Add Task' button in Task Management */
+/* .task-list .task-button {
+  display: none;
+}
+ */

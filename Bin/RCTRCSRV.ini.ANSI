@@ -1,0 +1,15 @@
+[CSTESTAPP_RCRESRCX]
+EnableDiag=0
+EnableInfo=0
+EnableWarning=0
+EnableError=0
+[CSTESTAPP_RCSLSIFX]
+EnableDiag=0
+EnableInfo=0
+EnableWarning=0
+EnableError=0
+[CSTESTAPP_RCOMOBJX]
+EnableDiag=0
+EnableInfo=0
+EnableWarning=0
+EnableError=1

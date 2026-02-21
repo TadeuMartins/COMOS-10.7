@@ -1,0 +1,117 @@
+<?xml version="1.0" encoding="utf-8"?>
+<UserInterfaceCustomization xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns="www.aveva.com">
+  <Tools>
+	<ButtonTool Name="buttonStartInterface">
+      <Command>
+        <Type>Macro</Type>
+        <Macro>!!ITInterface.Start()</Macro>
+        <Key>Macro:56155527-F1E9-44C2-8BB8-A2134F5E4548</Key>
+        <Arguments />
+      </Command>
+      <Image />
+      <ShortCut>F2</ShortCut>
+      <Caption>Start Interface</Caption>
+      <Tooltip>Starts the Interface</Tooltip>
+      <DisplayStyle>Default</DisplayStyle>
+      <Category>ComosMenu</Category>
+    </ButtonTool>
+	<ButtonTool Name="buttonStopInterface">
+      <Command>
+        <Type>Macro</Type>
+        <Macro>!!ITInterface.Stop()</Macro>
+        <Key>Macro:28FBF49F-3C20-44D3-AFAF-839620411680</Key>
+        <Arguments />
+      </Command>
+      <Image />
+      <ShortCut>F2</ShortCut>
+      <Caption>Stop Interface</Caption>
+      <Tooltip>Stops the Interface</Tooltip>
+      <DisplayStyle>Default</DisplayStyle>
+      <Category>ComosMenu</Category>
+    </ButtonTool>
+	<ButtonTool Name="buttonExportToComos">
+      <Command>
+        <Type>Macro</Type>
+        <Macro>!!ITSelectObjects.Display()</Macro>
+        <Key>Macro:A352EF4E-757C-44AD-A0F5-FB61C34F8C31</Key>
+        <Arguments />
+      </Command>
+      <Image />
+      <ShortCut>F2</ShortCut>
+      <Caption>Export to COMOS</Caption>
+      <Tooltip>Exports objects to COMOS</Tooltip>
+      <DisplayStyle>Default</DisplayStyle>
+      <Category>ComosMenu</Category>
+    </ButtonTool>
+	<ButtonTool Name="buttonQueryCOMOSData">
+      <Command>
+        <Type>Macro</Type>
+        <Macro>!!ITQuery.Display()</Macro>
+        <Key>Macro:C7F35BA5-C516-4D8F-BF01-EF6A92E374AA</Key>
+        <Arguments />
+      </Command>
+      <Image />
+      <ShortCut>F2</ShortCut>
+      <Caption>Query COMOS data</Caption>
+      <Tooltip>Executes COMOS queries</Tooltip>
+      <DisplayStyle>Default</DisplayStyle>
+      <Category>ComosMenu</Category>
+    </ButtonTool>
+	<ButtonTool Name="buttonStartupFunctions">
+      <Command>
+        <Type>Macro</Type>
+        <Macro>!!ITStartupFunctions.Display()</Macro>
+        <Key>Macro:45504EE6-E14E-410B-8608-B419B7FEAE10</Key>
+        <Arguments />
+      </Command>
+      <Image />
+      <ShortCut>F2</ShortCut>
+      <Caption>Configure start up functions</Caption>
+      <Tooltip>Configure start up functions</Tooltip>
+      <DisplayStyle>Default</DisplayStyle>
+      <Category>ComosMenu</Category>
+    </ButtonTool>
+	<ButtonTool Name="buttonExportMTO">
+      <Command>
+        <Type>Macro</Type>
+        <Macro>!!ITExportMTO.Display()</Macro>
+        <Key>Macro:79E0D33A-E161-411C-8E33-0C58B4793099</Key>
+        <Arguments />
+      </Command>
+      <Image />
+      <ShortCut>F2</ShortCut>
+      <Caption>Export MTO</Caption>
+      <Tooltip>Export MTO</Tooltip>
+      <DisplayStyle>Default</DisplayStyle>
+      <Category>ComosMenu</Category>
+    </ButtonTool>
+  </Tools>
+  
+  <Tabs>
+	<Tab Name="ComosMenu">
+      <Caption>COMOS</Caption>
+      <Command>
+        <Type>Instance</Type>
+        <Key />
+        <Arguments />
+      </Command>
+      <ContextualTabGroup>
+        <Item>None</Item>
+      </ContextualTabGroup>
+      <Groups>
+		<Group Name="Comos.InterfaceGroup">
+          <Tools>
+            <Tool Name="buttonStartInterface" />
+            <Tool Name="buttonStopInterface" />
+			<Tool Name="buttonExportToComos" />
+			<Tool Name="buttonQueryCOMOSData" />
+			<Tool Name="buttonStartupFunctions" />
+			<Tool Name="buttonExportMTO" />
+          </Tools>
+          <Caption>Interface</Caption>
+        </Group>
+      </Groups>
+    </Tab>
+  </Tabs>
+	
+</UserInterfaceCustomization>

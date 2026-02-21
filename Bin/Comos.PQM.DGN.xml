@@ -1,0 +1,6 @@
+<OpenDesign>  
+  <DgnToPDF>  
+    <PenTablePath>D:\DGNExport\PlotConfigs_DGN\Plotkonventionen_Sandoz.tbl</PenTablePath>  
+    <FontTablePath>D:\DGNExport\PlotConfigs_DGN_New\Workspace_Fonts+Symb\Symb\font.rsc</FontTablePath>  
+  </DgnToPDF>   
+</OpenDesign>  

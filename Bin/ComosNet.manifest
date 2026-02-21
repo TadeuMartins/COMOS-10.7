@@ -1,0 +1,3097 @@
+<assembly xmlns="urn:schemas-microsoft-com:asm.v1" manifestVersion="1.0">
+  <!--Manifest written by NetManifestMaker 1.1.0.0-->
+  <assemblyIdentity name="ComosNet" version="1.0.0.0" type="win32" />
+  <!--References to .NET DLLs-->
+  <dependency>
+    <dependentAssembly>
+      <assemblyIdentity name="Comos.3DSmartChart.Control" version="1.0.0.0" type="win32" />
+    </dependentAssembly>
+  </dependency>
+  <dependency>
+    <dependentAssembly>
+      <assemblyIdentity name="Comos.3DSmartChart" version="1.0.0.0" type="win32" />
+    </dependentAssembly>
+  </dependency>
+  <dependency>
+    <dependentAssembly>
+      <assemblyIdentity name="Comos.App3D.Global" version="1.0.0.0" type="win32" />
+    </dependentAssembly>
+  </dependency>
+  <dependency>
+    <dependentAssembly>
+      <assemblyIdentity name="Comos.AppExitHandler" version="1.0.0.0" type="win32" />
+    </dependentAssembly>
+  </dependency>
+  <dependency>
+    <dependentAssembly>
+      <assemblyIdentity name="Comos.Application.ComFacade" version="1.0.0.0" type="win32" />
+    </dependentAssembly>
+  </dependency>
+  <dependency>
+    <dependentAssembly>
+      <assemblyIdentity name="Comos.Application.Common.StorageLayer" version="1.0.0.0" type="win32" />
+    </dependentAssembly>
+  </dependency>
+  <dependency>
+    <dependentAssembly>
+      <assemblyIdentity name="Comos.Application.Global" version="1.0.0.0" type="win32" />
+    </dependentAssembly>
+  </dependency>
+  <dependency>
+    <dependentAssembly>
+      <assemblyIdentity name="Comos.Application.Kernel" version="1.0.0.0" type="win32" />
+    </dependentAssembly>
+  </dependency>
+  <dependency>
+    <dependentAssembly>
+      <assemblyIdentity name="Comos.Application.Kernel.Interfaces" version="1.0.0.0" type="win32" />
+    </dependentAssembly>
+  </dependency>
+  <dependency>
+    <dependentAssembly>
+      <assemblyIdentity name="Comos.Application.RoBase" version="1.0.0.0" type="win32" />
+    </dependentAssembly>
+  </dependency>
+  <dependency>
+    <dependentAssembly>
+      <assemblyIdentity name="Comos.Aspen.XMLImp" version="1.0.0.0" type="win32" />
+    </dependentAssembly>
+  </dependency>
+  <dependency>
+    <dependentAssembly>
+      <assemblyIdentity name="Comos.AutoCADIntegrator.ComWrapper" version="1.0.0.0" type="win32" />
+    </dependentAssembly>
+  </dependency>
+  <dependency>
+    <dependentAssembly>
+      <assemblyIdentity name="Comos.AutoCADIntegrator.DwgDxfAutoPlace" version="1.0.0.0" type="win32" />
+    </dependentAssembly>
+  </dependency>
+  <dependency>
+    <dependentAssembly>
+      <assemblyIdentity name="Comos.AutoCADMapping" version="1.0.0.0" type="win32" />
+    </dependentAssembly>
+  </dependency>
+  <dependency>
+    <dependentAssembly>
+      <assemblyIdentity name="Comos.Automation.PopupMenu" version="1.0.0.0" type="win32" />
+    </dependentAssembly>
+  </dependency>
+  <dependency>
+    <dependentAssembly>
+      <assemblyIdentity name="Comos.Barcode" version="1.0.0.0" type="win32" />
+    </dependentAssembly>
+  </dependency>
+  <dependency>
+    <dependentAssembly>
+      <assemblyIdentity name="Comos.C3DV.Popup" version="1.0.0.0" type="win32" />
+    </dependentAssembly>
+  </dependency>
+  <dependency>
+    <dependentAssembly>
+      <assemblyIdentity name="Comos.C3DView.AutoAssign" version="1.0.0.0" type="win32" />
+    </dependentAssembly>
+  </dependency>
+  <dependency>
+    <dependentAssembly>
+      <assemblyIdentity name="Comos.C3DView" version="1.0.0.0" type="win32" />
+    </dependentAssembly>
+  </dependency>
+  <dependency>
+    <dependentAssembly>
+      <assemblyIdentity name="Comos.Catalog" version="1.0.0.0" type="win32" />
+    </dependentAssembly>
+  </dependency>
+  <dependency>
+    <dependentAssembly>
+      <assemblyIdentity name="Comos.Catalog.Excel" version="1.0.0.0" type="win32" />
+    </dependentAssembly>
+  </dependency>
+  <dependency>
+    <dependentAssembly>
+      <assemblyIdentity name="Comos.Catalog.Text" version="1.0.0.0" type="win32" />
+    </dependentAssembly>
+  </dependency>
+  <dependency>
+    <dependentAssembly>
+      <assemblyIdentity name="Comos.Catalog.XML" version="1.0.0.0" type="win32" />
+    </dependentAssembly>
+  </dependency>
+  <dependency>
+    <dependentAssembly>
+      <assemblyIdentity name="Comos.CDevice.ConectEd" version="1.0.0.0" type="win32" />
+    </dependentAssembly>
+  </dependency>
+  <dependency>
+    <dependentAssembly>
+      <assemblyIdentity name="Comos.Chart" version="1.0.0.0" type="win32" />
+    </dependentAssembly>
+  </dependency>
+  <dependency>
+    <dependentAssembly>
+      <assemblyIdentity name="Comos.ComDlg" version="1.0.0.0" type="win32" />
+    </dependentAssembly>
+  </dependency>
+  <dependency>
+    <dependentAssembly>
+      <assemblyIdentity name="Comos.Comparer" version="1.0.0.0" type="win32" />
+    </dependentAssembly>
+  </dependency>
+  <dependency>
+    <dependentAssembly>
+      <assemblyIdentity name="Comos.ComparerInterfaces" version="1.0.0.0" type="win32" />
+    </dependentAssembly>
+  </dependency>
+  <dependency>
+    <dependentAssembly>
+      <assemblyIdentity name="Comos.ConfigLibHelper" version="1.0.0.0" type="win32" />
+    </dependentAssembly>
+  </dependency>
+  <dependency>
+    <dependentAssembly>
+      <assemblyIdentity name="Comos.Configurator" version="1.0.0.0" type="win32" />
+    </dependentAssembly>
+  </dependency>
+  <dependency>
+    <dependentAssembly>
+      <assemblyIdentity name="Comos.Configurator.Mapping" version="1.0.0.0" type="win32" />
+    </dependentAssembly>
+  </dependency>
+  <dependency>
+    <dependentAssembly>
+      <assemblyIdentity name="Comos.Configurator.Scripting" version="1.0.0.0" type="win32" />
+    </dependentAssembly>
+  </dependency>
+  <dependency>
+    <dependentAssembly>
+      <assemblyIdentity name="Comos.ContextHelp" version="1.0.0.0" type="win32" />
+    </dependentAssembly>
+  </dependency>
+  <dependency>
+    <dependentAssembly>
+      <assemblyIdentity name="Comos.ControlPack1" version="1.0.0.0" type="win32" />
+    </dependentAssembly>
+  </dependency>
+  <dependency>
+    <dependentAssembly>
+      <assemblyIdentity name="Comos.Controls.Common" version="1.0.0.0" type="win32" />
+    </dependentAssembly>
+  </dependency>
+  <dependency>
+    <dependentAssembly>
+      <assemblyIdentity name="Comos.Controls" version="1.0.0.0" type="win32" />
+    </dependentAssembly>
+  </dependency>
+  <dependency>
+    <dependentAssembly>
+      <assemblyIdentity name="Comos.Controls.DocumentPreview" version="1.0.0.0" type="win32" />
+    </dependentAssembly>
+  </dependency>
+  <dependency>
+    <dependentAssembly>
+      <assemblyIdentity name="Comos.Controls.ObjectGenerator" version="1.0.0.0" type="win32" />
+    </dependentAssembly>
+  </dependency>
+  <dependency>
+    <dependentAssembly>
+      <assemblyIdentity name="Comos.Controls.WPFUtils" version="1.0.0.0" type="win32" />
+    </dependentAssembly>
+  </dependency>
+  <dependency>
+    <dependentAssembly>
+      <assemblyIdentity name="Comos.CSMEnum" version="1.0.0.0" type="win32" />
+    </dependentAssembly>
+  </dependency>
+  <dependency>
+    <dependentAssembly>
+      <assemblyIdentity name="Comos.CtxMenu" version="1.0.0.0" type="win32" />
+    </dependentAssembly>
+  </dependency>
+  <dependency>
+    <dependentAssembly>
+      <assemblyIdentity name="Comos.Custom.Daimler.DuplicateObjectFinder" version="1.0.0.0" type="win32" />
+    </dependentAssembly>
+  </dependency>
+  <dependency>
+    <dependentAssembly>
+      <assemblyIdentity name="Comos.Custom.Daimler.ScriptLibrary" version="1.0.0.0" type="win32" />
+    </dependentAssembly>
+  </dependency>
+  <dependency>
+    <dependentAssembly>
+      <assemblyIdentity name="Comos.Custom.Daimler.TargetUpdate" version="1.0.0.0" type="win32" />
+    </dependentAssembly>
+  </dependency>
+  <dependency>
+    <dependentAssembly>
+      <assemblyIdentity name="Comos.D3" version="1.0.0.0" type="win32" />
+    </dependentAssembly>
+  </dependency>
+  <dependency>
+    <dependentAssembly>
+      <assemblyIdentity name="Comos.D3ObjectAnalyzer" version="1.0.0.0" type="win32" />
+    </dependentAssembly>
+  </dependency>
+  <dependency>
+    <dependentAssembly>
+      <assemblyIdentity name="Comos.D3ToIso" version="1.0.0.0" type="win32" />
+    </dependentAssembly>
+  </dependency>
+  <dependency>
+    <dependentAssembly>
+      <assemblyIdentity name="Comos.Data.Common.Comos" version="1.0.0.0" type="win32" />
+    </dependentAssembly>
+  </dependency>
+  <dependency>
+    <dependentAssembly>
+      <assemblyIdentity name="Comos.DataService" version="1.0.0.0" type="win32" />
+    </dependentAssembly>
+  </dependency>
+  <dependency>
+    <dependentAssembly>
+      <assemblyIdentity name="Comos.DateTime" version="1.0.0.0" type="win32" />
+    </dependentAssembly>
+  </dependency>
+  <dependency>
+    <dependentAssembly>
+      <assemblyIdentity name="Comos.DDMSafe" version="1.0.0.0" type="win32" />
+    </dependentAssembly>
+  </dependency>
+  <dependency>
+    <dependentAssembly>
+      <assemblyIdentity name="Comos.Device" version="1.0.0.0" type="win32" />
+    </dependentAssembly>
+  </dependency>
+  <dependency>
+    <dependentAssembly>
+      <assemblyIdentity name="Comos.Document.Helper" version="1.0.0.0" type="win32" />
+    </dependentAssembly>
+  </dependency>
+  <dependency>
+    <dependentAssembly>
+      <assemblyIdentity name="Comos.DocumentBrowsing" version="1.0.0.0" type="win32" />
+    </dependentAssembly>
+  </dependency>
+  <dependency>
+    <dependentAssembly>
+      <assemblyIdentity name="Comos.DocumentManager" version="1.0.0.0" type="win32" />
+    </dependentAssembly>
+  </dependency>
+  <dependency>
+    <dependentAssembly>
+      <assemblyIdentity name="Comos.DocumentSubscription" version="1.0.0.0" type="win32" />
+    </dependentAssembly>
+  </dependency>
+  <dependency>
+    <dependentAssembly>
+      <assemblyIdentity name="Comos.DocumentTransfer" version="1.0.0.0" type="win32" />
+    </dependentAssembly>
+  </dependency>
+  <dependency>
+    <dependentAssembly>
+      <assemblyIdentity name="Comos.DocumentTransfer.UsersView" version="1.0.0.0" type="win32" />
+    </dependentAssembly>
+  </dependency>
+  <dependency>
+    <dependentAssembly>
+      <assemblyIdentity name="Comos.Doxie" version="1.0.0.0" type="win32" />
+    </dependentAssembly>
+  </dependency>
+  <dependency>
+    <dependentAssembly>
+      <assemblyIdentity name="Comos.Doxie.UI" version="1.0.0.0" type="win32" />
+    </dependentAssembly>
+  </dependency>
+  <dependency>
+    <dependentAssembly>
+      <assemblyIdentity name="Comos.DVMPackage" version="1.0.0.0" type="win32" />
+    </dependentAssembly>
+  </dependency>
+  <dependency>
+    <dependentAssembly>
+      <assemblyIdentity name="Comos.DVMPackageConfigurator" version="1.0.0.0" type="win32" />
+    </dependentAssembly>
+  </dependency>
+  <dependency>
+    <dependentAssembly>
+      <assemblyIdentity name="Comos.DVMTransmittal" version="1.0.0.0" type="win32" />
+    </dependentAssembly>
+  </dependency>
+  <dependency>
+    <dependentAssembly>
+      <assemblyIdentity name="Comos.DWGMappingEditor" version="1.0.0.0" type="win32" />
+    </dependentAssembly>
+  </dependency>
+  <dependency>
+    <dependentAssembly>
+      <assemblyIdentity name="Comos.DxfImport2" version="1.0.0.0" type="win32" />
+    </dependentAssembly>
+  </dependency>
+  <dependency>
+    <dependentAssembly>
+      <assemblyIdentity name="Comos.eBlock.Abstract" version="1.0.0.0" type="win32" />
+    </dependentAssembly>
+  </dependency>
+  <dependency>
+    <dependentAssembly>
+      <assemblyIdentity name="Comos.eBlock.AssemblyActions" version="1.0.0.0" type="win32" />
+    </dependentAssembly>
+  </dependency>
+  <dependency>
+    <dependentAssembly>
+      <assemblyIdentity name="Comos.eBlock.AssemblyUpdater" version="1.0.0.0" type="win32" />
+    </dependentAssembly>
+  </dependency>
+  <dependency>
+    <dependentAssembly>
+      <assemblyIdentity name="Comos.eBlock.Creator" version="1.0.0.0" type="win32" />
+    </dependentAssembly>
+  </dependency>
+  <dependency>
+    <dependentAssembly>
+      <assemblyIdentity name="Comos.eBlock" version="1.0.0.0" type="win32" />
+    </dependentAssembly>
+  </dependency>
+  <dependency>
+    <dependentAssembly>
+      <assemblyIdentity name="Comos.eBlock.Interfaces" version="1.0.0.0" type="win32" />
+    </dependentAssembly>
+  </dependency>
+  <dependency>
+    <dependentAssembly>
+      <assemblyIdentity name="Comos.eBlock.RuiEBlock" version="1.0.0.0" type="win32" />
+    </dependentAssembly>
+  </dependency>
+  <dependency>
+    <dependentAssembly>
+      <assemblyIdentity name="Comos.ECadLib" version="1.0.0.0" type="win32" />
+    </dependentAssembly>
+  </dependency>
+  <dependency>
+    <dependentAssembly>
+      <assemblyIdentity name="Comos.Elements" version="1.0.0.0" type="win32" />
+    </dependentAssembly>
+  </dependency>
+  <dependency>
+    <dependentAssembly>
+      <assemblyIdentity name="Comos.Elements.QueryExtender" version="1.0.0.0" type="win32" />
+    </dependentAssembly>
+  </dependency>
+  <dependency>
+    <dependentAssembly>
+      <assemblyIdentity name="Comos.ELO.CabinetEquipmentAssistant" version="1.0.0.0" type="win32" />
+    </dependentAssembly>
+  </dependency>
+  <dependency>
+    <dependentAssembly>
+      <assemblyIdentity name="Comos.Elo.CabinetRouting" version="1.0.0.0" type="win32" />
+    </dependentAssembly>
+  </dependency>
+  <dependency>
+    <dependentAssembly>
+      <assemblyIdentity name="Comos.Elo.CabinetTest" version="1.0.0.0" type="win32" />
+    </dependentAssembly>
+  </dependency>
+  <dependency>
+    <dependentAssembly>
+      <assemblyIdentity name="Comos.ELO.CalcLib" version="1.0.0.0" type="win32" />
+    </dependentAssembly>
+  </dependency>
+  <dependency>
+    <dependentAssembly>
+      <assemblyIdentity name="Comos.EMail" version="1.0.0.0" type="win32" />
+    </dependentAssembly>
+  </dependency>
+  <dependency>
+    <dependentAssembly>
+      <assemblyIdentity name="Comos.EmfComparer" version="1.0.0.0" type="win32" />
+    </dependentAssembly>
+  </dependency>
+  <dependency>
+    <dependentAssembly>
+      <assemblyIdentity name="Comos.EquipmentReceipt" version="1.0.0.0" type="win32" />
+    </dependentAssembly>
+  </dependency>
+  <dependency>
+    <dependentAssembly>
+      <assemblyIdentity name="Comos.ExcelUtility" version="1.0.0.0" type="win32" />
+    </dependentAssembly>
+  </dependency>
+  <dependency>
+    <dependentAssembly>
+      <assemblyIdentity name="Comos.FEED.ImportOptions" version="1.0.0.0" type="win32" />
+    </dependentAssembly>
+  </dependency>
+  <dependency>
+    <dependentAssembly>
+      <assemblyIdentity name="Comos.FEED.PFDLib" version="4.5.0.0" type="win32" />
+    </dependentAssembly>
+  </dependency>
+  <dependency>
+    <dependentAssembly>
+      <assemblyIdentity name="Comos.FileActions" version="1.0.0.0" type="win32" />
+    </dependentAssembly>
+  </dependency>
+  <dependency>
+    <dependentAssembly>
+      <assemblyIdentity name="Comos.FiletransXmlReader" version="1.0.0.0" type="win32" />
+    </dependentAssembly>
+  </dependency>
+  <dependency>
+    <dependentAssembly>
+      <assemblyIdentity name="Comos.FLUID.BatchSymbolReplace" version="1.0.0.0" type="win32" />
+    </dependentAssembly>
+  </dependency>
+  <dependency>
+    <dependentAssembly>
+      <assemblyIdentity name="Comos.Fluid.FluidLib" version="1.2.0.0" type="win32" />
+    </dependentAssembly>
+  </dependency>
+  <dependency>
+    <dependentAssembly>
+      <assemblyIdentity name="Comos.FLUID.FluidSymbolSelect" version="1.0.0.0" type="win32" />
+    </dependentAssembly>
+  </dependency>
+  <dependency>
+    <dependentAssembly>
+      <assemblyIdentity name="Comos.FLUID.XMLSymbolConverter" version="1.0.0.0" type="win32" />
+    </dependentAssembly>
+  </dependency>
+  <dependency>
+    <dependentAssembly>
+      <assemblyIdentity name="Comos.GeneralizedSymbolConfiguratorPlugIn" version="1.0.0.0" type="win32" />
+    </dependentAssembly>
+  </dependency>
+  <dependency>
+    <dependentAssembly>
+      <assemblyIdentity name="Comos.GeneralizedSymbols" version="1.0.0.0" type="win32" />
+    </dependentAssembly>
+  </dependency>
+  <dependency>
+    <dependentAssembly>
+      <assemblyIdentity name="Comos.GeneralizedSymbolUtility" version="1.0.0.0" type="win32" />
+    </dependentAssembly>
+  </dependency>
+  <dependency>
+    <dependentAssembly>
+      <assemblyIdentity name="Comos.GL.D3Utils" version="1.1.0.0" type="win32" />
+    </dependentAssembly>
+  </dependency>
+  <dependency>
+    <dependentAssembly>
+      <assemblyIdentity name="Comos.Global" version="1.0.0.0" type="win32" />
+    </dependentAssembly>
+  </dependency>
+  <dependency>
+    <dependentAssembly>
+      <assemblyIdentity name="Comos.HalfOpenConnsQExtender" version="1.0.0.0" type="win32" />
+    </dependentAssembly>
+  </dependency>
+  <dependency>
+    <dependentAssembly>
+      <assemblyIdentity name="Comos.HYSYS.Import" version="1.0.0.0" type="win32" />
+    </dependentAssembly>
+  </dependency>
+  <dependency>
+    <dependentAssembly>
+      <assemblyIdentity name="Comos.IC.LoopDocMngr" version="1.0.0.0" type="win32" />
+    </dependentAssembly>
+  </dependency>
+  <dependency>
+    <dependentAssembly>
+      <assemblyIdentity name="Comos.IC.LoopUtilities" version="1.0.0.0" type="win32" />
+    </dependentAssembly>
+  </dependency>
+  <dependency>
+    <dependentAssembly>
+      <assemblyIdentity name="Comos.IC.PatternWiring" version="1.0.0.0" type="win32" />
+    </dependentAssembly>
+  </dependency>
+  <dependency>
+    <dependentAssembly>
+      <assemblyIdentity name="Comos.IC.Utilities" version="1.0.0.0" type="win32" />
+    </dependentAssembly>
+  </dependency>
+  <dependency>
+    <dependentAssembly>
+      <assemblyIdentity name="Comos.IDFImport" version="1.0.0.0" type="win32" />
+    </dependentAssembly>
+  </dependency>
+  <dependency>
+    <dependentAssembly>
+      <assemblyIdentity name="Comos.Implementation.Popup" version="1.0.0.0" type="win32" />
+    </dependentAssembly>
+  </dependency>
+  <dependency>
+    <dependentAssembly>
+      <assemblyIdentity name="Comos.IncludeDocuments" version="1.0.0.0" type="win32" />
+    </dependentAssembly>
+  </dependency>
+  <dependency>
+    <dependentAssembly>
+      <assemblyIdentity name="Comos.IReport.Properties" version="1.0.0.0" type="win32" />
+    </dependentAssembly>
+  </dependency>
+  <dependency>
+    <dependentAssembly>
+      <assemblyIdentity name="Comos.IsoLib" version="1.0.0.0" type="win32" />
+    </dependentAssembly>
+  </dependency>
+  <dependency>
+    <dependentAssembly>
+      <assemblyIdentity name="Comos.IsometricSpools" version="1.0.0.0" type="win32" />
+    </dependentAssembly>
+  </dependency>
+  <dependency>
+    <dependentAssembly>
+      <assemblyIdentity name="Comos.IsoQueries" version="1.0.0.0" type="win32" />
+    </dependentAssembly>
+  </dependency>
+  <dependency>
+    <dependentAssembly>
+      <assemblyIdentity name="Comos.JobManager" version="1.0.0.0" type="win32" />
+    </dependentAssembly>
+  </dependency>
+  <dependency>
+    <dependentAssembly>
+      <assemblyIdentity name="Comos.Layers" version="1.0.0.0" type="win32" />
+    </dependentAssembly>
+  </dependency>
+  <dependency>
+    <dependentAssembly>
+      <assemblyIdentity name="Comos.Legend" version="1.0.0.0" type="win32" />
+    </dependentAssembly>
+  </dependency>
+  <dependency>
+    <dependentAssembly>
+      <assemblyIdentity name="Comos.Legend.GUI" version="1.0.0.0" type="win32" />
+    </dependentAssembly>
+  </dependency>
+  <dependency>
+    <dependentAssembly>
+      <assemblyIdentity name="Comos.LicenseCheckUtility" version="1.0.0.0" type="win32" />
+    </dependentAssembly>
+  </dependency>
+  <dependency>
+    <dependentAssembly>
+      <assemblyIdentity name="Comos.LicenseLib" version="2.2.0.0" type="win32" />
+    </dependentAssembly>
+  </dependency>
+  <dependency>
+    <dependentAssembly>
+      <assemblyIdentity name="Comos.LineTypeUtilities" version="1.0.0.0" type="win32" />
+    </dependentAssembly>
+  </dependency>
+  <dependency>
+    <dependentAssembly>
+      <assemblyIdentity name="Comos.Logical.ControlModuleAssignment" version="1.0.0.0" type="win32" />
+    </dependentAssembly>
+  </dependency>
+  <dependency>
+    <dependentAssembly>
+      <assemblyIdentity name="Comos.Logical.MacroBlock.SymbolView" version="1.0.0.0" type="win32" />
+    </dependentAssembly>
+  </dependency>
+  <dependency>
+    <dependentAssembly>
+      <assemblyIdentity name="Comos.Logical.ScriptLib" version="1.0.0.0" type="win32" />
+    </dependentAssembly>
+  </dependency>
+  <dependency>
+    <dependentAssembly>
+      <assemblyIdentity name="Comos.Logical.SignalCrossReferences" version="1.0.0.0" type="win32" />
+    </dependentAssembly>
+  </dependency>
+  <dependency>
+    <dependentAssembly>
+      <assemblyIdentity name="Comos.Logical.Utilities" version="1.0.0.0" type="win32" />
+    </dependentAssembly>
+  </dependency>
+  <dependency>
+    <dependentAssembly>
+      <assemblyIdentity name="Comos.Login" version="1.0.0.0" type="win32" />
+    </dependentAssembly>
+  </dependency>
+  <dependency>
+    <dependentAssembly>
+      <assemblyIdentity name="Comos.Logistics" version="1.0.0.0" type="win32" />
+    </dependentAssembly>
+  </dependency>
+  <dependency>
+    <dependentAssembly>
+      <assemblyIdentity name="Comos.Maintenance" version="1.0.0.0" type="win32" />
+    </dependentAssembly>
+  </dependency>
+  <dependency>
+    <dependentAssembly>
+      <assemblyIdentity name="Comos.Maintenance.Navigator" version="1.0.0.0" type="win32" />
+    </dependentAssembly>
+  </dependency>
+  <dependency>
+    <dependentAssembly>
+      <assemblyIdentity name="Comos.Maintenance.Statistics" version="1.0.0.0" type="win32" />
+    </dependentAssembly>
+  </dependency>
+  <dependency>
+    <dependentAssembly>
+      <assemblyIdentity name="Comos.MenuManager" version="1.0.0.0" type="win32" />
+    </dependentAssembly>
+  </dependency>
+  <dependency>
+    <dependentAssembly>
+      <assemblyIdentity name="Comos.Merger" version="1.0.0.0" type="win32" />
+    </dependentAssembly>
+  </dependency>
+  <dependency>
+    <dependentAssembly>
+      <assemblyIdentity name="Comos.ModularDeviceFunctionChange" version="1.0.0.0" type="win32" />
+    </dependentAssembly>
+  </dependency>
+  <dependency>
+    <dependentAssembly>
+      <assemblyIdentity name="Comos.MSOLib" version="1.0.0.0" type="win32" />
+    </dependentAssembly>
+  </dependency>
+  <dependency>
+    <dependentAssembly>
+      <assemblyIdentity name="Comos.MXLogger" version="1.0.0.0" type="win32" />
+    </dependentAssembly>
+  </dependency>
+  <dependency>
+    <dependentAssembly>
+      <assemblyIdentity name="Comos.Navigator.ComHub" version="1.0.0.0" type="win32" />
+    </dependentAssembly>
+  </dependency>
+  <dependency>
+    <dependentAssembly>
+      <assemblyIdentity name="Comos.Navigator.Interfaces" version="1.0.0.0" type="win32" />
+    </dependentAssembly>
+  </dependency>
+  <dependency>
+    <dependentAssembly>
+      <assemblyIdentity name="Comos.NQControls" version="1.0.0.0" type="win32" />
+    </dependentAssembly>
+  </dependency>
+  <dependency>
+    <dependentAssembly>
+      <assemblyIdentity name="Comos.NQuery" version="1.0.0.0" type="win32" />
+    </dependentAssembly>
+  </dependency>
+  <dependency>
+    <dependentAssembly>
+      <assemblyIdentity name="Comos.NQuery.Grid" version="1.0.0.0" type="win32" />
+    </dependentAssembly>
+  </dependency>
+  <dependency>
+    <dependentAssembly>
+      <assemblyIdentity name="Comos.OcrHotspottingHandler" version="1.0.0.0" type="win32" />
+    </dependentAssembly>
+  </dependency>
+  <dependency>
+    <dependentAssembly>
+      <assemblyIdentity name="Comos.OfficeReImport" version="1.0.0.0" type="win32" />
+    </dependentAssembly>
+  </dependency>
+  <dependency>
+    <dependentAssembly>
+      <assemblyIdentity name="Comos.OkAbort" version="1.0.0.0" type="win32" />
+    </dependentAssembly>
+  </dependency>
+  <dependency>
+    <dependentAssembly>
+      <assemblyIdentity name="Comos.OpenxmlDataParser" version="1.0.0.0" type="win32" />
+    </dependentAssembly>
+  </dependency>
+  <dependency>
+    <dependentAssembly>
+      <assemblyIdentity name="Comos.OwnerDialog" version="1.0.0.0" type="win32" />
+    </dependentAssembly>
+  </dependency>
+  <dependency>
+    <dependentAssembly>
+      <assemblyIdentity name="Comos.PdfComparer" version="1.0.0.0" type="win32" />
+    </dependentAssembly>
+  </dependency>
+  <dependency>
+    <dependentAssembly>
+      <assemblyIdentity name="Comos.PDFeSignWrapper" version="1.0.0.0" type="win32" />
+    </dependentAssembly>
+  </dependency>
+  <dependency>
+    <dependentAssembly>
+      <assemblyIdentity name="Comos.PDFExport" version="1.0.0.0" type="win32" />
+    </dependentAssembly>
+  </dependency>
+  <dependency>
+    <dependentAssembly>
+      <assemblyIdentity name="Comos.PDFExportSettings" version="1.0.0.0" type="win32" />
+    </dependentAssembly>
+  </dependency>
+  <dependency>
+    <dependentAssembly>
+      <assemblyIdentity name="Comos.PDFImportGUI" version="1.0.0.0" type="win32" />
+    </dependentAssembly>
+  </dependency>
+  <dependency>
+    <dependentAssembly>
+      <assemblyIdentity name="Comos.PdfiumWrapper" version="1.0.0.0" type="win32" />
+    </dependentAssembly>
+  </dependency>
+  <dependency>
+    <dependentAssembly>
+      <assemblyIdentity name="Comos.PDFwatermarkWrapper" version="1.0.0.0" type="win32" />
+    </dependentAssembly>
+  </dependency>
+  <dependency>
+    <dependentAssembly>
+      <assemblyIdentity name="Comos.PDMSInterface.Comos" version="1.0.0.0" type="win32" />
+    </dependentAssembly>
+  </dependency>
+  <dependency>
+    <dependentAssembly>
+      <assemblyIdentity name="Comos.PDMSOperations" version="1.0.0.0" type="win32" />
+    </dependentAssembly>
+  </dependency>
+  <dependency>
+    <dependentAssembly>
+      <assemblyIdentity name="Comos.PDMSPipeSpecSelector" version="1.0.0.0" type="win32" />
+    </dependentAssembly>
+  </dependency>
+  <dependency>
+    <dependentAssembly>
+      <assemblyIdentity name="Comos.PeModule" version="1.0.0.0" type="win32" />
+    </dependentAssembly>
+  </dependency>
+  <dependency>
+    <dependentAssembly>
+      <assemblyIdentity name="Comos.PerfomanceCounter" version="1.0.0.0" type="win32" />
+    </dependentAssembly>
+  </dependency>
+  <dependency>
+    <dependentAssembly>
+      <assemblyIdentity name="Comos.PhysUnitLib" version="1.0.0.0" type="win32" />
+    </dependentAssembly>
+  </dependency>
+  <dependency>
+    <dependentAssembly>
+      <assemblyIdentity name="Comos.PicturesLibrary" version="1.0.0.0" type="win32" />
+    </dependentAssembly>
+  </dependency>
+  <dependency>
+    <dependentAssembly>
+      <assemblyIdentity name="Comos.PIDUpdate" version="1.0.0.0" type="win32" />
+    </dependentAssembly>
+  </dependency>
+  <dependency>
+    <dependentAssembly>
+      <assemblyIdentity name="Comos.PipeClass.AttributeName" version="1.0.0.0" type="win32" />
+    </dependentAssembly>
+  </dependency>
+  <dependency>
+    <dependentAssembly>
+      <assemblyIdentity name="Comos.PipeClass" version="1.0.0.0" type="win32" />
+    </dependentAssembly>
+  </dependency>
+  <dependency>
+    <dependentAssembly>
+      <assemblyIdentity name="Comos.PipeClass.PipeRunTransform" version="1.0.0.0" type="win32" />
+    </dependentAssembly>
+  </dependency>
+  <dependency>
+    <dependentAssembly>
+      <assemblyIdentity name="Comos.PipeClass.Tracing" version="1.0.0.0" type="win32" />
+    </dependentAssembly>
+  </dependency>
+  <dependency>
+    <dependentAssembly>
+      <assemblyIdentity name="Comos.PipeSpec.Chart" version="1.0.0.0" type="win32" />
+    </dependentAssembly>
+  </dependency>
+  <dependency>
+    <dependentAssembly>
+      <assemblyIdentity name="Comos.PipeSpec.ImportExport" version="1.0.0.0" type="win32" />
+    </dependentAssembly>
+  </dependency>
+  <dependency>
+    <dependentAssembly>
+      <assemblyIdentity name="Comos.PipeSpec.Mapping" version="1.0.0.0" type="win32" />
+    </dependentAssembly>
+  </dependency>
+  <dependency>
+    <dependentAssembly>
+      <assemblyIdentity name="Comos.PipeSpecDesigner" version="1.0.0.0" type="win32" />
+    </dependentAssembly>
+  </dependency>
+  <dependency>
+    <dependentAssembly>
+      <assemblyIdentity name="COMOS.PipeSpecExport.OPM" version="2.0.0.0" type="win32" />
+    </dependentAssembly>
+  </dependency>
+  <dependency>
+    <dependentAssembly>
+      <assemblyIdentity name="Comos.PipeSpecSnapShot" version="1.0.0.0" type="win32" />
+    </dependentAssembly>
+  </dependency>
+  <dependency>
+    <dependentAssembly>
+      <assemblyIdentity name="Comos.Piping.Standards" version="1.0.0.0" type="win32" />
+    </dependentAssembly>
+  </dependency>
+  <dependency>
+    <dependentAssembly>
+      <assemblyIdentity name="Comos.PlantSystem" version="1.0.0.0" type="win32" />
+    </dependentAssembly>
+  </dependency>
+  <dependency>
+    <dependentAssembly>
+      <assemblyIdentity name="Comos.Platform.Updateability.UI.Popup" version="1.0.0.0" type="win32" />
+    </dependentAssembly>
+  </dependency>
+  <dependency>
+    <dependentAssembly>
+      <assemblyIdentity name="Comos.Plugin.SetGeneralWire" version="1.0.0.0" type="win32" />
+    </dependentAssembly>
+  </dependency>
+  <dependency>
+    <dependentAssembly>
+      <assemblyIdentity name="Comos.PM.ComosActionProvider" version="1.0.0.0" type="win32" />
+    </dependentAssembly>
+  </dependency>
+  <dependency>
+    <dependentAssembly>
+      <assemblyIdentity name="Comos.PM.COMVisible" version="1.0.0.0" type="win32" />
+    </dependentAssembly>
+  </dependency>
+  <dependency>
+    <dependentAssembly>
+      <assemblyIdentity name="Comos.PMDiagram.ComosControl" version="1.0.0.0" type="win32" />
+    </dependentAssembly>
+  </dependency>
+  <dependency>
+    <dependentAssembly>
+      <assemblyIdentity name="Comos.Portable" version="1.0.0.0" type="win32" />
+    </dependentAssembly>
+  </dependency>
+  <dependency>
+    <dependentAssembly>
+      <assemblyIdentity name="Comos.PPBasics" version="1.0.0.0" type="win32" />
+    </dependentAssembly>
+  </dependency>
+  <dependency>
+    <dependentAssembly>
+      <assemblyIdentity name="Comos.PPD" version="1.0.0.0" type="win32" />
+    </dependentAssembly>
+  </dependency>
+  <dependency>
+    <dependentAssembly>
+      <assemblyIdentity name="Comos.PQM.CloudStorageProviderWrapper" version="1.0.0.0" type="win32" />
+    </dependentAssembly>
+  </dependency>
+  <dependency>
+    <dependentAssembly>
+      <assemblyIdentity name="Comos.PQM.Common" version="1.0.0.0" type="win32" />
+    </dependentAssembly>
+  </dependency>
+  <dependency>
+    <dependentAssembly>
+      <assemblyIdentity name="Comos.PQM.Controls" version="1.0.0.0" type="win32" />
+    </dependentAssembly>
+  </dependency>
+  <dependency>
+    <dependentAssembly>
+      <assemblyIdentity name="Comos.PQM.DDMSafeUtilities" version="1.0.0.0" type="win32" />
+    </dependentAssembly>
+  </dependency>
+  <dependency>
+    <dependentAssembly>
+      <assemblyIdentity name="Comos.PQM.DocumentPreview.Control" version="1.0.0.0" type="win32" />
+    </dependentAssembly>
+  </dependency>
+  <dependency>
+    <dependentAssembly>
+      <assemblyIdentity name="Comos.PQM.DocumentPreview" version="1.0.0.0" type="win32" />
+    </dependentAssembly>
+  </dependency>
+  <dependency>
+    <dependentAssembly>
+      <assemblyIdentity name="Comos.PQM.ESignCertificateManager.Common" version="1.0.0.0" type="win32" />
+    </dependentAssembly>
+  </dependency>
+  <dependency>
+    <dependentAssembly>
+      <assemblyIdentity name="Comos.PQM.Extender" version="1.0.0.0" type="win32" />
+    </dependentAssembly>
+  </dependency>
+  <dependency>
+    <dependentAssembly>
+      <assemblyIdentity name="Comos.PQM.PdfStamper" version="1.0.0.0" type="win32" />
+    </dependentAssembly>
+  </dependency>
+  <dependency>
+    <dependentAssembly>
+      <assemblyIdentity name="Comos.PQM.PDFTronWrapper" version="1.0.0.0" type="win32" />
+    </dependentAssembly>
+  </dependency>
+  <dependency>
+    <dependentAssembly>
+      <assemblyIdentity name="Comos.PQM.RevisionControl" version="1.0.0.0" type="win32" />
+    </dependentAssembly>
+  </dependency>
+  <dependency>
+    <dependentAssembly>
+      <assemblyIdentity name="Comos.PQM.WorkFlowExt" version="1.0.0.0" type="win32" />
+    </dependentAssembly>
+  </dependency>
+  <dependency>
+    <dependentAssembly>
+      <assemblyIdentity name="Comos.PQM.XRefHandler" version="1.0.0.0" type="win32" />
+    </dependentAssembly>
+  </dependency>
+  <dependency>
+    <dependentAssembly>
+      <assemblyIdentity name="Comos.PrintLib" version="1.0.0.0" type="win32" />
+    </dependentAssembly>
+  </dependency>
+  <dependency>
+    <dependentAssembly>
+      <assemblyIdentity name="Comos.ProductSelector" version="1.0.0.0" type="win32" />
+    </dependentAssembly>
+  </dependency>
+  <dependency>
+    <dependentAssembly>
+      <assemblyIdentity name="Comos.ProfileManager" version="1.0.0.0" type="win32" />
+    </dependentAssembly>
+  </dependency>
+  <dependency>
+    <dependentAssembly>
+      <assemblyIdentity name="Comos.ProMaxImport" version="1.0.0.0" type="win32" />
+    </dependentAssembly>
+  </dependency>
+  <dependency>
+    <dependentAssembly>
+      <assemblyIdentity name="Comos.PropertyBag" version="1.0.0.0" type="win32" />
+    </dependentAssembly>
+  </dependency>
+  <dependency>
+    <dependentAssembly>
+      <assemblyIdentity name="Comos.PropertyTree" version="1.0.0.0" type="win32" />
+    </dependentAssembly>
+  </dependency>
+  <dependency>
+    <dependentAssembly>
+      <assemblyIdentity name="Comos.PropertyTreeHelper" version="1.0.0.0" type="win32" />
+    </dependentAssembly>
+  </dependency>
+  <dependency>
+    <dependentAssembly>
+      <assemblyIdentity name="Comos.PTTitle" version="1.0.0.0" type="win32" />
+    </dependentAssembly>
+  </dependency>
+  <dependency>
+    <dependentAssembly>
+      <assemblyIdentity name="Comos.Query.Tools" version="1.0.0.0" type="win32" />
+    </dependentAssembly>
+  </dependency>
+  <dependency>
+    <dependentAssembly>
+      <assemblyIdentity name="Comos.QueryExport" version="1.0.0.0" type="win32" />
+    </dependentAssembly>
+  </dependency>
+  <dependency>
+    <dependentAssembly>
+      <assemblyIdentity name="Comos.QueryObjectPicker" version="1.0.0.0" type="win32" />
+    </dependentAssembly>
+  </dependency>
+  <dependency>
+    <dependentAssembly>
+      <assemblyIdentity name="Comos.QueryXObj" version="1.0.0.0" type="win32" />
+    </dependentAssembly>
+  </dependency>
+  <dependency>
+    <dependentAssembly>
+      <assemblyIdentity name="Comos.RailEquipment" version="1.0.0.0" type="win32" />
+    </dependentAssembly>
+  </dependency>
+  <dependency>
+    <dependentAssembly>
+      <assemblyIdentity name="Comos.RedliningViewer" version="1.0.0.0" type="win32" />
+    </dependentAssembly>
+  </dependency>
+  <dependency>
+    <dependentAssembly>
+      <assemblyIdentity name="Comos.Rema.ComClient" version="1.0.0.0" type="win32" />
+    </dependentAssembly>
+  </dependency>
+  <dependency>
+    <dependentAssembly>
+      <assemblyIdentity name="Comos.Report.Comparer.DetailUI" version="1.0.0.0" type="win32" />
+    </dependentAssembly>
+  </dependency>
+  <dependency>
+    <dependentAssembly>
+      <assemblyIdentity name="Comos.Report.Comparer" version="1.0.0.0" type="win32" />
+    </dependentAssembly>
+  </dependency>
+  <dependency>
+    <dependentAssembly>
+      <assemblyIdentity name="Comos.Report.Comparer.UI" version="1.0.0.0" type="win32" />
+    </dependentAssembly>
+  </dependency>
+  <dependency>
+    <dependentAssembly>
+      <assemblyIdentity name="Comos.Report.ConvertToJson" version="1.0.0.0" type="win32" />
+    </dependentAssembly>
+  </dependency>
+  <dependency>
+    <dependentAssembly>
+      <assemblyIdentity name="Comos.Report.IReport" version="1.0.0.0" type="win32" />
+    </dependentAssembly>
+  </dependency>
+  <dependency>
+    <dependentAssembly>
+      <assemblyIdentity name="Comos.ReportCOMAdapter" version="1.0.0.0" type="win32" />
+    </dependentAssembly>
+  </dependency>
+  <dependency>
+    <dependentAssembly>
+      <assemblyIdentity name="Comos.ReportEventSubscriber" version="1.0.0.0" type="win32" />
+    </dependentAssembly>
+  </dependency>
+  <dependency>
+    <dependentAssembly>
+      <assemblyIdentity name="Comos.ReportKeeper" version="1.0.0.0" type="win32" />
+    </dependentAssembly>
+  </dependency>
+  <dependency>
+    <dependentAssembly>
+      <assemblyIdentity name="Comos.ReportToExcel" version="1.0.0.0" type="win32" />
+    </dependentAssembly>
+  </dependency>
+  <dependency>
+    <dependentAssembly>
+      <assemblyIdentity name="Comos.ReportToWord" version="1.0.0.0" type="win32" />
+    </dependentAssembly>
+  </dependency>
+  <dependency>
+    <dependentAssembly>
+      <assemblyIdentity name="Comos.ReportTwoDCInterface" version="1.0.0.0" type="win32" />
+    </dependentAssembly>
+  </dependency>
+  <dependency>
+    <dependentAssembly>
+      <assemblyIdentity name="Comos.Revision.Printer" version="1.0.0.0" type="win32" />
+    </dependentAssembly>
+  </dependency>
+  <dependency>
+    <dependentAssembly>
+      <assemblyIdentity name="Comos.RevisionMaster" version="1.0.0.0" type="win32" />
+    </dependentAssembly>
+  </dependency>
+  <dependency>
+    <dependentAssembly>
+      <assemblyIdentity name="Comos.RevMaster" version="1.0.0.0" type="win32" />
+    </dependentAssembly>
+  </dependency>
+  <dependency>
+    <dependentAssembly>
+      <assemblyIdentity name="Comos.RI.PipeLib" version="4.1.0.0" type="win32" />
+    </dependentAssembly>
+  </dependency>
+  <dependency>
+    <dependentAssembly>
+      <assemblyIdentity name="Comos.RI.RILib" version="2.0.0.0" type="win32" />
+    </dependentAssembly>
+  </dependency>
+  <dependency>
+    <dependentAssembly>
+      <assemblyIdentity name="Comos.RightsLib" version="1.0.0.0" type="win32" />
+    </dependentAssembly>
+  </dependency>
+  <dependency>
+    <dependentAssembly>
+      <assemblyIdentity name="Comos.RTFConversion" version="1.0.0.0" type="win32" />
+    </dependentAssembly>
+  </dependency>
+  <dependency>
+    <dependentAssembly>
+      <assemblyIdentity name="Comos.Sap.Xml" version="1.0.0.0" type="win32" />
+    </dependentAssembly>
+  </dependency>
+  <dependency>
+    <dependentAssembly>
+      <assemblyIdentity name="Comos.Screws" version="1.4.0.0" type="win32" />
+    </dependentAssembly>
+  </dependency>
+  <dependency>
+    <dependentAssembly>
+      <assemblyIdentity name="Comos.ScriptProcessing" version="1.0.0.0" type="win32" />
+    </dependentAssembly>
+  </dependency>
+  <dependency>
+    <dependentAssembly>
+      <assemblyIdentity name="Comos.SearchSuitableEquipment" version="1.0.0.0" type="win32" />
+    </dependentAssembly>
+  </dependency>
+  <dependency>
+    <dependentAssembly>
+      <assemblyIdentity name="Comos.Services.Client.Communication" version="1.0.0.0" type="win32" />
+    </dependentAssembly>
+  </dependency>
+  <dependency>
+    <dependentAssembly>
+      <assemblyIdentity name="Comos.Snapshot.COMAdapter" version="1.0.0.0" type="win32" />
+    </dependentAssembly>
+  </dependency>
+  <dependency>
+    <dependentAssembly>
+      <assemblyIdentity name="Comos.SolidBaseUtilities" version="1.0.0.0" type="win32" />
+    </dependentAssembly>
+  </dependency>
+  <dependency>
+    <dependentAssembly>
+      <assemblyIdentity name="Comos.SolverDlg" version="1.0.0.0" type="win32" />
+    </dependentAssembly>
+  </dependency>
+  <dependency>
+    <dependentAssembly>
+      <assemblyIdentity name="Comos.SP.PID.Common" version="1.0.0.0" type="win32" />
+    </dependentAssembly>
+  </dependency>
+  <dependency>
+    <dependentAssembly>
+      <assemblyIdentity name="Comos.SP.PID.Exchange" version="1.0.0.0" type="win32" />
+    </dependentAssembly>
+  </dependency>
+  <dependency>
+    <dependentAssembly>
+      <assemblyIdentity name="Comos.StandardObjects.HVACCT" version="1.0.0.0" type="win32" />
+    </dependentAssembly>
+  </dependency>
+  <dependency>
+    <dependentAssembly>
+      <assemblyIdentity name="Comos.Symbols" version="1.0.0.0" type="win32" />
+    </dependentAssembly>
+  </dependency>
+  <dependency>
+    <dependentAssembly>
+      <assemblyIdentity name="Comos.SymbolToolbarMgr" version="8.7.0.0" type="win32" />
+    </dependentAssembly>
+  </dependency>
+  <dependency>
+    <dependentAssembly>
+      <assemblyIdentity name="Comos.TaskManagerCOM" version="1.0.0.0" type="win32" />
+    </dependentAssembly>
+  </dependency>
+  <dependency>
+    <dependentAssembly>
+      <assemblyIdentity name="Comos.TaskManagerCOM2" version="1.0.0.0" type="win32" />
+    </dependentAssembly>
+  </dependency>
+  <dependency>
+    <dependentAssembly>
+      <assemblyIdentity name="Comos.Tc.Integrator" version="1.0.0.0" type="win32" />
+    </dependentAssembly>
+  </dependency>
+  <dependency>
+    <dependentAssembly>
+      <assemblyIdentity name="Comos.TeighaWrapper" version="1.0.0.0" type="win32" />
+    </dependentAssembly>
+  </dependency>
+  <dependency>
+    <dependentAssembly>
+      <assemblyIdentity name="Comos.TM.Services.ComClient" version="1.0.0.0" type="win32" />
+    </dependentAssembly>
+  </dependency>
+  <dependency>
+    <dependentAssembly>
+      <assemblyIdentity name="Comos.TopQueries" version="1.0.0.0" type="win32" />
+    </dependentAssembly>
+  </dependency>
+  <dependency>
+    <dependentAssembly>
+      <assemblyIdentity name="Comos.Traversal" version="1.0.0.0" type="win32" />
+    </dependentAssembly>
+  </dependency>
+  <dependency>
+    <dependentAssembly>
+      <assemblyIdentity name="Comos.TwoDCInDesktop" version="1.0.0.0" type="win32" />
+    </dependentAssembly>
+  </dependency>
+  <dependency>
+    <dependentAssembly>
+      <assemblyIdentity name="Comos.TwoDCMarkupToReport" version="1.0.0.0" type="win32" />
+    </dependentAssembly>
+  </dependency>
+  <dependency>
+    <dependentAssembly>
+      <assemblyIdentity name="Comos.UIF" version="1.0.0.0" type="win32" />
+    </dependentAssembly>
+  </dependency>
+  <dependency>
+    <dependentAssembly>
+      <assemblyIdentity name="Comos.UIF.UIControls.UIFavorites" version="1.0.0.0" type="win32" />
+    </dependentAssembly>
+  </dependency>
+  <dependency>
+    <dependentAssembly>
+      <assemblyIdentity name="Comos.UIMTO" version="1.0.0.0" type="win32" />
+    </dependentAssembly>
+  </dependency>
+  <dependency>
+    <dependentAssembly>
+      <assemblyIdentity name="Comos.UserMenuConfigurator" version="1.0.0.0" type="win32" />
+    </dependentAssembly>
+  </dependency>
+  <dependency>
+    <dependentAssembly>
+      <assemblyIdentity name="Comos.UTSTagging" version="1.0.0.0" type="win32" />
+    </dependentAssembly>
+  </dependency>
+  <dependency>
+    <dependentAssembly>
+      <assemblyIdentity name="Comos.VDI2770Model" version="1.0.0.0" type="win32" />
+    </dependentAssembly>
+  </dependency>
+  <dependency>
+    <dependentAssembly>
+      <assemblyIdentity name="Comos.Viewer" version="1.0.0.0" type="win32" />
+    </dependentAssembly>
+  </dependency>
+  <dependency>
+    <dependentAssembly>
+      <assemblyIdentity name="Comos.ViewHelpContext" version="1.0.0.0" type="win32" />
+    </dependentAssembly>
+  </dependency>
+  <dependency>
+    <dependentAssembly>
+      <assemblyIdentity name="Comos.ViperSymbolBar" version="1.0.0.0" type="win32" />
+    </dependentAssembly>
+  </dependency>
+  <dependency>
+    <dependentAssembly>
+      <assemblyIdentity name="Comos.ViperUtilities" version="1.0.0.0" type="win32" />
+    </dependentAssembly>
+  </dependency>
+  <dependency>
+    <dependentAssembly>
+      <assemblyIdentity name="Comos.WatchGuardNotification" version="1.0.0.0" type="win32" />
+    </dependentAssembly>
+  </dependency>
+  <dependency>
+    <dependentAssembly>
+      <assemblyIdentity name="Comos.WebView.QuickLinks" version="1.0.0.0" type="win32" />
+    </dependentAssembly>
+  </dependency>
+  <dependency>
+    <dependentAssembly>
+      <assemblyIdentity name="Comos.Workflow.Activities" version="1.0.0.0" type="win32" />
+    </dependentAssembly>
+  </dependency>
+  <dependency>
+    <dependentAssembly>
+      <assemblyIdentity name="Comos.Workflow.Designer" version="1.0.0.0" type="win32" />
+    </dependentAssembly>
+  </dependency>
+  <dependency>
+    <dependentAssembly>
+      <assemblyIdentity name="Comos.Workflow" version="1.0.0.0" type="win32" />
+    </dependentAssembly>
+  </dependency>
+  <dependency>
+    <dependentAssembly>
+      <assemblyIdentity name="Comos.Workflow.Services.COMClient" version="1.0.0.0" type="win32" />
+    </dependentAssembly>
+  </dependency>
+  <dependency>
+    <dependentAssembly>
+      <assemblyIdentity name="Comos.WorksetPublisher" version="1.0.0.0" type="win32" />
+    </dependentAssembly>
+  </dependency>
+  <dependency>
+    <dependentAssembly>
+      <assemblyIdentity name="Comos.Wpf.Grid" version="1.0.0.0" type="win32" />
+    </dependentAssembly>
+  </dependency>
+  <dependency>
+    <dependentAssembly>
+      <assemblyIdentity name="Comos.WpfCom.Mover" version="1.0.0.0" type="win32" />
+    </dependentAssembly>
+  </dependency>
+  <dependency>
+    <dependentAssembly>
+      <assemblyIdentity name="Comos.WSP.AutoConn" version="1.0.0.0" type="win32" />
+    </dependentAssembly>
+  </dependency>
+  <dependency>
+    <dependentAssembly>
+      <assemblyIdentity name="Comos.WSP.Connection" version="1.0.0.0" type="win32" />
+    </dependentAssembly>
+  </dependency>
+  <dependency>
+    <dependentAssembly>
+      <assemblyIdentity name="Comos.WSP.CoRoConn" version="1.0.0.0" type="win32" />
+    </dependentAssembly>
+  </dependency>
+  <dependency>
+    <dependentAssembly>
+      <assemblyIdentity name="Comos.WSP.ExtendedObjects" version="1.0.0.0" type="win32" />
+    </dependentAssembly>
+  </dependency>
+  <dependency>
+    <dependentAssembly>
+      <assemblyIdentity name="Comos.WSP.Interfaces" version="1.0.0.0" type="win32" />
+    </dependentAssembly>
+  </dependency>
+  <dependency>
+    <dependentAssembly>
+      <assemblyIdentity name="Comos.WSP.IsoAutoDimension" version="1.0.0.0" type="win32" />
+    </dependentAssembly>
+  </dependency>
+  <dependency>
+    <dependentAssembly>
+      <assemblyIdentity name="Comos.WSP.IsoMod" version="8.1.0.0" type="win32" />
+    </dependentAssembly>
+  </dependency>
+  <dependency>
+    <dependentAssembly>
+      <assemblyIdentity name="Comos.WSP.Manager" version="1.0.0.0" type="win32" />
+    </dependentAssembly>
+  </dependency>
+  <dependency>
+    <dependentAssembly>
+      <assemblyIdentity name="Comos.WSP.MultiEd" version="18.0.0.0" type="win32" />
+    </dependentAssembly>
+  </dependency>
+  <dependency>
+    <dependentAssembly>
+      <assemblyIdentity name="Comos.WSP.PfdMod" version="3.1.0.0" type="win32" />
+    </dependentAssembly>
+  </dependency>
+  <dependency>
+    <dependentAssembly>
+      <assemblyIdentity name="Comos.WSP.ReportAttributeDlg" version="1.0.0.0" type="win32" />
+    </dependentAssembly>
+  </dependency>
+  <dependency>
+    <dependentAssembly>
+      <assemblyIdentity name="Comos.WSP.RfConn" version="1.0.0.0" type="win32" />
+    </dependentAssembly>
+  </dependency>
+  <dependency>
+    <dependentAssembly>
+      <assemblyIdentity name="Comos.WSP.RfDim" version="3.0.0.0" type="win32" />
+    </dependentAssembly>
+  </dependency>
+  <dependency>
+    <dependentAssembly>
+      <assemblyIdentity name="Comos.WSP.RFID" version="2.4.0.0" type="win32" />
+    </dependentAssembly>
+  </dependency>
+  <dependency>
+    <dependentAssembly>
+      <assemblyIdentity name="Comos.WSP.RFID1" version="1.1.0.0" type="win32" />
+    </dependentAssembly>
+  </dependency>
+  <dependency>
+    <dependentAssembly>
+      <assemblyIdentity name="Comos.WSP.RfID2" version="40.0.0.0" type="win32" />
+    </dependentAssembly>
+  </dependency>
+  <dependency>
+    <dependentAssembly>
+      <assemblyIdentity name="Comos.Wsp.RoBreak" version="1.0.0.0" type="win32" />
+    </dependentAssembly>
+  </dependency>
+  <dependency>
+    <dependentAssembly>
+      <assemblyIdentity name="Comos.WSP.RoCable" version="1.5.0.0" type="win32" />
+    </dependentAssembly>
+  </dependency>
+  <dependency>
+    <dependentAssembly>
+      <assemblyIdentity name="Comos.WSP.RoConn" version="1.1.0.0" type="win32" />
+    </dependentAssembly>
+  </dependency>
+  <dependency>
+    <dependentAssembly>
+      <assemblyIdentity name="Comos.WSP.RoConnBase" version="3.4.0.0" type="win32" />
+    </dependentAssembly>
+  </dependency>
+  <dependency>
+    <dependentAssembly>
+      <assemblyIdentity name="Comos.WSP.RoConnector" version="1.0.0.0" type="win32" />
+    </dependentAssembly>
+  </dependency>
+  <dependency>
+    <dependentAssembly>
+      <assemblyIdentity name="Comos.WSP.RoConnPfd" version="1.1.0.0" type="win32" />
+    </dependentAssembly>
+  </dependency>
+  <dependency>
+    <dependentAssembly>
+      <assemblyIdentity name="Comos.WSP.RoDevice" version="1.0.0.0" type="win32" />
+    </dependentAssembly>
+  </dependency>
+  <dependency>
+    <dependentAssembly>
+      <assemblyIdentity name="Comos.WSP.RoDeviceBase" version="5.3.0.0" type="win32" />
+    </dependentAssembly>
+  </dependency>
+  <dependency>
+    <dependentAssembly>
+      <assemblyIdentity name="Comos.WSP.RoDeviceBaseAutomation" version="1.0.0.0" type="win32" />
+    </dependentAssembly>
+  </dependency>
+  <dependency>
+    <dependentAssembly>
+      <assemblyIdentity name="Comos.WSP.RoDeviceFupRD" version="1.0.0.0" type="win32" />
+    </dependentAssembly>
+  </dependency>
+  <dependency>
+    <dependentAssembly>
+      <assemblyIdentity name="Comos.WSP.RoDeviceIso" version="2.0.0.0" type="win32" />
+    </dependentAssembly>
+  </dependency>
+  <dependency>
+    <dependentAssembly>
+      <assemblyIdentity name="Comos.WSP.RoDevicePfd" version="1.0.0.0" type="win32" />
+    </dependentAssembly>
+  </dependency>
+  <dependency>
+    <dependentAssembly>
+      <assemblyIdentity name="Comos.WSP.RoDim" version="1.0.0.0" type="win32" />
+    </dependentAssembly>
+  </dependency>
+  <dependency>
+    <dependentAssembly>
+      <assemblyIdentity name="Comos.WSP.RoFlagPfd" version="1.0.0.0" type="win32" />
+    </dependentAssembly>
+  </dependency>
+  <dependency>
+    <dependentAssembly>
+      <assemblyIdentity name="Comos.WSP.RoGrayBox" version="2.0.0.0" type="win32" />
+    </dependentAssembly>
+  </dependency>
+  <dependency>
+    <dependentAssembly>
+      <assemblyIdentity name="Comos.WSP.RoMacro" version="3.8.0.0" type="win32" />
+    </dependentAssembly>
+  </dependency>
+  <dependency>
+    <dependentAssembly>
+      <assemblyIdentity name="Comos.Wsp.RoPDFObject" version="1.0.0.0" type="win32" />
+    </dependentAssembly>
+  </dependency>
+  <dependency>
+    <dependentAssembly>
+      <assemblyIdentity name="Comos.WSP.RoPotential" version="1.0.0.0" type="win32" />
+    </dependentAssembly>
+  </dependency>
+  <dependency>
+    <dependentAssembly>
+      <assemblyIdentity name="Comos.WSP.RoReference" version="1.0.0.0" type="win32" />
+    </dependentAssembly>
+  </dependency>
+  <dependency>
+    <dependentAssembly>
+      <assemblyIdentity name="Comos.WSP.RoSegment" version="3.0.0.0" type="win32" />
+    </dependentAssembly>
+  </dependency>
+  <dependency>
+    <dependentAssembly>
+      <assemblyIdentity name="Comos.WSP.RoSignal" version="1.1.0.0" type="win32" />
+    </dependentAssembly>
+  </dependency>
+  <dependency>
+    <dependentAssembly>
+      <assemblyIdentity name="Comos.WSP.RoSymbol" version="2.1.0.0" type="win32" />
+    </dependentAssembly>
+  </dependency>
+  <dependency>
+    <dependentAssembly>
+      <assemblyIdentity name="Comos.WSP.RoUtilities" version="10.7.0.0" type="win32" />
+    </dependentAssembly>
+  </dependency>
+  <dependency>
+    <dependentAssembly>
+      <assemblyIdentity name="Comos.WSP.RoView3D" version="9.14.0.0" type="win32" />
+    </dependentAssembly>
+  </dependency>
+  <dependency>
+    <dependentAssembly>
+      <assemblyIdentity name="Comos.WSP.RUI" version="1.9.0.0" type="win32" />
+    </dependentAssembly>
+  </dependency>
+  <dependency>
+    <dependentAssembly>
+      <assemblyIdentity name="Comos.WSP.UIViper" version="1.0.0.0" type="win32" />
+    </dependentAssembly>
+  </dependency>
+  <dependency>
+    <dependentAssembly>
+      <assemblyIdentity name="Comos.WSP.XDoc" version="1.0.0.0" type="win32" />
+    </dependentAssembly>
+  </dependency>
+  <dependency>
+    <dependentAssembly>
+      <assemblyIdentity name="Comos.WSP.XDocElo" version="1.1.0.0" type="win32" />
+    </dependentAssembly>
+  </dependency>
+  <dependency>
+    <dependentAssembly>
+      <assemblyIdentity name="Comos.WSP.XDocFup" version="1.1.0.0" type="win32" />
+    </dependentAssembly>
+  </dependency>
+  <dependency>
+    <dependentAssembly>
+      <assemblyIdentity name="Comos.WSP.XDocFupRD" version="1.0.0.0" type="win32" />
+    </dependentAssembly>
+  </dependency>
+  <dependency>
+    <dependentAssembly>
+      <assemblyIdentity name="Comos.WSP.XDoc_Color" version="1.0.0.0" type="win32" />
+    </dependentAssembly>
+  </dependency>
+  <dependency>
+    <dependentAssembly>
+      <assemblyIdentity name="Comos.WSP.XDoc_ISO" version="1.0.0.0" type="win32" />
+    </dependentAssembly>
+  </dependency>
+  <dependency>
+    <dependentAssembly>
+      <assemblyIdentity name="Comos.Wsp.XDoc_Pfd" version="1.0.0.0" type="win32" />
+    </dependentAssembly>
+  </dependency>
+  <dependency>
+    <dependentAssembly>
+      <assemblyIdentity name="Comos.WSP.XGeo" version="7.5.0.0" type="win32" />
+    </dependentAssembly>
+  </dependency>
+  <dependency>
+    <dependentAssembly>
+      <assemblyIdentity name="Comos.XMLAdapter" version="1.0.0.0" type="win32" />
+    </dependentAssembly>
+  </dependency>
+  <dependency>
+    <dependentAssembly>
+      <assemblyIdentity name="Comos.XMLConnector" version="1.0.0.0" type="win32" />
+    </dependentAssembly>
+  </dependency>
+  <dependency>
+    <dependentAssembly>
+      <assemblyIdentity name="Comos.XMPlantExport1" version="1.0.0.0" type="win32" />
+    </dependentAssembly>
+  </dependency>
+  <dependency>
+    <dependentAssembly>
+      <assemblyIdentity name="Comos.XMPlantImport1" version="1.0.0.0" type="win32" />
+    </dependentAssembly>
+  </dependency>
+  <dependency>
+    <dependentAssembly>
+      <assemblyIdentity name="Comos3DTransform" version="1.0.0.0" type="win32" />
+    </dependentAssembly>
+  </dependency>
+  <dependency>
+    <dependentAssembly>
+      <assemblyIdentity name="ComosBranchTable" version="1.0.0.0" type="win32" />
+    </dependentAssembly>
+  </dependency>
+  <dependency>
+    <dependentAssembly>
+      <assemblyIdentity name="ComosCalcLib" version="1.0.0.0" type="win32" />
+    </dependentAssembly>
+  </dependency>
+  <dependency>
+    <dependentAssembly>
+      <assemblyIdentity name="ComosCheckFct" version="1.0.0.0" type="win32" />
+    </dependentAssembly>
+  </dependency>
+  <dependency>
+    <dependentAssembly>
+      <assemblyIdentity name="ComosCommonFilter" version="1.0.0.0" type="win32" />
+    </dependentAssembly>
+  </dependency>
+  <dependency>
+    <dependentAssembly>
+      <assemblyIdentity name="ComosConstants" version="1.0.0.0" type="win32" />
+    </dependentAssembly>
+  </dependency>
+  <dependency>
+    <dependentAssembly>
+      <assemblyIdentity name="ComosD3ObjCollection" version="1.0.0.0" type="win32" />
+    </dependentAssembly>
+  </dependency>
+  <dependency>
+    <dependentAssembly>
+      <assemblyIdentity name="ComosD3Obstruction" version="1.0.0.0" type="win32" />
+    </dependentAssembly>
+  </dependency>
+  <dependency>
+    <dependentAssembly>
+      <assemblyIdentity name="ComosD3Solver" version="1.0.0.0" type="win32" />
+    </dependentAssembly>
+  </dependency>
+  <dependency>
+    <dependentAssembly>
+      <assemblyIdentity name="ComosDecisionTable" version="1.0.0.0" type="win32" />
+    </dependentAssembly>
+  </dependency>
+  <dependency>
+    <dependentAssembly>
+      <assemblyIdentity name="ComosDetailUtilities" version="1.0.0.0" type="win32" />
+    </dependentAssembly>
+  </dependency>
+  <dependency>
+    <dependentAssembly>
+      <assemblyIdentity name="ComosDiagram" version="1.0.0.0" type="win32" />
+    </dependentAssembly>
+  </dependency>
+  <dependency>
+    <dependentAssembly>
+      <assemblyIdentity name="ComosDiagramOCX" version="1.0.0.0" type="win32" />
+    </dependentAssembly>
+  </dependency>
+  <dependency>
+    <dependentAssembly>
+      <assemblyIdentity name="ComosDocFctDist" version="1.0.0.0" type="win32" />
+    </dependentAssembly>
+  </dependency>
+  <dependency>
+    <dependentAssembly>
+      <assemblyIdentity name="ComosDTabInfo" version="1.0.0.0" type="win32" />
+    </dependentAssembly>
+  </dependency>
+  <dependency>
+    <dependentAssembly>
+      <assemblyIdentity name="ComosELOLib" version="1.0.0.0" type="win32" />
+    </dependentAssembly>
+  </dependency>
+  <dependency>
+    <dependentAssembly>
+      <assemblyIdentity name="ComoseSignHelper2" version="1.0.0.0" type="win32" />
+    </dependentAssembly>
+  </dependency>
+  <dependency>
+    <dependentAssembly>
+      <assemblyIdentity name="ComosExcelInit" version="1.0.0.0" type="win32" />
+    </dependentAssembly>
+  </dependency>
+  <dependency>
+    <dependentAssembly>
+      <assemblyIdentity name="ComosGeoSymbols" version="129.3.0.0" type="win32" />
+    </dependentAssembly>
+  </dependency>
+  <dependency>
+    <dependentAssembly>
+      <assemblyIdentity name="ComosIDocAdobePDF" version="1.0.0.0" type="win32" />
+    </dependentAssembly>
+  </dependency>
+  <dependency>
+    <dependentAssembly>
+      <assemblyIdentity name="ComosIDocAutoCAD" version="1.0.0.0" type="win32" />
+    </dependentAssembly>
+  </dependency>
+  <dependency>
+    <dependentAssembly>
+      <assemblyIdentity name="ComosIDocCXC" version="1.0.0.0" type="win32" />
+    </dependentAssembly>
+  </dependency>
+  <dependency>
+    <dependentAssembly>
+      <assemblyIdentity name="ComosIDocGeneral" version="1.0.0.0" type="win32" />
+    </dependentAssembly>
+  </dependency>
+  <dependency>
+    <dependentAssembly>
+      <assemblyIdentity name="ComosIDocPowerPoint" version="1.0.0.0" type="win32" />
+    </dependentAssembly>
+  </dependency>
+  <dependency>
+    <dependentAssembly>
+      <assemblyIdentity name="ComosImplementObjects" version="1.0.0.0" type="win32" />
+    </dependentAssembly>
+  </dependency>
+  <dependency>
+    <dependentAssembly>
+      <assemblyIdentity name="ComosInspection" version="1.0.0.0" type="win32" />
+    </dependentAssembly>
+  </dependency>
+  <dependency>
+    <dependentAssembly>
+      <assemblyIdentity name="ComosISGlobalObj" version="1.0.0.0" type="win32" />
+    </dependentAssembly>
+  </dependency>
+  <dependency>
+    <dependentAssembly>
+      <assemblyIdentity name="ComosMatchOptions" version="1.0.0.0" type="win32" />
+    </dependentAssembly>
+  </dependency>
+  <dependency>
+    <dependentAssembly>
+      <assemblyIdentity name="ComosMathUtils" version="1.0.0.0" type="win32" />
+    </dependentAssembly>
+  </dependency>
+  <dependency>
+    <dependentAssembly>
+      <assemblyIdentity name="ComosMenuContext" version="1.0.0.0" type="win32" />
+    </dependentAssembly>
+  </dependency>
+  <dependency>
+    <dependentAssembly>
+      <assemblyIdentity name="ComosNavPopUp" version="1.0.0.0" type="win32" />
+    </dependentAssembly>
+  </dependency>
+  <dependency>
+    <dependentAssembly>
+      <assemblyIdentity name="ComosNavPopUp.Extender" version="1.0.0.0" type="win32" />
+    </dependentAssembly>
+  </dependency>
+  <dependency>
+    <dependentAssembly>
+      <assemblyIdentity name="ComosNormUtilities" version="1.0.0.0" type="win32" />
+    </dependentAssembly>
+  </dependency>
+  <dependency>
+    <dependentAssembly>
+      <assemblyIdentity name="ComosPCOMCell" version="1.0.0.0" type="win32" />
+    </dependentAssembly>
+  </dependency>
+  <dependency>
+    <dependentAssembly>
+      <assemblyIdentity name="ComosPCOMRangeInterface" version="1.0.0.0" type="win32" />
+    </dependentAssembly>
+  </dependency>
+  <dependency>
+    <dependentAssembly>
+      <assemblyIdentity name="ComosPipeClass" version="1.0.0.0" type="win32" />
+    </dependentAssembly>
+  </dependency>
+  <dependency>
+    <dependentAssembly>
+      <assemblyIdentity name="ComosPipeClassCommon" version="1.0.0.0" type="win32" />
+    </dependentAssembly>
+  </dependency>
+  <dependency>
+    <dependentAssembly>
+      <assemblyIdentity name="ComosPipingUtilities" version="1.0.0.0" type="win32" />
+    </dependentAssembly>
+  </dependency>
+  <dependency>
+    <dependentAssembly>
+      <assemblyIdentity name="ComosPPCObjectCheck" version="1.0.0.0" type="win32" />
+    </dependentAssembly>
+  </dependency>
+  <dependency>
+    <dependentAssembly>
+      <assemblyIdentity name="ComosPrimObjects" version="1.0.0.0" type="win32" />
+    </dependentAssembly>
+  </dependency>
+  <dependency>
+    <dependentAssembly>
+      <assemblyIdentity name="ComosProjectXMod" version="1.0.0.0" type="win32" />
+    </dependentAssembly>
+  </dependency>
+  <dependency>
+    <dependentAssembly>
+      <assemblyIdentity name="ComosPTTitle" version="1.0.0.0" type="win32" />
+    </dependentAssembly>
+  </dependency>
+  <dependency>
+    <dependentAssembly>
+      <assemblyIdentity name="ComosQTransfer" version="1.0.0.0" type="win32" />
+    </dependentAssembly>
+  </dependency>
+  <dependency>
+    <dependentAssembly>
+      <assemblyIdentity name="ComosQueryXExpr" version="1.0.0.0" type="win32" />
+    </dependentAssembly>
+  </dependency>
+  <dependency>
+    <dependentAssembly>
+      <assemblyIdentity name="ComosReanimateDelObjs" version="1.0.0.0" type="win32" />
+    </dependentAssembly>
+  </dependency>
+  <dependency>
+    <dependentAssembly>
+      <assemblyIdentity name="ComosReportUtils" version="1.0.0.0" type="win32" />
+    </dependentAssembly>
+  </dependency>
+  <dependency>
+    <dependentAssembly>
+      <assemblyIdentity name="ComosRfANSI" version="1.0.0.0" type="win32" />
+    </dependentAssembly>
+  </dependency>
+  <dependency>
+    <dependentAssembly>
+      <assemblyIdentity name="ComosRFArc" version="1.0.0.0" type="win32" />
+    </dependentAssembly>
+  </dependency>
+  <dependency>
+    <dependentAssembly>
+      <assemblyIdentity name="ComosRFChildFrame" version="1.0.0.0" type="win32" />
+    </dependentAssembly>
+  </dependency>
+  <dependency>
+    <dependentAssembly>
+      <assemblyIdentity name="ComosRFContext" version="1.0.0.0" type="win32" />
+    </dependentAssembly>
+  </dependency>
+  <dependency>
+    <dependentAssembly>
+      <assemblyIdentity name="ComosRFDWG" version="1.0.0.0" type="win32" />
+    </dependentAssembly>
+  </dependency>
+  <dependency>
+    <dependentAssembly>
+      <assemblyIdentity name="ComosRFHelper" version="1.0.0.0" type="win32" />
+    </dependentAssembly>
+  </dependency>
+  <dependency>
+    <dependentAssembly>
+      <assemblyIdentity name="ComosRFLine" version="1.0.0.0" type="win32" />
+    </dependentAssembly>
+  </dependency>
+  <dependency>
+    <dependentAssembly>
+      <assemblyIdentity name="ComosRFList" version="1.0.0.0" type="win32" />
+    </dependentAssembly>
+  </dependency>
+  <dependency>
+    <dependentAssembly>
+      <assemblyIdentity name="ComosRFPath" version="1.0.0.0" type="win32" />
+    </dependentAssembly>
+  </dependency>
+  <dependency>
+    <dependentAssembly>
+      <assemblyIdentity name="ComosRFPicture" version="1.0.0.0" type="win32" />
+    </dependentAssembly>
+  </dependency>
+  <dependency>
+    <dependentAssembly>
+      <assemblyIdentity name="ComosRFRect" version="1.0.0.0" type="win32" />
+    </dependentAssembly>
+  </dependency>
+  <dependency>
+    <dependentAssembly>
+      <assemblyIdentity name="ComosRFSubReport" version="1.0.0.0" type="win32" />
+    </dependentAssembly>
+  </dependency>
+  <dependency>
+    <dependentAssembly>
+      <assemblyIdentity name="ComosRFWmf" version="1.0.0.0" type="win32" />
+    </dependentAssembly>
+  </dependency>
+  <dependency>
+    <dependentAssembly>
+      <assemblyIdentity name="ComosRprtQuery" version="1.0.0.0" type="win32" />
+    </dependentAssembly>
+  </dependency>
+  <dependency>
+    <dependentAssembly>
+      <assemblyIdentity name="ComosSatCom" version="1.0.0.0" type="win32" />
+    </dependentAssembly>
+  </dependency>
+  <dependency>
+    <dependentAssembly>
+      <assemblyIdentity name="ComosScriptFunction" version="1.0.0.0" type="win32" />
+    </dependentAssembly>
+  </dependency>
+  <dependency>
+    <dependentAssembly>
+      <assemblyIdentity name="ComosScriptHelper" version="1.0.0.0" type="win32" />
+    </dependentAssembly>
+  </dependency>
+  <dependency>
+    <dependentAssembly>
+      <assemblyIdentity name="ComosSelectSymbol" version="1.0.0.0" type="win32" />
+    </dependentAssembly>
+  </dependency>
+  <dependency>
+    <dependentAssembly>
+      <assemblyIdentity name="ComosShowInTree" version="1.0.0.0" type="win32" />
+    </dependentAssembly>
+  </dependency>
+  <dependency>
+    <dependentAssembly>
+      <assemblyIdentity name="ComosSpaceEngine" version="1.0.0.0" type="win32" />
+    </dependentAssembly>
+  </dependency>
+  <dependency>
+    <dependentAssembly>
+      <assemblyIdentity name="ComosSpecArchiv" version="1.0.0.0" type="win32" />
+    </dependentAssembly>
+  </dependency>
+  <dependency>
+    <dependentAssembly>
+      <assemblyIdentity name="ComosSpecColorSet" version="1.0.0.0" type="win32" />
+    </dependentAssembly>
+  </dependency>
+  <dependency>
+    <dependentAssembly>
+      <assemblyIdentity name="ComosSpecEval" version="1.0.0.0" type="win32" />
+    </dependentAssembly>
+  </dependency>
+  <dependency>
+    <dependentAssembly>
+      <assemblyIdentity name="ComosStandardObjects" version="1.0.0.0" type="win32" />
+    </dependentAssembly>
+  </dependency>
+  <dependency>
+    <dependentAssembly>
+      <assemblyIdentity name="ComosStdTableJobs" version="1.0.0.0" type="win32" />
+    </dependentAssembly>
+  </dependency>
+  <dependency>
+    <dependentAssembly>
+      <assemblyIdentity name="ComosTBarLockHelper" version="1.0.0.0" type="win32" />
+    </dependentAssembly>
+  </dependency>
+  <dependency>
+    <dependentAssembly>
+      <assemblyIdentity name="ComosTGeneratorJobs" version="1.0.0.0" type="win32" />
+    </dependentAssembly>
+  </dependency>
+  <dependency>
+    <dependentAssembly>
+      <assemblyIdentity name="ComosTQBPartners" version="1.0.0.0" type="win32" />
+    </dependentAssembly>
+  </dependency>
+  <dependency>
+    <dependentAssembly>
+      <assemblyIdentity name="ComosUCDevices" version="1.0.0.0" type="win32" />
+    </dependentAssembly>
+  </dependency>
+  <dependency>
+    <dependentAssembly>
+      <assemblyIdentity name="ComosUICDevice" version="1.0.0.0" type="win32" />
+    </dependentAssembly>
+  </dependency>
+  <dependency>
+    <dependentAssembly>
+      <assemblyIdentity name="ComosUIDimLevel" version="1.0.0.0" type="win32" />
+    </dependentAssembly>
+  </dependency>
+  <dependency>
+    <dependentAssembly>
+      <assemblyIdentity name="ComosUIDocObj" version="1.0.0.0" type="win32" />
+    </dependentAssembly>
+  </dependency>
+  <dependency>
+    <dependentAssembly>
+      <assemblyIdentity name="ComosUIDocument" version="1.0.0.0" type="win32" />
+    </dependentAssembly>
+  </dependency>
+  <dependency>
+    <dependentAssembly>
+      <assemblyIdentity name="ComosUIInterface" version="1.0.0.0" type="win32" />
+    </dependentAssembly>
+  </dependency>
+  <dependency>
+    <dependentAssembly>
+      <assemblyIdentity name="ComosUISpecification" version="1.0.0.0" type="win32" />
+    </dependentAssembly>
+  </dependency>
+  <dependency>
+    <dependentAssembly>
+      <assemblyIdentity name="ComosUpdDocGrp" version="1.0.0.0" type="win32" />
+    </dependentAssembly>
+  </dependency>
+  <dependency>
+    <dependentAssembly>
+      <assemblyIdentity name="ComosVB3D" version="1.0.0.0" type="win32" />
+    </dependentAssembly>
+  </dependency>
+  <dependency>
+    <dependentAssembly>
+      <assemblyIdentity name="ComosWspRfConnIso" version="1.0.0.0" type="win32" />
+    </dependentAssembly>
+  </dependency>
+  <dependency>
+    <dependentAssembly>
+      <assemblyIdentity name="ComosXSpaceObjects" version="1.0.0.0" type="win32" />
+    </dependentAssembly>
+  </dependency>
+  <dependency>
+    <dependentAssembly>
+      <assemblyIdentity name="ComponentOrchestrator" version="1.0.0.0" type="win32" />
+    </dependentAssembly>
+  </dependency>
+  <dependency>
+    <dependentAssembly>
+      <assemblyIdentity name="ContextAreaCOMAdaptor" version="1.0.0.0" type="win32" />
+    </dependentAssembly>
+  </dependency>
+  <dependency>
+    <dependentAssembly>
+      <assemblyIdentity name="DWHCore" version="1.0.0.0" type="win32" />
+    </dependentAssembly>
+  </dependency>
+  <dependency>
+    <dependentAssembly>
+      <assemblyIdentity name="EQStatusManagement" version="1.0.0.0" type="win32" />
+    </dependentAssembly>
+  </dependency>
+  <dependency>
+    <dependentAssembly>
+      <assemblyIdentity name="ExportDGN.UI" version="1.0.0.0" type="win32" />
+    </dependentAssembly>
+  </dependency>
+  <dependency>
+    <dependentAssembly>
+      <assemblyIdentity name="FupLibrary" version="1.0.0.0" type="win32" />
+    </dependentAssembly>
+  </dependency>
+  <dependency>
+    <dependentAssembly>
+      <assemblyIdentity name="Iso15926ResultLogger" version="1.0.0.0" type="win32" />
+    </dependentAssembly>
+  </dependency>
+  <dependency>
+    <dependentAssembly>
+      <assemblyIdentity name="Iso15926Verificator" version="1.0.0.0" type="win32" />
+    </dependentAssembly>
+  </dependency>
+  <dependency>
+    <dependentAssembly>
+      <assemblyIdentity name="ModularReport" version="10.6.0.0" type="win32" />
+    </dependentAssembly>
+  </dependency>
+  <dependency>
+    <dependentAssembly>
+      <assemblyIdentity name="MR_Config" version="1.0.0.0" type="win32" />
+    </dependentAssembly>
+  </dependency>
+  <dependency>
+    <dependentAssembly>
+      <assemblyIdentity name="PinC" version="4.0.8.2" type="win32" />
+    </dependentAssembly>
+  </dependency>
+  <dependency>
+    <dependentAssembly>
+      <assemblyIdentity name="ReadIso15926Excel" version="1.0.0.0" type="win32" />
+    </dependentAssembly>
+  </dependency>
+  <dependency>
+    <dependentAssembly>
+      <assemblyIdentity name="ReadIso15926Sandbox" version="1.0.0.0" type="win32" />
+    </dependentAssembly>
+  </dependency>
+  <dependency>
+    <dependentAssembly>
+      <assemblyIdentity name="ReportOptions" version="1.0.0.0" type="win32" />
+    </dependentAssembly>
+  </dependency>
+  <dependency>
+    <dependentAssembly>
+      <assemblyIdentity name="ScriptBlocks" version="1.0.0.0" type="win32" />
+    </dependentAssembly>
+  </dependency>
+  <dependency>
+    <dependentAssembly>
+      <assemblyIdentity name="SpecImportTools" version="0.1.0.0" type="win32" />
+    </dependentAssembly>
+  </dependency>
+  <dependency>
+    <dependentAssembly>
+      <assemblyIdentity name="WpfCom" version="1.0.0.0" type="win32" />
+    </dependentAssembly>
+  </dependency>
+  <!--References to TLBs-->
+  <file name="Typelibs\Comos.Application.ComFacade.tlb">
+    <typelib tlbid="{BE3DBCF1-CCA7-453D-9AA2-18048DECFFF0}" version="1.0" helpdir="" />
+  </file>
+  <file name="Typelibs\Comos.Application.Common.StorageLayer.tlb">
+    <typelib tlbid="{E4E5CE87-E2A7-4E72-A31F-077C7D5FE40C}" version="1.0" helpdir="" />
+  </file>
+  <file name="Typelibs\Comos.Application.Kernel.Interfaces.tlb">
+    <typelib tlbid="{1B791955-FAA6-46BF-B6D6-38FD79BBC101}" version="1.0" helpdir="" />
+  </file>
+  <file name="Typelibs\Comos.Application.Kernel.tlb">
+    <typelib tlbid="{74D30F04-D6E0-4620-8376-AEBE0AC24439}" version="1.0" helpdir="" />
+  </file>
+  <file name="Typelibs\Comos.Application.RoBase.tlb">
+    <typelib tlbid="{C2F99B22-4293-427E-A6BA-5667CD327C7D}" version="1.0" helpdir="" />
+  </file>
+  <file name="Typelibs\Comos.Aspen.XMLImp.tlb">
+    <typelib tlbid="{3A0D0CC5-B5DD-44CC-BE2C-03B3133A51AB}" version="1.0" helpdir="" />
+  </file>
+  <file name="Typelibs\Comos.AutoCADMapping.tlb">
+    <typelib tlbid="{E6DD4B2A-9AAB-4D10-95F8-4F6DB687C8BF}" version="1.0" helpdir="" />
+  </file>
+  <file name="Typelibs\Comos.Automation.PopupMenu.tlb">
+    <typelib tlbid="{C001AAF6-DACF-4FBA-A652-A8EFA0340482}" version="1.0" helpdir="" />
+  </file>
+  <file name="Typelibs\Comos.C3DView.AutoAssign.tlb">
+    <typelib tlbid="{6219CA4E-3792-42B3-A030-7C76D7F6FEE0}" version="1.0" helpdir="" />
+  </file>
+  <file name="Typelibs\Comos.C3DView.tlb">
+    <typelib tlbid="{889DF761-3466-4831-AA5E-EB62CB3A45F7}" version="1.0" helpdir="" />
+  </file>
+  <file name="Typelibs\Comos.Catalog.Excel.tlb">
+    <typelib tlbid="{B8A1340E-6D26-4D00-82C7-0380813A7E8A}" version="1.0" helpdir="" />
+  </file>
+  <file name="Typelibs\Comos.Catalog.Text.tlb">
+    <typelib tlbid="{D8BAB167-FEA5-49A9-9DDC-81FFB597FB94}" version="1.0" helpdir="" />
+  </file>
+  <file name="Typelibs\Comos.Catalog.tlb">
+    <typelib tlbid="{43802EBE-A6DB-4D37-AF78-B81D06632072}" version="1.0" helpdir="" />
+  </file>
+  <file name="Typelibs\Comos.Catalog.XML.tlb">
+    <typelib tlbid="{A89F91F0-B311-4C41-BF4B-7AC702250A0F}" version="1.0" helpdir="" />
+  </file>
+  <file name="Typelibs\Comos.CDevice.ConectEd.tlb">
+    <typelib tlbid="{CE95C860-1710-3424-99CE-699F15B74403}" version="1.0" helpdir="" />
+  </file>
+  <file name="Typelibs\Comos.Chart.tlb">
+    <typelib tlbid="{7EF28812-EE94-4278-A62A-241202588D67}" version="1.0" helpdir="" />
+  </file>
+  <file name="Typelibs\Comos.ComDlg.tlb">
+    <typelib tlbid="{F33E56A5-8DDA-34DD-BF53-026BE73BB337}" version="1.0" helpdir="" />
+  </file>
+  <file name="Typelibs\Comos.ConfigLibHelper.tlb">
+    <typelib tlbid="{7A5EBBA5-A76F-4BE2-B88C-C2C2BE2BE04A}" version="1.0" helpdir="" />
+  </file>
+  <file name="Typelibs\Comos.Configurator.Scripting.tlb">
+    <typelib tlbid="{510F9CCD-5564-4C49-BE60-EA2C55A277F8}" version="1.0" helpdir="" />
+  </file>
+  <file name="Typelibs\Comos.ControlPack1.tlb">
+    <typelib tlbid="{AC61C740-90B7-4024-B609-062F1B4F7E03}" version="1.0" helpdir="" />
+  </file>
+  <file name="Typelibs\Comos.Controls.Common.tlb">
+    <typelib tlbid="{16DBB012-CB5B-3FF4-9C8E-D02D2AEA323F}" version="1.0" helpdir="" />
+  </file>
+  <file name="Typelibs\Comos.Controls.DocumentPreview.tlb">
+    <typelib tlbid="{2111C27B-E763-4DF2-9B7F-B3CB3D8A40D6}" version="1.0" helpdir="" />
+  </file>
+  <file name="Typelibs\Comos.Controls.tlb">
+    <typelib tlbid="{F91AF816-E4AE-3885-A14F-EC8BB9BE7F3B}" version="1.0" helpdir="" />
+  </file>
+  <file name="Typelibs\Comos.CryptoLib.tlb">
+    <typelib tlbid="{03EA8C7A-D14E-4458-ACE2-C75096C737FB}" version="2.3" helpdir="" />
+  </file>
+  <file name="Typelibs\Comos.CSMEnum.tlb">
+    <typelib tlbid="{6FA069CD-1821-49FC-9DA3-E92E3AEB82A2}" version="1.0" helpdir="" />
+  </file>
+  <file name="Typelibs\Comos.CtxMenu.tlb">
+    <typelib tlbid="{02F12A67-DB59-4A89-86B7-2C186E770C18}" version="1.0" helpdir="" />
+  </file>
+  <file name="Typelibs\Comos.Custom.Daimler.DuplicateObjectFinder.tlb">
+    <typelib tlbid="{655B3635-50B6-4DBB-B8CA-E5278F24A3E4}" version="1.0" helpdir="" />
+  </file>
+  <file name="Typelibs\Comos.D3.tlb">
+    <typelib tlbid="{39CCA5F2-CD8E-4E23-8753-AAC347AB5881}" version="1.0" helpdir="" />
+  </file>
+  <file name="Typelibs\Comos.D3ObjectAnalyzer.tlb">
+    <typelib tlbid="{558DDCF4-3E60-3FCA-BBAA-53BBE2770C31}" version="1.0" helpdir="" />
+  </file>
+  <file name="Typelibs\Comos.D3ToIso.tlb">
+    <typelib tlbid="{5AEC3B06-554F-467B-A98D-39D2AA0C5444}" version="1.0" helpdir="" />
+  </file>
+  <file name="Typelibs\Comos.DataService.tlb">
+    <typelib tlbid="{3B6BBD86-2F8D-304C-80ED-906A38380142}" version="1.0" helpdir="" />
+  </file>
+  <file name="Typelibs\Comos.DateTime.tlb">
+    <typelib tlbid="{746ACE5B-4DA6-4BCA-9F1B-050698CC1DAE}" version="1.0" helpdir="" />
+  </file>
+  <file name="Typelibs\Comos.DDMSafe.tlb">
+    <typelib tlbid="{BF82C1C1-B1BC-3746-B53A-62D472048F71}" version="1.0" helpdir="" />
+  </file>
+  <file name="Typelibs\Comos.Device.tlb">
+    <typelib tlbid="{E41D080C-3292-488B-AE43-7C7F7DAEDCB1}" version="1.0" helpdir="" />
+  </file>
+  <file name="Typelibs\Comos.DocumentBrowsing.tlb">
+    <typelib tlbid="{EC9B0F97-5AF7-43F7-B23C-610CEE724B9E}" version="1.0" helpdir="" />
+  </file>
+  <file name="Typelibs\Comos.DocumentManager.tlb">
+    <typelib tlbid="{38536764-F484-415F-81AC-300FDA6E0AAF}" version="1.0" helpdir="" />
+  </file>
+  <file name="Typelibs\Comos.DocumentSubscription.tlb">
+    <typelib tlbid="{71C7A7EC-F928-42D3-A148-5E7947714296}" version="1.0" helpdir="" />
+  </file>
+  <file name="Typelibs\Comos.Doxie.tlb">
+    <typelib tlbid="{3267342E-9615-481D-8088-71EB4D151181}" version="1.0" helpdir="" />
+  </file>
+  <file name="Typelibs\Comos.DVMPackage.tlb">
+    <typelib tlbid="{0D982C49-0093-4CB4-A22D-6EDF1BA2FDC3}" version="1.0" helpdir="" />
+  </file>
+  <file name="Typelibs\Comos.DVMPackageConfigurator.tlb">
+    <typelib tlbid="{0F36DCD0-F94A-30DA-B0CA-58EFA8E4C001}" version="1.0" helpdir="" />
+  </file>
+  <file name="Typelibs\Comos.DVMTransmittal.tlb">
+    <typelib tlbid="{1145E7FA-7A59-4FDA-92BE-0DB8898360D2}" version="1.0" helpdir="" />
+  </file>
+  <file name="Typelibs\Comos.DWGMappingEditor.tlb">
+    <typelib tlbid="{80479C64-F7F3-4C06-A9BE-0BC169234F80}" version="1.0" helpdir="" />
+  </file>
+  <file name="Typelibs\Comos.DxfImport2.tlb">
+    <typelib tlbid="{21DAEC1D-F354-4D61-A9A2-AE7CD9C0E5DC}" version="1.0" helpdir="" />
+  </file>
+  <file name="Typelibs\Comos.eBlock.Abstract.tlb">
+    <typelib tlbid="{C9D352D5-A486-4C3A-9B65-DA4D18823079}" version="1.0" helpdir="" />
+  </file>
+  <file name="Typelibs\Comos.eBlock.AssemblyActions.tlb">
+    <typelib tlbid="{936FAA17-CB8A-44C0-AE4C-ACF4E93724F7}" version="1.0" helpdir="" />
+  </file>
+  <file name="Typelibs\Comos.eBlock.Interfaces.tlb">
+    <typelib tlbid="{8DE79B04-8ADE-4540-A5FF-60E499898377}" version="1.0" helpdir="" />
+  </file>
+  <file name="Typelibs\Comos.eBlock.tlb">
+    <typelib tlbid="{809BD26A-8B71-4529-AADF-69755CFC35A0}" version="1.0" helpdir="" />
+  </file>
+  <file name="Typelibs\Comos.eBlock.Utilities.tlb">
+    <typelib tlbid="{D99252D8-969C-4AD0-8E71-7F954F10723E}" version="1.0" helpdir="" />
+  </file>
+  <file name="Typelibs\Comos.Elements.QueryExtender.tlb">
+    <typelib tlbid="{256B80B1-8D6E-41A7-A719-30D1C65C903A}" version="1.0" helpdir="" />
+  </file>
+  <file name="Typelibs\Comos.Elements.tlb">
+    <typelib tlbid="{42A8F5BD-8AEA-40AB-97AA-4F472D98297E}" version="1.0" helpdir="" />
+  </file>
+  <file name="Typelibs\Comos.Elo.CabinetRouting.tlb">
+    <typelib tlbid="{6E64174C-B2A0-429E-95C9-D75EFE8F26E7}" version="1.0" helpdir="" />
+  </file>
+  <file name="Typelibs\Comos.Elo.CabinetTest.tlb">
+    <typelib tlbid="{95D317B0-B965-44DE-B6C0-708C7A52E341}" version="1.0" helpdir="" />
+  </file>
+  <file name="Typelibs\Comos.ELO.CalcLib.tlb">
+    <typelib tlbid="{23B11963-5328-4EB6-A982-BC83EF42CFB9}" version="1.0" helpdir="" />
+  </file>
+  <file name="Typelibs\COMOS.ELO.IECJICCONVERTER.TLB">
+    <typelib tlbid="{C2BFCAC0-CAE4-46C3-8E03-375694BC48FD}" version="1.0" helpdir="" />
+  </file>
+  <file name="Typelibs\COMOS.ELO.IECJICCONVERTERCONTRACTS.TLB">
+    <typelib tlbid="{C3F978D8-D1BF-401E-AB17-40C82A181597}" version="1.0" helpdir="" />
+  </file>
+  <file name="Typelibs\Comos.EMail.tlb">
+    <typelib tlbid="{F9C3A4E2-44B1-4E50-A7E1-EEA4B9D60DEE}" version="1.0" helpdir="" />
+  </file>
+  <file name="Typelibs\Comos.ExcelUtility.tlb">
+    <typelib tlbid="{01D7F69A-BE83-3F73-9B43-DD1ECF959785}" version="1.0" helpdir="" />
+  </file>
+  <file name="Typelibs\Comos.FEED.PFDLib.tlb">
+    <typelib tlbid="{B0BB0E4A-E0F8-11D2-A765-006008CBD87C}" version="4.5" helpdir="" />
+  </file>
+  <file name="Typelibs\Comos.FileActions.tlb">
+    <typelib tlbid="{FC9D077B-B088-4BFF-AA9B-0D39256E2ABF}" version="1.0" helpdir="" />
+  </file>
+  <file name="Typelibs\Comos.FiletransXmlReader.tlb">
+    <typelib tlbid="{98703610-7F89-4392-AFFD-02EB477F545E}" version="1.0" helpdir="" />
+  </file>
+  <file name="Typelibs\Comos.Fluid.FluidLib.tlb">
+    <typelib tlbid="{5016867B-DA2D-11D8-8D18-000475AABC95}" version="1.2" helpdir="" />
+  </file>
+  <file name="Typelibs\Comos.FLUID.FluidSymbolSelect.tlb">
+    <typelib tlbid="{A66D7713-5ED3-3E2C-80F2-03E503CB7FBE}" version="1.0" helpdir="" />
+  </file>
+  <file name="Typelibs\Comos.FLUID.XMLSymbolConverter.tlb">
+    <typelib tlbid="{139AEA36-9F8C-4E44-8ECB-F304090A9122}" version="1.0" helpdir="" />
+  </file>
+  <file name="Typelibs\Comos.GL.D3Utils.tlb">
+    <typelib tlbid="{B69D2969-ED55-11D5-A996-0050DA05920C}" version="1.1" helpdir="" />
+  </file>
+  <file name="Typelibs\Comos.Global.tlb">
+    <typelib tlbid="{E6AB7205-9B5B-47DF-9330-480FA381FA4A}" version="1.0" helpdir="" />
+  </file>
+  <file name="Typelibs\Comos.HalfOpenConnsQExtender.tlb">
+    <typelib tlbid="{114A463C-E6FF-4C50-B6ED-05EB926DF843}" version="1.0" helpdir="" />
+  </file>
+  <file name="Typelibs\Comos.HYSYS.Import.tlb">
+    <typelib tlbid="{B25ADE27-3BF4-404D-AD95-3D897AC5CC72}" version="1.0" helpdir="" />
+  </file>
+  <file name="Typelibs\Comos.IC.LoopUtilities.tlb">
+    <typelib tlbid="{7C91C3D3-B5EA-42E8-9747-D33E6B113BEA}" version="1.0" helpdir="" />
+  </file>
+  <file name="Typelibs\Comos.IC.PatternWiring.tlb">
+    <typelib tlbid="{17F880C1-2D08-4AA4-8B17-AAEAD59177BF}" version="1.0" helpdir="" />
+  </file>
+  <file name="Typelibs\Comos.IC.Signal.tlb">
+    <typelib tlbid="{BA23507F-BA49-3F7D-B935-5CCD0EBD2122}" version="1.0" helpdir="" />
+  </file>
+  <file name="Typelibs\Comos.IC.Utilities.tlb">
+    <typelib tlbid="{E73C2D54-F610-4199-A017-D6426E8A57F7}" version="1.0" helpdir="" />
+  </file>
+  <file name="Typelibs\Comos.IDFImport.tlb">
+    <typelib tlbid="{DA145D89-0C09-49E4-B06E-F8DFB4F163A0}" version="1.0" helpdir="" />
+  </file>
+  <file name="Typelibs\Comos.Implementation.Popup.tlb">
+    <typelib tlbid="{9CD08286-DAA9-4DDA-AAB7-AF109E2B7865}" version="1.0" helpdir="" />
+  </file>
+  <file name="Typelibs\Comos.IReport.Properties.tlb">
+    <typelib tlbid="{BB5FC77B-DBA4-46CA-8738-C2CCFFF5AE31}" version="1.0" helpdir="" />
+  </file>
+  <file name="Typelibs\Comos.IsoLib.tlb">
+    <typelib tlbid="{7585EF39-E5C0-4CD4-9FA2-CCF14D31860E}" version="1.0" helpdir="" />
+  </file>
+  <file name="Typelibs\Comos.IsometricSpools.tlb">
+    <typelib tlbid="{29405913-32C4-4C06-83C6-E64E36FC3AAF}" version="1.0" helpdir="" />
+  </file>
+  <file name="Typelibs\Comos.IsoQueries.tlb">
+    <typelib tlbid="{C4DB98CB-2CFB-35B0-AFF2-AE736C8D8D17}" version="1.0" helpdir="" />
+  </file>
+  <file name="Typelibs\Comos.Layers.tlb">
+    <typelib tlbid="{756C0190-C6F8-4A7B-840A-AB8579EF5359}" version="1.0" helpdir="" />
+  </file>
+  <file name="Typelibs\Comos.Legend.GUI.tlb">
+    <typelib tlbid="{13BD1A65-3CCF-3127-9C60-C807CEC03E1A}" version="1.0" helpdir="" />
+  </file>
+  <file name="Typelibs\Comos.Legend.tlb">
+    <typelib tlbid="{861E4489-B540-4E4E-9D72-F1E582B670B4}" version="1.0" helpdir="" />
+  </file>
+  <file name="Typelibs\Comos.LicenseLib.tlb">
+    <typelib tlbid="{504746D7-0B87-498D-8EF9-0EE1A568AB1F}" version="2.2" helpdir="" />
+  </file>
+  <file name="Typelibs\Comos.Logical.ControlModuleAssignment.tlb">
+    <typelib tlbid="{FBE9DBC9-CBF6-41B7-BEB6-B40E257778A2}" version="1.0" helpdir="" />
+  </file>
+  <file name="Typelibs\Comos.Logical.MacroBlock.SymbolView.tlb">
+    <typelib tlbid="{0C432F5B-F935-3FC1-8203-E27E11CDF9F1}" version="1.0" helpdir="" />
+  </file>
+  <file name="Typelibs\Comos.Logical.ScriptLib.tlb">
+    <typelib tlbid="{C859DE20-0E7D-478F-B447-FEA71CD7B91B}" version="1.0" helpdir="" />
+  </file>
+  <file name="Typelibs\Comos.Logical.SignalCrossReferences.tlb">
+    <typelib tlbid="{2B08BFF8-C3E0-337F-A958-1B60F0499822}" version="1.0" helpdir="" />
+  </file>
+  <file name="Typelibs\Comos.Logical.Utilities.tlb">
+    <typelib tlbid="{F6AB9CD4-22BF-42DC-8B45-2549619A9C76}" version="1.0" helpdir="" />
+  </file>
+  <file name="Typelibs\Comos.Login.tlb">
+    <typelib tlbid="{B22D5C9D-D363-48E5-B46B-C35C5F778A42}" version="1.0" helpdir="" />
+  </file>
+  <file name="Typelibs\Comos.MenuManager.tlb">
+    <typelib tlbid="{4BDE2DF9-4582-49F8-802C-1D306E4B1917}" version="1.0" helpdir="" />
+  </file>
+  <file name="Typelibs\Comos.Merger.tlb">
+    <typelib tlbid="{7B20D190-8389-48C1-8AD6-C98BB45DC13D}" version="1.0" helpdir="" />
+  </file>
+  <file name="Typelibs\Comos.MSOLib.tlb">
+    <typelib tlbid="{97FFC0E8-8DB9-45D8-A58E-05A026C2811C}" version="1.0" helpdir="" />
+  </file>
+  <file name="Typelibs\Comos.MXLogger.tlb">
+    <typelib tlbid="{3C0D523C-F321-4C78-AFC1-56E16854BE30}" version="1.0" helpdir="" />
+  </file>
+  <file name="Typelibs\Comos.Navigator.ComHub.tlb">
+    <typelib tlbid="{31AED646-4664-419D-B063-80937C87B89B}" version="1.0" helpdir="" />
+  </file>
+  <file name="Typelibs\Comos.Navigator.Interfaces.tlb">
+    <typelib tlbid="{BD672606-A40A-40FD-902A-06734E4CBD74}" version="1.0" helpdir="" />
+  </file>
+  <file name="Typelibs\Comos.NQControls.tlb">
+    <typelib tlbid="{3AA1E8FC-1DEA-48C1-829F-89302E69D35B}" version="1.0" helpdir="" />
+  </file>
+  <file name="Typelibs\Comos.NQuery.Grid.tlb">
+    <typelib tlbid="{C4965BCF-5C36-4BE3-9EE5-2051CA67F5DB}" version="1.0" helpdir="" />
+  </file>
+  <file name="Typelibs\Comos.NQuery.tlb">
+    <typelib tlbid="{F4D1A7C8-21F8-4054-9ADC-379A3B2758BC}" version="1.0" helpdir="" />
+  </file>
+  <file name="Typelibs\Comos.OfficeReImport.tlb">
+    <typelib tlbid="{CE4AC63D-94BD-4948-971F-3B7F8245CE41}" version="1.0" helpdir="" />
+  </file>
+  <file name="Typelibs\Comos.OkAbort.tlb">
+    <typelib tlbid="{13170CF5-36F3-46CA-A112-83470AB35B7D}" version="1.0" helpdir="" />
+  </file>
+  <file name="Typelibs\Comos.OpenxmlDataParser.tlb">
+    <typelib tlbid="{B2C7BD09-3CAF-497D-ADA6-61EBDB4CE967}" version="1.0" helpdir="" />
+  </file>
+  <file name="Typelibs\Comos.PDFeSignWrapper.tlb">
+    <typelib tlbid="{3E732DEC-FAB1-41E8-AA59-4A6658744B61}" version="1.0" helpdir="" />
+  </file>
+  <file name="Typelibs\Comos.PDFExport.tlb">
+    <typelib tlbid="{A00D8AFF-D5A2-3C4F-A48F-B1CEAB0AE419}" version="1.0" helpdir="" />
+  </file>
+  <file name="Typelibs\Comos.PDFExportSettings.tlb">
+    <typelib tlbid="{B8D6EC2E-D8C4-45F9-9127-36498E1A1D13}" version="1.0" helpdir="" />
+  </file>
+  <file name="Typelibs\Comos.PDFImportGUI.tlb">
+    <typelib tlbid="{3146BD5A-D976-4F43-97DE-A48171ED6F5C}" version="1.0" helpdir="" />
+  </file>
+  <file name="Typelibs\Comos.PdfiumWrapper.tlb">
+    <typelib tlbid="{3C27C4EE-712A-40BE-9A44-4E7B8132CA4A}" version="1.0" helpdir="" />
+  </file>
+  <file name="Typelibs\Comos.PDFwatermarkWrapper.tlb">
+    <typelib tlbid="{2B3AD3F1-6A39-4E9D-AE2F-D11978E3572B}" version="1.0" helpdir="" />
+  </file>
+  <file name="Typelibs\Comos.PDMSInterface.Comos.tlb">
+    <typelib tlbid="{E79484B4-1E36-431E-9412-E98D4CF488BB}" version="1.0" helpdir="" />
+  </file>
+  <file name="Typelibs\Comos.PDMSOperations.tlb">
+    <typelib tlbid="{D058D671-9461-4D6F-8F33-1553006E68C9}" version="1.0" helpdir="" />
+  </file>
+  <file name="Typelibs\Comos.PDMSPipeSpecSelector.tlb">
+    <typelib tlbid="{DF2725F0-459B-4837-AD24-5823CB19EAF9}" version="1.0" helpdir="" />
+  </file>
+  <file name="Typelibs\Comos.PeModule.tlb">
+    <typelib tlbid="{7E8615F3-1530-4753-9CF5-5F265FDF00A3}" version="1.0" helpdir="" />
+  </file>
+  <file name="Typelibs\Comos.PerfomanceCounter.tlb">
+    <typelib tlbid="{CE2F8A8D-D7E0-4423-ADFB-03600B387585}" version="1.0" helpdir="" />
+  </file>
+  <file name="Typelibs\Comos.PhysUnitLib.tlb">
+    <typelib tlbid="{06473BFB-06B9-49D0-8C2C-992F3A1D4A8F}" version="1.0" helpdir="" />
+  </file>
+  <file name="Typelibs\Comos.PicturesLibrary.tlb">
+    <typelib tlbid="{22A96763-B5E0-4679-B736-13CAA76BB6E3}" version="1.0" helpdir="" />
+  </file>
+  <file name="Typelibs\Comos.PIDUpdate.tlb">
+    <typelib tlbid="{FD936724-D69D-3764-81B2-CBED6351B602}" version="1.0" helpdir="" />
+  </file>
+  <file name="Typelibs\Comos.PipeClass.AttributeName.tlb">
+    <typelib tlbid="{E6F6CA00-8C97-4033-AFD4-93D895EBD1B8}" version="1.0" helpdir="" />
+  </file>
+  <file name="Typelibs\Comos.PipeClass.tlb">
+    <typelib tlbid="{E2161CBF-5F9C-47B1-B833-9B606FE6722C}" version="1.0" helpdir="" />
+  </file>
+  <file name="Typelibs\Comos.PipeClass.Tracing.tlb">
+    <typelib tlbid="{5790F2E7-20C9-49C3-AFC5-71C01FA88259}" version="1.0" helpdir="" />
+  </file>
+  <file name="Typelibs\Comos.PipeSpec.Chart.tlb">
+    <typelib tlbid="{43D8D44B-BE7F-4CC7-9358-AC713F948092}" version="1.0" helpdir="" />
+  </file>
+  <file name="Typelibs\Comos.PipeSpec.ImportExport.tlb">
+    <typelib tlbid="{39DB4AAE-35D9-4A57-B239-F23C5F95C781}" version="1.0" helpdir="" />
+  </file>
+  <file name="Typelibs\Comos.PipeSpec.Mapping.tlb">
+    <typelib tlbid="{90B147B8-81D5-4D2B-BAEC-402DBFF039C5}" version="1.0" helpdir="" />
+  </file>
+  <file name="Typelibs\Comos.PipeSpecDesigner.tlb">
+    <typelib tlbid="{9AA5BFBE-B052-3DEB-AC2C-8A2206A1909D}" version="1.0" helpdir="" />
+  </file>
+  <file name="Typelibs\Comos.PipeSpecSnapShot.tlb">
+    <typelib tlbid="{FDEBFE74-3CBA-4BAC-B86E-71BB59794904}" version="1.0" helpdir="" />
+  </file>
+  <file name="Typelibs\Comos.Piping.Standards.tlb">
+    <typelib tlbid="{BFFE6BBF-B366-4CB3-8151-5239ED169169}" version="1.0" helpdir="" />
+  </file>
+  <file name="Typelibs\Comos.Platform.Updateability.UI.Popup.tlb">
+    <typelib tlbid="{B2D96693-BE96-454D-A338-4D896AF302E0}" version="1.0" helpdir="" />
+  </file>
+  <file name="Typelibs\Comos.Plugin.SetGeneralWire.tlb">
+    <typelib tlbid="{F4101B09-8E57-31E6-B9A4-8A1E02AD7E39}" version="1.0" helpdir="" />
+  </file>
+  <file name="Typelibs\Comos.PPBasics.tlb">
+    <typelib tlbid="{EA61A7C5-D151-459D-BA30-6F71C3FEC805}" version="1.0" helpdir="" />
+  </file>
+  <file name="Typelibs\Comos.PPD.tlb">
+    <typelib tlbid="{2E7F15EC-0832-4FF6-9E54-63CE5C88A254}" version="1.0" helpdir="" />
+  </file>
+  <file name="Typelibs\Comos.PQM.CloudStorageProviderWrapper.tlb">
+    <typelib tlbid="{0E81695C-EC83-4482-A7C4-07A1ADDA9E38}" version="1.0" helpdir="" />
+  </file>
+  <file name="Typelibs\Comos.PQM.Common.tlb">
+    <typelib tlbid="{6EB48449-C265-418E-9B20-751DCE77A841}" version="1.0" helpdir="" />
+  </file>
+  <file name="Typelibs\Comos.PQM.Controls.tlb">
+    <typelib tlbid="{EFB8CD2B-DEEF-470F-8C39-F174F2C00243}" version="1.0" helpdir="" />
+  </file>
+  <file name="Typelibs\Comos.PQM.DDMSafeUtilities.tlb">
+    <typelib tlbid="{AE026AF2-6677-40AD-973A-1ADBB02E34DD}" version="1.0" helpdir="" />
+  </file>
+  <file name="Typelibs\Comos.PQM.DocumentPreview.Control.tlb">
+    <typelib tlbid="{6AF6AC20-257C-4620-8209-B24276E3B009}" version="1.0" helpdir="" />
+  </file>
+  <file name="Typelibs\Comos.PQM.DocumentPreview.tlb">
+    <typelib tlbid="{C815F60C-8BDC-420F-AC49-4E150EE3A86B}" version="1.0" helpdir="" />
+  </file>
+  <file name="Typelibs\Comos.PQM.Extender.tlb">
+    <typelib tlbid="{1584AFEE-073E-4084-AEA3-4C4EFADF19B8}" version="1.0" helpdir="" />
+  </file>
+  <file name="Typelibs\Comos.PQM.PdfStamper.tlb">
+    <typelib tlbid="{E9F67084-61EF-3B52-83FE-544F06CE46B0}" version="1.0" helpdir="" />
+  </file>
+  <file name="Typelibs\Comos.PQM.PDFTronWrapper.tlb">
+    <typelib tlbid="{B2EAE370-D65B-4BDC-9C1A-DF556EF05822}" version="1.0" helpdir="" />
+  </file>
+  <file name="Typelibs\Comos.PQM.WorkFlowExt.tlb">
+    <typelib tlbid="{80C599F2-1477-43A6-947B-68FFFCB63BAE}" version="1.0" helpdir="" />
+  </file>
+  <file name="Typelibs\Comos.PQM.XRefHandler.tlb">
+    <typelib tlbid="{0118173A-F5F9-4A07-8409-6613274D8A22}" version="1.0" helpdir="" />
+  </file>
+  <file name="Typelibs\Comos.PrintLib.tlb">
+    <typelib tlbid="{2191A9CA-4BFE-4D1D-A642-5A6EFA92574C}" version="1.0" helpdir="" />
+  </file>
+  <file name="Typelibs\Comos.ProductSelector.tlb">
+    <typelib tlbid="{776CC63B-068F-4A64-96CC-BD79B982D8FD}" version="1.0" helpdir="" />
+  </file>
+  <file name="Typelibs\Comos.ProMaxImport.tlb">
+    <typelib tlbid="{A441B8B1-C2BD-407A-8202-302670FD1273}" version="1.0" helpdir="" />
+  </file>
+  <file name="Typelibs\Comos.PropertyBag.tlb">
+    <typelib tlbid="{0AF2CBB3-CE88-45A0-BC18-D5762789344D}" version="1.0" helpdir="" />
+  </file>
+  <file name="Typelibs\Comos.PropertyTree.tlb">
+    <typelib tlbid="{868097F5-7B41-40AF-8CA4-9CCB2E8107BE}" version="1.0" helpdir="" />
+  </file>
+  <file name="Typelibs\Comos.PropertyTreeHelper.tlb">
+    <typelib tlbid="{B83D69ED-8DE4-4B46-90E2-961E19681EE1}" version="1.0" helpdir="" />
+  </file>
+  <file name="Typelibs\Comos.PTTitle.tlb">
+    <typelib tlbid="{754F199F-87F8-4F54-9FE6-F1309A6D430F}" version="1.0" helpdir="" />
+  </file>
+  <file name="Typelibs\Comos.Query.Tools.tlb">
+    <typelib tlbid="{972B3DAC-B013-46F3-AF22-414010A61730}" version="1.0" helpdir="" />
+  </file>
+  <file name="Typelibs\Comos.QueryExport.tlb">
+    <typelib tlbid="{F465C1B4-5376-3D26-B4D3-E6F764C23965}" version="1.0" helpdir="" />
+  </file>
+  <file name="Typelibs\Comos.QueryObjectPicker.tlb">
+    <typelib tlbid="{1838C032-E72E-4B21-9876-3DB52E4E9B41}" version="1.0" helpdir="" />
+  </file>
+  <file name="Typelibs\Comos.RailEquipment.tlb">
+    <typelib tlbid="{CC784563-E411-4E4E-9395-237C571D509A}" version="1.0" helpdir="" />
+  </file>
+  <file name="Typelibs\Comos.RedliningViewer.tlb">
+    <typelib tlbid="{06D13827-B853-34F0-A452-D03CC53D281B}" version="1.0" helpdir="" />
+  </file>
+  <file name="Typelibs\Comos.Report.ConvertToJson.tlb">
+    <typelib tlbid="{84F002CE-E2D1-4CE2-BAFC-D20AA1AA1433}" version="1.0" helpdir="" />
+  </file>
+  <file name="Typelibs\Comos.ReportCOMAdapter.tlb">
+    <typelib tlbid="{F3BDB619-1CD0-4EB0-A300-B711136FDB96}" version="1.0" helpdir="" />
+  </file>
+  <file name="Typelibs\Comos.ReportKeeper.tlb">
+    <typelib tlbid="{EDDA472A-5C6E-4428-892C-CB5B2E235C28}" version="1.0" helpdir="" />
+  </file>
+  <file name="Typelibs\Comos.ReportToExcel.tlb">
+    <typelib tlbid="{5771E7DB-22EA-4382-AEB4-ED45B5A80252}" version="1.0" helpdir="" />
+  </file>
+  <file name="Typelibs\Comos.ReportToWord.tlb">
+    <typelib tlbid="{CBED9DBE-837E-31CA-8912-4E4439D23A00}" version="1.0" helpdir="" />
+  </file>
+  <file name="Typelibs\Comos.Revision.Printer.tlb">
+    <typelib tlbid="{E9481186-4AA7-4C76-BF7F-CC05FB8FBF32}" version="1.0" helpdir="" />
+  </file>
+  <file name="Typelibs\Comos.RevisionMaster.tlb">
+    <typelib tlbid="{6FEA8AE9-54EE-4BA6-B65A-9B661F736AAC}" version="1.0" helpdir="" />
+  </file>
+  <file name="Typelibs\Comos.RI.PipeLib.tlb">
+    <typelib tlbid="{9C1AA1E4-63E8-4632-9AD8-8982289A119B}" version="4.1" helpdir="" />
+  </file>
+  <file name="Typelibs\Comos.RI.RILib.tlb">
+    <typelib tlbid="{C17050C5-32DF-11D4-8A34-0010A4C1CC54}" version="2.0" helpdir="" />
+  </file>
+  <file name="Typelibs\Comos.RightsLib.tlb">
+    <typelib tlbid="{9A9F9C76-7A79-47F7-A169-52F3EB72470E}" version="1.0" helpdir="" />
+  </file>
+  <file name="Typelibs\Comos.RTFConversion.tlb">
+    <typelib tlbid="{1A839CA0-085C-490B-AD6F-72B7BC6AFBF1}" version="1.0" helpdir="" />
+  </file>
+  <file name="Typelibs\Comos.Sap.Xml.tlb">
+    <typelib tlbid="{C1FF44B0-B2EC-4EE7-9AF3-7FEBF89BABF3}" version="1.0" helpdir="" />
+  </file>
+  <file name="Typelibs\Comos.Screws.tlb">
+    <typelib tlbid="{F6B3BFC4-1806-4C70-BABD-319E2FB931EA}" version="1.4" helpdir="" />
+  </file>
+  <file name="Typelibs\Comos.SearchSuitableEquipment.tlb">
+    <typelib tlbid="{063CE096-8A27-3E5F-8401-DFDE76C897D3}" version="1.0" helpdir="" />
+  </file>
+  <file name="Typelibs\Comos.Services.Client.Communication.tlb">
+    <typelib tlbid="{517D1376-4048-427D-B2E7-BFE8D5220B0F}" version="1.0" helpdir="" />
+  </file>
+  <file name="Typelibs\Comos.Snapshot.COMAdapter.tlb">
+    <typelib tlbid="{3BE03E8F-550A-4E97-AB65-340C34CDDF1B}" version="1.0" helpdir="" />
+  </file>
+  <file name="Typelibs\Comos.SolidBaseUtilities.tlb">
+    <typelib tlbid="{053C3034-8067-4730-8C90-0E3EE9346BF4}" version="1.0" helpdir="" />
+  </file>
+  <file name="Typelibs\Comos.StandardObjects.HVACCT.tlb">
+    <typelib tlbid="{2EB444F5-A352-4820-82C6-A6EECC4B342B}" version="1.0" helpdir="" />
+  </file>
+  <file name="Typelibs\Comos.SymbolToolbarMgr.tlb">
+    <typelib tlbid="{8BD060AC-91FF-4346-A928-CA553E306E28}" version="8.7" helpdir="" />
+  </file>
+  <file name="Typelibs\Comos.TaskManagerCOM.tlb">
+    <typelib tlbid="{69A49ED5-E27E-4DE8-BBF2-7F11CE3026E3}" version="1.0" helpdir="" />
+  </file>
+  <file name="Typelibs\Comos.TaskManagerCOM2.tlb">
+    <typelib tlbid="{2401819C-821C-45D9-97B9-F8DFE83482EA}" version="1.0" helpdir="" />
+  </file>
+  <file name="Typelibs\Comos.Tc.Integrator.tlb">
+    <typelib tlbid="{324AC660-C069-4CDA-B7F0-D604BA188680}" version="1.0" helpdir="" />
+  </file>
+  <file name="Typelibs\Comos.TM.Services.ComClient.tlb">
+    <typelib tlbid="{A33F16A4-9219-4B82-B37E-CF2291CE75CD}" version="1.0" helpdir="" />
+  </file>
+  <file name="Typelibs\Comos.TwoDCInDesktop.tlb">
+    <typelib tlbid="{B51CA710-D128-4E47-8ED8-20DA8468AA73}" version="1.0" helpdir="" />
+  </file>
+  <file name="Typelibs\Comos.TwoDCMarkupToReport.tlb">
+    <typelib tlbid="{927442A7-71E3-479E-8C7D-1B162F078DF5}" version="1.0" helpdir="" />
+  </file>
+  <file name="Typelibs\Comos.UIF.tlb">
+    <typelib tlbid="{E4E95CC8-B88D-4B84-8C93-66400745A21A}" version="1.0" helpdir="" />
+  </file>
+  <file name="Typelibs\Comos.UIMTO.tlb">
+    <typelib tlbid="{11077FE8-CCC6-3F13-86EC-C86C2FCF5AC7}" version="1.0" helpdir="" />
+  </file>
+  <file name="Typelibs\Comos.UserMenuConfigurator.tlb">
+    <typelib tlbid="{D59CA1C0-9F94-3DC7-A925-B9DFD87A6049}" version="1.0" helpdir="" />
+  </file>
+  <file name="Typelibs\Comos.Viewer.tlb">
+    <typelib tlbid="{2A1AEFBB-3721-3747-9A19-D8330C60B4F5}" version="1.0" helpdir="" />
+  </file>
+  <file name="Typelibs\Comos.ViewHelpContext.tlb">
+    <typelib tlbid="{5E0C784C-5991-4626-8FD8-95DEFAEBA419}" version="1.0" helpdir="" />
+  </file>
+  <file name="Typelibs\Comos.ViperSymbolBar.tlb">
+    <typelib tlbid="{63763D92-F1C5-4203-B01C-5A544553F127}" version="1.0" helpdir="" />
+  </file>
+  <file name="Typelibs\Comos.ViperUtilities.tlb">
+    <typelib tlbid="{46F4DFA4-3195-4593-B2EA-40B1A0A60D59}" version="1.0" helpdir="" />
+  </file>
+  <file name="Typelibs\Comos.WatchGuardNotification.tlb">
+    <typelib tlbid="{339C1C30-EEA5-48E5-B747-30327042EEDA}" version="1.0" helpdir="" />
+  </file>
+  <file name="Typelibs\Comos.Workflow.Activities.tlb">
+    <typelib tlbid="{71C3F722-A9FA-4D40-806B-E9DA9B94DDF5}" version="1.0" helpdir="" />
+  </file>
+  <file name="Typelibs\Comos.Workflow.Designer.tlb">
+    <typelib tlbid="{BECEDE3B-53C3-4316-8633-549716A729CC}" version="1.0" helpdir="" />
+  </file>
+  <file name="Typelibs\Comos.Workflow.Services.COMClient.tlb">
+    <typelib tlbid="{925271AF-5681-4512-9F30-30C5D7267639}" version="1.0" helpdir="" />
+  </file>
+  <file name="Typelibs\Comos.Workflow.tlb">
+    <typelib tlbid="{EE11D4D6-9D92-45F6-8B46-4A274EE3DC78}" version="1.0" helpdir="" />
+  </file>
+  <file name="Typelibs\Comos.WorksetPublisher.tlb">
+    <typelib tlbid="{7EC83C12-EA97-4C5C-B28B-983D1921D6E3}" version="1.0" helpdir="" />
+  </file>
+  <file name="Typelibs\Comos.Wpf.Grid.tlb">
+    <typelib tlbid="{9975CC27-7EDA-4A67-80AE-14135A0B04CE}" version="1.0" helpdir="" />
+  </file>
+  <file name="Typelibs\Comos.WpfCom.Mover.tlb">
+    <typelib tlbid="{2204E5B3-019D-43B1-879B-6C31FDFE3A8F}" version="1.0" helpdir="" />
+  </file>
+  <file name="Typelibs\Comos.WSP.AutoConn.tlb">
+    <typelib tlbid="{C6495EA7-30B9-11D4-A8BA-006008CBD74F}" version="1.0" helpdir="" />
+  </file>
+  <file name="Typelibs\Comos.WSP.Connection.tlb">
+    <typelib tlbid="{DDB29967-A1C5-4718-B745-BEC4105C52C9}" version="1.0" helpdir="" />
+  </file>
+  <file name="Typelibs\Comos.WSP.CoRoConn.tlb">
+    <typelib tlbid="{2BA646AB-6A90-499E-8A52-25AD267E218D}" version="1.0" helpdir="" />
+  </file>
+  <file name="Typelibs\Comos.WSP.ExtendedObjects.tlb">
+    <typelib tlbid="{B7020E4F-9854-4FB9-A4B3-1AC56643345C}" version="1.0" helpdir="" />
+  </file>
+  <file name="Typelibs\Comos.WSP.Interfaces.tlb">
+    <typelib tlbid="{49715492-910B-4C67-8E4E-38E985952B80}" version="1.0" helpdir="" />
+  </file>
+  <file name="Typelibs\Comos.WSP.IsoAutoDimension.tlb">
+    <typelib tlbid="{D369CE9A-97F8-466C-891F-B64A550528B6}" version="1.0" helpdir="" />
+  </file>
+  <file name="Typelibs\Comos.WSP.IsoMod.tlb">
+    <typelib tlbid="{DE318B3B-2DE1-11D7-AABD-0060089F38F3}" version="8.1" helpdir="" />
+  </file>
+  <file name="Typelibs\Comos.WSP.Manager.tlb">
+    <typelib tlbid="{0CF759C5-6E43-4D12-9817-052DA4B6CBC0}" version="1.0" helpdir="" />
+  </file>
+  <file name="Typelibs\Comos.WSP.MultiEd.tlb">
+    <typelib tlbid="{A9F35286-3A0E-11D4-8A4B-0010A4C1CC54}" version="18.0" helpdir="" />
+  </file>
+  <file name="Typelibs\Comos.WSP.PfdMod.tlb">
+    <typelib tlbid="{30AC601B-3623-11D4-A8C0-006008CBD74F}" version="3.1" helpdir="" />
+  </file>
+  <file name="Typelibs\Comos.WSP.ReportAttributeDlg.tlb">
+    <typelib tlbid="{1AC0E2E2-60E3-4926-895E-B66022931849}" version="1.0" helpdir="" />
+  </file>
+  <file name="Typelibs\COMOS.WSP.REPORTROUTING.TLB">
+    <typelib tlbid="{E96C2D7B-7447-4677-9D0C-E716807B8FDF}" version="2.0" helpdir="" />
+  </file>
+  <file name="Typelibs\Comos.WSP.RfConn.tlb">
+    <typelib tlbid="{AA8A671B-A01A-45AE-BBB0-E9F160B51467}" version="1.0" helpdir="" />
+  </file>
+  <file name="Typelibs\Comos.WSP.RfDim.tlb">
+    <typelib tlbid="{630C1BFD-08CF-11D4-AAC5-000000000000}" version="3.0" helpdir="" />
+  </file>
+  <file name="Typelibs\Comos.WSP.RFID.tlb">
+    <typelib tlbid="{884D0548-9A5A-11D6-A844-00105A392A11}" version="2.4" helpdir="" />
+  </file>
+  <file name="Typelibs\Comos.WSP.RFID1.tlb">
+    <typelib tlbid="{0069BBEC-FAE8-11D7-AB0C-006008500A65}" version="1.1" helpdir="" />
+  </file>
+  <file name="Typelibs\Comos.Wsp.RfID2.tlb">
+    <typelib tlbid="{5EC3CFDB-5C3D-11D2-B3B2-006008CBD98E}" version="40.0" helpdir="" />
+  </file>
+  <file name="Typelibs\Comos.Wsp.RoBreak.tlb">
+    <typelib tlbid="{33E37B74-DE5A-11D5-BC3F-006008CBD778}" version="1.0" helpdir="" />
+  </file>
+  <file name="Typelibs\Comos.WSP.RoCable.tlb">
+    <typelib tlbid="{4A5D7697-281B-11D4-BB05-006008CBD778}" version="1.5" helpdir="" />
+  </file>
+  <file name="Typelibs\Comos.WSP.RoConn.tlb">
+    <typelib tlbid="{60AB6F0A-FDD2-11D4-BBC7-006008CBD778}" version="1.1" helpdir="" />
+  </file>
+  <file name="Typelibs\Comos.WSP.RoConnBase.tlb">
+    <typelib tlbid="{5F21581F-3563-11D4-A8BF-006008CBD74F}" version="3.4" helpdir="" />
+  </file>
+  <file name="Typelibs\Comos.WSP.RoConnector.tlb">
+    <typelib tlbid="{0D5D658D-30AC-11D4-A8BA-006008CBD74F}" version="1.0" helpdir="" />
+  </file>
+  <file name="Typelibs\Comos.WSP.RoConnPfd.tlb">
+    <typelib tlbid="{982E431E-C5E0-11D4-A93C-006008CBD74F}" version="1.1" helpdir="" />
+  </file>
+  <file name="Typelibs\Comos.WSP.RoDevice.tlb">
+    <typelib tlbid="{CC699DA9-280F-11D4-BB05-006008CBD778}" version="1.0" helpdir="" />
+  </file>
+  <file name="Typelibs\Comos.WSP.RoDeviceBase.tlb">
+    <typelib tlbid="{3A72A128-6430-11D3-BA6E-006008CBD778}" version="5.3" helpdir="" />
+  </file>
+  <file name="Typelibs\Comos.WSP.RoDeviceBaseAutomation.tlb">
+    <typelib tlbid="{90001AB6-BAB3-40DE-8AB0-9E85DFD64023}" version="1.0" helpdir="" />
+  </file>
+  <file name="Typelibs\Comos.WSP.RoDevicePfd.tlb">
+    <typelib tlbid="{437BF646-6219-11D8-ABD3-0060089F38F3}" version="1.0" helpdir="" />
+  </file>
+  <file name="Typelibs\Comos.WSP.RoDim.tlb">
+    <typelib tlbid="{431CE1B1-3047-40E8-998E-BE0C37B1CAD8}" version="1.0" helpdir="" />
+  </file>
+  <file name="Typelibs\Comos.WSP.RoFlagPfd.tlb">
+    <typelib tlbid="{EEC467AB-2A3A-11D4-A8B4-006008CBD74F}" version="1.0" helpdir="" />
+  </file>
+  <file name="Typelibs\Comos.WSP.RoGrayBox.tlb">
+    <typelib tlbid="{9029D784-2A4A-11D4-BB06-006008CBD778}" version="2.0" helpdir="" />
+  </file>
+  <file name="Typelibs\Comos.WSP.RoMacro.tlb">
+    <typelib tlbid="{20C3556E-3622-11D4-8A42-0010A4C1CC54}" version="3.8" helpdir="" />
+  </file>
+  <file name="Typelibs\Comos.Wsp.RoPDFObject.tlb">
+    <typelib tlbid="{8F42EC96-41FA-4A95-9830-C3CFABA4662B}" version="1.0" helpdir="" />
+  </file>
+  <file name="Typelibs\Comos.WSP.RoPotential.tlb">
+    <typelib tlbid="{91C121CB-2A57-11D4-A8B4-006008CBD74F}" version="1.0" helpdir="" />
+  </file>
+  <file name="Typelibs\Comos.WSP.RoReference.tlb">
+    <typelib tlbid="{A0B7182E-842D-4DCC-B061-6EEE95B4A261}" version="1.0" helpdir="" />
+  </file>
+  <file name="Typelibs\Comos.WSP.RoSegment.tlb">
+    <typelib tlbid="{86039234-2827-11D4-BB05-006008CBD778}" version="3.0" helpdir="" />
+  </file>
+  <file name="Typelibs\Comos.WSP.RoSymbol.tlb">
+    <typelib tlbid="{5004D933-717C-11D6-AA2D-005056C00001}" version="2.1" helpdir="" />
+  </file>
+  <file name="Typelibs\Comos.WSP.RoUtilities.tlb">
+    <typelib tlbid="{2ACF86F0-30AD-11D4-A8BA-006008CBD74F}" version="10.7" helpdir="" />
+  </file>
+  <file name="Typelibs\Comos.WSP.RoView3D.tlb">
+    <typelib tlbid="{C6E80774-6653-11D6-AA27-0060089F38F3}" version="9.14" helpdir="" />
+  </file>
+  <file name="Typelibs\Comos.WSP.RUI.tlb">
+    <typelib tlbid="{FC2EA586-92E5-11D4-BB67-006008CBD778}" version="1.9" helpdir="" />
+  </file>
+  <file name="Typelibs\Comos.WSP.UIViper.tlb">
+    <typelib tlbid="{A65AA8DD-DC4D-4552-927D-8CCDBDC92F4C}" version="1.0" helpdir="" />
+  </file>
+  <file name="Typelibs\Comos.WSP.XDoc.tlb">
+    <typelib tlbid="{D767BA7C-577C-4D45-AD24-B5A6CC57C9F6}" version="1.0" helpdir="" />
+  </file>
+  <file name="Typelibs\Comos.WSP.XDocElo.tlb">
+    <typelib tlbid="{CD0EE4F5-3161-11D4-A8BB-006008CBD74F}" version="1.1" helpdir="" />
+  </file>
+  <file name="Typelibs\Comos.WSP.XDocFup.tlb">
+    <typelib tlbid="{E33FC52F-D1B1-11D4-A6B3-0050044A187A}" version="1.1" helpdir="" />
+  </file>
+  <file name="Typelibs\Comos.WSP.XDoc_Color.tlb">
+    <typelib tlbid="{C8CAD7E2-8BBE-4E71-AF4F-D77A1322A9DE}" version="1.0" helpdir="" />
+  </file>
+  <file name="Typelibs\Comos.WSP.XDoc_ISO.tlb">
+    <typelib tlbid="{D554AC3C-E595-4ACD-8D3F-F448E606AD61}" version="1.0" helpdir="" />
+  </file>
+  <file name="Typelibs\Comos.Wsp.XDoc_Pfd.tlb">
+    <typelib tlbid="{58F137F2-3161-11D4-A8BB-006008CBD74F}" version="1.0" helpdir="" />
+  </file>
+  <file name="Typelibs\Comos.WSP.XGeo.tlb">
+    <typelib tlbid="{A48A1EA2-3593-11D5-8C08-0010A4C73283}" version="7.5" helpdir="" />
+  </file>
+  <file name="Typelibs\Comos.XMLAdapter.tlb">
+    <typelib tlbid="{6D231316-04E3-4670-80BB-34A3F73C789D}" version="1.0" helpdir="" />
+  </file>
+  <file name="Typelibs\Comos.XMLConnector.tlb">
+    <typelib tlbid="{9B6DCDF3-9B19-434F-B3AA-D9E441490176}" version="1.0" helpdir="" />
+  </file>
+  <file name="Typelibs\Comos.XMPlantExport1.tlb">
+    <typelib tlbid="{4816DC77-9EC8-4ED1-908A-C3F959494019}" version="1.0" helpdir="" />
+  </file>
+  <file name="Typelibs\Comos.XMPlantImport1.tlb">
+    <typelib tlbid="{C5035384-7F9A-4EB5-9DA6-26D2AC10C93A}" version="1.0" helpdir="" />
+  </file>
+  <file name="Typelibs\Comos3DTransform.tlb">
+    <typelib tlbid="{6341BC42-0416-11D6-A9A4-0050DA05920C}" version="5.3" helpdir="" />
+  </file>
+  <file name="Typelibs\ComosCalcLib.tlb">
+    <typelib tlbid="{4D6C4F85-3384-4524-AD89-B7AD9CBA2076}" version="20.0" helpdir="" />
+  </file>
+  <file name="Typelibs\ComosCheckFct.tlb">
+    <typelib tlbid="{A8FA1522-3670-11D1-AC8C-0020AFE3A551}" version="7.0" helpdir="" />
+  </file>
+  <file name="Typelibs\ComosConstants.tlb">
+    <typelib tlbid="{FCF68FE2-C47C-11D1-A21A-00A0248A9FE3}" version="4.1" helpdir="" />
+  </file>
+  <file name="Typelibs\ComosD3ObjCollection.tlb">
+    <typelib tlbid="{1D7FF9C2-CEEC-4757-9B9E-7E5227A46361}" version="1.4" helpdir="" />
+  </file>
+  <file name="Typelibs\ComosD3Obstruction.tlb">
+    <typelib tlbid="{ECD63B50-477C-446D-9C90-59D4FA52DC40}" version="1.3" helpdir="" />
+  </file>
+  <file name="Typelibs\ComosD3Solver.tlb">
+    <typelib tlbid="{CC1B49EF-C7E6-11D5-AD70-00A0CCC1EC8A}" version="51.0" helpdir="" />
+  </file>
+  <file name="Typelibs\ComosDecisionTable.tlb">
+    <typelib tlbid="{A1280DD4-9861-11D4-A7CA-006008CBD99D}" version="1.13" helpdir="" />
+  </file>
+  <file name="Typelibs\ComosDetailUtilities.tlb">
+    <typelib tlbid="{931F538F-0A30-11D4-BAEC-006008CBD778}" version="17.6" helpdir="" />
+  </file>
+  <file name="Typelibs\ComosDocFctDist.tlb">
+    <typelib tlbid="{990DCEA3-7103-11D9-8BFD-0050DA1836B9}" version="1.8" helpdir="" />
+  </file>
+  <file name="Typelibs\ComosDTabInfo.tlb">
+    <typelib tlbid="{430E4572-3C7F-455E-8813-ED72A5061E17}" version="11.0" helpdir="" />
+  </file>
+  <file name="Typelibs\ComosELOLib.tlb">
+    <typelib tlbid="{1636F07E-2348-11D5-A79A-00105A392A11}" version="2.0" helpdir="" />
+  </file>
+  <file name="Typelibs\ComoseSignHelper2.tlb">
+    <typelib tlbid="{0DE9BE5B-4CDD-11D8-8AFD-0050DA1836B9}" version="5.0" helpdir="" />
+  </file>
+  <file name="Typelibs\ComosExcelInit.tlb">
+    <typelib tlbid="{6C84FFEE-14A3-11D6-84AA-0050DA1A43CE}" version="8.1" helpdir="" />
+  </file>
+  <file name="Typelibs\ComosIDocAdobePDF.tlb">
+    <typelib tlbid="{F50EE54D-C0BE-4C2C-95D8-1675CB8385C6}" version="5.0" helpdir="" />
+  </file>
+  <file name="Typelibs\ComosIDocAutoCAD.tlb">
+    <typelib tlbid="{DFF1D9C8-D5FA-11D2-BA03-00105A3945B4}" version="1.1" helpdir="" />
+  </file>
+  <file name="Typelibs\ComosIDocCXC.tlb">
+    <typelib tlbid="{2A5FFE3C-93E6-4066-A2AE-7908D542DAF3}" version="2.0" helpdir="" />
+  </file>
+  <file name="Typelibs\ComosIDocGeneral.tlb">
+    <typelib tlbid="{A0F042CD-8FBD-11D5-8401-0050DA1A43CE}" version="13.0" helpdir="" />
+  </file>
+  <file name="Typelibs\ComosIDocPowerPoint.tlb">
+    <typelib tlbid="{679BC3DA-9F1C-444D-8C23-22D1371766F6}" version="3.0" helpdir="" />
+  </file>
+  <file name="Typelibs\ComosImplementObjects.tlb">
+    <typelib tlbid="{F7B90AE6-C7DE-11D7-AAE8-005056C00001}" version="2.1" helpdir="" />
+  </file>
+  <file name="Typelibs\ComosISGlobalObj.tlb">
+    <typelib tlbid="{6B6DADCB-A97A-11D4-BBBB-006008CBD87C}" version="1.6" helpdir="" />
+  </file>
+  <file name="Typelibs\ComosMatchOptions.tlb">
+    <typelib tlbid="{7F18D869-045B-11D3-A715-006008CBD99D}" version="2.0" helpdir="" />
+  </file>
+  <file name="Typelibs\ComosMathUtils.tlb">
+    <typelib tlbid="{4A06AAB8-D217-11D7-AB08-006008500A65}" version="3.13" helpdir="" />
+  </file>
+  <file name="Typelibs\ComosMenuContext.tlb">
+    <typelib tlbid="{F1D1AD33-9BAC-11D1-A1E9-00A0248A9FE3}" version="2.2" helpdir="" />
+  </file>
+  <file name="Typelibs\ComosNavPopUp.tlb">
+    <typelib tlbid="{7FA7B33E-9A06-11D4-BBA9-006008CBD87C}" version="1.4" helpdir="" />
+  </file>
+  <file name="Typelibs\ComosNormUtilities.tlb">
+    <typelib tlbid="{5B4613C6-D305-4B1D-BBE9-745D6B937C27}" version="3.15" helpdir="" />
+  </file>
+  <file name="Typelibs\ComosPCOMCell.tlb">
+    <typelib tlbid="{41C651CD-08E9-47B3-9680-0E9EB00D06B1}" version="1.2" helpdir="" />
+  </file>
+  <file name="Typelibs\ComosPCOMRangeInterface.tlb">
+    <typelib tlbid="{7B78FBDF-AAEC-47B0-B422-C3C6A1216F0A}" version="1.9" helpdir="" />
+  </file>
+  <file name="Typelibs\ComosPipeClass.tlb">
+    <typelib tlbid="{E26A8E93-0D4E-49AD-97D3-65744211B5FE}" version="1.0" helpdir="" />
+  </file>
+  <file name="Typelibs\ComosPipeClassCommon.tlb">
+    <typelib tlbid="{D74375FF-BB9C-4E85-A137-98CB088FB688}" version="4.2" helpdir="" />
+  </file>
+  <file name="Typelibs\ComosPipingUtilities.tlb">
+    <typelib tlbid="{618BA2A3-A6AE-4B49-9153-F63EF68CBDA9}" version="1.2" helpdir="" />
+  </file>
+  <file name="Typelibs\ComosPPCObjectCheck.tlb">
+    <typelib tlbid="{F6159A14-A813-4853-A7F4-57A928B2B2A0}" version="4.23" helpdir="" />
+  </file>
+  <file name="Typelibs\ComosPrimObjects.tlb">
+    <typelib tlbid="{E6E8CCC1-D911-11D5-A981-0050DA05920C}" version="4.10" helpdir="" />
+  </file>
+  <file name="Typelibs\ComosProjectXMod.tlb">
+    <typelib tlbid="{669E7A41-F046-11D4-A77B-00105A392A11}" version="1.0" helpdir="" />
+  </file>
+  <file name="Typelibs\ComosPTTitle.tlb">
+    <typelib tlbid="{804A485E-5701-11D4-A7A5-006008CBD99D}" version="2.0" helpdir="" />
+  </file>
+  <file name="Typelibs\ComosQTransfer.tlb">
+    <typelib tlbid="{7F7C322A-71EA-11D5-BC66-006008CBD87C}" version="1.2" helpdir="" />
+  </file>
+  <file name="Typelibs\ComosQueryXExpr.tlb">
+    <typelib tlbid="{1FB72852-A707-47A1-B3D8-CF0A8330641C}" version="3.3" helpdir="" />
+  </file>
+  <file name="Typelibs\ComosQueryXObj.tlb">
+    <typelib tlbid="{4F3814F4-1138-11D4-BB27-00609775B24C}" version="2.17" helpdir="" />
+  </file>
+  <file name="Typelibs\ComosReanimateDelObjs.tlb">
+    <typelib tlbid="{D3B775A1-88B4-4338-8084-80C978409C97}" version="1.0" helpdir="" />
+  </file>
+  <file name="Typelibs\ComosReportUtils.tlb">
+    <typelib tlbid="{997D4CE2-B2E7-4F3B-9CD6-657503571F9A}" version="1.0" helpdir="" />
+  </file>
+  <file name="Typelibs\ComosRfANSI.tlb">
+    <typelib tlbid="{69EA88EA-0C48-11D7-8615-006008CBD99D}" version="1.0" helpdir="" />
+  </file>
+  <file name="Typelibs\ComosRFArc.tlb">
+    <typelib tlbid="{E64673CA-0FD9-11D4-AAD4-000000000000}" version="1.0" helpdir="" />
+  </file>
+  <file name="Typelibs\ComosRFChildFrame.tlb">
+    <typelib tlbid="{D913D9FC-D4EF-11D4-BBAA-006008CBD778}" version="1.0" helpdir="" />
+  </file>
+  <file name="Typelibs\ComosRFContext.tlb">
+    <typelib tlbid="{C57A34C2-2FBC-11D2-A2F7-0C32AA000000}" version="13.1" helpdir="" />
+  </file>
+  <file name="Typelibs\ComosRFDWG.tlb">
+    <typelib tlbid="{C65920D7-D4D6-495F-8D01-C57B27ED90F9}" version="1.0" helpdir="" />
+  </file>
+  <file name="Typelibs\ComosRFHelper.tlb">
+    <typelib tlbid="{84ABF6FE-0EDD-11D4-AAD1-00E09873CD1B}" version="1.2" helpdir="" />
+  </file>
+  <file name="Typelibs\ComosRFLine.tlb">
+    <typelib tlbid="{E1737214-1112-11D4-AAD7-00E09873CD1B}" version="1.1" helpdir="" />
+  </file>
+  <file name="Typelibs\ComosRFList.tlb">
+    <typelib tlbid="{6CF9FFDE-D4EC-11D4-BBAA-006008CBD778}" version="1.0" helpdir="" />
+  </file>
+  <file name="Typelibs\ComosRFPath.tlb">
+    <typelib tlbid="{F249D2BE-9450-11D4-BB69-006008CBD778}" version="1.0" helpdir="" />
+  </file>
+  <file name="Typelibs\ComosRFPicture.tlb">
+    <typelib tlbid="{098ED810-D4E4-11D4-BBAA-006008CBD778}" version="1.0" helpdir="" />
+  </file>
+  <file name="Typelibs\ComosRFRect.tlb">
+    <typelib tlbid="{050BB2CE-D63D-46B8-ACB0-293E6EED00FE}" version="5.0" helpdir="" />
+  </file>
+  <file name="Typelibs\ComosRFSubReport.tlb">
+    <typelib tlbid="{EE4F166F-D4EE-11D4-BBAA-006008CBD778}" version="2.0" helpdir="" />
+  </file>
+  <file name="Typelibs\ComosRFWmf.tlb">
+    <typelib tlbid="{9B62E16E-D4E1-11D4-BBAA-006008CBD778}" version="1.0" helpdir="" />
+  </file>
+  <file name="Typelibs\ComosRprtQuery.tlb">
+    <typelib tlbid="{5209B45C-356E-11D5-BBE9-006008CBD778}" version="2.24" helpdir="" />
+  </file>
+  <file name="Typelibs\ComosSatCom.tlb">
+    <typelib tlbid="{0A4CD86F-C4B9-11D6-AA6B-0060089F38F3}" version="2.0" helpdir="" />
+  </file>
+  <file name="Typelibs\ComosScriptFunction.tlb">
+    <typelib tlbid="{5E448FB6-E185-11D4-A7E4-006008CBD99D}" version="3.0" helpdir="" />
+  </file>
+  <file name="Typelibs\ComosScriptHelper.tlb">
+    <typelib tlbid="{E2CF9436-FFA2-43BA-A814-261AAAD0B52E}" version="1.7" helpdir="" />
+  </file>
+  <file name="Typelibs\ComosSelectSymbol.tlb">
+    <typelib tlbid="{CB046194-A935-11D1-B2CE-00A024DCF202}" version="3.0" helpdir="" />
+  </file>
+  <file name="Typelibs\ComosShowInTree.tlb">
+    <typelib tlbid="{A47BD57B-9F55-11D8-ABA9-005056C00001}" version="1.0" helpdir="" />
+  </file>
+  <file name="Typelibs\ComosSpaceEngine.tlb">
+    <typelib tlbid="{AA22F0FD-6CA7-11D6-B678-00A0CCC633C2}" version="1.10" helpdir="" />
+  </file>
+  <file name="Typelibs\ComosSpecArchiv.tlb">
+    <typelib tlbid="{C26E7BC3-66AE-11D3-BA82-00609775B24C}" version="1.0" helpdir="" />
+  </file>
+  <file name="Typelibs\ComosSpecColorSet.tlb">
+    <typelib tlbid="{FF0B0E94-C728-45D8-87D6-1F68D3F62B80}" version="1.2" helpdir="" />
+  </file>
+  <file name="Typelibs\ComosSpecEval.tlb">
+    <typelib tlbid="{FE52FCB7-74B8-11D7-AAAC-005056C00001}" version="1.0" helpdir="" />
+  </file>
+  <file name="Typelibs\ComosStandardObjects.tlb">
+    <typelib tlbid="{31310055-3591-11D6-A9B0-0050DA05920C}" version="9.7" helpdir="" />
+  </file>
+  <file name="Typelibs\ComosStdTableJobs.tlb">
+    <typelib tlbid="{662704DE-FA2E-11D7-AB19-005056C00001}" version="1.0" helpdir="" />
+  </file>
+  <file name="Typelibs\ComosTBarLockHelper.tlb">
+    <typelib tlbid="{DE6906A3-33E3-4FDF-9AE4-A37036DF3773}" version="3.1" helpdir="" />
+  </file>
+  <file name="Typelibs\ComosTGeneratorJobs.tlb">
+    <typelib tlbid="{9C002A6F-95DA-11D3-BAB0-00609775B24C}" version="2.3" helpdir="" />
+  </file>
+  <file name="Typelibs\ComosTQBPartners.tlb">
+    <typelib tlbid="{39C794FB-517C-11D4-BB59-00609775B24C}" version="2.0" helpdir="" />
+  </file>
+  <file name="Typelibs\ComosUCDevices.tlb">
+    <typelib tlbid="{F44B4249-2516-11D1-867A-0020AFC0D528}" version="10.0" helpdir="" />
+  </file>
+  <file name="Typelibs\ComosUICDevice.tlb">
+    <typelib tlbid="{2150F254-FD6D-11D2-A79C-006008CBD74F}" version="1.0" helpdir="" />
+  </file>
+  <file name="Typelibs\ComosUIDimLevel.tlb">
+    <typelib tlbid="{40C600A1-5863-11D7-AAE8-0060089F38F3}" version="1.1" helpdir="" />
+  </file>
+  <file name="Typelibs\ComosUIDocObj.tlb">
+    <typelib tlbid="{3E52D708-53C9-4767-B174-469C99C9701D}" version="1.0" helpdir="" />
+  </file>
+  <file name="Typelibs\ComosUIDocument.tlb">
+    <typelib tlbid="{073E1C43-BD67-11D5-A7D2-00105A392A11}" version="1.0" helpdir="" />
+  </file>
+  <file name="Typelibs\ComosUIInterface.tlb">
+    <typelib tlbid="{3F951C10-43DA-11D2-A6E3-006008CBD87C}" version="5.1" helpdir="" />
+  </file>
+  <file name="Typelibs\ComosUISpecification.tlb">
+    <typelib tlbid="{425ED3F9-AF35-11D4-A968-00609769DD4B}" version="1.0" helpdir="" />
+  </file>
+  <file name="Typelibs\ComosUpdDocGrp.tlb">
+    <typelib tlbid="{98F6FF43-0A9C-11D2-A261-00A0248A9FE3}" version="1.11" helpdir="" />
+  </file>
+  <file name="Typelibs\ComosVB3D.tlb">
+    <typelib tlbid="{39F74D14-7E73-49C2-ADAF-9F26ED189693}" version="1.4" helpdir="" />
+  </file>
+  <file name="Typelibs\ComosWspRfConnIso.tlb">
+    <typelib tlbid="{8B95430D-EA5E-11D5-A9C5-0060089F38F3}" version="1.1" helpdir="" />
+  </file>
+  <file name="Typelibs\ComosXSpaceObjects.tlb">
+    <typelib tlbid="{091650B5-F85F-40F7-800F-F52B1BAB55F5}" version="3.3" helpdir="" />
+  </file>
+  <file name="Typelibs\ComponentOrchestrator.tlb">
+    <typelib tlbid="{29CC8D59-E4C6-48DF-89AC-E1DE745FD50B}" version="1.0" helpdir="" />
+  </file>
+  <file name="Typelibs\ContextAreaCOMAdaptor.tlb">
+    <typelib tlbid="{4DB136F4-13E3-453F-8312-7A9BCD9F2046}" version="1.0" helpdir="" />
+  </file>
+  <file name="Typelibs\DWHCore.tlb">
+    <typelib tlbid="{0B1CAD3B-2A32-411D-A6AC-44148DBC842C}" version="1.0" helpdir="" />
+  </file>
+  <file name="Typelibs\ExportDGN.UI.tlb">
+    <typelib tlbid="{10C789B6-0889-4E82-A338-D97A8D0A7D7A}" version="1.0" helpdir="" />
+  </file>
+  <file name="Typelibs\FEEDImportUtilities.tlb">
+    <typelib tlbid="{3A0D0CC5-B5DD-44CC-BE2C-03B3133A51AC}" version="1.0" helpdir="" />
+  </file>
+  <file name="Typelibs\FupLibrary.tlb">
+    <typelib tlbid="{8ED62E70-2FE0-4AA9-8FFC-67D14EB30A30}" version="31.0" helpdir="" />
+  </file>
+  <file name="Typelibs\PinC.tlb">
+    <typelib tlbid="{415A1C74-7C4C-4142-A855-106BCAE4DF26}" version="4.0" helpdir="" />
+  </file>
+  <file name="Typelibs\ReadIso15926Excel.tlb">
+    <typelib tlbid="{64981808-A25C-4BEA-A6B6-E41C9A4E8CE3}" version="1.0" helpdir="" />
+  </file>
+  <file name="Typelibs\ReadIso15926Sandbox.tlb">
+    <typelib tlbid="{37245467-35C4-42A4-A3AE-A83F51CECDBB}" version="1.0" helpdir="" />
+  </file>
+  <file name="Typelibs\ReportOptions.tlb">
+    <typelib tlbid="{DC8E4C1E-FAAF-11D1-A92D-00A024414C53}" version="2.2" helpdir="" />
+  </file>
+  <file name="Typelibs\RevisionMaster.tlb">
+    <typelib tlbid="{A8A50011-6683-11D6-B6A3-0050DA1A43CE}" version="10.39" helpdir="" />
+  </file>
+  <file name="Typelibs\SpecImportTools.tlb">
+    <typelib tlbid="{97DA5B75-D43B-4438-93F2-9F98D9F25018}" version="0.1" helpdir="" />
+  </file>
+  <file name="Typelibs\WpfCom.tlb">
+    <typelib tlbid="{219AB350-332A-4227-AD03-30684E968D66}" version="1.0" helpdir="" />
+  </file>
+</assembly>

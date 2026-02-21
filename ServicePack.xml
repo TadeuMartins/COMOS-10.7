@@ -1,0 +1,13 @@
+<configuration>
+  <configkey name="ComosVersionName" value="" />
+  <configkey name="ComosVersionNr" value="Team_AI" />
+  <configkey name="ComosVersionSubNr" value="" />
+  <configkey name="UpdatePackType" value="Autobuild" />
+  <configkey name="UpdatePackNr" value="Build finished on 1/29/2026 9:49:42 AM" />
+  <configkey name="UpdatePackSubNr" value="" />
+  <configkey name="ComosUpdateCenterVersion" value="4.0.0.0" />
+  <configkey name="ComosUpdateName" value="Team_AI.712" />
+  <configkey name="ChangesetId" value="418926" />
+  <configkey name="ComosWebViewVersion" value="7.44.6" />
+  <configkey name="ComosWebCopyright" value="2020 - 2026" />
+</configuration>

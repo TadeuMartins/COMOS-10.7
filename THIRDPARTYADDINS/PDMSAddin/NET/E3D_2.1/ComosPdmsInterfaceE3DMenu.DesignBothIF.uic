@@ -1,0 +1,248 @@
+<?xml version="1.0" encoding="utf-8"?>
+<UserInterfaceCustomization xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns="www.aveva.com">
+  <Tools>
+    <ButtonTool Name="COMOS.Navigation.COMOS">
+      <Command>
+        <Type>Macro</Type>
+        <Macro>!!SAGNavigate()</Macro>
+        <Key>Macro:5ad8ac1c-fcee-4794-b35e-7f540ffe5ad8</Key>
+        <Arguments />
+      </Command>
+      <Image>
+      iVBORw0KGgoAAAANSUhEUgAAADwAAAA7CAYAAAAn+enKAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAAAZdEVYdFNvZnR3YXJlAFBhaW50Lk5FVCB2My41Ljg3O4BdAAAFOElEQVRoQ+2Zu09cRxSHR5Zo0iQNRWhoqLdBso0jGjfQ8BekspSgOAvmId4NNClCCiQLKaZxETlyk0gJUgyRbUx4GIOXsBsgvDHhbSBebMA8gvXL/GY9lwsM7N1ll2XXW3za5XJnxKczc2bOQdTW1l76kEgKJzpJ4UQnJsINd+9CuFwQKSkQGRnIr6uD6b1ocK7CeXl5EEJA8HNhASItDaK5GUIK83ma/Nk0LpKcm3Bubi4+ZmQ9HoiJCYi9PQifD+LGjYCwfJ7y+DFc169HVfqQcNWd3xAq9vEn8bnbjY8aGyFmZiCAw7S2BoT5+60tiHv3kFNejmYZedNcZ+WY8NzKOu780mOU0zT+3IWJuVX13T7ehLu+HkIKCL//uKyGy5rvSFklLeXzorSvjwlTttM3jbc7e4rNt9t4vbGBV/5XWF1dwdLSAh72DOK7++1BhesYOe5Xk+RROjog5HIWclmL9XUVde5507xnwbikt3f35J8A7O//h53tLWy88cP/70usLs9haW4S/7yYsKJtH3+UkITJkUR2rsJatqa6ClWV5Zbs7NTfmJoYCSqcmZmJTynMBGWSM3EkkTHJMdmZ5g8XozCXsY4sZSvKSg9kR70YH/0rqLA6fqS0yM8PnfT0wNicnIgfVUZh7tnq6kpUVpThs2tZuJZ1BSW33LhV8BVGB3sxMtSfWMJMUJQtLytRsllXLivZgptfYHigE4PeZ0GF42pJMxvrPVtS5EbR+8hS1tv7CAOezqDCJG6SFo8evWcpW/D1l5bs864H8Dx7EnnhWB1Lt3/qxNOBEXn0TKpszATFPctl7PV0KdmWJx345odHQYXJhb94jM2u4Nsf26wImqCsd2JBfbePP4kLfbUMFfv407iQxcNJhCJ2GnFRHkZK1s6FbwBEQ7qpqQka0++jRUwiHEtiFuFYkYywiWSE45i4jLB1nodxdsdVhPNlrUzSeT+XxxnhlZVXVz53ch2NmwirIkQ3CHgl1XdxFiUsPORzJwVHXETYKjP1/Zv38cXFQBnJ78RhSRnRCPO9cDDNZccS1vdv7l8+4z38/V522jSIaIT5rpNGPnHazC8uLj5oFWnhhoaAMCutlhaI1NSAsIx6sLZQxCN8tJG/tb2DN5ub8K/7sba2iuXlRSzMz+L3pz5HzXzCvanqZXuFxWXMWtr+TOKS+/merKlN85CIR5joRv67d/vY3d1GTU0VqqsqsPZyHkvz05h7MYrpyVEr2qa57FhLWicoU9Lis0gsaeJU2i6sZTc31pVsRXnpgeyYD+Njg46FWVFlcPnaE5QWtiUyLn1uAdMcmqhEmMtYRbY68F+LQG/7KkqKClRTcHz4OUaG/3QsTHjGHkpQWtiWyLgSTGPthBRhJ5+Ee5aR1f+1oGzW1ctKtpAdUG8Xhny9IQnbyWa02aiXpIbYEnIcYSefGiao1/5Va8+WFsvIFt5UkaWsr68N3v7usIUJ96rL5To1QZlwFGGnaAFmY3uComyhO9+S9XS3or83kKHDFebyDZagTERFmEfPoQRliyxle9p/RV/3wzMJ8+6cnZ0de2HVyPeOYHZmSh09zMZMUEO+PrWM+/valeyDtj8cN/PVsaQTVhAiciw5hX+8k0Y+CbWZ38DbFW9UvFnp48mOjDajbhqL2xnW86gs6VAxzWWiXt62PpGloOniwWrKNAZNmUCdiI7weVAu5VQ9zKjOzFj1sOldfO9SsnEtTHRBcVqhgPpUSzbuhclpx5JdNGGEwyUpnOgkhROdpHCikxROdD4w4dpL/wNzUEeBindsCQAAAABJRU5ErkJggg==
+      </Image>
+      <Caption>To COMOS</Caption>
+      <Tooltip>Navigates to the corresponding COMOS object in the COMOS navigator (if assigned)</Tooltip>
+      <TooltipTitle>Navigate to COMOS</TooltipTitle>
+      <DisplayStyle>Default</DisplayStyle>
+      <Category>Navigation</Category>
+    </ButtonTool>
+    <ButtonTool Name="COMOS.Navigation.COMOSPID">
+      <Command>
+        <Type>Macro</Type>
+        <Macro>!!SAGNavigateToPID()</Macro>
+        <Key>Macro:73e39610-d9f2-4121-8667-960ae672861d</Key>
+        <Arguments />
+      </Command>
+      <Image>
+      iVBORw0KGgoAAAANSUhEUgAAADIAAAAyCAYAAAAeP4ixAAAABGdBTUEAALGPC/xhBQAAAAlwSFlzAAAOwAAADsABataJCQAAABl0RVh0U29mdHdhcmUAUGFpbnQuTkVUIHYzLjUuODc7gF0AAAIRSURBVGhD7ZTRjqswDERX/TIe+l/0z3c1aAe5ZnBwCElVMdJRgTh2zo32/szz/PgGbpFP4xZpxev1+vWouhJDRXDoaZo21MgME6GESo2MFEETj6qrBf32JJiszJsID40mHq7Z+hrYn7HPiF87OnMVsQIqXDsj83xOUoTv9hnBc0rEN4+Sae65XMRvjn4RPNfKKBH1i2TmbEQQbFa/TGaAB/v8YdUvkpnT/UaAl1HJzuj6N2KJZtbMWEQAG0fNawZE2JmWmhmrCECDqHnNgBLsa1F1Jd5ESKvmGc7OkCKgx+Etl4mAnjL3jfxz30grMEehaiOG3QgPrP6rB1mh7jfiBXz4LSvU9UYiARu7boVUT9LtRihxNL62JNPlRrISTEbm8huplWCOylx+I2dFELt/VwQf1UIkwT1RDcD6WQmmJLOIcMEu8l19Q71q5mFti9g+avYqQvBe+rbXzML6lrH9/PxVhMHzHjZ47y2CsKefvxFB8O7xwbcRIgjP1FQkwvdoDedIERb4DbYG4Xf+i3jUnlax5+I8+cfOgxB7MMBmXFOwvnX25q8i+I0OBliDet9IwdpWYS81exEpHcjDPaV9WG8lYvtIEftyBS1kShLg40X83mEioFbmqAToIgKyMhkJ0E0EUKYkZNdZH0mAriIAB4qE+M0KlCRAdxHihTxHBcgwEcIDe1RtxHCRVnyJyPz4AxYRIhWDrNs6AAAAAElFTkSuQmCC
+      </Image>
+      <Caption>To COMOS Report</Caption>
+	  <Tooltip>Navigates to the corresponding COMOS object on the COMOS report (if assigned and placed on a report)</Tooltip>
+      <TooltipTitle>Navigate to COMOS report</TooltipTitle>
+      <DisplayStyle>Default</DisplayStyle>
+      <DropDownArrowStyle>Segmented</DropDownArrowStyle>
+      <IsContextMenu>false</IsContextMenu>
+    </ButtonTool>
+	<ButtonTool Name="COMOS.Navigation.COMOSPROP">
+      <Command>
+        <Type>Macro</Type>
+        <Macro>!!SAGNavigateToProperty()</Macro>
+        <Key>Macro:73e39610-d9f2-4121-8667-960ae672861d</Key>
+        <Arguments />
+      </Command>
+      <Image>
+      iVBORw0KGgoAAAANSUhEUgAAADIAAAAyCAYAAAAeP4ixAAAABGdBTUEAALGPC/xhBQAAAAlwSFlzAAAOwgAADsIBFShKgAAAABh0RVh0U29mdHdhcmUAcGFpbnQubmV0IDQuMS41ZEdYUgAAAoFJREFUaEPtmuFtGzEMRr1IdvEqGaPbeAgP5S1SvgMJfceWvdNFiYSgDyB6pD8JTzj5j5vbj+N+v79ZvXfUmy9dC5f76Kh3X7oWiCH4eDw+ns9nWXz+0w7yy9d8ZfVfX18YkqtU/1tnEYuP3sh31KeubxyEjWaDgx8kX9/jq+bB1Q6S6/gNESK80kHimnddta84iG3bXRAHCZforY6vmn8w/CA9RP4fB8n15xtiyIcssvZyKbk/IvLVQU5dNYa6eAS2rT+dI/LVQXKP8yavMNTwCGxbfzpH5Cvx3OO8ySsMNTwC27a7oBLPPc62Zg9DDc+kEs89zq7fYKjhmVTiucfZ9RsMNTyTSjz3OLt+g6GGZ1KJ5x5n128w1PAIbNvugko89zjbmj0MNTwC29afzhH5Sjz3OG/yCsMIW3u5lNwfEflKPPc425o9DDU8AtvWn84R+Uo89zhv8gpDDY/AtvWnc0S+Es89zpu8wlDDI7Btuwsq8dzjbGv2MNTwTCrx3OPs+g2GGp5JJZ57nF2/wVDDM6nEc4+z6zcYangEtm13QSWee5xtzR6GGh6BbetP54h8JZ57nDd5hWGErb1cSu6PiHwlnnucbc0ehhoegW3rT+eIfCWee5w3eYWhhkdg2/rTOSJfiece501eYajhEdi23QWVeO5xtjV7GGp4JpV47nF2/QZDDc+kEs89zq7fYKjhmVTiucfZ9RsM+TB+zZtZ8Usizyqee5xdv8HQP1ymrh5E/3uaX72nv53X67UT51/tcXX9v0NAF87m0wdZ4ftCVd+Z0wdZra4cZLnvC5W/M/i58jF+mGWuGRVX7dJBFq2ug/T+1dB31pp/ofSf2+32G6IcLz7rnfVvAAAAAElFTkSuQmCC
+      </Image>
+      <Caption>To COMOS properties</Caption>
+	  <Tooltip>Navigates to the corresponding COMOS object and opens the properties of the object)</Tooltip>
+      <TooltipTitle>Navigate to COMOS properties</TooltipTitle>
+      <DisplayStyle>Default</DisplayStyle>
+      <DropDownArrowStyle>Segmented</DropDownArrowStyle>
+      <IsContextMenu>false</IsContextMenu>
+    </ButtonTool>
+    <ButtonTool Name="COMOS.Navigation.2DWS">
+      <Command>
+        <Type>Macro</Type>
+        <Macro>!!SAGNavigateToScopeInPdms()</Macro>
+        <Key>Macro:4e133b82-da4f-4699-835f-155eaccacaee</Key>
+        <Arguments />
+      </Command>
+      <Image>
+      iVBORw0KGgoAAAANSUhEUgAAADIAAAAyCAYAAAAeP4ixAAAABGdBTUEAALGPC/xhBQAAAAlwSFlzAAAOwAAADsABataJCQAAABl0RVh0U29mdHdhcmUAUGFpbnQuTkVUIHYzLjUuODc7gF0AAAM4SURBVGhD7Zmtr+JAFMVRBLnPIZFI5BMkkGBI1iCROJDgcDyHRCKRsAqJRD65cuX+CfsndO+5e6eZ0w9aXstHN/ySE3qnA3NO+jGdUvv+4y34H/QK8myiILWKQd6pqBjknYqKQd6pqBjknYqKQd6pqBjknYoMer1eUzQRzURta34Y5J2KC4jxUb/f/yMKnKTtw3Y/BPJORQpiuBkN4ST7htatMLvdLoCszIS8U5GCmJ175n+LPr16Z90K02w24SE4Ho+5wpB3KlLAKeQZP4m2Xn20boUw80G73c4VApB3KlKQIO+ecZLsm1m3QnQ6HQ2y2WxuFwSI6V00hOhTgjSsS1ECO7VyQ96pyEBMj8X8UXSS7XlZIUajkR6N1Wp1tyAdCXFGGNmeWHMZBI1GQ48ywuS9c5F3KjIQ8zJWeFqdrbkQ8/lcjwY+z+ezbuP3dWcG5J2KDHAUvCB7ay4EjoR86Nj7/V63x+PxXYMUnj+Wy6Uat2tEJ0TUk8nk5kGWXpCNNX8ZNwH+q2q17Xar9Ww2u3mQcGLEtjV/GfyOzR+K3bVy373IOxUZRILMrbk03IW/Xq/LDRI9ZyVAOClKkDJvv4pd5OXffjOCjNBWlMVioWNA9XpdPw+Hg46XBXmnIkJCEEyGLkgfbZdw53yZ8q8f8k5FhKwgIjxMog2PLB+mpe1TDYdD7Z8mXOytVkufevHpaoybpLKC/HIGxGRL5M8rWUqcd669U/mQdyoiuDWCm7DEOBZYWI+cZRvrd3+dkijp8y7C0cGR+obf8blLEEMN2TYhxtpm0hlFsLUIpxv0U4QVpQvVsq+G3DUIzlsMlFf2PUUChMtiCRJ782L9Y9/LA3mnIoXpdKqD5ZU/D0iAi3e6uwYBGCiv7CvK0wVJIs/gEuDiJPrwIHkNRILEHmteQQTyTsUVXBEEt2MXJPboX5kgMP+0QbBe6Ha7amAwGGQF8V+3xlaVDwnivSi4JALXhRck9rz1sCOCVRwGdcILBGfUnlqJpw0ipPVLbJcg+F/FBTlZc8ijguigJp+0dgQR/2GQ2Eu9Kh0RrFvcoitxnf+VEIC8U1ExyDsVFYO8+0WV9QryXHoL/gKik1z1rKlCYQAAAABJRU5ErkJggg==
+      </Image>
+      <Caption>To 2D workspace</Caption>
+	  <Tooltip>Navigates to the corresponding object in the currently opened 2D Workspace in E3D (if assigned)</Tooltip>
+      <TooltipTitle>Navigate to 2D Workspace</TooltipTitle>
+      <DisplayStyle>Default</DisplayStyle>
+    </ButtonTool>
+    <ButtonTool Name="COMOS.Navigation.3DWS">
+      <Command>
+        <Type>Macro</Type>
+        <Macro>!!SAGNavigateToScopeInComos()</Macro>
+        <Key>Macro:D3A27916-C10A-43E5-86FF-56D5EDC266C5</Key>
+        <Arguments />
+      </Command>
+      <Image>
+      iVBORw0KGgoAAAANSUhEUgAAADIAAAAyCAYAAAAeP4ixAAAABGdBTUEAALGPC/xhBQAAAAlwSFlzAAAOwQAADsEBuJFr7QAAABl0RVh0U29mdHdhcmUAUGFpbnQuTkVUIHYzLjUuODc7gF0AAANPSURBVGhD7ZkvcyJBFMRRKeRJJBKJjEgVVGGQSCQuSOJwxOGCRCLBISORkSdP3ke4j7D3+t2brWl2mN2we5C5ul9VF/tmZzPdtX9mZ9Nqrd6yf0LBxhQVbExRXCQGeaciMcg7FYlB3qlIDPJORWKQdyoSg7xTEWcwGHREM9Fc1LPm+0HeqbiMGJ8Mh8NfosxJ2l5t930g71SEEcOd8xBOsm9s3Wqz2+0yyMpyyDsVYcTswjP/U/Th1TvrVptOpwMP2fF4rBaGvFMRBpeQZ/xdtPXqo3WrhZnPer1etRCAvFMRRoI8esZJsm9u3WrR7/c1yGaz+XtBgJjenYcQfUiQtnWpS2aXVnXIOxVxxPRUzB9F77K9aCrEZDLB2NlqtbpZkL6EOCGMbM+suQmydrutZxlhKj+5yDsVccS8jJVfVidrrsViscC4GX5Pp5Nu4+/rzjLIOxVxcBa8IHtrrgXOhPzo2Pv9Xren02mpF4W8UxHnLEjt+WO5XKpxu0d0QkQ9m81KvSjknYo4EmTpBdlY89W4CfBP1Wptt1ut5/N5qReFvFMRR4LkEyO2rflq8Hds/lDsqVX96UXeqYhzFmRhzY3hbvz1et1skPNrVgLkk6IEafLxq9hN3vzjtyTIBG11eXl50TGgh4cH/T0cDjpeKeSdCiYQBJOhCzJEWwx3zTcpun/IOxVMWRARXibRhleWV9PS9qnG47H2vyTc7N1uV9968etqjBtSU0F+OANisivy55UyBeedTz+pfMg7FYxbI7gJS4xjgYX1yEm2sX731ylBSZ9HEc4OztQ3/B2fmwQx1JBtE2KsZyadUQRbi3C5Qd9FWFG6UF07NOemQXDdYqCqsuMUCZAviyVI4cuL9S8cVwnyTkWY5+dnHayq/HlAAkSfdDcNAjBQVdkhypcLEqLK4BIgOonePUhVA2dBCq81/4MA8k5FdT4RBI9jF6Tw6p9MEJj/skGwXnh6elIDo9EoepyY9z+3FlaVdwnifSiIicB94QUpvG/d7YxgFYdBnfABwRm1t1biywYRLvULtksQ/F/FBXm35px7BdFBTT6X2hFE/OdBCh/1UjojWLe4RVdwnX9VCEDeqUgM8k5FYpB3v0hZwcYUFWxMTm/Zb/yLbpV5mcGKAAAAAElFTkSuQmCC
+      </Image>
+      <Caption>To 3D workspace</Caption>
+	  <Tooltip>Navigates to the corresponding object in the currently opened 3D Workspace in COMOS (if assigned)</Tooltip>
+      <TooltipTitle>Navigate to 3D Workspace</TooltipTitle>
+      <DisplayStyle>Default</DisplayStyle>
+    </ButtonTool>
+    <ButtonTool Name="buttonAttributeDump">
+      <Command>
+        <Type>Macro</Type>
+        <Macro>!!SAGCallAttributeDump()</Macro>
+        <Key>Macro:CA52A170-C775-4364-95EF-6AF853657BE6</Key>
+        <Arguments />
+      </Command>
+      <Image />
+      <Caption>Attribute Dump</Caption>
+      <DisplayStyle>Default</DisplayStyle>
+    </ButtonTool>
+    <ButtonTool Name="COMOS.Interface.Start">
+      <Command>
+        <Type>Macro</Type>
+        <Macro>!!SAGLaunchInterface()</Macro>
+        <Key>COMOS.Interface.Start</Key>
+        <Arguments />
+      </Command>
+      <Image>
+      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
+      </Image>
+      <Caption>Launch</Caption>
+      <Tooltip>Launches the interface. Displays the UI and establishes the connection to COMOS. Please ensure that the interface is already running in COMOS.</Tooltip>
+      <TooltipTitle>Launch interface</TooltipTitle>
+      <DisplayStyle>Default</DisplayStyle>
+      <Category>Interface</Category>
+      <DropDownArrowStyle>Segmented</DropDownArrowStyle>
+      <IsContextMenu>false</IsContextMenu>
+    </ButtonTool>
+    <ButtonTool Name="buttonStartInterface">
+      <Command>
+        <Type>Macro</Type>
+        <Macro>!!ITInterface.Start()</Macro>
+        <Key>Macro:56155527-F1E9-44C2-8BB8-A2134F5E4548</Key>
+        <Arguments />
+      </Command>
+      <Image />
+      <ShortCut>F2</ShortCut>
+      <Caption>Start Interface</Caption>
+      <Tooltip>Starts the Interface</Tooltip>
+      <DisplayStyle>Default</DisplayStyle>
+      <Category>ComosMenu</Category>
+    </ButtonTool>
+    <ButtonTool Name="buttonStopInterface">
+      <Command>
+        <Type>Macro</Type>
+        <Macro>!!ITInterface.Stop()</Macro>
+        <Key>Macro:28FBF49F-3C20-44D3-AFAF-839620411680</Key>
+        <Arguments />
+      </Command>
+      <Image />
+      <ShortCut>F2</ShortCut>
+      <Caption>Stop Interface</Caption>
+      <Tooltip>Stops the Interface</Tooltip>
+      <DisplayStyle>Default</DisplayStyle>
+      <Category>ComosMenu</Category>
+    </ButtonTool>
+    <ButtonTool Name="buttonExportToComos">
+      <Command>
+        <Type>Macro</Type>
+        <Macro>!!ITSelectObjects.Display()</Macro>
+        <Key>Macro:A352EF4E-757C-44AD-A0F5-FB61C34F8C31</Key>
+        <Arguments />
+      </Command>
+      <Image />
+      <ShortCut>F2</ShortCut>
+      <Caption>Export to COMOS</Caption>
+      <Tooltip>Exports objects to COMOS</Tooltip>
+      <DisplayStyle>Default</DisplayStyle>
+      <Category>ComosMenu</Category>
+    </ButtonTool>
+    <ButtonTool Name="buttonQueryCOMOSData">
+      <Command>
+        <Type>Macro</Type>
+        <Macro>!!ITQuery.Display()</Macro>
+        <Key>Macro:C7F35BA5-C516-4D8F-BF01-EF6A92E374AA</Key>
+        <Arguments />
+      </Command>
+      <Image />
+      <ShortCut>F2</ShortCut>
+      <Caption>Query COMOS data</Caption>
+      <Tooltip>Executes COMOS queries</Tooltip>
+      <DisplayStyle>Default</DisplayStyle>
+      <Category>ComosMenu</Category>
+    </ButtonTool>
+    <ButtonTool Name="buttonStartupFunctions">
+      <Command>
+        <Type>Macro</Type>
+        <Macro>!!ITStartupFunctions.Display()</Macro>
+        <Key>Macro:45504EE6-E14E-410B-8608-B419B7FEAE10</Key>
+        <Arguments />
+      </Command>
+      <Image />
+      <ShortCut>F2</ShortCut>
+      <Caption>Configure start up functions</Caption>
+      <Tooltip>Configure start up functions</Tooltip>
+      <DisplayStyle>Default</DisplayStyle>
+      <Category>ComosMenu</Category>
+    </ButtonTool>
+    <ButtonTool Name="buttonExportMTO">
+      <Command>
+        <Type>Macro</Type>
+        <Macro>!!ITExportMTO.Display()</Macro>
+        <Key>Macro:79E0D33A-E161-411C-8E33-0C58B4793099</Key>
+        <Arguments />
+      </Command>
+      <Image />
+      <ShortCut>F2</ShortCut>
+      <Caption>Export MTO</Caption>
+      <Tooltip>Export MTO</Tooltip>
+      <DisplayStyle>Default</DisplayStyle>
+      <Category>ComosMenu</Category>
+    </ButtonTool>
+  </Tools>
+  
+  <Tabs>
+    <Tab Name="ComosMenu">
+      <Caption>COMOS</Caption>
+      <Command>
+        <Type>Instance</Type>
+        <Key />
+        <Arguments />
+      </Command>
+      <ContextualTabGroup>
+        <Item>None</Item>
+      </ContextualTabGroup>
+      <Groups>
+        <Group Name="Comos.InterfaceGroup">
+          <Tools>
+            <Tool Name="COMOS.Interface.Start" LargeImage="True"/>
+          </Tools>
+          <Caption>Interface</Caption>
+        </Group>
+        <Group Name="Comos.NavigateGroup">
+          <Tools>
+            <Tool Name="COMOS.Navigation.COMOSPID" LargeImage="True"/>
+			<Tool Name="COMOS.Navigation.COMOSPROP" LargeImage="True"/>
+            <Tool Name="COMOS.Navigation.COMOS" LargeImage="True"/>
+            <Tool Name="COMOS.Navigation.2DWS" LargeImage="True"/>
+            <Tool Name="COMOS.Navigation.3DWS" LargeImage="True"/>
+          </Tools>
+          <Caption>Navigate</Caption>
+        </Group>
+	<Group Name="Comos.ReviewGroup">
+          <Tools>
+            <Tool Name="buttonAttributeDump" />
+          </Tools>
+          <Caption>Review</Caption>
+        </Group>
+	<Group Name="Comos.InterfaceGroupOld">
+          <Tools>
+            <Tool Name="buttonStartInterface" />
+            <Tool Name="buttonStopInterface" />
+	    <Tool Name="buttonExportToComos" />
+	    <Tool Name="buttonQueryCOMOSData" />
+	    <Tool Name="buttonStartupFunctions" />
+	    <Tool Name="buttonExportMTO" />
+          </Tools>
+          <Caption>Old Interface</Caption>
+        </Group>
+      </Groups>
+    </Tab>
+  </Tabs>
+	
+</UserInterfaceCustomization>

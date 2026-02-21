@@ -1,0 +1,58 @@
+=== PASS 2: Deep search ===
+
+--- CASE-SENSITIVE 'Oops' search (UTF16) ---
+Not in Comos.ChatBotInDesktop.dll
+Not in Comos.EngineeringAssistant.ChatControl.dll
+Not in Comos.EngineeringAssistant.HttpClient.dll
+Not in Comos.Ai.Http.dll
+Not in Comos.WPF.ExtendedControls.dll
+
+--- 'failed' search (UTF16) ---
+  None in Comos.ChatBotInDesktop.dll
+  HIT #1 in Comos.EngineeringAssistant.ChatControl.dll idx=6430
+    tcontrol.xaml.Engineering Assistant: AI Chat initialization failed...............................................................................................................console.log('C# can execute JavaScript - PostMessage should work');.Brows
+  HIT #1 in Comos.EngineeringAssistant.HttpClient.dll idx=3359
+    iceClient.request./api/ai/v1/completions.AI Service request failed with status {0}: {1}.AI Service request timed out.Error communicating with AI Service: ............................................................................I...................
+  HIT #1 in Comos.Ai.Http.dll idx=4527
+    ice Response from {0} (Status: {1}): {2}.AI Service request failed with status {0}: {1}.AI Service request timed out.Error communicating with AI Service: ./api/ai/v1/completions.........................................................................
+  HIT #1 in Comos.WPF.ExtendedControls.dll idx=75064
+    ully parsed message using ConvertMessageTo.ConvertMessageTo failed: .Attempting manual JSON parse of: .Manual JSON parse successful.Manual JSON parse failed: .ERROR: Could not parse message to dictionary.Parsed message successfully: .Error processing
+  HIT #2 in Comos.WPF.ExtendedControls.dll idx=75154
+    N parse of: .Manual JSON parse successful.Manual JSON parse failed: .ERROR: Could not parse message to dictionary.Parsed message successfully: .Error processing message: .Stack trace: .DevTools opened successfully.Failed to open DevTools: .'.', .(arg
+  HIT #3 in Comos.WPF.ExtendedControls.dll idx=75308
+    essing message: .Stack trace: .DevTools opened successfully.Failed to open DevTools: .'.', .(args) => CefSharp.PostMessage({ 'Type': '.', 'Data': args })., '.............................................................................................
+
+--- Full message strings in HttpClient and Ai.Http (UTF16) ---
+
+== Comos.EngineeringAssistant.HttpClient.dll ==
+  AI_SVC at idx=3340
+    i/ai/v1/completions.AI Service request failed with status {0}: {1}.AI Service request timed out.Error communicating with AI Service: ............................................................................I............................................................................................................ .. ........................ .....................................................
+  AI_SVC at idx=3387
+    ith status {0}: {1}.AI Service request timed out.Error communicating with AI Service: ............................................................................I............................................................................................................ .. ........................ .................................................................../api/ai/v1/completions...........
+  AI_SVC at idx=3441
+     communicating with AI Service: ............................................................................I............................................................................................................ .. ........................ .................................................................../api/ai/v1/completions.................https://localhost:7033..........................
+  ERROR at idx=3416
+    .AI Service request timed out.Error communicating with AI Service: ............................................................................I............................................................................................................ .. ........................ ...................
+
+== Comos.Ai.Http.dll ==
+  AI_SVC at idx=4434
+    rviceClient.request.AI Service Request to .: .AI Service Response from {0} (Status: {1}): {2}.AI Service request failed with status {0}: {1}.AI Service request timed out.Error communicating with AI Service: ./api/ai/v1/completions.....................................................................................I............................................................................ .......
+  AI_SVC at idx=4460
+    vice Request to .: .AI Service Response from {0} (Status: {1}): {2}.AI Service request failed with status {0}: {1}.AI Service request timed out.Error communicating with AI Service: ./api/ai/v1/completions.....................................................................................I............................................................................ ....... ............ ............
+  AI_SVC at idx=4508
+     (Status: {1}): {2}.AI Service request failed with status {0}: {1}.AI Service request timed out.Error communicating with AI Service: ./api/ai/v1/completions.....................................................................................I............................................................................ ....... ............ ............................................................
+  AI_SVC at idx=4555
+    ith status {0}: {1}.AI Service request timed out.Error communicating with AI Service: ./api/ai/v1/completions.....................................................................................I............................................................................ ....... ............ .......................................................................................... .. .............
+  AI_SVC at idx=4609
+     communicating with AI Service: ./api/ai/v1/completions.....................................................................................I............................................................................ ....... ............ .......................................................................................... .. ................. ....................... .........................
+  ERROR at idx=4584
+    .AI Service request timed out.Error communicating with AI Service: ./api/ai/v1/completions.....................................................................................I............................................................................ ....... ............ ..........................
+
+--- Broad 'Oops' case-sensitive search across ALL chatbot+AI DLLs ---
+FOUND 'Oops' in Comos.EngineeringAssistant.DesktopCommunication.dll at idx=9272
+  ................................................................................Oops! I couldn't connect to the AI service. Please check your connection and try again................................................................................................................................................................................................................. ................ .......
+
+--- Checking Web folder for 'Oops' ---
+  No 'Oops' in Web folder
+
+=== PASS 2 COMPLETE ===

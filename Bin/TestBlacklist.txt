@@ -1,0 +1,14 @@
+#shows an UI / needs administrator rights
+#-Comos.External.Communication.Test.dll
+#needs internet access
+-Comos.Data.Access.ECXML.Test.dll
+# The iModel.Test.dll runs into timeout
+-Comos.EngineeringAdapter.iModel.Test.dll
+#-Comos.EngineeringAdapter.iModel.Workpackage.Test.dll
+#tests should be deactivated
+-Comos.PM.ToolsDataProvider.Test.dll
+#only with plantsight
+-Comos.Data.Access.IModelHub.Test.dll
+-Comos.Data.Sync.IModel.Common.Test.dll
+-Comos.Data.Sync.IModel.Test.dll
+-Comos.Data.Sync.IModel.x64Bridge.Worker.Test.dll

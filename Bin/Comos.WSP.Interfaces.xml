@@ -1,0 +1,2245 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>Comos.WSP.Interfaces</name>
+    </assembly>
+    <members>
+        <member name="T:Comos.WSP.Interfaces.Cables.ICableInfo">
+            <summary>
+            </summary>
+        </member>
+        <member name="P:Comos.WSP.Interfaces.Cables.ICableInfo.Connections">
+            <summary>
+            </summary>
+        </member>
+        <member name="P:Comos.WSP.Interfaces.Cables.ICableInfo.Intersections">
+            <summary>
+            </summary>
+        </member>
+        <member name="P:Comos.WSP.Interfaces.Cables.ICableInfo.SegmentNrs">
+            <summary>
+            </summary>
+        </member>
+        <member name="P:Comos.WSP.Interfaces.Cables.ICableInfo.NumberOfSegments">
+            <summary>
+            </summary>
+        </member>
+        <member name="M:Comos.WSP.Interfaces.Cables.ICableInfo.AddAdditionalInfo(ComosWSPInterface.IRoConnBase,REPORTLib.INCoord,System.Int32,System.Int32)">
+            <summary>
+            </summary>
+            <param name="connection"></param>
+            <param name="intersection"></param>
+            <param name="segmentNr"></param>
+            <param name="numberOfSegments"></param>
+        </member>
+        <member name="P:Comos.WSP.Interfaces.Cables.ICrossSection.RoConn">
+            <summary>
+                Gets or sets the ro connection.
+            </summary>
+            <value>
+                The ro connection.
+            </value>
+        </member>
+        <member name="P:Comos.WSP.Interfaces.Cables.ICrossSection.RoLid">
+            <summary>
+                Gets or sets the ro lid.
+            </summary>
+            <value>
+                The ro lid.
+            </value>
+        </member>
+        <member name="P:Comos.WSP.Interfaces.Cables.ICrossSection.RoName">
+            <summary>
+                Gets or sets the name of the ro.
+            </summary>
+            <value>
+                The name of the ro.
+            </value>
+        </member>
+        <member name="P:Comos.WSP.Interfaces.Cables.ICrossSection.XRel">
+            <summary>
+                Gets or sets the x relative.
+            </summary>
+            <value>
+                The x relative.
+            </value>
+        </member>
+        <member name="P:Comos.WSP.Interfaces.Cables.ICrossSection.YRel">
+            <summary>
+                Gets or sets the y relative.
+            </summary>
+            <value>
+                The y relative.
+            </value>
+        </member>
+        <member name="P:Comos.WSP.Interfaces.Cables.ICrossSection.IsConnNew">
+             <summary>
+            
+             </summary>
+        </member>
+        <member name="P:Comos.WSP.Interfaces.Cables.ICrossSection.ConnObject">
+             <summary>
+            
+             </summary>
+        </member>
+        <member name="P:Comos.WSP.Interfaces.Cables.ICrossSection.IsDetailConn">
+            <summary>
+            </summary>
+        </member>
+        <member name="T:Comos.WSP.Interfaces.Cables.IWspRoCableNet">
+            <summary>
+            </summary>
+        </member>
+        <member name="P:Comos.WSP.Interfaces.Cables.IWspRoCableNet.CrossSections">
+             <summary>
+            
+             </summary>
+        </member>
+        <member name="T:Comos.WSP.Interfaces.Cables.IWspRoCableNewNet">
+            <summary>
+            </summary>
+        </member>
+        <member name="M:Comos.WSP.Interfaces.Cables.IWspRoCableNewNet.GetNewCableAngle(System.Double,System.Double)">
+            <summary>
+            </summary>
+            <param name="connAngle"></param>
+            <param name="oldCableAngle"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Comos.WSP.Interfaces.Cables.IWspRoCableNewNet.ClearWire(System.Object)">
+            <summary>
+            </summary>
+            <param name="wire"></param>
+        </member>
+        <member name="P:Comos.WSP.Interfaces.Cables.IWspRoCableNewNet.CrossSections">
+             <summary>
+            
+             </summary>
+        </member>
+        <member name="P:Comos.WSP.Interfaces.Cables.IWspRoCableNewNet.MasterRoCableLid">
+             <summary>
+            
+             </summary>
+        </member>
+        <member name="P:Comos.WSP.Interfaces.Cables.IWspRoCableNewNet.MasterGrayboxLid">
+             <summary>
+            
+             </summary>
+        </member>
+        <member name="P:Comos.WSP.Interfaces.Cables.IWspRoCableNewNet.SegmentLid">
+             <summary>
+            
+             </summary>
+        </member>
+        <member name="P:Comos.WSP.Interfaces.Cables.IWspRoCableNewNet.ConnectionIdentificationMode">
+             <summary>
+            
+             </summary>
+        </member>
+        <member name="T:Comos.WSP.Interfaces.Cables.IWspRoShieldNet">
+            <summary>
+            </summary>
+        </member>
+        <member name="P:Comos.WSP.Interfaces.Cables.IWspRoShieldNet.MasterRoCableLid">
+             <summary>
+            
+             </summary>
+        </member>
+        <member name="P:Comos.WSP.Interfaces.Cables.IWspRoShieldNet.MasterGrayboxLid">
+             <summary>
+            
+             </summary>
+        </member>
+        <member name="T:Comos.WSP.Interfaces.Connections.ConnectionObject.Enums.EarthingSystem">
+            <summary>
+            </summary>
+        </member>
+        <member name="F:Comos.WSP.Interfaces.Connections.ConnectionObject.Enums.EarthingSystem.None">
+            <summary>
+            </summary>
+        </member>
+        <member name="F:Comos.WSP.Interfaces.Connections.ConnectionObject.Enums.EarthingSystem.ProtectiveEarthing">
+            <summary>
+            </summary>
+        </member>
+        <member name="F:Comos.WSP.Interfaces.Connections.ConnectionObject.Enums.EarthingSystem.FunctionalEarthing">
+            <summary>
+            </summary>
+        </member>
+        <member name="P:Comos.WSP.Interfaces.Connections.ConnectionObject.IConnectionObjectBase.ComosObject">
+            <summary>
+                The connection database object which is set as wire at the connected connectors
+            </summary>
+        </member>
+        <member name="M:Comos.WSP.Interfaces.Connections.ConnectionObject.IConnectionObjectBase.InitWithObject(Plt.IComosDDevice)">
+            <summary>
+                Initializes the connection object interface with an existing connection database object.
+                Useful if it cannot be created with its constructor.
+            </summary>
+            <param name="comosObject">The connection object database object</param>
+        </member>
+        <member name="M:Comos.WSP.Interfaces.Connections.ConnectionObject.IConnectionObjectBase.InitWithConnector(Plt.IComosDConnector)">
+            <summary>
+                Initializes the connection object interface with an existing connection database object at the given connector.
+                Useful if it cannot be created with its constructor.
+                If no connection object exists, it will be created.
+            </summary>
+            <param name="connector">One of the (connected) connectors that might have a connection object</param>
+        </member>
+        <member name="M:Comos.WSP.Interfaces.Connections.ConnectionObject.IConnectionObjectBase.InitWithConnector2(Plt.IComosDConnector,System.Boolean)">
+            <summary>
+                Initializes the connection object interface with an existing connection database object at the given connector.
+                Useful if it cannot be created with its constructor.
+            </summary>
+            <param name="connector">One of the (connected) connectors that might have a connection object</param>
+            <param name="noConnObj">
+                If "true" no connection object will be created when this interface initializes an the connector is not related with
+                an existing connection object.
+                This is useful when the object shall be created by modifying connection related properties.
+                If "false" same behavior as "InitWithConnector". A connection object will be created if the connector does not have
+                one already.
+            </param>
+        </member>
+        <member name="M:Comos.WSP.Interfaces.Connections.ConnectionObject.IConnectionObjectBase.Reset">
+            <summary>
+                Resets each property to its default value
+            </summary>
+        </member>
+        <member name="P:Comos.WSP.Interfaces.Connections.ConnectionObject.IConnectionObjectBaseOwn.OwnCrossSection">
+            <summary>
+                The connection cross-section.
+                Either set directly here or obtained from a related wire/cable
+                If a wire is set the value cannot be changed here.
+            </summary>
+        </member>
+        <member name="P:Comos.WSP.Interfaces.Connections.ConnectionObject.IConnectionObjectBaseInherited.CrossSectionUnit">
+            <summary>
+                The unit of the current cross-section
+            </summary>
+        </member>
+        <member name="P:Comos.WSP.Interfaces.Connections.ConnectionObject.IConnectionObjectBaseInherited.CrossSection">
+            <summary>
+                The connection cross-section.
+                Either set directly here or obtained from a related wire/cable
+                If a wire is set the value cannot be changed here.
+            </summary>
+        </member>
+        <member name="P:Comos.WSP.Interfaces.Connections.ConnectionObject.IConnectionObjectBaseInherited.FromConnector">
+            <summary>
+                One of the (connected) connectors related with this connection object and a "Direction" set as "From"
+            </summary>
+        </member>
+        <member name="P:Comos.WSP.Interfaces.Connections.ConnectionObject.IConnectionObjectBaseInherited.ToConnector">
+            <summary>
+                One of the (connected) connectors related with this connection object and a "Direction" set as "To"
+            </summary>
+        </member>
+        <member name="P:Comos.WSP.Interfaces.Connections.ConnectionObject.IConnectionObjectBaseInherited.AWGDiameterValue">
+             <summary>
+                 Provides calculated AWG value based on crosssection value
+             </summary>
+            
+        </member>
+        <member name="P:Comos.WSP.Interfaces.Connections.ConnectionObject.IConnectionObjectBaseInherited.AWGDiameter">
+            <summary>
+                Provides string representation of AWG value
+            </summary>
+        </member>
+        <member name="P:Comos.WSP.Interfaces.Connections.ConnectionObject.IConnectionObjectBaseInherited.AWGDiameterValueUnit">
+            <summary>
+                Provides unit string for AWG value
+            </summary>
+        </member>
+        <member name="P:Comos.WSP.Interfaces.Connections.ConnectionObject.IConnectionObjectBaseInherited.AWGDiameterUnit">
+            <summary>
+                Provides string representation of AWG value's unit (AWG / kcmil)
+            </summary>
+        </member>
+        <member name="T:Comos.WSP.Interfaces.Connections.ConnectionObject.ICanReverseConnectionDirection">
+            <summary>
+            Adds functionality to reverse the direction of a connection.
+            </summary>
+        </member>
+        <member name="M:Comos.WSP.Interfaces.Connections.ConnectionObject.ICanReverseConnectionDirection.ReverseConnectionDirection">
+            <summary>
+            Reverses the direction of the connection the implementation represents.
+            </summary>
+        </member>
+        <member name="T:Comos.WSP.Interfaces.Connections.ConnectionObject.Internal.IConnectionObjectAutomation">
+            <summary>
+            </summary>
+        </member>
+        <member name="M:Comos.WSP.Interfaces.Connections.ConnectionObject.Internal.IConnectionObjectAutomation.InitWithObject(Plt.IComosDDevice)">
+            <summary>
+                Initializes the connection object interface with an existing connection database object.
+                Useful if it cannot be created with its constructor.
+            </summary>
+            <param name="comosObject">The connection object database object</param>
+        </member>
+        <member name="M:Comos.WSP.Interfaces.Connections.ConnectionObject.Internal.IConnectionObjectAutomation.InitWithConnector(Plt.IComosDConnector)">
+            <summary>
+                Initializes the connection object interface with an existing connection database object at the given connector.
+                Useful if it cannot be created with its constructor.
+                If no connection object exists, it will be created.
+            </summary>
+            <param name="connector">One of the (connected) connectors that might have a connection object</param>
+        </member>
+        <member name="M:Comos.WSP.Interfaces.Connections.ConnectionObject.Internal.IConnectionObjectAutomation.InitWithConnector2(Plt.IComosDConnector,System.Boolean)">
+            <summary>
+                Initializes the connection object interface with an existing connection database object at the given connector.
+                Useful if it cannot be created with its constructor.
+            </summary>
+            <param name="connector">One of the (connected) connectors that might have a connection object</param>
+            <param name="noConnObj">
+                If "true" no connection object will be created when this interface initializes an the connector is not related with
+                an existing connection object.
+                This is useful when the object shall be created by modifying connection related properties.
+                If "false" same behavior as "InitWithConnector". A connection object will be created if the connector does not have
+                one already.
+            </param>
+        </member>
+        <member name="P:Comos.WSP.Interfaces.Connections.ConnectionObject.Internal.IConnectionObjectAutomation.Label">
+            <summary>
+                gets or sets the Label to the connection object comos device
+            </summary>
+        </member>
+        <member name="P:Comos.WSP.Interfaces.Connections.ConnectionObject.Internal.IConnectionObjectAutomation.Cable">
+            <summary>
+                gets or sets the Cable, that either got set directly or indirectly via the wire property
+            </summary>
+        </member>
+        <member name="P:Comos.WSP.Interfaces.Connections.ConnectionObject.Internal.IConnectionObjectAutomation.ConnectionLengthUnit">
+            <summary>
+                Gets or sets the connection length unit of this connection
+            </summary>
+        </member>
+        <member name="P:Comos.WSP.Interfaces.Connections.ConnectionObject.Internal.IConnectionObjectAutomationConnector.Potential">
+            <summary>
+                Gets the log. Potential of this connection.
+            </summary>
+        </member>
+        <member name="P:Comos.WSP.Interfaces.Connections.ConnectionObject.Internal.IConnectionObjectAutomationConnector.Signal">
+            <summary>
+                Gets the Signal of this connection.
+            </summary>
+        </member>
+        <member name="P:Comos.WSP.Interfaces.Connections.ConnectionObject.Internal.IConnectionObjectAutomationConnector.ConnectorCategorieFrom">
+            <summary>
+                Gets or sets the categorie information of the related "From"-Connector
+            </summary>
+        </member>
+        <member name="P:Comos.WSP.Interfaces.Connections.ConnectionObject.Internal.IConnectionObjectAutomationConnector.ConnectorCategorieTo">
+            <summary>
+                Gets or sets the categorie information of the related "To"-Connector
+            </summary>
+        </member>
+        <member name="P:Comos.WSP.Interfaces.Connections.ConnectionObject.Internal.IConnectionObjectAutomationConnector.ConnectionLength">
+            <summary>
+                Gets or sets the connection length of this connection
+            </summary>
+        </member>
+        <member name="P:Comos.WSP.Interfaces.Connections.ConnectionObject.Internal.IConnectionObjectAutomationOwn.OwnConnectionEndTo">
+            <summary>
+                Gets or sets the "connection end to" at the connection object.
+                should return null as default value
+            </summary>
+        </member>
+        <member name="P:Comos.WSP.Interfaces.Connections.ConnectionObject.Internal.IConnectionObjectAutomationOwn.OwnConnectionEndFrom">
+            <summary>
+                Gets or sets the "connection end from" at the connection object.
+                should return null as default value
+            </summary>
+        </member>
+        <member name="P:Comos.WSP.Interfaces.Connections.ConnectionObject.Internal.IConnectionObjectAutomationOwn.OwnTypeInfo">
+            <summary>
+                gets or sets type info to the conneciton object
+                should return null as default value
+            </summary>
+        </member>
+        <member name="P:Comos.WSP.Interfaces.Connections.ConnectionObject.Internal.IConnectionObjectAutomationOwn.OwnConnectionLength">
+            <summary>
+                Gets or sets the connection length at the connection object
+                should have null as default value
+            </summary>
+        </member>
+        <member name="P:Comos.WSP.Interfaces.Connections.ConnectionObject.Internal.IConnectionObjectAutomationOwn.OwnLabel">
+            <summary>
+                Gets or sets the label of the connection object device
+                should return null when the device has "" set as label
+            </summary>
+        </member>
+        <member name="P:Comos.WSP.Interfaces.Connections.ConnectionObject.Internal.IConnectionObjectAutomationOwn.OwnCable">
+            <summary>
+                Gets or sets the cable directly to the connection object
+                not indirectly read from the wire
+            </summary>
+        </member>
+        <member name="P:Comos.WSP.Interfaces.Connections.ConnectionObject.Internal.IConnectionObjectAutomationInherited.ConnectionEndTo">
+            <summary>
+                Gets or sets the "connection end to" at the connection object.
+                Or displays the "connection end to" from the related wire.
+            </summary>
+        </member>
+        <member name="P:Comos.WSP.Interfaces.Connections.ConnectionObject.Internal.IConnectionObjectAutomationInherited.ConnectionEndFrom">
+            <summary>
+                Gets or sets the "connection end from" at the connection object.
+                Or displays the "connection end from" from the related wire.
+            </summary>
+        </member>
+        <member name="P:Comos.WSP.Interfaces.Connections.ConnectionObject.Internal.IConnectionObjectAutomationInherited.TypeInfo">
+             <summary>
+                 gets or sets the type info
+                 if a wire is set it will get read from the wire
+                 if no wire is set it will get read from the connection object
+                 if connection object has no value it will get read from the document
+            
+                 set will only set to the connecion object
+             </summary>
+        </member>
+        <member name="T:Comos.WSP.Interfaces.Connections.ConnectionObject.Internal.IConnectionObjectDesign">
+            <summary>
+            </summary>
+        </member>
+        <member name="M:Comos.WSP.Interfaces.Connections.ConnectionObject.Internal.IConnectionObjectDesign.InitWithObject(Plt.IComosDDevice)">
+            <summary>
+                Initializes the connection object interface with an existing connection database object.
+                Useful if it cannot be created with its constructor.
+            </summary>
+            <param name="comosObject">The connection object database object</param>
+        </member>
+        <member name="M:Comos.WSP.Interfaces.Connections.ConnectionObject.Internal.IConnectionObjectDesign.InitWithConnector(Plt.IComosDConnector)">
+            <summary>
+                Initializes the connection object interface with an existing connection database object at the given connector.
+                Useful if it cannot be created with its constructor.
+                If no connection object exists, it will be created.
+            </summary>
+            <param name="connector">One of the (connected) connectors that might have a connection object</param>
+        </member>
+        <member name="M:Comos.WSP.Interfaces.Connections.ConnectionObject.Internal.IConnectionObjectDesign.InitWithConnector2(Plt.IComosDConnector,System.Boolean)">
+            <summary>
+                Initializes the connection object interface with an existing connection database object at the given connector.
+                Useful if it cannot be created with its constructor.
+            </summary>
+            <param name="connector">One of the (connected) connectors that might have a connection object</param>
+            <param name="noConnObj">
+                If "true" no connection object will be created when this interface initializes an the connector is not related with
+                an existing connection object.
+                This is useful when the object shall be created by modifying connection related properties.
+                If "false" same behavior as "InitWithConnector". A connection object will be created if the connector does not have
+                one already.
+            </param>
+        </member>
+        <member name="P:Comos.WSP.Interfaces.Connections.ConnectionObject.Internal.IConnectionObjectDesignInherited.CableUsage">
+            <summary>
+            </summary>
+        </member>
+        <member name="T:Comos.WSP.Interfaces.Connections.ConnectionObject.Internal.IConnectionObjectDetail">
+            <summary>
+            </summary>
+        </member>
+        <member name="P:Comos.WSP.Interfaces.Connections.ConnectionObject.Internal.IConnectionObjectDetail.Cable">
+            <summary>
+                Gets the wire.MainDevice
+            </summary>
+        </member>
+        <member name="M:Comos.WSP.Interfaces.Connections.ConnectionObject.Internal.IConnectionObjectDetail.InitWithObject(Plt.IComosDDevice)">
+            <summary>
+                Initializes the connection object interface with an existing connection database object.
+                Useful if it cannot be created with its constructor.
+            </summary>
+            <param name="comosObject">The connection object database object</param>
+        </member>
+        <member name="M:Comos.WSP.Interfaces.Connections.ConnectionObject.Internal.IConnectionObjectDetail.InitWithConnector(Plt.IComosDConnector)">
+            <summary>
+                Initializes the connection object interface with an existing connection database object at the given connector.
+                Useful if it cannot be created with its constructor.
+                If no connection object exists, it will be created.
+            </summary>
+            <param name="connector">One of the (connected) connectors that might have a connection object</param>
+        </member>
+        <member name="M:Comos.WSP.Interfaces.Connections.ConnectionObject.Internal.IConnectionObjectDetail.InitWithConnector2(Plt.IComosDConnector,System.Boolean)">
+            <summary>
+                Initializes the connection object interface with an existing connection database object at the given connector.
+                Useful if it cannot be created with its constructor.
+            </summary>
+            <param name="connector">One of the (connected) connectors that might have a connection object</param>
+            <param name="noConnObj">
+                If "true" no connection object will be created when this interface initializes an the connector is not related with
+                an existing connection object.
+                This is useful when the object shall be created by modifying connection related properties.
+                If "false" same behavior as "InitWithConnector". A connection object will be created if the connector does not have
+                one already.
+            </param>
+        </member>
+        <member name="P:Comos.WSP.Interfaces.Connections.ConnectionObject.Internal.IConnectionObjectDetail.Earthingsystem">
+            <summary>
+                Contains information if a connection object is used for "protective earthing" or "functional earthing"
+            </summary>
+        </member>
+        <member name="M:Comos.WSP.Interfaces.Connections.ConnectionObject.Internal.IConnectionObjectDetail.HasShield(Plt.IComosDDevice@)">
+            <summary>
+                Checks if the connection object has a shield assigned and yields it.
+            </summary>
+        </member>
+        <member name="M:Comos.WSP.Interfaces.Connections.ConnectionObject.Internal.IConnectionObjectDetail.IsHalfOpen(Plt.IComosDConnector@)">
+            <summary>
+                Checks if the connection is half-open. Yields the closed-end connector
+            </summary>
+        </member>
+        <member name="P:Comos.WSP.Interfaces.Connections.ConnectionObject.Internal.IConnectionObjectDetailConnector.ConnectorEndFrom">
+            <summary>
+                Gets or sets the connector end (formerly wire end) from the related "From"-Connector
+            </summary>
+        </member>
+        <member name="P:Comos.WSP.Interfaces.Connections.ConnectionObject.Internal.IConnectionObjectDetailConnector.ConnectorEndTo">
+            <summary>
+                Gets or sets the connector end (formerly wire end) from the related "To"-Connector
+            </summary>
+        </member>
+        <member name="P:Comos.WSP.Interfaces.Connections.ConnectionObject.Internal.IConnectionObjectDetailConnector.FromConnectorEndHandlingValueOfCConnector">
+            <summary>
+                Gets the value of the "ConnectorEndHandling" attribute of "From" set at CConnector
+            </summary>
+        </member>
+        <member name="P:Comos.WSP.Interfaces.Connections.ConnectionObject.Internal.IConnectionObjectDetailConnector.ToConnectorEndHandlingValueOfCConnector">
+            <summary>
+                Gets the value of the "ConnectorEndHandling" attribute of "To" set at CConnector
+            </summary>
+        </member>
+        <member name="P:Comos.WSP.Interfaces.Connections.ConnectionObject.Internal.IConnectionObjectDetailOwn.OwnWireColor">
+            <summary>
+                Gets or sets the wire color at the connection object
+                If a wire object is set, the value cannot be overwritten by this interface
+            </summary>
+        </member>
+        <member name="P:Comos.WSP.Interfaces.Connections.ConnectionObject.Internal.IConnectionObjectDetailOwn.Wire">
+            <summary>
+                Gets or sets the connection object wire
+            </summary>
+        </member>
+        <member name="P:Comos.WSP.Interfaces.Connections.ConnectionObject.Internal.IConnectionObjectDetailInherited.WireColor">
+            <summary>
+                Gets or sets the wire color at the connection object
+                If a wire object is set, the value cannot be overwritten by this interface
+            </summary>
+        </member>
+        <member name="P:Comos.WSP.Interfaces.Connections.ConnectionObject.Internal.IConnectionObjectDetailInherited.BridgeType">
+            <summary>
+                Gets or sets the current bridge type
+            </summary>
+        </member>
+        <member name="P:Comos.WSP.Interfaces.Connections.ConnectionObject.Internal.IConnectionObjectDetailInherited.IsBridge">
+            <summary>
+                Resturns true if this is a bridge connection
+            </summary>
+        </member>
+        <member name="M:Comos.WSP.Interfaces.Connections.ConnectionObject.Internal.IConnectionObjectDetailValidation.CheckWire(Plt.IComosDDevice)">
+            <summary>
+            </summary>
+            <param name="wire"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Comos.WSP.Interfaces.Connections.ConnectionObject.Internal.IConnectionObjectDetailValidation.CheckWireAndProvideConnectors(Plt.IComosDDevice,System.Collections.Generic.IList{Plt.IComosDConnector}@)">
+            <summary>
+            </summary>
+            <param name="wire"></param>
+            <param name="connectors"></param>
+            <returns></returns>
+        </member>
+        <member name="T:Comos.WSP.Interfaces.Connections.ConnectionObject.Internal.IConnectionObjectSLine">
+            <summary>
+            </summary>
+        </member>
+        <member name="M:Comos.WSP.Interfaces.Connections.ConnectionObject.Internal.IConnectionObjectSLine.InitWithObject(Plt.IComosDDevice)">
+            <summary>
+                Initializes the connection object interface with an existing connection database object.
+                Useful if it cannot be created with its constructor.
+            </summary>
+            <param name="comosObject">The connection object database object</param>
+        </member>
+        <member name="M:Comos.WSP.Interfaces.Connections.ConnectionObject.Internal.IConnectionObjectSLine.InitWithConnector(Plt.IComosDConnector)">
+            <summary>
+                Initializes the connection object interface with an existing connection database object at the given connector.
+                Useful if it cannot be created with its constructor.
+                If no connection object exists, it will be created.
+            </summary>
+            <param name="connector">One of the (connected) connectors that might have a connection object</param>
+        </member>
+        <member name="M:Comos.WSP.Interfaces.Connections.ConnectionObject.Internal.IConnectionObjectSLine.InitWithConnector2(Plt.IComosDConnector,System.Boolean)">
+            <summary>
+                Initializes the connection object interface with an existing connection database object at the given connector.
+                Useful if it cannot be created with its constructor.
+            </summary>
+            <param name="connector">One of the (connected) connectors that might have a connection object</param>
+            <param name="noConnObj">
+                If "true" no connection object will be created when this interface initializes an the connector is not related with
+                an existing connection object.
+                This is useful when the object shall be created by modifying connection related properties.
+                If "false" same behavior as "InitWithConnector". A connection object will be created if the connector does not have
+                one already.
+            </param>
+        </member>
+        <member name="T:Comos.WSP.Interfaces.Connections.ConnectionObject.Internal.IGraphicalConnection">
+            <summary>
+            </summary>
+        </member>
+        <member name="P:Comos.WSP.Interfaces.Connections.ConnectionObject.Internal.IGraphicalConnection.LineColor">
+            <summary>
+                Gets or sets the connection line color
+            </summary>
+        </member>
+        <member name="P:Comos.WSP.Interfaces.Connections.ConnectionObject.Internal.IGraphicalConnection.LineLayer">
+            <summary>
+                Gets or sets the connection line layer
+            </summary>
+        </member>
+        <member name="P:Comos.WSP.Interfaces.Connections.ConnectionObject.Internal.IGraphicalConnection.LineType">
+            <summary>
+                Gets or sets the connection line type
+            </summary>
+        </member>
+        <member name="P:Comos.WSP.Interfaces.Connections.ConnectionObject.Internal.IGraphicalConnection.LineWidth">
+            <summary>
+                Gets or sets the connection line width
+            </summary>
+        </member>
+        <member name="P:Comos.WSP.Interfaces.Connections.ConnectionObject.Internal.IGraphicalConnection.LineWidthUnit">
+            <summary>
+                Gets or sets the connection line width unit
+            </summary>
+        </member>
+        <member name="P:Comos.WSP.Interfaces.Connections.ConnectionObject.Internal.IGraphicalConnection.ConnectionMode">
+            <summary>
+                Gets or sets the connection line mode
+            </summary>
+        </member>
+        <member name="M:Comos.WSP.Interfaces.Connections.ConnectionObject.Internal.IGraphicalConnection.GraphicalPropertiesExist">
+            <summary>
+                If true graphical properties were set at the connection object (except ConnectionMode)
+            </summary>
+        </member>
+        <member name="T:Comos.WSP.Interfaces.Connections.ConnectionObject.PropertyTypes.IComosColor">
+            <summary>
+            Capsols a comos color value and offers converseion to a .Net Color type
+            Used for Identifiication of Color Values 
+            </summary>
+        </member>
+        <member name="P:Comos.WSP.Interfaces.Connections.ConnectionObject.PropertyTypes.IComosColor.ComosColorValue">
+            <summary>
+            Comos Color Value(g/b/r)
+            </summary>
+        </member>
+        <member name="P:Comos.WSP.Interfaces.Connections.ConnectionObject.PropertyTypes.IComosColor.NetColor">
+            <summary>
+            .Net Color object for the Comos Color Value
+            </summary>
+        </member>
+        <member name="T:Comos.WSP.Interfaces.Connections.ConnectionObject.Scripting.IConnectionObjectAutomation">
+            <summary>
+            </summary>
+        </member>
+        <member name="P:Comos.WSP.Interfaces.Connections.ConnectionObject.Scripting.IConnectionObjectAutomation.ComosObject">
+            <summary>
+                The connection database object which is set as wire at the connected connectors
+            </summary>
+        </member>
+        <member name="P:Comos.WSP.Interfaces.Connections.ConnectionObject.Scripting.IConnectionObjectAutomation.FromConnector">
+            <summary>
+                One of the (connected) connectors related with this connection object and a "Direction" set as "From"
+            </summary>
+        </member>
+        <member name="P:Comos.WSP.Interfaces.Connections.ConnectionObject.Scripting.IConnectionObjectAutomation.ToConnector">
+            <summary>
+                One of the (connected) connectors related with this connection object and a "Direction" set as "To"
+            </summary>
+        </member>
+        <member name="P:Comos.WSP.Interfaces.Connections.ConnectionObject.Scripting.IConnectionObjectAutomation.LineColor">
+            <summary>
+                Gets or sets the connection line color
+            </summary>
+        </member>
+        <member name="P:Comos.WSP.Interfaces.Connections.ConnectionObject.Scripting.IConnectionObjectAutomation.LineType">
+            <summary>
+                Gets or sets the connection line type
+            </summary>
+        </member>
+        <member name="P:Comos.WSP.Interfaces.Connections.ConnectionObject.Scripting.IConnectionObjectAutomation.LineWidth">
+            <summary>
+                Gets or sets the connection line width
+            </summary>
+        </member>
+        <member name="P:Comos.WSP.Interfaces.Connections.ConnectionObject.Scripting.IConnectionObjectAutomation.LineWidthUnit">
+            <summary>
+                Gets or sets the connection line width
+            </summary>
+        </member>
+        <member name="P:Comos.WSP.Interfaces.Connections.ConnectionObject.Scripting.IConnectionObjectAutomation.LineLayer">
+            <summary>
+                Gets or sets the connection line layer
+            </summary>
+        </member>
+        <member name="P:Comos.WSP.Interfaces.Connections.ConnectionObject.Scripting.IConnectionObjectAutomation.CrossSection">
+            <summary>
+                The connection cross-section.
+                Either set directly here or obtained from a related wire/cable
+                If a wire is set the value cannot be changed here.
+            </summary>
+        </member>
+        <member name="P:Comos.WSP.Interfaces.Connections.ConnectionObject.Scripting.IConnectionObjectAutomation.CrossSectionUnit">
+            <summary>
+                The unit of the current cross-section
+            </summary>
+        </member>
+        <member name="P:Comos.WSP.Interfaces.Connections.ConnectionObject.Scripting.IConnectionObjectAutomation.Potential">
+            <summary>
+                Gets or sets the log. Potential of this connection.
+                Will also be set at the connected connectors.
+                If no connection database object exists it will be created by setting this property!
+            </summary>
+        </member>
+        <member name="P:Comos.WSP.Interfaces.Connections.ConnectionObject.Scripting.IConnectionObjectAutomation.Signal">
+            <summary>
+                Gets or sets the Signal of this connection.
+                Will also be set at the connected connectors.
+                If no connection database object exists it will be created by setting this property!
+            </summary>
+        </member>
+        <member name="P:Comos.WSP.Interfaces.Connections.ConnectionObject.Scripting.IConnectionObjectAutomation.ConnectorCategorieFrom">
+            <summary>
+                Gets or sets the categorie information of the related "From"-Connector
+            </summary>
+        </member>
+        <member name="P:Comos.WSP.Interfaces.Connections.ConnectionObject.Scripting.IConnectionObjectAutomation.ConnectorCategorieTo">
+            <summary>
+                Gets or sets the categorie information of the related "To"-Connector
+            </summary>
+        </member>
+        <member name="P:Comos.WSP.Interfaces.Connections.ConnectionObject.Scripting.IConnectionObjectAutomation.ConnectionEndFrom">
+            <summary>
+                Gets or sets the "connection end from" at the connection object.
+                Or displays the "connection end from" from the related wire.
+            </summary>
+        </member>
+        <member name="P:Comos.WSP.Interfaces.Connections.ConnectionObject.Scripting.IConnectionObjectAutomation.ConnectionEndTo">
+            <summary>
+                Gets or sets the "connection end to" at the connection object.
+                Or displays the "connection end to" from the related wire.
+            </summary>
+        </member>
+        <member name="P:Comos.WSP.Interfaces.Connections.ConnectionObject.Scripting.IConnectionObjectAutomation.Label">
+            <summary>
+                Gets or sets the connection object label
+            </summary>
+        </member>
+        <member name="P:Comos.WSP.Interfaces.Connections.ConnectionObject.Scripting.IConnectionObjectAutomation.ConnectionLength">
+            <summary>
+                Gets or sets the connection length
+            </summary>
+        </member>
+        <member name="P:Comos.WSP.Interfaces.Connections.ConnectionObject.Scripting.IConnectionObjectAutomation.ConnectionLengthUnit">
+            <summary>
+                Gets or sets the connection length unit
+            </summary>
+        </member>
+        <member name="P:Comos.WSP.Interfaces.Connections.ConnectionObject.Scripting.IConnectionObjectAutomation.Cable">
+            <summary>
+                Gets or sets the cable
+            </summary>
+        </member>
+        <member name="M:Comos.WSP.Interfaces.Connections.ConnectionObject.Scripting.IConnectionObjectAutomation.InitWithObject(Plt.IComosDDevice)">
+            <summary>
+                Initializes the connection object interface with an existing connection database object.
+                Useful if it cannot be created with its constructor.
+            </summary>
+            <param name="comosObject">The connection object database object</param>
+        </member>
+        <member name="M:Comos.WSP.Interfaces.Connections.ConnectionObject.Scripting.IConnectionObjectAutomation.InitWithConnector(Plt.IComosDConnector)">
+            <summary>
+                Initializes the connection object interface with an existing connection database object at the given connector.
+                Useful if it cannot be created with its constructor.
+                If no connection object exists, it will be created.
+            </summary>
+            <param name="connector">One of the (connected) connectors that might have a connection object</param>
+        </member>
+        <member name="M:Comos.WSP.Interfaces.Connections.ConnectionObject.Scripting.IConnectionObjectAutomation.InitWithConnector2(Plt.IComosDConnector,System.Boolean)">
+            <summary>
+                Initializes the connection object interface with an existing connection database object at the given connector.
+                Useful if it cannot be created with its constructor.
+            </summary>
+            <param name="connector">One of the (connected) connectors that might have a connection object</param>
+            <param name="noConnObj">
+                If "true" no connection object will be created when this interface initializes an the connector is not related with
+                an existing connection object.
+                This is useful when the object shall be created by modifying connection related properties.
+                If "false" same behavior as "InitWithConnector". A connection object will be created if the connector does not have
+                one already.
+            </param>
+        </member>
+        <member name="M:Comos.WSP.Interfaces.Connections.ConnectionObject.Scripting.IConnectionObjectAutomation.GraphicalPropertiesExist">
+            <summary>
+                If true graphical properties were set at the connection object (except ConnectionMode)
+            </summary>
+        </member>
+        <member name="M:Comos.WSP.Interfaces.Connections.ConnectionObject.Scripting.IConnectionObjectAutomation.Reset">
+            <summary>
+                Resets each property to its default value
+            </summary>
+        </member>
+        <member name="P:Comos.WSP.Interfaces.Connections.ConnectionObject.Scripting.IConnectionObjectAutomation.AWGDiameterValue">
+            <summary>
+                Provides calculated American Wire Gauge (AWG) diameter value based on crosssection value
+            </summary>
+        </member>
+        <member name="P:Comos.WSP.Interfaces.Connections.ConnectionObject.Scripting.IConnectionObjectAutomation.AWGDiameter">
+            <summary>
+                Provides string representation of American Wire Gauge (AWG) diameter value
+            </summary>
+        </member>
+        <member name="P:Comos.WSP.Interfaces.Connections.ConnectionObject.Scripting.IConnectionObjectAutomation.AWGDiameterValueUnit">
+            <summary>
+                Provides string representation of American Wire Gauge (AWG) diameter unit
+            </summary>
+        </member>
+        <member name="P:Comos.WSP.Interfaces.Connections.ConnectionObject.Scripting.IConnectionObjectAutomation.AWGDiameterUnit">
+            <summary>
+                Provides string representation of American Wire Gauge (AWG) unit (AWG / kcmil)
+            </summary>
+        </member>
+        <member name="T:Comos.WSP.Interfaces.Connections.ConnectionObject.Scripting.IConnectionObjectDesign">
+            <summary>
+            </summary>
+        </member>
+        <member name="P:Comos.WSP.Interfaces.Connections.ConnectionObject.Scripting.IConnectionObjectDesign.ComosObject">
+            <summary>
+                The connection database object which is set as wire at the connected connectors
+            </summary>
+        </member>
+        <member name="P:Comos.WSP.Interfaces.Connections.ConnectionObject.Scripting.IConnectionObjectDesign.FromConnector">
+            <summary>
+                One of the (connected) connectors related with this connection object and a "Direction" set as "From"
+            </summary>
+        </member>
+        <member name="P:Comos.WSP.Interfaces.Connections.ConnectionObject.Scripting.IConnectionObjectDesign.ToConnector">
+            <summary>
+                One of the (connected) connectors related with this connection object and a "Direction" set as "To"
+            </summary>
+        </member>
+        <member name="P:Comos.WSP.Interfaces.Connections.ConnectionObject.Scripting.IConnectionObjectDesign.LineColor">
+            <summary>
+                Gets or sets the connection line color
+            </summary>
+        </member>
+        <member name="P:Comos.WSP.Interfaces.Connections.ConnectionObject.Scripting.IConnectionObjectDesign.LineType">
+            <summary>
+                Gets or sets the connection line type
+            </summary>
+        </member>
+        <member name="P:Comos.WSP.Interfaces.Connections.ConnectionObject.Scripting.IConnectionObjectDesign.LineWidth">
+            <summary>
+                Gets or sets the connection line width
+            </summary>
+        </member>
+        <member name="P:Comos.WSP.Interfaces.Connections.ConnectionObject.Scripting.IConnectionObjectDesign.LineLayer">
+            <summary>
+                Gets or sets the connection line layer
+            </summary>
+        </member>
+        <member name="P:Comos.WSP.Interfaces.Connections.ConnectionObject.Scripting.IConnectionObjectDesign.CrossSection">
+            <summary>
+                The connection cross-section.
+                Either set directly here or obtained from a related wire/cable
+                If a wire is set the value cannot be changed here.
+            </summary>
+        </member>
+        <member name="P:Comos.WSP.Interfaces.Connections.ConnectionObject.Scripting.IConnectionObjectDesign.CrossSectionUnit">
+            <summary>
+                The unit of the current cross-section
+            </summary>
+        </member>
+        <member name="P:Comos.WSP.Interfaces.Connections.ConnectionObject.Scripting.IConnectionObjectDesign.Wire">
+            <summary>
+                Gets or sets the connection object wire
+            </summary>
+        </member>
+        <member name="P:Comos.WSP.Interfaces.Connections.ConnectionObject.Scripting.IConnectionObjectDesign.Signal">
+            <summary>
+                Gets or sets the Signal of this connection.
+                Will also be set at the connected connectors.
+                If no connection database object exists it will be created by setting this property!
+            </summary>
+        </member>
+        <member name="P:Comos.WSP.Interfaces.Connections.ConnectionObject.Scripting.IConnectionObjectDesign.Label">
+            <summary>
+                Gets or sets the connection object label
+            </summary>
+        </member>
+        <member name="P:Comos.WSP.Interfaces.Connections.ConnectionObject.Scripting.IConnectionObjectDesign.Potential">
+            <summary>
+                Gets or sets the log. Potential of this connection.
+                Will also be set at the connected connectors.
+                If no connection database object exists it will be created by setting this property!
+            </summary>
+        </member>
+        <member name="P:Comos.WSP.Interfaces.Connections.ConnectionObject.Scripting.IConnectionObjectDesign.BridgeType">
+            <summary>
+                Gets or sets the current bridge type
+            </summary>
+        </member>
+        <member name="P:Comos.WSP.Interfaces.Connections.ConnectionObject.Scripting.IConnectionObjectDesign.ConnectorEndFrom">
+            <summary>
+                Gets or sets the connector end (formerly wire end) from the related "From"-Connector
+            </summary>
+        </member>
+        <member name="P:Comos.WSP.Interfaces.Connections.ConnectionObject.Scripting.IConnectionObjectDesign.ConnectorEndTo">
+            <summary>
+                Gets or sets the connector end (formerly wire end) from the related "To"-Connector
+            </summary>
+        </member>
+        <member name="P:Comos.WSP.Interfaces.Connections.ConnectionObject.Scripting.IConnectionObjectDesign.ConnectionEndFrom">
+            <summary>
+                Gets or sets the "connection end from" at the connection object.
+                Or displays the "connection end from" from the related wire.
+            </summary>
+        </member>
+        <member name="P:Comos.WSP.Interfaces.Connections.ConnectionObject.Scripting.IConnectionObjectDesign.ConnectionEndTo">
+            <summary>
+                Gets or sets the "connection end to" at the connection object.
+                Or displays the "connection end to" from the related wire.
+            </summary>
+        </member>
+        <member name="P:Comos.WSP.Interfaces.Connections.ConnectionObject.Scripting.IConnectionObjectDesign.WireColor">
+            <summary>
+                Gets or sets the wire color at the connection object
+                If a wire object is set, the value cannot be overwritten by this interface
+            </summary>
+        </member>
+        <member name="P:Comos.WSP.Interfaces.Connections.ConnectionObject.Scripting.IConnectionObjectDesign.IsBridge">
+            <summary>
+                Resturns true if this is a bridge connection
+            </summary>
+        </member>
+        <member name="P:Comos.WSP.Interfaces.Connections.ConnectionObject.Scripting.IConnectionObjectDesign.ConnectionLength">
+            <summary>
+                Gets or sets the connection length
+            </summary>
+        </member>
+        <member name="P:Comos.WSP.Interfaces.Connections.ConnectionObject.Scripting.IConnectionObjectDesign.ConnectionLengthUnit">
+            <summary>
+                Gets or sets the connection length unit
+            </summary>
+        </member>
+        <member name="P:Comos.WSP.Interfaces.Connections.ConnectionObject.Scripting.IConnectionObjectDesign.Cable">
+            <summary>
+                Gets the wire.MainDevice
+            </summary>
+        </member>
+        <member name="P:Comos.WSP.Interfaces.Connections.ConnectionObject.Scripting.IConnectionObjectDesign.ConnectorCategorieFrom">
+            <summary>
+                Gets or sets the categorie information of the related "From"-Connector
+            </summary>
+        </member>
+        <member name="P:Comos.WSP.Interfaces.Connections.ConnectionObject.Scripting.IConnectionObjectDesign.ConnectorCategorieTo">
+            <summary>
+                Gets or sets the categorie information of the related "To"-Connector
+            </summary>
+        </member>
+        <member name="M:Comos.WSP.Interfaces.Connections.ConnectionObject.Scripting.IConnectionObjectDesign.InitWithObject(Plt.IComosDDevice)">
+            <summary>
+                Initializes the connection object interface with an existing connection database object.
+                Useful if it cannot be created with its constructor.
+            </summary>
+            <param name="comosObject">The connection object database object</param>
+        </member>
+        <member name="M:Comos.WSP.Interfaces.Connections.ConnectionObject.Scripting.IConnectionObjectDesign.InitWithConnector(Plt.IComosDConnector)">
+            <summary>
+                Initializes the connection object interface with an existing connection database object at the given connector.
+                Useful if it cannot be created with its constructor.
+                If no connection object exists, it will be created.
+            </summary>
+            <param name="connector">One of the (connected) connectors that might have a connection object</param>
+        </member>
+        <member name="M:Comos.WSP.Interfaces.Connections.ConnectionObject.Scripting.IConnectionObjectDesign.InitWithConnector2(Plt.IComosDConnector,System.Boolean)">
+            <summary>
+                Initializes the connection object interface with an existing connection database object at the given connector.
+                Useful if it cannot be created with its constructor.
+            </summary>
+            <param name="connector">One of the (connected) connectors that might have a connection object</param>
+            <param name="noConnObj">
+                If "true" no connection object will be created when this interface initializes an the connector is not related with
+                an existing connection object.
+                This is useful when the object shall be created by modifying connection related properties.
+                If "false" same behavior as "InitWithConnector". A connection object will be created if the connector does not have
+                one already.
+            </param>
+        </member>
+        <member name="M:Comos.WSP.Interfaces.Connections.ConnectionObject.Scripting.IConnectionObjectDesign.GraphicalPropertiesExist">
+            <summary>
+                If true graphical properties were set at the connection object (except ConnectionMode)
+            </summary>
+        </member>
+        <member name="M:Comos.WSP.Interfaces.Connections.ConnectionObject.Scripting.IConnectionObjectDesign.CheckWire(Plt.IComosDDevice)">
+            <summary>
+            </summary>
+            <param name="wire"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Comos.WSP.Interfaces.Connections.ConnectionObject.Scripting.IConnectionObjectDesign.Reset">
+            <summary>
+                Resets each property to its default value
+            </summary>
+        </member>
+        <member name="P:Comos.WSP.Interfaces.Connections.ConnectionObject.Scripting.IConnectionObjectDesign.CorrespondingConnectorFrom">
+            <summary>
+            returns the Main (Base) conector used by designCO ("inherit" parent of the CRConn)
+            </summary>
+        </member>
+        <member name="P:Comos.WSP.Interfaces.Connections.ConnectionObject.Scripting.IConnectionObjectDesign.CorrespondingConnectorTo">
+            <summary>
+            returns the Main (Base) conector used by designCO ("inherit" parent of the CRConn)
+            </summary>
+        </member>
+        <member name="P:Comos.WSP.Interfaces.Connections.ConnectionObject.Scripting.IConnectionObjectDesign.CableUsage">
+            <summary>
+            </summary>
+        </member>
+        <member name="P:Comos.WSP.Interfaces.Connections.ConnectionObject.Scripting.IConnectionObjectDesign.CRNetMask">
+            <summary>
+            returs the netmask the connection belongs to (read from Base/CR Conns from/to)
+            </summary>
+        </member>
+        <member name="T:Comos.WSP.Interfaces.Connections.ConnectionObject.Scripting.IConnectionObjectDetail">
+            <summary>
+            </summary>
+        </member>
+        <member name="P:Comos.WSP.Interfaces.Connections.ConnectionObject.Scripting.IConnectionObjectDetail.ComosObject">
+            <summary>
+                The connection database object which is set as wire at the connected connectors
+            </summary>
+        </member>
+        <member name="P:Comos.WSP.Interfaces.Connections.ConnectionObject.Scripting.IConnectionObjectDetail.FromConnector">
+            <summary>
+                One of the (connected) connectors related with this connection object and a "Direction" set as "From"
+            </summary>
+        </member>
+        <member name="P:Comos.WSP.Interfaces.Connections.ConnectionObject.Scripting.IConnectionObjectDetail.ToConnector">
+            <summary>
+                One of the (connected) connectors related with this connection object and a "Direction" set as "To"
+            </summary>
+        </member>
+        <member name="P:Comos.WSP.Interfaces.Connections.ConnectionObject.Scripting.IConnectionObjectDetail.LineColor">
+            <summary>
+                Gets or sets the connection line color
+            </summary>
+        </member>
+        <member name="P:Comos.WSP.Interfaces.Connections.ConnectionObject.Scripting.IConnectionObjectDetail.LineType">
+            <summary>
+                Gets or sets the connection line type
+            </summary>
+        </member>
+        <member name="P:Comos.WSP.Interfaces.Connections.ConnectionObject.Scripting.IConnectionObjectDetail.LineWidth">
+            <summary>
+                Gets or sets the connection line width
+            </summary>
+        </member>
+        <member name="P:Comos.WSP.Interfaces.Connections.ConnectionObject.Scripting.IConnectionObjectDetail.LineLayer">
+            <summary>
+                Gets or sets the connection line layer
+            </summary>
+        </member>
+        <member name="P:Comos.WSP.Interfaces.Connections.ConnectionObject.Scripting.IConnectionObjectDetail.CrossSection">
+            <summary>
+                The connection cross-section.
+                Either set directly here or obtained from a related wire/cable
+                If a wire is set the value cannot be changed here.
+            </summary>
+        </member>
+        <member name="P:Comos.WSP.Interfaces.Connections.ConnectionObject.Scripting.IConnectionObjectDetail.CrossSectionUnit">
+            <summary>
+                The unit of the current cross-section
+            </summary>
+        </member>
+        <member name="P:Comos.WSP.Interfaces.Connections.ConnectionObject.Scripting.IConnectionObjectDetail.Wire">
+            <summary>
+                Gets or sets the connection object wire
+            </summary>
+        </member>
+        <member name="P:Comos.WSP.Interfaces.Connections.ConnectionObject.Scripting.IConnectionObjectDetail.Signal">
+            <summary>
+                Gets or sets the Signal of this connection.
+                Will also be set at the connected connectors.
+                If no connection database object exists it will be created by setting this property!
+            </summary>
+        </member>
+        <member name="P:Comos.WSP.Interfaces.Connections.ConnectionObject.Scripting.IConnectionObjectDetail.Label">
+            <summary>
+                Gets or sets the connection object label
+            </summary>
+        </member>
+        <member name="P:Comos.WSP.Interfaces.Connections.ConnectionObject.Scripting.IConnectionObjectDetail.Potential">
+            <summary>
+                Gets or sets the log. Potential of this connection.
+                Will also be set at the connected connectors.
+                If no connection database object exists it will be created by setting this property!
+            </summary>
+        </member>
+        <member name="P:Comos.WSP.Interfaces.Connections.ConnectionObject.Scripting.IConnectionObjectDetail.BridgeType">
+            <summary>
+                Gets or sets the current bridge type
+            </summary>
+        </member>
+        <member name="P:Comos.WSP.Interfaces.Connections.ConnectionObject.Scripting.IConnectionObjectDetail.ConnectorEndFrom">
+            <summary>
+                Gets or sets the connector end (formerly wire end) from the related "From"-Connector
+            </summary>
+        </member>
+        <member name="P:Comos.WSP.Interfaces.Connections.ConnectionObject.Scripting.IConnectionObjectDetail.ConnectorEndTo">
+            <summary>
+                Gets or sets the connector end (formerly wire end) from the related "To"-Connector
+            </summary>
+        </member>
+        <member name="P:Comos.WSP.Interfaces.Connections.ConnectionObject.Scripting.IConnectionObjectDetail.ConnectionEndFrom">
+            <summary>
+                Gets or sets the "connection end from" at the connection object.
+                Or displays the "connection end from" from the related wire.
+            </summary>
+        </member>
+        <member name="P:Comos.WSP.Interfaces.Connections.ConnectionObject.Scripting.IConnectionObjectDetail.ConnectionEndTo">
+            <summary>
+                Gets or sets the "connection end to" at the connection object.
+                Or displays the "connection end to" from the related wire.
+            </summary>
+        </member>
+        <member name="P:Comos.WSP.Interfaces.Connections.ConnectionObject.Scripting.IConnectionObjectDetail.WireColor">
+            <summary>
+                Gets or sets the wire color at the connection object
+                If a wire object is set, the value cannot be overwritten by this interface
+            </summary>
+        </member>
+        <member name="P:Comos.WSP.Interfaces.Connections.ConnectionObject.Scripting.IConnectionObjectDetail.IsBridge">
+            <summary>
+                Resturns true if this is a bridge connection
+            </summary>
+        </member>
+        <member name="P:Comos.WSP.Interfaces.Connections.ConnectionObject.Scripting.IConnectionObjectDetail.ConnectionLength">
+            <summary>
+                Gets or sets the connection length
+            </summary>
+        </member>
+        <member name="P:Comos.WSP.Interfaces.Connections.ConnectionObject.Scripting.IConnectionObjectDetail.ConnectionLengthUnit">
+            <summary>
+                Gets or sets the connection length unit
+            </summary>
+        </member>
+        <member name="P:Comos.WSP.Interfaces.Connections.ConnectionObject.Scripting.IConnectionObjectDetail.Cable">
+            <summary>
+                Gets the wire.MainDevice
+            </summary>
+        </member>
+        <member name="P:Comos.WSP.Interfaces.Connections.ConnectionObject.Scripting.IConnectionObjectDetail.ConnectorCategorieFrom">
+            <summary>
+                Gets or sets the categorie information of the related "From"-Connector
+            </summary>
+        </member>
+        <member name="P:Comos.WSP.Interfaces.Connections.ConnectionObject.Scripting.IConnectionObjectDetail.ConnectorCategorieTo">
+            <summary>
+                Gets or sets the categorie information of the related "To"-Connector
+            </summary>
+        </member>
+        <member name="M:Comos.WSP.Interfaces.Connections.ConnectionObject.Scripting.IConnectionObjectDetail.InitWithObject(Plt.IComosDDevice)">
+            <summary>
+                Initializes the connection object interface with an existing connection database object.
+                Useful if it cannot be created with its constructor.
+            </summary>
+            <param name="comosObject">The connection object database object</param>
+        </member>
+        <member name="M:Comos.WSP.Interfaces.Connections.ConnectionObject.Scripting.IConnectionObjectDetail.InitWithConnector(Plt.IComosDConnector)">
+            <summary>
+                Initializes the connection object interface with an existing connection database object at the given connector.
+                Useful if it cannot be created with its constructor.
+                If no connection object exists, it will be created.
+            </summary>
+            <param name="connector">One of the (connected) connectors that might have a connection object</param>
+        </member>
+        <member name="M:Comos.WSP.Interfaces.Connections.ConnectionObject.Scripting.IConnectionObjectDetail.InitWithConnector2(Plt.IComosDConnector,System.Boolean)">
+            <summary>
+                Initializes the connection object interface with an existing connection database object at the given connector.
+                Useful if it cannot be created with its constructor.
+            </summary>
+            <param name="connector">One of the (connected) connectors that might have a connection object</param>
+            <param name="noConnObj">
+                If "true" no connection object will be created when this interface initializes an the connector is not related with
+                an existing connection object.
+                This is useful when the object shall be created by modifying connection related properties.
+                If "false" same behavior as "InitWithConnector". A connection object will be created if the connector does not have
+                one already.
+            </param>
+        </member>
+        <member name="M:Comos.WSP.Interfaces.Connections.ConnectionObject.Scripting.IConnectionObjectDetail.GraphicalPropertiesExist">
+            <summary>
+                If true graphical properties were set at the connection object (except ConnectionMode)
+            </summary>
+        </member>
+        <member name="M:Comos.WSP.Interfaces.Connections.ConnectionObject.Scripting.IConnectionObjectDetail.CheckWire(Plt.IComosDDevice)">
+            <summary>
+            </summary>
+            <param name="wire"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Comos.WSP.Interfaces.Connections.ConnectionObject.Scripting.IConnectionObjectDetail.Reset">
+            <summary>
+                Resets each property to its default value
+            </summary>
+        </member>
+        <member name="T:Comos.WSP.Interfaces.Connections.ConnectionObject.Scripting.IConnectionObjectSLine">
+            <summary>
+            </summary>
+        </member>
+        <member name="P:Comos.WSP.Interfaces.Connections.ConnectionObject.Scripting.IConnectionObjectSLine.ComosObject">
+            <summary>
+                The connection database object which is set as wire at the connected connectors
+            </summary>
+        </member>
+        <member name="P:Comos.WSP.Interfaces.Connections.ConnectionObject.Scripting.IConnectionObjectSLine.FromConnector">
+            <summary>
+                One of the (connected) connectors related with this connection object and a "Direction" set as "From"
+            </summary>
+        </member>
+        <member name="P:Comos.WSP.Interfaces.Connections.ConnectionObject.Scripting.IConnectionObjectSLine.ToConnector">
+            <summary>
+                One of the (connected) connectors related with this connection object and a "Direction" set as "To"
+            </summary>
+        </member>
+        <member name="P:Comos.WSP.Interfaces.Connections.ConnectionObject.Scripting.IConnectionObjectSLine.LineColor">
+            <summary>
+                Gets or sets the connection line color
+            </summary>
+        </member>
+        <member name="P:Comos.WSP.Interfaces.Connections.ConnectionObject.Scripting.IConnectionObjectSLine.LineType">
+            <summary>
+                Gets or sets the connection line type
+            </summary>
+        </member>
+        <member name="P:Comos.WSP.Interfaces.Connections.ConnectionObject.Scripting.IConnectionObjectSLine.LineWidth">
+            <summary>
+                Gets or sets the connection line width
+            </summary>
+        </member>
+        <member name="P:Comos.WSP.Interfaces.Connections.ConnectionObject.Scripting.IConnectionObjectSLine.LineLayer">
+            <summary>
+                Gets or sets the connection line layer
+            </summary>
+        </member>
+        <member name="P:Comos.WSP.Interfaces.Connections.ConnectionObject.Scripting.IConnectionObjectSLine.CrossSection">
+            <summary>
+                The connection cross-section.
+                Either set directly here or obtained from a related wire/cable
+                If a wire is set the value cannot be changed here.
+            </summary>
+        </member>
+        <member name="P:Comos.WSP.Interfaces.Connections.ConnectionObject.Scripting.IConnectionObjectSLine.CrossSectionUnit">
+            <summary>
+                The unit of the current cross-section
+            </summary>
+        </member>
+        <member name="P:Comos.WSP.Interfaces.Connections.ConnectionObject.Scripting.IConnectionObjectSLine.Potential">
+            <summary>
+                Gets or sets the log. Potential of this connection.
+                Will also be set at the connected connectors.
+                If no connection database object exists it will be created by setting this property!
+            </summary>
+        </member>
+        <member name="P:Comos.WSP.Interfaces.Connections.ConnectionObject.Scripting.IConnectionObjectSLine.Signal">
+            <summary>
+                Gets or sets the Signal of this connection.
+                Will also be set at the connected connectors.
+                If no connection database object exists it will be created by setting this property!
+            </summary>
+        </member>
+        <member name="P:Comos.WSP.Interfaces.Connections.ConnectionObject.Scripting.IConnectionObjectSLine.ConnectorCategorieFrom">
+            <summary>
+                Gets or sets the categorie information of the related "From"-Connector
+            </summary>
+        </member>
+        <member name="P:Comos.WSP.Interfaces.Connections.ConnectionObject.Scripting.IConnectionObjectSLine.ConnectorCategorieTo">
+            <summary>
+                Gets or sets the categorie information of the related "To"-Connector
+            </summary>
+        </member>
+        <member name="P:Comos.WSP.Interfaces.Connections.ConnectionObject.Scripting.IConnectionObjectSLine.ConnectionEndFrom">
+            <summary>
+                Gets or sets the "connection end from" at the connection object.
+                Or displays the "connection end from" from the related wire.
+            </summary>
+        </member>
+        <member name="P:Comos.WSP.Interfaces.Connections.ConnectionObject.Scripting.IConnectionObjectSLine.ConnectionEndTo">
+            <summary>
+                Gets or sets the "connection end to" at the connection object.
+                Or displays the "connection end to" from the related wire.
+            </summary>
+        </member>
+        <member name="P:Comos.WSP.Interfaces.Connections.ConnectionObject.Scripting.IConnectionObjectSLine.Label">
+            <summary>
+                Gets or sets the connection object label
+            </summary>
+        </member>
+        <member name="P:Comos.WSP.Interfaces.Connections.ConnectionObject.Scripting.IConnectionObjectSLine.ConnectionLength">
+            <summary>
+                Gets or sets the connection length
+            </summary>
+        </member>
+        <member name="P:Comos.WSP.Interfaces.Connections.ConnectionObject.Scripting.IConnectionObjectSLine.ConnectionLengthUnit">
+            <summary>
+                Gets or sets the connection length unit
+            </summary>
+        </member>
+        <member name="P:Comos.WSP.Interfaces.Connections.ConnectionObject.Scripting.IConnectionObjectSLine.Cable">
+            <summary>
+                Gets or sets the cable
+            </summary>
+        </member>
+        <member name="M:Comos.WSP.Interfaces.Connections.ConnectionObject.Scripting.IConnectionObjectSLine.InitWithObject(Plt.IComosDDevice)">
+            <summary>
+                Initializes the connection object interface with an existing connection database object.
+                Useful if it cannot be created with its constructor.
+            </summary>
+            <param name="comosObject">The connection object database object</param>
+        </member>
+        <member name="M:Comos.WSP.Interfaces.Connections.ConnectionObject.Scripting.IConnectionObjectSLine.InitWithConnector(Plt.IComosDConnector)">
+            <summary>
+                Initializes the connection object interface with an existing connection database object at the given connector.
+                Useful if it cannot be created with its constructor.
+                If no connection object exists, it will be created.
+            </summary>
+            <param name="connector">One of the (connected) connectors that might have a connection object</param>
+        </member>
+        <member name="M:Comos.WSP.Interfaces.Connections.ConnectionObject.Scripting.IConnectionObjectSLine.InitWithConnector2(Plt.IComosDConnector,System.Boolean)">
+            <summary>
+                Initializes the connection object interface with an existing connection database object at the given connector.
+                Useful if it cannot be created with its constructor.
+            </summary>
+            <param name="connector">One of the (connected) connectors that might have a connection object</param>
+            <param name="noConnObj">
+                If "true" no connection object will be created when this interface initializes an the connector is not related with
+                an existing connection object.
+                This is useful when the object shall be created by modifying connection related properties.
+                If "false" same behavior as "InitWithConnector". A connection object will be created if the connector does not have
+                one already.
+            </param>
+        </member>
+        <member name="M:Comos.WSP.Interfaces.Connections.ConnectionObject.Scripting.IConnectionObjectSLine.GraphicalPropertiesExist">
+            <summary>
+                If true graphical properties were set at the connection object (except ConnectionMode)
+            </summary>
+        </member>
+        <member name="M:Comos.WSP.Interfaces.Connections.ConnectionObject.Scripting.IConnectionObjectSLine.Reset">
+            <summary>
+                Resets each property to its default value
+            </summary>
+        </member>
+        <member name="T:Comos.WSP.Interfaces.Connections.IConnectionLineNet">
+            <summary>
+            </summary>
+        </member>
+        <member name="P:Comos.WSP.Interfaces.Connections.IConnectionLineNet.Points">
+            <summary>
+            </summary>
+        </member>
+        <member name="P:Comos.WSP.Interfaces.Connections.IConnectionLineNet.SplinePoints">
+            <summary>
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="T:Comos.WSP.Interfaces.Connections.ICoRoConn">
+            <summary>
+            </summary>
+        </member>
+        <member name="P:Comos.WSP.Interfaces.Connections.ICoRoConn.ScriptConnectionObjectAutomation">
+            <summary>
+            </summary>
+        </member>
+        <member name="P:Comos.WSP.Interfaces.Connections.ICoRoConn.ScriptConnectionObjectDetail">
+            <summary>
+            </summary>
+        </member>
+        <member name="P:Comos.WSP.Interfaces.Connections.ICoRoConn.ScriptConnectionObjectSLine">
+            <summary>
+            </summary>
+        </member>
+        <member name="P:Comos.WSP.Interfaces.Connections.ICoRoConn.ConnectionObjectDocObj">
+            <summary>
+            </summary>
+        </member>
+        <member name="M:Comos.WSP.Interfaces.Connections.ICoRoConn.UpdateDocObjQuadranten">
+            <summary>
+            </summary>
+        </member>
+        <member name="P:Comos.WSP.Interfaces.Connections.ICoRoConn.EarthingSystem">
+            <summary>
+            </summary>
+        </member>
+        <member name="T:Comos.WSP.Interfaces.Connections.IRoConnectorsNet">
+            <summary>
+            </summary>
+        </member>
+        <member name="M:Comos.WSP.Interfaces.Connections.IRoConnectorsNet.Clear">
+            <summary>
+            </summary>
+        </member>
+        <member name="T:Comos.WSP.Interfaces.Connections.IRoConnNet">
+            <summary>
+            </summary>
+        </member>
+        <member name="M:Comos.WSP.Interfaces.Connections.IRoConnNet.GetDZ(Plt.IComosDConnector@)">
+            <summary>
+            </summary>
+            <param name="cc"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Comos.WSP.Interfaces.Connections.IRoConnNet.FindCables(ComosWSPInterface.IWspRoConn)">
+            <summary>
+            </summary>
+            <param name="wspRoConn"></param>
+            <returns></returns>
+        </member>
+        <member name="P:Comos.WSP.Interfaces.Connections.IRoConnNet.HasText">
+            <summary>
+            Indicates whether or not the connection line has a text.
+            This affects the minimum gap between connection lines.
+            </summary>
+        </member>
+        <member name="M:Comos.WSP.Interfaces.Connections.IRoConnNet.GetMinimumSpace">
+            <summary>
+            Calculates the minimum distance between this and other lines.
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="P:Comos.WSP.Interfaces.Connections.IRoConnNet.Disposed">
+             <summary>
+            
+             </summary>
+        </member>
+        <member name="P:Comos.WSP.Interfaces.Connections.IRoConnNet.DoNotCloseDynamics">
+            <summary>
+            If "true" do not close or disconnect dynamic connections in OnDelete, create half open connections instead
+            </summary>
+        </member>
+        <member name="P:Comos.WSP.Interfaces.Connections.IRoConnNet.SubType">
+            <summary>
+            subType (category) of the referenced comos connectors
+            </summary>
+        </member>
+        <member name="M:Comos.WSP.Interfaces.Connections.IRoConnNet.RemoveConnectionFromComos(ComosWSPInterface.IWspRoConn)">
+            <summary>
+            </summary>
+            <param name="source">the connection line from which this method has been called</param>
+        </member>
+        <member name="T:Comos.WSP.Interfaces.Connections.IRoDimNet">
+            <summary>
+            </summary>
+        </member>
+        <member name="T:Comos.WSP.Interfaces.Connections.IWspPointNet">
+            <summary>
+            </summary>
+        </member>
+        <member name="P:Comos.WSP.Interfaces.Connections.IWspPointNet.Angle">
+            <summary>
+            </summary>
+        </member>
+        <member name="P:Comos.WSP.Interfaces.Connections.IWspPointNet.Class">
+            <summary>
+            </summary>
+        </member>
+        <member name="P:Comos.WSP.Interfaces.Connections.IWspPointNet.x">
+            <summary>
+            </summary>
+        </member>
+        <member name="P:Comos.WSP.Interfaces.Connections.IWspPointNet.y">
+            <summary>
+            </summary>
+        </member>
+        <member name="T:Comos.WSP.Interfaces.Connections.IWspPointsNet">
+            <summary>
+            </summary>
+        </member>
+        <member name="P:Comos.WSP.Interfaces.Connections.IWspPointsNet.Count">
+            <summary>
+            </summary>
+        </member>
+        <member name="P:Comos.WSP.Interfaces.Connections.IWspPointsNet.Item(System.Int32)">
+            <summary>
+            </summary>
+            <param name="index"></param>
+        </member>
+        <member name="P:Comos.WSP.Interfaces.Connections.IWspPointsNet.Item(System.String)">
+            <summary>
+            </summary>
+            <param name="key"></param>
+        </member>
+        <member name="M:Comos.WSP.Interfaces.Connections.IWspPointsNet.Add(System.Object,System.String)">
+            <summary>
+            </summary>
+            <param name="point"></param>
+            <param name="key"></param>
+        </member>
+        <member name="M:Comos.WSP.Interfaces.Connections.IWspPointsNet.AddEmpty(System.String)">
+            <summary>
+            </summary>
+            <param name="key"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Comos.WSP.Interfaces.Connections.IWspPointsNet.InsertBefore(System.Int32)">
+            <summary>
+            </summary>
+            <param name="index"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Comos.WSP.Interfaces.Connections.IWspPointsNet.InsertBefore(System.String)">
+            <summary>
+            </summary>
+            <param name="key"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Comos.WSP.Interfaces.Connections.IWspPointsNet.RemoveAt(System.Int32)">
+            <summary>
+            </summary>
+            <param name="index"></param>
+        </member>
+        <member name="M:Comos.WSP.Interfaces.Connections.IWspPointsNet.RemoveKey(System.String)">
+            <summary>
+            </summary>
+            <param name="key"></param>
+        </member>
+        <member name="M:Comos.WSP.Interfaces.Connections.IWspPointsNet.SetCount(System.Int32)">
+            <summary>
+            </summary>
+            <param name="count"></param>
+        </member>
+        <member name="T:Comos.WSP.Interfaces.Connections.IWspRoPotentialNet">
+            <summary>
+            </summary>
+        </member>
+        <member name="P:Comos.WSP.Interfaces.Connections.IWspRoPotentialNet.DocObj2">
+             <summary>
+            
+             </summary>
+        </member>
+        <member name="P:Comos.WSP.Interfaces.Controls.IStatusItem.CausingObject">
+            <summary>
+            The object which caused the error
+            </summary>
+        </member>
+        <member name="P:Comos.WSP.Interfaces.Controls.IStatusItem.Sender">
+            <summary>
+            [ERROR: Unknown property access] the sender.
+            </summary>
+            <value>The sender.</value>
+        </member>
+        <member name="P:Comos.WSP.Interfaces.Controls.IStatusItem.Description">
+            <summary>
+            Get the description
+            </summary>
+        </member>
+        <member name="P:Comos.WSP.Interfaces.Controls.IStatusItem.TraceLevel">
+            <summary>
+            Get the Trace level
+            </summary>
+        </member>
+        <member name="P:Comos.WSP.Interfaces.Controls.IStatusItem.Source">
+            <summary>
+            Get the Source (for example text of the line)
+            </summary>
+        </member>
+        <member name="P:Comos.WSP.Interfaces.Controls.IStatusItem.Position">
+            <summary>
+            Gets the Line Number.
+            </summary>
+            <value>The line.</value>
+        </member>
+        <member name="T:Comos.WSP.Interfaces.Device.IPfdObject">
+            <summary>
+            ADHAHU1, 1216675, 12.06.17:
+            Interface representing a Pipe *OR* a Device on a PID.
+            Common API for Pipes and Devices should be declared here!
+            </summary>
+        </member>
+        <member name="M:Comos.WSP.Interfaces.Device.IPfdObject.addDataFlowBreakFlag(System.UInt64)">
+            <summary>
+            Adds/attaches a "data flow break flag" to a pipe/device
+            </summary>
+            <param name="LID"> LID of the break flag to add </param>
+        </member>
+        <member name="M:Comos.WSP.Interfaces.Device.IPfdObject.removeDataFlowBreakFlag(System.UInt64)">
+            <summary>
+            Removes a "data flow break flag" to a pipe/device
+            </summary>
+            <param name="LID"> LID of the break flag to remove </param>
+        </member>
+        <member name="M:Comos.WSP.Interfaces.Device.IPfdObject.getDataFlowBreakFlags">
+            <summary>
+            Retrieves all attached break flags from a pipe/device
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="T:Comos.WSP.Interfaces.Device.IRoDeviceBaseNet">
+            <summary>
+            </summary>
+        </member>
+        <member name="P:Comos.WSP.Interfaces.Device.IRoDeviceBaseNet.Disposed">
+            <summary>
+            </summary>
+        </member>
+        <member name="M:Comos.WSP.Interfaces.Device.IRoDeviceBaseNet.ShutDown">
+            <summary>
+            </summary>
+        </member>
+        <member name="T:Comos.WSP.Interfaces.Device.IRoDeviceNet">
+            <summary>
+                Never ever make this COM-Visible!!!!!
+            </summary>
+        </member>
+        <member name="P:Comos.WSP.Interfaces.Device.IRoDeviceNet.Disposed">
+            <summary>
+            </summary>
+        </member>
+        <member name="M:Comos.WSP.Interfaces.Device.IRoDeviceNet.UpdatePath(System.Object,System.Object)">
+            <summary>
+                Alternative to WSPRoDevice.UpdatePath.
+                Extends the feature to work with an already collected list of ComosReportTexts.
+                This is useful if you want to call UpdatePath on each RoDevice.
+            </summary>
+            <param name="dColLanguages">Expected type [IComosDOwnCollection]</param>
+            <param name="listCText">Expected type [List{ComosReportText}]</param>
+        </member>
+        <member name="M:Comos.WSP.Interfaces.Device.IRoDeviceNet.SetSwitchInOut(System.Boolean)">
+            <summary>
+            Disables or enables the old option "Change Direction" by given <paramref name="value"/>.
+            </summary>
+            <param name="value"></param>
+        </member>
+        <member name="T:Comos.WSP.Interfaces.Device.IRoDevicePfdNet">
+            <summary>
+            ADNOJO6, 18.07.2017: Added ShowInconsistencies to avoid that XDoc_Pfd must know the
+            implementation of RoDevicePfd.
+            </summary>
+        </member>
+        <member name="M:Comos.WSP.Interfaces.Device.IRoInterchange.GetXMEContent">
+            <summary>
+            append to a crp full file
+            </summary>
+        </member>
+        <member name="M:Comos.WSP.Interfaces.Device.IRoInterchange.InitFromXMEContent(System.Object)">
+            <summary>
+            init from xml
+            </summary>
+        </member>
+        <member name="T:Comos.WSP.Interfaces.Device.IRoPolygonNet">
+            <summary>
+            </summary>
+        </member>
+        <member name="P:Comos.WSP.Interfaces.Device.IRoPolygonNet.PointCount">
+            <summary>
+            </summary>
+        </member>
+        <member name="M:Comos.WSP.Interfaces.Device.IRoPolygonNet.get_Point(System.Int32,System.Boolean)">
+            <summary>
+            </summary>
+            <param name="index"></param>
+            <param name="absCoord"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Comos.WSP.Interfaces.Device.IRoPolygonNet.set_Point(System.Int32,System.Boolean,ComosWSPInterface.PointD)">
+            <summary>
+            </summary>
+            <param name="index"></param>
+            <param name="absCoord"></param>
+            <param name="point"></param>
+        </member>
+        <member name="T:Comos.WSP.Interfaces.Device.IRoSegmentNet">
+            <summary>
+            </summary>
+        </member>
+        <member name="P:Comos.WSP.Interfaces.Device.IRoSegmentNet.MasterLid">
+             <summary>
+            
+             </summary>
+        </member>
+        <member name="P:Comos.WSP.Interfaces.Device.IRoSegmentNet.MasterGrayboxLid">
+             <summary>
+            
+             </summary>
+        </member>
+        <member name="P:Comos.WSP.Interfaces.Device.IRoSegmentNet.ParentSegmentLid">
+             <summary>
+            
+             </summary>
+        </member>
+        <member name="T:Comos.WSP.Interfaces.Device.IRoStatusInfo">
+            <summary>
+            This Interface should be used together with the StatusManager
+            It should simplify the handling of the StatusWindow
+            </summary>
+        </member>
+        <member name="M:Comos.WSP.Interfaces.Device.IRoStatusInfo.UpdateStatusWindow">
+            <summary>
+            shows all Warnings and Erros in the StatusWindow 
+            Note: function should only output, check should be done in the coresponding functions
+            </summary>
+        </member>
+        <member name="M:Comos.WSP.Interfaces.Device.IRoStatusInfo.CheckForWarnings">
+            <summary>
+            check for warnings
+            Note: this function should internally detect all warnings and add them to the StatusManager
+            </summary>
+            <returns>FALSE if everything is ok, TRUE if Warnings were found</returns>
+        </member>
+        <member name="M:Comos.WSP.Interfaces.Device.IRoStatusInfo.CheckForErrors">
+            <summary>
+            check for errors
+            Note: this function should internally detect all errors and add them to the StatusManager
+            </summary>
+            <returns>FALSE = if everything is ok, TRUE = if Warnings were found</returns>
+        </member>
+        <member name="M:Comos.WSP.Interfaces.Device.IRoStatusInfo.GetStatusInfo">
+            <summary>
+            Use this to check the result of the status check functions
+            The result can by combined in the int value esp. > 0 = no error, 1 = warnings, 2 = error, 3 = warnings + error
+            Note: this function should be internally used by UpdateStatusWindow(), too
+            </summary>
+            <returns>0 = everything is ok, > 0 = warnings or errors are found (may be combined int values)</returns>
+        </member>
+        <member name="T:Comos.WSP.Interfaces.eBlock.Enums.StatusValue">
+            <summary>
+            Defines the possible status values for an eBlock action.
+            </summary>
+            <history>
+            created by adveta1,07.07.2010,A3191-1
+            </history>
+        </member>
+        <member name="F:Comos.WSP.Interfaces.eBlock.Enums.StatusValue.Open">
+            <summary>
+            The action is neither fully configured nor executed.
+            </summary>
+        </member>
+        <member name="F:Comos.WSP.Interfaces.eBlock.Enums.StatusValue.Processing">
+            <summary>
+            The action is configured but not executed.
+            </summary>
+        </member>
+        <member name="F:Comos.WSP.Interfaces.eBlock.Enums.StatusValue.Finished">
+            <summary>
+            The action is already executed.
+            </summary>
+        </member>
+        <member name="F:Comos.WSP.Interfaces.eBlock.Enums.StatusValue.Unknown">
+            <summary>
+            The action status is unknown
+            </summary>
+        </member>
+        <member name="M:Comos.WSP.Interfaces.eBlock.IEBlockLibCom.GetGrayboxMainDocument(Plt.IComosBaseObject)">
+            <summary>
+                Searches recursivly after the MainDocument for a Document used at Graybox technique
+            </summary>
+            <param name="ComosObject">
+                Should be a Graybox or an Comos-Document!
+            </param>
+            <history>
+                created by adoeti0 10.06.2010: A2851:F18197
+                modified by adoeti0 11.06.2010
+            </history>
+            <remarks>
+                If the commited Document is part of Graybox technique and placed on an MainDocument,
+                than the MainDocument is returned.
+                1.Commited Object is a Graybox
+                1.1: Get DocObj from Graybox if placed, call RoUtilities.GU_GetMainDocumentViaDocObj
+                2.ComosObject is a Document
+                2.1: Owner is also a Graybox, then start goon with that one
+                2.2: This is MainDocument
+                Internal usage of RoUtilitie.GU_GetMainDocumentViaDocObj, if possible better use this
+                method directly.
+            </remarks>
+            <returns>
+                null: No MainDocument found
+                not null: The MainDocument
+            </returns>
+        </member>
+        <member name="M:Comos.WSP.Interfaces.Lib.IRILib.GetActualFlowDirection(Plt.IComosDConnector,Plt.IComosDConnector@)">
+            <summary>
+                ADHAHU1, 1383815, 10.08.2015:
+                Methode liefert die "tatsächliche" Fließrichtung für einen Konnektor abhängig davon,
+                wie es wirklich eingesetzt ist, und nicht, wie das von den COMOS-Einstellungen her (Input/Output)
+                konfiguriert ist.
+            </summary>
+            <param name="ComosConn"> Der zu untersuchende COMOS-Konnektor </param>
+            <param name="RelatedConn">
+                Der gefundene Pipe-Konnektor, der am nächsten liegt.
+                Wenn kein Pipe-Konnektor gefunden wird, dann wird der letzte Component-Konnektor geliefert,
+                der sich in der Kette befindet (siehe Beschreibung des Tasks "1383815"
+            </param>
+            <returns>
+                "I":  Tatsächliche Fließrichtung ist "Input"
+                "O":  Tatsächliche Fließrichtung ist "Output"
+            </returns>
+        </member>
+        <member name="M:Comos.WSP.Interfaces.Lib.IRILib.GetNextConnectorsInFlowDirection(Plt.IComosDConnector)">
+            <summary>
+                ADHAHU1, 1384000, 11.08.2015:
+                Methode liefert die in der Fließrichtung des übergebenen Konnektors verbundenen Bauteile (-Konnektoren).
+            </summary>
+            <param name="ComosConn"> Der zu untersuchende Konnektor </param>
+            <returns> Liste der in der Fließrichtung verbundenen Bauteile </returns>
+        </member>
+        <member name="T:Comos.WSP.Interfaces.Manager.IConnectionManager">
+            <summary>
+            </summary>
+        </member>
+        <member name="P:Comos.WSP.Interfaces.Manager.IConnectionManager.Container">
+            <summary>
+            </summary>
+        </member>
+        <member name="P:Comos.WSP.Interfaces.Manager.IConnectionManager.XDocPublic">
+            <summary>
+            </summary>
+        </member>
+        <member name="P:Comos.WSP.Interfaces.Manager.IConnectionManager.SFCFactory">
+             <summary>
+            
+             </summary>
+        </member>
+        <member name="M:Comos.WSP.Interfaces.Manager.IConnectionManager.CutOffConnection(ComosVBInterface.IConnectedRO,VBA.Collection@)">
+            <summary>
+            </summary>
+            <param name="selectedRo"></param>
+            <param name="roConns"></param>
+        </member>
+        <member name="M:Comos.WSP.Interfaces.Manager.IConnectionManager.DoCutConnection(REPORTLib.Object,ComosVBInterface.IRoConnector,ComosVBInterface.IRoConnector,VBA.Collection@,System.Collections.Generic.List{Plt.IComosDDevice},System.Boolean)">
+            <summary>
+            </summary>
+            <param name="connectionRo"></param>
+            <param name="roCon1"></param>
+            <param name="roCon2"></param>
+            <param name="roConns"></param>
+            <param name="cuttingDevices"></param>
+            <param name="isRecursive"></param>
+        </member>
+        <member name="M:Comos.WSP.Interfaces.Manager.IConnectionManager.GetNearestConnByPointExt(System.Double,System.Double,System.Int32,System.Double,System.Boolean,REPORTLib.Object,System.Boolean)">
+            <summary>
+            </summary>
+            <param name="x"></param>
+            <param name="y"></param>
+            <param name="pageNr"></param>
+            <param name="eps"></param>
+            <param name="filterSubDocuments"></param>
+            <param name="excludeRoConn"></param>
+            <param name="filterVirtualPageNr"></param>
+            <returns></returns>
+        </member>
+        <member name="T:Comos.WSP.Interfaces.RFID.IRFID">
+             <summary>
+            
+             </summary>
+        </member>
+        <member name="P:Comos.WSP.Interfaces.RFID.IRFID.DragObjectOwner">
+             <summary>
+            
+             </summary>
+        </member>
+        <member name="P:Comos.WSP.Interfaces.RFID.IRFID.DragObjectCreator">
+             <summary>
+            
+             </summary>
+        </member>
+        <member name="M:Comos.WSP.Interfaces.RFID.IRFID.Init">
+             <summary>
+            
+             </summary>
+        </member>
+        <member name="M:Comos.WSP.Interfaces.RFID.IRFID.RotateSymbolOneStep(REPORTLib.IItem)">
+             <summary>
+            
+             </summary>
+             <param name="ReportItem"></param>
+        </member>
+        <member name="M:Comos.WSP.Interfaces.RFID.IRFID.FixOneObjectDependencies(System.Object,System.Object)">
+             <summary>
+            
+             </summary>
+             <param name="ReportDocument"></param>
+             <param name="RoObject"></param>
+        </member>
+        <member name="M:Comos.WSP.Interfaces.RFID.IRFID.FixDependencies(System.Object)">
+             <summary>
+            
+             </summary>
+             <param name="ReportDocument"></param>
+        </member>
+        <member name="M:Comos.WSP.Interfaces.RFID.IRFID.SetRUIOcx(System.Object)">
+             <summary>
+            
+             </summary>
+             <param name="RUI"></param>
+        </member>
+        <member name="M:Comos.WSP.Interfaces.RFID.IRFID.BaseDevice(ComosVBInterface.IRoDevice)">
+             <summary>
+            
+             </summary>
+             <param name="Device"></param>
+             <returns></returns>
+        </member>
+        <member name="M:Comos.WSP.Interfaces.RFID.IRFID.GetBoolSpecValue(System.String,System.Boolean@,Plt.IComosDCDevice,System.String)">
+             <summary>
+            
+             </summary>
+             <param name="SpecName"></param>
+             <param name="SpecValue"></param>
+             <param name="cd"></param>
+             <param name="cChapter"></param>
+             <returns></returns>
+        </member>
+        <member name="M:Comos.WSP.Interfaces.RFID.IRFID.GetAllReportItemsInThisView(REPORTLib.IItem)">
+             <summary>
+            
+             </summary>
+             <param name="SelectedObject"></param>
+             <returns></returns>
+        </member>
+        <member name="M:Comos.WSP.Interfaces.RFID.IRFID.IsSequentialFunctionChart(System.String@)">
+             <summary>
+            
+             </summary>
+             <param name="CDevName"></param>
+             <returns></returns>
+        </member>
+        <member name="M:Comos.WSP.Interfaces.RFID.IRFID.IsSequentialFunctionChart2(Plt.IComosDCDevice@)">
+             <summary>
+            
+             </summary>
+             <param name="CDev"></param>
+             <returns></returns>
+        </member>
+        <member name="M:Comos.WSP.Interfaces.RFID.IRFID.RotateSymbolOneStep(REPORTLib.Item)">
+             <summary>
+            
+             </summary>
+             <param name="ri"></param>
+        </member>
+        <member name="M:Comos.WSP.Interfaces.RFID.IRFID.FixOneObjectDependencies(REPORTLib.Document,REPORTLib.Object)">
+             <summary>
+            
+             </summary>
+             <param name="ReportDocument"></param>
+             <param name="RoObject"></param>
+        </member>
+        <member name="M:Comos.WSP.Interfaces.RFID.IRFID.IsSequentialFunctionChart2(Plt.IComosDCDevice)">
+            <summary>
+                The identification of the step chain objects is done by HIERARCHICAL classification.
+            </summary>
+        </member>
+        <member name="P:Comos.WSP.Interfaces.Status.IStatusWindowManager.SilentMode">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="M:Comos.WSP.Interfaces.Status.IStatusWindowManager.AddStatus(REPORTLib.Object,Comos.WSP.Interfaces.Status.StatusType,System.String)">
+            <summary>
+            </summary>
+            <param name="container"></param>
+            <param name="type"></param>
+            <param name="msgText"></param>
+        </member>
+        <member name="M:Comos.WSP.Interfaces.Status.IStatusWindowManager.AddStatus(Plt.IComosBaseObject,Comos.WSP.Interfaces.Status.StatusType,System.String)">
+            <summary>
+            </summary>
+            <param name="baseObject"></param>
+            <param name="type"></param>
+            <param name="msgText"></param>
+        </member>
+        <member name="M:Comos.WSP.Interfaces.Status.IStatusWindowManager.ClearStatusWindow(System.String)">
+            <summary>
+            </summary>
+            <param name="checkDocumentTaskId"></param>
+        </member>
+        <member name="M:Comos.WSP.Interfaces.Status.IStatusWindowManager.HasStatus(REPORTLib.Object)">
+            <summary>
+            </summary>
+            <param name="container"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Comos.WSP.Interfaces.Status.IStatusWindowManager.HasStatus(Plt.IComosBaseObject)">
+            <summary>
+            </summary>
+            <param name="baseObject"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Comos.WSP.Interfaces.Status.IStatusWindowManager.LogStatus(REPORTLib.Object,System.Boolean,System.Boolean)">
+            <summary>
+            </summary>
+            <param name="container"></param>
+            <param name="showWindow"></param>
+            <param name="enableClearing"></param>
+        </member>
+        <member name="M:Comos.WSP.Interfaces.Status.IStatusWindowManager.LogStatus(Plt.IComosBaseObject,System.Boolean,System.Boolean)">
+            <summary>
+            </summary>
+            <param name="baseObject"></param>
+            <param name="showWindow"></param>
+            <param name="enableClearing"></param>
+        </member>
+        <member name="M:Comos.WSP.Interfaces.Status.IStatusWindowManager.RemoveAllMessages(REPORTLib.Object)">
+            <summary>
+            </summary>
+            <param name="container"></param>
+        </member>
+        <member name="M:Comos.WSP.Interfaces.Status.IStatusWindowManager.RemoveAllMessages(Plt.IComosBaseObject)">
+            <summary>
+            </summary>
+            <param name="baseObject"></param>
+        </member>
+        <member name="M:Comos.WSP.Interfaces.Status.IStatusWindowManager.RemoveAlreadyLoggedMessages(REPORTLib.Object)">
+            <summary>
+            </summary>
+            <param name="container"></param>
+        </member>
+        <member name="M:Comos.WSP.Interfaces.Status.IStatusWindowManager.RemoveAlreadyLoggedMessages(Plt.IComosBaseObject)">
+            <summary>
+            </summary>
+            <param name="baseObject"></param>
+        </member>
+        <member name="M:Comos.WSP.Interfaces.Status.IStatusWindowManager.RemoveMessage(REPORTLib.Object,System.String)">
+            <summary>
+            </summary>
+            <param name="container"></param>
+            <param name="msgText"></param>
+        </member>
+        <member name="M:Comos.WSP.Interfaces.Status.IStatusWindowManager.RemoveMessage(Plt.IComosBaseObject,System.String)">
+            <summary>
+            </summary>
+            <param name="baseObject"></param>
+            <param name="msgText"></param>
+        </member>
+        <member name="T:Comos.WSP.Interfaces.Status.IVbStatusWindowManager">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="M:Comos.WSP.Interfaces.Status.IVbStatusWindowManager.ClearStatusWindow(System.String)">
+            <summary>
+            
+            </summary>
+            <param name="checkDocumentTaskId"></param>
+        </member>
+        <member name="M:Comos.WSP.Interfaces.Status.IVbStatusWindowManager.RemoveAlreadyLoggedMessagesReport(REPORTLib.Object)">
+            <summary>
+            
+            </summary>
+            <param name="container"></param>
+        </member>
+        <member name="M:Comos.WSP.Interfaces.Status.IVbStatusWindowManager.RemoveAlreadyLoggedMessagesComos(Plt.IComosBaseObject)">
+            <summary>
+            
+            </summary>
+            <param name="baseObject"></param>
+        </member>
+        <member name="M:Comos.WSP.Interfaces.Status.IVbStatusWindowManager.RemoveAllMessagesReport(REPORTLib.Object)">
+            <summary>
+            
+            </summary>
+            <param name="container"></param>
+        </member>
+        <member name="M:Comos.WSP.Interfaces.Status.IVbStatusWindowManager.RemoveAllMessagesComos(Plt.IComosBaseObject)">
+            <summary>
+            
+            </summary>
+            <param name="baseObject"></param>
+        </member>
+        <member name="M:Comos.WSP.Interfaces.Status.IVbStatusWindowManager.AddStatusReport(REPORTLib.Object,Comos.WSP.Interfaces.Status.StatusType,System.String)">
+            <summary>
+            
+            </summary>
+            <param name="container"></param>
+            <param name="type"></param>
+            <param name="msgText"></param>
+        </member>
+        <member name="M:Comos.WSP.Interfaces.Status.IVbStatusWindowManager.AddStatusComos(Plt.IComosBaseObject,Comos.WSP.Interfaces.Status.StatusType,System.String)">
+            <summary>
+            
+            </summary>
+            <param name="baseObject"></param>
+            <param name="type"></param>
+            <param name="msgText"></param>
+        </member>
+        <member name="M:Comos.WSP.Interfaces.Status.IVbStatusWindowManager.LogStatusReport(REPORTLib.Object,System.Boolean)">
+            <summary>
+            
+            </summary>
+            <param name="container"></param>
+            <param name="show"></param>
+        </member>
+        <member name="M:Comos.WSP.Interfaces.Status.IVbStatusWindowManager.LogStatusComos(Plt.IComosBaseObject,System.Boolean)">
+            <summary>
+            
+            </summary>
+            <param name="baseObject"></param>
+            <param name="show"></param>
+        </member>
+        <member name="M:Comos.WSP.Interfaces.Status.IVbStatusWindowManager.HasStatusReport(REPORTLib.Object)">
+            <summary>
+            
+            </summary>
+            <param name="container"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Comos.WSP.Interfaces.Status.IVbStatusWindowManager.HasStatusComos(Plt.IComosBaseObject)">
+            <summary>
+            
+            </summary>
+            <param name="baseObject"></param>
+            <returns></returns>
+        </member>
+        <member name="T:Comos.WSP.Interfaces.Status.StatusType">
+            <summary>
+            </summary>
+        </member>
+        <member name="F:Comos.WSP.Interfaces.Status.StatusType.Warning">
+            <summary>
+            </summary>
+        </member>
+        <member name="F:Comos.WSP.Interfaces.Status.StatusType.Error">
+            <summary>
+            </summary>
+        </member>
+        <member name="F:Comos.WSP.Interfaces.Status.StatusType.Hint">
+            <summary>
+            </summary>
+        </member>
+        <member name="T:Comos.WSP.Interfaces.XDoc.IAutoConnect">
+            <summary>
+            Interface for the AutoConnect class.
+            </summary>
+        </member>
+        <member name="M:Comos.WSP.Interfaces.XDoc.IAutoConnect.SetContainer(REPORTLib.Document)">
+            <summary>
+            Sets the container.
+            </summary>
+            <param name="container">The container.</param>
+        </member>
+        <member name="M:Comos.WSP.Interfaces.XDoc.IAutoConnect.SetXDoc(ComosWSPInterface.IXDocElo)">
+            <summary>
+            Sets the X doc.
+            </summary>
+            <param name="xDoc">The X doc.</param>
+        </member>
+        <member name="M:Comos.WSP.Interfaces.XDoc.IAutoConnect.StartAutoConnect">
+            <summary>
+            Automatically connects....
+            </summary>
+        </member>
+        <member name="M:Comos.WSP.Interfaces.XDoc.IAutoConnect.AutoLoopCables">
+            <summary>
+            Automatically connects....
+            </summary>
+        </member>
+        <member name="T:Comos.WSP.Interfaces.XDoc.IAutoLoop">
+            <summary>
+            Interface for the AutoLoop class.
+            </summary>
+        </member>
+        <member name="M:Comos.WSP.Interfaces.XDoc.IAutoLoop.SetContainer(REPORTLib.Document)">
+            <summary>
+            Sets the container.
+            </summary>
+            <param name="container">The container.</param>
+        </member>
+        <member name="M:Comos.WSP.Interfaces.XDoc.IAutoLoop.SetXDoc(ComosWSPInterface.IXDocElo)">
+            <summary>
+            Sets the X doc.
+            </summary>
+            <param name="xDoc">The X doc.</param>
+        </member>
+        <member name="M:Comos.WSP.Interfaces.XDoc.IAutoLoop.StartAutoLoop(REPORTLib.Object)">
+            <summary>
+            Automatically places all objects connected with the StartObjs list.
+            AutoLoopStartObject is building the StartObjs collection beginning with
+            start object (startObject) or using general rules.
+            </summary>
+            <param name="startObject">Start object for building StartObjs list, if available.</param>
+        </member>
+        <member name="T:Comos.WSP.Interfaces.XDoc.IXDocNet">
+            <summary>
+            </summary>
+        </member>
+        <member name="P:Comos.WSP.Interfaces.XDoc.IXDocNet.IsUndoRedoRunning">
+             <summary>
+            
+             </summary>
+        </member>
+        <member name="P:Comos.WSP.Interfaces.XDoc.IXDocNet.GetWspConnectionManager">
+             <summary>
+            
+             </summary>
+        </member>
+        <member name="M:Comos.WSP.Interfaces.XDoc.IXDocNet.DocumentIsLoaded">
+             <summary>
+            
+             </summary>
+             <returns></returns>
+        </member>
+        <member name="M:Comos.WSP.Interfaces.XDoc.IXDocNet.DocumentIsVisible">
+             <summary>
+            
+             </summary>
+             <returns></returns>
+        </member>
+        <member name="M:Comos.WSP.Interfaces.XDoc.IXDocNet.SetIsSequentialFunctionChart(System.Boolean)">
+             <summary>
+            
+             </summary>
+             <param name="b"></param>
+        </member>
+        <member name="M:Comos.WSP.Interfaces.XDoc.IXDocNet.RouteOnMovedItems(System.Collections.Generic.List{ComosVBInterface.IRoConn},System.Collections.Generic.Dictionary{REPORTLib.Item,Comos.WSP.Interfaces.Cables.ICableInfo})">
+             <summary>
+            
+             </summary>
+             <param name="connections"></param>
+             <param name="cablesToBeMoved"></param>
+        </member>
+        <member name="P:Comos.WSP.Interfaces.XDoc.IXDocNet.PlacingTemplate">
+            <summary>
+            </summary>
+        </member>
+        <member name="P:Comos.WSP.Interfaces.XDoc.IXDocNet.ConnectionObjectVersion">
+            <summary>
+            -1: not defined
+            0: old connection lines
+            1: new connection lines
+            </summary>
+        </member>
+        <member name="M:Comos.WSP.Interfaces.XDoc.IXDocNet.AddCable(ComosWSPInterface.IRoConnBase,System.Collections.Generic.List{REPORTLib.Item},System.Collections.Generic.List{REPORTLib.NCoord},System.Collections.Generic.List{System.Int32},System.Int32)">
+            <summary>
+            </summary>
+            <param name="iroCb"></param>
+            <param name="cables"></param>
+            <param name="intersections"></param>
+            <param name="segmentNrs"></param>
+            <param name="numberSegments"></param>
+        </member>
+        <member name="M:Comos.WSP.Interfaces.XDoc.IXDocNet.AddMovedConnection(ComosWSPInterface.IRoConnBase,System.Collections.Generic.List{REPORTLib.Item},System.Collections.Generic.List{REPORTLib.NCoord},System.Collections.Generic.List{System.Int32},System.Int32)">
+            <summary>
+            </summary>
+            <param name="iroCb"></param>
+            <param name="cables"></param>
+            <param name="intersections"></param>
+            <param name="segmentNrs"></param>
+            <param name="numberOfSegments"></param>
+        </member>
+        <member name="T:Comos.WSP.Interfaces.XDoc.IXDocPfdNet">
+             <summary>
+            
+             </summary>
+        </member>
+        <member name="M:Comos.WSP.Interfaces.XDoc.IXDocPfdNet.OnMoveItemsDone">
+             <summary>
+            
+             </summary>
+        </member>
+    </members>
+</doc>

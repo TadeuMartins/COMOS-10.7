@@ -1,0 +1,64 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<Configuration>
+  <!--<Walkinside>
+    <ServerUrl>
+      <Scheme>https</Scheme>
+      <Port></Port>
+      <Host></Host>
+    </ServerUrl>
+    <RenderingService>walkinside-js</RenderingService>
+    <WebApiUri>WebApi</WebApiUri>
+  </Walkinside>-->
+  
+  <!--<Users>
+    <ShowInactiveUsers>true</ShowInactiveUsers>
+  </Users>-->
+
+  <!--<AutoLogOff>
+    <PromptUser>false</PromptUser>
+    <IdleTime>300</IdleTime>
+  </AutoLogOff>-->
+
+  <!-- Enable this setting to use SmartMarkupTool in comos web redlining. Enabling this setting activates the Content Security Policy (CSP) directive "unsafe-eval", 
+  which doesn't inherently introduce a direct exploitable vulnerability. However, it does pose some risk in relation to XSS (Cross-Site Scripting) attacks-->
+  <!--<EnableSmartMarkupTool>false</EnableSmartMarkupTool>-->
+
+  <!--<Barcode>
+        <ProjectId>U:2:A2YW123456</ProjectId>
+        <ScriptName>DecodeBarcode</ScriptName>
+        <LibObjectFullName>@20|A80|Z10|BarcodeCustomizing</LibObjectFullName>
+    </Barcode>-->
+
+  <!--<DefaultLanguageKey>en</DefaultLanguageKey>-->
+
+  <!--<Languages>
+    <Language>
+      <Value>German</Value>
+      <Key>de</Key>
+      <LCID>1031</LCID>
+    </Language>
+    --><!--English--><!--
+    <Language>
+      <Value>English</Value>
+      <Key>en</Key>
+      <LCID>1033</LCID>
+    </Language>
+    --><!--Chinese--><!--
+    <Language>
+      <Value>Chinese</Value>
+      <Key>cn</Key>    
+      <LCID>2052</LCID>
+    </Language>
+  </Languages>-->
+  
+  <DisplayRightContextPanelOnMobileDevice>true</DisplayRightContextPanelOnMobileDevice>
+
+  <!--ThresholdLimit: Default value of 120 seconds will be set, if in case it is left blank or set to zero-->
+  <ThresholdLimit>150</ThresholdLimit>
+  <!--COMOS Help URL can configured here-->
+  <HelpSystemURL>https://support.industry.siemens.com/cs/document/109776498/technical-documentation-comos-documentation-portal?dti=0%26lc=en-US</HelpSystemURL>
+
+  <!-- XsrfTokenSecret: key to validate XSRF-TOKEN in load balancer enviroment [min 32 random alphanumeric chars] -->
+  <!--<XsrfTokenSecret>secret_value</XsrfTokenSecret>-->
+
+</Configuration>
