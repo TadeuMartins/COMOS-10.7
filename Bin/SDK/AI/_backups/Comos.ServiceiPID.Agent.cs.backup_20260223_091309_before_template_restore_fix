@@ -1257,10 +1257,32 @@ public class ImportAgent : AIComosTool
 			}
 			diag.AppendLine("ReportDocument obtained");
 
-			// 4. Call CreateTemplate — native drag-drop equivalent
-			//    IXDocDeveloper.CreateTemplate(IComosBaseObject BaseObj, double x, double y)
-			//    This instantiates all devices, connections, and coordinates from the
-			//    template document onto the target diagram at position (x, y).
+			// 4a. BACKUP template before CreateTemplate — for multifilar diagrams,
+			//     CreateTemplate may MOVE the template doc instead of copying it.
+			//     Save the original owner so we can restore if needed.
+			object templateOriginalOwner = null;
+			string templateOriginalOwnerSuid = "";
+			object templateClipboard = null;
+			bool templateInTemplateTree = false;
+			try
+			{
+				dynamic dynTpl = templateDoc;
+				templateOriginalOwner = dynTpl.owner;
+				try { templateOriginalOwnerSuid = (string)((dynamic)templateOriginalOwner).SystemUID; } catch { }
+				try { templateInTemplateTree = (bool)dynTpl.IsInTemplateTree(); } catch { }
+				templateClipboard = dynTpl.CopyAll();
+				diag.AppendLine(string.Format("Template backup: ownerSuid={0}, inTemplateTree={1}, clipboard={2}",
+					templateOriginalOwnerSuid, templateInTemplateTree, templateClipboard != null));
+			}
+			catch (Exception exBackup)
+			{
+				diag.AppendLine("Template backup ERR: " + exBackup.Message);
+			}
+
+			// 4b. Call CreateTemplate — native drag-drop equivalent
+			//     IXDocDeveloper.CreateTemplate(IComosBaseObject BaseObj, double x, double y)
+			//     This instantiates all devices, connections, and coordinates from the
+			//     template document onto the target diagram at position (x, y).
 			string createMethod = "";
 			IXDocDeveloper xDocDev = reportDocument as IXDocDeveloper;
 			if (xDocDev == null)
@@ -1342,6 +1364,72 @@ public class ImportAgent : AIComosTool
 					templateName = templateName,
 					diag = diag.ToString()
 				};
+			}
+
+			// 4c. RESTORE template if it was moved — check if owner changed
+			//     For multifilar diagrams, CreateTemplate may reparent the template
+			//     document under the target instead of copying. Detect and fix this.
+			if (!string.IsNullOrEmpty(templateOriginalOwnerSuid))
+			{
+				try
+				{
+					dynamic dynTpl2 = templateDoc;
+					string currentOwnerSuid = "";
+					try { currentOwnerSuid = (string)((dynamic)dynTpl2.owner).SystemUID; } catch { }
+					if (!string.IsNullOrEmpty(currentOwnerSuid) && currentOwnerSuid != templateOriginalOwnerSuid)
+					{
+						diag.AppendLine(string.Format("Template MOVED: owner changed {0} -> {1}, restoring...",
+							templateOriginalOwnerSuid, currentOwnerSuid));
+						// Strategy A: Set owner back to original parent
+						try
+						{
+							dynTpl2.owner = templateOriginalOwner;
+							diag.AppendLine("Template owner restored via set_owner OK");
+						}
+						catch (Exception exOwner)
+						{
+							diag.AppendLine("set_owner ERR: " + exOwner.Message);
+							// Strategy B: Paste from clipboard back to original owner
+							if (templateClipboard != null && templateOriginalOwner != null)
+							{
+								try
+								{
+									dynamic dynOwner = templateOriginalOwner;
+									object restoredObj = null;
+									int rc = (int)dynOwner.Paste(templateClipboard, ref restoredObj, 1);
+									diag.AppendLine("Template restored via Paste rc=" + rc);
+								}
+								catch (Exception exPaste)
+								{
+									diag.AppendLine("Paste restore ERR: " + exPaste.Message);
+								}
+							}
+						}
+					}
+					else
+					{
+						diag.AppendLine("Template owner unchanged (no move detected)");
+					}
+				}
+				catch (Exception exCheck)
+				{
+					diag.AppendLine("Template move-check ERR: " + exCheck.Message);
+					// Template doc may be inaccessible — try paste restore
+					if (templateClipboard != null && templateOriginalOwner != null)
+					{
+						try
+						{
+							dynamic dynOwner = templateOriginalOwner;
+							object restoredObj = null;
+							int rc = (int)dynOwner.Paste(templateClipboard, ref restoredObj, 1);
+							diag.AppendLine("Template restored via Paste (fallback) rc=" + rc);
+						}
+						catch (Exception exPaste2)
+						{
+							diag.AppendLine("Paste restore (fallback) ERR: " + exPaste2.Message);
+						}
+					}
+				}
 			}
 
 			// 5. Save the report and commit

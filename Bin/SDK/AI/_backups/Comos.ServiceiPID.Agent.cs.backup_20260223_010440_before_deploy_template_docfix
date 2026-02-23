@@ -1173,197 +1173,177 @@ public class ImportAgent : AIComosTool
 
 	private object DrawTemplateObject(object targetDocObj, IComosDProject currentProject, int documentType, string tag, string description, string systemFullName, double x, double y, string documentUID)
 	{
-		// NATIVE APPROACH: Use IXDocDeveloper.CreateTemplate — the programmatic
-		// equivalent of dragging a template document from the navigator and
-		// dropping it onto the target diagram. This replicates ALL objects,
-		// connections, and coordinates exactly as the template defines them.
-		StringBuilder diag = new StringBuilder();
+		StringBuilder stringBuilder = new StringBuilder();
 		try
 		{
-			// 1. Resolve template document
-			object templateObj = ResolveTemplateDocument(currentProject, systemFullName, description, diag);
-			if (templateObj == null)
+			HashSet<string> hashSet2 = SnapshotProjectDocumentSystemUids(currentProject, stringBuilder);
+			HashSet<string> hashSet = SnapshotDocumentDeviceSystemUids(targetDocObj, stringBuilder);
+			object obj = ResolveTemplateDocument(currentProject, systemFullName, description, stringBuilder);
+			if (obj == null)
 			{
 				return new
 				{
 					success = false,
 					error = "Template document not resolved. Use a valid template path/name from COMOS templates.",
 					route = "template",
-					diag = diag.ToString(),
-					hint = "Ensure the template document exists in the project's template tree."
+					diag = stringBuilder.ToString(),
+					hint = "If COMOS does not expose template roots via API in this context, drag the template from navigator once and retry."
 				};
 			}
-			IComosDDocument templateDoc = templateObj as IComosDDocument;
-			if (templateDoc == null)
+			stringBuilder.AppendLine("Source type=" + obj.GetType().FullName);
+			object obj2 = null;
+			bool flag = TryPasteCopiedObjectIntoDocument(obj, targetDocObj, x, y, stringBuilder, out obj2);
+			IComosDDocument comosDDocument = FindCopiedDocumentByDelta(currentProject, hashSet2, GetSafeObjectName(obj), stringBuilder);
+			if (comosDDocument == null)
 			{
-				try { templateDoc = (IComosDDocument)(dynamic)templateObj; } catch { }
+				comosDDocument = FindCopiedDocumentBySystemFullNamePattern(currentProject, documentUID, systemFullName, stringBuilder);
 			}
-			string templateName = "";
-			try { templateName = templateDoc != null ? (templateDoc.Name ?? "") : ""; } catch { }
-			diag.AppendLine("Template doc resolved, Name=" + templateName);
-			if (templateDoc == null)
+			if (comosDDocument != null)
 			{
-				return new
-				{
-					success = false,
-					error = "Resolved object is not an IComosDDocument.",
-					route = "template",
-					diag = diag.ToString()
-				};
-			}
-
-			// 2. Get the target document and open its Report
-			IComosDDocument targetDoc = targetDocObj as IComosDDocument;
-			if (targetDoc == null)
-			{
-				try { targetDoc = (IComosDDocument)(dynamic)targetDocObj; } catch { }
-			}
-			if (targetDoc == null)
-			{
-				return new
-				{
-					success = false,
-					error = "Target document could not be cast to IComosDDocument.",
-					route = "template",
-					diag = diag.ToString()
-				};
-			}
-
-			dynamic report = targetDoc.Report();
-			if (report == null)
-			{
-				return new
-				{
-					success = false,
-					error = "Target document has no Report object.",
-					route = "template",
-					diag = diag.ToString()
-				};
-			}
-			report.Open();
-			diag.AppendLine("Target report opened");
-
-			// 3. Get ReportDocument and cast to IXDocDeveloper
-			dynamic reportDocument = report.ReportDocument;
-			if (reportDocument == null)
-			{
-				return new
-				{
-					success = false,
-					error = "ReportDocument is null after Report.Open().",
-					route = "template",
-					diag = diag.ToString()
-				};
-			}
-			diag.AppendLine("ReportDocument obtained");
-
-			// 4. Call CreateTemplate — native drag-drop equivalent
-			//    IXDocDeveloper.CreateTemplate(IComosBaseObject BaseObj, double x, double y)
-			//    This instantiates all devices, connections, and coordinates from the
-			//    template document onto the target diagram at position (x, y).
-			string createMethod = "";
-			IXDocDeveloper xDocDev = reportDocument as IXDocDeveloper;
-			if (xDocDev == null)
-			{
-				try { xDocDev = (IXDocDeveloper)reportDocument; }
-				catch { diag.AppendLine("Direct cast to IXDocDeveloper failed, trying dynamic"); }
-			}
-
-			if (xDocDev != null)
-			{
-				// Prefer CreateTemplateInBackground (no UI refresh overhead)
+				string text2 = "";
 				try
 				{
-					xDocDev.CreateTemplateInBackground((IComosBaseObject)templateDoc, x, y, 0.0);
-					createMethod = "IXDocDeveloper.CreateTemplateInBackground OK";
-					diag.AppendLine(createMethod);
+					text2 = comosDDocument.SystemFullName();
 				}
-				catch (Exception ex1)
+				catch
 				{
-					diag.AppendLine("CreateTemplateInBackground ERR: " + ex1.Message);
-					// Fallback to CreateTemplate (with UI)
+				}
+				if (!string.IsNullOrWhiteSpace(text2))
+				{
+					stringBuilder.AppendLine("Copied document SFN=" + text2);
+					string text3 = RemoveTemplateKeyword(description);
+					object obj3 = DrawSingleObject(documentUID, documentType, tag, text3, text2, x, y);
+					bool flag2 = false;
+					string text4 = "";
 					try
 					{
-						xDocDev.CreateTemplate((IComosBaseObject)templateDoc, x, y);
-						createMethod = "IXDocDeveloper.CreateTemplate OK";
-						diag.AppendLine(createMethod);
-					}
-					catch (Exception ex2)
-					{
-						diag.AppendLine("CreateTemplate ERR: " + ex2.Message);
-						// Final fallback: CreateTemplateWithRotation
+						dynamic val = obj3;
+						flag2 = (bool)val.success;
 						try
 						{
-							xDocDev.CreateTemplateWithRotation((IComosBaseObject)templateDoc, x, y, 0.0);
-							createMethod = "IXDocDeveloper.CreateTemplateWithRotation OK";
-							diag.AppendLine(createMethod);
+							text4 = (string)val.message;
 						}
-						catch (Exception ex3)
+						catch
 						{
-							diag.AppendLine("CreateTemplateWithRotation ERR: " + ex3.Message);
 						}
 					}
+					catch
+					{
+					}
+					if (flag2)
+					{
+						return new
+						{
+							success = true,
+							route = "template",
+							tag = tag,
+							description = description,
+							sourceSystemFullName = systemFullName,
+							copiedSystemFullName = text2,
+							documentUID = documentUID,
+							x = x,
+							y = y,
+							message = "Template copied and drawn using copied document SystemFullName.",
+							drawMessage = text4,
+							diag = stringBuilder.ToString(),
+							delegatedDraw = obj3
+						};
+					}
+					return new
+					{
+						success = false,
+						route = "template",
+						tag = tag,
+						description = description,
+						sourceSystemFullName = systemFullName,
+						copiedSystemFullName = text2,
+						documentUID = documentUID,
+						x = x,
+						y = y,
+						error = "Template copied, but draw by copied SystemFullName failed.",
+						message = "Template copied, but draw by copied SystemFullName failed.",
+						diag = stringBuilder.ToString(),
+						delegatedDraw = obj3
+					};
 				}
 			}
-
-			// Dynamic fallback if typed IXDocDeveloper cast failed
-			if (string.IsNullOrEmpty(createMethod))
+			IComosDDevice val6 = null;
+			if (obj2 is IComosDDevice)
 			{
-				try
+				val6 = (IComosDDevice)obj2;
+			}
+			if (val6 == null)
+			{
+				val6 = FindNewDeviceByDelta(targetDocObj, hashSet, stringBuilder);
+			}
+			if (val6 == null)
+			{
+				val6 = FindDeviceOnDocumentStrict(targetDocObj, tag, currentProject);
+			}
+			if (val6 != null)
+			{
+				if (!string.IsNullOrWhiteSpace(tag))
 				{
-					reportDocument.CreateTemplateInBackground((object)templateDoc, x, y, 0.0);
-					createMethod = "dynamic.CreateTemplateInBackground OK";
-					diag.AppendLine(createMethod);
-				}
-				catch (Exception exd1)
-				{
-					diag.AppendLine("dynamic.CreateTemplateInBackground ERR: " + exd1.Message);
 					try
 					{
-						reportDocument.CreateTemplate((object)templateDoc, x, y);
-						createMethod = "dynamic.CreateTemplate OK";
-						diag.AppendLine(createMethod);
+						val6.Name = tag;
 					}
-					catch (Exception exd2)
+					catch
 					{
-						diag.AppendLine("dynamic.CreateTemplate ERR: " + exd2.Message);
 					}
 				}
-			}
-
-			if (string.IsNullOrEmpty(createMethod))
-			{
+				if (!string.IsNullOrWhiteSpace(description))
+				{
+					try
+					{
+						val6.Description = description;
+					}
+					catch
+					{
+					}
+				}
+				try
+				{
+					val6.Save();
+				}
+				catch
+				{
+				}
+				try
+				{
+					Workset.SaveAll();
+				}
+				catch
+				{
+				}
 				return new
 				{
-					success = false,
-					error = "All CreateTemplate methods failed. See diag for details.",
+					success = true,
 					route = "template",
 					tag = tag,
-					templateName = templateName,
-					diag = diag.ToString()
+					description = description,
+					systemFullName = systemFullName,
+					documentUID = documentUID,
+					x = x,
+					y = y,
+					message = (flag ? "Template object pasted and device resolved on target document." : "Device resolved on target document (paste status returned non-standard result)."),
+					diag = stringBuilder.ToString()
 				};
 			}
-
-			// 5. Save the report and commit
-			try { report.Save(); diag.AppendLine("Report.Save OK"); }
-			catch (Exception exs) { diag.AppendLine("Report.Save ERR: " + exs.Message); }
-			try { Workset.SaveAll(); } catch { }
-
 			return new
 			{
-				success = true,
+				success = false,
 				route = "template",
 				tag = tag,
 				description = description,
-				templateSourceSfn = systemFullName,
-				templateName = templateName,
+				systemFullName = systemFullName,
+				documentUID = documentUID,
 				x = x,
 				y = y,
-				documentUID = documentUID,
-				createMethod = createMethod,
-				message = string.Format("Template '{0}' instantiated at ({1},{2}) via {3}. All devices, connections, and coordinates replicated from template.",
-					templateName, x, y, createMethod),
-				diag = diag.ToString()
+				pasted = flag,
+				error = "Template copy/paste executed, but no device with the expected tag was resolved automatically.",
+				message = "Template copy/paste executed, but no device with the expected tag was resolved automatically.",
+				diag = stringBuilder.ToString()
 			};
 		}
 		catch (Exception ex)
@@ -1374,7 +1354,7 @@ public class ImportAgent : AIComosTool
 				route = "template",
 				tag = tag,
 				error = "DrawTemplateObject error: " + ex.Message,
-				diag = diag.ToString()
+				diag = stringBuilder.ToString()
 			};
 		}
 	}

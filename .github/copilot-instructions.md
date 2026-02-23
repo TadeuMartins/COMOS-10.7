@@ -62,16 +62,60 @@ public static IComosDWorkset Workset
 - Fuzzy matching: Levenshtein distance ≤ 2 for attribute name typos
 - 120ms delay between `onresult` and `onend` in speech polyfill (React 18 batching fix)
 
-## DLL Versioning & Backups
+## DLL Versioning & Backups — CRITICAL RULES (NEVER VIOLATE)
 
-Two separate DLLs — never confuse them:
+### Golden Rule: .cs ↔ DLL Sync
+
+The `.cs` source and the active `.dll` MUST always be in perfect sync. **NEVER**:
+- Edit the `.cs` without recompiling and deploying the DLL
+- Deploy a DLL without updating the `.cs` to match
+- Decompile a DLL and overwrite the hand-written `.cs` with decompiled IL output
+- Assume they match — always verify with compilation + hash comparison
+
+**Verification command** (run after every change):
+```powershell
+$CSC = "C:\Program Files\Microsoft Visual Studio\2022\Community\MSBuild\Current\Bin\Roslyn\csc.exe"
+$BIN = "C:\Program Files (x86)\COMOS\Team_AI\Bin"
+$SDK = "$BIN\SDK\AI"
+& $CSC /target:library /optimize+ /out:"$env:TEMP\verify.dll" /reference:"$BIN\Comos.Ai.Functions.dll" /reference:"$BIN\Comos.Ai.Contracts.dll" /reference:"$BIN\Interop.Plt.dll" /reference:"$BIN\Interop.ComosQSGlobalObj.dll" /reference:"$BIN\Interop.ComosVBInterface.dll" /reference:"$BIN\Comos.WSP.RoUtilities.dll" /reference:"C:\Windows\Microsoft.NET\Framework64\v4.0.30319\Microsoft.CSharp.dll" /reference:"C:\Windows\Microsoft.NET\assembly\GAC_MSIL\System.ComponentModel.Composition\v4.0_4.0.0.0__b77a5c561934e089\System.ComponentModel.Composition.dll" /reference:"C:\Windows\Microsoft.NET\assembly\GAC_MSIL\System.IO.Compression\v4.0_4.0.0.0__b77a5c561934e089\System.IO.Compression.dll" /reference:"C:\Windows\Microsoft.NET\assembly\GAC_MSIL\System.IO.Compression.FileSystem\v4.0_4.0.0.0__b77a5c561934e089\System.IO.Compression.FileSystem.dll" "$SDK\Comos.ServiceiPID.Agent.cs"
+# Must compile with ZERO errors. Deploy the output — never an older DLL.
+```
+
+### Two Separate DLLs — Never Confuse
 
 | DLL | Location | Content |
 |-----|----------|---------|
 | `Comos.EngineeringAssistant.BasicFunctions.dll` | `Bin/` | **Native** IL-patched (navigation, attribute, count tools) |
 | `Comos.ServiceiPID.Agent.dll` | `Bin/SDK/AI/` | **Custom** compiled from `.cs` (import, draw, connect) |
 
-Backup convention: `.dll.locked_<purpose>` or `.dll.locked_YYYYMMDD_HHMMSS`. The `locked_autoconnect` backup is the known-good version with working connections.
+### Backup Naming Convention — MANDATORY
+
+**Before ANY DLL replacement**, create a backup with this exact format:
+```
+<original_name>.dll.locked_YYYYMMDD_HHMMSS_<description>
+```
+Examples:
+- `Comos.ServiceiPID.Agent.dll.locked_20260222_100900_before_resync`
+- `Comos.ServiceiPID.Agent.dll.locked_20260220_150500_before_template_add`
+- `Comos.ServiceiPID.Agent.dll.locked_autoconnect` (known-good with working connections)
+
+**Rules:**
+1. **Always include date+time** in `YYYYMMDD_HHMMSS` format
+2. **Always include a purpose/comment** after the timestamp (e.g., `before_savefix`, `before_template_add`)
+3. **Never delete backups** — disk space is cheap, recovery is priceless
+4. **The `locked_autoconnect` backup** is the known-good version with working connections — treat as sacred
+5. **Store all backups in `Bin/SDK/AI/_backups/`** — never clutter the main `SDK/AI/` folder
+6. **Backup the .cs too** when making significant changes: `Comos.ServiceiPID.Agent.cs.backup_YYYYMMDD_HHMMSS_<description>`
+
+### Deployment Checklist (Follow Every Time)
+
+1. ✅ Backup current DLL: `copy active.dll _backups/active.dll.locked_YYYYMMDD_HHMMSS_<reason>`
+2. ✅ Edit `.cs` source (NEVER decompiled IL)
+3. ✅ Compile with `/optimize+` — must produce ZERO errors
+4. ✅ Deploy compiled DLL to replace active (kill AI API if locked)
+5. ✅ Verify hash: `certutil -hashfile <deployed.dll> SHA256` must match compiled output
+6. ✅ Restart COMOS/AI API to load new DLL
+7. ✅ Test functionality before considering done
 
 ## Temp Files
 
@@ -100,3 +144,6 @@ netstat -ano | Select-String ":8000|:8100|:56400|:56401" | Select-String "LISTEN
 4. **Array return values** — use `string.Join()`, never `.ToArray()` in anonymous return types
 5. **30s timeout** — batch all Report operations; cache COM objects and CDevice lookups
 6. **COMOS max 3 iterations** — shim budget counter prevents infinite re-fabrication loops
+7. **NEVER overwrite .cs with decompiled IL** — decompilers produce non-compilable output (variable name collisions, missing scopes). The hand-written `.cs` is the SINGLE SOURCE OF TRUTH. Edit the `.cs`, compile, deploy — never reverse the flow.
+8. **NEVER deploy a DLL without backing up first** — use `_backups/` folder with `YYYYMMDD_HHMMSS_<description>` naming. No exceptions.
+9. **NEVER assume .cs and DLL are in sync** — always verify by compiling .cs and comparing output hash with active DLL hash. If they differ, the .cs is the authority — recompile and redeploy.

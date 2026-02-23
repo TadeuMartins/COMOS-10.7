@@ -322,11 +322,13 @@ function normalizeMessagesForOpenAI(messages) {
       role: role || msg.role || msg.Role,
       content: msg.content ?? msg.Content ?? "",
     };
-    // For assistant messages without tool calls, content may be null (legal for OpenAI)
+    // For plain assistant messages (no tool_calls), content MUST be a string.
+    // OpenAI rejects { role: "assistant", content: null } when tool_calls is absent.
+    // Sanitize timeout/error texts that would otherwise poison the session.
     if (role === "assistant") {
-      clean.content = msg.content ?? msg.Content ?? null;
+      clean.content = msg.content ?? msg.Content ?? "";
       if (isToolIterationTimeoutText(clean.content)) {
-        clean.content = null;
+        clean.content = "(previous action timed out or encountered an error)";
       }
     }
     normalized.push(clean);
@@ -374,6 +376,16 @@ function normalizeMessagesForOpenAI(messages) {
       placedIds.add(tcId);
       log(`heal_orphan_tool msg[${i}] tool_call_id=${tcId} → assistant[${j}]`);
       break;
+    }
+  }
+
+  // ── Safety net: ensure no assistant message has null content without tool_calls ──
+  // OpenAI requires content to be a string for assistant messages without tool_calls.
+  // After orphan-healing, some assistant messages may still have null content if their
+  // tool_calls were stripped by COMOS and no matching tool result was found.
+  for (const m of normalized) {
+    if (m.role === "assistant" && m.content == null && !m.tool_calls) {
+      m.content = "";
     }
   }
 
@@ -575,6 +587,12 @@ const analysisStateFile = path.join(logDir, "completed_analyses.json");
 const bridgeCommandQueue = new Map();
 const BRIDGE_TTL_MS = 60 * 60 * 1000; // 1 hour — auto-expire stale entries
 
+// ── Pending navigation: tracks sessions where we fabricated objects_with_name
+//    as a fast search step for a "Go to X" intent. The eval handler will
+//    chain into navigate_to_comos_object_by_systemUID when the result arrives.
+const pendingNavigation = new Map();
+const NAV_TTL_MS = 60 * 1000; // 1 minute — auto-expire stale entries
+
 function buildCachedImportPayload(cached) {
   const items = Array.isArray(cached && cached.items) ? cached.items : [];
   if (items.length === 0) return "";
@@ -702,16 +720,6 @@ function extractRecentObjectSystemUID(rawMsg, messages) {
   if (directLabel) return directLabel[1];
   const directUid = String(rawMsg || "").match(uidRegex);
   if (directUid) return directUid[0];
-
-  const list = Array.isArray(messages) ? messages : [];
-  for (let i = list.length - 1; i >= 0; i--) {
-    const m = list[i] || {};
-    const content = String(m.content || m.Content || "");
-    const labeled = content.match(withLabelRegex);
-    if (labeled) return labeled[1];
-    const uid = content.match(uidRegex);
-    if (uid) return uid[0];
-  }
   return "";
 }
 
@@ -721,9 +729,12 @@ function isAttributeValueIntent(text) {
   // Pattern 1: explicit ask verb + attribute keyword
   const asksValue = /\b(qual|value|valor|what\s+is|what's|whats|show|get|read|ler|obter|consulte|consultar|me\s+diga|tell\s+me|retrieve|fetch|buscar)\b/.test(t);
   const hasAttrSignal = /\b(attribute|atribut|shaft\s*power|pot[eê]ncia|power|modelo|model|rated|general\s*notes?|notas?\s*gerais?|pressure|press[aã]o|voltage|tens[aã]o|current|corrente|flow|vaz[aã]o|temperature|temperatura|speed|velocidade|efficiency|efici[eê]ncia|weight|peso|diameter|di[aâ]metro|capacity|capacidade|head|height|material|design\s*data|dados\s*de\s*projeto)\b/.test(t);
-  // Pattern 2: "what's the X of Y" where Y is an object tag
-  const asksAboutTag = /\b(what|qual|whats)\b.*\b[A-Z]{1,4}[- ]?\d{2,5}\b/i.test(String(text || ""));
-  return (asksValue && hasAttrSignal) || (asksAboutTag && hasAttrSignal);
+  // Pattern 2: "what's the X of Y" where Y is an object tag — GENERIC (no keyword list needed)
+  // Matches: "what's the operation mode of PC001", "qual o tipo de operação de P-101", etc.
+  const asksAboutTag = /\b(what|qual|whats|what's)\b.*\b[A-Z]{1,4}[- ]?\d{2,5}\b/i.test(String(text || ""));
+  // Pattern 3: "X of TAG" with an ask verb — detects any attribute name before an object tag
+  const genericAttrOfTag = asksValue && /\b[A-Z]{1,4}[- ]?\d{2,5}[A-Z]?\b/i.test(String(text || ""));
+  return (asksValue && hasAttrSignal) || asksAboutTag || genericAttrOfTag;
 }
 
 // Extract attribute name and object tag from a user query
@@ -735,7 +746,7 @@ function extractAttributeAndObject(text) {
   const objectTag = tagMatch ? tagMatch[1] : "";
   // Remove ask verbs, articles, object references to isolate attribute name
   let attrPart = t
-    .replace(/^(what(s|\s+is|'s)?|qual\s*([eéoa]\s+)?|show(\s+me)?|get|read|ler|obter|tell\s+me|navigate\s+to(\s+the)?|ir\s+para|retrieve|fetch|buscar)\s+/i, "")
+    .replace(/^(what(s|\s+is|['’]s)?|qual\s*([eéoa]\s+)?|show(\s+me)?|get|read|ler|obter|tell\s+me|navigate\s+to(\s+the)?|ir\s+para|retrieve|fetch|buscar)\s+/i, "")
     .replace(/\b(the|o|a|os|as)\s+/gi, "")
     .replace(/\b(of|from|da|do|de|para|on)\s+(the\s+)?(pump|bomba|motor|valve|válvula|equipment|objeto|object|equipamento)?\s*[A-Z]{0,4}[- ]?\d{0,5}[A-Z]?\s*$/i, "")
     .replace(/\b(attribute|atributo)\b\s*/gi, "")
@@ -748,6 +759,53 @@ function isAttributeNavigationIntent(text) {
   return /\b(navigate|go\s+to|open|ir|naveg|abra|mostrar)\b/.test(t) && /\b(attribute|atribut)\b/.test(t);
 }
 
+// ── Pure navigation intent: "Go to AG005", "Navegar para P-101" ──────────
+// Detects requests to navigate to an object (NOT attribute navigation).
+// Used to fabricate fast objects_with_name → navigate_by_systemUID chain
+// instead of the slow navigate_to_comos_object_by_name tree scan.
+function isPureNavigationIntent(text) {
+  const t = String(text || "").toLowerCase().trim();
+  // Must have a navigation verb
+  const hasNavVerb = /\b(go\s+to|navigate\s+to|ir\s+para|v[aá]\s+para|navegu?e?\s*(para|at[eé])|abr[ai]r?|open|select|selecionar?)\b/i.test(t);
+  if (!hasNavVerb) return false;
+  // Must NOT be about attributes
+  if (/\b(attribute|atribut|valor|value)\b/i.test(t)) return false;
+  // Must NOT be about documents/reports (different tool)
+  if (/\b(document|documento|report|relatório|diagram|diagrama)\b/i.test(t)) return false;
+  // Must have an object tag to navigate to
+  return /\b[A-Z]{1,4}[- ]?\d{2,5}[A-Z]?\b/i.test(t);
+}
+
+// Extract the navigation target tag from text like "Go to AG005" → "AG005"
+function extractNavigationTarget(text) {
+  const t = String(text || "").trim();
+  const tagMatch = t.match(/\b([A-Z]{1,4}[- ]?\d{2,5}[A-Z]?)\b/i);
+  return tagMatch ? tagMatch[1] : "";
+}
+
+// Generate name variations for navigation retries.
+// COMOS object names may differ from how users type them:
+//   "PC-001" in hierarchy display → "PC001" in Name property (or vice-versa)
+// Given a tag, returns alternative forms with different separators.
+function generateNavigationNameVariations(tag) {
+  const t = String(tag || "").trim();
+  const m = t.match(/^([A-Za-z]+)([- ]?)(\d+[A-Za-z]?)$/);
+  if (!m) return [];
+  const prefix = m[1].toUpperCase();
+  const digits = m[3];
+  const sep = m[2]; // current separator: "", "-", or " "
+  const variations = [];
+  // Priority: if has separator, try without first; if no separator, try with hyphen first
+  if (sep) {
+    variations.push(prefix + digits);                                    // PC-001 → PC001
+    variations.push(prefix + (sep === "-" ? " " : "-") + digits);   // other separator
+  } else {
+    variations.push(prefix + "-" + digits);  // PC001 → PC-001
+    variations.push(prefix + " " + digits);  // PC001 → PC 001
+  }
+  return variations;
+}
+
 function isAttributeWriteIntent(text) {
   const t = String(text || "").toLowerCase();
   const writeVerb = /\b(set|update|change|edit|alter|altere|alterar|mude|modifique|defina|ajuste)\b/.test(t) || /\bpara\b/.test(t);
@@ -755,10 +813,108 @@ function isAttributeWriteIntent(text) {
   return writeVerb && attrSignal;
 }
 
+// ── Document navigation intent: "open document X", "abrir documento X" ──
+// Different from isPureNavigationIntent because documents use navigate_to_comos_document_by_name.
+function isDocumentNavigationIntent(text) {
+  const t = String(text || "").toLowerCase();
+  const hasNavVerb = /\b(go\s+to|navigate\s+to|open|ir\s+para|v[aá]\s+para|navegu?e?\s*(para|at[eé])|abr[ai]r?|select|selecionar?)\b/i.test(t);
+  const hasDocSignal = /\b(document|documento|diagram|diagrama|drawing|desenho|p&id|pid|folha|sheet)\b/i.test(t);
+  if (!hasNavVerb || !hasDocSignal) return false;
+  // Exclude attribute intents
+  if (/\b(attribute|atribut|valor|value)\b/i.test(t)) return false;
+  return true;
+}
+
+// Extract document name from text like "open document AA_001" → "AA_001"
+function extractDocumentTarget(text) {
+  const t = String(text || "").trim();
+  // Try quoted name first
+  const quoted = t.match(/["""']([^"""']{1,80})["""']/);
+  if (quoted) return quoted[1].trim();
+  // Try after "document/documento" keyword
+  const afterKeyword = t.match(/\b(?:document|documento|diagram[ae]?|drawing|desenho|folha|sheet|p&id|pid)\s+([A-Za-z0-9_\-.]+(?:\s+[A-Za-z0-9_\-.]+)?)/i);
+  if (afterKeyword) return afterKeyword[1].trim();
+  // Try alphanumeric tag pattern
+  const tag = t.match(/\b([A-Z]{1,6}[_-]?\d{2,5}[A-Za-z_-]*)\b/i);
+  return tag ? tag[1] : "";
+}
+
+// ── Report intent: "open report X", "abrir relatório X" ──
+function isReportOpenIntent(text) {
+  const t = String(text || "").toLowerCase();
+  const hasReportSignal = /\b(report|relat[oó]rio|gerar\s+relat[oó]rio|generate\s+report)\b/i.test(t);
+  const hasAction = /\b(open|abr[ai]r?|gerar|generate|run|executar|rodar|show|mostrar|exibir)\b/i.test(t);
+  return hasReportSignal && hasAction;
+}
+
+// ── Report TwoDC intent: "open report in TwoDC", "abrir relatório no TwoDC" ──
+function isReportTwoDCIntent(text) {
+  const t = String(text || "").toLowerCase();
+  return /\b(twodc|two\s*dc|2dc)\b/i.test(t) && /\b(report|relat[oó]rio)\b/i.test(t);
+}
+
+// Extract report name from text
+function extractReportTarget(text) {
+  const t = String(text || "").trim();
+  const quoted = t.match(/["""']([^"""']{1,80})["""']/);
+  if (quoted) return quoted[1].trim();
+  const afterKeyword = t.match(/\b(?:report|relat[oó]rio)\s+([A-Za-z0-9_\-.]+(?:\s+[A-Za-z0-9_\-.]+)?)/i);
+  if (afterKeyword) return afterKeyword[1].trim();
+  return "";
+}
+
+// ── Revision intents ──
+function isShowRevisionIntent(text) {
+  const t = String(text || "").toLowerCase();
+  const hasRevision = /\b(revis[ãa]o|revision|rev)\b/i.test(t);
+  const hasShow = /\b(show|mostrar|exibir|last|[uú]ltim[ao]|current|atual|ver|see|check|checar|consultar)\b/i.test(t);
+  return hasRevision && hasShow;
+}
+
+function isCreateRevisionIntent(text) {
+  const t = String(text || "").toLowerCase();
+  const hasRevision = /\b(revis[ãa]o|revision|rev)\b/i.test(t);
+  const hasCreate = /\b(create|criar|nova?|new|gerar|generate|iniciar|start)\b/i.test(t);
+  return hasRevision && hasCreate;
+}
+
+// ── Printer intent: "list printers", "listar impressoras" ──
+function isPrinterIntent(text) {
+  const t = String(text || "").toLowerCase();
+  return /\b(printer|impressora|paper|papel|printers|impressoras)\b/i.test(t);
+}
+
+// ── Query export intent: "export query X", "exportar consulta" ──
+function isQueryExportIntent(text) {
+  const t = String(text || "").toLowerCase();
+  const hasExport = /\b(export|exportar|download|baixar|gerar\s+excel)\b/i.test(t);
+  const hasQuery = /\b(query|consulta|queries|relat[oó]rio.*excel|excel)\b/i.test(t);
+  return hasExport && hasQuery;
+}
+
+// Extract query name from text
+function extractQueryTarget(text) {
+  const t = String(text || "").trim();
+  const quoted = t.match(/["""']([^"""']{1,80})["""']/);
+  if (quoted) return quoted[1].trim();
+  const afterKeyword = t.match(/\b(?:query|consulta)\s+([A-Za-z0-9_\-.]+(?:\s+[A-Za-z0-9_\-.]+)?)/i);
+  if (afterKeyword) return afterKeyword[1].trim();
+  return "";
+}
+
+// ── SystemUID navigation intent: detects hex-like COMOS SystemUIDs ──
+function isSystemUIDNavigationIntent(text) {
+  const t = String(text || "").toLowerCase();
+  const hasNavVerb = /\b(go\s+to|navigate\s+to|ir\s+para|v[aá]\s+para|navegu?e?\s*(?:para|at[eé])|abr[ai]r?|open|select|selecionar?)\b/i.test(t);
+  if (!hasNavVerb) return false;
+  // SystemUID pattern: alphanumeric, typically 8+ chars, mix of letters and numbers (e.g. A541598NS5)
+  return /\b[A-Z0-9]{6,20}\b/i.test(t) && /\b(?:systemuid|uid|system\s+uid)\b/i.test(t);
+}
+
 function extractAttributeQueryText(text) {
   const raw = String(text || "").trim().replace(/[?]+$/g, "");
   const cleaned = raw
-    .replace(/^(qual(\s+é|\s+o|\s+a)?|what(\s+is|'s)?|show|get|obter|me\s+diga|diga|tell\s+me)\s+/i, "")
+    .replace(/^(qual(\s+é|\s+o|\s+a)?|what(\s+is|['’]s)?|show|get|obter|me\s+diga|diga|tell\s+me)\s+/i, "")
     .replace(/\b(do|da|de|of)\s+(objeto|equipamento|object|pump|p-?\d+)\b/ig, "")
     .trim();
   return cleaned || raw;
@@ -769,103 +925,21 @@ function hasAttributeWriteTool(toolNames) {
   return list.some((name) => /(?:set|update|change|edit).*(?:attribute|attr)|(?:attribute|attr).*(?:set|update|change|edit)/i.test(String(name || "")));
 }
 
-// ── Simple Levenshtein edit-distance for fuzzy attribute-name matching ────
-function levenshteinDistance(a, b) {
-  const n = a.length, m = b.length;
-  const dp = Array.from({ length: n + 1 }, (_, i) => {
-    const row = new Array(m + 1);
-    row[0] = i;
-    return row;
-  });
-  for (let j = 0; j <= m; j++) dp[0][j] = j;
-  for (let i = 1; i <= n; i++) {
-    for (let j = 1; j <= m; j++) {
-      dp[i][j] = Math.min(
-        dp[i - 1][j] + 1,
-        dp[i][j - 1] + 1,
-        dp[i - 1][j - 1] + (a[i - 1] === b[j - 1] ? 0 : 1)
-      );
-    }
-  }
-  return dp[n][m];
+// ── Detect when user explicitly asks to see/list attributes of an object ────
+// "list attributes of PC001", "show me the attributes", "provide a list of attributes",
+// "quais atributos", "listar atributos", "mostra os atributos preenchidos", etc.
+function isListAttributesIntent(text) {
+  const t = String(text || "").toLowerCase();
+  // EN patterns
+  const enList = /\b(list|show|give|provide|get|display|what\s+are|bring)\b.*\b(attributes?|specs?|specifications?|properties?)\b/.test(t);
+  const enReverse = /\b(attributes?|specs?|specifications?|properties?)\b.*\b(list|show|give|provide|get|display|bring)\b/.test(t);
+  // PT patterns
+  const ptList = /\b(list[ae]r?|mostr[ae]r?|exib[ie]r?|tra(?:ga|zer)|fornec|quais?|d[eê]\s*(?:me|a|o))\b.*\b(atribut|especifica[çc]|propriedade)/.test(t);
+  const ptReverse = /\b(atribut|especifica[çc]|propriedade).*\b(list[ae]r?|mostr[ae]r?|exib[ie]r?|tra(?:ga|zer)|fornec|quais?)\b/.test(t);
+  // Direct: "attributes of X", "atributos de X"
+  const directAsk = /\b(attributes?|atributos?)\b.*\b(of|d[eoa])\b.*\b[A-Z]{1,4}[- ]?\d{2,5}[A-Z]?\b/i.test(String(text || ""));
+  return enList || enReverse || ptList || ptReverse || directAsk;
 }
-
-// ── Generate alternative attribute names for retry when COMOS can't find ────
-// COMOS attributes can be labeled differently across templates:
-// "Shaft Power" → "Power", "Rated Power", "P_shaft", "Motor Power", etc.
-function generateAttributeAlternatives(originalName) {
-  const lower = String(originalName || "").toLowerCase().trim();
-  const alternatives = [];
-
-  // Common COMOS attribute name variations
-  const aliasMap = {
-    "shaft power": ["Power", "Rated Power", "Motor Power", "P_shaft", "Potência", "Shaft power [kW]", "Design Power"],
-    "power": ["Rated Power", "Shaft Power", "Motor Power", "P_shaft", "Potência", "Power [kW]", "Design Power"],
-    "rated power": ["Power", "Shaft Power", "Motor Power", "Potência"],
-    "potência": ["Power", "Shaft Power", "Rated Power", "Potência do eixo"],
-    "general notes": ["Notes", "General Notes", "Remarks", "Observações", "Notas", "Comment", "Description"],
-    "notas gerais": ["General Notes", "Notes", "Remarks", "Observações", "Comment"],
-    "pressure": ["Design Pressure", "Rated Pressure", "Operating Pressure", "Pressão"],
-    "pressão": ["Pressure", "Design Pressure", "Pressão de projeto"],
-    "temperature": ["Design Temperature", "Operating Temperature", "Rated Temperature", "Temperatura"],
-    "temperatura": ["Temperature", "Design Temperature", "Temperatura de projeto"],
-    "flow": ["Flow Rate", "Design Flow", "Rated Flow", "Vazão", "Q"],
-    "vazão": ["Flow", "Flow Rate", "Design Flow", "Q"],
-    "voltage": ["Rated Voltage", "Operating Voltage", "Tensão", "U"],
-    "tensão": ["Voltage", "Rated Voltage", "U"],
-    "current": ["Rated Current", "Operating Current", "Corrente", "I"],
-    "corrente": ["Current", "Rated Current", "I"],
-    "speed": ["Rated Speed", "Operating Speed", "RPM", "Velocidade", "n"],
-    "velocidade": ["Speed", "Rated Speed", "RPM", "n"],
-    "weight": ["Dry Weight", "Operating Weight", "Empty Weight", "Peso", "Mass"],
-    "peso": ["Weight", "Dry Weight", "Mass"],
-    "efficiency": ["Rated Efficiency", "Eficiência", "η", "Eta"],
-    "eficiência": ["Efficiency", "Rated Efficiency", "η"],
-    "model": ["Model", "Type", "Modelo", "Equipment Model"],
-    "modelo": ["Model", "Type", "Equipment Model"],
-    "design data": ["Design Data", "Dados de projeto", "Performance Data"],
-    "dados de projeto": ["Design Data", "Performance Data"],
-    "head": ["Total Head", "Design Head", "Rated Head", "TDH", "H"],
-    "diameter": ["Nominal Diameter", "Pipe Diameter", "DN", "Diâmetro"],
-    "diâmetro": ["Diameter", "Nominal Diameter", "DN"],
-    "capacity": ["Rated Capacity", "Design Capacity", "Capacidade"],
-    "capacidade": ["Capacity", "Rated Capacity"],
-    "material": ["Material", "Body Material", "Casing Material", "Construction Material"],
-  };
-
-  // Exact match in alias map
-  if (aliasMap[lower]) {
-    alternatives.push(...aliasMap[lower]);
-  } else {
-    // Fuzzy match: if the input is within Levenshtein distance ≤ 2 of a known key,
-    // use that key's aliases. Handles typos like "Shatf Power" → "Shaft Power".
-    let bestKey = null, bestDist = 3; // threshold = 2
-    for (const key of Object.keys(aliasMap)) {
-      const d = levenshteinDistance(lower, key);
-      if (d < bestDist) { bestDist = d; bestKey = key; }
-    }
-    if (bestKey) {
-      alternatives.push(...aliasMap[bestKey]);
-    }
-  }
-
-  // If original has multiple words, try individual words and simplified versions
-  const words = lower.split(/\s+/);
-  if (words.length > 1) {
-    // Try each significant word alone
-    for (const w of words) {
-      if (w.length > 2 && !["the", "of", "for", "kw", "bar", "mm"].includes(w)) {
-        const capitalized = w.charAt(0).toUpperCase() + w.slice(1);
-        if (!alternatives.includes(capitalized)) alternatives.push(capitalized);
-      }
-    }
-  }
-
-  // Remove duplicates and the original name itself
-  const unique = [...new Set(alternatives)].filter(a => a.toLowerCase() !== lower);
-  return unique;
-}
-
 
 function isObjectCountIntent(text) {
   const t = String(text || "").toLowerCase();
@@ -1052,6 +1126,23 @@ function isDocumentKnowledgeIntent(text) {
   if (detectCircuitGenerationIntent(t)) return false;
   if (detectConnectionIntent(t)) return false;
   if (detectInteractiveDrawingIntent(t)) return false;
+  // Exclude new tool-actionable intents (documents, reports, revisions, printers, queries)
+  if (isDocumentNavigationIntent(t)) return false;
+  if (isReportOpenIntent(t)) return false;
+  if (isReportTwoDCIntent(t)) return false;
+  if (isShowRevisionIntent(t)) return false;
+  if (isCreateRevisionIntent(t)) return false;
+  if (isPrinterIntent(t)) return false;
+  if (isQueryExportIntent(t)) return false;
+  if (isListAttributesIntent(t)) return false;
+
+  // Direct RAG triggers — user explicitly asking for RAG / document search
+  const ragDirect = /\b(rag|search\s+rag|buscar?\s+rag|pesquisar?\s+rag|search\s+documents?|buscar?\s+documentos?|pesquisar?\s+documentos?|consult[ae]r?\s+documentos?|consult\s+documents?)\b/i.test(t);
+  if (ragDirect) return true;
+
+  // Meta-questions about available documents ("which documents", "list documents", etc.)
+  const ragMeta = /\b(which\s+documents?|quais\s+documentos?|list\s+(?:the\s+)?documents?|list[ae]r?\s+(?:os\s+)?documentos?|what\s+documents?\s+(?:do|are|can)|que\s+documentos?\s+(?:tem|tenho|temos|possu[io])|have\s+access|tem\s+acesso|documentos?\s+dispon[ií]ve(?:l|is)|available\s+documents?)\b/i.test(t);
+  if (ragMeta) return true;
 
   // Positive signals — user asking about document content / specifications / procedures
   // NOTE: plurals (documentos, especificações, etc.) handled with optional "s"/"es"
@@ -1061,6 +1152,85 @@ function isDocumentKnowledgeIntent(text) {
   const knowledgeSignals = /\b(what\s+is|o\s+que\s+[eé]|quais?\s+(?:[eé]|s[ãa]o)|how\s+does|como\s+funciona|explain|explique|qual\s+[eé]\s+a?\s*(?:press[ãa]o|temperatura|vaz[ãa]o|pot[eê]ncia|capacidade|voltagem)|what\s+(?:is\s+the|are\s+the)\s+(?:pressure|temperature|flow|power|capacity|voltage|specification)|quais\s+(?:s[ãa]o\s+)?(?:as|os)\s+(?:vari[aá]ve|par[aâ]metro|dados?|condi[çc][õo]es))\b/i.test(t) && !/\b(navigate|navegar|abrir|open|go\s+to|ir\s+para|v[aá]\s+para)\b/i.test(t);
 
   return docSignals || knowledgeSignals;
+}
+
+/**
+ * Detect meta-questions asking what documents are available / indexed.
+ * These need a different handler — list files instead of vector search.
+ */
+function isRagDocumentListIntent(text) {
+  const t = String(text || "").toLowerCase();
+  return /\b(which\s+documents?|quais\s+documentos?|list\s+(?:the\s+)?documents?|list[ae]r?\s+(?:os\s+)?documentos?|what\s+documents?\s+(?:do|are|can)|que\s+documentos?\s+(?:tem|tenho|temos|possu[io])|have\s+access|tem\s+acesso|documentos?\s+dispon[ií]ve(?:l|is)|available\s+documents?|indexed\s+documents?|documentos?\s+indexados?)\b/i.test(t);
+}
+
+/**
+ * Fetch the list of indexed RAG documents from the gateway.
+ * Returns a formatted string for the system prompt, or empty on failure.
+ */
+async function fetchRagDocumentList(gatewayBase) {
+  try {
+    const resp = await fetch(`${gatewayBase}/comos/rag-documents`, { method: "GET" });
+    if (!resp.ok) return "";
+    const data = await resp.json();
+    const docs = data.documents || data;
+    if (!Array.isArray(docs) || docs.length === 0) return "";
+    let ctx = "\n\nINDEXED DOCUMENTS (available for knowledge queries):\n";
+    ctx += "The following documents are indexed and searchable. The user can ask questions about their content.\n\n";
+    for (const d of docs) {
+      const name = d.file || d.name || "unknown";
+      const size = d.size_kb ? ` (${d.size_kb} KB)` : "";
+      const chunks = d.chunks ? ` — ${d.chunks} chunks` : "";
+      ctx += `  • ${name}${size}${chunks}\n`;
+    }
+    ctx += "\nTell the user which documents are available and suggest they ask specific questions about the content.\n";
+    return ctx;
+  } catch (err) {
+    log(`rag_doclist_error: ${err.message}`);
+    return "";
+  }
+}
+
+/**
+ * Build an enriched RAG query from the current user text + conversation context.
+ * For follow-up questions ("when was it developed?"), pull key topics from
+ * recent assistant/user messages so the vector search has useful terms.
+ */
+function buildEnrichedRagQuery(currentText, messages) {
+  const t = String(currentText || "");
+  // If the current query is already long enough (>40 chars) or has specific
+  // terms, use it as-is — it likely has enough context.
+  if (t.length > 40) return t;
+  if (/\b[A-Z]{2,}[- ]?\d+|IEEE|ASME|API|NFPA|IEC|ASTM|DIN|ABNT/i.test(t)) return t;
+
+  // Collect topic keywords from recent conversation (last 6 messages)
+  const list = Array.isArray(messages) ? messages : [];
+  const recentMsgs = list.slice(-6);
+  const topics = [];
+  for (const m of recentMsgs) {
+    const role = String(m.role || m.Role || "").toLowerCase();
+    if (role !== "user" && role !== "assistant") continue;
+    const content = String(m.content || m.Content || "");
+    if (!content) continue;
+    // Extract standard references (IEEE C2, API 610, etc.)
+    const stdMatches = content.match(/\b(?:IEEE|ASME|API|NFPA|IEC|ASTM|DIN|ABNT|NBR|NESC)\s*[A-Z]?\d*[A-Z]?\b/gi);
+    if (stdMatches) topics.push(...stdMatches);
+    // Extract equipment tags (P-201, PC001, etc.)
+    const tagMatches = content.match(/\b[A-Z]{1,4}[- ]?\d{2,5}[A-Z]?\b/g);
+    if (tagMatches) topics.push(...tagMatches);
+    // Extract quoted terms
+    const quotedMatches = content.match(/"([^"]{3,40})"/g);
+    if (quotedMatches) topics.push(...quotedMatches.map(q => q.replace(/"/g, "")));
+    // Extract capitalized proper nouns from assistant responses
+    if (role === "assistant") {
+      const nounMatches = content.match(/\b(?:National|Electrical|Safety|Code|Engineering|Specification|Procedure|Cooling|Water|Centrifugal|Pump)\b/gi);
+      if (nounMatches) topics.push(...nounMatches.slice(0, 3));
+    }
+  }
+  if (topics.length === 0) return t;
+  // Deduplicate and limit
+  const unique = [...new Set(topics.map(x => x.trim()))].slice(0, 5);
+  const enriched = `${t} (context: ${unique.join(", ")})`;
+  return enriched;
 }
 
 /**
@@ -1523,6 +1693,13 @@ function cleanExpiredPending() {
     if (now - val.storedAt > DRAWING_SESSION_TTL_MS) {
       drawingSessions.delete(key);
       log(`drawing_session_expired session=${key}`);
+    }
+  }
+
+  // Clean expired pending navigation entries
+  for (const [key, val] of pendingNavigation) {
+    if (now - val.timestamp > NAV_TTL_MS) {
+      pendingNavigation.delete(key);
     }
   }
 
@@ -3558,9 +3735,39 @@ async function handleInteractiveDrawing(sessionKey, info, parsed, res) {
 
       // Store pending component and call the matcher
       session.pendingComponent = comp;
-      session.step = "matching";
       session.storedAt = Date.now();
 
+      // ── SystemFullName bypass: if description IS a SystemFullName, skip matcher ──
+      const sfnPattern = /^@[A-Za-z0-9_]+(?:\|[A-Za-z0-9_]+)+$/;
+      if (sfnPattern.test((comp.description || "").trim())) {
+        const directSFN = comp.description.trim();
+        log(`drawing_sfn_bypass session=${sessionKey} sfn=${directSFN} tag=${comp.tag}`);
+
+        // Go directly to drawing — no matcher, no confirm
+        const toolCallResp = buildDrawToolCall(
+          session.docUID, session.docType || 29,
+          comp.tag, comp.tag, directSFN,
+          comp.x, comp.y, model,
+          !hasDirectDrawTool && hasImportTool
+        );
+
+        session.lastDrawAttempt = {
+          tag: comp.tag,
+          description: directSFN,
+          systemFullName: directSFN,
+          x: comp.x,
+          y: comp.y,
+        };
+
+        session.step = "drawing";
+        session.storedAt = Date.now();
+
+        sendJsonResponse(res, 200, toolCallResp, { "X-Comos-Ai-Shim": "drawing-tool-call-sfn-bypass" });
+        log(`drawing_tool_call session=${sessionKey} tag=${comp.tag} sfn=${directSFN} (bypass)`);
+        return true;
+      }
+
+      session.step = "matching";
       log(`drawing_matching session=${sessionKey} desc=${comp.description} tag=${comp.tag}`);
 
       // Call gateway matcher
@@ -3703,9 +3910,36 @@ async function handleInteractiveDrawing(sessionKey, info, parsed, res) {
       if (newComp) {
         // Treat as new component, discard previous match
         session.pendingComponent = newComp;
-        session.step = "matching";
         session.storedAt = Date.now();
 
+        // ── SystemFullName bypass for new component in confirm_match ──
+        const sfnPat = /^@[A-Za-z0-9_]+(?:\|[A-Za-z0-9_]+)+$/;
+        if (sfnPat.test((newComp.description || "").trim())) {
+          const directSFN = newComp.description.trim();
+          log(`drawing_sfn_bypass session=${sessionKey} sfn=${directSFN} tag=${newComp.tag} (from confirm_match)`);
+
+          const toolCallResp = buildDrawToolCall(
+            session.docUID, session.docType || 29,
+            newComp.tag, newComp.tag, directSFN,
+            newComp.x, newComp.y, model,
+            !hasDirectDrawTool && hasImportTool
+          );
+
+          session.lastDrawAttempt = {
+            tag: newComp.tag,
+            description: directSFN,
+            systemFullName: directSFN,
+            x: newComp.x,
+            y: newComp.y,
+          };
+
+          session.step = "drawing";
+          session.storedAt = Date.now();
+          sendJsonResponse(res, 200, toolCallResp, { "X-Comos-Ai-Shim": "drawing-tool-call-sfn-bypass" });
+          return true;
+        }
+
+        session.step = "matching";
         const matchResult = await matchComponent(newComp.description, newComp.tag, session.diagramType, session.diagramSubtype);
         if (!matchResult || !matchResult.SystemFullName) {
           session.step = "ask_component";
@@ -3745,6 +3979,11 @@ async function handleInteractiveDrawing(sessionKey, info, parsed, res) {
         session.pendingConnection || null
       );
       let connectResultMsg = "";
+
+      // NOTE: Auto-retry removed — COMOS client can only handle ONE round of
+      // tool calling per user message. Sending a second tool_call causes COMOS
+      // to show "what's up?" instead of executing it. Retry logic now lives
+      // inside the DLL ConnectObjects method (Close+Open report cycle).
 
       if (latestTool && latestTool.connected) {
         const connectedSource = latestTool.sourceTag || session.pendingConnection?.sourceTag || "?";
@@ -3803,6 +4042,10 @@ async function handleInteractiveDrawing(sessionKey, info, parsed, res) {
       let drawnMsg = "";
       if (latestTool && latestTool.success === false) {
         // FAILED — add to failedObjects, NOT drawnObjects
+        const failureDetail =
+          (latestTool.error && String(latestTool.error).trim()) ||
+          (latestTool.message && String(latestTool.message).trim()) ||
+          "Unknown error";
         if (!session.failedObjects) session.failedObjects = [];
         if (drawAttempt) {
           session.failedObjects.push({
@@ -3811,10 +4054,10 @@ async function handleInteractiveDrawing(sessionKey, info, parsed, res) {
             systemFullName: drawAttempt.systemFullName || "",
             x: drawAttempt.x || 0,
             y: drawAttempt.y || 0,
-            error: latestTool.error || latestTool.message || "Unknown error",
+            error: failureDetail,
           });
         }
-        drawnMsg = `⚠️ Drawing failed for **${drawAttempt?.tag || "component"}**: ${latestTool.error || "Unknown error"}.\n\n`;
+        drawnMsg = `⚠️ Drawing failed for **${drawAttempt?.tag || "component"}**: ${failureDetail}.\n\n`;
       } else if (latestTool && latestTool.success === true) {
         // SUCCESS — add to drawnObjects
         if (!session.drawnObjects) session.drawnObjects = [];
@@ -4028,11 +4271,18 @@ const COMOS_SYSTEM_PROMPT =
   "9. You may call tools for both actions and COMOS data questions that require live project data " +
   "(e.g., attribute value, object count, object existence). " +
   "Do not answer these from memory when a matching tool exists.\n" +
-  "10. For object navigation by text, prefer this order: " +
-  "(a) objects_with_name, " +
-  "(b) navigate_to_comos_object_by_name_or_label, " +
-  "(c) navigate_to_comos_object_by_name. " +
+  "10. For object navigation by text (e.g. 'go to PC-001', 'navigate to M-002'), " +
+  "ALWAYS use navigate_to_comos_object_by_name as your FIRST choice. " +
+  "This tool does a reliable full tree scan and will find the object. " +
+  "Do NOT use objects_with_name for navigation — it uses an unreliable query and often returns 0 results even for objects that exist. " +
+  "objects_with_name should ONLY be used for counting or existence checks, NOT for navigation. " +
+  "If navigate_to_comos_object_by_name_or_label is available, you may use it as an alternative. " +
   "If the user provides a SystemUID, prefer navigate_to_comos_object_by_systemUID.\n" +
+  "10a. IMPORTANT — Object name variations: COMOS object names may differ from how the user types them. " +
+  "For example, the user may say 'PC-001' but the actual COMOS Name property is 'PC001' (no hyphen), or vice-versa. " +
+  "If navigate_to_comos_object_by_name returns 'Object doesn't found', ALWAYS retry with the tag WITHOUT the separator " +
+  "(e.g., 'PC-001' → try 'PC001'; 'AG 005' → try 'AG005'). If still not found, try WITH a hyphen " +
+  "(e.g., 'PC001' → try 'PC-001'). Try at least 2 name variations before giving up.\n" +
   "11. CRITICAL FOR ATTRIBUTES: When the user asks for an attribute value (e.g., 'What is the Shaft Power of P-101?'), " +
   "you MUST call value_of_attribute_by_name_or_description IMMEDIATELY — do NOT navigate to the object first, " +
   "do NOT say 'I can't run the lookup', do NOT ask for confirmation, do NOT offer manual instructions. " +
@@ -4064,6 +4314,22 @@ const COMOS_SYSTEM_PROMPT =
   "These tools execute locally inside COMOS and always have access.\n" +
   "12. If the user asks to change/write an attribute value, only do it when a dedicated write tool exists. " +
   "If no write tool exists in this request, clearly explain that write is unavailable and offer to read/navigate the attribute instead.\n" +
+  "13. TOOL SELECTION GUIDE — use this mapping to choose the correct tool for each user intent:\n" +
+  "  • COUNT objects ('how many X', 'quantos X', 'quantidade de X') → get_count_of_comos_objects_with_name\n" +
+  "  • LIST objects ('list objects named X', 'listar objetos X') → objects_with_name (NOT for navigation)\n" +
+  "  • GO TO / NAVIGATE to object ('go to X', 'ir para X', 'navegar até X', 'abrir X', 'selecionar X') → navigate_to_comos_object_by_name (or _by_name_or_label)\n" +
+  "  • GO TO by SystemUID ('go to A541598NS5') → navigate_to_comos_object_by_systemUID\n" +
+  "  • OPEN DOCUMENT / GO TO DOCUMENT ('open document X', 'abrir documento X', 'ir para documento X') → navigate_to_comos_document_by_name\n" +
+  "  • GO TO ATTRIBUTE ('show attribute X', 'ir para atributo X', 'navegar até atributo X') → navigate_to_attribute_by_name_or_description\n" +
+  "  • GET ATTRIBUTE VALUE ('what is the X of Y', 'qual o X de Y', 'valor do atributo X') → value_of_attribute_by_name_or_description\n" +
+  "  • EXPORT QUERY ('export query X', 'exportar query X', 'exportar consulta') → export_query_to_excel\n" +
+  "  • OPEN REPORT ('open report X', 'abrir relatório X', 'gerar relatório X') → open_report\n" +
+  "  • OPEN REPORT IN TWODC ('open report in TwoDC', 'abrir relatório no TwoDC') → open_report_twodc\n" +
+  "  • LIST PRINTERS ('list printers', 'listar impressoras', 'quais impressoras', 'available printers') → get_info_about_all_available_printers_and_all_available_paper\n" +
+  "  • PAPER SIZE ('what paper for document', 'tamanho do papel', 'papel do documento') → get_print_paper_name_for_document\n" +
+  "  • LAST REVISION ('last revision', 'última revisão', 'mostrar revisão', 'show revision') → show_last_revision_of_document\n" +
+  "  • CREATE REVISION ('create revision', 'criar revisão', 'nova revisão', 'new revision') → create_new_revision\n" +
+  "  • LIST ATTRIBUTES ('list attributes', 'show attributes', 'listar atributos', 'quais atributos') → list_object_attributes — use when an attribute is not found to show what's available\n" +
   "\n" +
   "IMPORT WORKFLOW (after ServiceiPID analysis):\n" +
   "When the user asks to import/draw/create objects from an analysis in a COMOS diagram:\n" +
@@ -4691,6 +4957,15 @@ const server = http.createServer(async (req, res) => {
           //    tool-result round and should let the LLM process the result.
           const _hasToolResultInConversation = (Array.isArray(messages) ? messages : [])
             .some(m => { const r = String((m || {}).role || (m || {}).Role || "").toLowerCase(); return r === "tool" || r === "function"; });
+          // ── NEW: detect if this POST is a fresh user request (last msg is "user")
+          //    vs. a mid-fabrication round (last msg is "tool" with a result).
+          //    In multi-turn conversations, previous turns' tool results should NOT
+          //    block fabrication for the new user request.
+          const _isNewUserRequest = (() => {
+            if (!Array.isArray(messages) || messages.length === 0) return true;
+            const lastRole = String(messages[messages.length - 1].role || messages[messages.length - 1].Role || "").toLowerCase();
+            return lastRole === "user";
+          })();
           let effectiveCountText = lastUserText;
           let asksObjectCount = isObjectCountIntent(lastUserText);
           if (!asksObjectCount && !_hasToolResultInConversation) {
@@ -4794,35 +5069,60 @@ const server = http.createServer(async (req, res) => {
           //    message (including the final text response). So we can fabricate
           //    at most 2 tool calls. Count how many we've already used by
           //    looking at tool result messages with call_shim_ IDs.
-          const _fabricatedCallCount = (Array.isArray(messages) ? messages : []).filter(m => {
-            const role = String(m.role || m.Role || "").toLowerCase();
-            if (role !== "tool") return false;
-            const tcId = String(m.tool_call_id || m.toolCallId || m.ToolCallId || "");
-            return tcId.startsWith("call_shim_");
-          }).length;
+          //    IMPORTANT: Only count fabricated calls in the CURRENT turn
+          //    (after the last "user" message), not across all turns.
+          const _fabricatedCallCount = (() => {
+            if (!Array.isArray(messages)) return 0;
+            let lastUserIdx = -1;
+            for (let i = messages.length - 1; i >= 0; i--) {
+              if (String(messages[i].role || messages[i].Role || "").toLowerCase() === "user") {
+                lastUserIdx = i;
+                break;
+              }
+            }
+            return messages.slice(lastUserIdx + 1).filter(m => {
+              const role = String(m.role || m.Role || "").toLowerCase();
+              if (role !== "tool") return false;
+              const tcId = String(m.tool_call_id || m.toolCallId || m.ToolCallId || "");
+              return tcId.startsWith("call_shim_");
+            }).length;
+          })();
           const _maxFabricatedCalls = 2;
           if (_fabricatedCallCount >= _maxFabricatedCalls) {
             log(`fabrication_budget_exhausted session=${sessionKey} count=${_fabricatedCallCount} max=${_maxFabricatedCalls}`);
           }
+
+          // ── Shared: messages in the CURRENT turn (after the last user message) ──
+          // All fabrication handlers must use this to avoid acting on stale tool
+          // results from previous turns.
+          const _lastUserIdxShared = (() => {
+            if (!Array.isArray(messages)) return -1;
+            for (let i = messages.length - 1; i >= 0; i--) {
+              if (String(messages[i].role || messages[i].Role || "").toLowerCase() === "user") return i;
+            }
+            return -1;
+          })();
+          const _currentTurnMsgsShared = Array.isArray(messages) ? messages.slice(_lastUserIdxShared + 1) : [];
+          const _lastUserContentShared = _lastUserIdxShared >= 0 ? String(messages[_lastUserIdxShared].content || messages[_lastUserIdxShared].Content || "") : "";
 
           // ── Post-navigation attribute fabrication ────────────────────────
           // When the last tool result is a successful navigation AND there's a
           // pending attribute query that hasn't been attempted yet, fabricate the
           // attribute tool call WITH the systemUID from the navigation result.
           if (_fabricatedCallCount < _maxFabricatedCalls) {
-            const _lastToolMsgNav = (Array.isArray(messages) ? messages : []).filter(m =>
+            // Use shared current-turn scoping to avoid stale nav results
+            const _lastToolMsgNav = _currentTurnMsgsShared.filter(m =>
               String(m.role || m.Role || "").toLowerCase() === "tool"
             ).pop();
             const _navContent = String((_lastToolMsgNav || {}).content || (_lastToolMsgNav || {}).Content || "");
             const _isNavSuccess = _navContent.includes("Navigated to the object") || _navContent.includes("SystemUID");
             const _navUID = (_navContent.match(/SystemUID\s*[:=]\s*([A-Z0-9]{8,12})/i) || [])[1] || "";
 
-            const _hasPendingAttr = (Array.isArray(messages) ? messages : []).some(m =>
-              String(m.role || m.Role || "").toLowerCase() === "user" &&
-              (isAttributeValueIntent(String(m.content || m.Content || "")) || isAttributeNavigationIntent(String(m.content || m.Content || "")))
-            );
-            // Check if attribute tool was already attempted (any attr tool result present)
-            const _attrAttempted = (Array.isArray(messages) ? messages : []).some(m => {
+            // Check if the CURRENT user message asks about an attribute
+            const _hasPendingAttr = isAttributeValueIntent(_lastUserContentShared) || isAttributeNavigationIntent(_lastUserContentShared);
+
+            // Check if attribute tool was already attempted IN CURRENT TURN
+            const _attrAttempted = _currentTurnMsgsShared.some(m => {
               const r = String(m.role || m.Role || "").toLowerCase();
               if (r !== "assistant") return false;
               const tc = m.tool_calls || m.ToolCalls || [];
@@ -4832,90 +5132,268 @@ const server = http.createServer(async (req, res) => {
               });
             });
 
-            if (_isNavSuccess && _navUID && _hasPendingAttr && !_attrAttempted && hasTools && (hasAttributeReadTool || hasAttributeNavTool)) {
-              // Find the attribute name from the user's query
-              const _userMsgsNav = (Array.isArray(messages) ? messages : []).filter(m =>
-                String(m.role || m.Role || "").toLowerCase() === "user"
-              );
+            if (_isNavSuccess && _hasPendingAttr && !_attrAttempted && hasTools && (hasAttributeReadTool || hasAttributeNavTool)) {
+              // Find the attribute name from the CURRENT user message
               let _attrName = "";
-              for (let ui = _userMsgsNav.length - 1; ui >= 0; ui--) {
-                const uText = String(_userMsgsNav[ui].content || _userMsgsNav[ui].Content || "");
-                if (isAttributeValueIntent(uText) || isAttributeNavigationIntent(uText)) {
-                  _attrName = extractAttributeAndObject(uText).attributeName;
-                  break;
-                }
+              if (_lastUserContentShared) {
+                const extracted = extractAttributeAndObject(_lastUserContentShared);
+                _attrName = extracted.attributeName || "";
               }
               if (_attrName) {
                 const _preferToolNav = hasAttributeReadTool
                   ? "value_of_attribute_by_name_or_description"
                   : "navigate_to_attribute_by_name_or_description";
-                // Do NOT pass systemUID — after navigation the object is selected
-                // in the COMOS navigator, so the DLL's get_navigator_selected_object()
-                // path will find it correctly.
+                // Pass systemUID from nav result so the DLL can find the object
+                // (SelectedObject is unreliable across separate tool iterations)
+                const _attrArgs = { objectNameOrDescription: _attrName };
+                if (_navUID) _attrArgs.systemUID = _navUID;
                 const fabricated = buildFabricatedToolCallResponse(
                   _preferToolNav,
-                  { objectNameOrDescription: _attrName },
+                  _attrArgs,
                   parsed.model
                 );
                 sendJsonResponse(res, 200, fabricated, { "X-Comos-Ai-Shim": "fabricated-attr-after-nav" });
-                log(`fabricated_attr_after_nav session=${sessionKey} attr="${_attrName}" (no systemUID, using selected object)`);
+                log(`fabricated_attr_after_nav session=${sessionKey} attr="${_attrName}" systemUID=${_navUID || "(none)"}`);
                 return;
               }
             }
           }
 
-          // ── Attribute AUTO-RETRY: when last tool result is "Object doesn't found" ──
-          // and the conversation contains an attribute query, try alternative attribute names.
-          // COMOS attribute names can vary: "Shaft Power" vs "Power" vs "P_shaft" vs "Rated Power"
+          // ── Direct list_object_attributes result handler ──────────────
+          // When the user asked "list attributes" and we got the result back,
+          // format it as a nice table and short-circuit (don't send to LLM).
+          {
+            const _lastToolMsgDirect = _currentTurnMsgsShared.filter(m =>
+              String(m.role || m.Role || "").toLowerCase() === "tool"
+            ).pop();
+            const _directContent = String((_lastToolMsgDirect || {}).content || (_lastToolMsgDirect || {}).Content || "");
+            // Check if this is a list_object_attributes result (has "attributeCount" and "attributes" keys)
+            const _isListAttrsDirectResult = _directContent.includes("attributeCount") && _directContent.includes("filledOnly");
+            if (_isListAttrsDirectResult && isListAttributesIntent(lastUserText)) {
+              const _isPtD = detectPortugueseText(lastUserText);
+              let _parsedAttrs = {};
+              try { _parsedAttrs = JSON.parse(_directContent); } catch { }
+              const _attrStr = String(_parsedAttrs.attributes || "");
+              const _attrs = _attrStr.split(";").map(a => a.trim()).filter(a => a.length > 0);
+              const _objName = _parsedAttrs.objectName || _parsedAttrs.objectLabel || "object";
+
+              let _msg;
+              if (_attrs.length === 0) {
+                _msg = _isPtD
+                  ? `O objeto **${_objName}** não possui atributos preenchidos.`
+                  : `Object **${_objName}** has no filled attributes.`;
+              } else {
+                // Format as markdown table
+                _msg = _isPtD
+                  ? `Atributos preenchidos de **${_objName}** (${_attrs.length}):\n\n`
+                  : `Filled attributes of **${_objName}** (${_attrs.length}):\n\n`;
+                _msg += `| Tab | Attribute | Value |\n|-----|-----------|-------|\n`;
+                for (const attr of _attrs.slice(0, 100)) {
+                  // Parse: [TabName] AttrName (Desc) = Value
+                  const tabMatch = attr.match(/^\[([^\]]*)\]\s*(.*)/);
+                  let tab = "", rest = attr;
+                  if (tabMatch) { tab = tabMatch[1]; rest = tabMatch[2]; }
+                  const eqIdx = rest.indexOf(" = ");
+                  let name = rest, val = "";
+                  if (eqIdx > -1) { name = rest.substring(0, eqIdx); val = rest.substring(eqIdx + 3); }
+                  _msg += `| ${tab} | ${name} | ${val} |\n`;
+                }
+                if (_attrs.length > 100) {
+                  _msg += _isPtD
+                    ? `\n... e mais ${_attrs.length - 100} atributos.`
+                    : `\n... and ${_attrs.length - 100} more.`;
+                }
+              }
+              const _scResp = {
+                id: `chatcmpl-shim-listattrs-${Date.now()}`,
+                object: "chat.completion",
+                model: parsed.model || "serviceipid-gateway",
+                choices: [{ index: 0, message: { role: "assistant", content: _msg }, finish_reason: "stop" }],
+                usage: { prompt_tokens: 0, completion_tokens: 0, total_tokens: 0 },
+              };
+              sendJsonResponse(res, 200, _scResp, { "X-Comos-Ai-Shim": "list-attrs-formatted" });
+              log(`list_attrs_formatted session=${sessionKey} obj="${_objName}" count=${_attrs.length}`);
+              return;
+            }
+          }
+
+          // ── Attribute AUTO-RECOVERY: when the attribute tool returns "Object doesn't found",
+          // instead of guessing alternative names, call list_object_attributes to get the
+          // actual list of attributes on the object, then short-circuit with a helpful response.
           if (_fabricatedCallCount < _maxFabricatedCalls) {
-            const _lastToolMsg = (Array.isArray(messages) ? messages : []).filter(m =>
+            const _lastToolMsg = _currentTurnMsgsShared.filter(m =>
               String(m.role || m.Role || "").toLowerCase() === "tool"
             ).pop();
             const _lastToolContent = String((_lastToolMsg || {}).content || (_lastToolMsg || {}).Content || "");
             const _attrFailed = _lastToolContent.includes("Object doesn't found") || _lastToolContent.includes("doesn't found");
+            const _objectLookupFailed = /could\s+not\s+find\s+the\s+object|objectname\s*=|provide\s+the\s+object\s+name\/tag/i.test(_lastToolContent);
+            const _userAttrObj = extractAttributeAndObject(lastUserText);
+            const _hasExplicitObjectTagInQuery = !!_userAttrObj.objectTag;
 
-            if (_attrFailed && hasTools && (hasAttributeReadTool || hasAttributeNavTool)) {
+            if (_attrFailed && !_objectLookupFailed && !_hasExplicitObjectTagInQuery && hasTools) {
               // Find the original attribute query from user messages
               const _userMsgs = (Array.isArray(messages) ? messages : []).filter(m =>
                 String(m.role || m.Role || "").toLowerCase() === "user"
               );
               let _origAttrQuery = "";
-              let _origObjectTag = "";
               for (let ui = _userMsgs.length - 1; ui >= 0; ui--) {
                 const uText = String(_userMsgs[ui].content || _userMsgs[ui].Content || "");
                 if (isAttributeValueIntent(uText) || isAttributeNavigationIntent(uText)) {
-                  const parsed2 = extractAttributeAndObject(uText);
-                  _origAttrQuery = parsed2.attributeName;
-                  _origObjectTag = parsed2.objectTag;
+                  _origAttrQuery = extractAttributeAndObject(uText).attributeName;
                   break;
                 }
               }
 
-              // Count how many "Object doesn't found" results we already have (to pick next alternative)
-              const _failCount = (Array.isArray(messages) ? messages : []).filter(m =>
-                String(m.role || m.Role || "").toLowerCase() === "tool" &&
-                String(m.content || m.Content || "").includes("Object doesn't found")
-              ).length;
+              // If list_object_attributes tool is available, call it to get the real attribute list
+              const hasListAttrsTool = toolNames.includes("list_object_attributes");
+              const _lastToolCallId = String(_lastToolMsg?.tool_call_id || _lastToolMsg?.toolCallId || "");
 
-              // Generate alternative attribute names based on the original query
-              const _alternatives = generateAttributeAlternatives(_origAttrQuery);
-              const _nextAlt = _alternatives[_failCount - 1]; // -1 because first attempt was the original
+              // Check if the last tool result is already FROM list_object_attributes
+              // (to avoid infinite loop: attr-fail → list → attr-fail → list ...)
+              const _lastAssistantMsg = _currentTurnMsgsShared.filter(m =>
+                String(m.role || m.Role || "").toLowerCase() === "assistant" && m.tool_calls
+              ).pop();
+              const _lastCalledTool = _lastAssistantMsg?.tool_calls?.[0]?.function?.name || "";
+              const _isListAttrsResult = _lastCalledTool === "list_object_attributes";
 
-              // Cap retries to 1 to stay within COMOS's 3-iteration budget
-              // (navigate=1, attr=2, retry=3). Also require systemUID.
-              // Do NOT pass systemUID — use the currently selected object in COMOS
-              if (_nextAlt && _origAttrQuery && _failCount <= 1) {
-                const _retryArgs = { objectNameOrDescription: _nextAlt };
-                const _preferTool = hasAttributeReadTool
-                  ? "value_of_attribute_by_name_or_description"
-                  : "navigate_to_attribute_by_name_or_description";
-                const fabricated = buildFabricatedToolCallResponse(_preferTool, _retryArgs, parsed.model);
-                sendJsonResponse(res, 200, fabricated, { "X-Comos-Ai-Shim": "fabricated-attr-retry" });
-                log(`fabricated_attr_retry session=${sessionKey} original="${_origAttrQuery}" retry="${_nextAlt}" attempt=${_failCount + 1} (no systemUID)`);
+              if (_isListAttrsResult) {
+                // We already called list_object_attributes — parse the result and short-circuit
+                const _isPt = detectPortugueseText(lastUserText);
+                let _attrList = "";
+                try {
+                  const _parsed = JSON.parse(_lastToolContent);
+                  _attrList = _parsed.attributes || "";
+                } catch {
+                  _attrList = _lastToolContent;
+                }
+
+                // Parse semicolon-delimited list and format nicely
+                const _attrs = _attrList.split(";").map(a => a.trim()).filter(a => a.length > 0);
+                let _scMsg;
+                if (_isPt) {
+                  _scMsg = _origAttrQuery
+                    ? `O atributo "${_origAttrQuery}" não foi encontrado neste objeto.`
+                    : `O atributo solicitado não foi encontrado neste objeto.`;
+                  if (_attrs.length > 0) {
+                    _scMsg += `\n\nAtributos disponíveis neste objeto (${_attrs.length}):\n` +
+                      _attrs.slice(0, 50).map(a => `  • ${a}`).join("\n");
+                    if (_attrs.length > 50) _scMsg += `\n  ... e mais ${_attrs.length - 50} atributos.`;
+                  }
+                  _scMsg += `\n\nDiga o nome exato do atributo que deseja consultar.`;
+                } else {
+                  _scMsg = _origAttrQuery
+                    ? `The attribute "${_origAttrQuery}" was not found on this object.`
+                    : `The requested attribute was not found on this object.`;
+                  if (_attrs.length > 0) {
+                    _scMsg += `\n\nAvailable attributes on this object (${_attrs.length}):\n` +
+                      _attrs.slice(0, 50).map(a => `  • ${a}`).join("\n");
+                    if (_attrs.length > 50) _scMsg += `\n  ... and ${_attrs.length - 50} more.`;
+                  }
+                  _scMsg += `\n\nPlease specify the exact attribute name you want to query.`;
+                }
+                const _scResp = {
+                  id: `chatcmpl-shim-attrlist-${Date.now()}`,
+                  object: "chat.completion",
+                  model: parsed.model || "serviceipid-gateway",
+                  choices: [{ index: 0, message: { role: "assistant", content: _scMsg }, finish_reason: "stop" }],
+                  usage: { prompt_tokens: 0, completion_tokens: 0, total_tokens: 0 },
+                };
+                sendJsonResponse(res, 200, _scResp, { "X-Comos-Ai-Shim": "attr-not-found-list-attrs" });
+                log(`attr_not_found_list_attrs session=${sessionKey} attr="${_origAttrQuery}" availableAttrs=${_attrs.length}`);
                 return;
-              } else if (_failCount > 1) {
-                log(`skip_attr_retry session=${sessionKey} reason=retry_cap_reached failCount=${_failCount}`);
+              } else if (hasListAttrsTool) {
+                // Call list_object_attributes to discover available attributes
+                // Extract object tag from user text for AllDevices lookup
+                const _tagMatchFail = String(lastUserText || "").match(/\b([A-Z]{1,4}[- ]?\d{2,5}[A-Z]?)\b/i);
+                const _tagForFail = _tagMatchFail ? _tagMatchFail[1] : "";
+                const fabricated = buildFabricatedToolCallResponse(
+                  "list_object_attributes",
+                  { systemUID: "", objectName: _tagForFail },
+                  parsed.model
+                );
+                sendJsonResponse(res, 200, fabricated, { "X-Comos-Ai-Shim": "fabricated-list-attrs-after-fail" });
+                log(`fabricated_list_attrs_after_fail session=${sessionKey} originalAttr="${_origAttrQuery}" objectName="${_tagForFail}"`);    
+                return;
+              } else {
+                // No list_object_attributes tool available — short-circuit with generic message
+                const _isPt2 = detectPortugueseText(lastUserText);
+                const _scMsg2 = _isPt2
+                  ? `O atributo "${_origAttrQuery || "solicitado"}" não foi encontrado neste objeto.\n\nVocê pode pedir: **"liste os atributos preenchidos"** para ver todos os atributos disponíveis com valor.`
+                  : `The attribute "${_origAttrQuery || "requested"}" was not found on this object.\n\nYou can ask: **"list the filled attributes"** to see all available attributes with values.`;
+                const _scResp2 = {
+                  id: `chatcmpl-shim-attrsc-${Date.now()}`,
+                  object: "chat.completion",
+                  model: parsed.model || "serviceipid-gateway",
+                  choices: [{ index: 0, message: { role: "assistant", content: _scMsg2 }, finish_reason: "stop" }],
+                  usage: { prompt_tokens: 0, completion_tokens: 0, total_tokens: 0 },
+                };
+                sendJsonResponse(res, 200, _scResp2, { "X-Comos-Ai-Shim": "attr-not-found-short-circuit" });
+                log(`attr_not_found_short_circuit session=${sessionKey} attr="${_origAttrQuery}" (no list_object_attributes tool)`);
+                return;
               }
+            }
+          }
+
+          // ── Navigation AUTO-RETRY: when a nav tool returns "Object doesn't found",
+          //    try name variations (with/without hyphens, spaces).
+          //    COMOS object names may differ from how users type them:
+          //    "PC-001" in hierarchy → "PC001" in Name property (most common).
+          if (_fabricatedCallCount < _maxFabricatedCalls && isPureNavigationIntent(lastUserText)) {
+            const _lastNavToolMsg = _currentTurnMsgsShared.filter(m =>
+              String(m.role || m.Role || "").toLowerCase() === "tool"
+            ).pop();
+            const _lastNavContent = String((_lastNavToolMsg || {}).content || (_lastNavToolMsg || {}).Content || "");
+            const _navFailed = _lastNavContent.includes("Object doesn't found") || _lastNavContent.includes("doesn't found");
+
+            if (_navFailed) {
+              const navTarget = extractNavigationTarget(lastUserText);
+              if (navTarget) {
+                // Count nav-specific failures in CURRENT TURN (with call_shim_ IDs = shim-fabricated)
+                const _navFailCount = _currentTurnMsgsShared.filter(m =>
+                  String(m.role || m.Role || "").toLowerCase() === "tool" &&
+                  (String(m.content || m.Content || "").includes("doesn't found")) &&
+                  String(m.tool_call_id || m.toolCallId || m.ToolCallId || "").startsWith("call_shim_")
+                ).length;
+
+                const _navVariations = generateNavigationNameVariations(navTarget);
+                const _nextNavVariation = _navVariations[_navFailCount - 1]; // -1: first attempt was original
+
+                if (_nextNavVariation && _navFailCount <= 2) {
+                  const _navToolName2 = toolNames.includes("navigate_to_comos_object_by_name_or_label")
+                    ? "navigate_to_comos_object_by_name_or_label" : "navigate_to_comos_object_by_name";
+                  const _navArgKey2 = _navToolName2.includes("label") ? "objectNameOrLabel" : "objectName";
+                  const fabricatedRetry = buildFabricatedToolCallResponse(
+                    _navToolName2,
+                    { [_navArgKey2]: _nextNavVariation },
+                    parsed.model
+                  );
+                  sendJsonResponse(res, 200, fabricatedRetry, { "X-Comos-Ai-Shim": "fabricated-nav-retry" });
+                  log(`fabricated_nav_retry session=${sessionKey} original="${navTarget}" retry="${_nextNavVariation}" attempt=${_navFailCount + 1}`);
+                  return;
+                } else if (_navFailCount > 2) {
+                  log(`skip_nav_retry session=${sessionKey} reason=retry_cap_reached navFailCount=${_navFailCount}`);
+                }
+              }
+            }
+          }
+
+          // ── Pure navigation fabrication — uses navigate_to_comos_object_by_name ──
+          // Directly fabricates the correct navigation tool call to avoid the LLM
+          // picking objects_with_name (unreliable QS) or wasting a tool iteration.
+          if (hasTools && isPureNavigationIntent(lastUserText) && _isNewUserRequest && _fabricatedCallCount < _maxFabricatedCalls) {
+            const navTarget = extractNavigationTarget(lastUserText);
+            if (navTarget) {
+              const _navToolName = toolNames.includes("navigate_to_comos_object_by_name_or_label")
+                ? "navigate_to_comos_object_by_name_or_label" : "navigate_to_comos_object_by_name";
+              const _navArgKey = _navToolName.includes("label") ? "objectNameOrLabel" : "objectName";
+              const fabricatedNav = buildFabricatedToolCallResponse(
+                _navToolName,
+                { [_navArgKey]: navTarget },
+                parsed.model
+              );
+              sendJsonResponse(res, 200, fabricatedNav, { "X-Comos-Ai-Shim": "fabricated-nav-direct" });
+              log(`fabricated_nav_direct session=${sessionKey} target="${navTarget}" tool=${_navToolName}`);
+              return;
             }
           }
 
@@ -4923,15 +5401,16 @@ const server = http.createServer(async (req, res) => {
           // When the user asks for an attribute value (e.g., "What's the Shaft Power of P-101?"),
           // fabricate the tool call directly instead of letting the LLM navigate first.
           // This avoids the navigate-then-read two-step which is blocked by force_tool_choice_none.
-          if (hasTools && asksAttrValue && hasAttributeReadTool && !_hasToolResultInConversation && _fabricatedCallCount < _maxFabricatedCalls) {
+          if (hasTools && asksAttrValue && hasAttributeReadTool && _isNewUserRequest && _fabricatedCallCount < _maxFabricatedCalls) {
             const { objectTag, attributeName } = extractAttributeAndObject(lastUserText);
             if (attributeName) {
               const recentUID = extractRecentObjectSystemUID(lastUserText, messages);
               if (!recentUID && objectTag) {
-                // No systemUID yet — navigate to the object FIRST to get one.
-                // The attribute call will be fabricated when the nav result comes back.
+                // Reliable path: resolve SystemUID from the requested object IN THIS TURN,
+                // then post-nav handler will call value_of_attribute... with that UID.
                 const _navToolName = toolNames.includes("navigate_to_comos_object_by_name_or_label")
-                  ? "navigate_to_comos_object_by_name_or_label" : "navigate_to_comos_object_by_name";
+                  ? "navigate_to_comos_object_by_name_or_label"
+                  : "navigate_to_comos_object_by_name";
                 const _navArgKey = _navToolName.includes("label") ? "objectNameOrLabel" : "objectName";
                 const fabricated = buildFabricatedToolCallResponse(
                   _navToolName,
@@ -4942,39 +5421,51 @@ const server = http.createServer(async (req, res) => {
                 log(`fabricated_attr_nav_first session=${sessionKey} tag="${objectTag}" attr="${attributeName}" tool=${_navToolName}`);
                 return;
               }
-              // Call attribute tool without systemUID — DLL will use the selected object
-              const attrArgs = { objectNameOrDescription: attributeName };
+              // Keep requests independent: if object tag is in the user's message,
+              // call attribute tool directly with the full query text. Do NOT
+              // force a navigation pre-step based on prior conversation state.
+              const attrQueryText = extractAttributeQueryText(lastUserText);
+              const objectScopedAttrQuery = objectTag
+                ? (attrQueryText || `${attributeName} of ${objectTag}`)
+                : attributeName;
+              const attrArgs = { objectNameOrDescription: objectScopedAttrQuery };
+              if (recentUID) attrArgs.systemUID = recentUID;
               const fabricated = buildFabricatedToolCallResponse(
                 "value_of_attribute_by_name_or_description",
                 attrArgs,
                 parsed.model
               );
               sendJsonResponse(res, 200, fabricated, { "X-Comos-Ai-Shim": "fabricated-attr-value" });
-              log(`fabricated_attr_value session=${sessionKey} attr="${attributeName}" tag="${objectTag}" (no systemUID)`);
+              log(`fabricated_attr_value session=${sessionKey} attr="${attributeName}" tag="${objectTag}" systemUID=${recentUID || "(none)"}`);
               return;
             }
           }
 
           // ── Attribute NAVIGATION fabrication ────────────────────────
-          if (hasTools && asksAttrNav && hasAttributeNavTool && !_hasToolResultInConversation && _fabricatedCallCount < _maxFabricatedCalls) {
+          if (hasTools && asksAttrNav && hasAttributeNavTool && _isNewUserRequest && _fabricatedCallCount < _maxFabricatedCalls) {
             const { objectTag, attributeName } = extractAttributeAndObject(lastUserText);
             if (attributeName) {
               const recentUID = extractRecentObjectSystemUID(lastUserText, messages);
               if (!recentUID && objectTag) {
-                // Navigate to the object first to get systemUID
-                const _navToolName2 = toolNames.includes("navigate_to_comos_object_by_name_or_label")
-                  ? "navigate_to_comos_object_by_name_or_label" : "navigate_to_comos_object_by_name";
-                const _navArgKey2 = _navToolName2.includes("label") ? "objectNameOrLabel" : "objectName";
+                const _navToolName = toolNames.includes("navigate_to_comos_object_by_name_or_label")
+                  ? "navigate_to_comos_object_by_name_or_label"
+                  : "navigate_to_comos_object_by_name";
+                const _navArgKey = _navToolName.includes("label") ? "objectNameOrLabel" : "objectName";
                 const fabricated = buildFabricatedToolCallResponse(
-                  _navToolName2,
-                  { [_navArgKey2]: objectTag },
+                  _navToolName,
+                  { [_navArgKey]: objectTag },
                   parsed.model
                 );
                 sendJsonResponse(res, 200, fabricated, { "X-Comos-Ai-Shim": "fabricated-attr-nav-first" });
-                log(`fabricated_attr_nav_first session=${sessionKey} tag="${objectTag}" attr="${attributeName}" tool=${_navToolName2}`);
+                log(`fabricated_attr_nav_first session=${sessionKey} tag="${objectTag}" attr="${attributeName}" tool=${_navToolName}`);
                 return;
               }
-              const attrArgs = { objectNameOrDescription: attributeName };
+              const attrQueryText = extractAttributeQueryText(lastUserText);
+              const objectScopedAttrQuery = objectTag
+                ? (attrQueryText || `${attributeName} of ${objectTag}`)
+                : attributeName;
+              const attrArgs = { objectNameOrDescription: objectScopedAttrQuery };
+              if (recentUID) attrArgs.systemUID = recentUID;
               const fabricated = buildFabricatedToolCallResponse(
                 "navigate_to_attribute_by_name_or_description",
                 attrArgs,
@@ -4982,6 +5473,191 @@ const server = http.createServer(async (req, res) => {
               );
               sendJsonResponse(res, 200, fabricated, { "X-Comos-Ai-Shim": "fabricated-attr-nav" });
               log(`fabricated_attr_nav session=${sessionKey} attr="${attributeName}" tag="${objectTag}" (no systemUID)`);
+              return;
+            }
+          }
+
+          // ── Document navigation fabrication ────────────────────────
+          // "open document AA_001" / "abrir documento X" → navigate_to_comos_document_by_name
+          if (hasTools && _fabricatedCallCount < _maxFabricatedCalls && _isNewUserRequest &&
+              isDocumentNavigationIntent(lastUserText) && toolNames.includes("navigate_to_comos_document_by_name")) {
+            const docTarget = extractDocumentTarget(lastUserText);
+            if (docTarget) {
+              const fabricated = buildFabricatedToolCallResponse(
+                "navigate_to_comos_document_by_name",
+                { documentName: docTarget },
+                parsed.model
+              );
+              sendJsonResponse(res, 200, fabricated, { "X-Comos-Ai-Shim": "fabricated-doc-nav" });
+              log(`fabricated_doc_nav session=${sessionKey} target="${docTarget}"`);
+              return;
+            }
+          }
+
+          // ── Report open fabrication ────────────────────────
+          // "open report X" / "abrir relatório X" → open_report or open_report_twodc
+          if (hasTools && _fabricatedCallCount < _maxFabricatedCalls && _isNewUserRequest) {
+            if (isReportTwoDCIntent(lastUserText) && toolNames.includes("open_report_twodc")) {
+              const rptTarget = extractReportTarget(lastUserText);
+              if (rptTarget) {
+                const fabricated = buildFabricatedToolCallResponse(
+                  "open_report_twodc",
+                  { reportName: rptTarget },
+                  parsed.model
+                );
+                sendJsonResponse(res, 200, fabricated, { "X-Comos-Ai-Shim": "fabricated-report-twodc" });
+                log(`fabricated_report_twodc session=${sessionKey} target="${rptTarget}"`);
+                return;
+              }
+            } else if (isReportOpenIntent(lastUserText) && toolNames.includes("open_report")) {
+              const rptTarget = extractReportTarget(lastUserText);
+              if (rptTarget) {
+                const fabricated = buildFabricatedToolCallResponse(
+                  "open_report",
+                  { reportName: rptTarget },
+                  parsed.model
+                );
+                sendJsonResponse(res, 200, fabricated, { "X-Comos-Ai-Shim": "fabricated-report-open" });
+                log(`fabricated_report_open session=${sessionKey} target="${rptTarget}"`);
+                return;
+              }
+            }
+          }
+
+          // ── Revision fabrication ────────────────────────
+          // "show last revision" / "última revisão" → show_last_revision_of_document
+          // "create revision" / "criar revisão" → create_new_revision
+          if (hasTools && _fabricatedCallCount < _maxFabricatedCalls && _isNewUserRequest) {
+            if (isCreateRevisionIntent(lastUserText) && toolNames.includes("create_new_revision")) {
+              const fabricated = buildFabricatedToolCallResponse(
+                "create_new_revision",
+                {},
+                parsed.model
+              );
+              sendJsonResponse(res, 200, fabricated, { "X-Comos-Ai-Shim": "fabricated-create-revision" });
+              log(`fabricated_create_revision session=${sessionKey}`);
+              return;
+            } else if (isShowRevisionIntent(lastUserText) && toolNames.includes("show_last_revision_of_document")) {
+              const fabricated = buildFabricatedToolCallResponse(
+                "show_last_revision_of_document",
+                {},
+                parsed.model
+              );
+              sendJsonResponse(res, 200, fabricated, { "X-Comos-Ai-Shim": "fabricated-show-revision" });
+              log(`fabricated_show_revision session=${sessionKey}`);
+              return;
+            }
+          }
+
+          // ── Printer fabrication ────────────────────────
+          // "list printers" / "listar impressoras" → get_info_about_all_available_printers_and_all_available_paper
+          // "paper for document" / "papel do documento" → get_print_paper_name_for_document
+          if (hasTools && _fabricatedCallCount < _maxFabricatedCalls && _isNewUserRequest && isPrinterIntent(lastUserText)) {
+            const hasPaperDocSignal = /\b(document|documento|for\s+document|para\s+documento|do\s+documento)\b/i.test(lastUserText);
+            if (hasPaperDocSignal && toolNames.includes("get_print_paper_name_for_document")) {
+              // Paper size for a specific document — let LLM fill in the document parameter
+              const fabricated = buildFabricatedToolCallResponse(
+                "get_print_paper_name_for_document",
+                {},
+                parsed.model
+              );
+              sendJsonResponse(res, 200, fabricated, { "X-Comos-Ai-Shim": "fabricated-paper-for-doc" });
+              log(`fabricated_paper_for_doc session=${sessionKey}`);
+              return;
+            } else if (toolNames.includes("get_info_about_all_available_printers_and_all_available_paper")) {
+              const fabricated = buildFabricatedToolCallResponse(
+                "get_info_about_all_available_printers_and_all_available_paper",
+                {},
+                parsed.model
+              );
+              sendJsonResponse(res, 200, fabricated, { "X-Comos-Ai-Shim": "fabricated-list-printers" });
+              log(`fabricated_list_printers session=${sessionKey}`);
+              return;
+            }
+          }
+
+          // ── Query export fabrication ────────────────────────
+          // "export query X" / "exportar consulta X" → export_query_to_excel
+          if (hasTools && _fabricatedCallCount < _maxFabricatedCalls && _isNewUserRequest &&
+              isQueryExportIntent(lastUserText) && toolNames.includes("export_query_to_excel")) {
+            const queryTarget = extractQueryTarget(lastUserText);
+            const fabricated = buildFabricatedToolCallResponse(
+              "export_query_to_excel",
+              queryTarget ? { queryName: queryTarget } : {},
+              parsed.model
+            );
+            sendJsonResponse(res, 200, fabricated, { "X-Comos-Ai-Shim": "fabricated-query-export" });
+            log(`fabricated_query_export session=${sessionKey} target="${queryTarget}"`);
+            return;
+          }
+
+          // ── List attributes fabrication ────────────────────────
+          // "list attributes of PC001", "show me the attributes", etc.
+          // → list_object_attributes (or navigate first if object tag present)
+          if (hasTools && _fabricatedCallCount < _maxFabricatedCalls && isListAttributesIntent(lastUserText)) {
+            const hasListAttrsTool2 = toolNames.includes("list_object_attributes");
+            if (hasListAttrsTool2) {
+              // Check if user mentions a specific object tag
+              const tagMatch = String(lastUserText || "").match(/\b([A-Z]{1,4}[- ]?\d{2,5}[A-Z]?)\b/i);
+              if (tagMatch && _isNewUserRequest) {
+                // Navigate to the object first, then list_object_attributes will use selected object
+                const _navToolName = toolNames.includes("navigate_to_comos_object_by_name_or_label")
+                  ? "navigate_to_comos_object_by_name_or_label" : "navigate_to_comos_object_by_name";
+                const _navArgKey = _navToolName.includes("label") ? "objectNameOrLabel" : "objectName";
+                const fabricated = buildFabricatedToolCallResponse(
+                  _navToolName,
+                  { [_navArgKey]: tagMatch[1] },
+                  parsed.model
+                );
+                sendJsonResponse(res, 200, fabricated, { "X-Comos-Ai-Shim": "fabricated-list-attrs-nav-first" });
+                log(`fabricated_list_attrs_nav_first session=${sessionKey} tag="${tagMatch[1]}"`);
+                return;
+              }
+              // No tag or already navigated — call list_object_attributes directly
+              const _tagForDirect = tagMatch ? tagMatch[1] : "";
+              const fabricated = buildFabricatedToolCallResponse(
+                "list_object_attributes",
+                { systemUID: "", objectName: _tagForDirect },
+                parsed.model
+              );
+              sendJsonResponse(res, 200, fabricated, { "X-Comos-Ai-Shim": "fabricated-list-attrs-direct" });
+              log(`fabricated_list_attrs_direct session=${sessionKey} objectName="${_tagForDirect}"`);
+              return;
+            } else {
+              // Tool not available — inform user
+              const isPt = detectPortugueseText(lastUserText);
+              const msg = isPt
+                ? "A ferramenta de listagem de atributos não está disponível nesta sessão. Reinicie o COMOS para carregar a versão atualizada."
+                : "The attribute listing tool is not available in this session. Restart COMOS to load the updated version.";
+              sendJsonResponse(res, 200, buildCompletionResponse(msg, parsed.model), {
+                "X-Comos-Ai-Shim": "list-attrs-unavailable",
+              });
+              log(`list_attrs_unavailable session=${sessionKey}`);
+              return;
+            }
+          }
+
+          // ── Post-nav follow-up for list attributes: if last tool was nav success
+          //    and user asked for list_attributes, fabricate list_object_attributes
+          if (_fabricatedCallCount < _maxFabricatedCalls && isListAttributesIntent(lastUserText)) {
+            const _lastToolMsgLA = (Array.isArray(messages) ? messages : []).filter(m =>
+              String(m.role || m.Role || "").toLowerCase() === "tool"
+            ).pop();
+            const _laContent = String((_lastToolMsgLA || {}).content || (_lastToolMsgLA || {}).Content || "");
+            const _laIsNavSuccess = _laContent.includes("Navigated to the object");
+            if (_laIsNavSuccess && toolNames.includes("list_object_attributes")) {
+              // Extract tag from user text and SystemUID from nav result
+              const _tagMatchLA = String(lastUserText || "").match(/\b([A-Z]{1,4}[- ]?\d{2,5}[A-Z]?)\b/i);
+              const _tagForLA = _tagMatchLA ? _tagMatchLA[1] : "";
+              const _uidMatchLA = _laContent.match(/SystemUID\s*[=:]\s*(\S+)/i);
+              const _uidForLA = _uidMatchLA ? _uidMatchLA[1] : "";
+              const fabricated = buildFabricatedToolCallResponse(
+                "list_object_attributes",
+                { systemUID: _uidForLA, objectName: _tagForLA },
+                parsed.model
+              );
+              sendJsonResponse(res, 200, fabricated, { "X-Comos-Ai-Shim": "fabricated-list-attrs-after-nav" });
+              log(`fabricated_list_attrs_after_nav session=${sessionKey} objectName="${_tagForLA}" uid="${_uidForLA}"`);
               return;
             }
           }
@@ -5276,11 +5952,30 @@ const server = http.createServer(async (req, res) => {
             let ragContext = "";
             if (lastUserText && isDocumentKnowledgeIntent(lastUserText)) {
               log(`rag_intent_detected session=${sessionKey} query="${lastUserText.substring(0, 80)}"`);
-              ragContext = await fetchRagContext(lastUserText, gatewayBase, 5);
-              if (ragContext) {
-                log(`rag_context_injected session=${sessionKey} length=${ragContext.length}`);
-              } else {
-                log(`rag_no_results session=${sessionKey}`);
+
+              // Handle meta-questions ("which documents do you have?") by fetching
+              // the document list instead of doing vector search
+              if (isRagDocumentListIntent(lastUserText)) {
+                ragContext = await fetchRagDocumentList(gatewayBase);
+                if (ragContext) {
+                  log(`rag_doclist_injected session=${sessionKey} length=${ragContext.length}`);
+                } else {
+                  log(`rag_doclist_empty session=${sessionKey}`);
+                }
+              }
+
+              // Always also do vector search (enriched for follow-ups)
+              if (!ragContext) {
+                const enrichedQuery = buildEnrichedRagQuery(lastUserText, cleanMessages);
+                if (enrichedQuery !== lastUserText) {
+                  log(`rag_query_enriched session=${sessionKey} original="${lastUserText.substring(0, 60)}" enriched="${enrichedQuery.substring(0, 80)}"`);
+                }
+                ragContext = await fetchRagContext(enrichedQuery, gatewayBase, 5);
+                if (ragContext) {
+                  log(`rag_context_injected session=${sessionKey} length=${ragContext.length}`);
+                } else {
+                  log(`rag_no_results session=${sessionKey}`);
+                }
               }
             }
 
@@ -5292,6 +5987,29 @@ const server = http.createServer(async (req, res) => {
               cleanMessages.unshift(systemMsg);
             }
             log(`comos_system_prompt_injected session=${sessionKey} tools=[${toolNames.join(",")}]`);
+          }
+
+          // ── Conversation trimming — keep LLM context manageable ──────
+          // The LLM slows down dramatically as message count grows (3s at 6 msgs
+          // → 60s at 12+ msgs), causing COMOS 30s per-iteration timeout errors.
+          // Strategy: keep system[0] + last N non-system messages. Preserves the
+          // most recent user question and tool results while discarding old turns.
+          const MAX_NON_SYSTEM_MSGS = 6; // system + last 6 = 7 total max
+          if (cleanMessages.length > MAX_NON_SYSTEM_MSGS + 1) {
+            const sysMsg = cleanMessages[0]?.role === "system" ? cleanMessages[0] : null;
+            const nonSystem = sysMsg ? cleanMessages.slice(1) : cleanMessages;
+            const trimmed = nonSystem.slice(-MAX_NON_SYSTEM_MSGS);
+            // Ensure first message after system is not an orphan tool result
+            if (trimmed.length > 0 && trimmed[0].role === "tool") {
+              trimmed.shift(); // drop orphan tool result
+            }
+            const finalMsgs = sysMsg ? [sysMsg, ...trimmed] : trimmed;
+            const dropped = cleanMessages.length - finalMsgs.length;
+            if (dropped > 0) {
+              log(`conversation_trimmed session=${sessionKey} from=${cleanMessages.length} to=${finalMsgs.length} dropped=${dropped}`);
+              cleanMessages.length = 0;
+              cleanMessages.push(...finalMsgs);
+            }
           }
 
           parsed.messages = cleanMessages;
@@ -5313,11 +6031,11 @@ const server = http.createServer(async (req, res) => {
             const lastToolContent = String(lastMsg.content || "");
             const isNavigationResult = lastToolContent.includes("Navigated to the object") || lastToolContent.includes("SystemUID");
             const isAttrResult = lastToolContent.includes("attribute") || lastToolContent.includes("Attribute");
-            const hasPendingAttrQuery = cleanMessages.some(m =>
-              m.role === "user" && (isAttributeValueIntent(m.content) || isAttributeNavigationIntent(m.content))
-            );
-            const attrAlreadyAttempted = cleanMessages.some(m =>
-              m.role === "tool" && (String(m.content || "").includes("Object doesn't found") || isAttrResult)
+            // Check if the CURRENT user message asks about an attribute (not previous turns)
+            const hasPendingAttrQuery = isAttributeValueIntent(lastUserText) || isAttributeNavigationIntent(lastUserText);
+            // Check if attribute was already attempted in CURRENT TURN only
+            const attrAlreadyAttempted = _currentTurnMsgsShared.some(m =>
+              String(m.role || m.Role || "").toLowerCase() === "tool" && (String(m.content || "").includes("Object doesn't found") || isAttrResult)
             );
 
             if (isNavigationResult && hasPendingAttrQuery && !attrAlreadyAttempted) {
@@ -5326,6 +6044,115 @@ const server = http.createServer(async (req, res) => {
             } else {
               parsed.tool_choice = "none";
               log(`force_tool_choice_none session=${sessionKey} reason=last_msg_is_tool`);
+            }
+          }
+
+          // ── Tool-failure short-circuit ────────────────────────────────
+          // When tool_choice is "none" (LLM must respond with text) AND the last
+          // tool result is a clear unrecoverable error, synthesize the response
+          // instantly instead of asking the LLM (which can take 35-60s to think
+          // about an error and compose a message — exceeding the 30s DLL timeout).
+          if (parsed.tool_choice === "none" && lastMsg && lastMsg.role === "tool") {
+            const _tc = String(lastMsg.content || "");
+            let _shortCircuitMsg = null;
+
+            if (_tc.includes("Document not found")) {
+              const uidMatch = _tc.match(/Document not found:\s*(\S+)/);
+              _shortCircuitMsg = `The requested document was not found (${uidMatch ? uidMatch[1] : "unknown UID"}). ` +
+                `This object may not have an associated document or diagram in the current project. ` +
+                `Try using navigate_to_comos_document_by_name with the document name instead.`;
+            } else if (_tc.includes("TIMEOUT_ERROR") || _tc.includes("timed out")) {
+              _shortCircuitMsg = `The previous operation timed out. Please try again with a simpler request.`;
+            } else if (_tc.includes("success = False") && _tc.includes("Object doesn't found")) {
+              // Navigation failed — but this is already handled by nav-retry above.
+              // Only short-circuit if we've exhausted retries.
+              const navRetryExhausted = _fabricatedCallCount >= _maxFabricatedCalls;
+              if (navRetryExhausted) {
+                const nameMatch = _tc.match(/(?:Name|objectName)\s*=\s*([^,}]+)/);
+                _shortCircuitMsg = `The object "${nameMatch ? nameMatch[1].trim() : "requested"}" was not found in COMOS. ` +
+                  `Please verify the exact name in the COMOS Navigator (it may use a different spelling, ` +
+                  `with or without hyphens/spaces).`;
+              }
+            } else if (_tc.includes("success = False") && _tc.includes("Could not find the object")) {
+              // list_object_attributes or similar failed to locate the object
+              const nameMatch = _tc.match(/objectName='([^']+)'/);
+              _shortCircuitMsg = `Could not find the object "${nameMatch ? nameMatch[1] : "requested"}" in COMOS. ` +
+                `The object may use a different name format. Please verify the exact tag in the COMOS Navigator.`;
+            }
+
+            if (_shortCircuitMsg) {
+              const shortCircuitResp = {
+                id: `chatcmpl-shim-sc-${Date.now()}`,
+                object: "chat.completion",
+                model: parsed.model || "serviceipid-gateway",
+                choices: [{ index: 0, message: { role: "assistant", content: _shortCircuitMsg }, finish_reason: "stop" }],
+                usage: { prompt_tokens: 0, completion_tokens: 0, total_tokens: 0 },
+              };
+              sendJsonResponse(res, 200, shortCircuitResp, { "X-Comos-Ai-Shim": "tool-fail-short-circuit" });
+              log(`tool_fail_short_circuit session=${sessionKey} msg="${_shortCircuitMsg.substring(0, 80)}..."`);
+              return;
+            }
+          }
+
+          // ── Tool-SUCCESS short-circuit ────────────────────────────────
+          // When tool_choice is "none" AND the last tool result is a shim-
+          // fabricated SUCCESS, synthesize the response instantly instead of
+          // asking the LLM. The LLM would compose obvious text like "Navigated
+          // to M001" but can take 30-60s causing timeout. Since WE fabricated
+          // the tool call, we know exactly what the user asked for.
+          if (parsed.tool_choice === "none" && lastMsg && lastMsg.role === "tool") {
+            const _scContent = String(lastMsg.content || "");
+            const _scTcId = String(lastMsg.tool_call_id || lastMsg.toolCallId || lastMsg.ToolCallId || "");
+            const _scFabricated = _scTcId.startsWith("call_shim_");
+            const _scSuccess = _scContent.includes("success = True");
+            const _isPt = detectPortugueseText(lastUserText);
+
+            if (_scFabricated && _scSuccess) {
+              let _successMsg = null;
+
+              // ─ Navigation success ─
+              if (_scContent.includes("Navigated to the object")) {
+                const _scNameM = _scContent.match(/objectNameOrLabel\s*=\s*([^,}]+)/);
+                const _scUidM = _scContent.match(/SystemUID\s*=\s*([A-Z0-9]+)/i);
+                const _scObjName = _scNameM ? _scNameM[1].trim() : "the object";
+                _successMsg = _isPt
+                  ? `✅ Navegado para **${_scObjName}**` + (_scUidM ? ` (SystemUID: ${_scUidM[1]})` : "")
+                  : `✅ Navigated to **${_scObjName}**` + (_scUidM ? ` (SystemUID: ${_scUidM[1]})` : "");
+              }
+              // ─ Attribute value success ─
+              else if (_scContent.includes("Value of attribute") || _scContent.includes("DisplayValue")) {
+                const _dvM = _scContent.match(/DisplayValue\s*=\s*([^,}]+)/);
+                const _valM = _scContent.match(/(?:^|,\s*)Value\s*=\s*([^,}]+)/);
+                const _displayVal = _dvM ? _dvM[1].trim() : (_valM ? _valM[1].trim() : "N/A");
+                const _attrEx = extractAttributeAndObject(lastUserText);
+                const _scAttrName = _attrEx.attributeName || "the attribute";
+                const _scObjTag = _attrEx.objectTag || "the object";
+                _successMsg = _isPt
+                  ? `O valor de **${_scAttrName}** de **${_scObjTag}** é **${_displayVal}**.`
+                  : `The **${_scAttrName}** of **${_scObjTag}** is **${_displayVal}**.`;
+              }
+              // ─ Count success ─
+              else if (_scContent.includes("Count =") || _scContent.includes("count =")) {
+                const _cntM = _scContent.match(/[Cc]ount\s*=\s*(\d+)/);
+                const _countVal = _cntM ? _cntM[1] : "0";
+                const _navTarget = extractNavigationTarget(lastUserText) || "matching objects";
+                _successMsg = _isPt
+                  ? `Foram encontrados **${_countVal}** objetos com o nome "${_navTarget}".`
+                  : `Found **${_countVal}** objects named "${_navTarget}".`;
+              }
+
+              if (_successMsg) {
+                const _successResp = {
+                  id: `chatcmpl-shim-ok-${Date.now()}`,
+                  object: "chat.completion",
+                  model: parsed.model || "serviceipid-gateway",
+                  choices: [{ index: 0, message: { role: "assistant", content: _successMsg }, finish_reason: "stop" }],
+                  usage: { prompt_tokens: 0, completion_tokens: 0, total_tokens: 0 },
+                };
+                sendJsonResponse(res, 200, _successResp, { "X-Comos-Ai-Shim": "tool-success-short-circuit" });
+                log(`tool_success_short_circuit session=${sessionKey} msg="${_successMsg.substring(0, 80)}..."`);
+                return;
+              }
             }
           }
 
@@ -5367,6 +6194,28 @@ const server = http.createServer(async (req, res) => {
               }
             } catch { /* ignore parsing issues and keep default flow */ }
 
+            // ── Soften non-200 gateway responses into a friendly chat message ──
+            // The C# AI Client does NOT handle HTTP errors gracefully — it throws
+            // an exception and never calls window.addAssistantMessage(), leaving
+            // the CefSharp chat UI permanently frozen with a spinning indicator.
+            // By always returning 200 with an error-text in first choice content,
+            // the C# client processes it normally and the UI stays responsive.
+            if (rawResp.status !== 200) {
+              let errDetail = "";
+              try { errDetail = adapted.buffer.toString("utf8").substring(0, 300); } catch {}
+              const friendlyMsg =
+                "⚠️ The AI service returned an error (HTTP " + rawResp.status + "). " +
+                "Please try again or start a new conversation.";
+              log(
+                `raw_llm_error_softened session=${sessionKey} status=${rawResp.status} ` +
+                `detail=${errDetail.substring(0, 200)}`
+              );
+              sendJsonResponse(res, 200, buildCompletionResponse(friendlyMsg, parsed.model), {
+                "X-Comos-Ai-Shim": "error-softened-" + rawResp.status,
+              });
+              return;
+            }
+
             const rawHeaders = {};
             for (const [k, v] of rawResp.headers.entries()) {
               if (k.toLowerCase() === "transfer-encoding") continue;
@@ -5382,19 +6231,19 @@ const server = http.createServer(async (req, res) => {
             );
           } catch (rawErr) {
             log(`raw_llm_error session=${sessionKey} ${rawErr.message}`);
-            sendJsonResponse(res, 502, buildCompletionResponse(
-              "Error connecting to LLM gateway. Please verify the service is running.",
+            sendJsonResponse(res, 200, buildCompletionResponse(
+              "⚠️ Error connecting to LLM gateway. Please verify the service is running.",
               parsed.model
-            ));
+            ), { "X-Comos-Ai-Shim": "gateway-connection-error" });
           }
           return;
         }
       } catch (parseErr) {
         log(`completions_parse_error ${parseErr && parseErr.message} stack=${parseErr && parseErr.stack}`);
-        sendJsonResponse(res, 500, buildCompletionResponse(
-          `Internal shim error (completions): ${parseErr && parseErr.message}`,
+        sendJsonResponse(res, 200, buildCompletionResponse(
+          `⚠️ Internal shim error: ${parseErr && parseErr.message}. Please try again.`,
           defaultModel
-        ));
+        ), { "X-Comos-Ai-Shim": "completions-parse-error-softened" });
         return;  // NEVER fall through to native API
       }
     }
@@ -5417,6 +6266,10 @@ const server = http.createServer(async (req, res) => {
         const evalTools = parsed.tools || parsed.Tools || [];
         const importToolRegistered = hasImportToolRegistered(evalTools);
         const hasToolResult = hasAnyToolResultMessage(evalMessages);
+
+        // ── Fast navigation chaining — DISABLED ──
+        // objects_with_name doesn't reliably find objects; letting LLM use
+        // navigate_to_comos_object_by_name directly (timeout patched to 120s).
 
         // ── Intercept import_equipment_from_excel results to avoid slow eval round-trip ──
         if (
@@ -5474,6 +6327,11 @@ const server = http.createServer(async (req, res) => {
         if (drawSession && drawSession.step === "connecting") {
           const result = parseLatestConnectToolResult(evalMessages, drawSession.pendingConnection || null);
           let resultMsg = "";
+
+          // NOTE: Auto-retry removed — COMOS client can only handle ONE round
+          // of tool calling. Retry logic is now inside the DLL ConnectObjects
+          // method (Close+Open report cycle to refresh COM DevObjects).
+
           if (result && result.connected) {
             const connectedSource = result.sourceTag || drawSession.pendingConnection?.sourceTag || "?";
             const connectedTarget = result.targetTag || drawSession.pendingConnection?.targetTag || "?";
@@ -5600,6 +6458,23 @@ const server = http.createServer(async (req, res) => {
           }
         } catch { /* ignore */ }
 
+        // ── Soften non-200 eval responses (same rationale as completions) ──
+        if (rawResp.status !== 200) {
+          let errDetail = "";
+          try { errDetail = adapted.buffer.toString("utf8").substring(0, 300); } catch {}
+          const friendlyMsg =
+            "⚠️ The AI service returned an error (HTTP " + rawResp.status + "). " +
+            "Please try again or start a new conversation.";
+          log(
+            `eval_error_softened session=${sessionKey} status=${rawResp.status} ` +
+            `detail=${errDetail.substring(0, 200)}`
+          );
+          sendJsonResponse(res, 200, buildCompletionResponse(friendlyMsg, parsed.model || defaultModel), {
+            "X-Comos-Ai-Shim": "eval-error-softened-" + rawResp.status,
+          });
+          return;
+        }
+
         const rawHeaders = {};
         for (const [k, v] of rawResp.headers.entries()) {
           if (k.toLowerCase() === "transfer-encoding") continue;
@@ -5623,10 +6498,10 @@ const server = http.createServer(async (req, res) => {
           return;
         }
 
-        sendJsonResponse(res, 500, buildCompletionResponse(
-          `Internal shim error (evaluation): ${evalErr && evalErr.message}`,
+        sendJsonResponse(res, 200, buildCompletionResponse(
+          `⚠️ Internal error during evaluation: ${evalErr && evalErr.message}. Please try again.`,
           defaultModel
-        ));
+        ), { "X-Comos-Ai-Shim": "eval-internal-error-softened" });
         return;  // NEVER fall through to native API
       }
     }
@@ -6207,8 +7082,15 @@ server.listen(listenPort, "127.0.0.1", () => {
 
 server.on("error", (err) => {
   const message = err && err.message ? err.message : String(err);
-  console.error(`[SHIM] server_error: ${message}`);
-  log(`server_error ${message}`);
+  if (err && err.code === "EADDRINUSE") {
+    const friendly = `Port ${listenPort} is already in use (EADDRINUSE). Another ai-api-shim instance is already running. ` +
+      `This is expected if you started the shim earlier: finishing a chat request does not stop the shim server process.`;
+    console.error(`[SHIM] server_error: ${friendly}`);
+    log(`server_error ${friendly} raw=${message}`);
+  } else {
+    console.error(`[SHIM] server_error: ${message}`);
+    log(`server_error ${message}`);
+  }
   process.exit(1);
 });
 
