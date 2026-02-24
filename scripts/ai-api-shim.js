@@ -1112,13 +1112,32 @@ function hasFilterCapableTools(toolNames) {
 
 // ── RAG (Document knowledge) integration ─────────────────────────────────
 /**
+ * Detect EXPLICIT document/RAG signals — phrases that unambiguously mean
+ * the user wants RAG knowledge, not a COMOS tool/attribute lookup.
+ * This is checked BEFORE attribute fabrication to prevent false routing.
+ * Examples:
+ *   "according to the documents, what is PC-001?" → true
+ *   "in the documents, what is the pressure of P-201?" → true
+ *   "what is the shaft power of P-101?" → false (no doc signal)
+ */
+function hasExplicitDocumentSignals(text) {
+  const t = String(text || "").toLowerCase();
+  return /\b(according\s+to\s+(the\s+)?(documents?|documentos?|manual|manuai?s?|specification|especifica[çc])|in\s+the\s+(documents?|manual|files?)|n[oa]s?\s+(documentos?|manuai?s?|arquivos?)|segundo\s+(os?\s+)?(documentos?|manual)|conforme\s+(os?\s+)?(documentos?|manual)|de\s+acordo\s+com\s+(os?\s+)?(documentos?|manual)|com\s+base\s+n[oa]s?\s+(documentos?|manual)|search\s+(the\s+)?documents?|buscar?\s+(nos?\s+)?documentos?|pesquisar?\s+(nos?\s+)?documentos?|consult[ae]r?\s+(os?\s+)?documentos?|consult\s+(the\s+)?documents?)\b/i.test(t);
+}
+
+/**
  * Detect if the user is asking a question that should be answered from
  * project documents (RAG).  Returns true for knowledge/content questions
  * that are NOT tool-actionable (not navigation, not attribute lookup, not count).
  */
 function isDocumentKnowledgeIntent(text) {
   const t = String(text || "").toLowerCase();
-  // Exclude clearly tool-actionable intents
+
+  // PRIORITY: explicit document signals always win, even if the query
+  // also looks like an attribute request (e.g. "get PC-001 according to the documents")
+  if (hasExplicitDocumentSignals(t)) return true;
+
+  // Exclude clearly tool-actionable intents (only when NO explicit doc signals)
   if (isAttributeValueIntent(t)) return false;
   if (isAttributeNavigationIntent(t)) return false;
   if (isObjectCountIntent(t)) return false;
@@ -2064,7 +2083,8 @@ function formatTagExtractionResult(result, filename, sessionKey) {
   msg += "Como esta é uma extração de TAGs, a criação será **somente na hierarquia** (sem desenho em diagrama).\n\n";
   msg += "1. **Criar automaticamente** — Usa a ferramenta nativa para criar os objetos na hierarquia do COMOS\n";
   msg += "2. **Gerar script VBS** — Gero um script para criar os objetos (executar no Object Debugger)\n\n";
-  msg += "_Exemplo: \"Criar na hierarquia, opção 1\"_";
+  msg += "Basta me dizer **qual diagrama** deseja usar e qual opção prefere.\n";
+  msg += "_Exemplo: \"Criar na hierarquia, opção 1\" ou \"Automático, FA.009\" (importação automática no diagrama FA.009)_";
 
   return { error: false, message: msg };
 }
@@ -2729,7 +2749,7 @@ async function formatAnalysisResult(result, filename, diagramType, sessionKey) {
   msg += "1. **Criar automaticamente** — Usa a ferramenta nativa para criar os objetos na hierarquia do COMOS\n";
   msg += "2. **Gerar script VBS** — Gero um script que cria os objetos **e desenha no diagrama** (executar no Object Debugger)\n\n";
   msg += "Basta me dizer **qual diagrama** deseja usar (nome ou caminho no COMOS) e qual opção prefere.\n";
-  msg += "_Exemplo: \"Importar no diagrama =A1.10, opção 1\" ou \"Gerar script para o diagrama Painel_01\"_";
+  msg += "_Exemplo: \"Importar no diagrama =A1.10, opção 1\" ou \"Automático, FA.009\" (importação automática)_";
 
   return { error: false, message: msg };
 }
@@ -4212,6 +4232,68 @@ async function handleInteractiveDrawing(sessionKey, info, parsed, res) {
     return true;
 }
 
+// ── SSE Agent Events infrastructure ────────────────────────────────────────
+// Connected SSE clients (chat-app.js opens EventSource to /api/ai/v1/agent-events)
+const sseClients = new Set();
+
+/** Emit an agent event to all connected SSE clients */
+function emitAgentEvent(eventType, data) {
+  const payload = JSON.stringify({ type: eventType, ...data, ts: Date.now() });
+  const message = `event: ${eventType}\ndata: ${payload}\n\n`;
+  for (const client of sseClients) {
+    try { client.write(message); } catch { sseClients.delete(client); }
+  }
+  log(`sse_emit type=${eventType} clients=${sseClients.size} data=${JSON.stringify(data).substring(0, 120)}`);
+}
+
+/** Friendly tool labels for agent status messages */
+const TOOL_FRIENDLY_LABELS = {
+  value_of_attribute_by_name_or_description: "Reading attribute value",
+  list_object_attributes: "Listing object attributes",
+  navigate_to_comos_object_by_name_or_label: "Navigating to object",
+  import_equipment_from_excel: "Importing equipment",
+  extract_and_create_tags: "Creating tags in hierarchy",
+  objects_with_name: "Searching objects by name",
+  open_report: "Opening report",
+  count_objects_by_name: "Counting objects",
+  draw_single_object: "Drawing object on diagram",
+  connect_two_objects: "Connecting objects",
+};
+
+function friendlyToolLabel(toolName) {
+  return TOOL_FRIENDLY_LABELS[toolName] || toolName.replace(/_/g, " ");
+}
+
+// Track step counter per session for "Step N" labeling
+const agentStepCounters = new Map();
+
+// ── 25-second safety timeout for LLM fetch ────────────────────────────────
+// COMOS C# AI Client has a hardcoded ~30s per-iteration timeout.
+// If the LLM takes longer than 25s, we abort and return a soft message
+// so the C# client doesn't throw an unhandled timeout exception.
+const LLM_SAFETY_TIMEOUT_MS = 25000;
+
+/**
+ * Fetch with 25-second safety abort.
+ * Returns { response, timedOut } — if timedOut is true, response is null.
+ */
+async function fetchWithSafetyTimeout(url, options, label) {
+  const controller = new AbortController();
+  const timer = setTimeout(() => controller.abort(), LLM_SAFETY_TIMEOUT_MS);
+  try {
+    const response = await fetch(url, { ...options, signal: controller.signal });
+    clearTimeout(timer);
+    return { response, timedOut: false };
+  } catch (err) {
+    clearTimeout(timer);
+    if (err.name === "AbortError") {
+      log(`safety_timeout_25s label=${label} url=${url}`);
+      return { response: null, timedOut: true };
+    }
+    throw err; // re-throw non-timeout errors
+  }
+}
+
 // ── Build OpenAI-compatible response ───────────────────────────────────────
 function buildCompletionResponse(message, model) {
   return {
@@ -4379,6 +4461,32 @@ const server = http.createServer(async (req, res) => {
         "Access-Control-Allow-Headers": "Content-Type",
       });
       res.end();
+      return;
+    }
+
+    // ── SSE Agent Events endpoint ────────────────────────────────────────
+    // Chat-app.js opens an EventSource here to receive real-time agent
+    // status updates (thinking, tool calls, timeouts, completion).
+    if (method === "GET" && basePath === "/api/ai/v1/agent-events") {
+      res.writeHead(200, {
+        "Content-Type": "text/event-stream",
+        "Cache-Control": "no-cache",
+        "Connection": "keep-alive",
+        "Access-Control-Allow-Origin": "*",
+      });
+      // Send initial heartbeat
+      res.write(`event: connected\ndata: ${JSON.stringify({ ts: Date.now() })}\n\n`);
+      sseClients.add(res);
+      log(`sse_client_connected total=${sseClients.size}`);
+      req.on("close", () => {
+        sseClients.delete(res);
+        log(`sse_client_disconnected total=${sseClients.size}`);
+      });
+      // Keep-alive ping every 20s to prevent proxy/browser timeout
+      const keepAlive = setInterval(() => {
+        try { res.write(`:ping\n\n`); } catch { clearInterval(keepAlive); sseClients.delete(res); }
+      }, 20000);
+      req.on("close", () => clearInterval(keepAlive));
       return;
     }
 
@@ -5401,7 +5509,8 @@ const server = http.createServer(async (req, res) => {
           // When the user asks for an attribute value (e.g., "What's the Shaft Power of P-101?"),
           // fabricate the tool call directly instead of letting the LLM navigate first.
           // This avoids the navigate-then-read two-step which is blocked by force_tool_choice_none.
-          if (hasTools && asksAttrValue && hasAttributeReadTool && _isNewUserRequest && _fabricatedCallCount < _maxFabricatedCalls) {
+          // GUARD: skip fabrication if user explicitly references documents/RAG — let RAG handle it.
+          if (hasTools && asksAttrValue && hasAttributeReadTool && _isNewUserRequest && _fabricatedCallCount < _maxFabricatedCalls && !hasExplicitDocumentSignals(lastUserText)) {
             const { objectTag, attributeName } = extractAttributeAndObject(lastUserText);
             if (attributeName) {
               const recentUID = extractRecentObjectSystemUID(lastUserText, messages);
@@ -5442,7 +5551,8 @@ const server = http.createServer(async (req, res) => {
           }
 
           // ── Attribute NAVIGATION fabrication ────────────────────────
-          if (hasTools && asksAttrNav && hasAttributeNavTool && _isNewUserRequest && _fabricatedCallCount < _maxFabricatedCalls) {
+          // GUARD: skip fabrication if user explicitly references documents/RAG — let RAG handle it.
+          if (hasTools && asksAttrNav && hasAttributeNavTool && _isNewUserRequest && _fabricatedCallCount < _maxFabricatedCalls && !hasExplicitDocumentSignals(lastUserText)) {
             const { objectTag, attributeName } = extractAttributeAndObject(lastUserText);
             if (attributeName) {
               const recentUID = extractRecentObjectSystemUID(lastUserText, messages);
@@ -6169,12 +6279,49 @@ const server = http.createServer(async (req, res) => {
             const hasTCID = m.tool_call_id ? `tcid=${m.tool_call_id}` : "";
             log(`comp_msg[${mi}] role=${mRole} ${hasTC} ${hasFC} ${hasTCID} content=${(m.content || "").substring(0, 60)}`);
           }
+          // ── Detect intent for agent_started event ──
+          const _userIntentSummary = lastUserText
+            ? lastUserText.substring(0, 80).replace(/\n/g, " ")
+            : "processing request";
+          emitAgentEvent("agent_started", { message: `Agent activated — analyzing: ${_userIntentSummary}` });
+
+          // Detect tool_calls in the request (COMOS sending back results means a tool step happened)
+          const _reqToolCalls = cleanMessages.filter(m => m.role === "assistant" && m.tool_calls);
+          const _reqToolResults = cleanMessages.filter(m => m.role === "tool" || m.role === "function");
+          if (_reqToolCalls.length > 0) {
+            const _lastTC = _reqToolCalls[_reqToolCalls.length - 1];
+            const _tcNames = (_lastTC.tool_calls || []).map(tc => tc.function?.name || "unknown");
+            const stepNum = (agentStepCounters.get(sessionKey) || 0) + 1;
+            agentStepCounters.set(sessionKey, stepNum);
+            for (const tn of _tcNames) {
+              emitAgentEvent("agent_tool_call", { message: `Step ${stepNum}: ${friendlyToolLabel(tn)}`, tool: tn, step: stepNum });
+            }
+          }
+
+          emitAgentEvent("agent_thinking", { message: "Calling LLM for reasoning...", substate: "llm_call" });
+
           try {
-            const rawResp = await fetch(rawUrl, {
+            const { response: rawResp, timedOut } = await fetchWithSafetyTimeout(rawUrl, {
               method: "POST",
               headers: { "Content-Type": "application/json" },
               body: rawBody,
-            });
+            }, `completions_session=${sessionKey}`);
+
+            // ── 25s safety timeout: return soft message ──
+            if (timedOut) {
+              emitAgentEvent("agent_timeout", { message: "Agent timed out — synthesizing results..." });
+              const safetyMsg =
+                "⏳ A IA ainda está processando sua solicitação. " +
+                "O tempo de resposta excedeu o limite de segurança (25s).\n\n" +
+                "Envie uma nova mensagem para continuar ou tente novamente.";
+              sendJsonResponse(res, 200, buildCompletionResponse(safetyMsg, parsed.model), {
+                "X-Comos-Ai-Shim": "safety-timeout-25s",
+              });
+              log(`safety_timeout_25s session=${sessionKey}`);
+              agentStepCounters.delete(sessionKey);
+              return;
+            }
+
             const rawBuffer = Buffer.from(await rawResp.arrayBuffer());
             const adapted = adaptRawCompletionForComos(rawBuffer, parsed, sessionKey);
 
@@ -6223,6 +6370,27 @@ const server = http.createServer(async (req, res) => {
             }
             rawHeaders["content-length"] = String(adapted.buffer.length);
             rawHeaders["X-Comos-Ai-Shim"] = adapted.changed ? "raw-llm-compat" : "raw-llm";
+
+            // ── Emit agent_complete or agent_tool_call depending on response ──
+            try {
+              const _respObj = JSON.parse(adapted.buffer.toString("utf8"));
+              const _respMsg = _respObj?.choices?.[0]?.message;
+              const _hasTCResp = _respMsg?.tool_calls || _respMsg?.function_call;
+              if (_hasTCResp) {
+                const _tcList = _respMsg.tool_calls || [{ function: _respMsg.function_call }];
+                const stepNum = (agentStepCounters.get(sessionKey) || 0) + 1;
+                agentStepCounters.set(sessionKey, stepNum);
+                for (const tc of _tcList) {
+                  const tn = tc.function?.name || "unknown";
+                  emitAgentEvent("agent_tool_call", { message: `Step ${stepNum}: ${friendlyToolLabel(tn)}`, tool: tn, step: stepNum });
+                }
+                emitAgentEvent("agent_thinking", { message: "Waiting for COMOS to execute tool...", substate: "continuation" });
+              } else {
+                emitAgentEvent("agent_complete", { message: "Response ready" });
+                agentStepCounters.delete(sessionKey);
+              }
+            } catch { /* ignore */ }
+
             res.writeHead(rawResp.status, rawHeaders);
             res.end(adapted.buffer);
             log(
@@ -6424,11 +6592,29 @@ const server = http.createServer(async (req, res) => {
           log(`eval_msg[${mi}] role=${mRole} ${hasTC} ${hasFC} ${hasTCID} content=${(m.content || "").substring(0, 80)}`);
         }
 
-        const rawResp = await fetch(rawUrl, {
+        // ── Emit agent_thinking for eval continuation ──
+        emitAgentEvent("agent_thinking", { message: "Evaluating tool results and planning next action...", substate: "eval_continuation" });
+
+        const { response: rawResp, timedOut } = await fetchWithSafetyTimeout(rawUrl, {
           method: "POST",
           headers: { "Content-Type": "application/json" },
           body: rawBody,
-        });
+        }, `eval_session=${sessionKey}`);
+
+        // ── 25s safety timeout for eval ──
+        if (timedOut) {
+          emitAgentEvent("agent_timeout", { message: "Agent timed out during evaluation — synthesizing results..." });
+          const safetyMsg =
+            "⏳ A IA ainda está processando os resultados. " +
+            "O tempo de resposta excedeu o limite de segurança (25s).\n\n" +
+            "Envie uma nova mensagem para continuar.";
+          sendJsonResponse(res, 200, buildCompletionResponse(safetyMsg, parsed.model || defaultModel), {
+            "X-Comos-Ai-Shim": "eval-safety-timeout-25s",
+          });
+          log(`eval_safety_timeout_25s session=${sessionKey}`);
+          agentStepCounters.delete(sessionKey);
+          return;
+        }
 
         const rawBuffer = Buffer.from(await rawResp.arrayBuffer());
 
@@ -6482,6 +6668,27 @@ const server = http.createServer(async (req, res) => {
         }
         rawHeaders["content-length"] = String(adapted.buffer.length);
         rawHeaders["X-Comos-Ai-Shim"] = adapted.changed ? "eval-compat" : "eval-raw";
+
+        // ── Emit agent_complete or agent_tool_call for eval response ──
+        try {
+          const _evalRespObj = JSON.parse(adapted.buffer.toString("utf8"));
+          const _evalRespMsg = _evalRespObj?.choices?.[0]?.message;
+          const _evalHasTC = _evalRespMsg?.tool_calls || _evalRespMsg?.toolCalls || _evalRespMsg?.function_call;
+          if (_evalHasTC) {
+            const _tcList = _evalRespMsg.tool_calls || _evalRespMsg.toolCalls || [{ function: _evalRespMsg.function_call }];
+            const stepNum = (agentStepCounters.get(sessionKey) || 0) + 1;
+            agentStepCounters.set(sessionKey, stepNum);
+            for (const tc of (_tcList || [])) {
+              const tn = tc?.function?.name || tc?.Function?.Name || "unknown";
+              emitAgentEvent("agent_tool_call", { message: `Step ${stepNum}: ${friendlyToolLabel(tn)}`, tool: tn, step: stepNum });
+            }
+            emitAgentEvent("agent_thinking", { message: "Waiting for COMOS to execute tool...", substate: "continuation" });
+          } else {
+            emitAgentEvent("agent_complete", { message: "Response ready" });
+            agentStepCounters.delete(sessionKey);
+          }
+        } catch { /* ignore */ }
+
         res.writeHead(rawResp.status, rawHeaders);
         res.end(adapted.buffer);
         log(`eval_response session=${sessionKey} status=${rawResp.status} compat=${adapted.changed}`);
@@ -6966,6 +7173,28 @@ const server = http.createServer(async (req, res) => {
         reqLogFile,
       };
       sendJsonResponse(res, 200, status);
+      return;
+    }
+
+    // ── GET /api/ai/v1/agent-events — SSE stream for agent status ──────
+    if (method === "GET" && basePath === "/api/ai/v1/agent-events") {
+      res.writeHead(200, {
+        "Content-Type": "text/event-stream",
+        "Cache-Control": "no-cache",
+        "Connection": "keep-alive",
+        "Access-Control-Allow-Origin": "*",
+      });
+      res.write("event: connected\ndata: {\"status\":\"ok\"}\n\n");
+      agentSSEClients.add(res);
+      log(`agent_sse_client_connected total=${agentSSEClients.size}`);
+      const keepAlive = setInterval(() => {
+        try { res.write(": keepalive\n\n"); } catch { clearInterval(keepAlive); agentSSEClients.delete(res); }
+      }, 15000);
+      req.on("close", () => {
+        clearInterval(keepAlive);
+        agentSSEClients.delete(res);
+        log(`agent_sse_client_disconnected total=${agentSSEClients.size}`);
+      });
       return;
     }
 

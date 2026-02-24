@@ -1025,11 +1025,587 @@ public class ImportAgent : AIComosTool
 			object orCreateObject = val4.GetOrCreateObject(obj2, tag, (object)cDeviceBySystemFullname, (IComosBaseObject)null);
 			if (orCreateObject == null)
 			{
-				return new
+				// ══════════════════════════════════════════════════════════
+				// Dataset fallback — V4 (direct-draw, no clone)
+				// ══════════════════════════════════════════════════════════
+				// GetOrCreateObject returns null for Dataset-type CDevices.
+				// Datasets are composite base objects. When CreateTemplate is
+				// called with a dataset CDevice, COMOS auto-generates documents
+				// somewhere in the project (typically in units).
+				//
+				// Strategy (simplified — same as V5 template route):
+				//   1. Snapshot ALL project documents BEFORE
+				//   2. CreateTemplate(cDevice) → triggers doc creation
+				//   3. Snapshot AFTER → diff UIDs to find new docs
+				//   4. Pick doc matching diagram type (single-line vs multi)
+				//   5. Feed selectedDoc DIRECTLY to CreateTemplateInBackground
+				//      (same as V5 template route — no clone needed!)
+				//   6. Delete only the UNWANTED auto-created docs
+				// ══════════════════════════════════════════════════════════
+				StringBuilder dsDiag = new StringBuilder();
+				try
 				{
-					success = false,
-					error = "GetOrCreateObject returned null for tag: " + tag
-				};
+					IComosDDocument targetDoc = obj2 as IComosDDocument;
+					if (targetDoc == null)
+					{
+						try { targetDoc = (IComosDDocument)(dynamic)obj2; } catch { }
+					}
+					if (targetDoc == null)
+					{
+						return new
+						{
+							success = false,
+							error = "Dataset fallback: target document could not be cast.",
+							route = "dataset",
+							systemFullName = systemFullName,
+							resolvedBaseObj = text2
+						};
+					}
+
+					// ── 1. Snapshot ALL project documents BEFORE ──
+					// Using project.AllDocuments() is the most reliable way to
+					// detect new documents regardless of WHERE COMOS puts them.
+					HashSet<string> beforeDocUIDs = new HashSet<string>(StringComparer.OrdinalIgnoreCase);
+					try
+					{
+						dynamic allDocsBefore = currentProject.AllDocuments();
+						if (allDocsBefore != null)
+						{
+							int docCnt = allDocsBefore.Count;
+							for (int si = 1; si <= docCnt; si++)
+							{
+								try
+								{
+									dynamic d = allDocsBefore.Item(si);
+									if (d == null) continue;
+									string uid = "";
+									try { uid = (string)d.SystemUID; }
+									catch
+									{
+										try { uid = (string)((dynamic)d).SystemUID(); } catch { }
+									}
+									if (!string.IsNullOrEmpty(uid)) beforeDocUIDs.Add(uid);
+								}
+								catch { }
+							}
+						}
+					}
+					catch (Exception exSnap)
+					{
+						dsDiag.AppendLine("1-snapshot ERR: " + exSnap.Message);
+					}
+					dsDiag.AppendLine("1-snapshot: " + beforeDocUIDs.Count + " project docs before CreateTemplate");
+
+					// ── 2. Call CreateTemplate(cDevice) to trigger doc creation ──
+					dynamic report = targetDoc.Report();
+					if (report == null)
+					{
+						return new
+						{
+							success = false,
+							error = "Dataset fallback: target document has no Report.",
+							route = "dataset",
+							diag = dsDiag.ToString()
+						};
+					}
+					report.Open();
+					dynamic reportDocument = report.ReportDocument;
+					if (reportDocument == null)
+					{
+						return new
+						{
+							success = false,
+							error = "Dataset fallback: ReportDocument is null.",
+							route = "dataset",
+							diag = dsDiag.ToString()
+						};
+					}
+
+					string triggerMethod = "";
+					IXDocDeveloper xDocDev = reportDocument as IXDocDeveloper;
+					if (xDocDev == null)
+					{
+						try { xDocDev = (IXDocDeveloper)reportDocument; } catch { }
+					}
+
+					if (xDocDev != null)
+					{
+						try
+						{
+							xDocDev.CreateTemplateInBackground((IComosBaseObject)cDeviceBySystemFullname, x, y, 0.0);
+							triggerMethod = "CreateTemplateInBackground(CDevice)";
+						}
+						catch
+						{
+							try
+							{
+								xDocDev.CreateTemplate((IComosBaseObject)cDeviceBySystemFullname, x, y);
+								triggerMethod = "CreateTemplate(CDevice)";
+							}
+							catch
+							{
+								try
+								{
+									xDocDev.CreateTemplateWithRotation((IComosBaseObject)cDeviceBySystemFullname, x, y, 0.0);
+									triggerMethod = "CreateTemplateWithRotation(CDevice)";
+								}
+								catch { }
+							}
+						}
+					}
+					if (string.IsNullOrEmpty(triggerMethod))
+					{
+						try
+						{
+							reportDocument.CreateTemplateInBackground((object)cDeviceBySystemFullname, x, y, 0.0);
+							triggerMethod = "dynamic.CreateTemplateInBackground(CDevice)";
+						}
+						catch
+						{
+							try
+							{
+								reportDocument.CreateTemplate((object)cDeviceBySystemFullname, x, y);
+								triggerMethod = "dynamic.CreateTemplate(CDevice)";
+							}
+							catch { }
+						}
+					}
+
+					if (string.IsNullOrEmpty(triggerMethod))
+					{
+						return new
+						{
+							success = false,
+							error = "Dataset fallback: all CreateTemplate methods failed for CDevice.",
+							route = "dataset",
+							systemFullName = systemFullName,
+							diag = dsDiag.ToString()
+						};
+					}
+					dsDiag.AppendLine("2-trigger: " + triggerMethod);
+
+					// Commit so new documents are visible
+					try { report.Save(); } catch { }
+					try { Workset.SaveAll(); } catch { }
+
+					// ── 3. Snapshot AFTER via project.AllDocuments() and diff ──
+					List<IComosDDocument> newDocsFound = new List<IComosDDocument>();
+					try
+					{
+						dynamic allDocsAfter = currentProject.AllDocuments();
+						if (allDocsAfter != null)
+						{
+							int docCnt = allDocsAfter.Count;
+							dsDiag.AppendLine("3-diff: project docs after=" + docCnt + " (before=" + beforeDocUIDs.Count + ")");
+							// Iterate from the END — new docs are typically last
+							for (int si = docCnt; si >= 1; si--)
+							{
+								try
+								{
+									dynamic d = allDocsAfter.Item(si);
+									if (d == null) continue;
+									string uid = "";
+									try { uid = (string)d.SystemUID; }
+									catch
+									{
+										try { uid = (string)((dynamic)d).SystemUID(); } catch { }
+									}
+									if (!string.IsNullOrEmpty(uid) && !beforeDocUIDs.Contains(uid))
+									{
+										IComosDDocument docTyped = d as IComosDDocument;
+										if (docTyped == null)
+										{
+											try { docTyped = (IComosDDocument)d; } catch { }
+										}
+										if (docTyped != null)
+										{
+											newDocsFound.Add(docTyped);
+										}
+									}
+								}
+								catch { }
+								// Stop early once we've found enough
+								if (newDocsFound.Count >= 10) break;
+							}
+						}
+					}
+					catch (Exception exDiff)
+					{
+						dsDiag.AppendLine("3-diff ERR: " + exDiff.Message);
+					}
+					dsDiag.AppendLine("3-diff: " + newDocsFound.Count + " new documents found");
+
+					// Log all new docs for diagnostics
+					for (int di = 0; di < newDocsFound.Count; di++)
+					{
+						try
+						{
+							string dDesc = newDocsFound[di].Description ?? "";
+							string dName = newDocsFound[di].Name ?? "";
+							string dSfn = "";
+							try { dSfn = newDocsFound[di].SystemFullName(); } catch { }
+							dsDiag.AppendLine("3-diff doc[" + di + "]: Name=" + dName + " Desc=" + dDesc + " SFN=" + dSfn);
+						}
+						catch { }
+					}
+
+					if (newDocsFound.Count == 0)
+					{
+						return new
+						{
+							success = false,
+							error = "Dataset trigger ran (" + triggerMethod + ") but no new documents found in project. "
+								+ "Project had " + beforeDocUIDs.Count + " docs before trigger.",
+							route = "dataset",
+							tag = tag,
+							systemFullName = systemFullName,
+							diag = dsDiag.ToString()
+						};
+					}
+
+					// ── 4. Pick the right document based on diagram type ──
+					bool wantSingleLine = false;
+					try
+					{
+						string targetDocDesc = targetDoc.Description ?? "";
+						string targetDocName = targetDoc.Name ?? "";
+						string combined = (targetDocDesc + " " + targetDocName).ToLowerInvariant();
+						wantSingleLine = combined.Contains("single") || combined.Contains("unifilar");
+						dsDiag.AppendLine("4-pick: targetDoc desc='" + targetDocDesc + "' name='" + targetDocName + "' wantSingleLine=" + wantSingleLine);
+					}
+					catch (Exception exTgt)
+					{
+						dsDiag.AppendLine("4-pick: could not read targetDoc desc: " + exTgt.Message);
+					}
+
+					// Also check equipment description
+					if (!wantSingleLine)
+					{
+						string descLower = (description ?? "").ToLowerInvariant();
+						if (descLower.Contains("single") || descLower.Contains("unifilar"))
+						{
+							wantSingleLine = true;
+							dsDiag.AppendLine("4-pick: equipment description contains single-line hint");
+						}
+					}
+
+					IComosDDocument selectedDoc = null;
+					if (newDocsFound.Count == 1)
+					{
+						selectedDoc = newDocsFound[0];
+						dsDiag.AppendLine("4-pick: only 1 doc found, using it");
+					}
+					else
+					{
+						// Identify single-line doc by keyword in Description/Name
+						int singleIdx = -1;
+						for (int di = 0; di < newDocsFound.Count; di++)
+						{
+							try
+							{
+								string dDesc = (newDocsFound[di].Description ?? "").ToLowerInvariant();
+								string dName = (newDocsFound[di].Name ?? "").ToLowerInvariant();
+								string dCombined = dDesc + " " + dName;
+								if (dCombined.Contains("single") || dCombined.Contains("unifilar"))
+								{
+									singleIdx = di;
+									break;
+								}
+							}
+							catch { }
+						}
+
+						if (wantSingleLine && singleIdx >= 0)
+						{
+							selectedDoc = newDocsFound[singleIdx];
+							dsDiag.AppendLine("4-pick: selected single-line doc (idx=" + singleIdx + ")");
+						}
+						else if (!wantSingleLine && singleIdx >= 0)
+						{
+							// Want multiline → pick NOT single-line
+							int multiIdx = (singleIdx == 0) ? 1 : 0;
+							selectedDoc = (multiIdx < newDocsFound.Count) ? newDocsFound[multiIdx] : newDocsFound[0];
+							dsDiag.AppendLine("4-pick: selected multiline doc (idx=" + multiIdx + ", single-line was idx=" + singleIdx + ")");
+						}
+						else
+						{
+							selectedDoc = newDocsFound[0];
+							dsDiag.AppendLine("4-pick: no single-line keyword found, using first doc");
+						}
+					}
+
+					string selectedName = "";
+					string selectedDesc = "";
+					try { selectedName = selectedDoc.Name ?? ""; } catch { }
+					try { selectedDesc = selectedDoc.Description ?? ""; } catch { }
+					dsDiag.AppendLine("5-draw: selectedDoc Name=" + selectedName + " Desc=" + selectedDesc);
+
+					// ── 5. Feed selectedDoc DIRECTLY to CreateTemplateInBackground ──
+					// This is the SAME approach as V5 template route (line ~1915).
+					// No clone needed — the selected doc IS the template to draw.
+					// Record original owner in case CreateTemplate moves the doc.
+					object selOrigOwner = null;
+					string selOrigOwnerSfn = "";
+					try
+					{
+						selOrigOwner = ((dynamic)selectedDoc).owner;
+						if (selOrigOwner != null)
+						{
+							try { selOrigOwnerSfn = ((dynamic)selOrigOwner).SystemFullName(); }
+							catch { selOrigOwnerSfn = "(could not read)"; }
+						}
+						dsDiag.AppendLine("5-draw: original owner SFN=" + selOrigOwnerSfn);
+					}
+					catch { }
+
+					string drawMethod = "";
+					if (xDocDev != null)
+					{
+						try
+						{
+							xDocDev.CreateTemplateInBackground((IComosBaseObject)selectedDoc, x, y, 0.0);
+							drawMethod = "CreateTemplateInBackground(selectedDoc)";
+							dsDiag.AppendLine("5-draw: " + drawMethod + " OK");
+						}
+						catch (Exception exDraw1)
+						{
+							dsDiag.AppendLine("5-draw: CreateTemplateInBackground ERR: " + exDraw1.Message);
+							try
+							{
+								xDocDev.CreateTemplate((IComosBaseObject)selectedDoc, x, y);
+								drawMethod = "CreateTemplate(selectedDoc)";
+								dsDiag.AppendLine("5-draw: " + drawMethod + " OK");
+							}
+							catch (Exception exDraw2)
+							{
+								dsDiag.AppendLine("5-draw: CreateTemplate ERR: " + exDraw2.Message);
+								try
+								{
+									xDocDev.CreateTemplateWithRotation((IComosBaseObject)selectedDoc, x, y, 0.0);
+									drawMethod = "CreateTemplateWithRotation(selectedDoc)";
+									dsDiag.AppendLine("5-draw: " + drawMethod + " OK");
+								}
+								catch (Exception exDraw3)
+								{
+									dsDiag.AppendLine("5-draw: CreateTemplateWithRotation ERR: " + exDraw3.Message);
+								}
+							}
+						}
+					}
+					// Dynamic fallback
+					if (string.IsNullOrEmpty(drawMethod))
+					{
+						try
+						{
+							reportDocument.CreateTemplateInBackground((object)selectedDoc, x, y, 0.0);
+							drawMethod = "dynamic.CreateTemplateInBackground(selectedDoc)";
+							dsDiag.AppendLine("5-draw: " + drawMethod + " OK");
+						}
+						catch
+						{
+							try
+							{
+								reportDocument.CreateTemplate((object)selectedDoc, x, y);
+								drawMethod = "dynamic.CreateTemplate(selectedDoc)";
+								dsDiag.AppendLine("5-draw: " + drawMethod + " OK");
+							}
+							catch (Exception exDyn)
+							{
+								dsDiag.AppendLine("5-draw: dynamic draw ERR: " + exDyn.Message);
+							}
+						}
+					}
+
+					try { report.Save(); } catch { }
+					try { Workset.SaveAll(); } catch { }
+
+					// ── 5b. Restore selectedDoc if it was moved (same as V5 4c) ──
+					if (selOrigOwner != null && !string.IsNullOrEmpty(drawMethod))
+					{
+						try
+						{
+							object curOwner = ((dynamic)selectedDoc).owner;
+							string curOwnerSfn = "";
+							try { curOwnerSfn = ((dynamic)curOwner).SystemFullName(); } catch { curOwnerSfn = "(unknown)"; }
+
+							bool wasMoved = false;
+							if (curOwner == null) wasMoved = true;
+							else
+							{
+								try { wasMoved = !string.Equals(selOrigOwnerSfn, curOwnerSfn, StringComparison.OrdinalIgnoreCase); }
+								catch { wasMoved = !object.ReferenceEquals(selOrigOwner, curOwner); }
+							}
+							if (wasMoved)
+							{
+								dsDiag.AppendLine("5b: selectedDoc MOVED from " + selOrigOwnerSfn + " to " + curOwnerSfn);
+								try
+								{
+									((dynamic)selectedDoc).ChangeOwner((object)selOrigOwner);
+									dsDiag.AppendLine("5b: ChangeOwner OK — restored");
+								}
+								catch
+								{
+									// Fallback: CopyAll+Paste back to original owner
+									try
+									{
+										dynamic clipb = ((dynamic)selectedDoc).CopyAll();
+										if (clipb != null)
+										{
+											object pastedBack = null;
+											int rcBack = (int)((dynamic)selOrigOwner).Paste(clipb, ref pastedBack, true);
+											dsDiag.AppendLine("5b: CopyAll+Paste restore rc=" + rcBack);
+											if (rcBack == 0 || pastedBack != null)
+											{
+												try { ((dynamic)selectedDoc).Delete(); }
+												catch { dsDiag.AppendLine("5b: delete moved copy failed (non-critical)"); }
+												dsDiag.AppendLine("5b: restored via CopyAll+Paste fallback");
+											}
+										}
+									}
+									catch (Exception exRestore)
+									{
+										dsDiag.AppendLine("5b: restore ERR: " + exRestore.Message);
+									}
+								}
+							}
+							else
+							{
+								dsDiag.AppendLine("5b: selectedDoc owner unchanged (OK)");
+							}
+						}
+						catch (Exception exChk)
+						{
+							dsDiag.AppendLine("5b: owner check ERR: " + exChk.Message);
+						}
+					}
+
+					// ── 6. Delete UNWANTED auto-created docs ──
+					// The trigger created multiple docs. We drew one already.
+					// Delete the ones we don't want (the "other" docs, NOT the
+					// selectedDoc itself — it might have been consumed by CreateTemplate).
+					// Skip NameSystem reference objects (SFN starts with @NameSystem).
+					int deleteCount = 0;
+					string selectedUid = "";
+					try { selectedUid = selectedDoc.SystemUID(); }
+					catch { try { selectedUid = (string)((dynamic)selectedDoc).SystemUID; } catch { } }
+
+					for (int di = 0; di < newDocsFound.Count; di++)
+					{
+						try
+						{
+							string ndUid = "";
+							try { ndUid = newDocsFound[di].SystemUID(); }
+							catch { try { ndUid = (string)((dynamic)newDocsFound[di]).SystemUID; } catch { } }
+
+							// Skip the selected doc — it was used for drawing
+							if (!string.IsNullOrEmpty(ndUid) && !string.IsNullOrEmpty(selectedUid)
+								&& ndUid.Equals(selectedUid, StringComparison.OrdinalIgnoreCase))
+							{
+								dsDiag.AppendLine("6-cleanup: skipping selectedDoc[" + di + "] (used for drawing)");
+								continue;
+							}
+
+							// Skip NameSystem references — they're internal
+							string ndSfn = "";
+							try { ndSfn = newDocsFound[di].SystemFullName(); } catch { }
+							if (ndSfn.StartsWith("@NameSystem", StringComparison.OrdinalIgnoreCase))
+							{
+								dsDiag.AppendLine("6-cleanup: skipping NameSystem ref[" + di + "] SFN=" + ndSfn);
+								continue;
+							}
+
+							// Try deletion via dynamic (COM late-binding)
+							try
+							{
+								((dynamic)newDocsFound[di]).Delete();
+								deleteCount++;
+								dsDiag.AppendLine("6-cleanup: deleted doc[" + di + "] via dynamic.Delete()");
+							}
+							catch
+							{
+								// Fallback 2: Remove via parent
+								try
+								{
+									dynamic docOwner = ((dynamic)newDocsFound[di]).owner;
+									if (docOwner != null)
+									{
+										docOwner.RemoveObject((object)newDocsFound[di]);
+										deleteCount++;
+										dsDiag.AppendLine("6-cleanup: removed doc[" + di + "] via owner.RemoveObject()");
+									}
+									else
+									{
+										dsDiag.AppendLine("6-cleanup: doc[" + di + "] has no owner, cannot delete");
+									}
+								}
+								catch (Exception exRem)
+								{
+									dsDiag.AppendLine("6-cleanup: doc[" + di + "] all delete methods failed: " + exRem.Message);
+								}
+							}
+						}
+						catch (Exception exDel)
+						{
+							dsDiag.AppendLine("6-cleanup: doc[" + di + "] ERR: " + exDel.Message);
+						}
+					}
+
+					try { report.Save(); } catch { }
+					try { Workset.SaveAll(); } catch { }
+					dsDiag.AppendLine("6-cleanup: deleted " + deleteCount + " items total");
+
+					if (!string.IsNullOrEmpty(drawMethod))
+					{
+						return new
+						{
+							success = true,
+							route = "dataset-v4",
+							tag = tag,
+							description = description,
+							systemFullName = systemFullName,
+							resolvedBaseObj = text2,
+							x = x,
+							y = y,
+							documentUID = text,
+							triggerMethod = triggerMethod,
+							drawMethod = drawMethod,
+							selectedDocName = selectedName,
+							selectedDocDesc = selectedDesc,
+							wantSingleLine = wantSingleLine,
+							newDocsFound = newDocsFound.Count,
+							deletedCount = deleteCount,
+							message = string.Format("Dataset '{0}' drawn on diagram at ({1},{2}). Selected='{3}' ({4}). Cleaned {5} extras.",
+								tag, x, y, selectedName, selectedDesc, deleteCount),
+							diag = dsDiag.ToString()
+						};
+					}
+
+					return new
+					{
+						success = false,
+						error = "Dataset fallback V4: trigger created " + newDocsFound.Count + " docs but all draw methods failed. See diag.",
+						route = "dataset-v4",
+						tag = tag,
+						systemFullName = systemFullName,
+						triggerMethod = triggerMethod,
+						newDocsFound = newDocsFound.Count,
+						deletedCount = deleteCount,
+						diag = dsDiag.ToString()
+					};
+				}
+				catch (Exception exDs)
+				{
+					return new
+					{
+						success = false,
+						error = "Dataset fallback error: " + exDs.Message,
+						route = "dataset",
+						tag = tag,
+						systemFullName = systemFullName,
+						resolvedBaseObj = text2,
+						stack = exDs.StackTrace
+					};
+				}
 			}
 			IComosDDevice val5 = (IComosDDevice)((orCreateObject is IComosDDevice) ? orCreateObject : null);
 			string text3 = "(no dev)";
@@ -1257,10 +1833,30 @@ public class ImportAgent : AIComosTool
 			}
 			diag.AppendLine("ReportDocument obtained");
 
-			// 4. Call CreateTemplate — native drag-drop equivalent
-			//    IXDocDeveloper.CreateTemplate(IComosBaseObject BaseObj, double x, double y)
-			//    This instantiates all devices, connections, and coordinates from the
-			//    template document onto the target diagram at position (x, y).
+			// 4a. Record the template's original owner/parent BEFORE CreateTemplate
+			//     Some diagram types (e.g. multifilar) MOVE the template instead of
+			//     copying it. We detect this and restore it afterward.
+			object originalOwner = null;
+			string originalOwnerSfn = "";
+			try
+			{
+				originalOwner = ((dynamic)templateDoc).owner;
+				if (originalOwner != null)
+				{
+					try { originalOwnerSfn = ((dynamic)originalOwner).SystemFullName(); }
+					catch { originalOwnerSfn = "(could not read SFN)"; }
+				}
+				diag.AppendLine("4a: Original owner SFN=" + originalOwnerSfn);
+			}
+			catch (Exception exOwn)
+			{
+				diag.AppendLine("4a: Could not read original owner: " + exOwn.Message);
+			}
+
+			// 4b. Call CreateTemplate — native drag-drop equivalent
+			//     IXDocDeveloper.CreateTemplate(IComosBaseObject BaseObj, double x, double y)
+			//     This instantiates all devices, connections, and coordinates from the
+			//     template document onto the target diagram at position (x, y).
 			string createMethod = "";
 			IXDocDeveloper xDocDev = reportDocument as IXDocDeveloper;
 			if (xDocDev == null)
@@ -1342,6 +1938,108 @@ public class ImportAgent : AIComosTool
 					templateName = templateName,
 					diag = diag.ToString()
 				};
+			}
+
+			// 4c. Detect if template was MOVED (owner changed) and restore it
+			//     For multifilar diagrams, CreateTemplate may move the template
+			//     document under the target diagram instead of copying it.
+			//     If that happened, we move it back to its original parent.
+			if (originalOwner != null)
+			{
+				try
+				{
+					object currentOwner = ((dynamic)templateDoc).owner;
+					string currentOwnerSfn = "";
+					try { currentOwnerSfn = ((dynamic)currentOwner).SystemFullName(); }
+					catch { currentOwnerSfn = "(unknown)"; }
+
+					bool wasMoved = false;
+					if (currentOwner == null && originalOwner != null)
+					{
+						wasMoved = true;
+					}
+					else if (currentOwner != null && originalOwner != null)
+					{
+						// Compare by SystemFullName — if different, template was relocated
+						try
+						{
+							wasMoved = !string.Equals(originalOwnerSfn, currentOwnerSfn, StringComparison.OrdinalIgnoreCase);
+						}
+						catch
+						{
+							// If comparison fails, compare COM object identity
+							wasMoved = !object.ReferenceEquals(originalOwner, currentOwner);
+						}
+					}
+
+					if (wasMoved)
+					{
+						diag.AppendLine("4c: Template MOVED detected! Original=" + originalOwnerSfn + " Current=" + currentOwnerSfn);
+						diag.AppendLine("4c: Restoring template to original parent...");
+
+						// Strategy: Use CopyAll/Paste to copy template back, then delete the moved copy
+						// OR: Use ChangeOwner if available
+						bool restored = false;
+
+						// Try ChangeOwner first (cleanest approach)
+						try
+						{
+							((dynamic)templateDoc).ChangeOwner((object)originalOwner);
+							restored = true;
+							diag.AppendLine("4c: ChangeOwner OK — template restored to " + originalOwnerSfn);
+						}
+						catch (Exception exCo)
+						{
+							diag.AppendLine("4c: ChangeOwner ERR: " + exCo.Message);
+						}
+
+						// Fallback: Move via CopyAll + Paste into original owner, then delete from current location
+						if (!restored)
+						{
+							try
+							{
+								dynamic clipObj = ((dynamic)templateDoc).CopyAll();
+								if (clipObj != null)
+								{
+									object pastedRef = null;
+									int pasteRc = (int)((dynamic)originalOwner).Paste(clipObj, ref pastedRef, true);
+									diag.AppendLine("4c: CopyAll+Paste rc=" + pasteRc + " pastedRef=" + (pastedRef != null ? "OK" : "null"));
+									if (pasteRc == 0 || pastedRef != null)
+									{
+										// Delete the moved (current) copy from the target diagram
+										try
+										{
+											((dynamic)templateDoc).Delete();
+											diag.AppendLine("4c: Deleted moved copy from target diagram");
+										}
+										catch (Exception exDel)
+										{
+											diag.AppendLine("4c: Delete moved copy ERR (non-critical): " + exDel.Message);
+										}
+										restored = true;
+									}
+								}
+							}
+							catch (Exception exPaste)
+							{
+								diag.AppendLine("4c: CopyAll+Paste fallback ERR: " + exPaste.Message);
+							}
+						}
+
+						if (!restored)
+						{
+							diag.AppendLine("4c: WARNING — could not restore template to original location. Template may have been moved under the target diagram.");
+						}
+					}
+					else
+					{
+						diag.AppendLine("4c: Template owner unchanged — no move detected (OK).");
+					}
+				}
+				catch (Exception exCheck)
+				{
+					diag.AppendLine("4c: Owner check ERR: " + exCheck.Message);
+				}
 			}
 
 			// 5. Save the report and commit

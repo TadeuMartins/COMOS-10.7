@@ -598,6 +598,87 @@ function createConversationInWidget(widget, conversationId, title, conversationS
 
 //#region APPLICATION LIFECYCLE
 
+/**
+ * Connects to the shim's SSE agent-events endpoint for real-time status.
+ * Displays thinking indicators, tool call steps, and timeout warnings
+ * in the chat UI typing indicator area.
+ */
+function _connectAgentEvents() {
+    var shimBase = _detectShimBase();
+    var url = shimBase + '/api/ai/v1/agent-events';
+
+    var evtSource;
+    try {
+        evtSource = new EventSource(url);
+    } catch (err) {
+        Logger.warn('SSE EventSource not available:', err.message);
+        return;
+    }
+
+    /** Handle agent_started — show activation message */
+    evtSource.addEventListener('agent_started', function (e) {
+        try {
+            var data = JSON.parse(e.data);
+            _setProcessingStatus(data.message || 'Agent activated...');
+            Logger.debug('SSE agent_started:', data.message);
+        } catch (err) { Logger.error('SSE agent_started parse error', err.message); }
+    });
+
+    /** Handle agent_thinking — show reasoning status */
+    evtSource.addEventListener('agent_thinking', function (e) {
+        try {
+            var data = JSON.parse(e.data);
+            var msg = data.message || 'Thinking...';
+            // Add visual indicator based on substate
+            if (data.substate === 'llm_call') msg = '🧠 ' + msg;
+            else if (data.substate === 'eval_continuation') msg = '🔄 ' + msg;
+            else if (data.substate === 'continuation') msg = '⏳ ' + msg;
+            _setProcessingStatus(msg);
+            Logger.debug('SSE agent_thinking:', msg);
+        } catch (err) { Logger.error('SSE agent_thinking parse error', err.message); }
+    });
+
+    /** Handle agent_tool_call — show step and tool name */
+    evtSource.addEventListener('agent_tool_call', function (e) {
+        try {
+            var data = JSON.parse(e.data);
+            _setProcessingStatus('🔧 ' + (data.message || 'Executing tool...'));
+            Logger.debug('SSE agent_tool_call:', data.message);
+        } catch (err) { Logger.error('SSE agent_tool_call parse error', err.message); }
+    });
+
+    /** Handle agent_timeout — show timeout warning */
+    evtSource.addEventListener('agent_timeout', function (e) {
+        try {
+            var data = JSON.parse(e.data);
+            _setProcessingStatus('⏱️ ' + (data.message || 'Agent timed out...'));
+            Logger.debug('SSE agent_timeout:', data.message);
+        } catch (err) { Logger.error('SSE agent_timeout parse error', err.message); }
+    });
+
+    /** Handle agent_complete — clear status */
+    evtSource.addEventListener('agent_complete', function (e) {
+        try {
+            _clearProcessingStatus();
+            Logger.debug('SSE agent_complete');
+        } catch (err) { Logger.error('SSE agent_complete error', err.message); }
+    });
+
+    /** Handle connection open */
+    evtSource.onopen = function () {
+        Logger.info('SSE agent-events connected to ' + url);
+    };
+
+    /** Handle errors — auto-reconnect is built into EventSource */
+    evtSource.onerror = function (err) {
+        Logger.warn('SSE agent-events connection error (will auto-reconnect)');
+    };
+
+    // Store reference for cleanup
+    appState._agentEventSource = evtSource;
+    Logger.info('SSE agent-events listener initialized');
+}
+
 /** Initializes the chat widget application */
 async function initializeApp() {
     try {
@@ -615,6 +696,9 @@ async function initializeApp() {
         // Store widget instance globally for C# integration and internal use
         appState.widgetInstance = widget;
         window.widget = widget;
+
+        // ── SSE Agent Events: connect to shim for real-time status ─────
+        _connectAgentEvents();
 
         Logger.info('Application initialized successfully');
     } catch (error) {
