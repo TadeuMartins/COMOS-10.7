@@ -1,0 +1,19 @@
+ildasm: C:\Program Files (x86)\Microsoft SDKs\Windows\v10.0A\bin\NETFX 4.8.1 Tools\ildasm.exe
+dotnet: True
+
+=== String search in Hosting DLLs ===
+
+--- Comos.Services.Ai.Api.dll (50688 bytes) ---
+  Timeout: Timeout
+  Seconds: second
+
+=== UTF-8 string search ===
+
+--- Comos.Services.Ai.Api.dll (UTF-8) ---
+  set_Timeout
+
+--- Comos.Services.Ai.dll (UTF-8) ---
+  Timeout
+  get_Timeout
+  set_Timeout
+  ConfigureHttpClientTimeout

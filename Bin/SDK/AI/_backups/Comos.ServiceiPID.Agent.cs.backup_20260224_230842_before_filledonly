@@ -6144,11 +6144,10 @@ public class ImportAgent : AIComosTool
 		return list;
 	}
 
-	[AiFunction("list_object_attributes", "Lists ALL specification attributes of a COMOS object, including Name, Description, Value, SpecValue and SpecUnit. Recursively searches up to 10 spec levels (same depth as set_attribute_value). Use when the user asks to see/list attributes, or when an attribute was not found.")]
+	[AiFunction("list_object_attributes", "Lists all filled/non-blank specification attributes (Name, Description, Value) of a COMOS object. Skips empty attributes. Use this when the user asks to see attributes, or when an attribute was not found. Returns a structured list grouped by specification tab.")]
 	public object ListObjectAttributes(
 		[DescribeParameter("Optional: SystemUID of the COMOS object.", ExampleValue = "")] string systemUID,
-		[DescribeParameter("Optional: Name/tag of the COMOS object (e.g. M001, PC001). Preferred way to identify the object.", ExampleValue = "")] string objectName,
-		[DescribeParameter("Optional: SystemType returned by navigate (e.g. 8). Enables direct LoadObjectByType(type, uid).", ExampleValue = "")] string systemType)
+		[DescribeParameter("Optional: Name/tag of the COMOS object (e.g. M001, PC001). Preferred way to identify the object.", ExampleValue = "")] string objectName)
 	{
 		if (Workset == null)
 		{
@@ -6162,118 +6161,57 @@ public class ImportAgent : AIComosTool
 		try
 		{
 			dynamic device = null;
-			string stratDiag = "";
+			IComosDProject currentProject = null;
+			try { currentProject = Workset.GetCurrentProject(); } catch { }
 
-			// ── Strategy 1 (GOLDEN PATH): LoadObjectByType(systemType, systemUID) ──
-			// The shim ALWAYS navigates first and passes systemUID + systemType
-			// from the native navigate result. This is the same API the native
-			// navigate_to_comos_object uses internally.
-			int parsedType = 0;
-			if (!string.IsNullOrWhiteSpace(systemType)) int.TryParse(systemType, out parsedType);
-
-			if ((object)device == null && !string.IsNullOrWhiteSpace(systemUID) && parsedType > 0)
+			// Strategy 1: Find by objectName using AllDevices enumeration (most reliable)
+			if ((object)device == null && !string.IsNullOrWhiteSpace(objectName) && currentProject != null)
 			{
 				try
 				{
-					object loaded = Workset.LoadObjectByType(parsedType, systemUID);
-					if (loaded != null)
+					dynamic allDevs = ((dynamic)currentProject).AllDevices();
+					if (allDevs != null)
 					{
-						device = (dynamic)loaded;
-						stratDiag += $"S1:LoadByType({parsedType},'{systemUID}')=FOUND";
-					}
-					else { stratDiag += $"S1:LoadByType({parsedType},'{systemUID}')=null"; }
-				}
-				catch (Exception ex) { stratDiag += $"S1:LoadByType({parsedType},'{systemUID}')=ERR({ex.Message})"; }
-			}
-			else
-			{
-				stratDiag += $"S1:SKIP(uid={!string.IsNullOrWhiteSpace(systemUID)},type={parsedType})";
-			}
-
-			// ── Strategy 2: LoadObjectByType(candidateTypes, systemUID) ──
-			// systemUID provided but systemType missing or S1 returned null.
-			if ((object)device == null && !string.IsNullOrWhiteSpace(systemUID))
-			{
-				try
-				{
-					int[] fallbackTypes = new[] { 8, 1, 29, 2, 3, 4, 5, 6, 7, 9, 10 };
-					int usedType = 0;
-					foreach (int dt in fallbackTypes)
-					{
-						if (dt == parsedType) continue; // already tried in S1
-						try
-						{
-							object loaded = Workset.LoadObjectByType(dt, systemUID);
-							if (loaded != null) { device = (dynamic)loaded; usedType = dt; break; }
-						}
-						catch { }
-					}
-					stratDiag += (object)device != null
-						? $" S2:LoadByType(scan,'{systemUID}')=FOUND(type={usedType})"
-						: $" S2:LoadByType(scan,'{systemUID}')=NOMATCH";
-				}
-				catch (Exception ex) { stratDiag += $" S2:LoadByType(scan)=ERR({ex.Message})"; }
-			}
-
-			// ── Strategy 3: LoadObjectByType by objectName candidates ──
-			if ((object)device == null && !string.IsNullOrWhiteSpace(objectName))
-			{
-				try
-				{
-					int[] deviceTypes = new[] { 8, 1, 29, 2, 3, 4, 5, 6, 7, 9, 10 };
-					var candidates = ImportAgent.BuildTagCandidates(objectName);
-					string usedCand = ""; int usedType = 0;
-					foreach (string cand in candidates)
-					{
-						if ((object)device != null) break;
-						foreach (int dt in deviceTypes)
+						int count = allDevs.Count;
+						int maxScan = (count < 10000) ? count : 10000;
+						for (int i = 1; i <= maxScan; i++)
 						{
 							try
 							{
-								object loaded = Workset.LoadObjectByType(dt, cand);
-								if (loaded != null) { device = (dynamic)loaded; usedCand = cand; usedType = dt; break; }
+								dynamic dev = allDevs.Item(i);
+								if (dev != null && ImportAgent.DeviceMatchesTag(dev, objectName))
+								{
+									device = dev;
+									break;
+								}
 							}
 							catch { }
 						}
 					}
-					stratDiag += (object)device != null
-						? $" S3:LoadByName=FOUND(type={usedType},cand='{usedCand}')"
-						: $" S3:LoadByName=NOMATCH(cands=[{string.Join(",", candidates)}])";
 				}
-				catch (Exception ex) { stratDiag += $" S3:LoadByName=ERR({ex.Message})"; }
+				catch { }
 			}
 
-			// ── Strategy 4 (LAST RESORT): AllDevices scan ──
-			if ((object)device == null && !string.IsNullOrWhiteSpace(objectName))
+			// Strategy 2: Try SystemUID via dynamic (may not exist on all COM interfaces)
+			if ((object)device == null && !string.IsNullOrWhiteSpace(systemUID))
 			{
-				IComosDProject currentProject = null;
-				try { currentProject = Workset.GetCurrentProject(); } catch { }
-				if (currentProject != null)
+				try
 				{
-					try
-					{
-						dynamic allDevs = ((dynamic)currentProject).AllDevices();
-						if (allDevs != null)
-						{
-							int count = allDevs.Count;
-							int maxScan = (count < 10000) ? count : 10000;
-							for (int i = 1; i <= maxScan; i++)
-							{
-								try
-								{
-									dynamic dev = allDevs.Item(i);
-									if (dev != null && ImportAgent.DeviceMatchesTag(dev, objectName))
-									{ device = dev; break; }
-								}
-								catch { }
-							}
-							stratDiag += (object)device != null
-								? $" S4:AllDevices=FOUND"
-								: $" S4:AllDevices(count={count})=NOMATCH";
-						}
-					}
-					catch (Exception ex) { stratDiag += $" S4:AllDevices=ERR({ex.Message})"; }
+					if (currentProject != null)
+						device = ((dynamic)currentProject).GetObjectBySystemUID(systemUID);
 				}
+				catch { }
+			}
+
+			// Strategy 3: SelectedObject (last resort — may be null if native nav uses internal state)
+			if ((object)device == null)
+			{
+				try
+				{
+					dynamic ws = Workset;
+					device = ws.SelectedObject;
+				}
+				catch { }
 			}
 
 			if ((object)device == null)
@@ -6281,11 +6219,10 @@ public class ImportAgent : AIComosTool
 				string tried = "";
 				if (!string.IsNullOrWhiteSpace(objectName)) tried += $" objectName='{objectName}'";
 				if (!string.IsNullOrWhiteSpace(systemUID)) tried += $" systemUID='{systemUID}'";
-				if (parsedType > 0) tried += $" systemType={parsedType}";
 				return new
 				{
 					success = false,
-					error = $"Could not find the object.{tried} [DIAG: {stratDiag}]"
+					error = $"Could not find the object.{tried} Provide the object name/tag (e.g. objectName=\"M001\")."
 				};
 			}
 
@@ -6296,11 +6233,10 @@ public class ImportAgent : AIComosTool
 			try { objLabel = (string)device.Label; } catch { }
 			try { objUID = (string)device.SystemUID; } catch { }
 
-			// Enumerate specifications recursively (same depth as set_attribute_value)
+			// Enumerate specifications
 			var results = new List<string>();
 			int totalAttrs = 0;
-			const int MAX_ATTRS = 500;  // Only filled attributes now, so count is much lower
-			const int MAX_DEPTH = 10;
+			const int MAX_ATTRS = 200; // cap to stay within 30s timeout
 
 			try
 			{
@@ -6318,7 +6254,89 @@ public class ImportAgent : AIComosTool
 					};
 				}
 
-				CollectSpecsRecursive(specs, "", 0, MAX_DEPTH, results, ref totalAttrs, MAX_ATTRS);
+				int topCount = (int)specs.Count;
+				for (int t = 1; t <= topCount && totalAttrs < MAX_ATTRS; t++)
+				{
+					try
+					{
+						dynamic topSpec = specs.Item(t);
+						if ((object)topSpec == null) continue;
+
+						string tabName = "";
+						string tabDesc = "";
+						try { tabName = (string)topSpec.Name; } catch { }
+						try { tabDesc = (string)topSpec.Description; } catch { }
+						string tabLabel = string.IsNullOrWhiteSpace(tabDesc) ? tabName : tabDesc;
+
+						bool isFolder = false;
+						try { isFolder = (bool)topSpec.IsFolder; } catch { }
+
+						if (isFolder)
+						{
+							// It's a spec tab — enumerate its children
+							try
+							{
+								dynamic childSpecs = topSpec.Specs;
+								if (childSpecs != null)
+								{
+									int childCount = (int)childSpecs.Count;
+									for (int c = 1; c <= childCount && totalAttrs < MAX_ATTRS; c++)
+									{
+										try
+										{
+											dynamic childSpec = childSpecs.Item(c);
+											if ((object)childSpec == null) continue;
+
+											string cName = "";
+											string cDesc = "";
+											string cValue = "";
+											try { cName = (string)childSpec.Name; } catch { }
+											try { cDesc = (string)childSpec.Description; } catch { }
+											try { cValue = (string)childSpec.DisplayValue; } catch { }
+											if (string.IsNullOrWhiteSpace(cValue))
+											{
+												try { cValue = (string)childSpec.value; } catch { }
+											}
+
+											// Skip blank/unfilled attributes
+											if (string.IsNullOrWhiteSpace(cValue)) continue;
+
+											string attrDisplay = string.IsNullOrWhiteSpace(cDesc)
+												? cName
+												: $"{cName} ({cDesc})";
+											attrDisplay += $" = {cValue}";
+
+											results.Add($"[{tabLabel}] {attrDisplay}");
+											totalAttrs++;
+										}
+										catch { }
+									}
+								}
+							}
+							catch { }
+						}
+						else
+						{
+							// Top-level attribute (not inside a tab)
+							string tValue = "";
+							try { tValue = (string)topSpec.DisplayValue; } catch { }
+							if (string.IsNullOrWhiteSpace(tValue))
+							{
+								try { tValue = (string)topSpec.value; } catch { }
+							}
+
+							string attrDisplay = string.IsNullOrWhiteSpace(tabDesc)
+								? tabName
+								: $"{tabName} ({tabDesc})";
+							if (!string.IsNullOrWhiteSpace(tValue))
+								attrDisplay += $" = {tValue}";
+
+							results.Add(attrDisplay);
+							totalAttrs++;
+						}
+					}
+					catch { }
+				}
 			}
 			catch (Exception ex)
 			{
@@ -6354,118 +6372,6 @@ public class ImportAgent : AIComosTool
 		}
 	}
 
-	/// <summary>
-	/// Recursively collects ALL spec attributes with Name, Description, Value, SpecValue and SpecUnit.
-	/// Uses the same traversal pattern as SearchSpecsRecursive (tries .Specs then .Specifications).
-	/// </summary>
-	private static void CollectSpecsRecursive(
-		dynamic specs, string parentLabel, int depth, int maxDepth,
-		List<string> results, ref int totalAttrs, int maxAttrs)
-	{
-		if (depth > maxDepth || totalAttrs >= maxAttrs) return;
-		if ((object)specs == null) return;
-
-		int count = 0;
-		try { count = (int)specs.Count; } catch { return; }
-
-		for (int i = 1; i <= count && totalAttrs < maxAttrs; i++)
-		{
-			try
-			{
-				dynamic spec = specs.Item(i);
-				if ((object)spec == null) continue;
-
-				string sName = "";
-				string sDesc = "";
-				try { sName = (string)spec.Name; } catch { }
-				try { sDesc = (string)spec.Description; } catch { }
-				string sLabel = string.IsNullOrWhiteSpace(sDesc) ? sName : sDesc;
-				string fullLabel = string.IsNullOrWhiteSpace(parentLabel) ? sLabel : parentLabel + " > " + sLabel;
-
-				bool isFolder = false;
-				try { isFolder = (bool)spec.IsFolder; } catch { }
-
-				// Collect this node as an attribute if it's NOT a folder
-				if (!isFolder)
-				{
-					string displayValue = "";
-					string specValue = "";
-					string specUnit = "";
-					try { displayValue = (string)spec.DisplayValue; } catch { }
-					if (string.IsNullOrWhiteSpace(displayValue))
-					{
-						try { displayValue = (string)spec.value; } catch { }
-					}
-					try { specValue = Convert.ToString(((dynamic)spec).SpecValue); } catch { }
-					try { specUnit = (string)spec.Unit; } catch { }
-					if (string.IsNullOrWhiteSpace(specUnit))
-					{
-						try { specUnit = (string)((dynamic)spec).SpecUnit; } catch { }
-					}
-
-					// Only include attributes that have at least one filled value
-					bool hasAnyValue = !string.IsNullOrWhiteSpace(displayValue)
-						|| !string.IsNullOrWhiteSpace(specValue);
-					if (!hasAnyValue) continue; // skip blank attributes
-
-					// Build attribute entry: [Tab > SubTab] Name (Description) = Value | SV=specValue U=unit
-					string entry = $"[{(string.IsNullOrWhiteSpace(parentLabel) ? "(root)" : parentLabel)}] ";
-					entry += string.IsNullOrWhiteSpace(sDesc) ? sName : $"{sName} ({sDesc})";
-					if (!string.IsNullOrWhiteSpace(displayValue))
-						entry += $" = {displayValue}";
-					// Append SpecValue if different from DisplayValue
-					if (!string.IsNullOrWhiteSpace(specValue) && specValue != displayValue)
-						entry += $" | SV={specValue}";
-					if (!string.IsNullOrWhiteSpace(specUnit))
-						entry += $" | U={specUnit}";
-
-					results.Add(entry);
-					totalAttrs++;
-				}
-
-				// ALWAYS recurse into children — same as SearchSpecsRecursive:
-				// some COMOS spec nodes have sub-specs even when IsFolder is false.
-				bool recursed = false;
-				try
-				{
-					dynamic childSpecs = spec.Specs;
-					if ((object)childSpecs != null)
-					{
-						int childCount = 0;
-						try { childCount = (int)childSpecs.Count; } catch { }
-						if (childCount > 0)
-						{
-							recursed = true;
-							CollectSpecsRecursive(childSpecs, fullLabel, depth + 1, maxDepth,
-								results, ref totalAttrs, maxAttrs);
-						}
-					}
-				}
-				catch { }
-				// Fallback: try .Specifications
-				if (!recursed)
-				{
-					try
-					{
-						dynamic childSpecs2 = spec.Specifications;
-						if ((object)childSpecs2 != null)
-						{
-							int childCount2 = 0;
-							try { childCount2 = (int)childSpecs2.Count; } catch { }
-							if (childCount2 > 0)
-							{
-								CollectSpecsRecursive(childSpecs2, fullLabel, depth + 1, maxDepth,
-									results, ref totalAttrs, maxAttrs);
-							}
-						}
-					}
-					catch { }
-				}
-			}
-			catch { }
-		}
-	}
-
 	// ══════════════════════════════════════════════════════════════════════
 	// SET / WRITE ATTRIBUTE VALUE
 	// ══════════════════════════════════════════════════════════════════════
@@ -6482,9 +6388,7 @@ public class ImportAgent : AIComosTool
 		[DescribeParameter("Optional: SystemUID of the COMOS object.", ExampleValue = "")]
 		string systemUID,
 		[DescribeParameter("Optional: Name/tag of the COMOS object (e.g. M001, PC001). Preferred way to identify the object.", ExampleValue = "")]
-		string objectName,
-		[DescribeParameter("Optional: SystemType returned by navigate (e.g. 8). Enables direct LoadObjectByType(type, uid).", ExampleValue = "")]
-		string systemType)
+		string objectName)
 	{
 		if (Workset == null)
 		{
@@ -6507,114 +6411,57 @@ public class ImportAgent : AIComosTool
 		try
 		{
 			dynamic device = null;
-			string stratDiag = "";
+			IComosDProject currentProject = null;
+			try { currentProject = Workset.GetCurrentProject(); } catch { }
 
-			// ── Strategy 1 (GOLDEN PATH): LoadObjectByType(systemType, systemUID) ──
-			// The shim ALWAYS navigates first and passes systemUID + systemType.
-			int parsedType = 0;
-			if (!string.IsNullOrWhiteSpace(systemType)) int.TryParse(systemType, out parsedType);
-
-			if ((object)device == null && !string.IsNullOrWhiteSpace(systemUID) && parsedType > 0)
+			// Strategy 1: Find by objectName
+			if ((object)device == null && !string.IsNullOrWhiteSpace(objectName) && currentProject != null)
 			{
 				try
 				{
-					object loaded = Workset.LoadObjectByType(parsedType, systemUID);
-					if (loaded != null)
+					dynamic allDevs = ((dynamic)currentProject).AllDevices();
+					if (allDevs != null)
 					{
-						device = (dynamic)loaded;
-						stratDiag += $"S1:LoadByType({parsedType},'{systemUID}')=FOUND";
-					}
-					else { stratDiag += $"S1:LoadByType({parsedType},'{systemUID}')=null"; }
-				}
-				catch (Exception ex) { stratDiag += $"S1:LoadByType({parsedType},'{systemUID}')=ERR({ex.Message})"; }
-			}
-			else
-			{
-				stratDiag += $"S1:SKIP(uid={!string.IsNullOrWhiteSpace(systemUID)},type={parsedType})";
-			}
-
-			// ── Strategy 2: LoadObjectByType(candidateTypes, systemUID) ──
-			if ((object)device == null && !string.IsNullOrWhiteSpace(systemUID))
-			{
-				try
-				{
-					int[] fallbackTypes = new[] { 8, 1, 29, 2, 3, 4, 5, 6, 7, 9, 10 };
-					int usedType = 0;
-					foreach (int dt in fallbackTypes)
-					{
-						if (dt == parsedType) continue;
-						try
-						{
-							object loaded = Workset.LoadObjectByType(dt, systemUID);
-							if (loaded != null) { device = (dynamic)loaded; usedType = dt; break; }
-						}
-						catch { }
-					}
-					stratDiag += (object)device != null
-						? $" S2:LoadByType(scan,'{systemUID}')=FOUND(type={usedType})"
-						: $" S2:LoadByType(scan,'{systemUID}')=NOMATCH";
-				}
-				catch (Exception ex) { stratDiag += $" S2:LoadByType(scan)=ERR({ex.Message})"; }
-			}
-
-			// ── Strategy 3: LoadObjectByType by objectName candidates ──
-			if ((object)device == null && !string.IsNullOrWhiteSpace(objectName))
-			{
-				try
-				{
-					int[] deviceTypes = new[] { 8, 1, 29, 2, 3, 4, 5, 6, 7, 9, 10 };
-					var candidates = ImportAgent.BuildTagCandidates(objectName);
-					foreach (string cand in candidates)
-					{
-						if ((object)device != null) break;
-						foreach (int dt in deviceTypes)
+						int count = allDevs.Count;
+						int maxScan = (count < 10000) ? count : 10000;
+						for (int i = 1; i <= maxScan; i++)
 						{
 							try
 							{
-								object loaded = Workset.LoadObjectByType(dt, cand);
-								if (loaded != null) { device = (dynamic)loaded; break; }
+								dynamic dev = allDevs.Item(i);
+								if (dev != null && ImportAgent.DeviceMatchesTag(dev, objectName))
+								{
+									device = dev;
+									break;
+								}
 							}
 							catch { }
 						}
 					}
-					stratDiag += (object)device != null
-						? $" S3:LoadByName=FOUND"
-						: $" S3:LoadByName=NOMATCH";
 				}
-				catch (Exception ex) { stratDiag += $" S3:LoadByName=ERR({ex.Message})"; }
+				catch { }
 			}
 
-			// ── Strategy 4 (LAST RESORT): AllDevices scan ──
-			if ((object)device == null && !string.IsNullOrWhiteSpace(objectName))
+			// Strategy 2: Try SystemUID
+			if ((object)device == null && !string.IsNullOrWhiteSpace(systemUID))
 			{
-				IComosDProject currentProject = null;
-				try { currentProject = Workset.GetCurrentProject(); } catch { }
-				if (currentProject != null)
+				try
 				{
-					try
-					{
-						dynamic allDevs = ((dynamic)currentProject).AllDevices();
-						if (allDevs != null)
-						{
-							int count = allDevs.Count;
-							int maxScan = (count < 10000) ? count : 10000;
-							for (int i = 1; i <= maxScan; i++)
-							{
-								try
-								{
-									dynamic dev = allDevs.Item(i);
-									if (dev != null && ImportAgent.DeviceMatchesTag(dev, objectName))
-									{ device = dev; break; }
-								}
-								catch { }
-							}
-							stratDiag += (object)device != null
-								? $" S4:AllDevices=FOUND"
-								: $" S4:AllDevices(count={count})=NOMATCH";
-						}
-					}
-					catch (Exception ex) { stratDiag += $" S4:AllDevices=ERR({ex.Message})"; }
+					if (currentProject != null)
+						device = ((dynamic)currentProject).GetObjectBySystemUID(systemUID);
 				}
+				catch { }
+			}
+
+			// Strategy 3: SelectedObject
+			if ((object)device == null)
+			{
+				try
+				{
+					dynamic ws = Workset;
+					device = ws.SelectedObject;
+				}
+				catch { }
 			}
 
 			if ((object)device == null)
@@ -6622,11 +6469,10 @@ public class ImportAgent : AIComosTool
 				string tried = "";
 				if (!string.IsNullOrWhiteSpace(objectName)) tried += $" objectName='{objectName}'";
 				if (!string.IsNullOrWhiteSpace(systemUID)) tried += $" systemUID='{systemUID}'";
-				if (parsedType > 0) tried += $" systemType={parsedType}";
 				return new
 				{
 					success = false,
-					error = $"Could not find the object.{tried} [DIAG: {stratDiag}]"
+					error = $"Could not find the object.{tried} Provide the object name/tag (e.g. objectName=\"M001\")."
 				};
 			}
 
@@ -6645,7 +6491,6 @@ public class ImportAgent : AIComosTool
 			string bestOldValue = "";
 			string bestTabLabel = "";
 			int bestScore = int.MaxValue; // lower is better (Levenshtein distance)
-			var specDump = new System.Collections.Generic.List<string>();
 
 			try
 			{
@@ -6660,10 +6505,87 @@ public class ImportAgent : AIComosTool
 					};
 				}
 
-				// Recursive search through specs (up to 10 levels, matching native DLL behavior)
-				SearchSpecsRecursive(specs, searchLower, "", 0, 10,
-					ref bestMatch, ref bestName, ref bestDesc, ref bestOldValue, ref bestTabLabel, ref bestScore,
-					specDump);
+				int topCount = (int)specs.Count;
+				for (int t = 1; t <= topCount; t++)
+				{
+					try
+					{
+						dynamic topSpec = specs.Item(t);
+						if ((object)topSpec == null) continue;
+
+						string tabName = "";
+						string tabDesc = "";
+						try { tabName = (string)topSpec.Name; } catch { }
+						try { tabDesc = (string)topSpec.Description; } catch { }
+						string tabLabel = string.IsNullOrWhiteSpace(tabDesc) ? tabName : tabDesc;
+
+						bool isFolder = false;
+						try { isFolder = (bool)topSpec.IsFolder; } catch { }
+
+						if (isFolder)
+						{
+							try
+							{
+								dynamic childSpecs = topSpec.Specs;
+								if (childSpecs != null)
+								{
+									int childCount = (int)childSpecs.Count;
+									for (int c = 1; c <= childCount; c++)
+									{
+										try
+										{
+											dynamic childSpec = childSpecs.Item(c);
+											if ((object)childSpec == null) continue;
+
+											string cName = "";
+											string cDesc = "";
+											try { cName = (string)childSpec.Name; } catch { }
+											try { cDesc = (string)childSpec.Description; } catch { }
+
+											int score = ScoreAttributeMatch(searchLower, cName, cDesc);
+											if (score < bestScore)
+											{
+												bestScore = score;
+												bestMatch = childSpec;
+												bestName = cName;
+												bestDesc = cDesc;
+												bestTabLabel = tabLabel;
+												try { bestOldValue = (string)childSpec.DisplayValue; } catch { }
+												if (string.IsNullOrWhiteSpace(bestOldValue))
+												{
+													try { bestOldValue = (string)childSpec.value; } catch { }
+												}
+											}
+											if (score == 0) break; // exact match
+										}
+										catch { }
+									}
+								}
+							}
+							catch { }
+						}
+						else
+						{
+							// Top-level attribute
+							int score = ScoreAttributeMatch(searchLower, tabName, tabDesc);
+							if (score < bestScore)
+							{
+								bestScore = score;
+								bestMatch = topSpec;
+								bestName = tabName;
+								bestDesc = tabDesc;
+								bestTabLabel = "(top-level)";
+								try { bestOldValue = (string)topSpec.DisplayValue; } catch { }
+								if (string.IsNullOrWhiteSpace(bestOldValue))
+								{
+									try { bestOldValue = (string)topSpec.value; } catch { }
+								}
+							}
+						}
+						if (bestScore == 0) break; // exact match found
+					}
+					catch { }
+				}
 			}
 			catch (Exception ex)
 			{
@@ -6678,15 +6600,13 @@ public class ImportAgent : AIComosTool
 			// Threshold: Levenshtein distance > 5 means no reasonable match
 			if ((object)bestMatch == null || bestScore > 5)
 			{
-				string specTree = string.Join("; ", specDump.Count > 40 ? specDump.GetRange(0, 40) : specDump);
 				return new
 				{
 					success = false,
 					error = $"Attribute '{attributeName}' not found on object '{objName}'. Use list_object_attributes to see available attributes.",
 					objectName = objName,
 					systemUID = objUID,
-					closestMatch = (object)bestMatch != null ? $"{bestName} ({bestDesc}) [score={bestScore}]" : "none",
-					specsFound = specTree
+					closestMatch = (object)bestMatch != null ? $"{bestName} ({bestDesc}) [score={bestScore}]" : "none"
 				};
 			}
 
@@ -6753,112 +6673,6 @@ public class ImportAgent : AIComosTool
 				success = false,
 				error = $"Unexpected error: {ex.Message}"
 			};
-		}
-	}
-
-	/// <summary>
-	/// Recursively searches through COMOS Specifications to find the best-matching attribute.
-	/// Mirrors the native DLL's search_spec_recursive behavior (up to maxDepth levels).
-	/// </summary>
-	private static void SearchSpecsRecursive(
-		dynamic specs, string searchLower, string parentLabel, int depth, int maxDepth,
-		ref dynamic bestMatch, ref string bestName, ref string bestDesc,
-		ref string bestOldValue, ref string bestTabLabel, ref int bestScore,
-		System.Collections.Generic.List<string> specDump = null)
-	{
-		if (depth > maxDepth || bestScore == 0) return;
-		if ((object)specs == null) return;
-
-		int count = 0;
-		try { count = (int)specs.Count; } catch { return; }
-
-		for (int i = 1; i <= count; i++)
-		{
-			if (bestScore == 0) break; // exact match already found
-
-			try
-			{
-				dynamic spec = specs.Item(i);
-				if ((object)spec == null) continue;
-
-				string sName = "";
-				string sDesc = "";
-				try { sName = (string)spec.Name; } catch { }
-				try { sDesc = (string)spec.Description; } catch { }
-				string sLabel = string.IsNullOrWhiteSpace(sDesc) ? sName : sDesc;
-				string fullLabel = string.IsNullOrWhiteSpace(parentLabel) ? sLabel : parentLabel + " > " + sLabel;
-
-				// Diagnostic dump
-				if (specDump != null && specDump.Count < 80)
-					specDump.Add($"d{depth}:{(string.IsNullOrWhiteSpace(sDesc) ? sName : sName + "(" + sDesc + ")")}");
-
-				// Score this node as a potential attribute match (regardless of folder status)
-				bool isFolder = false;
-				try { isFolder = (bool)spec.IsFolder; } catch { }
-
-				if (!isFolder)
-				{
-					int score = ScoreAttributeMatch(searchLower, sName, sDesc);
-					if (score < bestScore)
-					{
-						bestScore = score;
-						bestMatch = spec;
-						bestName = sName;
-						bestDesc = sDesc;
-						bestTabLabel = string.IsNullOrWhiteSpace(parentLabel) ? "(top-level)" : parentLabel;
-						try { bestOldValue = (string)spec.DisplayValue; } catch { }
-						if (string.IsNullOrWhiteSpace(bestOldValue))
-						{
-							try { bestOldValue = (string)spec.value; } catch { }
-						}
-					}
-				}
-
-				// ALWAYS try to recurse into children — some COMOS spec nodes
-				// have sub-specs (.Specs or .Specifications) even when IsFolder is false.
-				bool recursed = false;
-				// Try .Specs first (standard child accessor)
-				try
-				{
-					dynamic childSpecs = spec.Specs;
-					if ((object)childSpecs != null)
-					{
-						int childCount = 0;
-						try { childCount = (int)childSpecs.Count; } catch { }
-						if (childCount > 0)
-						{
-							recursed = true;
-							SearchSpecsRecursive(childSpecs, searchLower, fullLabel, depth + 1, maxDepth,
-								ref bestMatch, ref bestName, ref bestDesc,
-								ref bestOldValue, ref bestTabLabel, ref bestScore,
-								specDump);
-						}
-					}
-				}
-				catch { }
-				// Fallback: try .Specifications (some COMOS COM objects use this)
-				if (!recursed)
-				{
-					try
-					{
-						dynamic childSpecs2 = spec.Specifications;
-						if ((object)childSpecs2 != null)
-						{
-							int childCount2 = 0;
-							try { childCount2 = (int)childSpecs2.Count; } catch { }
-							if (childCount2 > 0)
-							{
-								SearchSpecsRecursive(childSpecs2, searchLower, fullLabel, depth + 1, maxDepth,
-									ref bestMatch, ref bestName, ref bestDesc,
-									ref bestOldValue, ref bestTabLabel, ref bestScore,
-									specDump);
-							}
-						}
-					}
-					catch { }
-				}
-			}
-			catch { }
 		}
 	}
 

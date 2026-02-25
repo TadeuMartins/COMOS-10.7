@@ -107,6 +107,15 @@ Examples:
 5. **Store all backups in `Bin/SDK/AI/_backups/`** — never clutter the main `SDK/AI/` folder
 6. **Backup the .cs too** when making significant changes: `Comos.ServiceiPID.Agent.cs.backup_YYYYMMDD_HHMMSS_<description>`
 
+### Source Save + SDK Folder Hygiene — MANDATORY
+
+1. **Always save `Comos.ServiceiPID.Agent.cs` before compile/deploy** (no deploy from unsaved editor buffer)
+2. **Always keep backups in `Bin/SDK/AI/_backups/` only** (both `.dll` and significant `.cs` snapshots)
+3. **Never leave temporary/non-project files in `Bin/SDK/AI/` root**
+    - compile outputs, verify DLLs, IL dumps, logs, and scratch files must stay in `%TEMP%` or `_backups/`
+    - keep `Bin/SDK/AI/` root clean with only project source/artifacts required by COMOS loading
+4. **If a temporary file is created in `Bin/SDK/AI/` by mistake, remove it after use** and keep only the canonical active files
+
 ### Deployment Checklist (Follow Every Time)
 
 1. ✅ Backup current DLL: `copy active.dll _backups/active.dll.locked_YYYYMMDD_HHMMSS_<reason>`
