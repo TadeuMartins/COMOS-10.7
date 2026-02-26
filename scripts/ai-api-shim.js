@@ -993,6 +993,44 @@ function isListAttributesIntent(text) {
   return enList || enReverse || ptList || ptReverse || directAsk;
 }
 
+/**
+ * Extract a tab/category filter from user text for attribute listing.
+ * E.g. "list process data attributes" → "process data"
+ *      "show design data attributes of PC001" → "design data"
+ *      "list all attributes" → "" (no filter)
+ */
+function extractTabFilter(text) {
+  const t = String(text || "").toLowerCase();
+  // Known COMOS tab names (in order of specificity)
+  const knownTabs = [
+    "system data", "ambient conditions", "order data", "accessories",
+    "graphical options", "process data", "insulation", "heat tracing",
+    "safety requirements", "design data", "equipment list",
+    "general information", "proteus", "material", "surface treatment",
+    "documentation", "tagging", "document information", "standard", "test",
+    // PT equivalents
+    "dados de sistema", "condições ambientais", "dados de pedido",
+    "acessórios", "opções gráficas", "dados de processo",
+    "isolamento", "requisitos de segurança", "dados de projeto",
+    "lista de equipamentos", "informações gerais", "informação do documento",
+    "documentação", "etiquetagem", "padrão", "teste",
+  ];
+  for (const tab of knownTabs) {
+    if (t.includes(tab)) return tab;
+  }
+  // Pattern: "<word(s)> attributes" or "attributes of <word(s)> tab"
+  // Capture multi-word tab name before "attributes/atributos/specs"
+  const beforeAttr = t.match(/\b((?:[a-záàâãéèêíóôõúüç]+\s+){1,3})(?:attributes?|atributos?|specs?|specifications?|especificaç[õo]es?)\b/);
+  if (beforeAttr) {
+    const candidate = beforeAttr[1].trim();
+    // Exclude generic words that aren't tab names
+    const skip = new Set(["all", "the", "filled", "empty", "todos", "os", "as", "preenchidos", "das", "dos", "object", "of"]);
+    const words = candidate.split(/\s+/).filter(w => !skip.has(w));
+    if (words.length > 0) return words.join(" ");
+  }
+  return "";
+}
+
 function isObjectCountIntent(text) {
   const t = String(text || "").toLowerCase();
   const hasCountSignal =
@@ -5040,12 +5078,21 @@ const COMOS_SYSTEM_PROMPT =
   "If the tool returned a value, present it clearly. If it returned an error like 'Object doesn't found', say 'The attribute X was not found on that object — it may be named differently in COMOS. Would you like me to try alternative names?' " +
   "NEVER say 'I can't run the lookup', 'I don't have access', 'I'll fetch it in the next step', or 'I'll run it when access is available' if the tool already returned a result. " +
   "These tools execute locally inside COMOS and always have access.\n" +
-  "12. ATTRIBUTE WRITE WORKFLOW (MANDATORY 2-step process):\n" +
-  "  a) FIRST call value_of_attribute_by_name_or_description to read the current value — " +
-  "this validates the object exists and returns the systemUID you need.\n" +
-  "  b) THEN call set_attribute_value passing the systemUID from step (a), the attributeName, and the newValue.\n" +
+  "12. ATTRIBUTE WRITE WORKFLOW:\n" +
+  "  a) If you already have a systemUID from a PRIOR tool result in this conversation " +
+  "(e.g., from a previous navigate, list_object_attributes, value_of_attribute, or set_attribute_value call), " +
+  "you can call set_attribute_value DIRECTLY with that systemUID — no need to read first.\n" +
+  "  b) If you do NOT have a systemUID, FIRST call value_of_attribute_by_name_or_description to read the current value — " +
+  "this validates the object exists and returns the systemUID you need. " +
+  "THEN call set_attribute_value passing the systemUID from the read result, the attributeName, and the newValue.\n" +
   "  c) If no write tool (set_attribute_value) exists in this request, explain that write is unavailable and offer to read/navigate instead.\n" +
-  "  d) NEVER call set_attribute_value without first reading the attribute. The read tool resolves the object internally.\n" +
+  "12a. CRITICAL — OBJECT CONTEXT FROM CONVERSATION: When the user refers to an object implicitly " +
+  "(e.g., 'change Power transmission to 50' without mentioning the object tag), you MUST look at " +
+  "PRIOR tool results in the conversation to find which object was last used. " +
+  "Look for systemUID, objectName, SystemUID, or Name fields in previous tool results. " +
+  "The C# tool results use this format: '{ success = True, objectName = PC001, systemUID = A541598NS5, ... }'. " +
+  "Extract the systemUID and objectName from these prior results and pass them to the next tool call. " +
+  "NEVER say 'object not found' or 'please specify the object' if there is a systemUID in the conversation history.\n" +
   "13. TOOL SELECTION GUIDE — use this mapping to choose the correct tool for each user intent:\n" +
   "  • COUNT objects ('how many X', 'quantos X', 'quantidade de X') → get_count_of_comos_objects_with_name\n" +
   "  • LIST objects ('list objects named X', 'listar objetos X') → objects_with_name (NOT for navigation)\n" +
@@ -5061,7 +5108,7 @@ const COMOS_SYSTEM_PROMPT =
   "  • PAPER SIZE ('what paper for document', 'tamanho do papel', 'papel do documento') → get_print_paper_name_for_document\n" +
   "  • LAST REVISION ('last revision', 'última revisão', 'mostrar revisão', 'show revision') → show_last_revision_of_document\n" +
   "  • CREATE REVISION ('create revision', 'criar revisão', 'nova revisão', 'new revision') → create_new_revision\n" +
-  "  • SET ATTRIBUTE VALUE ('set X to Y', 'change X to Y', 'alterar X para Y', 'defina X como Y') → ALWAYS read first with value_of_attribute_by_name_or_description, then set_attribute_value with the systemUID from the read result\n" +
+  "  • SET ATTRIBUTE VALUE ('set X to Y', 'change X to Y', 'alterar X para Y', 'defina X como Y') → If you have a systemUID from prior tool results, call set_attribute_value directly. Otherwise, read first with value_of_attribute_by_name_or_description, then set_attribute_value with the systemUID from the read result\n" +
   "  • LIST ATTRIBUTES ('list attributes', 'show attributes', 'listar atributos', 'quais atributos') → list_object_attributes — use when an attribute is not found to show what's available\n" +
   "\n" +
   "IMPORT WORKFLOW (after ServiceiPID analysis):\n" +
@@ -5987,16 +6034,31 @@ const server = http.createServer(async (req, res) => {
               const _attrs = _attrStr.split(";").map(a => a.trim()).filter(a => a.length > 0);
               const _objName = (_objNameM ? _objNameM[1].trim() : "") || (_objLabelM ? _objLabelM[1].trim() : "") || "object";
 
+              // Extract tabFilter from C# response if present
+              const _tabFilterM = _directContent.match(/tabFilter\s*=\s*([^,}]+)/);
+              const _tabFilterVal = _tabFilterM ? _tabFilterM[1].trim() : "";
+              const _hasTabFilter = _tabFilterVal && _tabFilterVal !== "(all)";
+              const _tabFilterDisplay = _hasTabFilter ? _tabFilterVal : "";
+
               let _msg;
               if (_attrs.length === 0) {
-                _msg = _isPtD
-                  ? `O objeto **${_objName}** não possui atributos preenchidos.`
-                  : `Object **${_objName}** has no filled attributes.`;
+                // Log the full raw C# response for debugging
+                log(`list_attrs_ZERO_RAW session=${sessionKey} content="${_directContent.substring(0, 2000)}"`);
+                if (_hasTabFilter) {
+                  _msg = _isPtD
+                    ? `O objeto **${_objName}** não possui atributos preenchidos na aba **${_tabFilterDisplay}**.`
+                    : `Object **${_objName}** has no filled attributes in tab **${_tabFilterDisplay}**.`;
+                } else {
+                  _msg = _isPtD
+                    ? `O objeto **${_objName}** não possui atributos preenchidos.`
+                    : `Object **${_objName}** has no filled attributes.`;
+                }
               } else {
                 // Format as markdown table
+                const _filterNote = _hasTabFilter ? ` [${_tabFilterDisplay}]` : "";
                 _msg = _isPtD
-                  ? `Atributos preenchidos de **${_objName}** (${_attrs.length}):\n\n`
-                  : `Filled attributes of **${_objName}** (${_attrs.length}):\n\n`;
+                  ? `Atributos preenchidos de **${_objName}**${_filterNote} (${_attrs.length}):\n\n`
+                  : `Filled attributes of **${_objName}**${_filterNote} (${_attrs.length}):\n\n`;
                 _msg += `| Tab | Attribute | Value |\n|-----|-----------|-------|\n`;
                 for (const attr of _attrs) {
                   // Parse: [TabName] AttrName (Desc) = Value
@@ -6017,7 +6079,10 @@ const server = http.createServer(async (req, res) => {
                 usage: { prompt_tokens: 0, completion_tokens: 0, total_tokens: 0 },
               };
               sendJsonResponse(res, 200, _scResp, { "X-Comos-Ai-Shim": "list-attrs-formatted" });
-              log(`list_attrs_formatted session=${sessionKey} obj="${_objName}" count=${_attrs.length}`);
+              // Log diagnostics from C# response if present
+              const _diagM = _directContent.match(/diagnostics\s*=\s*([^,}]+(?:;[^,}]+)*)/);
+              const _diagStr = _diagM ? _diagM[1].trim() : "";
+              log(`list_attrs_formatted session=${sessionKey} obj="${_objName}" count=${_attrs.length} diag="${_diagStr}"`);
               return;
             }
           }
@@ -6124,13 +6189,14 @@ const server = http.createServer(async (req, res) => {
                     if (_uidForFail) break;
                   }
                 }
+                const _tabFilterFail = extractTabFilter(lastUserText);
                 const fabricated = buildFabricatedToolCallResponse(
                   "list_object_attributes",
-                  { systemUID: _uidForFail, objectName: _tagForFail, systemType: _typeForFail },
+                  { systemUID: _uidForFail, objectName: _tagForFail, systemType: _typeForFail, tabFilter: _tabFilterFail },
                   parsed.model
                 );
                 sendJsonResponse(res, 200, fabricated, { "X-Comos-Ai-Shim": "fabricated-list-attrs-after-fail" });
-                log(`fabricated_list_attrs_after_fail session=${sessionKey} originalAttr="${_origAttrQuery}" objectName="${_tagForFail}" uid="${_uidForFail}" type=${_typeForFail}`);    
+                log(`fabricated_list_attrs_after_fail session=${sessionKey} originalAttr="${_origAttrQuery}" objectName="${_tagForFail}" uid="${_uidForFail}" type=${_typeForFail} tabFilter="${_tabFilterFail}"`);    
                 return;
               } else {
                 // No list_object_attributes tool available — short-circuit with generic message
@@ -6471,6 +6537,14 @@ const server = http.createServer(async (req, res) => {
               asksAttrWrite && canWriteAttribute && toolNames.includes("set_attribute_value")) {
             // Step 1: Navigate to the object first to get the SystemUID
             const _wp = extractWriteParams(lastUserText);
+            // Reject false-positive tags: prepositions/stopwords that the regex picks up
+            // e.g. "Set power transmission to 40" → regex extracts "to 40" as tag
+            const _tagClean = (_wp.objectTag || "").replace(/[-\s]/g, "").toLowerCase();
+            const _isFalseTag = /^(to|of|at|in|on|is|as|or|by|if|so|up|we|us|an|be|my|no|de|da|do|na|em|se|um|para)\d/i.test(_tagClean);
+            if (_isFalseTag) {
+              log(`false_positive_tag session=${sessionKey} rejected="${_wp.objectTag}" (preposition+number, not a real COMOS tag)`);
+              _wp.objectTag = "";
+            }
             if (_wp.objectTag) {
               const _navTool = toolNames.includes("navigate_to_comos_object_by_name_or_label")
                 ? "navigate_to_comos_object_by_name_or_label" : "navigate_to_comos_object_by_name";
@@ -6481,6 +6555,50 @@ const server = http.createServer(async (req, res) => {
               sendJsonResponse(res, 200, fabricated, { "X-Comos-Ai-Shim": "fabricated-attr-write-nav" });
               log(`fabricated_attr_write_nav session=${sessionKey} tag="${_wp.objectTag}" attr="${_wp.attributeName}" val="${_wp.newValue}"`);
               return;
+            }
+            // No objectTag in user text — try to infer from conversation context
+            // (prior nav success, list_object_attributes result, or set_attribute_value success)
+            if (_wp.attributeName && _wp.newValue) {
+              let _ctxUid = "", _ctxType = "", _ctxObj = "";
+              const _ctxToolMsgs = (Array.isArray(messages) ? messages : []).filter(m =>
+                String(m.role || m.Role || "").toLowerCase() === "tool"
+              );
+              // Search backwards for the most recent object context
+              for (let ci = _ctxToolMsgs.length - 1; ci >= 0; ci--) {
+                const _ctxC = String(_ctxToolMsgs[ci].content || _ctxToolMsgs[ci].Content || "");
+                // Nav success: "Navigated to the object ... SystemUID = X ... SystemType = Y"
+                // List attrs success: "success = True, objectName = PC001, ... systemUID = X"
+                // Set attr success: "success = True, objectName = PC001, ... systemUID = X"
+                const uidM = _ctxC.match(/(?:SystemUID|systemUID)\s*[=:]\s*([A-Z0-9]+)/i);
+                const typeM = _ctxC.match(/(?:SystemType|systemType)\s*[=:]\s*(\d+)/i);
+                const objM = _ctxC.match(/(?:objectName|ObjectName)\s*[=:]\s*([A-Za-z0-9_\-]+)/i);
+                if (uidM) {
+                  _ctxUid = uidM[1];
+                  if (typeM) _ctxType = typeM[1];
+                  if (objM) _ctxObj = objM[1];
+                  break;
+                }
+                // Also match nav results with "Name = PC001"
+                if (!_ctxUid && _ctxC.includes("Navigated to the object")) {
+                  const uidM2 = _ctxC.match(/SystemUID\s*[=:]\s*(\S+)/i);
+                  if (uidM2) { _ctxUid = uidM2[1]; }
+                  const typeM2 = _ctxC.match(/SystemType\s*[=:]\s*(\d+)/i);
+                  if (typeM2) _ctxType = typeM2[1];
+                  const nameM = _ctxC.match(/\bName\s*[=:]\s*([A-Za-z0-9_\-]+)/i);
+                  if (nameM) _ctxObj = nameM[1];
+                  if (_ctxUid) break;
+                }
+              }
+              if (_ctxUid || _ctxObj) {
+                const fabricated = buildFabricatedToolCallResponse(
+                  "set_attribute_value",
+                  { attributeName: _wp.attributeName, newValue: _wp.newValue, systemUID: _ctxUid, objectName: _ctxObj, systemType: _ctxType },
+                  parsed.model
+                );
+                sendJsonResponse(res, 200, fabricated, { "X-Comos-Ai-Shim": "fabricated-attr-write-ctx" });
+                log(`fabricated_attr_write_ctx session=${sessionKey} attr="${_wp.attributeName}" val="${_wp.newValue}" uid="${_ctxUid}" type=${_ctxType} obj="${_ctxObj}" (inferred from conversation)`);
+                return;
+              }
             }
           }
 
@@ -6528,13 +6646,14 @@ const server = http.createServer(async (req, res) => {
                 }
               }
               const _tagForDirect = tagMatch ? tagMatch[1] : "";
+              const _tabFilterDirect = extractTabFilter(lastUserText);
               const fabricated = buildFabricatedToolCallResponse(
                 "list_object_attributes",
-                { systemUID: _navUidForDirect, objectName: _tagForDirect, systemType: _navTypeForDirect },
+                { systemUID: _navUidForDirect, objectName: _tagForDirect, systemType: _navTypeForDirect, tabFilter: _tabFilterDirect },
                 parsed.model
               );
               sendJsonResponse(res, 200, fabricated, { "X-Comos-Ai-Shim": "fabricated-list-attrs-direct" });
-              log(`fabricated_list_attrs_direct session=${sessionKey} objectName="${_tagForDirect}" uid="${_navUidForDirect}" type=${_navTypeForDirect}`);
+              log(`fabricated_list_attrs_direct session=${sessionKey} objectName="${_tagForDirect}" uid="${_navUidForDirect}" type=${_navTypeForDirect} tabFilter="${_tabFilterDirect}"`);
               return;
             } else {
               // Tool not available — inform user
@@ -6566,13 +6685,14 @@ const server = http.createServer(async (req, res) => {
               const _uidForLA = _uidMatchLA ? _uidMatchLA[1] : "";
               const _typeMatchLA = _laContent.match(/SystemType\s*[=:]\s*(\d+)/i);
               const _typeForLA = _typeMatchLA ? _typeMatchLA[1] : "";
+              const _tabFilterLA = extractTabFilter(lastUserText);
               const fabricated = buildFabricatedToolCallResponse(
                 "list_object_attributes",
-                { systemUID: _uidForLA, objectName: _tagForLA, systemType: _typeForLA },
+                { systemUID: _uidForLA, objectName: _tagForLA, systemType: _typeForLA, tabFilter: _tabFilterLA },
                 parsed.model
               );
               sendJsonResponse(res, 200, fabricated, { "X-Comos-Ai-Shim": "fabricated-list-attrs-after-nav" });
-              log(`fabricated_list_attrs_after_nav session=${sessionKey} objectName="${_tagForLA}" uid="${_uidForLA}" type=${_typeForLA}`);
+              log(`fabricated_list_attrs_after_nav session=${sessionKey} objectName="${_tagForLA}" uid="${_uidForLA}" type=${_typeForLA} tabFilter="${_tabFilterLA}"`);
               return;
             }
           }

@@ -6148,7 +6148,8 @@ public class ImportAgent : AIComosTool
 	public object ListObjectAttributes(
 		[DescribeParameter("Optional: SystemUID of the COMOS object.", ExampleValue = "")] string systemUID,
 		[DescribeParameter("Optional: Name/tag of the COMOS object (e.g. M001, PC001). Preferred way to identify the object.", ExampleValue = "")] string objectName,
-		[DescribeParameter("Optional: SystemType returned by navigate (e.g. 8). Enables direct LoadObjectByType(type, uid).", ExampleValue = "")] string systemType)
+		[DescribeParameter("Optional: SystemType returned by navigate (e.g. 8). Enables direct LoadObjectByType(type, uid).", ExampleValue = "")] string systemType,
+		[DescribeParameter("Optional: Filter by tab name (e.g. 'process data', 'design data', 'system data'). Only attributes under matching tabs will be returned. Case-insensitive partial match.", ExampleValue = "")] string tabFilter)
 	{
 		if (Workset == null)
 		{
@@ -6298,8 +6299,9 @@ public class ImportAgent : AIComosTool
 
 			// Enumerate specifications recursively (same depth as set_attribute_value)
 			var results = new List<string>();
+			var diagLog = new List<string>();
 			int totalAttrs = 0;
-			const int MAX_ATTRS = 500;  // Only filled attributes now, so count is much lower
+			const int MAX_ATTRS = 500;
 			const int MAX_DEPTH = 10;
 
 			try
@@ -6318,7 +6320,83 @@ public class ImportAgent : AIComosTool
 					};
 				}
 
-				CollectSpecsRecursive(specs, "", 0, MAX_DEPTH, results, ref totalAttrs, MAX_ATTRS);
+				int topCount = 0;
+				try { topCount = (int)specs.Count; } catch { }
+				diagLog.Add($"TopSpecs.Count={topCount}");
+
+				// Tab filter: if provided, only recurse into top-level tabs whose Name or Description matches
+				string tabFilterLower = string.IsNullOrWhiteSpace(tabFilter) ? "" : tabFilter.Trim().ToLowerInvariant();
+
+				if (string.IsNullOrEmpty(tabFilterLower))
+				{
+					// No filter — collect all tabs
+					CollectSpecsRecursive(specs, "", 0, MAX_DEPTH, results, ref totalAttrs, MAX_ATTRS, diagLog);
+				}
+				else
+				{
+					// Filter: iterate top-level tabs manually and only recurse into matching ones
+					int matchedTabs = 0;
+					var matchedTabNames = new List<string>();
+					for (int ti = 1; ti <= topCount && totalAttrs < MAX_ATTRS; ti++)
+					{
+						try
+						{
+							dynamic tabSpec = specs.Item(ti);
+							if ((object)tabSpec == null) continue;
+							string tName = "", tDesc = "";
+							try { tName = (string)tabSpec.Name; } catch { }
+							try { tDesc = (string)tabSpec.Description; } catch { }
+							string tNameL = (tName ?? "").ToLowerInvariant();
+							string tDescL = (tDesc ?? "").ToLowerInvariant();
+
+							// Match: tab name or description contains the filter, or filter contains the tab name/description
+							bool tabMatches = tNameL.Contains(tabFilterLower) || tDescL.Contains(tabFilterLower)
+								|| tabFilterLower.Contains(tDescL) || tabFilterLower.Contains(tNameL);
+							// Also try word overlap: split filter into words and check if all appear in desc
+							if (!tabMatches)
+							{
+								string[] filterWords = tabFilterLower.Split(new[] { ' ', '_', '-' }, StringSplitOptions.RemoveEmptyEntries);
+								if (filterWords.Length > 0)
+								{
+									int hits = 0;
+									foreach (string fw in filterWords)
+									{
+										if (fw.Length < 2) continue;
+										if (tDescL.Contains(fw) || tNameL.Contains(fw)) hits++;
+									}
+									tabMatches = hits == filterWords.Length;
+								}
+							}
+
+							if (tabMatches)
+							{
+								matchedTabs++;
+								string tabLabel = string.IsNullOrWhiteSpace(tDesc) ? tName : tDesc;
+								matchedTabNames.Add(tabLabel);
+								// Recurse into this tab's children
+								bool tabRecursed = false;
+								try {
+									dynamic childSpecs = tabSpec.Specs;
+									if ((object)childSpecs != null) {
+										int cc = 0; try { cc = (int)childSpecs.Count; } catch { }
+										if (cc > 0) { tabRecursed = true; CollectSpecsRecursive(childSpecs, tabLabel, 1, MAX_DEPTH, results, ref totalAttrs, MAX_ATTRS, diagLog); }
+									}
+								} catch { }
+								if (!tabRecursed) {
+									try {
+										dynamic childSpecs2 = tabSpec.Specifications;
+										if ((object)childSpecs2 != null) {
+											int cc2 = 0; try { cc2 = (int)childSpecs2.Count; } catch { }
+											if (cc2 > 0) { tabRecursed = true; CollectSpecsRecursive(childSpecs2, tabLabel, 1, MAX_DEPTH, results, ref totalAttrs, MAX_ATTRS, diagLog); }
+										}
+									} catch { }
+								}
+							}
+						}
+						catch { }
+					}
+					diagLog.Add($"TabFilter='{tabFilter}' matched={matchedTabs} tabs=[{string.Join(",", matchedTabNames)}]");
+				}
 			}
 			catch (Exception ex)
 			{
@@ -6332,6 +6410,7 @@ public class ImportAgent : AIComosTool
 			}
 
 			string allAttributes = string.Join("; ", results);
+			string diagnostics = string.Join("; ", diagLog);
 			return new
 			{
 				success = true,
@@ -6340,7 +6419,9 @@ public class ImportAgent : AIComosTool
 				systemUID = objUID,
 				attributeCount = totalAttrs,
 				filledOnly = true,
+				tabFilter = string.IsNullOrWhiteSpace(tabFilter) ? "(all)" : tabFilter,
 				truncated = totalAttrs >= MAX_ATTRS,
+				diagnostics = diagnostics,
 				attributes = allAttributes
 			};
 		}
@@ -6360,7 +6441,8 @@ public class ImportAgent : AIComosTool
 	/// </summary>
 	private static void CollectSpecsRecursive(
 		dynamic specs, string parentLabel, int depth, int maxDepth,
-		List<string> results, ref int totalAttrs, int maxAttrs)
+		List<string> results, ref int totalAttrs, int maxAttrs,
+		List<string> diagLog = null)
 	{
 		if (depth > maxDepth || totalAttrs >= maxAttrs) return;
 		if ((object)specs == null) return;
@@ -6385,7 +6467,18 @@ public class ImportAgent : AIComosTool
 				bool isFolder = false;
 				try { isFolder = (bool)spec.IsFolder; } catch { }
 
-				// Collect this node as an attribute if it's NOT a folder
+				// Diagnostic: log every node visited (first 60)
+				if (diagLog != null && diagLog.Count < 60)
+				{
+					string dvDiag = "", svDiag = "", valDiag = "";
+					try { dvDiag = (string)spec.DisplayValue ?? ""; } catch (Exception ex) { dvDiag = $"ERR:{ex.GetType().Name}"; }
+					try { valDiag = Convert.ToString(((dynamic)spec).value) ?? ""; } catch (Exception ex) { valDiag = $"ERR:{ex.GetType().Name}"; }
+					try { svDiag = Convert.ToString(((dynamic)spec).SpecValue) ?? ""; } catch (Exception ex) { svDiag = $"ERR:{ex.GetType().Name}"; }
+					diagLog.Add($"d{depth}:{sName}({sDesc})[fld={isFolder}] DV='{dvDiag}' val='{valDiag}' SV='{svDiag}'");
+				}
+
+				// Collect this node as an attribute if it has a value (regardless of IsFolder)
+				// NOTE: Do NOT use 'continue' here — must always fall through to recursion below.
 				if (!isFolder)
 				{
 					string displayValue = "";
@@ -6406,42 +6499,46 @@ public class ImportAgent : AIComosTool
 					// Only include attributes that have at least one filled value
 					bool hasAnyValue = !string.IsNullOrWhiteSpace(displayValue)
 						|| !string.IsNullOrWhiteSpace(specValue);
-					if (!hasAnyValue) continue; // skip blank attributes
 
-					// Build attribute entry: [Tab > SubTab] Name (Description) = Value | SV=specValue U=unit
-					string entry = $"[{(string.IsNullOrWhiteSpace(parentLabel) ? "(root)" : parentLabel)}] ";
-					entry += string.IsNullOrWhiteSpace(sDesc) ? sName : $"{sName} ({sDesc})";
-					if (!string.IsNullOrWhiteSpace(displayValue))
-						entry += $" = {displayValue}";
-					// Append SpecValue if different from DisplayValue
-					if (!string.IsNullOrWhiteSpace(specValue) && specValue != displayValue)
-						entry += $" | SV={specValue}";
-					if (!string.IsNullOrWhiteSpace(specUnit))
-						entry += $" | U={specUnit}";
+					if (hasAnyValue)
+					{
+						// Build attribute entry: [Tab > SubTab] Name (Description) = Value | SV=specValue U=unit
+						string entry = $"[{(string.IsNullOrWhiteSpace(parentLabel) ? "(root)" : parentLabel)}] ";
+						entry += string.IsNullOrWhiteSpace(sDesc) ? sName : $"{sName} ({sDesc})";
+						if (!string.IsNullOrWhiteSpace(displayValue))
+							entry += $" = {displayValue}";
+						// Append SpecValue if different from DisplayValue
+						if (!string.IsNullOrWhiteSpace(specValue) && specValue != displayValue)
+							entry += $" | SV={specValue}";
+						if (!string.IsNullOrWhiteSpace(specUnit))
+							entry += $" | U={specUnit}";
 
-					results.Add(entry);
-					totalAttrs++;
+						results.Add(entry);
+						totalAttrs++;
+					}
 				}
 
 				// ALWAYS recurse into children — same as SearchSpecsRecursive:
 				// some COMOS spec nodes have sub-specs even when IsFolder is false.
 				bool recursed = false;
+				int childCntA = -1, childCntB = -1, childCntC = -1;
+				string childErrA = "", childErrB = "", childErrC = "";
 				try
 				{
 					dynamic childSpecs = spec.Specs;
 					if ((object)childSpecs != null)
 					{
-						int childCount = 0;
-						try { childCount = (int)childSpecs.Count; } catch { }
-						if (childCount > 0)
+						try { childCntA = (int)childSpecs.Count; } catch (Exception cex) { childErrA = cex.GetType().Name; }
+						if (childCntA > 0)
 						{
 							recursed = true;
 							CollectSpecsRecursive(childSpecs, fullLabel, depth + 1, maxDepth,
-								results, ref totalAttrs, maxAttrs);
+								results, ref totalAttrs, maxAttrs, diagLog);
 						}
 					}
+					else { childErrA = "null"; }
 				}
-				catch { }
+				catch (Exception ex) { childErrA = ex.GetType().Name; }
 				// Fallback: try .Specifications
 				if (!recursed)
 				{
@@ -6450,16 +6547,53 @@ public class ImportAgent : AIComosTool
 						dynamic childSpecs2 = spec.Specifications;
 						if ((object)childSpecs2 != null)
 						{
-							int childCount2 = 0;
-							try { childCount2 = (int)childSpecs2.Count; } catch { }
-							if (childCount2 > 0)
+							try { childCntB = (int)childSpecs2.Count; } catch (Exception cex) { childErrB = cex.GetType().Name; }
+							if (childCntB > 0)
 							{
+								recursed = true;
 								CollectSpecsRecursive(childSpecs2, fullLabel, depth + 1, maxDepth,
-									results, ref totalAttrs, maxAttrs);
+									results, ref totalAttrs, maxAttrs, diagLog);
 							}
 						}
+						else { childErrB = "null"; }
 					}
-					catch { }
+					catch (Exception ex) { childErrB = ex.GetType().Name; }
+				}
+				// Fallback 2: try device-style .Specifications on the spec node (COMOS tabs)
+				if (!recursed)
+				{
+					try
+					{
+						object rawObj = (object)spec;
+						// Try to call Specifications property via COM interop reflection
+						var specType = rawObj.GetType();
+						var specsProp = specType.GetProperty("Specifications");
+						if (specsProp == null)
+						{
+							// Try via InvokeMember for late-bound COM
+							object childObj = specType.InvokeMember("Specifications",
+								System.Reflection.BindingFlags.GetProperty | System.Reflection.BindingFlags.Instance | System.Reflection.BindingFlags.Public,
+								null, rawObj, null);
+							if (childObj != null)
+							{
+								dynamic childDyn = childObj;
+								try { childCntC = (int)childDyn.Count; } catch (Exception cex) { childErrC = cex.GetType().Name; }
+								if (childCntC > 0)
+								{
+									recursed = true;
+									CollectSpecsRecursive(childDyn, fullLabel, depth + 1, maxDepth,
+										results, ref totalAttrs, maxAttrs, diagLog);
+								}
+							}
+							else { childErrC = "InvokeMember=null"; }
+						}
+					}
+					catch (Exception ex) { childErrC = ex.GetType().Name; }
+				}
+				// Diagnostic: log child accessor results for depth 0
+				if (diagLog != null && depth == 0 && diagLog.Count < 80)
+				{
+					diagLog.Add($"  children({sName}): Specs={childCntA}({childErrA}) Specifications={childCntB}({childErrB}) Reflect={childCntC}({childErrC}) recursed={recursed}");
 				}
 			}
 			catch { }
