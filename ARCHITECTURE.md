@@ -1,204 +1,794 @@
-# COMOS AI Engineering Assistant — Arquitetura Completa
+# COMOS AI Engineering Assistant — Architecture
 
-> **Autor:** GitHub Copilot  
-> **Data:** 16 de Fevereiro de 2026  
-> **Versão:** 1.0
-
----
-
-## Índice
-
-1. [Visão Geral da Arquitetura](#1-visão-geral-da-arquitetura)
-2. [Diagrama de Fluxo](#2-diagrama-de-fluxo)
-3. [Componentes do Sistema](#3-componentes-do-sistema)
-   - 3.1 [COMOS Desktop (C#/.NET) — NATIVO](#31-comos-desktop-cnet--nativo)
-   - 3.2 [CefSharp Browser — NATIVO (com patches)](#32-cefsharp-browser--nativo-com-patches)
-   - 3.3 [Chat UI (TwoDcChat) — NATIVO + CUSTOMIZADO](#33-chat-ui-twodcchat--nativo--customizado)
-   - 3.4 [C# AI API Service (:56400) — NATIVO](#34-c-ai-api-service-56400--nativo)
-   - 3.5 [AI API Shim (:56401) — CUSTOMIZADO](#35-ai-api-shim-56401--customizado)
-   - 3.6 [COMOS Gateway (:8100) — CUSTOMIZADO](#36-comos-gateway-8100--customizado)
-   - 3.7 [ServiceiPID Backend (:8000) — CUSTOMIZADO](#37-serviceipid-backend-8000--customizado)
-4. [Arquivos Customizados vs Nativos](#4-arquivos-customizados-vs-nativos)
-5. [DLLs Patcheadas (IL Assembly)](#5-dlls-patcheadas-il-assembly)
-6. [Voice Input (Entrada por Voz)](#6-voice-input-entrada-por-voz)
-7. [Funcionalidades Customizadas do Shim](#7-funcionalidades-customizadas-do-shim)
-8. [Endpoints — Referência Completa](#8-endpoints--referência-completa)
-9. [Configurações e Variáveis de Ambiente](#9-configurações-e-variáveis-de-ambiente)
-10. [Como Inicializar o Sistema](#10-como-inicializar-o-sistema)
-11. [Resumo de Tudo que Foi Feito](#11-resumo-de-tudo-que-foi-feito)
+> **Author:** GitHub Copilot (Claude Opus 4.6) - Tadeu Martins
+> **Date:** February 26, 2026
+> **Version:** 2.0
 
 ---
 
-## 1. Visão Geral da Arquitetura
+## Table of Contents
 
-O sistema é composto por **4 camadas** que se comunicam via HTTP/REST:
+### Part I — Management View
+1. [Executive Summary](#1-executive-summary)
+2. [System Overview](#2-system-overview)
+3. [Key Capabilities](#3-key-capabilities)
+4. [Integration Architecture](#4-integration-architecture)
+5. [Technology Stack](#5-technology-stack)
+6. [Deployment & Operations](#6-deployment--operations)
 
-```
-┌─────────────────────────────────────────────────────────────────┐
-│                    COMOS Desktop (.NET/C#)                       │
-│  ┌──────────────┐   ┌────────────────────────────────────────┐  │
-│  │ COMOS Engine  │   │ CefSharp Browser (Chromium 136)        │  │
-│  │  + AI Agent   │   │  ┌──────────────────────────────────┐  │  │
-│  │  + DLLs       │   │  │ Chat UI (React)                  │  │  │
-│  │  patched      │   │  │  index.html                      │  │  │
-│  │               │   │  │  speech-polyfill.js  ←CUSTOM      │  │  │
-│  │               │   │  │  chat-widget.js      ←NATIVO      │  │  │
-│  │               │   │  │  chat-app.js         ←CUSTOM      │  │  │
-│  └──────┬───────┘   │  └──────────────────────────────────┘  │  │
-│         │            └─────────────────┬──────────────────────┘  │
-└─────────┼──────────────────────────────┼────────────────────────┘
-          │ API calls                    │ fetch()
-          ▼                              ▼
-┌─────────────────────────────────────────────────────────────────┐
-│              AI API Shim (Node.js) — porta 56401                │
-│              ─────────── CUSTOMIZADO ───────────                 │
-│  • Proxy inteligente entre COMOS e LLM                          │
-│  • Fabricação de tool calls                                      │
-│  • System prompt injection                                       │
-│  • Digitização P&ID (two-step)                                  │
-│  • Gravação de voz server-side (MCI)                            │
-│  • Azure Whisper transcrição                                     │
-│  • Fuzzy matching (Levenshtein)                                  │
-│  • Budget counter                                                │
-└────────┬────────────────────────────┬───────────────────────────┘
-         │                            │
-         ▼                            ▼
-┌─────────────────────┐   ┌───────────────────────────────────────┐
-│ C# AI API (:56400)  │   │ COMOS Gateway (Python) — porta 8100   │
-│ ──── NATIVO ─────   │   │ ────── CUSTOMIZADO ──────              │
-│ ValidateConnection  │   │ • Chat com MCP tools                   │
-│ Tool definitions    │   │ • Export Excel / VBS                   │
-│ COMOS SDK bridge    │   │ • Análise PDF                          │
-└─────────────────────┘   └──────────────┬────────────────────────┘
-                                         │
-                                         ▼
-                          ┌───────────────────────────────────────┐
-                          │ ServiceiPID Backend — porta 8000       │
-                          │ ────── CUSTOMIZADO ──────              │
-                          │ • Análise P&ID / Diagramas Elétricos  │
-                          │ • OpenCV, PyMuPDF, GPT-5.x            │
-                          │ • System matching                      │
-                          └───────────────────────────────────────┘
-```
+### Part II — Technical Detailed View
+7. [Component Architecture](#7-component-architecture)
+8. [AI API Shim — Smart Proxy](#8-ai-api-shim--smart-proxy)
+9. [COMOS Gateway — MCP Orchestrator](#9-comos-gateway--mcp-orchestrator)
+10. [ServiceiPID Backend — P&ID Analysis Engine](#10-serviceipid-backend--pid-analysis-engine)
+11. [ServiceiPID MCP Server — Tool Interface](#11-serviceipid-mcp-server--tool-interface)
+12. [COMOS SDK Tools — C# Agent DLLs](#12-comos-sdk-tools--c-agent-dlls)
+13. [Native COMOS Tools — BasicFunctions DLL](#13-native-comos-tools--basicfunctions-dll)
+14. [Voice Input — Speech Polyfill](#14-voice-input--speech-polyfill)
+15. [Chat UI — Widget Configuration](#15-chat-ui--widget-configuration)
+16. [DLL Patching (IL Assembly)](#16-dll-patching-il-assembly)
+17. [System Prompt & LLM Intelligence](#17-system-prompt--llm-intelligence)
+18. [Endpoints Reference](#18-endpoints-reference)
+19. [Configuration Reference](#19-configuration-reference)
+20. [Adding New MCP Tools](#20-adding-new-mcp-tools)
+21. [Adding New C# SDK Tools](#21-adding-new-c-sdk-tools)
+22. [Startup & Health Checks](#22-startup--health-checks)
+23. [File Structure](#23-file-structure)
 
 ---
 
-## 2. Diagrama de Fluxo
+# Part I — Management View
 
-### Fluxo de Chat Normal (Tool-Calling)
+## 1. Executive Summary
 
-```
-Usuário digita mensagem
-    │
-    ▼
-CefSharp → chat-app.js → fetch POST /api/ai/v1/completions
-    │
-    ▼
-AI API Shim (:56401)
-    ├─ Injeta COMOS_SYSTEM_PROMPT (rules 1-12)
-    ├─ Detecta intent (contagem? atributo? digitização?)
-    ├─ Pode fabricar tool calls sem chamar LLM
-    ├─ Normaliza mensagens (PascalCase ↔ camelCase)
-    ├─ Enriquece/limpa tool calls (strip systemUID)
-    └─ Proxy → Gateway (:8100) ou AI API (:56400)
-         │
-         ▼
-    Gateway executa loop MCP:
-         LLM → tool_call → MCP executa → resultado → LLM → ...
-         │
-         ▼
-    Resposta final → Shim adapta formato → CefSharp → UI
-```
+The COMOS AI Engineering Assistant is an AI-powered copilot integrated into the Siemens COMOS plant engineering desktop application. It allows engineers to interact with COMOS through natural language — navigating objects, querying and setting attributes, opening reports, managing revisions, digitizing P&ID and electrical diagrams from PDF, and generating import scripts — all through a conversational chat interface with voice support.
 
-### Fluxo de Digitização P&ID (Two-Step)
+The system extends COMOS with **four custom service layers** that work together:
+
+| Layer | Technology | Purpose |
+|-------|-----------|---------|
+| **AI API Shim** | Node.js | Smart proxy with intent detection, tool fabrication, voice recording |
+| **COMOS Gateway** | Python/FastAPI | LLM orchestrator with MCP tool loop |
+| **ServiceiPID Backend** | Python/FastAPI | P&ID/electrical diagram analysis via computer vision + GPT |
+| **SDK Agent DLLs** | C#/.NET | COMOS COM interop tools (import, draw, connect, attributes) |
+
+The AI uses **GPT-5** (Azure OpenAI) for reasoning, **GPT-5.2** for vision analysis, and **Azure Whisper** for voice input transcription. COMOS desktop tools are exposed via **MEF plugin DLLs** that execute locally through the COMOS COM SDK.
+
+---
+
+## 2. System Overview
 
 ```
-Usuário anexa PDF
-    │
-    ▼
-Shim detecta PDF → Step A: "P&ID ou Diagrama Elétrico?"
-    │
-    ▼
-Usuário responde "P&ID"
-    │
-    ▼
-Shim → Step B: POST /comos/analyze-direct (Gateway :8100)
-    │
-    ▼
-Gateway → ServiceiPID (:8000) POST /analyze
-    │
-    ▼
-Resultado (Excel + links download) → Usuário
-```
-
-### Fluxo de Voice Input (Entrada por Voz)
-
-```
-Usuário clica 🎤
-    │
-    ▼
-speech-polyfill.js → POST /api/ai/v1/mic/start
-    │
-    ▼
-Shim spawna PowerShell + MCI (winmm.dll)
-    → Grava do microfone padrão do Windows
-    │
-Usuário clica 🎤 novamente (stop)
-    │
-    ▼
-speech-polyfill.js → POST /api/ai/v1/mic/stop
-    │
-    ▼
-Shim: para gravação → salva WAV → envia para Azure Whisper
-    │
-    ▼
-Whisper retorna texto → Shim responde { text: "..." }
-    │
-    ▼
-polyfill dispara onresult → W2 hook atualiza transcript
-    │ (120ms delay antes de onend)
-    ▼
-useEffect copia transcript → input field → Usuário vê texto
+┌──────────────────────────────────────────────────────────────────────┐
+│                      COMOS Desktop (.NET/C#)                         │
+│  ┌───────────────┐   ┌───────────────────────────────────────────┐  │
+│  │  COMOS Engine  │   │  CefSharp Browser (Chromium 136)          │  │
+│  │  + C# AI API   │   │  ┌───────────────────────────────────┐   │  │
+│  │  + SDK DLLs    │   │  │ Chat UI (React Widget)             │   │  │
+│  │  (MEF plugins) │   │  │  • speech-polyfill.js (voice)      │   │  │
+│  │                │   │  │  • chat-app.js (config + PDF)      │   │  │
+│  │                │   │  │  • chat-widget.js (native bundle)  │   │  │
+│  └──────┬────────┘   │  └────────────────┬────────────────────┘  │  │
+│         │             └──────────────────┬┘                       │  │
+└─────────┼────────────────────────────────┼───────────────────────────┘
+          │ C# API calls                   │ fetch() HTTP
+          ▼                                ▼
+┌──────────────────────────────────────────────────────────────────────┐
+│                AI API Shim (Node.js :56401)                          │
+│  • Intercepts all chat requests from COMOS                           │
+│  • Fabricates tool calls without LLM (saves latency + cost)          │
+│  • Detects intents bilingual (PT-BR + EN)                            │
+│  • Records voice via Windows MCI + transcribes via Azure Whisper     │
+│  • Injects system prompt with 13+ rules for LLM behavior            │
+│  • Manages 2-call budget per message (3rd iteration = text response) │
+└────────────┬─────────────────────────────┬───────────────────────────┘
+             │                             │
+             ▼                             ▼
+┌────────────────────────┐   ┌─────────────────────────────────────────┐
+│ C# AI API (:56400)     │   │ COMOS Gateway (Python/FastAPI :8100)     │
+│ NATIVE — COMOS SDK     │   │  • OpenAI-compatible chat endpoint       │
+│  • Tool definitions    │   │  • MCP tool loop (spawn → call → return) │
+│  • Tool execution      │   │  • RAW LLM passthrough mode              │
+│  • COM interop bridge  │   │  • RAG document search                   │
+│  • 30s timeout/call    │   │  • Direct analysis proxy                 │
+└────────────────────────┘   └──────────────────┬──────────────────────┘
+                                                │
+                                                ▼
+                             ┌─────────────────────────────────────────┐
+                             │ ServiceiPID Backend (Python/FastAPI :8000)│
+                             │  • P&ID diagram analysis (GPT-5.2 vision)│
+                             │  • Electrical diagram analysis            │
+                             │  • Component system matching (embeddings) │
+                             │  • TAG extraction (regex + LLM)           │
+                             │  • Diagram generation from text           │
+                             │  • Knowledge base & chatbot               │
+                             └─────────────────────────────────────────┘
 ```
 
 ---
 
-## 3. Componentes do Sistema
+## 3. Key Capabilities
 
-### 3.1 COMOS Desktop (C#/.NET) — NATIVO
+### Conversational Engineering (COMOS Desktop)
+- **Object Navigation** — "Go to PC001", "Navigate to pump P-101"
+- **Attribute Queries** — "What is the shaft power of P-101?", "List all design data attributes of PC001"
+- **Attribute Modification** — "Set power transmission to 50", "Change operation mode to Continuous"
+- **Object Counting** — "How many pumps do we have?", "Quantas bombas existem?"
+- **Reports** — "Open report X", "Open report in TwoDC"
+- **Revisions** — "Show last revision", "Create new revision"
+- **Queries** — "Export query X to Excel", "Create and run query"
+- **Printing** — "List available printers", "What paper size for document X?"
 
-| Item | Detalhes |
+### P&ID & Electrical Diagram Digitization (ServiceiPID)
+- **PDF Analysis** — Upload a P&ID or electrical diagram PDF → AI extracts all equipment, instruments, and connections with coordinates
+- **System Matching** — Each detected component is automatically matched to a COMOS `SystemFullName` using semantic embeddings
+- **Excel Export** — Analysis results exported as XLSX with Components and Connections sheets
+- **COMOS Import** — Automatic import from Excel into COMOS diagrams (create devices, draw, connect)
+- **VBScript Generation** — Generate COM automation scripts for manual import
+- **TAG Extraction** — Extract ISA S5.1 / IEC tags from engineering documents
+- **Diagram Generation** — Generate P&ID/electrical diagrams from natural language descriptions
+- **Knowledge Base** — Store and query analyzed P&IDs for Q&A
+
+### Voice Input
+- Click the microphone button in the chat to speak
+- Server-side recording via Windows MCI (bypasses CefSharp secure-context limitation)
+- Transcription via Azure Whisper
+- Supports both English and Portuguese
+
+### Document Intelligence (RAG)
+- Index project documents (PDF, DOCX, TXT, CSV, MD)
+- Semantic search over indexed documents
+- Full RAG pipeline: search + LLM answer with citations
+
+---
+
+## 4. Integration Architecture
+
+### How COMOS 10.7 and ServiceiPID Integrate
+
+The two repositories serve complementary roles:
+
+| Repository | Role | Location |
+|-----------|------|----------|
+| **COMOS 10.7** | Desktop AI integration (shim, DLLs, UI, voice) | `C:\Program Files (x86)\COMOS\Team_AI` |
+| **ServiceiPID** | Backend AI services (analysis, gateway, MCP, RAG) | `C:\Users\...\ServiceiPID-main\ServiceiPID` |
+
+**Integration Points:**
+
+1. **Shim → Gateway** (`http://localhost:8100`): The shim proxies chat requests to the gateway for LLM reasoning when native tool fabrication is not sufficient. The gateway runs the MCP tool loop and returns final answers.
+
+2. **Shim → Gateway (Direct Analysis)**: For PDF digitization, the shim sends the PDF directly to `/comos/analyze-direct` on the gateway, which forwards to the backend's `/analyze` endpoint. This bypasses the MCP/LLM loop for faster processing.
+
+3. **Gateway → MCP → Backend**: The gateway spawns the MCP server as a subprocess via `stdio`. MCP tool calls are forwarded as HTTP requests to the backend at `:8000`.
+
+4. **Shim → C# AI API** (`http://localhost:56400`): For COMOS-native tool calls (navigation, attributes, reports), the shim forwards requests to the C# AI API which executes tools through the COMOS COM SDK.
+
+5. **C# SDK DLLs**: The custom DLLs (`Comos.ServiceiPID.Agent.dll`, `Comos.QueryCreator.Agent.dll`) are discovered by MEF at COMOS startup and provide import/draw/connect/query tools that the LLM can call.
+
+### Data Flow — Chat with COMOS Tools
+
+```
+User types "What is the shaft power of P-101?"
+  → CefSharp → fetch POST /api/ai/v1/completions
+  → Shim detects attribute query intent
+  → Shim fabricates: value_of_attribute_by_name_or_description({attributeName: "shaft power"})
+  → COMOS C# executes tool via COM SDK
+  → Result: { success=True, Value="100 kW" }
+  → Shim formats response
+  → User sees: "The shaft power of P-101 is 100 kW"
+```
+
+### Data Flow — PDF Digitization
+
+```
+User attaches PDF → Shim asks: "P&ID or Electrical?"
+  → User replies "P&ID"
+  → Shim → POST /comos/analyze-direct (Gateway :8100)
+  → Gateway → POST /analyze (Backend :8000)
+  → Backend: PyMuPDF renders pages → grid quadrants → GPT-5.2 vision
+  → Backend: system_matcher maps each component → COMOS SystemFullName
+  → Gateway: generates Excel with Components + Connections
+  → Shim: returns download links to user
+  → User clicks "Import into COMOS"
+  → Shim: import_equipment_from_excel tool call
+  → C# DLL: reads Excel, creates devices, draws on diagram, connects
+```
+
+---
+
+## 5. Technology Stack
+
+| Component | Technology | Version/Details |
+|-----------|-----------|----------------|
+| **COMOS Desktop** | C#/.NET Framework 4.x | Siemens COMOS 10.4.x |
+| **Browser Engine** | CefSharp (Chromium) | Chromium 136 |
+| **Chat Widget** | React | Bundled in chat-widget.js |
+| **AI API Shim** | Node.js | ~8,400 lines JavaScript |
+| **COMOS Gateway** | Python + FastAPI + Uvicorn | ~1,700 lines |
+| **ServiceiPID Backend** | Python + FastAPI + Uvicorn | ~6,700 lines |
+| **MCP Server** | Python + FastMCP | ~245 lines, stdio transport |
+| **LLM (Chat)** | GPT-5 | Azure OpenAI |
+| **LLM (Vision)** | GPT-5.2 (primary), GPT-5.1 (fallback) | Azure OpenAI |
+| **Speech-to-Text** | Azure Whisper | Cognitive Services |
+| **Embeddings** | text-embedding-3-large | Azure OpenAI |
+| **PDF Processing** | PyMuPDF (fitz), pdf2image, pypdf | |
+| **Image Processing** | OpenCV, Pillow, scikit-image | |
+| **COM Interop** | COMOS SDK (Interop.Plt, Interop.ComosQSGlobalObj) | .NET Framework 4.x |
+
+---
+
+## 6. Deployment & Operations
+
+### Service Startup Order
+
+Services **must** be started in this order:
+
+```
+1. ServiceiPID Backend (:8000)  ← must be running before Gateway
+2. COMOS Gateway (:8100)        ← depends on Backend for MCP
+3. AI API Shim (:56401)         ← depends on Gateway + AI API
+4. COMOS Desktop                ← starts AI API (:56400) automatically
+```
+
+A convenience startup script is provided: `ServiceiPID\backend\start_all_services.ps1` (or `Start_COMOS_AI.bat`).
+
+### Health Verification
+
+```powershell
+Invoke-RestMethod http://127.0.0.1:8000/health     # Backend → {"status":"ok"}
+Invoke-RestMethod http://127.0.0.1:8100/health     # Gateway → {"status":"ok"}
+Invoke-RestMethod http://127.0.0.1:56401/api/ai/v1/shim-status  # Shim → status, uptime
+```
+
+### Logs
+
+| Log | Location |
+|-----|----------|
+| Shim HTTP traffic | `%TEMP%\comos_ai_shim\ai_api_shim.log` |
+| Shim request/response | `%TEMP%\comos_ai_shim\requests.jsonl` |
+| P&ID analysis state | `%TEMP%\comos_ai_shim\completed_analyses.json` |
+| C# AI API | `%TEMP%\comos_ai_api-YYYYMMDD.log` |
+| Excel/analysis exports | `%TEMP%\comos_ai_exports\` |
+
+---
+
+# Part II — Technical Detailed View
+
+## 7. Component Architecture
+
+### 7.1 COMOS Desktop (C#/.NET) — Native
+
+| Item | Details |
 |------|---------|
-| **Executável** | `Comos.exe` |
-| **AI Agent** | `Comos.EngineeringAssistant.BasicFunctions.dll` (patcheado) |
-| **Config** | `Bin\agent.conf` — porta 8080, assemblies no diretório atual |
-| **Protocolo** | O COMOS .NET chama `/api/ai/v1/completions` com formato proprietário (PascalCase aliases) |
-| **Limitação** | Máximo **3 iterações** por mensagem do usuário (incluindo resposta final de texto) |
+| **Executable** | `Comos.exe` |
+| **AI Agent** | `Comos.EngineeringAssistant.BasicFunctions.dll` (IL-patched) |
+| **AI API** | `Comos.Services.Ai.Api.exe` (port 56400) |
+| **Config** | `Bin\agent.conf` — port 8080, assemblies in current directory |
+| **Protocol** | Proprietary PascalCase format for tool calls and results |
+| **Limitation** | Maximum **3 iterations** per user message (tool → tool → text response) |
 
-### 3.2 CefSharp Browser — NATIVO (com patches)
+### 7.2 CefSharp Browser — Native (with patches)
 
-| Item | Detalhes |
+| Item | Details |
 |------|---------|
-| **Diretório** | `Bin\ThirdParty\CefSharp\x86\` |
+| **Directory** | `Bin\ThirdParty\CefSharp\x86\` |
 | **Engine** | Chromium 136 |
-| **Esquema** | `localfolder://twodcvisualizer` — **NÃO é secure context** |
-| **Consequência** | `navigator.mediaDevices.getUserMedia()` indisponível |
-| **Patches aplicados** | Flags `--enable-media-stream`, `--use-fake-ui-for-media-stream` (no DLL via IL) |
-| **Nota** | Flags sozinhas são insuficientes; a solução final foi gravação server-side |
+| **URL Scheme** | `localfolder://twodcvisualizer` — **NOT a secure context** |
+| **Consequence** | `navigator.mediaDevices.getUserMedia()` completely unavailable |
+| **Patches** | CefSharp flags in `ExtendedControls.dll` (insufficient alone — server-side recording is the real fix) |
 
-### 3.3 Chat UI (TwoDcChat) — NATIVO + CUSTOMIZADO
+### 7.3 Chat UI (TwoDcChat)
 
-**Diretório:** `Bin\ThirdParty\TwoDcChat\`
+| File | Status | Description |
+|------|--------|-------------|
+| `index.html` | **Modified** | Added `<script src="speech-polyfill.js?v=4">` |
+| `chat-widget.js` | **Native** | React bundle — W2 SpeechRecognition hook, Xf chat component, I_ input bar |
+| `chat-widget.css` | **Native** | Widget styles |
+| `chat-app.js` | **Modified** | Widget config: `voiceInput: true`, PDF upload, script block handler (~1,565 lines) |
+| `speech-polyfill.js` | **New** | Server-side voice polyfill via MCI + Azure Whisper |
 
-| Arquivo | Status | Descrição |
-|---------|--------|-----------|
-| `index.html` | **CUSTOMIZADO** | Adicionado `<script src="speech-polyfill.js?v=4">` |
-| `chat-widget.js` | **NATIVO** | React bundle — W2 hook (SpeechRecognition), Xf component (chat principal), I_ component (input bar) |
-| `chat-widget.css` | **NATIVO** | Estilos do widget |
-| `chat-app.js` | **CUSTOMIZADO** | Configuração do widget — `voiceInput: true`, endpoints, event handlers |
-| `speech-polyfill.js` | **CUSTOMIZADO** (novo) | Polyfill SpeechRecognition via MCI + Azure Whisper |
+---
 
-**Configuração do Widget (chat-app.js):**
+## 8. AI API Shim — Smart Proxy
+
+**File:** `scripts\ai-api-shim.js` (~8,440 lines)
+**Port:** 56401
+**Runtime:** Node.js
+
+The shim sits between the COMOS desktop and all backend services. It intercepts every chat request and decides whether to fabricate a tool call locally (saving LLM latency/cost) or proxy to the gateway for full LLM reasoning.
+
+### 8.1 Tool Call Fabrication
+
+The shim can fabricate tool calls **without calling the LLM**, returning directly to COMOS:
+
+| Intent | Detection | Fabricated Tool |
+|--------|-----------|-----------------|
+| Count objects | "how many pumps?" / "quantas bombas?" | `get_count_of_comos_objects_with_name` |
+| Read attribute value | "what is the shaft power?" / "qual a potência?" | `value_of_attribute_by_name_or_description` |
+| Navigate to attribute | "go to pressure attribute" | `navigate_to_attribute_by_name_or_description` |
+| Navigate to object | "go to PC001" | `navigate_to_comos_object_by_name_or_label` |
+| List attributes | "list attributes of PC001" / "list design data attributes" | Navigate → `list_object_attributes` (with optional tab filter) |
+| Set attribute | "set power transmission of PC001 to 50" | Navigate → `set_attribute_value` |
+| Set attribute (context) | "set power transmission to 50" (object from prior context) | `set_attribute_value` (with systemUID from conversation) |
+| Follow-up confirmation | "yes" / "sim" / "ok" | Pending tool call from prior turn |
+| Auto-retry | Attribute "not found" | Retry with alternative names (fuzzy) |
+
+### 8.2 Budget Counter
+
+COMOS .NET allows a maximum of **3 iterations** per user message. The shim tracks fabricated calls with prefix `call_shim_` and limits to **2 fabrications** per message, reserving the 3rd iteration for the LLM's text response.
+
+### 8.3 Intent Detection (Bilingual PT + EN)
+
+| Function | Detects |
+|----------|---------|
+| `isObjectCountIntent()` | "how many X" / "quantos X" / "qtd de X" |
+| `isListAttributesIntent()` | "list attributes" / "listar atributos" / "show specs" |
+| `isAttributeWriteIntent()` | "set X to Y" / "change X to Y" / "alterar X para Y" |
+| `isPureNavigationIntent()` | "go to X" / "navegar até X" / "abrir X" |
+| `isDocumentNavigationIntent()` | "open document X" / "abrir documento X" |
+| `isMultiStepIntent()` | Multi-action with connectors ("do X and then Y") |
+| `extractWriteParams()` | Extracts object tag, attribute name, new value from write requests |
+| `extractTabFilter()` | Extracts tab name filter ("process data", "design data", etc.) |
+
+### 8.4 False-Positive Tag Filter
+
+The tag extraction regex `[A-Z]{1,4}[- ]?\d{2,5}` can match prepositions + numbers (e.g., "to 40" from "set power transmission to 40"). A validation step rejects tags starting with common prepositions (`to`, `of`, `at`, `de`, `para`, etc.) followed by digits, allowing the context-carry or LLM path to handle the request instead.
+
+### 8.5 Context Carry for Attribute Writes
+
+When user says "set power transmission to 50" without mentioning an object, the shim scans prior tool messages in the conversation for `systemUID`, `objectName`, and `SystemType` fields. If found, it fabricates `set_attribute_value` directly with the inferred context — no navigation needed.
+
+### 8.6 Fuzzy Matching (Levenshtein)
+
+- `levenshteinDistance(a, b)` — edit distance between two strings
+- `generateAttributeAlternatives(name)` — generates aliases for attribute names
+- Bilingual alias map: "shaft power", "pressure", "temperatura", "Potência do eixo", etc.
+- Tolerance: Levenshtein ≤ 2 (corrects typos like "Shatf Power" → "Shaft Power")
+
+### 8.7 System Prompt Injection
+
+Every `/completions` request gets `COMOS_SYSTEM_PROMPT` injected (13+ rules):
+
+| Rule | Summary |
+|------|---------|
+| **1** | Only use tools from the `tools` array |
+| **2** | Never mention PDF/P&ID/ServiceiPID capabilities |
+| **3** | List only COMOS-native capabilities |
+| **4** | Respond in user's language (PT or EN) |
+| **7** | Maximum 1 tool call per response |
+| **8** | Up to 4 retries for attribute lookups |
+| **10** | Prefer `navigate_to_comos_object_by_name` for navigation |
+| **10a** | Try name variations (with/without hyphen) |
+| **11** | Call attribute tools immediately — no confirmation |
+| **11a-f** | Sub-rules for retry, counting, filtered counting, mandatory reporting |
+| **12** | Attribute write workflow: use prior systemUID or read-first |
+| **12a** | Extract object context from prior C# tool results |
+| **13** | Tool selection guide (mapping intent → tool name) |
+
+### 8.8 Digitization Two-Step Flow
+
+1. User attaches PDF → Shim detects PDF
+2. **Step A:** Ask user: "P&ID or Electrical Diagram?"
+3. User replies → Shim sends PDF + type to Gateway `/comos/analyze-direct`
+4. Gateway forwards to Backend `/analyze` → GPT vision analysis
+5. Results returned with download links (Excel, VBS import script)
+
+### 8.9 Format Adaptation
+
+The COMOS .NET client expects a proprietary PascalCase format. The shim:
+- Normalizes input: `function_call` (legacy) → `tool_calls` (modern OpenAI)
+- Adapts responses: adds `Role`, `Content`, `FunctionCall`, `toolCalls` (PascalCase aliases)
+- Heals orphan tool messages (missing corresponding `tool_calls[].id`)
+- Strips systemUID from attribute tool calls to force reliable path (navigator-selected object)
+
+### 8.10 SSE Agent Events
+
+The shim broadcasts Server-Sent Events (SSE) on `GET /api/ai/v1/agent-events` for real-time UI updates:
+- `agent_thinking` — "Analyzing your request...", "Retrying with alternative approach..."
+- `agent_complete` — "Response ready"
+
+---
+
+## 9. COMOS Gateway — MCP Orchestrator
+
+**File:** `ServiceiPID\backend\comos_gateway.py` (~1,700 lines)
+**Port:** 8100
+**Framework:** Python FastAPI + Uvicorn
+
+The gateway provides an OpenAI-compatible chat endpoint that orchestrates the full tool-calling loop using MCP (Model Context Protocol).
+
+### 9.1 MCP Tool Loop (`_run_llm_with_mcp`)
+
+```
+1. Spawn MCP stdio subprocess (python -m backend.mcp_server)
+2. session.list_tools() → get available tools
+3. Convert MCP schemas → OpenAI function-calling format
+4. Build messages: system prompt → history → user message
+5. LOOP (max_tool_calls + 1 iterations):
+   a. Call LLM with tools + tool_choice: "auto"
+   b. If no tool_calls → return final answer
+   c. For each tool_call:
+      - Parse arguments
+      - Call mcp_session.call_tool(name, args, timeout)
+      - Append tool response
+      - Log execution
+   d. Decrement remaining counter
+6. If exhausted → RuntimeError
+```
+
+### 9.2 Operating Modes
+
+| Mode | Endpoint | Description |
+|------|----------|-------------|
+| **MCP Chat** | `POST /comos/chat` | Full tool loop with ServiceiPID MCP tools |
+| **OpenAI-Compatible** | `POST /v1/chat/completions` | Converts OpenAI format ↔ gateway format, runs MCP loop |
+| **RAW LLM** | `POST /v1/chat/completions/raw` | Direct passthrough to LLM — no MCP, no gateway system prompt. Used by the shim for COMOS-native tool-calling. |
+| **Direct Analysis** | `POST /comos/analyze-direct` | Bypasses MCP/LLM, calls backend `/analyze` directly via httpx |
+
+### 9.3 RAG (Retrieval-Augmented Generation)
+
+The gateway exposes RAG endpoints backed by `rag_engine.py`:
+
+| Endpoint | Purpose |
+|----------|---------|
+| `POST /comos/rag-ingest` | Index documents folder |
+| `POST /comos/rag-query` | Semantic search (top-k results) |
+| `POST /comos/rag-ask` | Full RAG: search + LLM answer |
+| `GET /comos/rag-stats` | Index statistics |
+| `GET /comos/rag-documents` | List indexed documents |
+| `POST /comos/rag-add-file` | Add file to index |
+
+**Supported file types:** PDF, DOCX, DOC, TXT, CSV, MD, RTF
+**Embedding model:** `text-embedding-3-large`
+**Chunk size:** 1000 chars with 200 overlap
+
+---
+
+## 10. ServiceiPID Backend — P&ID Analysis Engine
+
+**File:** `ServiceiPID\backend\backend.py` (~6,700 lines)
+**Port:** 8000
+**Framework:** Python FastAPI + Uvicorn
+
+### 10.1 Core Analysis Pipeline (`POST /analyze`)
+
+The main analysis endpoint processes P&ID and electrical diagram PDFs:
+
+1. **PDF Rendering** — PyMuPDF renders each page at configurable DPI (100-600, default 400)
+2. **Grid Quadrants** — Each page is split into a grid (1-6, default 3×3) of overlapping quadrant images
+3. **GPT Vision Analysis** — Each quadrant image is sent to GPT-5.2 vision model with detailed prompts for equipment/instrument detection
+4. **Coordinate Mapping** — Local quadrant coordinates (mm) are mapped to global page coordinates
+5. **Deduplication** — Overlapping detections from adjacent quadrants are merged
+6. **System Matching** — Each detected component is matched to a COMOS `SystemFullName` using semantic embeddings (via `system_matcher.py`)
+7. **Output** — Per-page results with items (tag, description, type, coordinates, SystemFullName, confidence) and connections (source → target)
+
+**Analysis Parameters:**
+
+| Parameter | Default | Description |
+|-----------|---------|-------------|
+| `dpi` | 400 | Rendering resolution (100-600) |
+| `grid` | 3 | Grid subdivisions per axis (1-6) |
+| `diagram_type` | "pid" | "pid" or "electrical" |
+| `tol_mm` | 10.0 | Connection tolerance in mm |
+| `use_dynamic_tolerance` | true | Auto-adjust tolerance based on diagram density |
+| `use_overlap` | false | Overlap quadrants for better edge detection |
+| `use_ocr_validation` | false | Post-validate with OCR |
+| `use_geometric_refinement` | false | Refine positions using geometric analysis |
+| `use_pdf_alignment` | false | Align to PDF vector coordinates |
+| `enable_electrical_quadrants` | false | Use electrical-specific quadrant logic |
+
+### 10.2 System Matcher (`system_matcher.py`)
+
+Maps equipment tags/descriptions to COMOS `SystemFullName` values using OpenAI embeddings + cosine similarity.
+
+**How it works:**
+1. **Reference databases** — Two Excel files contain the mapping: `referencia_systems.xlsx` (P&ID) and `Referencia_systems_electrical.xlsx` (electrical). Each row has Type, Description, and SystemFullName.
+2. **Embedding generation** — Reference descriptions are embedded with `text-embedding-3-large` and cached as `.pkl` files. Auto-regenerated if the Excel source is newer.
+3. **Matching** — For each detected component, the tag+description is embedded and compared against all references using cosine similarity. The top match is returned with confidence score.
+4. **Dual matching** — `match_system_fullname_dual()` tries both P&ID and electrical databases.
+5. **Pole detection** — For electrical components, detects pole count ("trifásico" → 3-pole) for filtering.
+
+### 10.3 TAG Extraction (`POST /extract-tags`)
+
+Extracts engineering tags from PDF documents using:
+- **Regex patterns** — ISA S5.1 patterns for P&ID, IEC patterns for electrical
+- **LLM descriptions** — Optional GPT-generated technical descriptions for each tag
+- **System matching** — Each tag is mapped to a COMOS SystemFullName
+- **Document mode** — Special mode for RFQs, specs, equipment lists (broader patterns + blacklist)
+
+### 10.4 Diagram Generation (`POST /generate`)
+
+Generates P&ID or electrical diagrams from natural language:
+- Input: natural language description (e.g., "a simple cooling water circuit with pump, heat exchanger, and control valve")
+- Output: structured JSON with items (tag, description, type, XY coordinates) and connections
+- Uses `FALLBACK_MODEL` (GPT-5.1) with temperature 0.7
+- System matching applied to all generated items
+- Supports A0 sheet for P&ID, A3 sheet for electrical
+
+### 10.5 Knowledge Base & Chat
+
+- **Store** (`POST /store`) — Store analyzed P&ID data in memory (per-session)
+- **Describe** (`GET /describe`) — Generate/retrieve ultra-complete technical descriptions
+- **Chat** (`POST /chat`) — Q&A about stored P&IDs with text/vision/hybrid modes
+
+---
+
+## 11. ServiceiPID MCP Server — Tool Interface
+
+**File:** `ServiceiPID\backend\mcp_server.py` (~245 lines)
+**Transport:** stdio (spawned by gateway as subprocess)
+**Framework:** FastMCP
+
+The MCP server is a thin wrapper that exposes ServiceiPID backend capabilities as MCP tools. It forwards all calls to the backend HTTP API at `:8000`.
+
+### 11.1 MCP Tools (9 total)
+
+| # | Tool | Parameters | Description |
+|---|------|-----------|-------------|
+| 1 | `backend_health` | — | Check if backend is running |
+| 2 | `backend_ping` | — | Return backend model/runtime info |
+| 3 | `analyze_pdf` | `file_path`, `dpi`, `grid`, `enable_electrical_quadrants`, `debug_quadrant_coords`, `tol_mm`, `use_overlap`, `use_dynamic_tolerance`, `use_ocr_validation`, `use_geometric_refinement`, `use_geometric_refinement_electrical`, `use_pdf_alignment`, `diagram_type` | Analyze a PDF from local file path |
+| 4 | `analyze_pdf_base64` | `filename`, `pdf_base64`, `dpi`, `grid`, `diagram_type` | Analyze a PDF from base64 data |
+| 5 | `generate_pid` | `prompt`, `diagram_type` | Generate diagram from natural language (min 10 chars) |
+| 6 | `store_pid_knowledge` | `pid_id`, `data` | Store P&ID data in knowledge base |
+| 7 | `list_knowledge_base` | — | List stored P&IDs |
+| 8 | `describe_pid` | `pid_id`, `regenerate` | Get/regenerate P&ID description |
+| 9 | `chat_about_pid` | `pid_id`, `question`, `mode` | Ask questions about a P&ID (text/vision/hybrid) |
+
+### 11.2 How MCP Tools Work
+
+Each MCP tool follows the same pattern:
+
+1. The gateway spawns the MCP server as a subprocess via stdio
+2. The LLM decides which tool to call based on the tool schema + user message
+3. The gateway sends the tool call to the MCP server via stdio JSON-RPC
+4. The MCP server makes an HTTP request to the backend (`:8000`)
+5. The backend processes the request and returns JSON
+6. The MCP server returns the result to the gateway
+7. The gateway appends the tool result to the conversation and loops back to the LLM
+
+### 11.3 Configuration
+
+| Variable | Default | Description |
+|----------|---------|-------------|
+| `SERVICEIPID_API_BASE_URL` | `http://127.0.0.1:8000` | Backend URL |
+| `SERVICEIPID_API_TIMEOUT_S` | `900` | HTTP timeout |
+| `SERVICEIPID_MCP_TRANSPORT` | `stdio` | Transport: `stdio` or `streamable-http` |
+
+---
+
+## 12. COMOS SDK Tools — C# Agent DLLs
+
+Custom DLLs compiled from C# source and placed in `Bin\SDK\AI\`. Discovered by MEF (Managed Extensibility Framework) at COMOS startup.
+
+### 12.1 ServiceiPID Agent (`Comos.ServiceiPID.Agent.dll`)
+
+**ToolScope:** `"ServiceiPID"` — 7 tools for import, drawing, connecting, and attribute management.
+
+#### `import_equipment_from_excel`
+Batch imports equipment from a ServiceiPID analysis Excel file. Creates COMOS devices, draws them on the diagram at XY coordinates, and establishes electrical/process connections (EB01/EB02 pins). Also supports inline JSON payloads for interactive operations.
+
+| Parameter | Type | Description |
+|-----------|------|-------------|
+| `excelFilePath` | string | Full path to the XLSX file from ServiceiPID analysis |
+| `documentUID` | string | SystemUID of the target COMOS diagram |
+| `documentType` | int | Document type (usually 29) |
+
+#### `draw_single_object`
+Interactive drawing — places a single device on a COMOS diagram at specific XY coordinates. Resolves CDevice from SystemFullName, creates/retrieves the logical device, draws on the Report, and links via COM.
+
+| Parameter | Type | Description |
+|-----------|------|-------------|
+| `documentUID` | string | Target diagram SystemUID |
+| `documentType` | int | Document type (29) |
+| `tag` | string | Equipment tag (e.g., `=M01.Q01`) |
+| `description` | string | Equipment description |
+| `systemFullName` | string | COMOS SystemFullName from system_matcher |
+| `x` | double | X coordinate (mm) |
+| `y` | double | Y coordinate (mm) |
+
+#### `connect_objects`
+Connects two existing objects on a diagram by tag — wires source output pin (EB02) to target input pin (EB01) via `IComosDConnector.Connect()`.
+
+| Parameter | Type | Description |
+|-----------|------|-------------|
+| `documentUID` | string | Diagram SystemUID |
+| `documentType` | int | Document type (29) |
+| `sourceTag` | string | Source (upstream) object tag |
+| `targetTag` | string | Target (downstream) object tag |
+| `sourceSystemFullName` | string | Source COMOS SystemFullName |
+| `targetSystemFullName` | string | Target COMOS SystemFullName |
+
+#### `scan_document_tags`
+Diagnostic: enumerates all device objects on a diagram, returning Name, Label, and SystemUID. Use before `connect_objects` to verify tags exist.
+
+| Parameter | Type | Description |
+|-----------|------|-------------|
+| `documentUID` | string | Diagram SystemUID (or `"ACTIVE"`) |
+| `documentType` | int | Document type (29) |
+| `maxTags` | int | Max tags to return (default 60) |
+
+#### `extract_and_create_tags`
+Bulk creation of COMOS devices from extracted tags (base64 TSV payload). Hierarchy-only — no diagram drawing, no connections. Used for PDF tag extraction import.
+
+| Parameter | Type | Description |
+|-----------|------|-------------|
+| `tagsPayload` | string | Base64-encoded TSV: `tag\tdescription\tSystemFullName` per line |
+| `documentUID` | string | Target document SystemUID (or `"ACTIVE"`) |
+| `documentType` | int | Document type (29) |
+
+#### `list_object_attributes`
+Lists all specification attributes of a COMOS object. Recursively searches up to 10 spec levels. Supports tab-level filtering (e.g., show only "Design data" attributes).
+
+| Parameter | Type | Description |
+|-----------|------|-------------|
+| `systemUID` | string | Optional: Object SystemUID |
+| `objectName` | string | Optional: Object name/tag |
+| `systemType` | string | Optional: SystemType from navigation result |
+| `tabFilter` | string | Optional: Filter by tab name (case-insensitive partial match) |
+
+**Resolution strategy (4-cascade):** LoadByType → type-scan → name candidates → AllDevices scan.
+
+#### `set_attribute_value`
+Sets/overwrites a specification attribute value. Uses recursive fuzzy matching (Levenshtein distance) to find the attribute by name or description.
+
+| Parameter | Type | Description |
+|-----------|------|-------------|
+| `attributeName` | string | Attribute name or description (fuzzy matched) |
+| `newValue` | string | New value to write |
+| `systemUID` | string | Optional: Object SystemUID |
+| `objectName` | string | Optional: Object name/tag |
+| `systemType` | string | Optional: SystemType from navigation result |
+
+### 12.2 QueryCreator Agent (`Comos.QueryCreator.Agent.dll`)
+
+**ToolScope:** `"QueryCreator"` — 2 tools for COMOS data enumeration.
+
+#### `create_and_run_query`
+Enumerates COMOS objects: Devices (queryType=0), CDevices/catalog (queryType=1), or Documents (queryType=4).
+
+| Parameter | Type | Description |
+|-----------|------|-------------|
+| `queryType` | string | 0=Devices, 1=CDevices, 4=Documents |
+| `columns` | string | Comma-separated: Name, Description, SystemFullName, FullName, Label, etc. |
+| `sfnPrefix` | string | Optional SystemFullName prefix filter (`@30` for P&ID, `@10` for electrical) |
+| `nameFilter` | string | Optional Name contains filter |
+| `maxRows` | string | Max rows (default 200, max 500) |
+| `exportPath` | string | Optional CSV export path |
+
+#### `list_all_cdevice_sfn`
+Lists CDevice SystemFullName values from the COMOS catalog. Shortcut for `create_and_run_query` with queryType=1.
+
+| Parameter | Type | Description |
+|-----------|------|-------------|
+| `rootPrefix` | string | SFN prefix: `@30`=P&ID, `@10`=electrical, ``=all |
+| `maxRows` | string | Max rows (default 200) |
+| `exportPath` | string | Optional CSV export path |
+
+### 12.3 TestTool Agent (`Comos.TestTool.Agent.dll`)
+
+**ToolScope:** `"TestTool"` — 1 tool for pipeline verification.
+
+#### `test_hello_world`
+Returns `"Hello, {name}! Test tool is active."` — used to verify MEF discovery and tool registration.
+
+### 12.4 Built-in SDK Agents
+
+These are Siemens-provided DLLs without source code:
+
+| DLL | ToolScope | Tools |
+|-----|-----------|-------|
+| `Comos.Query.Agent.dll` | `"Query"` | Database queries, export |
+| `Comos.Report.Agent.dll` | `"Report"` | Report generation, opening |
+| `Comos.Revsioning.Agent.dll` | `"Revsion"` | Revision management (note: intentional typo in COMOS) |
+
+---
+
+## 13. Native COMOS Tools — BasicFunctions DLL
+
+These tools come from `Comos.EngineeringAssistant.BasicFunctions.dll` (IL-patched, in `Bin/`). They are registered by the native COMOS AI framework and execute through the C# AI API at port 56400.
+
+### Navigation Tools
+
+| Tool | Description |
+|------|-------------|
+| `navigate_to_comos_object_by_name` | Navigate to object by Name (full tree scan) |
+| `navigate_to_comos_object_by_name_or_label` | Navigate by Name or Label |
+| `navigate_to_comos_object_by_systemUID` | Navigate by SystemUID |
+| `navigate_to_comos_document_by_name` | Open a COMOS document |
+
+### Attribute Tools
+
+| Tool | Description |
+|------|-------------|
+| `navigate_to_attribute_by_name_or_description` | Navigate to attribute tab/field (with recursive search) |
+| `value_of_attribute_by_name_or_description` | Read attribute value (with recursive search + unit) |
+
+### Query/Search Tools
+
+| Tool | Description |
+|------|-------------|
+| `objects_with_name` | Search objects by name (for counting, NOT navigation) |
+| `get_count_of_comos_objects_with_name` | Count objects matching a name pattern |
+| `export_query_to_excel` | Export a COMOS query to Excel |
+
+### Report/Document Tools
+
+| Tool | Description |
+|------|-------------|
+| `open_report` | Open a COMOS report |
+| `open_report_twodc` | Open a report in TwoDC viewer |
+| `show_last_revision_of_document` | Show the last revision of a document |
+| `create_new_revision` | Create a new document revision |
+
+### Printing Tools
+
+| Tool | Description |
+|------|-------------|
+| `get_info_about_all_available_printers_and_all_available_paper` | List printers and paper sizes |
+| `get_print_paper_name_for_document` | Get paper size for a specific document |
+
+### IL Patches Applied
+
+| Patch | Version | Description |
+|-------|---------|-------------|
+| v1 | `SearchSpecRecursive` | Recursive specification search to 10 levels (fixed attributes not found for nested specs) |
+| v2 | Cast fix | Fixed `isinst` cast in `ValueOfAttributeWithNameOrDescription` |
+| v3 | Unit concatenation | `sp.get_Unit()` appended to values (e.g., "100 kW" instead of "100") |
+| CefSharp | ExtendedControls.dll | Added `--enable-media-stream`, `--use-fake-ui-for-media-stream` flags |
+
+---
+
+## 14. Voice Input — Speech Polyfill
+
+### Problem
+
+CefSharp loads chat UI via `localfolder://`, which is **not a secure context** in Chromium 136+. This makes `navigator.mediaDevices.getUserMedia()` completely unavailable and `SpeechRecognition.start()` throw `not-allowed`, even with CefSharp flags.
+
+### Solution: Server-Side Recording
+
+```
+Browser (CefSharp)                    Server (Node.js Shim)
+──────────────────                    ─────────────────────
+speech-polyfill.js                    ai-api-shim.js
+
+  POST /mic/start ────────────►      Spawn PowerShell
+                                      MCI: open waveaudio
+                                      MCI: record capture
+                                      (Records from Windows mic)
+
+  POST /mic/stop ─────────────►      MCI: stop capture
+                                      MCI: save WAV
+                                      Send WAV → Azure Whisper
+       { text: "Hello" }  ◄────────  Return transcription
+
+  onresult({ transcript })
+  [120ms delay]
+  onend()
+
+  useEffect copies to input
+```
+
+### Components
+
+1. **`speech-polyfill.js`** — Unconditionally replaces `window.SpeechRecognition` and `window.webkitSpeechRecognition` with `WhisperSpeechRecognition`. Implements standard SpeechRecognition API interface so the React widget's W2 hook works transparently.
+
+2. **MCI Recording (shim)** — Three endpoints: `/mic/start` (spawn PowerShell with MCI recording), `/mic/stop` (stop + save WAV + transcribe via Azure Whisper), `/mic/abort` (cancel).
+
+3. **Azure Whisper** — Deployment: `whisper`, API version `2024-06-01`, endpoint: Azure Cognitive Services.
+
+### Critical Fix: React 18 Batching
+
+The widget's `useEffect` only copies transcript to input while `isListening=true`. If `onresult` and `onend` fire synchronously, React batches updates and `isListening` becomes `false` before the effect runs — transcript is lost. **Fix:** 120ms `setTimeout` between `onresult` and `onend`.
+
+---
+
+## 15. Chat UI — Widget Configuration
+
+**File:** `Bin\ThirdParty\TwoDcChat\chat-app.js` (~1,565 lines)
+
+### Widget Setup
+
 ```javascript
 {
     title: 'COMOS Engineering Copilot',
@@ -206,520 +796,418 @@ useEffect copia transcript → input field → Usuário vê texto
         conversationSidebar: true,
         messageSearch: false,
         fileUpload: true,
-        voiceInput: true          // ← CUSTOMIZADO (era false)
+        voiceInput: true    // ← enabled (was false in native)
     }
 }
 ```
 
-### 3.4 C# AI API Service (:56400) — NATIVO
+### Custom Features
 
-| Item | Detalhes |
-|------|---------|
-| **Executável** | `Comos.Services.Ai.Api.exe` |
-| **Config** | `Comos.Services.Ai.Api.exe.config` |
-| **Porta** | 56400 |
-| **Função** | Bridge entre COMOS SDK e o mundo exterior |
-| **Responsável por** | Validação de conexão (`HEAD /api/ai/v1/completions`), definição de tools COMOS, execução de tool calls no SDK |
-| **Probing** | `ThirdParty\Microsoft`, `ThirdParty\Swashbuckle` |
-
-### 3.5 AI API Shim (:56401) — CUSTOMIZADO
-
-| Item | Detalhes |
-|------|---------|
-| **Arquivo** | `scripts\ai-api-shim.js` (~5.234 linhas) |
-| **Runtime** | Node.js |
-| **Porta** | 56401 (default) |
-| **Logs** | `%TEMP%\comos_ai_shim\ai_api_shim.log` |
-| **Request log** | `%TEMP%\comos_ai_shim\requests.jsonl` |
-
-**Modos de operação:**
-1. **Chat normal** — proxy inteligente com injeção de system prompt e fabricação de tool calls
-2. **Digitização** — two-step flow (detecta PDF → pergunta tipo → analisa)
-3. **Gravação de voz** — MCI recording + Azure Whisper
-
-**Funcionalidades completas detalhadas na [Seção 7](#7-funcionalidades-customizadas-do-shim).**
-
-### 3.6 COMOS Gateway (:8100) — CUSTOMIZADO
-
-| Item | Detalhes |
-|------|---------|
-| **Arquivo** | `comos_gateway.py` (no projeto ServiceiPID) |
-| **Framework** | FastAPI + Uvicorn |
-| **Porta** | 8100 (`COMOS_GATEWAY_PORT`) |
-| **Modelo LLM** | `gpt-5` (Azure OpenAI) |
-| **Protocol** | MCP (Model Context Protocol) via `stdio_client` |
-
-**Função:** Endpoint OpenAI-compatible que executa loop de tool-calling com MCP tools do ServiceiPID.
-
-**System Prompt:** Assistente de engenharia industrial integrado com COMOS. Responde em português brasileiro por padrão.
-
-### 3.7 ServiceiPID Backend (:8000) — CUSTOMIZADO
-
-| Item | Detalhes |
-|------|---------|
-| **Arquivo** | `backend\backend.py` (no projeto ServiceiPID) |
-| **Framework** | FastAPI + Uvicorn |
-| **Porta** | 8000 |
-| **Modelo primário** | `gpt-5.2` (`PRIMARY_MODEL`) |
-| **Modelo fallback** | `gpt-5.1` (`FALLBACK_MODEL`) |
-| **Dependências** | PIL, PyMuPDF (fitz), httpx, openai, numpy, OpenCV (cv2), pdf2image, pypdf |
-| **Função** | Análise de P&ID e diagramas elétricos, geração de diagramas, matching de componentes |
+- **PDF Upload** — Hidden `<input type="file" accept=".pdf">` wired to the `+` button via `MutationObserver`. PDF-only policy with type selection dialog (P&ID / Electrical / Tags Only / Document).
+- **CefSharp Interop** — `sendToBackend()` via `CefSharp.PostMessage()` for bidirectional communication.
+- **Script Block Handler** — Watches for `comos-script` code blocks in assistant messages and injects interactive execution panels.
+- **Application State** — Centralized `appState` with conversation management and widget instance reference.
 
 ---
 
-## 4. Arquivos Customizados vs Nativos
+## 16. DLL Patching (IL Assembly)
 
-### Arquivos CUSTOMIZADOS (criados ou modificados)
+All DLL patches use the workflow: `ildasm` (disassemble) → manual `.il` editing → `ilasm` (reassemble).
 
-| Arquivo | Tipo | Localização |
-|---------|------|-------------|
-| `ai-api-shim.js` | Criado | `scripts\` |
-| `speech-polyfill.js` | Criado | `Bin\ThirdParty\TwoDcChat\` |
-| `chat-app.js` | Modificado | `Bin\ThirdParty\TwoDcChat\` (voiceInput: true) |
-| `index.html` | Modificado | `Bin\ThirdParty\TwoDcChat\` (script tag speech-polyfill) |
-| `comos_gateway.py` | Criado | Projeto ServiceiPID |
-| `backend.py` | Criado | Projeto ServiceiPID |
-| `mcp_server.py` | Criado | Projeto ServiceiPID |
-| `BasicFunctions.dll` | Patcheado (IL) | `Bin\` (3 versões) |
-| `ExtendedControls.dll` | Patcheado (IL) | `Bin\` (CefSharp flags) |
+### Patched DLLs
 
-### Arquivos NATIVOS (não modificados)
+| DLL | Location | Patches |
+|-----|----------|---------|
+| `Comos.EngineeringAssistant.BasicFunctions.dll` | `Bin\` | v1: recursive spec search, v2: cast fix, v3: unit concatenation |
+| `Comos.WPF.ExtendedControls.dll` | `Bin\` | CefSharp flags for media stream |
 
-| Arquivo | Localização |
-|---------|-------------|
-| `chat-widget.js` | `Bin\ThirdParty\TwoDcChat\` |
-| `chat-widget.css` | `Bin\ThirdParty\TwoDcChat\` |
-| `Comos.Services.Ai.Api.exe` | `Bin\` |
-| `Comos.Services.Ai.Api.exe.config` | `Bin\` |
-| `agent.conf` | `Bin\` |
-| Todo o diretório CefSharp | `Bin\ThirdParty\CefSharp\x86\` |
-| COMOS Engine e demais DLLs | `Bin\` |
+### Important Rules
+
+- **Backups mandatory** — Always backup before replacing: `_backups/<name>.dll.locked_YYYYMMDD_HHMMSS_<reason>`
+- **DLL is locked while COMOS runs** — Must close COMOS before replacing
+- **Custom DLLs** (`Comos.ServiceiPID.Agent.dll`) are compiled from `.cs` source — **never** confuse with the native patched `BasicFunctions.dll`
+- **Compilation** — Roslyn `csc.exe` with `/target:library /optimize+ /deterministic`
 
 ---
 
-## 5. DLLs Patcheadas (IL Assembly)
+## 17. System Prompt & LLM Intelligence
 
-Todas as DLLs foram patcheadas usando `ildasm` (disassemble) → edição manual do `.il` → `ilasm` (reassemble).
+The shim injects a comprehensive system prompt (`COMOS_SYSTEM_PROMPT`) into every LLM request. This prompt contains 13+ rules that govern tool selection, retry behavior, attribute handling, and context awareness.
 
-### 5.1 Comos.EngineeringAssistant.BasicFunctions.dll
+### Key Behavioral Rules
 
-**Workspace de patch:** `%TEMP%\comos_patch\`
-
-| Versão | Arquivo de Backup | Modificação |
-|--------|-------------------|-------------|
-| **Original** | `.dll.original` | Backup do DLL nativo |
-| **v1** | `.dll.locked` / `.dll.locked_20260216_201625` | Adicionado `search_spec_recursive` — busca recursiva de especificações até 10 níveis de profundidade |
-| **v2** | `.dll.locked_v2` / `.dll.locked_v2_20260216_202953` | Corrigido cast `isinst` quebrado em `ValueOfAttributeWithNameOrDescription` |
-| **v3** | (versão ativa) | Adicionada concatenação de unidade (`sp.get_Unit()`) — valores retornados agora incluem a unidade (ex: "100 kW" em vez de "100") |
-
-**Métodos alterados:**
-- `SearchSpecRecursive` — helper recursivo para busca de specs
-- `ValueOfAttributeWithNameOrDescription` — cast fix + unit concatenation
-- `NavigateToAttributeByNameOrDescription` — integração com busca recursiva
-
-### 5.2 Comos.WPF.ExtendedControls.dll
-
-| Versão | Modificação |
-|--------|-------------|
-| **Original** | `.dll.original` — backup |
-| **Patch** | Adicionadas flags CefSharp: `--enable-media-stream`, `--use-fake-ui-for-media-stream`, `--unsafely-treat-insecure-origin-as-secure=localfolder://twodcvisualizer` |
-
-> **Nota:** Essas flags do CefSharp não são suficientes para resolver o problema do `getUserMedia` em `localfolder://`. A solução final foi a gravação server-side via MCI.
+| # | Rule | Effect |
+|---|------|--------|
+| 1 | Only use tools from `tools` array | Prevents hallucinated tool calls |
+| 2 | Never mention PDF/P&ID capabilities | Clean separation between COMOS tools and ServiceiPID |
+| 7 | Max 1 tool call per response | Works within COMOS 3-iteration limit |
+| 10 | Prefer `navigate_to_comos_object_by_name` | Most reliable — full tree scan |
+| 10a | Try name variations (with/without hyphen) | "PC-001" → "PC001" retry |
+| 11 | Call attribute tools immediately | No confirmation prompts for lookups |
+| 11a | Retry up to 4 times with variations | "Shaft Power" → "Power" → "P_shaft" → "Shaft" |
+| 12 | Write workflow: use prior systemUID if available | Direct writes without read-first when context exists |
+| 12a | Extract context from C# format tool results | Parse `{ success = True, objectName = PC001, systemUID = A541598NS5 }` |
 
 ---
 
-## 6. Voice Input (Entrada por Voz)
-
-### Problema
-
-O CefSharp carrega páginas via `localfolder://`, que **não é um secure context** no Chromium 136+. Consequências:
-- `navigator.mediaDevices.getUserMedia()` fica **completamente indisponível**
-- `SpeechRecognition.start()` dispara erro `"not-allowed"` mesmo com a classe existindo globalmente
-- Nenhuma flag CefSharp resolve isso
-
-### Solução: Gravação Server-Side (MCI + Azure Whisper)
-
-```
-Browser (CefSharp)                    Servidor (Node.js Shim)
-─────────────────                    ──────────────────────────
-speech-polyfill.js                   ai-api-shim.js
-     │                                    │
-     │  POST /mic/start ──────────►      │ Spawna PowerShell
-     │                                    │ MCI: open waveaudio
-     │                                    │ MCI: record capture
-     │     "Recording..."                 │ Grava do mic Windows
-     │                                    │
-     │  POST /mic/stop ───────────►      │ MCI: stop capture
-     │                                    │ MCI: save WAV
-     │                                    │ Envia WAV → Azure Whisper
-     │      { text: "Hello" }    ◄────── │ Retorna transcrição
-     │                                    │
-     │  onresult({ transcript })          │
-     │  [120ms delay]                     │
-     │  onend()                           │
-     │                                    │
-     │  useEffect copia para input        │
-     ▼                                    ▼
-```
-
-### Componentes da Solução
-
-1. **`speech-polyfill.js`** — substitui incondicionalmente `window.SpeechRecognition` e `window.webkitSpeechRecognition` com `WhisperSpeechRecognition`
-2. **MCI (winmm.dll)** — grava áudio do microfone padrão do Windows via PowerShell + P/Invoke
-3. **Azure Whisper** — transcreve o WAV em texto
-
-### Timing Crítico (React 18 Batching Fix)
-
-O widget React usa um `useEffect` que só copia transcript → input **enquanto `isListening` é `true`**:
-```javascript
-useEffect(() => {
-    W && M && f !== W && (h(W), g(tg(W)))
-}, [W, M, f, h, g])
-```
-
-Se `onresult` e `onend` dispararem no mesmo tick, React batcha as atualizações e o `useEffect` vê `isListening=false` → transcript é perdido. Solução: **120ms de delay** entre `onresult` e `_fireEnd()`.
-
----
-
-## 7. Funcionalidades Customizadas do Shim
-
-### 7.1 System Prompt Injection
-
-O shim injeta `COMOS_SYSTEM_PROMPT` em toda chamada `/completions`. Contém 12+ regras:
-
-| Regra | Descrição |
-|-------|-----------|
-| **1** | Só usar tools do array `tools` |
-| **2** | Nunca mencionar PDF/P&ID/ServiceiPID |
-| **7** | Máximo 1 tool call por resposta |
-| **8** | Até 4 retentativas para lookup de atributos |
-| **10** | Ordem de preferência para tools de navegação |
-| **11** | Attribute lookups devem ser chamados imediatamente, sem confirmação |
-| **11a-11f** | Sub-regras de retry, contagem (PT+EN), contagem filtrada, report obrigatório |
-| **12** | Operações de escrita só com tool dedicado |
-
-### 7.2 Fabricação de Tool Calls
-
-O shim pode fabricar tool calls **sem chamar o LLM**, retornando diretamente ao COMOS:
-
-| Cenário | Fabricação |
-|---------|------------|
-| **Contagem de equipamentos** | Detecta "quantos pumps?" → fabrica `get_count_of_comos_objects_with_name({objectName: "pump"})` |
-| **Atributo VALUE** | Detecta "qual a potência?" → fabrica `ValueOfAttributeWithNameOrDescription({attributeName: "shaft power"})` |
-| **Atributo NAVIGATION** | Detecta "navegar para pressão" → fabrica `NavigateToAttributeByNameOrDescription({attributeName: "pressure"})` |
-| **Follow-up confirmation** | Detecta "sim" após contagem pendente → fabrica tool call |
-| **Auto-retry** | Atributo retorna "not found" → fabrica retry com alternativas |
-
-### 7.3 Detecção de Intent Bilíngue (PT + EN)
-
-| Função | Propósito |
-|--------|-----------|
-| `isObjectCountIntent(text)` | Detecta "how many" / "quantos" / "contagem" / "qtd" |
-| `extractObjectNameForCountQuery(text)` | Extrai nome do objeto da query de contagem |
-| `normalizeLooseCountTarget(value)` | Mapeia plurais → singular (EN + PT) |
-| `isFilteredObjectCountIntent(text)` | Detecta contagem com filtro (ex: "quantas bombas com 100 kW") |
-| `isFollowUpConfirmation(text)` | Detecta "sim" / "yes" / "ok" / "pode" / "go ahead" |
-
-### 7.4 Normalização de Equipamentos
-
-Mapa bilíngue que normaliza nomes de equipamentos para a forma canônica:
-```javascript
-{ pumps: "pump", bombas: "bomba", válvulas: "válvula",
-  motors: "motor", motores: "motor", instruments: "instrument", ... }
-```
-
-### 7.5 Fuzzy Matching (Levenshtein)
-
-- `levenshteinDistance(a, b)` — distância de edição DP
-- `generateAttributeAlternatives(name)` — gera aliases para nomes de atributos
-- Mapa de aliases bilíngue: "shaft power", "pressure", "temperatura", etc.
-- Tolerance: Levenshtein ≤ 2 (corrige typos como "Shatf Power" → "Shaft Power")
-
-### 7.6 Budget Counter (Anti-Loop)
-
-- COMOS .NET permite máximo **3 iterações** por mensagem
-- O shim conta tool calls fabricados com prefixo `call_shim_`
-- Limite: **2 fabricações** máximas (a 3ª iteração é para a resposta textual)
-- Evita loops infinitos de re-fabricação
-
-### 7.7 Stripping de systemUID
-
-O shim **remove** qualquer `systemUID` que o LLM alucine em tool calls de navegação de atributos. Motivo:
-- DLL path #1: `LoadObjectByType(systemUID)` → frequentemente falha
-- DLL path #2: `get_navigator_selected_object()` → funciona após navegação
-- Sem systemUID → DLL usa path #2 (mais confiável)
-
-### 7.8 Adaptação de Formato COMOS
-
-O COMOS .NET espera formato proprietário com aliases PascalCase. O shim:
-- Normaliza mensagens de entrada: `function_call` legacy → `tool_calls` moderno
-- Adapta respostas: adiciona `Role`, `Content`, `FunctionCall`, `toolCalls` (PascalCase)
-- Repara tool messages órfãs (sem `tool_calls[].id` correspondente)
-
-### 7.9 Digitização Two-Step
-
-1. Detecta PDF anexado na mensagem
-2. **Step A:** Pergunta ao usuário: "P&ID ou Diagrama Elétrico?"
-3. **Step B:** Envia PDF + tipo para Gateway → ServiceiPID → análise completa
-4. Retorna links de download (Excel, VBS import script)
-
-### 7.10 force_tool_choice_none
-
-Quando a última mensagem é um resultado de tool, o shim força `tool_choice: "none"` para obrigar o LLM a produzir resposta textual. **Exceção:** se o resultado é navegação com sucesso E há query de atributo pendente → permite encadear navigate → attribute lookup.
-
----
-
-## 8. Endpoints — Referência Completa
+## 18. Endpoints Reference
 
 ### AI API Shim (:56401)
 
-| Método | Path | Descrição |
-|--------|------|-----------|
-| `HEAD` | `/api/ai/v1/completions` | Validação de conexão (COMOS .NET) |
-| `OPTIONS` | `*` | CORS preflight |
-| `POST` | `/api/ai/v1/completions` | **Chat principal** — digitização + tool-calling + proxy |
-| `POST` | `/api/ai/v1/completions/generate-title` | Gerar título de conversa |
+| Method | Path | Description |
+|--------|------|-------------|
+| `HEAD` | `/api/ai/v1/completions` | Connection validation (COMOS .NET) |
+| `POST` | `/api/ai/v1/completions` | **Main chat** — intent detection + fabrication + proxy |
+| `POST` | `/api/ai/v1/completions/generate-title` | Generate conversation title |
 | `POST` | `/api/ai/v1/transcribe` | Speech-to-text via Azure Whisper |
-| `POST` | `/api/ai/v1/mic/start` | Iniciar gravação de microfone (MCI) |
-| `POST` | `/api/ai/v1/mic/stop` | Parar gravação + transcrever |
-| `POST` | `/api/ai/v1/mic/abort` | Cancelar gravação |
-| `POST` | `/api/ai/v1/save-download` | Salvar arquivo em disco |
-| `POST` | `/api/ai/v1/attach-pdf` | Pré-carregar PDF para próxima mensagem |
-| `POST` | `/api/ai/v1/upload-pdf` | Upload direto de PDF |
-| `GET` | `/api/ai/v1/shim-status` | Status/debug do shim |
+| `POST` | `/api/ai/v1/mic/start` | Start microphone recording (MCI) |
+| `POST` | `/api/ai/v1/mic/stop` | Stop recording + transcribe |
+| `POST` | `/api/ai/v1/mic/abort` | Cancel recording |
+| `POST` | `/api/ai/v1/save-download` | Save file to disk |
+| `POST` | `/api/ai/v1/attach-pdf` | Pre-load PDF for next message |
+| `POST` | `/api/ai/v1/upload-pdf` | Direct PDF upload |
+| `GET` | `/api/ai/v1/shim-status` | Shim status/debug |
+| `GET` | `/api/ai/v1/agent-events` | SSE stream for agent thinking events |
 | `GET` | `/comos/download/:id` | Proxy download → gateway |
-| `POST` | `/comos/export-excel` | Proxy export Excel → gateway |
-| `POST` | `/comos/generate-import-script` | Proxy VBS script → gateway |
-| `*` | `*` | Default: proxy → AI API (:56400) |
+| `POST` | `/comos/export-excel` | Proxy Excel export → gateway |
+| `POST` | `/comos/generate-import-script` | Proxy VBS generation → gateway |
+| `*` | `*` | Default: proxy → C# AI API (:56400) |
 
-### Gateway (:8100)
+### COMOS Gateway (:8100)
 
-| Método | Path | Descrição |
-|--------|------|-----------|
+| Method | Path | Description |
+|--------|------|-------------|
 | `GET` | `/health` | Health check |
-| `GET` | `/comos/tools` | Listar MCP tools disponíveis |
-| `POST` | `/comos/chat` | Chat COMOS (com MCP tool loop) |
-| `POST` | `/v1/chat/completions` | Chat OpenAI-compatible (com MCP) |
-| `POST` | `/v1/chat/completion` | Alias do acima |
-| `POST` | `/v1/chat/completions/raw` | LLM passthrough direto (sem MCP) |
-| `POST` | `/comos/analyze-direct` | Análise direta de PDF |
-| `POST` | `/comos/generate-circuit` | Gerar circuito |
-| `POST` | `/comos/match-component` | Matching de componentes |
-| `POST` | `/comos/export-excel` | Export Excel com tabela de confiança |
-| `GET` | `/comos/download/{file_id}` | Download de arquivo gerado |
-| `GET` | `/comos/excel-path/{file_id}` | Obter path do Excel |
-| `POST` | `/comos/generate-import-script` | Gerar script VBS de importação COMOS |
+| `GET` | `/comos/tools` | List MCP tools |
+| `POST` | `/comos/chat` | **MCP tool loop chat** |
+| `POST` | `/v1/chat/completions` | OpenAI-compatible chat (with MCP) |
+| `POST` | `/v1/chat/completion` | Alias |
+| `POST` | `/v1/chat/completions/raw` | **RAW LLM passthrough** (no MCP) |
+| `POST` | `/comos/analyze-direct` | Direct PDF analysis (bypasses MCP) |
+| `POST` | `/comos/extract-tags-direct` | Direct TAG extraction |
+| `POST` | `/comos/generate-circuit` | Generate circuit from NL |
+| `POST` | `/comos/match-component` | Single component matching |
+| `POST` | `/comos/regen-embeddings` | Regenerate embedding caches |
+| `POST` | `/comos/reload-cache` | Reload PKL caches |
+| `POST` | `/comos/export-excel` | Generate Excel workbook |
+| `GET` | `/comos/download/{file_id}` | Download generated file |
+| `GET` | `/comos/excel-path/{file_id}` | Get file disk path |
+| `POST` | `/comos/generate-import-script` | Generate VBScript |
+| `POST` | `/comos/rag-ingest` | Index RAG documents |
+| `POST` | `/comos/rag-query` | Semantic search |
+| `POST` | `/comos/rag-ask` | RAG Q&A |
+| `GET` | `/comos/rag-stats` | RAG statistics |
+| `GET` | `/comos/rag-documents` | List RAG documents |
+| `POST` | `/comos/rag-add-file` | Add file to RAG |
 
 ### ServiceiPID Backend (:8000)
 
-| Método | Path | Descrição |
-|--------|------|-----------|
+| Method | Path | Description |
+|--------|------|-------------|
 | `GET` | `/health` | Health check |
-| `GET` | `/ping` | Ping |
-| `GET` | `/progress` | Tracking de progresso |
-| `POST` | `/analyze` | **Análise principal** de P&ID/diagramas |
-| `POST` | `/generate` | Gerar diagrama |
-| `GET` | `/describe` | Descrever P&ID |
-| `POST` | `/chat` | Chat sobre P&IDs |
-| `POST` | `/store` | Armazenar dados |
-| `POST` | `/enable_cv2` | Habilitar OpenCV |
+| `GET` | `/ping` | Model/runtime info |
+| `GET` | `/progress` | SSE progress stream |
+| `POST` | `/analyze` | **Main P&ID analysis** |
+| `POST` | `/extract-tags` | TAG extraction |
+| `POST` | `/generate` | Diagram generation from NL |
+| `GET` | `/describe` | P&ID description |
+| `POST` | `/chat` | P&ID chatbot |
+| `POST` | `/store` | Store P&ID data |
+| `GET` | `/knowledge-base` | List stored P&IDs |
+| `POST` | `/enable_cv2` | Enable OpenCV at runtime |
 
 ---
 
-## 9. Configurações e Variáveis de Ambiente
+## 19. Configuration Reference
 
 ### Azure OpenAI
 
-| Configuração | Valor |
-|-------------|-------|
-| **Endpoint** | `https://openai-aittack-msa-001070-swedencentral-aifordipaswidser-00.openai.azure.com` |
-| **API Key** | `arquivo .env` |
-| **API Version** | `2024-12-01-preview` |
-| **Modelo Chat** | `gpt-5` |
+| Setting | Value |
+|---------|-------|
+| Endpoint | `https://openai-aittack-msa-001070-swedencentral-aifordipaswidser-00.openai.azure.com` |
+| API Key | `.env` file |
+| API Version | `2024-12-01-preview` |
+| Chat Model | `gpt-5` |
 
-### Azure Whisper (Speech-to-Text)
+### Azure Whisper
 
-| Configuração | Valor |
-|-------------|-------|
-| **Endpoint** | `https://openai-aittack-msa-001070-swedencentral-aifordipaswidser-00.cognitiveservices.azure.com` |
-| **Deployment** | `whisper` |
-| **API Version** | `2024-06-01` |
-| **API Key** | mesma da Azure OpenAI |
+| Setting | Value |
+|---------|-------|
+| Endpoint | `*.cognitiveservices.azure.com` |
+| Deployment | `whisper` |
+| API Version | `2024-06-01` |
 
-### Variáveis de Ambiente do Gateway
+### Environment Variables
 
-| Variável | Default | Descrição |
-|----------|---------|-----------|
-| `COMOS_GATEWAY_PORT` | `8100` | Porta do gateway |
-| `COMOS_GATEWAY_HOST` | `0.0.0.0` | Host do gateway |
-| `COMOS_GATEWAY_MODEL` | `gpt-5` | Modelo LLM |
-| `COMOS_MCP_COMMAND` | `sys.executable` | Comando MCP |
-| `COMOS_MCP_ARGS` | `-m backend.mcp_server` | Args MCP |
-| `COMOS_MCP_TOOL_TIMEOUT_S` | `600` | Timeout de tool (s) |
-| `COMOS_TOOL_RESULT_CHAR_LIMIT` | `12000` | Limite chars por tool result |
-| `SERVICEIPID_API_BASE_URL` | `http://127.0.0.1:8000` | URL do ServiceiPID |
-
-### Variáveis do ServiceiPID Backend
-
-| Variável | Default | Descrição |
-|----------|---------|-----------|
-| `PRIMARY_MODEL` | `gpt-5.2` | Modelo primário |
-| `FALLBACK_MODEL` | `gpt-5.1` | Modelo fallback |
-| `OPENAI_REQUEST_TIMEOUT` | `600` | Timeout (s) |
+| Variable | Default | Used By |
+|----------|---------|---------|
+| `OPENAI_API_KEY` | — | Gateway, Backend |
+| `AZURE_OPENAI_ENDPOINT` | — | Gateway, Backend |
+| `AZURE_OPENAI_API_KEY` | — | Gateway, Backend |
+| `COMOS_GATEWAY_PORT` | `8100` | Gateway |
+| `COMOS_GATEWAY_MODEL` | `gpt-5` | Gateway |
+| `COMOS_MCP_TOOL_TIMEOUT_S` | `600` | Gateway |
+| `COMOS_TOOL_RESULT_CHAR_LIMIT` | `12000` | Gateway |
+| `SERVICEIPID_API_BASE_URL` | `http://127.0.0.1:8000` | MCP Server |
+| `PRIMARY_MODEL` | `gpt-5.2` | Backend |
+| `FALLBACK_MODEL` | `gpt-5.1` | Backend |
+| `OPENAI_REQUEST_TIMEOUT` | `600` | Backend |
 
 ---
 
-## 10. Como Inicializar o Sistema
+## 20. Adding New MCP Tools
 
-### Ordem de Inicialização
+To extend the system with new MCP tools that the LLM can call through the gateway:
 
-**Os serviços devem ser iniciados nesta ordem:**
+### Step 1: Add the Tool Function in the MCP Server
 
+Edit `ServiceiPID\backend\mcp_server.py` and add a new `@mcp.tool()` decorated function:
+
+```python
+@mcp.tool()
+async def my_new_tool(
+    param1: str,
+    param2: int = 10,
+) -> str:
+    """
+    Description of what the tool does.
+    The LLM sees this docstring to decide when to call it.
+    """
+    result = await _request_backend("POST", "/my-endpoint", json_body={
+        "param1": param1,
+        "param2": param2,
+    })
+    return json.dumps(result, ensure_ascii=False)
 ```
-1. ServiceiPID Backend (:8000)  ← deve subir primeiro (dependência do Gateway)
-2. COMOS Gateway (:8100)        ← depende do Backend
-3. AI API Shim (:56401)         ← depende do Gateway e AI API
-4. COMOS Desktop                ← depende do Shim e AI API (:56400)
+
+### Step 2: Add the Backend Endpoint (if needed)
+
+If the tool needs new backend logic, add a FastAPI endpoint in `backend.py`:
+
+```python
+@app.post("/my-endpoint")
+async def my_endpoint(param1: str, param2: int = 10):
+    # Your logic here
+    return {"result": "..."}
 ```
 
-### Comandos
+### Step 3: Update the Gateway System Prompt (optional)
 
-#### 1. ServiceiPID Backend (porta 8000)
+If you want the LLM to have specific policies for using the tool, edit the system prompt in `comos_gateway.py`:
+
+```python
+SYSTEM_PROMPT = """...
+- Use `my_new_tool` when the user asks about X.
+..."""
+```
+
+### Step 4: Update the Shim Hiding Rules (if needed)
+
+The shim's `COMOS_SYSTEM_PROMPT` (rule 2) tells the LLM to NOT mention ServiceiPID tools. If your new tool should be visible in the COMOS chat context, update the hiding rules in `ai-api-shim.js`.
+
+### Step 5: Restart Services
 
 ```powershell
-cd "c:\Users\z004uz0p\Downloads\ServiceiPID-main\ServiceiPID"
-.\.venv\Scripts\python.exe -m uvicorn backend.backend:app --host 0.0.0.0 --port 8000
-```
-
-#### 2. COMOS Gateway (porta 8100)
-
-```powershell
-cd "c:\Users\z004uz0p\Downloads\ServiceiPID-main\ServiceiPID"
+# Restart Gateway (which re-spawns MCP subprocess)
+$gw = Get-NetTCPConnection -LocalPort 8100 -State Listen | Select-Object -First 1
+Stop-Process -Id $gw.OwningProcess -Force
+# Start Gateway again
+cd "C:\Users\...\ServiceiPID"
 .\.venv\Scripts\python.exe -m uvicorn backend.comos_gateway:app --host 0.0.0.0 --port 8100
 ```
 
-#### 3. AI API Shim (porta 56401)
+### Adding External MCP Servers
+
+To connect a completely separate MCP server (not ServiceiPID):
+
+1. **Deploy your MCP server** as a separate process (stdio or HTTP transport)
+2. **Update `COMOS_MCP_COMMAND` and `COMOS_MCP_ARGS`** environment variables to point to your MCP server
+3. OR **modify `comos_gateway.py`** to spawn multiple MCP sessions and merge their tool lists
+
+For HTTP-based MCP (instead of stdio), the MCP server can use `streamable-http` transport:
+```python
+# In your MCP server:
+mcp.run(transport="streamable-http", host="127.0.0.1", port=8765)
+```
+
+Then configure the gateway to connect via HTTP instead of spawning a subprocess.
+
+---
+
+## 21. Adding New C# SDK Tools
+
+To add new tools that execute locally in COMOS through the COM SDK:
+
+### Step 1: Create the Tool Class
+
+Create a new `.cs` file in `Bin\SDK\AI\`:
+
+```csharp
+using System;
+using System.ComponentModel.Composition;
+using Comos.Ai.Functions;
+
+namespace MyPlugin
+{
+    [Export(typeof(AIComosTool))]
+    public class MyTool : AIComosTool
+    {
+        public string ToolScope => "MyScope"; // NEVER use "comos"
+
+        // CRITICAL: Workset pattern — private get, public set
+        private static IComosDWorkset _workset;
+        public static IComosDWorkset Workset
+        {
+            private get { return _workset; }
+            set { _workset = value; }
+        }
+
+        [AiFunction("Description of what this tool does")]
+        public object my_tool_function(
+            [DescribeParameter("Description of param1")] string param1,
+            [DescribeParameter("Description of param2")] string param2 = "default")
+        {
+            // Access COMOS via Workset
+            var project = Workset.Project;
+            // ... your logic ...
+            return new { success = true, message = "Done" };
+        }
+    }
+}
+```
+
+### Step 2: Compile
 
 ```powershell
-cd "c:\Program Files (x86)\COMOS\Team_AI\scripts"
+$CSC = "C:\Program Files\Microsoft Visual Studio\2022\Community\MSBuild\Current\Bin\Roslyn\csc.exe"
+$BIN = "C:\Program Files (x86)\COMOS\Team_AI\Bin"
+& $CSC /target:library /optimize+ /out:"$BIN\SDK\AI\MyTool.dll" `
+    /reference:"$BIN\Comos.Ai.Functions.dll" `
+    /reference:"$BIN\Comos.Ai.Contracts.dll" `
+    /reference:"$BIN\Interop.Plt.dll" `
+    /reference:"$BIN\Interop.ComosQSGlobalObj.dll" `
+    /reference:"C:\Windows\Microsoft.NET\Framework64\v4.0.30319\Microsoft.CSharp.dll" `
+    /reference:"C:\Windows\Microsoft.NET\assembly\GAC_MSIL\System.ComponentModel.Composition\v4.0_4.0.0.0__b77a5c561934e089\System.ComponentModel.Composition.dll" `
+    "$BIN\SDK\AI\MyTool.cs"
+```
+
+### Step 3: Deploy
+
+1. Close COMOS
+2. Place `MyTool.dll` in `Bin\SDK\AI\`
+3. Restart COMOS — MEF discovers the new DLL automatically
+
+### Key Rules
+
+| Rule | Details |
+|------|---------|
+| **Workset** | Must have `private get` + `public set` + `static` — or registration silently fails |
+| **ToolScope** | Never `"comos"` — that's reserved for native tools |
+| **Return types** | Anonymous types with simple fields. Use `string.Join("; ", list)` — never `.ToArray()` |
+| **Timeout** | 30s per tool call (hardcoded). Batch `Report.Open/Save/Close` — never per-object |
+| **Target** | .NET Framework 4.x only |
+| **Directory** | Flat in `Bin\SDK\AI\` — no subdirectories scanned |
+
+---
+
+## 22. Startup & Health Checks
+
+### Start All Services
+
+```powershell
+# 1. ServiceiPID Backend (port 8000)
+cd "C:\Users\z004uz0p\Downloads\ServiceiPID-main\ServiceiPID"
+.\.venv\Scripts\python.exe -m uvicorn backend.backend:app --host 0.0.0.0 --port 8000
+
+# 2. COMOS Gateway (port 8100)
+.\.venv\Scripts\python.exe -m uvicorn backend.comos_gateway:app --host 0.0.0.0 --port 8100
+
+# 3. AI API Shim (port 56401)
+cd "C:\Program Files (x86)\COMOS\Team_AI\scripts"
 node ai-api-shim.js --port 56401 --ai-api-base http://localhost:56400 --gateway-base http://localhost:8100
+
+# 4. COMOS Desktop — start normally (starts :56400 automatically)
 ```
 
-> O C# AI API (:56400) é iniciado automaticamente pelo COMOS Desktop.
+Or use the convenience script: `ServiceiPID\backend\Start_COMOS_AI.bat`
 
-#### 4. COMOS Desktop
-
-Iniciar o COMOS normalmente através do atalho ou `Comos.exe`.
-
-### Verificação de Saúde
+### Health Checks
 
 ```powershell
-# Verificar todas as portas
-netstat -ano | Select-String "LISTENING" | Select-String ":8000|:8100|:56400|:56401"
-
-# Health checks
-Invoke-RestMethod http://127.0.0.1:8000/health    # ServiceiPID
-Invoke-RestMethod http://127.0.0.1:8100/health    # Gateway
+Invoke-RestMethod http://127.0.0.1:8000/health     # Backend
+Invoke-RestMethod http://127.0.0.1:8100/health     # Gateway
 Invoke-RestMethod http://127.0.0.1:56401/api/ai/v1/shim-status  # Shim
+netstat -ano | Select-String ":8000|:8100|:56400|:56401" | Select-String "LISTEN"
 ```
 
-### Parar Tudo
+### Stop All Services
 
 ```powershell
-# Parar Shim
-$sh = Get-NetTCPConnection -LocalPort 56401 -State Listen -ErrorAction SilentlyContinue | Select-Object -First 1
-if ($sh) { Stop-Process -Id $sh.OwningProcess -Force }
-
-# Parar Gateway
-$gw = Get-NetTCPConnection -LocalPort 8100 -State Listen -ErrorAction SilentlyContinue | Select-Object -First 1
-if ($gw) { Stop-Process -Id $gw.OwningProcess -Force }
-
-# Parar Backend
-$be = Get-NetTCPConnection -LocalPort 8000 -State Listen -ErrorAction SilentlyContinue | Select-Object -First 1
-if ($be) { Stop-Process -Id $be.OwningProcess -Force }
+@(56401, 8100, 8000) | ForEach-Object {
+    $conn = Get-NetTCPConnection -LocalPort $_ -State Listen -ErrorAction SilentlyContinue | Select-Object -First 1
+    if ($conn) { Stop-Process -Id $conn.OwningProcess -Force; Write-Host "Stopped :$_" }
+}
 ```
 
 ---
 
-## 11. Resumo de Tudo que Foi Feito
-
-### Fase 1 — Inteligência do Shim (Tool-Calling e Intent Detection)
-
-1. **Detecção de intent de contagem bilíngue (PT + EN)** — o shim detecta perguntas como "quantos pumps?" e fabrica tool calls automaticamente sem chamar o LLM
-2. **Normalização de equipamentos** — mapa bilíngue que converte plurais e variações para a forma canônica (ex: "bombas" → "bomba", "pumps" → "pump")
-3. **Confirmação de follow-up** — detecta respostas curtas ("sim", "ok", "yes") e associa com intenção pendente na conversa
-4. **`buildFabricatedToolCallResponse()`** — constrói respostas de tool call no formato exato que o COMOS .NET espera (PascalCase + camelCase aliases)
-5. **Fix de loop infinito de re-fabricação** — sistema de budget counter para evitar loops
-6. **`extractLastSystemUidFromConversation()`** — rastreia qual objeto COMOS está selecionado no momento
-7. **`enrichAttributeToolCalls()`** — remove systemUIDs alucinados pelo LLM para forçar uso do path mais confiável (objeto selecionado no navigator)
-8. **System prompt com 12+ regras** — injection em toda chamada, com regras 11a-11f para atributos
-9. **Fix de LLM recusando attribute tools** — rules 11a-11f para forçar uso imediato sem confirmação
-10. **Fabricação de tool calls para VALUE e NAVIGATION de atributos** — detecção de intent → fabricação direta
-11. **Auto-retry de atributos** — quando "not found" → tenta com alternativas
-12. **Smart `force_tool_choice_none`** — exceção para permitir encadeamento navigate → attribute
-13. **Budget counter com LIMIT_REACHED** — limita a 2 fabricações por mensagem
-14. **Fuzzy matching Levenshtein** — corrige typos em nomes de atributos (distância ≤ 2)
-15. **Remoção de systemUID de todas as chamadas de atributo** — fix global
-
-### Fase 2 — Patches de DLL (IL Assembly)
-
-16. **DLL v1** — `search_spec_recursive`: helper recursivo para busca de especificações até 10 níveis de profundidade. Resolveu o problema de atributos não encontrados em objetos com specs aninhadas
-17. **DLL v2** — Fix de cast `isinst` quebrado em `ValueOfAttributeWithNameOrDescription` que causava crash
-18. **DLL v3** — Concatenação de unidade (`sp.get_Unit()`) — valores retornam com unidade (ex: "100 kW" em vez de "100")
-
-> Todos os patches via workflow: `ildasm` → edição `.il` → `ilasm` → deploy
-
-### Fase 3 — Voice Input (Entrada por Voz)
-
-19. **Habilitação do botão de voz** — `voiceInput: false` → `true` em `chat-app.js`
-20. **Patches CefSharp** — flags `--enable-media-stream`, `--use-fake-ui-for-media-stream`, `--unsafely-treat-insecure-origin-as-secure` no DLL `ExtendedControls`
-21. **Descoberta:** CefSharp `localfolder://` não é secure context — `getUserMedia` é fundamentalmente indisponível no Chromium 136+, nenhuma flag resolve
-22. **Solução server-side: Gravação MCI** — 3 novos endpoints no shim (`mic/start`, `mic/stop`, `mic/abort`) usando PowerShell + `winmm.dll` (MCI) para gravar do microfone padrão do Windows
-23. **Criação do `speech-polyfill.js`** — polyfill que substitui `SpeechRecognition` nativa pela pipeline server-side (MCI + Azure Whisper)
-24. **Endpoint `/api/ai/v1/transcribe`** — transcrição via Azure Whisper (deployment `whisper`, API version `2024-06-01`)
-25. **Testes confirmados:** gravação funcional (WAV 38-57KB), transcrição precisa ("HELLO HELLO HELLO HELLO", "Hello. Hello.")
-26. **Fix "Microphone access denied"** — Chromium 136 define `SpeechRecognition` globalmente mesmo em non-secure contexts, mas `start()` dispara `not-allowed`. Fix: instalação INCONDICIONAL do polyfill (sempre sobrescreve os globals)
-27. **Fix "Transcript not appearing in chat"** — React 18 batching: `onresult` e `onend` disparavam synchronously → `useEffect` via `isListening=false` antes de processar transcript. Fix: 120ms `setTimeout` entre `onresult` e `_fireEnd()`
-28. **Cache-busting** — `speech-polyfill.js?v=4` em index.html para forçar reload
-
-### Fase 4 — Documentação
-
-29. **Documento de arquitetura** — este documento (`ARCHITECTURE.md`)
-
----
-
-## Apêndice: Estrutura de Diretórios
+## 23. File Structure
 
 ```
-C:\Program Files (x86)\COMOS\Team_AI\
-├── ARCHITECTURE.md               ← ESTE DOCUMENTO
+C:\Program Files (x86)\COMOS\Team_AI\          ← COMOS 10.7 Repository
+├── ARCHITECTURE.md                             ← This document
 ├── scripts\
-│   └── ai-api-shim.js            ← CUSTOMIZADO (5.234 linhas)
+│   └── ai-api-shim.js                         ← Smart proxy (~8,440 lines)
 ├── Bin\
-│   ├── agent.conf                ← NATIVO (porta 8080)
-│   ├── Comos.exe                 ← NATIVO
-│   ├── Comos.Services.Ai.Api.exe ← NATIVO (porta 56400)
-│   ├── Comos.EngineeringAssistant.BasicFunctions.dll      ← PATCHEADO v3
-│   ├── Comos.EngineeringAssistant.BasicFunctions.dll.*    ← backups (original, locked, v2)
-│   ├── Comos.WPF.ExtendedControls.dll                     ← PATCHEADO (CefSharp flags)
-│   ├── Comos.WPF.ExtendedControls.dll.original            ← backup
+│   ├── Comos.exe                               ← COMOS Desktop (native)
+│   ├── Comos.Services.Ai.Api.exe               ← C# AI API (native, port 56400)
+│   ├── Comos.EngineeringAssistant.BasicFunctions.dll  ← IL-patched (navigation, attributes)
+│   ├── Comos.WPF.ExtendedControls.dll          ← IL-patched (CefSharp flags)
+│   ├── SDK\
+│   │   └── AI\
+│   │       ├── Comos.ServiceiPID.Agent.cs      ← Custom DLL source (import/draw/connect/attrs)
+│   │       ├── Comos.ServiceiPID.Agent.dll     ← Compiled custom DLL
+│   │       ├── Comos.QueryCreator.Agent.cs     ← Custom DLL source (queries)
+│   │       ├── Comos.QueryCreator.Agent.dll    ← Compiled custom DLL
+│   │       ├── Comos.TestTool.Agent.cs         ← Test tool source
+│   │       ├── Comos.TestTool.Agent.dll        ← Compiled test DLL
+│   │       ├── Comos.Query.Agent.dll           ← Built-in (queries)
+│   │       ├── Comos.Report.Agent.dll          ← Built-in (reports)
+│   │       ├── Comos.Revsioning.Agent.dll      ← Built-in (revisions)
+│   │       ├── compile.bat                     ← Roslyn build script
+│   │       ├── README_COMOS_AI_Tools.md        ← SDK documentation
+│   │       └── _backups\                       ← DLL backups
 │   └── ThirdParty\
 │       ├── TwoDcChat\
-│       │   ├── index.html            ← CUSTOMIZADO (script tag adicionada)
-│       │   ├── chat-app.js           ← CUSTOMIZADO (voiceInput: true)
-│       │   ├── chat-widget.js        ← NATIVO (React bundle)
-│       │   ├── chat-widget.css       ← NATIVO
-│       │   └── speech-polyfill.js    ← CUSTOMIZADO (novo, MCI+Whisper)
-│       └── CefSharp\x86\            ← NATIVO (Chromium 136)
-│
-C:\Users\z004uz0p\Downloads\ServiceiPID-main\ServiceiPID\
+│       │   ├── index.html                      ← Modified (speech-polyfill script tag)
+│       │   ├── chat-app.js                     ← Modified (voiceInput, PDF upload, ~1,565 lines)
+│       │   ├── chat-widget.js                  ← Native React bundle
+│       │   ├── chat-widget.css                 ← Native styles
+│       │   └── speech-polyfill.js              ← Custom (MCI + Azure Whisper voice)
+│       └── CefSharp\x86\                       ← Native Chromium 136
+
+C:\Users\...\ServiceiPID-main\ServiceiPID\     ← ServiceiPID Repository
 ├── backend\
-│   ├── backend.py                ← CUSTOMIZADO (porta 8000)
-│   ├── comos_gateway.py          ← CUSTOMIZADO (porta 8100)
-│   └── mcp_server.py             ← CUSTOMIZADO (MCP tools)
-└── .venv\                        ← Python virtual environment
+│   ├── backend.py                              ← P&ID analysis engine (~6,700 lines)
+│   ├── comos_gateway.py                        ← MCP orchestrator (~1,700 lines)
+│   ├── mcp_server.py                           ← MCP tool server (~245 lines)
+│   ├── system_matcher.py                       ← Embedding-based component matching (~1,280 lines)
+│   ├── rag_engine.py                           ← RAG document search engine (~623 lines)
+│   ├── referencia_systems.xlsx                 ← P&ID reference data
+│   ├── Referencia_systems_electrical.xlsx      ← Electrical reference data
+│   ├── ref_embeddings_pid.pkl                  ← Cached P&ID embeddings
+│   ├── ref_embeddings_electrical.pkl           ← Cached electrical embeddings
+│   ├── rag_documents\                          ← RAG document storage
+│   ├── rag_index.pkl                           ← Persisted RAG index
+│   ├── start_all_services.ps1                  ← Startup script
+│   ├── Start_COMOS_AI.bat                      ← BAT wrapper
+│   ├── MCP_SETUP.md                            ← MCP setup guide
+│   └── COMOS_GATEWAY_SETUP.md                  ← Gateway setup guide
+├── .venv\                                      ← Python virtual environment
+└── requirements.txt                            ← Python dependencies
 ```
 
 ---
 
-*Documento gerado em 16/02/2026 por GitHub Copilot (Claude Opus 4.6)*
+*Generated on February 26, 2026 by GitHub Copilot (Claude Opus 4.6)*
+

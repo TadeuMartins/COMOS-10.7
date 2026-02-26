@@ -853,6 +853,20 @@ public class ImportAgent : AIComosTool
 					list3.Add("Coil safety draw error: " + ex.Message);
 				}
 			}
+			// ── AutoConnect: render physical connection lines on diagram ──
+			string autoConnectResult = "skipped";
+			if (num3 > 0)
+			{
+				try
+				{
+					autoConnectResult = RunAutoConnect(obj);
+				}
+				catch (Exception acEx)
+				{
+					list3.Add("AutoConnect error: " + acEx.Message);
+					autoConnectResult = "error: " + acEx.Message;
+				}
+			}
 			string errors = ((list3.Count > 0) ? string.Join("; ", list3) : "");
 			return new
 			{
@@ -861,6 +875,7 @@ public class ImportAgent : AIComosTool
 				drawn = num2,
 				connections = num3,
 				skipped = num4,
+				autoConnect = autoConnectResult,
 				errorCount = list3.Count,
 				errors = errors,
 				message = string.Format("Import complete: {0} objects created, {1} positioned on diagram at XY coordinates, {2} connections made.{3}", num, num2, num3, (list3.Count > 0) ? $" {list3.Count} errors occurred." : "")
@@ -3299,6 +3314,16 @@ public class ImportAgent : AIComosTool
 					targetResolutionMode = targetResolutionMode
 				};
 			}
+			// ── AutoConnect: render physical connection lines on diagram ──
+			string autoConnectResult = "skipped";
+			try
+			{
+				autoConnectResult = RunAutoConnect(obj2);
+			}
+			catch (Exception acEx)
+			{
+				autoConnectResult = "AutoConnect exception: " + acEx.Message;
+			}
 			return new
 			{
 				success = true,
@@ -3310,6 +3335,7 @@ public class ImportAgent : AIComosTool
 				sourceResolved = sourceResolved,
 				targetResolved = targetResolved,
 				message = $"Connected {sourceTag} (EB02) → {targetTag} (EB01) successfully.",
+				autoConnect = autoConnectResult,
 				documentUID = text,
 				strictScope = "document-owner",
 				sourceResolutionMode = sourceResolutionMode,
@@ -3348,6 +3374,80 @@ public class ImportAgent : AIComosTool
 			}
 			catch
 			{
+			}
+		}
+	}
+
+	/// <summary>
+	/// Runs COMOS AutoConnect on a diagram document to render physical
+	/// connection lines (wires/pipes) for all logical connections.
+	/// Opens the report, calls StartAutoConnect, removes error markers
+	/// (ErrorNumber == 1), saves, and leaves the report open.
+	/// </summary>
+	private string RunAutoConnect(object docObj)
+	{
+		dynamic autoConnect = null;
+		try
+		{
+			Type acType = Type.GetTypeFromProgID("Comos.WSP.XDocElo.AutoConnect");
+			if (acType == null) return "AutoConnect COM class not registered";
+			autoConnect = Activator.CreateInstance(acType);
+
+			IComosDDocument comosDoc = docObj as IComosDDocument;
+			if (comosDoc == null) return "docObj is not IComosDDocument — skipped";
+
+			dynamic iRep = comosDoc.Report();
+			if (iRep == null) return "Report() returned null";
+
+			iRep.Open();
+			dynamic rDoc = iRep.ReportDocument;
+			if (rDoc == null) return "ReportDocument is null";
+
+			autoConnect.SetContainer(rDoc);
+			autoConnect.SetXDoc(rDoc.XDoc);
+			autoConnect.StartAutoConnect();
+
+			iRep.Save();
+
+			// Clean up error markers (ErrorNumber == 1) — same as VBS doAutoConnect
+			try
+			{
+				GlobalCastings gc = new GlobalCastings();
+				int itemCount = (int)rDoc.itemCount;
+				for (int i = itemCount - 1; i >= 0; i--)
+				{
+					try
+					{
+						dynamic item = rDoc.item(i);
+						dynamic roErr = gc.GC_GetIROError((object)item);
+						if (roErr != null)
+						{
+							int errNum = (int)roErr.ErrorNumber;
+							if (errNum == 1)
+							{
+								item.Delete();
+							}
+						}
+					}
+					catch { }
+				}
+			}
+			catch { }
+
+			iRep.Save();
+			// Do NOT close the report — keep diagram open per user requirement
+
+			return "ok";
+		}
+		catch (Exception ex)
+		{
+			return "AutoConnect error: " + ex.Message;
+		}
+		finally
+		{
+			if (autoConnect != null)
+			{
+				try { Marshal.ReleaseComObject(autoConnect); } catch { }
 			}
 		}
 	}
