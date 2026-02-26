@@ -2132,12 +2132,12 @@ function formatTagExtractionResult(result, filename, sessionKey) {
 
   // Import offer
   msg += "\n\n---\n";
-  msg += "🏭 **Deseja criar estes objetos na hierarquia do COMOS?**\n\n";
-  msg += "Como esta é uma extração de TAGs, a criação será **somente na hierarquia** (sem desenho em diagrama).\n\n";
-  msg += "1. **Criar automaticamente** — Usa a ferramenta nativa para criar os objetos na hierarquia do COMOS\n";
-  msg += "2. **Gerar script VBS** — Gero um script para criar os objetos (executar no Object Debugger)\n\n";
-  msg += "Basta me dizer **qual diagrama** deseja usar e qual opção prefere.\n";
-  msg += "_Exemplo: \"Criar na hierarquia, opção 1\" ou \"Automático, FA.009\" (importação automática no diagrama FA.009)_";
+  msg += "🏭 **Would you like to create these objects in the COMOS hierarchy?**\n\n";
+  msg += "Since this is a TAG extraction, creation will be **hierarchy only** (no diagram drawing).\n\n";
+  msg += "1. **Create automatically** — Uses the native tool to create objects in the COMOS hierarchy\n";
+  msg += "2. **Generate VBS script** — I generate a script that creates the objects (run in Object Debugger)\n\n";
+  msg += "Just tell me **which diagram** you want to use and which option you prefer.\n";
+  msg += "_Example: \"Create in hierarchy, option 1\" or \"Automatic, FA.009\" (automatic import to diagram FA.009)_";
 
   return { error: false, message: msg };
 }
@@ -2797,12 +2797,12 @@ async function formatAnalysisResult(result, filename, diagramType, sessionKey) {
 
   // ── Append import offer ─────────────────────────────────────────────
   msg += "\n\n---\n";
-  msg += "🏭 **Deseja importar estes objetos em um diagrama COMOS?**\n\n";
-  msg += "Posso ajudá-lo de duas formas:\n";
-  msg += "1. **Criar automaticamente** — Usa a ferramenta nativa para criar os objetos na hierarquia do COMOS\n";
-  msg += "2. **Gerar script VBS** — Gero um script que cria os objetos **e desenha no diagrama** (executar no Object Debugger)\n\n";
-  msg += "Basta me dizer **qual diagrama** deseja usar (nome ou caminho no COMOS) e qual opção prefere.\n";
-  msg += "_Exemplo: \"Importar no diagrama =A1.10, opção 1\" ou \"Automático, FA.009\" (importação automática)_";
+  msg += "🏭 **Would you like to import these objects into a COMOS diagram?**\n\n";
+  msg += "I can help you in two ways:\n";
+  msg += "1. **Create automatically** — Uses the native tool to create objects in the COMOS hierarchy\n";
+  msg += "2. **Generate VBS script** — I generate a script that creates the objects **and draws them on the diagram** (run in Object Debugger)\n\n";
+  msg += "Just tell me **which diagram** you want to use (name or path in COMOS) and which option you prefer.\n";
+  msg += "_Example: \"Import to diagram =A1.10, option 1\" or \"Automatic, FA.009\" (automatic import)_";
 
   return { error: false, message: msg };
 }
@@ -3275,9 +3275,17 @@ function detectInteractiveDrawingIntent(msg) {
     /draw[ns]?\s+(an?\s+)?object/,
     /draw[ns]?\s+(an?\s+)?component/,
     /draw[ns]?\s+(an?\s+)?\d+\s+/,
+    // English — "draw a <type> at/on/in [the] [diagram/document] <docCode>"
+    // Catches: "Draw a Frequency Vector Starter at the diagram FS.001"
+    //          "Draw a Frequency Vector Starter on FS.001"
+    /draw[ns]?\s+(?:an?\s+)?\w[\w\s]*?\b(?:at|on|in)\s+(?:the\s+)?(?:(?:diagram|document)\s+)?[a-z]{2}\.\d/i,
+    // Portuguese — "desenhar um <tipo> no/na [diagrama/documento] <docCode>"
+    /desenhar\s+(?:um\s+)?\w[\w\s]*?\b(?:no|na|dentro)\s+(?:o\s+|a\s+)?(?:(?:diagrama|documento)\s+)?[a-z]{2}\.\d/i,
     /place\s+(an?\s+)?device/,
     /place\s+(an?\s+)?symbol/,
     /place\s+(an?\s+)?(object|equipment|component)/,
+    // English — "place a <type> at/on/in [the] [diagram/document] <docCode>"
+    /place\s+(?:an?\s+)?\w[\w\s]*?\b(?:at|on|in)\s+(?:the\s+)?(?:(?:diagram|document)\s+)?[a-z]{2}\.\d/i,
     /interactive\s+draw/,
     /drawing\s+mode/,
     /interactive\s+mode/,
@@ -3307,10 +3315,10 @@ function parseBatchDrawingRequest(msg) {
   const count = parseInt(countMatch[1], 10);
   if (count < 2 || count > 50) return null;
 
-  // Extract document name (FA.009, FB.001, etc.) or SystemUID
-  const docMatch = msg.match(/\b((?:FA|FB|FC|FD|FE|GA|GB|GC|GD|GE)\.\w[\w.]*)/i) ||
+  // Extract document name (FA.009, FS.001, GB.002, etc.) or SystemUID
+  const docMatch = msg.match(/\b([A-Z]{2}\.\d[\w.]*)/i) ||
                    msg.match(/\b(?:diagrama|diagram|documento|document)\s+([\w.]+)/i) ||
-                   msg.match(/\b(?:no|na|in|on|dentro\s+d[eo])\s+(?:diagrama\s+|diagram\s+)?([A-Z][A-Z0-9]\.[\w.]+)/i);
+                   msg.match(/\b(?:no|na|in|on|at|dentro\s+d[eo])\s+(?:the\s+|o\s+|a\s+)?(?:diagrama\s+|diagram\s+)?([A-Z][A-Z0-9]\.\d[\w.]*)/i);
   const document = docMatch ? docMatch[1] : null;
 
   // Extract component type: text between the count and the document/distribution keywords
@@ -3327,6 +3335,46 @@ function parseBatchDrawingRequest(msg) {
   const diagramType = /\b(p&?id|pid)\b/i.test(lc) ? "pid" : "electrical";
 
   return { count, componentType, document, distribution, diagramType };
+}
+
+/**
+ * Parse a SINGLE draw request (count=1).
+ * Detects patterns like:
+ *   "Draw a Frequency Inverter Starter on FS.001"
+ *   "Desenhar uma partida direta no FA.009"
+ *   "Place a three-phase motor at the diagram GB.002"
+ * Returns { componentType, document, diagramType } or null.
+ */
+function parseSingleDrawRequest(msg) {
+  if (!msg) return null;
+  const lc = msg.toLowerCase().trim();
+
+  // Must NOT contain a count >= 2 (that is batch territory)
+  const countMatch = lc.match(/\b(\d+)\s+/);
+  if (countMatch) {
+    const n = parseInt(countMatch[1], 10);
+    if (n >= 2) return null; // batch, not single
+  }
+
+  // Must have a document code (XX.NNN)
+  const docMatch = msg.match(/\b([A-Z]{2}\.\d[\w.]*)/i);
+  if (!docMatch) return null;
+  const document = docMatch[1];
+
+  // Extract component type: text between the verb and the preposition+doc
+  // EN: "draw a <type> on/at/in [the] [diagram] XX.NNN"
+  // PT: "desenhar um/uma <type> no/na/dentro [do/da] [diagrama] XX.NNN"
+  const compPat = lc.match(
+    /(?:draw[ns]?|create|place|insert|desenhar|criar|inserir|colocar|posicionar)\s+(?:an?\s+|uma?\s+)?(.+?)\s+(?:on|at|in|no|na|dentro|em)\s+(?:the\s+|o\s+|a\s+|do\s+|da\s+)?(?:diagram[a]?\s+|document[o]?\s+)?[a-z]{2}\.\d/i
+  );
+  if (!compPat) return null;
+  const componentType = compPat[1].replace(/\s+d[eo]\s*$/i, "").trim();
+  if (!componentType || componentType.length < 2) return null;
+
+  // Detect diagram type
+  const diagramType = /\b(p&?id|pid)\b/i.test(lc) ? "pid" : "electrical";
+
+  return { componentType, document, diagramType };
 }
 
 /** Max parallel draw tool calls per iteration (fits within 30s C# timeout) */
@@ -4642,6 +4690,65 @@ async function handleInteractiveDrawing(sessionKey, info, parsed, res) {
     return true;
   }
 
+  // ── SINGLE INSTANT DRAW ─────────────────────────────────────────────────
+  // "Draw a Frequency Inverter Starter on FS.001" → match + draw immediately
+  const singleReq = parseSingleDrawRequest(msg);
+  if (singleReq && singleReq.document) {
+    log(`single_draw_detected session=${sessionKey} type="${singleReq.componentType}" doc=${singleReq.document}`);
+    emitAgentEvent("tool_start", { label: `Matching: "${singleReq.componentType}"` });
+
+    const matchResult = await matchComponent(singleReq.componentType, "", singleReq.diagramType, "");
+
+    if (!matchResult || !matchResult.SystemFullName) {
+      const errDetail = matchResult?.error || "No match found in component catalog";
+      sendJsonResponse(res, 200, buildCompletionResponse(
+        `❌ **No match found** for "${singleReq.componentType}".\n\n` +
+        `Error: ${errDetail}\n\n` +
+        `Try a more specific description (e.g., "partida direta", "motor trifásico", "contactor 3-pole").`,
+        model
+      ), { "X-Comos-Ai-Shim": "single-draw-no-match" });
+      log(`single_draw_no_match session=${sessionKey} type="${singleReq.componentType}" err=${errDetail}`);
+      return true;
+    }
+
+    const sfn = matchResult.SystemFullName;
+    const refDesc = matchResult.Descricao_ref || matchResult.descricao_ref || singleReq.componentType;
+    log(`single_draw_matched session=${sessionKey} sfn=${sfn} ref="${refDesc}"`);
+    emitAgentEvent("tool_result", { label: `Matched: ${refDesc}` });
+
+    const tagPrefix = inferTagPrefix(singleReq.componentType);
+    const tag = `${tagPrefix}001`;
+    const x = 50, y = 50;
+
+    // Create a drawing session so the user can continue drawing more or connect
+    const singleSession = {
+      step: "drawing",
+      docUID: singleReq.document,
+      docType: 29,
+      diagramType: singleReq.diagramType,
+      diagramSubtype: "",
+      drawnObjects: [],
+      failedObjects: [],
+      connections: [],
+      pendingComponent: null,
+      pendingMatch: null,
+      lastDrawAttempt: { tag, description: refDesc, systemFullName: sfn, x, y },
+      storedAt: Date.now(),
+      _sessionKey: sessionKey,
+    };
+    drawingSessions.set(sessionKey, singleSession);
+
+    // Send the draw tool_call immediately
+    const resp = buildDrawToolCall(
+      singleReq.document, 29, tag, refDesc, sfn, x, y,
+      model, !hasDirectDrawTool && hasImportTool
+    );
+    emitAgentEvent("tool_start", { label: `Drawing: ${tag} (${refDesc})` });
+    sendJsonResponse(res, 200, resp, { "X-Comos-Ai-Shim": "single-draw-tool-call" });
+    log(`single_draw_start session=${sessionKey} tag=${tag} sfn=${sfn} doc=${singleReq.document}`);
+    return true;
+  }
+
   const lc = msg.toLowerCase();
   let initialType = "electrical";
   if (/\b(p&?id|pid)\b/i.test(lc)) {
@@ -4651,11 +4758,11 @@ async function handleInteractiveDrawing(sessionKey, info, parsed, res) {
   }
 
     // Check if user already included a document name/UID in the message
-    // (e.g., "start interactive mode on FA.020" or "interactive drawing A5BKD4FN3Y")
+    // (e.g., "start interactive mode on FA.020", "Draw a Starter at the diagram FS.001")
     let initialDocUID = "";
-    const docInMsg = lc.match(/\b((?:FA|FB|FC|FD|FE)\.[\w.]+)\b/i) ||
+    const docInMsg = lc.match(/\b([a-z]{2}\.\d[\w.]*)\b/i) ||
                      lc.match(/\b(A[A-Z0-9]{9})\b/) ||
-                     lc.match(/\bon\s+([\w.]+)/i);
+                     lc.match(/\b(?:at|on|in|no|na)\s+(?:the\s+|o\s+|a\s+)?(?:diagram[a]?\s+|document[o]?\s+)?([\w][\w.]+)/i);
     if (docInMsg) {
       initialDocUID = docInMsg[1];
     }
@@ -6575,11 +6682,11 @@ const server = http.createServer(async (req, res) => {
 
             if (wantsImport && importDiag && importDiag.cdeviceNotFound && importDiag.created === 0) {
               const msg =
-                "⚠️ A importação foi executada, mas o COMOS não criou objetos para este P&ID.\n\n" +
-                `Motivo: **CDevice not found for SFN** (${importDiag.missingSfn || "SFN inválido para este projeto"}).\n` +
-                `Criados: **0** | Erros: **${importDiag.errorCount ?? "?"}**\n\n` +
-                "Isso indica que os `SystemFullName` do matcher não existem neste catálogo COMOS de P&ID.\n" +
-                "Para resolver, precisamos ajustar o mapeamento do matcher para SFNs válidos do seu ambiente.";
+                "⚠️ Import was executed, but COMOS did not create any objects for this P&ID.\n\n" +
+                `Reason: **CDevice not found for SFN** (${importDiag.missingSfn || "Invalid SFN for this project"}).\n` +
+                `Created: **0** | Errors: **${importDiag.errorCount ?? "?"}**\n\n` +
+                "This indicates that the `SystemFullName` values from the matcher do not exist in this COMOS P&ID catalog.\n" +
+                "To resolve, we need to adjust the matcher mapping to valid SFNs for your environment.";
               sendJsonResponse(res, 200, buildCompletionResponse(msg, parsed.model), {
                 "X-Comos-Ai-Shim": "import-sfn-mismatch",
               });
@@ -6613,8 +6720,8 @@ const server = http.createServer(async (req, res) => {
                 // No valid payload
                 sendJsonResponse(res, 200,
                   buildCompletionResponse(
-                    "❌ Nenhuma TAG válida com SystemFullName encontrada.\n\n" +
-                    "Tente extrair novamente o PDF para obter TAGs com matching.",
+                    "❌ No valid TAG with SystemFullName found.\n\n" +
+                    "Try extracting the PDF again to get TAGs with matching.",
                     parsed.model),
                   { "X-Comos-Ai-Shim": "tags-no-payload" },
                 );
@@ -6653,9 +6760,9 @@ const server = http.createServer(async (req, res) => {
                 // Excel path not available after all strategies
                 sendJsonResponse(res, 200,
                   buildCompletionResponse(
-                    "❌ Não foi possível resolver o caminho do arquivo Excel.\n\n" +
-                    "O arquivo pode ter expirado ou o gateway foi reiniciado.\n" +
-                    "Tente **analisar novamente** o PDF/circuito, ou use a **Opção 2** (gerar script VBS).",
+                    "❌ Could not resolve the Excel file path.\n\n" +
+                    "The file may have expired or the gateway was restarted.\n" +
+                    "Try **analyzing the PDF/circuit again**, or use **Option 2** (generate VBS script).",
                     parsed.model),
                   { "X-Comos-Ai-Shim": "import-no-excel" },
                 );
@@ -6664,8 +6771,8 @@ const server = http.createServer(async (req, res) => {
                 // Native tool not registered — tell user
                 sendJsonResponse(res, 200,
                   buildCompletionResponse(
-                    "❌ A ferramenta `import_equipment_from_excel` não está disponível nesta sessão.\n\n" +
-                    "Use a **Opção 2** para gerar um script VBS que pode ser executado no **Object Debugger**.",
+                    "❌ The `import_equipment_from_excel` tool is not available in this session.\n\n" +
+                    "Use **Option 2** to generate a VBS script that can be run in the **Object Debugger**.",
                     parsed.model),
                   { "X-Comos-Ai-Shim": "import-tool-unavailable" },
                 );
@@ -6685,7 +6792,7 @@ const server = http.createServer(async (req, res) => {
                   items: cached.items || [],
                   document_uid: useActive ? "ACTIVE" : "",
                   document_type: 29,
-                  diagram_name: diagName || "documento selecionado",
+                  diagram_name: diagName || "currently selected document",
                 };
                 const vbsResp = await fetch(`${gatewayBase}/comos/generate-import-script`, {
                   method: "POST",
@@ -6706,11 +6813,11 @@ const server = http.createServer(async (req, res) => {
                     script: vbsData.script,
                   };
                   const vbsMsg =
-                    `✅ **Opção 2 — Script VBS** gerado com **${itemCount}** itens!\n\n` +
-                    `Os objetos serão **criados na hierarquia e desenhados** no diagrama.\n\n` +
+                    `✅ **Option 2 — VBS Script** generated with **${itemCount}** items!\n\n` +
+                    `Objects will be **created in the hierarchy and drawn** on the diagram.\n\n` +
                     "```comos-script\n" + JSON.stringify(scriptData) + "\n```\n\n" +
-                    `Abra o **Object Debugger** do COMOS, cole o script (**Ctrl+V**) e pressione **F5** para executar.\n` +
-                    `O script usará o **documento atualmente selecionado** no navegador do COMOS.`;
+                    `Open the COMOS **Object Debugger**, paste the script (**Ctrl+V**) and press **F5** to run.\n` +
+                    `The script will use the **currently selected document** in the COMOS navigator.`;
                   sendJsonResponse(res, 200,
                     buildCompletionResponse(vbsMsg, parsed.model),
                     { "X-Comos-Ai-Shim": "vbs-generated" },
