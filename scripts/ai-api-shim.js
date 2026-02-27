@@ -6392,15 +6392,35 @@ const server = http.createServer(async (req, res) => {
             }
           }
 
-          // ── Document navigation fabrication ────────────────────────
-          // "open document AA_001" / "abrir documento X" → navigate_to_comos_document_by_name
+          // ── Document open fabrication (2-step: navigate → open_report) ────
+          // Step 2: After successful doc-nav, fabricate open_report to actually open it
+          if (hasTools && _fabricatedCallCount > 0 && _fabricatedCallCount < _maxFabricatedCalls + 1 &&
+              isDocumentNavigationIntent(lastUserText) && toolNames.includes("open_report")) {
+            const _lastToolMsgDoc = _currentTurnMsgsShared.filter(m =>
+              String(m.role || m.Role || "").toLowerCase() === "tool"
+            ).pop();
+            const _docNavContent = String((_lastToolMsgDoc || {}).content || (_lastToolMsgDoc || {}).Content || "");
+            if (_docNavContent.includes("Navigated to the document")) {
+              const docTarget = extractDocumentTarget(lastUserText);
+              const fabricated = buildFabricatedToolCallResponse(
+                "open_report",
+                { objectName: docTarget || "" },
+                parsed.model
+              );
+              sendJsonResponse(res, 200, fabricated, { "X-Comos-Ai-Shim": "fabricated-doc-open-after-nav" });
+              log(`fabricated_doc_open_after_nav session=${sessionKey} target="${docTarget}"`);
+              return;
+            }
+          }
+
+          // Step 1: "open document AA_001" / "abrir documento X" → navigate_to_comos_document_by_name
           if (hasTools && _fabricatedCallCount < _maxFabricatedCalls && _isNewUserRequest && !_isMultiStep &&
               isDocumentNavigationIntent(lastUserText) && toolNames.includes("navigate_to_comos_document_by_name")) {
             const docTarget = extractDocumentTarget(lastUserText);
             if (docTarget) {
               const fabricated = buildFabricatedToolCallResponse(
                 "navigate_to_comos_document_by_name",
-                { documentName: docTarget },
+                { objectName: docTarget },
                 parsed.model
               );
               sendJsonResponse(res, 200, fabricated, { "X-Comos-Ai-Shim": "fabricated-doc-nav" });
