@@ -1014,13 +1014,16 @@ public class ImportAgent : AIComosTool
 					error = "No project is currently open."
 				};
 			}
-			if (ShouldUseTemplateRouting(description, systemFullName))
-			{
-				return DrawTemplateObject(obj2, currentProject, documentType, tag, description, systemFullName, x, y, text);
-			}
+			// Try CDevice resolution first — works for BOTH @30 and @template paths.
+			// Only fall back to document-based DrawTemplateObject if CDevice is not found
+			// AND the SFN/description signals a template.
 			IComosDCDevice cDeviceBySystemFullname = currentProject.GetCDeviceBySystemFullname(systemFullName, 3);
 			if (cDeviceBySystemFullname == null)
 			{
+				if (ShouldUseTemplateRouting(description, systemFullName))
+				{
+					return DrawTemplateObject(obj2, currentProject, documentType, tag, description, systemFullName, x, y, text);
+				}
 				return new
 				{
 					success = false,

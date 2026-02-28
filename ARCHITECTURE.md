@@ -566,7 +566,7 @@ Custom DLLs compiled from C# source and placed in `Bin\SDK\AI\`. Discovered by M
 **ToolScope:** `"ServiceiPID"` — 7 tools for import, drawing, connecting, and attribute management.
 
 #### `import_equipment_from_excel`
-Batch imports equipment from a ServiceiPID analysis Excel file. Creates COMOS devices, draws them on the diagram at XY coordinates, and establishes electrical/process connections (EB01/EB02 pins). Also supports inline JSON payloads for interactive operations.
+Batch imports equipment from a ServiceiPID analysis Excel file. Creates COMOS devices, draws them on the diagram at XY coordinates, and establishes electrical/process connections (EB01/EB02 pins). Also supports inline JSON payloads for interactive operations. After connections are made, **AutoConnect** runs automatically to render physical connection lines on the diagram (`Comos.WSP.XDocElo.AutoConnect` COM object).
 
 | Parameter | Type | Description |
 |-----------|------|-------------|
@@ -588,7 +588,7 @@ Interactive drawing — places a single device on a COMOS diagram at specific XY
 | `y` | double | Y coordinate (mm) |
 
 #### `connect_objects`
-Connects two existing objects on a diagram by tag — wires source output pin (EB02) to target input pin (EB01) via `IComosDConnector.Connect()`.
+Connects two existing objects on a diagram by tag — wires source output pin (EB02) to target input pin (EB01) via `IComosDConnector.Connect()`. After a successful connection, **AutoConnect** runs automatically to render the physical connection line on the diagram (`Comos.WSP.XDocElo.AutoConnect` COM object). Error markers (ErrorNumber == 1) are cleaned up automatically.
 
 | Parameter | Type | Description |
 |-----------|------|-------------|
