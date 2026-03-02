@@ -1346,12 +1346,12 @@ function buildEnrichedRagQuery(currentText, messages) {
  * Fetch relevant document chunks from the RAG gateway endpoint.
  * Returns the context string to inject, or empty string on failure.
  */
-async function fetchRagContext(query, gatewayBase, topK = 5) {
+async function fetchRagContext(query, gatewayBase, topK = 5, minScore = 0.3) {
   try {
     const resp = await fetch(`${gatewayBase}/comos/rag-query`, {
       method: "POST",
       headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ query, top_k: topK, min_score: 0.3 }),
+      body: JSON.stringify({ query, top_k: topK, min_score: minScore }),
     });
     if (!resp.ok) return "";
     const data = await resp.json();
@@ -4951,15 +4951,20 @@ function friendlyToolLabel(toolName) {
 // Track step counter per session for "Step N" labeling
 const agentStepCounters = new Map();
 
-// ── 95-second safety timeout for LLM fetch ────────────────────────────────
-// COMOS C# AI Client TimeoutPerIteration was IL-patched from 30s → 100s.
-// We abort 5s before that limit so the C# client doesn't throw an
-// unhandled timeout exception.
-const LLM_SAFETY_TIMEOUT_MS = 95000;
+// ── Safety timeout for Gateway fetch ────────────────────────────────────────
+// The Gateway /v1/chat/completions/raw runs a full MCP tool loop internally:
+//   LLM call (~10s) → tool execution (0-180s) → LLM continuation (~10s)
+// For complex imports (8+ objects + connections), tool execution alone can
+// take 100-120s. The shim must NOT abort during tool execution — the tool
+// runs locally in the C# AI API, no LLM is involved, aborting would just
+// discard a successful result and pollute the conversation with "processando".
+// 300s = 5 min is a pure crash/hang safety net, not a tool-execution limiter.
+const LLM_SAFETY_TIMEOUT_MS = 300000;
 
 /**
- * Fetch with 95-second safety abort.
+ * Fetch with 5-minute safety abort (crash/hang detection only).
  * Returns { response, timedOut } — if timedOut is true, response is null.
+ * Normal tool execution (import, draw) should NEVER hit this limit.
  */
 async function fetchWithSafetyTimeout(url, options, label) {
   const controller = new AbortController();
@@ -4971,7 +4976,7 @@ async function fetchWithSafetyTimeout(url, options, label) {
   } catch (err) {
     clearTimeout(timer);
     if (err.name === "AbortError") {
-      log(`safety_timeout_95s label=${label} url=${url}`);
+      log(`safety_timeout_300s label=${label} url=${url}`);
       return { response: null, timedOut: true };
     }
     throw err; // re-throw non-timeout errors
@@ -7054,7 +7059,23 @@ const server = http.createServer(async (req, res) => {
                 if (ragContext) {
                   log(`rag_context_injected session=${sessionKey} length=${ragContext.length}`);
                 } else {
-                  log(`rag_no_results session=${sessionKey}`);
+                  log(`rag_no_results session=${sessionKey} query="${enrichedQuery.substring(0, 80)}"`);
+                  // Retry with just the equipment tag (e.g. "M-002") at lower
+                  // min_score.  Generic questions like "what info about M-002"
+                  // have weak embeddings; the tag alone often matches better.
+                  const tagMatch = lastUserText.match(/\b([A-Z]{1,4})[- ]?(\d{2,5}[A-Z]?)\b/i);
+                  if (tagMatch) {
+                    const tagWithHyphen = `${tagMatch[1]}-${tagMatch[2]}`;
+                    const tagWithout   = `${tagMatch[1]}${tagMatch[2]}`;
+                    const tagQuery = `${tagWithHyphen} ${tagWithout}`;
+                    log(`rag_retry_tag session=${sessionKey} tagQuery="${tagQuery}"`);
+                    ragContext = await fetchRagContext(tagQuery, gatewayBase, 5, 0.2);
+                    if (ragContext) {
+                      log(`rag_retry_tag_hit session=${sessionKey} length=${ragContext.length}`);
+                    } else {
+                      log(`rag_retry_tag_miss session=${sessionKey}`);
+                    }
+                  }
                 }
               }
             }
@@ -7085,16 +7106,32 @@ const server = http.createServer(async (req, res) => {
             log(`comos_system_prompt_injected session=${sessionKey} tools=[${toolNames.join(",")}]`);
 
             // ── RAG-priority override: strip tools for document-based queries ──
-            // When the user explicitly says "according to the documents" and RAG
-            // context was successfully injected, the answer lives in the context —
-            // not in COMOS tools. Strip tools and force tool_choice=none so the
-            // LLM answers from the injected RAG context instead of calling tools
-            // (which wastes 2 iterations, strips object names, and then times out).
-            if (ragContext && _isNewUserRequest && hasExplicitDocumentSignals(lastUserText)) {
+            // When the user explicitly says "according to the documents", the
+            // answer should come from document context — not from COMOS tools.
+            // Strip tools whether or not RAG returned results. If RAG returned
+            // nothing, inject a "no results" note so the LLM answers honestly
+            // instead of hallucinating or calling tools that will fail (the LLM
+            // was passing the entire question as objectNameOrDescription, which
+            // fails lookup for tags with hyphens like "M-002" vs COMOS "M002").
+            if (_isNewUserRequest && hasExplicitDocumentSignals(lastUserText)) {
               delete parsed.tools;
               delete parsed.tool_choice;
               parsed.tool_choice = "none";
-              log(`rag_priority_strip_tools session=${sessionKey} reason=explicit_document_signals_with_rag`);
+              if (ragContext) {
+                log(`rag_priority_strip_tools session=${sessionKey} reason=explicit_document_signals_with_rag`);
+              } else {
+                // No RAG results — inject guidance so LLM doesn't hallucinate
+                ragContext = "\n\nDOCUMENT KNOWLEDGE: No matching content was found in the indexed project documents for this query. " +
+                  "Tell the user you searched the project documents but did not find specific information about their query. " +
+                  "Suggest they try a more specific question (e.g. mention a specific attribute, datasheet, or document name), " +
+                  "or ask you to list available documents, or ask you to read the COMOS attributes directly (without 'according to documents').\n";
+                // Update the system message with the new ragContext
+                const sysIdx = cleanMessages.findIndex(m => m.role === "system");
+                if (sysIdx >= 0) {
+                  cleanMessages[sysIdx].content += ragContext;
+                }
+                log(`rag_priority_strip_tools_no_results session=${sessionKey} reason=explicit_document_signals_no_rag`);
+              }
             }
           }
 
@@ -7432,16 +7469,16 @@ const server = http.createServer(async (req, res) => {
               body: rawBody,
             }, `completions_session=${sessionKey}`);
 
-            // ── 95s safety timeout: return soft message ──
+            // ── 300s safety timeout: only fires on genuine hang/crash ──
             if (timedOut) {
-              emitAgentEvent("agent_timeout", { message: "Agent timed out — synthesizing results..." });
+              emitAgentEvent("agent_timeout", { message: "Gateway did not respond in 5 minutes — possible hang" });
               const safetyMsg =
-                "⏳ Engineering copilot está processando sua solicitação. " +
-                "Envie uma nova mensagem para continuar ou tente novamente.";
+                "⚠️ O serviço não respondeu em 5 minutos. " +
+                "Isso pode indicar um problema no servidor. Tente novamente.";
               sendJsonResponse(res, 200, buildCompletionResponse(safetyMsg, parsed.model), {
-                "X-Comos-Ai-Shim": "safety-timeout-95s",
+                "X-Comos-Ai-Shim": "safety-timeout-300s",
               });
-              log(`safety_timeout_95s session=${sessionKey}`);
+              log(`safety_timeout_300s session=${sessionKey}`);
               agentStepCounters.delete(sessionKey);
               return;
             }
@@ -7730,16 +7767,16 @@ const server = http.createServer(async (req, res) => {
           body: rawBody,
         }, `eval_session=${sessionKey}`);
 
-        // ── 95s safety timeout for eval ──
+        // ── 300s safety timeout for eval ──
         if (timedOut) {
-          emitAgentEvent("agent_timeout", { message: "Agent timed out during evaluation — synthesizing results..." });
+          emitAgentEvent("agent_timeout", { message: "Gateway did not respond in 5 minutes — possible hang" });
           const safetyMsg =
-            "⏳ Engineering copilot está processando sua solicitação. " +
-            "Envie uma nova mensagem para continuar.";
+            "⚠️ O serviço não respondeu em 5 minutos. " +
+            "Isso pode indicar um problema no servidor. Tente novamente.";
           sendJsonResponse(res, 200, buildCompletionResponse(safetyMsg, parsed.model || defaultModel), {
-            "X-Comos-Ai-Shim": "eval-safety-timeout-95s",
+            "X-Comos-Ai-Shim": "eval-safety-timeout-300s",
           });
-          log(`eval_safety_timeout_95s session=${sessionKey}`);
+          log(`eval_safety_timeout_300s session=${sessionKey}`);
           agentStepCounters.delete(sessionKey);
           return;
         }

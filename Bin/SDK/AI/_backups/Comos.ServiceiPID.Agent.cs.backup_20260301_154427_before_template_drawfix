@@ -1005,30 +1005,6 @@ public class ImportAgent : AIComosTool
 					error = "Document not found: " + text + ". Please open the target drawing in COMOS before using interactive mode."
 				};
 			}
-			// ── Prefer TwoDC-hosted document for IXDocDeveloper support ──
-			// When documentUID is explicit (not ACTIVE), obj2 comes from ResolveDocument
-			// which returns a cold COM object without TwoDC context. If the user has
-			// the target document open in TwoDC, swap to the active doc for better
-			// IXDocDeveloper / CreateTemplate support (needed for template drawing).
-			if (val == null)
-			{
-				try
-				{
-					object activeCandidate = GetActiveDocument(out var _err2);
-					if (activeCandidate != null)
-					{
-						string aCandUid = "";
-						string obj2Uid = "";
-						try { aCandUid = ((dynamic)activeCandidate).SystemUID; } catch { try { aCandUid = (string)((dynamic)activeCandidate).SystemUID(); } catch { } }
-						try { obj2Uid = ((dynamic)obj2).SystemUID; } catch { try { obj2Uid = (string)((dynamic)obj2).SystemUID(); } catch { } }
-						if (!string.IsNullOrEmpty(aCandUid) && aCandUid == obj2Uid)
-						{
-							obj2 = activeCandidate; // TwoDC-hosted, supports IXDocDeveloper
-						}
-					}
-				}
-				catch { }
-			}
 			IComosDProject currentProject = Workset.GetCurrentProject();
 			if (currentProject == null)
 			{
@@ -1068,19 +1044,7 @@ public class ImportAgent : AIComosTool
 			if (orCreateObject == null)
 			{
 				// ══════════════════════════════════════════════════════════
-				// GetOrCreateObject returned null — two possible reasons:
-				//   A) @template CDevice → delegate to DrawTemplateObject
-				//      (resolves template DOCUMENT, draws graphically)
-				//   B) @30 Dataset CDevice → Dataset Fallback below
-				//      (snapshot/diff approach for composite base objects)
-				// ══════════════════════════════════════════════════════════
-				if (ShouldUseTemplateRouting(description, systemFullName))
-				{
-					// Route A: template CDevice exists but needs document-based drawing
-					return DrawTemplateObject(obj2, currentProject, documentType, tag, description, systemFullName, x, y, text);
-				}
-				// ══════════════════════════════════════════════════════════
-				// Route B: Dataset fallback — V4 (direct-draw, no clone)
+				// Dataset fallback — V4 (direct-draw, no clone)
 				// ══════════════════════════════════════════════════════════
 				// GetOrCreateObject returns null for Dataset-type CDevices.
 				// Datasets are composite base objects. When CreateTemplate is
@@ -1176,14 +1140,11 @@ public class ImportAgent : AIComosTool
 					}
 
 					string triggerMethod = "";
-					// Try IXDocDeveloper from document object first (same fix as DrawTemplateObject)
-					IXDocDeveloper xDocDev = null;
-					try { xDocDev = obj2 as IXDocDeveloper; } catch { }
-					if (xDocDev == null) { try { xDocDev = targetDoc as IXDocDeveloper; } catch { } }
-					if (xDocDev == null) { try { xDocDev = (IXDocDeveloper)(object)report; } catch { } }
-					if (xDocDev == null) { try { xDocDev = reportDocument as IXDocDeveloper; } catch { } }
-					if (xDocDev == null) { try { xDocDev = (IXDocDeveloper)reportDocument; } catch { } }
-					dsDiag.AppendLine("IXDocDeveloper: " + (xDocDev != null ? "obtained" : "all casts failed"));
+					IXDocDeveloper xDocDev = reportDocument as IXDocDeveloper;
+					if (xDocDev == null)
+					{
+						try { xDocDev = (IXDocDeveloper)reportDocument; } catch { }
+					}
 
 					if (xDocDev != null)
 					{
@@ -1914,106 +1875,12 @@ public class ImportAgent : AIComosTool
 			//     IXDocDeveloper.CreateTemplate(IComosBaseObject BaseObj, double x, double y)
 			//     This instantiates all devices, connections, and coordinates from the
 			//     template document onto the target diagram at position (x, y).
-			//
-			//     CRITICAL: IXDocDeveloper is only available when the document is
-			//     open in the TwoDC graphical editor (not just Report.Open()).
-			//     GetActiveDocument() returns the TwoDC-hosted document when the
-			//     user has the diagram open in the COMOS UI — same object that
-			//     connect_objects uses successfully for IXDocDeveloper.
 			string createMethod = "";
-			IXDocDeveloper xDocDev = null;
-
-			// ── Try to get the TwoDC-hosted active document ──
-			// When the user has the target diagram open in TwoDC, GetActiveDocument()
-			// returns the document with full IXDocDeveloper support.
-			// This is the same mechanism that makes connect_objects work.
-			object activeDocObj = null;
-			try
-			{
-				activeDocObj = GetActiveDocument(out var _activeErr);
-				if (activeDocObj != null)
-				{
-					// Verify this IS our target document (compare SystemUID)
-					string activeUid = "";
-					string targetUid = "";
-					try { activeUid = ((dynamic)activeDocObj).SystemUID; } catch { try { activeUid = (string)((dynamic)activeDocObj).SystemUID(); } catch { } }
-					try { targetUid = ((dynamic)targetDocObj).SystemUID; } catch { try { targetUid = (string)((dynamic)targetDocObj).SystemUID(); } catch { } }
-					if (!string.IsNullOrEmpty(activeUid) && activeUid == targetUid)
-					{
-						diag.AppendLine("TwoDC active document matches target (UID=" + activeUid + ")");
-						// Use the TwoDC-hosted object for IXDocDeveloper
-						targetDocObj = activeDocObj;
-						// Also re-cast targetDoc from the active object
-						try { targetDoc = (IComosDDocument)activeDocObj; } catch { }
-						// Re-open the report from the TwoDC doc
-						try
-						{
-							dynamic activeReport = targetDoc.Report();
-							if (activeReport != null)
-							{
-								activeReport.Open();
-								dynamic activeReportDoc = activeReport.ReportDocument;
-								if (activeReportDoc != null)
-								{
-									report = activeReport;
-									reportDocument = activeReportDoc;
-									diag.AppendLine("Switched to TwoDC report/reportDocument");
-								}
-							}
-						}
-						catch (Exception exAr)
-						{
-							diag.AppendLine("TwoDC report switch ERR: " + exAr.Message);
-						}
-					}
-					else
-					{
-						diag.AppendLine("TwoDC active doc UID=" + activeUid + " does NOT match target UID=" + targetUid + " — skipping");
-					}
-				}
-				else
-				{
-					diag.AppendLine("No TwoDC active document (target may not be open in editor)");
-				}
-			}
-			catch (Exception exActive)
-			{
-				diag.AppendLine("GetActiveDocument ERR: " + exActive.Message);
-			}
-
-			// Try 1: Document object (same approach as connect_objects line 3443)
+			IXDocDeveloper xDocDev = reportDocument as IXDocDeveloper;
 			if (xDocDev == null)
 			{
-				try { xDocDev = targetDocObj as IXDocDeveloper; }
-				catch { }
-				if (xDocDev != null) { diag.AppendLine("IXDocDeveloper from targetDocObj OK"); }
-			}
-			// Try 2: IComosDDocument
-			if (xDocDev == null)
-			{
-				try { xDocDev = targetDoc as IXDocDeveloper; }
-				catch { }
-				if (xDocDev != null) { diag.AppendLine("IXDocDeveloper from targetDoc OK"); }
-			}
-			// Try 3: Report object
-			if (xDocDev == null)
-			{
-				try { xDocDev = (IXDocDeveloper)(object)report; }
-				catch { }
-				if (xDocDev != null) { diag.AppendLine("IXDocDeveloper from report OK"); }
-			}
-			// Try 4: ReportDocument (known to fail for programmatic opens, but try anyway)
-			if (xDocDev == null)
-			{
-				try { xDocDev = reportDocument as IXDocDeveloper; }
-				catch { }
-				if (xDocDev == null)
-				{
-					try { xDocDev = (IXDocDeveloper)reportDocument; }
-					catch { }
-				}
-				if (xDocDev != null) { diag.AppendLine("IXDocDeveloper from reportDocument OK"); }
-				else { diag.AppendLine("IXDocDeveloper: all cast sources failed (doc may not be open in TwoDC)"); }
+				try { xDocDev = (IXDocDeveloper)reportDocument; }
+				catch { diag.AppendLine("Direct cast to IXDocDeveloper failed, trying dynamic"); }
 			}
 
 			if (xDocDev != null)
@@ -2053,236 +1920,29 @@ public class ImportAgent : AIComosTool
 				}
 			}
 
-			// ═══════════════════════════════════════════════════════════════
-			// DYNAMIC FALLBACK — same approach that works in Dataset-V4 path
-			// reportDocument is 'dynamic', so bypasses IXDocDeveloper cast
-			// and calls CreateTemplateInBackground directly via late binding.
-			// This is how the DOL @30 path succeeds (diag shows
-			// "dynamic.CreateTemplateInBackground(CDevice)" in Dataset-V4).
-			// ═══════════════════════════════════════════════════════════════
+			// Dynamic fallback if typed IXDocDeveloper cast failed
 			if (string.IsNullOrEmpty(createMethod))
 			{
-				diag.AppendLine("IXDocDeveloper cast failed — trying dynamic reportDocument fallback");
 				try
 				{
 					reportDocument.CreateTemplateInBackground((object)templateDoc, x, y, 0.0);
-					createMethod = "dynamic.CreateTemplateInBackground(templateDoc)";
-					diag.AppendLine(createMethod + " OK");
+					createMethod = "dynamic.CreateTemplateInBackground OK";
+					diag.AppendLine(createMethod);
 				}
-				catch (Exception exDyn1)
+				catch (Exception exd1)
 				{
-					diag.AppendLine("dynamic.CreateTemplateInBackground ERR: " + exDyn1.Message);
+					diag.AppendLine("dynamic.CreateTemplateInBackground ERR: " + exd1.Message);
 					try
 					{
 						reportDocument.CreateTemplate((object)templateDoc, x, y);
-						createMethod = "dynamic.CreateTemplate(templateDoc)";
-						diag.AppendLine(createMethod + " OK");
+						createMethod = "dynamic.CreateTemplate OK";
+						diag.AppendLine(createMethod);
 					}
-					catch (Exception exDyn2)
+					catch (Exception exd2)
 					{
-						diag.AppendLine("dynamic.CreateTemplate ERR: " + exDyn2.Message);
-						try
-						{
-							reportDocument.CreateTemplateWithRotation((object)templateDoc, x, y, 0.0);
-							createMethod = "dynamic.CreateTemplateWithRotation(templateDoc)";
-							diag.AppendLine(createMethod + " OK");
-						}
-						catch (Exception exDyn3)
-						{
-							diag.AppendLine("dynamic.CreateTemplateWithRotation ERR: " + exDyn3.Message);
-						}
+						diag.AppendLine("dynamic.CreateTemplate ERR: " + exd2.Message);
 					}
 				}
-			}
-
-			// ═══════════════════════════════════════════════════════════════
-			// FALLBACK: Per-device CreateReportObject approach
-			// When both IXDocDeveloper AND dynamic calls are unavailable,
-			// replicate the working @30 drawing path:
-			//   1. Get CDevice from template document's hierarchy
-			//   2. Create device via GetOrCreateObject
-			//   3. Draw via CreateReportObject + IRoDevice.Device
-			// This is the same mechanism that works for @30 objects.
-			// ═══════════════════════════════════════════════════════════════
-			if (string.IsNullOrEmpty(createMethod))
-			{
-				diag.AppendLine("Dynamic fallback also failed — trying per-device CreateReportObject approach");
-				try
-				{
-					// Step A: Get CDevice from template document hierarchy
-					IComosDCDevice templateCDevice = null;
-
-					// A1: templateDoc.owner → might BE the CDevice directly (under @Template)
-					try
-					{
-						dynamic tOwner = ((dynamic)templateDoc).owner;
-						if (tOwner != null)
-						{
-							templateCDevice = tOwner as IComosDCDevice;
-							if (templateCDevice == null)
-							{
-								try { templateCDevice = (IComosDCDevice)tOwner; } catch { }
-							}
-							if (templateCDevice != null)
-							{
-								string csfn = "";
-								try { csfn = templateCDevice.SystemFullName(); } catch { }
-								diag.AppendLine("A1: CDevice from owner: " + csfn);
-							}
-						}
-					}
-					catch (Exception exA1) { diag.AppendLine("A1 ERR: " + exA1.Message); }
-
-					// A2: templateDoc.owner.CDevice (if owner is a Device, not CDevice)
-					if (templateCDevice == null)
-					{
-						try
-						{
-							dynamic tOwner = ((dynamic)templateDoc).owner;
-							if (tOwner != null)
-							{
-								dynamic ownerCD = tOwner.CDevice;
-								templateCDevice = ownerCD as IComosDCDevice;
-								if (templateCDevice == null && ownerCD != null)
-								{
-									try { templateCDevice = (IComosDCDevice)ownerCD; } catch { }
-								}
-								if (templateCDevice != null)
-								{
-									string csfn = "";
-									try { csfn = templateCDevice.SystemFullName(); } catch { }
-									diag.AppendLine("A2: CDevice from owner.CDevice: " + csfn);
-								}
-							}
-						}
-						catch { }
-					}
-
-					// A3: Strip document segment from SFN → resolve parent as CDevice
-					if (templateCDevice == null && !string.IsNullOrEmpty(systemFullName))
-					{
-						string parentSfn = systemFullName;
-						int pipeIdx = parentSfn.LastIndexOf('|');
-						if (pipeIdx > 0)
-						{
-							parentSfn = parentSfn.Substring(0, pipeIdx);
-							try
-							{
-								templateCDevice = currentProject.GetCDeviceBySystemFullname(parentSfn, 3);
-								if (templateCDevice != null)
-								{
-									diag.AppendLine("A3: CDevice from parent SFN: " + parentSfn);
-								}
-							}
-							catch { }
-						}
-					}
-
-					// A4: Enumerate template report items to find a device with CDevice
-					if (templateCDevice == null)
-					{
-						try
-						{
-							dynamic tRpt = templateDoc.Report();
-							if (tRpt != null)
-							{
-								tRpt.Open();
-								dynamic tRptDoc = tRpt.ReportDocument;
-								if (tRptDoc != null)
-								{
-									GlobalCastings tGc = new GlobalCastings();
-									int tCount = 0;
-									try { tCount = (int)tRptDoc.itemCount; } catch { }
-									for (int ti = 0; ti < tCount && templateCDevice == null; ti++)
-									{
-										try
-										{
-											dynamic tItem = tRptDoc.item(ti);
-											if (tItem == null) continue;
-											IRoDevice tRoDev = tGc.GC_GetIRODevice((object)tItem);
-											if (tRoDev != null && tRoDev.Device != null)
-											{
-												templateCDevice = tRoDev.Device.CDevice;
-												if (templateCDevice != null)
-												{
-													string csfn = "";
-													try { csfn = templateCDevice.SystemFullName(); } catch { }
-													diag.AppendLine("A4: CDevice from template item[" + ti + "]: " + csfn);
-												}
-											}
-										}
-										catch { }
-									}
-									try { Marshal.ReleaseComObject(tGc); } catch { }
-								}
-							}
-						}
-						catch (Exception exA4) { diag.AppendLine("A4 ERR: " + exA4.Message); }
-					}
-
-					if (templateCDevice != null)
-					{
-						// Step B: Create device using GetOrCreateObject (same as @30 path)
-						_QsGlobalObj qsGlobal = null;
-						try { qsGlobal = (_QsGlobalObj)new QsGlobalObjClass(); } catch { }
-
-						IComosDDevice newDevice = null;
-						if (qsGlobal != null)
-						{
-							try
-							{
-								object devObj = qsGlobal.GetOrCreateObject(targetDocObj, tag, (object)templateCDevice, (IComosBaseObject)null);
-								newDevice = devObj as IComosDDevice;
-								if (newDevice == null && devObj != null)
-								{
-									try { newDevice = (IComosDDevice)(dynamic)devObj; } catch { }
-								}
-								diag.AppendLine("B: GetOrCreateObject → " + (newDevice != null ? "OK (" + (newDevice.Name ?? "") + ")" : "null"));
-							}
-							catch (Exception exGoc) { diag.AppendLine("B: GetOrCreateObject ERR: " + exGoc.Message); }
-						}
-
-						if (newDevice != null)
-						{
-							// Set description if provided
-							if (!string.IsNullOrWhiteSpace(description))
-							{
-								try { newDevice.Description = description; } catch { }
-							}
-
-							// Step C: Draw on diagram using CreateReportObject + IRoDevice.Device
-							// This is the EXACT same approach that works for @30 objects.
-							GlobalCastings gc = new GlobalCastings();
-							try
-							{
-								dynamic newRptObj = reportDocument.CreateReportObject(x, y, x, y);
-								newRptObj.CreateXObj("ComosWspRoDevice.WspRoDevice");
-								IRoDevice roDev = gc.GC_GetIRODevice((object)newRptObj);
-								roDev.Determination = (DeterminationLevel)1;
-								roDev.Device = newDevice;
-
-								createMethod = "per-device CreateReportObject + IRoDevice.Device";
-								diag.AppendLine("C: " + createMethod);
-							}
-							catch (Exception exDraw)
-							{
-								diag.AppendLine("C: CreateReportObject ERR: " + exDraw.Message);
-							}
-							try { newDevice.Save(); } catch { }
-							try { Marshal.ReleaseComObject(gc); } catch { }
-						}
-
-						if (qsGlobal != null)
-						{
-							try { Marshal.ReleaseComObject(qsGlobal); } catch { }
-						}
-					}
-					else
-					{
-						diag.AppendLine("No CDevice found from template hierarchy — cannot use per-device approach");
-					}
-				}
-				catch (Exception exFb) { diag.AppendLine("Per-device fallback ERR: " + exFb.Message); }
 			}
 
 			if (string.IsNullOrEmpty(createMethod))

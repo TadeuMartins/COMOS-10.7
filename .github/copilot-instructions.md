@@ -105,7 +105,7 @@ Examples:
 3. **Never delete backups** — disk space is cheap, recovery is priceless
 4. **The `locked_autoconnect` backup** is the known-good version with working connections — treat as sacred
 5. **Store all backups in `Bin/SDK/AI/_backups/`** — never clutter the main `SDK/AI/` folder
-6. **Backup the .cs too** when making significant changes: `Comos.ServiceiPID.Agent.cs.backup_YYYYMMDD_HHMMSS_<description>`
+6. **ALWAYS backup the .cs BEFORE editing** — not just for "significant" changes, for ALL changes: `Comos.ServiceiPID.Agent.cs.backup_YYYYMMDD_HHMMSS_before_<description>`. This is step 0 of the Deployment Checklist and is BLOCKING.
 
 ### Source Save + SDK Folder Hygiene — MANDATORY
 
@@ -116,15 +116,19 @@ Examples:
     - keep `Bin/SDK/AI/` root clean with only project source/artifacts required by COMOS loading
 4. **If a temporary file is created in `Bin/SDK/AI/` by mistake, remove it after use** and keep only the canonical active files
 
-### Deployment Checklist (Follow Every Time)
+### Deployment Checklist (Follow Every Time — NO EXCEPTIONS)
 
-1. ✅ Backup current DLL: `copy active.dll _backups/active.dll.locked_YYYYMMDD_HHMMSS_<reason>`
+0. ✅ **Backup current .cs BEFORE editing**: `copy Agent.cs _backups/Agent.cs.backup_YYYYMMDD_HHMMSS_before_<reason>`
+1. ✅ **Backup current DLL BEFORE compiling**: `copy active.dll _backups/active.dll.locked_YYYYMMDD_HHMMSS_before_<reason>`
 2. ✅ Edit `.cs` source (NEVER decompiled IL)
 3. ✅ Compile with `/optimize+` — must produce ZERO errors
 4. ✅ Deploy compiled DLL to replace active (kill AI API if locked)
 5. ✅ Verify hash: `certutil -hashfile <deployed.dll> SHA256` must match compiled output
 6. ✅ Restart COMOS/AI API to load new DLL
 7. ✅ Test functionality before considering done
+
+**⚠ Steps 0 and 1 are BLOCKING — do NOT proceed to step 2 without completing both backups.**
+**Even if git has the previous version, ALWAYS create explicit file backups. Git is a safety net, not a substitute.**
 
 ## Temp Files
 
@@ -156,3 +160,4 @@ netstat -ano | Select-String ":8000|:8100|:56400|:56401" | Select-String "LISTEN
 7. **NEVER overwrite .cs with decompiled IL** — decompilers produce non-compilable output (variable name collisions, missing scopes). The hand-written `.cs` is the SINGLE SOURCE OF TRUTH. Edit the `.cs`, compile, deploy — never reverse the flow.
 8. **NEVER deploy a DLL without backing up first** — use `_backups/` folder with `YYYYMMDD_HHMMSS_<description>` naming. No exceptions.
 9. **NEVER assume .cs and DLL are in sync** — always verify by compiling .cs and comparing output hash with active DLL hash. If they differ, the .cs is the authority — recompile and redeploy.
+10. **NEVER edit .cs without backing it up first** — `copy Agent.cs _backups/Agent.cs.backup_YYYYMMDD_HHMMSS_before_<reason>` is step 0 of EVERY deployment. Git history is a safety net, not a replacement for explicit backups. This rule exists because it was violated on 2026-02-28 and caused a missing pre-edit snapshot.
